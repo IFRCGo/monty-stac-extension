@@ -1,0 +1,61 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://IFRCGo.github.io/monty/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "FL-2015-000171-PRY",
+  "bbox": [
+    -56.9998168945312,
+    -24.0289052541336,
+    -56.9998168945312,
+    -24.0289052541336
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -56.9998168945312,
+      -24.0289052541336
+    ]
+  },
+  "properties": {
+    "title": "Flood in Paraguay",
+    "description": "atypical flash flooding from the overflowing Jejuí, Paraguay, Aguaray mi, Aguaray Guazú Rivers in the department of San Pedro II. According to the second report issued by the San Pedro department operations centre, 17,565 people (3,513 families) have been affected by the rains, flooding, storms, and hail that have been occurring since mid-November - 2,285 people are in shelters and 2,600 people remain cut off. The intense and constant rains during this period have dumped some 350.2mm of rain between 23 November and 14 December.",
+    "datetime": "2015-11-23T00:00:00Z",
+    "monty:country_codes": [
+      "PRY"
+    ],
+    "monty:hazard_codes": [
+      "MH0004",
+      "MH0005",
+      "MH0006",
+      "MH0007",
+      "MH0008",
+      "MH0012"
+    ],
+    "monty:corr_id": "FL-2015-11-30-PRY-GCDB_V1",
+    "roles": [
+      "event"
+    ],
+    "keywords": [
+      "San Pedro department",
+      "paraguay",
+      "Surface Water Flooding",
+      "Coastal Flood",
+      "Estuarine (Coastal) Flood",
+      "Flash Flood",
+      "Fluvial (Riverine) Flood",
+      "Groundwater Flood"
+    ]
+  },
+  "links": [
+    {
+      "href": "https://monty-api.ifrc.org/stac/reference-events/FL-2015-11-30-PRY-GCDB_V1",
+      "rel": "self"
+    },
+    {
+      "href": "https://monty-api.ifrc.org/stac/glide-events/FL-2015-000171-PRY",
+      "rel": "related"
+    }
+  ]
+}
