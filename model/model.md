@@ -18,13 +18,15 @@ The normalized model must keep all the information from the Monty model and cove
 
 ### Data Overview
 
-The Monty model is based on events that consititute the core of the model. In STAC, they will be represented as an item. Then for each event,
+The Monty model is based on **Event** data type that consititutes the core of the model. In STAC, they will be represented as an item. Then for each event,
 3 kinds of data are collected:
 
 - **Hazard**: The type of hazard, its location and the intensity
 - **Impact**: All type of impact affecting the population, the infrastructure, the environment, etc
   in terms of number of people affected, financial loss, dmaage to infrastructure, etc.
 - **Response**: Anticipatory measures and actions taken in response to the event
+
+![GCDB](gcdb.png)
 
 The original Monty model is a relational model with a lot of redundant taxonomy attributes in various forms (e.g. country code + name). 
 In the STAC model, we try to use unambiguous and normalized attributes as much as possible
