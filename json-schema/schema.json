@@ -14,8 +14,7 @@
           "type": "object",
           "required": [
             "type",
-            "properties",
-            "assets"
+            "properties"
           ],
           "properties": {
             "type": {

@@ -19,6 +19,7 @@
     ]
   },
   "properties": {
+    "datetime": "2015-11-30T00:00:00Z",
     "start_datetime": "2015-11-30T00:00:00Z",
     "end_datetime": "2016-01-28T23:59:59Z",
     "monty:country_codes": [
@@ -57,5 +58,6 @@
       "href": "https://monty-api.ifrc.org/stac/glide-events/FL-2015-000171-PRY",
       "rel": "related"
     }
-  ]
+  ],
+  "assets": {}
 }

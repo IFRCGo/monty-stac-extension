@@ -27,7 +27,7 @@ More detail on the field rules is available in the [Montandon model analysis](./
 
 - Examples:
   - [Reference Event example](examples/item-ref-event-flood-PAR.json): Shows usage of the extension for a reference event
-  - [Source Collection example](examples/collection-source-event-GLIDE.json): Shows the usage of the extension in a STAC Collection representing an event data source.
+  <!-- - [Source Collection example](examples/collection-source-event-GLIDE.json): Shows the usage of the extension in a STAC Collection representing an event data source. -->
   - [Source Event example](examples/item-source-event-flood-PAR-GLIDE.json): Shows usage of the extension for a source event
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
@@ -64,8 +64,10 @@ The following field are specific to the Montandon model:
 
 #### monty:corr_id
 
-It is the unique identifier assigned by the Monty system to the reference event. This correlation identifier is critical to associate the events to the reference event.
-Each source event MUST have one in order to make a search of the source events efficiently. A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
+It is the unique identifier assigned by the Monty system to the reference event.
+This correlation identifier is critical to associate the events to the reference event.
+Each source event MUST have one in order to make a search of the source events efficiently.
+A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
 
 ## Relation types
 

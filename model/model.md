@@ -1,3 +1,5 @@
+<!-- remark-ignore -->
+
 # Monty Model
 
 The [Monty model](./Montandon_Schema_V1-00.json) is maintained in the [GDBC repository](https://github.com/IFRCGo/GCDB)
@@ -18,7 +20,8 @@ The normalized model must keep all the information from the Monty model and cove
 
 ### Data Overview
 
-The Monty model is based on **Event** data type that consititutes the core of the model. In STAC, they will be represented as an item. Then for each event,
+The Monty model is based on **Event** data type that consititutes the core of the model.
+In STAC, they will be represented as an item. Then for each event,
 3 kinds of data are collected:
 
 - **Hazard**: The type of hazard, its location and the intensity

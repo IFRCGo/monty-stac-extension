@@ -57,5 +57,6 @@
       "href": "https://monty-api.ifrc.org/stac/glide-events/FL-2015-000171-PRY",
       "rel": "related"
     }
-  ]
+  ],
+  "assets": {}
 }
