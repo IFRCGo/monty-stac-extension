@@ -32,24 +32,24 @@ More detail on the field rules is available in the [Montandon model analysis](./
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-### Fields
+### Event Fields
 
 The fields described in this section are exclusively used in :
 
 - [x] Item Properties (incl. Summaries in Collections)
 
-#### STAC Item core fields best practises
+#### STAC Item core fields best practises for event
 
 The table below describes the **REQUIRED** core fields in the representation of an event.
 
-| Field Name                                   | Description                                                                                                                                                                     |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                                           | The unique identifier for the event assigned by the issuer (source) of the event.                                                                                               |
-| geometry                                     | Defines the location of the event, formatted according to RFC 7946. It is higly recommended to use a point.                                                                     |
-| **properties object**                        |                                                                                                                                                                                 |
-| title                                        | The name of the event assigned by the issuer (source) of the event.                                                                                                             |
-| roles                                        | It MUST include the `event` role. The reference event MUST also contain `reference`.                                                                                            |
-| datetime<br/>start_datetime<br/>end_datetime | Any temporal information of the event                                                                                                                                           |
+| Field Name                                   | Description                                                                                                                                                                                                                         |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                           | The unique identifier for the event assigned by the issuer (source) of the event.                                                                                                                                                   |
+| geometry                                     | Defines the location of the event, formatted according to RFC 7946. It is higly recommended to use a point.                                                                                                                         |
+| **properties object**                        |                                                                                                                                                                                                                                     |
+| title                                        | The name of the event assigned by the issuer (source) of the event.                                                                                                                                                                 |
+| roles                                        | It MUST include the `event` role. The reference event MUST also contain `reference`.                                                                                                                                                |
+| datetime<br/>start_datetime<br/>end_datetime | Any temporal information of the event                                                                                                                                                                                               |
 | keywords                                     | A list of keywords that describe the event. This list includes the human-readable names of<br/>- the countries affected by the event<br/>- the hazard types affecting the event<br/>- Any additional useful keyword from the source |
 
 The following field are specific to the Montandon model:
@@ -68,6 +68,40 @@ It is the unique identifier assigned by the Monty system to the reference event.
 This correlation identifier is critical to associate the events to the reference event.
 Each source event MUST have one in order to make a search of the source events efficiently.
 A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
+
+## Hazard
+
+This section describes the mandatory fields for the hazard object.
+More detail on the field rules is available in the [Montandon model analysis](./model/model.md#hazard).
+
+- Examples:
+  - [Hazard example](examples/item-hazard-flood-PAR.json): Shows usage of the extension for a flooding hazard
+
+### Hazard Fields
+
+The fields described in this section are exclusively used in :
+
+- [x] Item Properties (incl. Summaries in Collections)
+
+#### STAC Item core fields best practises for hazard
+
+The table below describes the **REQUIRED** core fields in the representation of a hazard.
+
+| Field Name                                   | Description                                                                                                  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| id                                           | The unique identifier for the hazard assigned by the issuer (source) of the hazard.                          |
+| geometry                                     | Defines the location of the hazard, formatted according to RFC 7946.                                         |
+| **properties object**                        |                                                                                                              |
+| title                                        | The name of the hazard assigned by the issuer (source) of the hazard.                                        |
+| roles                                        | It MUST include the `hazard` role.                                                                           |
+| datetime<br/>start_datetime<br/>end_datetime | Any temporal information of the event                                                                        |
+| keywords                                     | A list of keywords that describe the hazard. This list includes the human-readable names of the hazard type. |
+
+The following field are specific to the Montandon model:
+
+| Field Name          | Type      | Description                                                                                                                                                                                              |
+| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:hazards_codes   | string    | **REQUIRED**. The hazard type of the hazard. The hazard type follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.                 |
 
 ## Relation types
 

@@ -62,13 +62,15 @@
         "monty:country_codes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
           }
         },
         "monty:hazard_codes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Z]{2}\\d{4}$"
           }
         },
         "monty:corr_id": {

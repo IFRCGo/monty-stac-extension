@@ -38,27 +38,32 @@ For example, the country code is used as a normalized attribute in a specific fi
 
 The following classs diagram shows the relationships between the different classes in the Monty model and their high-level attributes.
 
+<style>
+  .invisible {
+    display: none;
+  }
+</style>
+
 ``` mermaid
 ---
 title: Montandon STAC Model
 ---
 classDiagram
     class Item["STAC Item"] {
-        
-    }
-
-    Item <|-- Event
-
-    class Event {
         +id: string
         +title: string
         +geometry: GeoJson geometry
         +datetime: datetime
         +start_datetime: datetime
         +end_datetime: datetime
+        +keywords: string[]
+    }
+
+    Item <|-- Event
+
+    class Event {
         +country_codes: string[]
         +hazard_codes: string[]
-        +keywords: string[]
     }
 
     class ReferenceEvent["Reference Event"] {
@@ -73,7 +78,43 @@ classDiagram
 
     SourceEvent "1..*" --> "1" ReferenceEvent : is paired with
 
+    Item <|-- Hazard
+
     class Hazard {
+        +ref_event_id: string
+        +source_event_id: string
+        +source: string
+        +codes: string[]
+        +max_value: number
+        +max_unit: string
+        +estimate_type: string
+    }
+
+    Hazard "0..*" --> "1" ReferenceEvent : is related to
+    Hazard "0..*" --> "0" SourceEvent : is associated with
+
+    class HazardProfile["Hazard Information Profile"] {
+        +code: string
+        +name: string
+        +type: string
+        +cluster: string
+    }
+
+    Event "*" --> "*" HazardProfile : has
+    Hazard "*" --> "*" HazardProfile : is defined by
+
+    link HazardProfile "https://www.preventionweb.net/drr-glossary/hips" "UNDRR-ISC 2020 Hazard Information Profiles"
+    note for HazardProfile "UNDRR-ISC 2020 Hazard Information Profiles"
+
+    class ac["&ZeroWidthSpace;"] ::: invisible
+    Hazard "0..*" -- ac : is concurrent with
+    Hazard "0..*" <-- ac
+
+    ac .. Occurence
+    class Occurence {
+        +type: string
+        +prob: string
+        +probdef: string
     }
 
     class Impact {
@@ -105,9 +146,9 @@ The event class has the following attributes:
 - **datetime**: The date and time when the event occurred.
   For forecasted events, it is the date and time when the event is forecasted to occur.
 - **start_datetime**: The date and time when the event started.
-  For forecasted events, it is the date and time when the event is forecasted to start.
+  For forecasted events, it is the date and time when the event is forecasted to start. **OPTIONAL**
 - **end_datetime**: The date and time when the event ended.
-  For forecasted events, it is the date and time when the event is forecasted to end.
+  For forecasted events, it is the date and time when the event is forecasted to end. **OPTIONAL**
 - **country_codes**: The country codes of the countries affected by the event.
   The country codes are based on the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard.
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
@@ -117,3 +158,41 @@ The event class has the following attributes:
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
   - the countries affected by the event
   - the hazard types affecting the event
+
+### Hazard
+
+The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - https://www.undrr.org/terminology/hazard.
+In the Monty model, a hazard is always linked to an event and as per event, every hazard is recorded from multiple sources.
+
+The hazard class has the following attributes:
+
+- **id**: A unique identifier for the hazard. Preferably, the identifier assigned by the issuer (source) of the hazard. If not available, an identifier can be generated and should be prefixed with the related event id.
+- **title**: The name of the hazard assigned by the issuer (source) of the hazard.
+- **geometry** (GeoJSON geometry): The location of the hazard in the form of a GeoJSON geometry.
+- **datetime**: The date and time when the hazard occurrs or is forecasted to occur.
+- **start_datetime**: The date and time when the hazard started or is forecasted to start. **OPTIONAL**
+- **end_datetime**: The date and time when the hazard ended or is forecasted to end. **OPTIONAL**
+- **ref_event_id**: The identifier of the reference event to which is associated the hazard.
+- **source_event_id**: The identifier of the source event to which is associated the hazard. **OPTIONAL**
+- **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this data.
+- **codes**: The hazard codes defining the hazard.
+- **max_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
+- **max_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
+- **estimate_type**: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:
+  - Primary data
+  - Secondary data
+  - Modelled data: estimated without any event-specific data
+
+Hazards may be linked between each others. This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a specific relationship:
+
+- **Triggers**: as the current hazard triggers the linked hazard. For example, an earthquake triggers a landslide.
+- **Triggered by**: as the current hazard is triggered by the linked hazard. For example, a landslide is triggered by an earthquake.
+- **Concurrent**: For hazards that do not necessarily trigger one-another, but occur together. For example, thunderstorms can occur together with windstorms or cyclones, thus, we would use 'concurrent'.
+- **Complex**: When the relationship between two hazards is complex.
+
+The link has also specific occurence attributes:
+
+- **occurence_type**: the linked hazard actually observed to have occurred with the main hazard, or is this link only a potential link. Montandon allows for hazards to be linked together by actual observed occurrences, or the possibility that the linked hazard occurred with the principal hazard. This is especially useful when handling hazards such as tropical cyclones, whereby more than half of all deaths from cyclones in the US were actually caused by inland flooding.
+- **occurence_prob** of the linked hazard occurring with the main hazard. This is a subjective probability, and is not a statistical probability. It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard.
+- **occurenece_probdef**: definition of occurrence probability is for the hazard relationship. For example, if the probability is 'high', where is 'high' defined?
+
