@@ -175,13 +175,14 @@ The hazard class has the following attributes:
 - **ref_event_id**: The identifier of the reference event to which is associated the hazard.
 - **source_event_id**: The identifier of the source event to which is associated the hazard. **OPTIONAL**
 - **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this data.
-- **codes**: The hazard codes defining the hazard.
-- **max_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
-- **max_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
-- **estimate_type**: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:
-  - Primary data
-  - Secondary data
-  - Modelled data: estimated without any event-specific data
+- **hazard_detail**: A detailed description of the hazard including:
+  - **codes**: The hazard codes defining the hazard.
+  - **max_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
+  - **max_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
+  - **estimate_type**: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:
+    - Primary data
+    - Secondary data
+    - Modelled data: estimated without any event-specific data
 
 Hazards may be linked between each others. This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a specific relationship:
 

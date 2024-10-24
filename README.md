@@ -16,14 +16,78 @@ and provide a more complete picture of disaster risk for the National Societies.
 For more information about the Montandon project, please check out [this 5-minute video](https://www.youtube.com/watch?v=BEWxqYfrQek).
 
 This document explains the Montandon Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-It provides a way to include Montandon data in a STAC Item or Collection.
+It provides a way to include Montandon data from [Montandon model analysis](./model/model.md) in a STAC Item or Collection.
+The specification is organized as follows
 
-The specifications of the fields and the objects are grouped by the data types of the [Montandon model analysis](./model/model.md).
+- [Fields](#fields): Describes the fields that are added to the STAC Item and Collection objects.
+- [Event](#event): Describes the mandatory fields for the event object.
+- [Hazard](#hazard): Describes the mandatory fields for the hazard object.
+- [Relation types](#relation-types): Describes the relation types that should be used in the Monty extension.
+
+The specifications of the fields and the objects are grouped by the data types of the
+
+## Fields
+
+The fields in the table below can be used in these parts of STAC documents:
+
+- [ ] Catalogs
+- [x] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Links
+- [ ] Bands
+
+| Field Name          | Type                                        | Description                                                                                                                                                                                |
+| ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| monty:country_codes | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.   |
+| monty:corr_id       | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event.                                                    |
+| monty:hazard_codes  | \[string]                                   | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. |
+| monty:hazard_detail | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                 |
+
+> [!NOTE]  
+> Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
+
+### Additional Field Information
+
+#### monty:country_codes
+
+It is a list of country codes of the countries concerned by the item. 
+It must at least contain the countries intersected by the item's geometry.
+
+#### monty:hazard_codes
+
+It is a list of hazard codes of the hazards concerned by the item. 
+The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.
+With that identifier, it is possible to derive a set of additional properties associated with the hazard:
+
+- The name of the hazard
+- The type of the hazard
+- The description of the hazard
+- The cluster of the hazard
+
+#### monty:corr_id
+
+It is the unique identifier assigned by the Monty system to the reference event.
+This correlation identifier is critical to associate the events to the reference event.
+Each source event MUST have one in order to make a search of the source events efficiently.
+A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
+
+#### monty:hazard_detail
+
+It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
+The following fields are available in the object:
+
+| Field Name    | Type      | Description                                                                                                                                                                                |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| codes         | \[string] | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. |
+| max_value     | number    | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                                                                                           |
+| max_unit      | string    | The unit of the max_value.                                                                                                                                                                 |
+| estimate_type | string    | The type of the estimate. It can be one of the following values: `primary`, `secondary`, `modelled`.                                                                                       |
 
 ## Event
 
-This section describes the mandatory fields for the event object.
-More detail on the field rules is available in the [Montandon model analysis](./model/model.md#event).
+This section describes the rules and best practises to apply on the STAC core fields for the event object.
+More detail on the fields is available in the [Montandon model analysis](./model/model.md#event).
 
 - Examples:
   - [Reference Event example](examples/item-ref-event-flood-PAR.json): Shows usage of the extension for a reference event
@@ -32,13 +96,7 @@ More detail on the field rules is available in the [Montandon model analysis](./
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-### Event Fields
-
-The fields described in this section are exclusively used in :
-
-- [x] Item Properties (incl. Summaries in Collections)
-
-#### STAC Item core fields best practises for event
+### STAC Item fields for event
 
 The table below describes the **REQUIRED** core fields in the representation of an event.
 
@@ -52,23 +110,6 @@ The table below describes the **REQUIRED** core fields in the representation of 
 | datetime<br/>start_datetime<br/>end_datetime | Any temporal information of the event                                                                                                                                                                                               |
 | keywords                                     | A list of keywords that describe the event. This list includes the human-readable names of<br/>- the countries affected by the event<br/>- the hazard types affecting the event<br/>- Any additional useful keyword from the source |
 
-The following field are specific to the Montandon model:
-
-| Field Name          | Type      | Description                                                                                                                                                                                              |
-| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:country_codes | \[string] | **REQUIRED**. The country codes of the countries affected by the event. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                 |
-| monty:hazard_codes  | \[string] | **REQUIRED**. The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. |
-| monty:corr_id       | string    | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the instances of the same event.                                                              |
-
-### Additional Field Information
-
-#### monty:corr_id
-
-It is the unique identifier assigned by the Monty system to the reference event.
-This correlation identifier is critical to associate the events to the reference event.
-Each source event MUST have one in order to make a search of the source events efficiently.
-A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
-
 ## Hazard
 
 This section describes the mandatory fields for the hazard object.
@@ -77,13 +118,7 @@ More detail on the field rules is available in the [Montandon model analysis](./
 - Examples:
   - [Hazard example](examples/item-hazard-flood-PAR.json): Shows usage of the extension for a flooding hazard
 
-### Hazard Fields
-
-The fields described in this section are exclusively used in :
-
-- [x] Item Properties (incl. Summaries in Collections)
-
-#### STAC Item core fields best practises for hazard
+### STAC Item fields for hazard
 
 The table below describes the **REQUIRED** core fields in the representation of a hazard.
 
@@ -97,20 +132,16 @@ The table below describes the **REQUIRED** core fields in the representation of 
 | datetime<br/>start_datetime<br/>end_datetime | Any temporal information of the event                                                                        |
 | keywords                                     | A list of keywords that describe the hazard. This list includes the human-readable names of the hazard type. |
 
-The following field are specific to the Montandon model:
-
-| Field Name          | Type      | Description                                                                                                                                                                                              |
-| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:hazards_codes   | string    | **REQUIRED**. The hazard type of the hazard. The hazard type follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.                 |
-
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
 [Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
 
-| Type            | Description                           |
-| --------------- | ------------------------------------- |
-| reference-event | This link points to the the reference |
+| Type            | Description                             |
+| --------------- | --------------------------------------- |
+| reference-event | This link points to the reference event |
+| source-event    | This link points to the source event    |
+
 
 ## Contributing
 
