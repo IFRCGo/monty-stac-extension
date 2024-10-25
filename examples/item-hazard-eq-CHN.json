@@ -1,0 +1,63 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://IFRCGo.github.io/monty/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "EQ-2015-11-30-PRY-GCDB_V1",
+  "bbox": [
+    103.279,
+    31.0992,
+    103.279,
+    31.0992
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      103.279,
+      31.0992
+    ]
+  },
+  "properties": {
+    "datetime": "2015-11-30T00:00:00Z",
+    "start_datetime": "2015-11-30T00:00:00Z",
+    "end_datetime": "2016-01-28T23:59:59Z",
+    "monty:country_codes": [
+      "PRY"
+    ],
+    "monty:hazard_codes": [
+      "MH0004",
+      "MH0005",
+      "MH0006",
+      "MH0007",
+      "MH0008",
+      "MH0012"
+    ],
+    "monty:corr_id": "FL-2015-11-30-PRY-GCDB_V1",
+    "roles": [
+      "event",
+      "reference"
+    ],
+    "keywords": [
+      "flood",
+      "paraguay",
+      "Surface Water Flooding",
+      "Coastal Flood",
+      "Estuarine (Coastal) Flood",
+      "Flash Flood",
+      "Fluvial (Riverine) Flood",
+      "Groundwater Flood"
+    ]
+  },
+  "links": [
+    {
+      "href": "https://monty-api.ifrc.org/stac/reference-events/FL-2015-11-30-PRY-GCDB_V1",
+      "rel": "self"
+    },
+    {
+      "href": "https://monty-api.ifrc.org/stac/glide-events/FL-2015-000171-PRY",
+      "rel": "related"
+    }
+  ],
+  "assets": {}
+}

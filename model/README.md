@@ -49,6 +49,9 @@ The following classs diagram shows the relationships between the different class
 title: Montandon STAC Model
 ---
 classDiagram
+    direction TD
+    linkStyle default interpolate basis
+
     class Item["STAC Item"] {
         +id: string
         +title: string
@@ -59,12 +62,20 @@ classDiagram
         +keywords: string[]
     }
 
-    Item <|-- Event
-
     class Event {
         +country_codes: string[]
         +hazard_codes: string[]
     }
+
+    Item <|-- Event
+
+    class Data {
+        +ref_event_id: string
+        +source_event_id: string
+        +source: string
+    }
+
+    Item <|-- Data
 
     class ReferenceEvent["Reference Event"] {
     }
@@ -73,27 +84,41 @@ classDiagram
         +correlation_id: string
     }
 
+    Data "0..*" --> "1" ReferenceEvent : is related to
+    Data "0..*" --> "0" SourceEvent : is associated with
+
     Event <|-- ReferenceEvent
     Event <|-- SourceEvent
-
     SourceEvent "1..*" --> "1" ReferenceEvent : is paired with
 
-    Item <|-- Hazard
-
     class Hazard {
-        +ref_event_id: string
-        +source_event_id: string
-        +source: string
+        +hazard_detail: HazardDetail[]
+    }
+
+    Hazard --|> Data
+
+    class Impact {
+        +impact_detail: ImpactDetail[]
+    }
+
+    Impact --|> Data
+    Impact "0..*" --> "1" Hazard : is the effect of
+
+    class Response {
+    }
+
+    Response --|> Data
+    
+    class HazardDetail {
         +codes: string[]
         +max_value: number
         +max_unit: string
         +estimate_type: string
     }
 
-    Hazard "0..*" --> "1" ReferenceEvent : is related to
-    Hazard "0..*" --> "0" SourceEvent : is associated with
-
-    class HazardProfile["Hazard Information Profile"] {
+    HazardDetail --* Hazard
+    
+    class HazardProfile["UNDRR-ISC 2020\nHazard Information Profiles"] {
         +code: string
         +name: string
         +type: string
@@ -101,10 +126,9 @@ classDiagram
     }
 
     Event "*" --> "*" HazardProfile : has
-    Hazard "*" --> "*" HazardProfile : is defined by
+    HazardDetail "*" --> "*" HazardProfile : is defined by
 
-    link HazardProfile "https://www.preventionweb.net/drr-glossary/hips" "UNDRR-ISC 2020 Hazard Information Profiles"
-    note for HazardProfile "UNDRR-ISC 2020 Hazard Information Profiles"
+    link HazardProfile "https://www.preventionweb.net/drr-glossary/hips"
 
     class ac["&ZeroWidthSpace;"] ::: invisible
     Hazard "0..*" -- ac : is concurrent with
@@ -117,11 +141,18 @@ classDiagram
         +probdef: string
     }
 
-    class Impact {
+    class ImpactDetail {
+        +category: string
+        +value: number
+        +type: string
+        +unit: string
+        +date: datetime
+        +estimate_type: string
     }
 
-    class Response {
-    }
+    ImpactDetail --* Impact
+
+    
 ```
 
 ### Event
@@ -196,4 +227,31 @@ The link has also specific occurence attributes:
 - **occurence_type**: the linked hazard actually observed to have occurred with the main hazard, or is this link only a potential link. Montandon allows for hazards to be linked together by actual observed occurrences, or the possibility that the linked hazard occurred with the principal hazard. This is especially useful when handling hazards such as tropical cyclones, whereby more than half of all deaths from cyclones in the US were actually caused by inland flooding.
 - **occurence_prob** of the linked hazard occurring with the main hazard. This is a subjective probability, and is not a statistical probability. It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard.
 - **occurenece_probdef**: definition of occurrence probability is for the hazard relationship. For example, if the probability is 'high', where is 'high' defined?
+
+### Impact
+
+Impact data represent an estimate of the effect, including negative effects (e.g., economic losses) and positive effects (e.g., economic gains), of a hazardous event or a disaster. The term includes economic, human and environmental impacts, and may include death, injuries, disease and other negative effects on human physical, mental and social well-being'. UNDRR - https://www.undrr.org/terminology/disaster
+
+The impact class has the following attributes:
+
+- **id**: A unique identifier for the impact. Preferably, the identifier assigned by the issuer (source) of the impact estimate data. If not available, an identifier can be generated and should be prefixed with the related event id.
+- **title**: The name of the impact assigned by the issuer (source) of the impact estimate data.
+- **geometry** (GeoJSON geometry): The location of the impact in the form of a GeoJSON geometry.
+- **datetime**: The date and time periods of the impact estimates.
+- **start_datetime**: The date and time when the impact estimate started or is forecasted to start. **OPTIONAL**
+- **end_datetime**: The date and time when the impact estimate ended or is forecasted to end. **OPTIONAL**
+- **ref_event_id**: The identifier of the reference event to which is associated the impact.
+- **source_event_id**: The identifier of the source event to which is associated the impact. **OPTIONAL**
+- **hazard_id**: The identifier of the hazard to which is associated the impact. **OPTIONAL**
+- **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this estimate impact data.
+- **impact_detail**: A detailed description of the impact including:
+  - **category**: The category of impact, which is the specific asset or population demographic that has been impacted by the hazard.
+  - **value**: The estimated value of the impact, as a number, without the units. For example, for an estimate of 1000 people displaced, you would enter 1000.
+  - **type**: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'.
+  - **unit**: The units of the impact estimate. For example, 10 deaths would be a count value, thus 'unitscountnum' should be used.
+  - **date**: If the impact estimate is a cost, provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, imp_sdate will be used.  **OPTIONAL**
+  - **estimate_type**: The type of data source that was used to create this impact estimate:
+    - Primary data
+    - Secondary data
+    - Modelled data: estimated without any event-specific data
 
