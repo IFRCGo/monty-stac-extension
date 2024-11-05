@@ -1,0 +1,63 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://IFRCGo.github.io/monty/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "EQ-2008-000062-CHN",
+  "collection": "reference-events",
+  "bbox": [
+    103.279,
+    31.0992,
+    103.279,
+    31.0992
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      103.279,
+      31.0992
+    ]
+  },
+  "properties": {
+    "datetime": "2008-05-12T06:28:00Z",
+    "monty:country_codes": [
+      "CHN"
+    ],
+    "monty:hazard_codes": [
+      "GH0001",
+      "GH0002",
+      "GH0004"
+    ],
+    "monty:corr_id": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB",
+    "roles": [
+      "event",
+      "reference"
+    ],
+    "keywords": [
+      "earthquake",
+      "china",
+      "Ground Shaking (Earthquake)",
+      "Earthquake Surface Rupture, Fissures, and Tectonic Uplift/Subsidence"
+    ]
+  },
+  "links": [
+    {
+      "href": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",
+      "rel": "self"
+    },
+    {
+      "href": "https://monty-api.ifrc.org/stac/glide-events/EQ-2008-000062-CHN",
+      "rel": "via"
+    },
+    {
+      "href": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/json"
+    }
+  ],
+  "assets": {}
+}

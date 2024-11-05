@@ -25,7 +25,7 @@ The specification is organized as follows
 - [Data](#data): Describes the mandatory fields for all data objects.
   - [Hazard](#hazard): Describes the mandatory fields for the hazard object.
   - [Impact](#impact): Describes the mandatory fields for the impact object.
-
+  - [Response](#response): Describes the mandatory fields for the response object.
 
 The specifications of the fields and the objects are grouped by the data types of the
 
@@ -44,14 +44,29 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 | Field Name          | Type                                        | Description                                                                                                                                                                                                                                                                                                 |
 | ------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:country_codes | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                                                    |
-| monty:corr_id       | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event.                                                                                                                                                                     |
+| monty:country_codes | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                        |
+| monty:corr_id       | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/event_paring.md) page.                                        |
 | monty:hazard_codes  | \[string]                                   | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). |
 | monty:hazard_detail | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                                                                                                                                  |
 | monty:impact_detail | [Impact Detail object](#montyimpact_detail) | The details of the impact.                                                                                                                                                                                                                                                                                  |
 
 > [!NOTE]  
 > Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
+
+### Roles
+
+A set of roles are defined to describe the type of the data. The following roles are defined:
+
+| Role      | Description                    |
+| --------- | ------------------------------ |
+| event     | The data is an event.          |
+| reference | The data is a reference event. |
+| source    | The data is a source event.    |
+| hazard    | The data is a hazard.          |
+| impact    | The data is an impact.         |
+| response  | The data is a response.        |
+
+The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item. This is useful to find exactly the item needed. For instance, to find the reference event of a data, a link with both `event` and `reference` roles is needed.
 
 ### Link Attributes
 
@@ -120,6 +135,8 @@ The following types should be used as applicable `rel` types in the
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | reference-event     | This link points to the reference event                                                                            |
 | source-event        | This link points to the source event                                                                               |
+| related-hazard      | This link points to a related hazard. For example, a flood related to the event.                                   |
+| related-impact      | This link points to a related impact. For example, a flood related to the impact.                                  |
 | triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide.                           |
 | triggered-by-hazard | This link points to a triggered hazard. For example, a landslide triggered by an earthquake.                       |
 | concurrent-hazard   | This link points to a concurrent hazard. For example, thunderstorms can occur together with windstorms or cyclones |
@@ -154,7 +171,10 @@ The event class is the core of the Monty model. It represents a disaster event t
 The global crisis data bank records multiple instances of events that are related to a single event:
 
 - One **unique reference** event that is used to "pair" all the instances of the event
-- Multiple instances of the event that are recorded for different sources
+- Multiple instances of the event that are recorded for different sources. Each source event **MUST** have the following:
+  - A link to the reference event with the [relationship](#relation-types) type `reference-event`
+  - A link to the resource from which the event was sourced with 
+    the [relationship]([#relation-types](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md#using-relation-types)) type `via`.
 
 ## Data
 
