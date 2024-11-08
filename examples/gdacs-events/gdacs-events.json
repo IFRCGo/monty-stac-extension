@@ -8,6 +8,10 @@
   "title": "GDACS Source Events",
   "description": "A collection of GDACS source events loaded into Monty",
   "license": "MIT",
+  "roles": [
+    "event",
+    "source"
+  ],
   "extent": {
     "spatial": {
       "bbox": [

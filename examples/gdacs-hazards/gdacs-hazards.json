@@ -5,12 +5,11 @@
   ],
   "type": "Collection",
   "id": "collection",
-  "title": "Reference Events",
-  "description": "A collection of reference events loaded into Monty",
-  "license": "Apache-2.0",
+  "title": "GDACS Hazards",
+  "description": "A collection of GDACS hazards loaded into Monty",
+  "license": "MIT",
   "roles": [
-    "event",
-    "reference"
+    "hazard"
   ],
   "extent": {
     "spatial": {
@@ -38,22 +37,21 @@
       "maximum": "2019-07-10T13:44:56Z"
     },
     "roles": [
-      "event",
-      "reference"
+      "hazard"
     ],
     "monty:country_codes": [
       "CHN",
       "SPN"
     ],
     "monty:hazard_codes": [
-      "GH0001",
-      "GH0002",
-      "GH0004"
+      "MH0004",
+      "MH0005",
+      "MH0006"
     ]
   },
   "links": [
     {
-      "href": "reference-events.json",
+      "href": "gdacs-events.json",
       "rel": "self"
     }
   ]

@@ -8,6 +8,10 @@
   "title": "GLIDE Source Events",
   "description": "A collection of GLIDE source events loaded into Monty",
   "license": "unknown",
+  "roles": [
+    "event",
+    "source"
+  ],
   "extent": {
     "spatial": {
       "bbox": [

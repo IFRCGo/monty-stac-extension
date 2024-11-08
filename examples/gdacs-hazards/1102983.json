@@ -7,21 +7,20 @@
   "id": "1102983",
   "collection": "gdacs-events",
   "bbox": [
-    -3.4110253455683806,
-    38.60133168687446,
-    -3.4110253455683806,
-    38.60133168687446
+    103.279,
+    31.0992,
+    103.279,
+    31.0992
   ],
   "geometry": {
     "type": "Point",
     "coordinates": [
-      -3.4110253455683806,
-      38.60133168687446
+      103.279,
+      31.0992
     ]
   },
   "properties": {
-    "start_datetime": "2024-10-27T15:00:00",
-    "end_datetime": "2024-11-04T11:00:00",
+    "datetime": "2008-05-12T06:28:00Z",
     "monty:country_codes": [
       "CHN"
     ],
@@ -52,7 +51,7 @@
       "rel": "collection"
     },
     {
-      "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983",
+      "href": "https://monty-api.ifrc.org/stac/glide-events/EQ-2008-000062-CHN",
       "rel": "via"
     },
     {

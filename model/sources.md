@@ -61,6 +61,17 @@ Individual events can be accessed via the API endpoint `https://www.gdacs.org/gd
 * Documentation: https://www.gdacs.org/floodmerge/data_v2.aspx
 * Python lib: https://github.com/Kamparia/gdacs-api
 
-#### Data conversion
+### Event
 
-* A GDACS evvent will **ALWAYS** produce an event STAC item as in the example [GDACS-2021-000001-IND](../examples/gdacs-events/GDACS-2021-000001-IND.json)
+A GDACS event will **ALWAYS** produce an event STAC item as in the example [GDACS-2021-000001-IND](../examples/gdacs-events/GDACS-2021-000001-IND.json).
+
+Here is a table with the fields that are mapped from the GDACS event to the STAC event:
+
+| GDACS field          | STAC field         | Description                                                                             |
+| -------------------- | ------------------ | --------------------------------------------------------------------------------------- |
+| bbox                 | bbox               | Bounding box of the event                                                               |
+| geometry             | geometry           | Geometry of the event                                                                   |
+| properties.eventtype | monty:hazard_codes | List of hazard codes converted following the GDACS event type to Hazard profile mapping |
+| properties.eventid   | id                 | Unique identifier for the event                                                         |
+
+
