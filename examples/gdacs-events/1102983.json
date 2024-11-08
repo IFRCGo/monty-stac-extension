@@ -4,8 +4,8 @@
     "https://ifrcgo.github.io/monty/v1.0.0/schema.json"
   ],
   "type": "Feature",
-  "id": "EQ-2008-000062-CHN",
-  "collection": "glide-events",
+  "id": "1102983",
+  "collection": "gdacs-events",
   "bbox": [
     103.279,
     31.0992,
@@ -25,9 +25,9 @@
       "CHN"
     ],
     "monty:hazard_codes": [
-      "GH0001",
-      "GH0002",
-      "GH0004"
+      "MH0004",
+      "MH0005",
+      "MH0006"
     ],
     "monty:corr_id": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB",
     "roles": [
@@ -47,16 +47,12 @@
       "rel": "self"
     },
     {
-      "href": "https://www.glidenumber.net/glide/jsonglideset.jsp?level1=CHN&fromyear=2008&events=EQ&number=2008-000062",
-      "rel": "via"
+      "href": "gdacs-events.json",
+      "rel": "collection"
     },
     {
-      "href": "../reference-events/20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",
-      "rel": "related",
-      "roles": [
-        "reference",
-        "event"
-      ]
+      "href": "https://monty-api.ifrc.org/stac/glide-events/EQ-2008-000062-CHN",
+      "rel": "via"
     },
     {
       "href": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",
@@ -65,10 +61,6 @@
         "hazard"
       ],
       "type": "application/json"
-    },
-    {
-      "href": "gdacs-events.json",
-      "rel": "collection"
     }
   ],
   "assets": {}

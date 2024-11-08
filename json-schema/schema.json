@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://IFRCGo.github.io/monty/v1.0.0/schema.json#",
+  "$id": "https://ifrcgo.github.io/monty/v1.0.0/schema.json#",
   "title": "Monty Extension",
   "description": "STAC Monty Extension for STAC Items and STAC Collections.",
   "oneOf": [
@@ -27,12 +27,51 @@
                   "required": [
                     "monty:country_codes",
                     "monty:hazard_codes",
-                    "monty:corr_id"
+                    "monty:corr_id",
+                    "roles"
                   ]
                 },
                 {
                   "$ref": "#/definitions/fields"
+                },
+                {
+                  "$ref": "#/definitions/roles"
                 }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "This is the schema for STAC Collections.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/stac_extensions"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "Collection"
+            }
+          }
+        }
+      ],
+      "anyOf": [
+        {
+          "$comment": "This is the schema for the fields in Summaries. By default, only checks the existence of the properties, but not the schema of the summaries.",
+          "required": [
+            "summaries"
+          ],
+          "properties": {
+            "summaries": {
+              "required": [
+                "monty:country_codes",
+                "monty:hazard_codes"
               ]
             }
           }
@@ -50,7 +89,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://IFRCGo.github.io/monty/v1.0.0/schema.json"
+            "const": "https://ifrcgo.github.io/monty/v1.0.0/schema.json"
           }
         }
       }
@@ -83,6 +122,17 @@
         }
       },
       "additionalProperties": false
+    },
+    "is_event": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 2,
+          "contains": {
+            "const": "event"
+          }
+        }
+      }
     }
   }
 }
