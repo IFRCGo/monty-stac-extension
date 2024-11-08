@@ -6,11 +6,21 @@
   "type": "Collection",
   "id": "collection",
   "title": "GDACS Source Events",
-  "description": "A collection of GDACS source events loaded into Monty",
+  "description": "Global Disaster Alert and Coordination System (GDACS)",
   "license": "MIT",
   "roles": [
     "event",
     "source"
+  ],
+  "providers": [
+    {
+      "name": "GDACS",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.gdacs.org/",
+      "email": "coordination@gdacs.org"
+    }
   ],
   "extent": {
     "spatial": {

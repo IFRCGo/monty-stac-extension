@@ -52,7 +52,9 @@
         {
           "type": "object",
           "required": [
-            "type"
+            "type",
+            "providers",
+            "license"
           ],
           "properties": {
             "type": {

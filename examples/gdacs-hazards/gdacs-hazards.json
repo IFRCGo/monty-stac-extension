@@ -11,6 +11,16 @@
   "roles": [
     "hazard"
   ],
+  "providers": [
+    {
+      "name": "GDACS",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.gdacs.org/",
+      "email": "coordination@gdacs.org"
+    }
+  ],
   "extent": {
     "spatial": {
       "bbox": [

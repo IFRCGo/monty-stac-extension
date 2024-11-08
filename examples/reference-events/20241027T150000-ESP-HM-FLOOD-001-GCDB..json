@@ -48,53 +48,15 @@
       "Fluvial (Riverine) Flood"
     ]
   },
-  "assets": {
-    "icon": {
-      "href": "https://www.gdacs.org/images/gdacs_icons/maps/Red/FL.png",
-      "title": "Icon",
-      "type": "image/png",
-      "roles": [
-        "icon"
-      ]
-    },
-    "report": {
-      "href": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL",
-      "title": "GDACS Report",
-      "type": "text/html",
-      "roles": [
-        "report"
-      ]
-    }
-  },
+  "assets": {},
   "links": [
     {
-      "href": "1102983.json",
+      "href": "20241027T150000-ESP-HM-FLOOD-001-GCDB..json",
       "rel": "self"
     },
     {
-      "href": "gdacs-events.json",
+      "href": "reference-events.json",
       "rel": "collection"
-    },
-    {
-      "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983",
-      "rel": "via"
-    },
-    {
-      "href": "../reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json",
-      "rel": "related",
-      "roles": [
-        "event",
-        "reference"
-      ],
-      "type": "application/json"
-    },
-    {
-      "href": "../glide-events/FL-2024-000199-ESP.json",
-      "rel": "related",
-      "roles": [
-        "event"
-      ],
-      "type": "application/json"
     }
   ]
 }

@@ -12,6 +12,16 @@
     "event",
     "reference"
   ],
+  "providers": [
+    {
+      "name": "IFRC",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://ifrcgo.github.io/monty/",
+      "email": "info@ifrc.org"
+    }
+  ],
   "extent": {
     "spatial": {
       "bbox": [

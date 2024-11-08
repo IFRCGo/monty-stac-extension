@@ -12,6 +12,16 @@
     "event",
     "source"
   ],
+  "providers": [
+    {
+      "name": "GLIDE",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://glide.org/",
+      "email": "gliderep@adrc.asia"
+    }
+  ],
   "extent": {
     "spatial": {
       "bbox": [
