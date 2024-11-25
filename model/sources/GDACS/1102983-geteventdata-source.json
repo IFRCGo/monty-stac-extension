@@ -1,0 +1,274 @@
+{
+    "type": "Feature",
+    "bbox": [
+        -2.6232332,
+        39.4177902,
+        -2.6232332,
+        39.4177902
+    ],
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -2.6232332,
+            39.4177902
+        ]
+    },
+    "properties": {
+        "eventtype": "FL",
+        "eventid": 1102983,
+        "episodeid": 2,
+        "eventname": "",
+        "glide": "FL-2024-000199-ESP",
+        "name": "Flood in Spain",
+        "description": "Flood in Spain",
+        "htmldescription": "Orange Flood in Spain from: 27 Oct 2024 15 to: 04 Nov 2024 11.",
+        "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Green/FL.png",
+        "iconoverall": null,
+        "url": {
+            "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=2",
+            "report": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL",
+            "media": "https://www.gdacs.org/gdacsapi/api/emm/getemmnewsbykey?eventtype=FL&eventid=1102983"
+        },
+        "alertlevel": "Orange",
+        "alertscore": 2,
+        "episodealertlevel": "Green",
+        "episodealertscore": 0.5,
+        "istemporary": "false",
+        "iscurrent": "false",
+        "country": "Spain",
+        "fromdate": "2024-10-27T15:00:00",
+        "todate": "2024-11-04T11:00:00",
+        "datemodified": "2024-11-21T18:35:23",
+        "iso3": "ESP",
+        "source": "GLOFAS",
+        "sourceid": "3f2eac19-ee5a-4923-a3b4-1dd82818943f",
+        "polygonlabel": "Centroid",
+        "Class": "Point_Centroid",
+        "affectedcountries": [
+            {
+                "iso3": "ESP",
+                "countryname": "Spain"
+            }
+        ],
+        "severitydata": {
+            "severity": 0.0,
+            "severitytext": "Magnitude 0 ",
+            "severityunit": ""
+        },
+        "episodes": [
+            {
+                "details": "https://www.gdacs.org/gdacsapi/api/events/getepisodedata?eventtype=FL&eventid=1102983&episodeid=1"
+            },
+            {
+                "details": "https://www.gdacs.org/gdacsapi/api/events/getepisodedata?eventtype=FL&eventid=1102983&episodeid=2"
+            }
+        ],
+        "sendai": [
+            {
+                "latest": true,
+                "sendaitype": "B",
+                "sendainame": "rescued",
+                "sendaivalue": "26",
+                "country": "Spain",
+                "region": "Cullera",
+                "dateinsert": "2024-11-21T08:16:42.7",
+                "description": "26 [people] Rescued in Cullera, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "B",
+                "sendainame": "displaced",
+                "sendaivalue": "40",
+                "country": "Spain",
+                "region": "Letur",
+                "dateinsert": "2024-11-21T08:16:42.733",
+                "description": "40 [people] Evacuated in Letur, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "1",
+                "country": "Spain",
+                "region": "Letur",
+                "dateinsert": "2024-11-21T08:16:42.767",
+                "description": "1 [people] Fatalities in Letur, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "1",
+                "country": "Spain",
+                "region": "Mira",
+                "dateinsert": "2024-11-21T08:16:42.783",
+                "description": "1 [people] Fatalities in Mira, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "62",
+                "country": "Spain",
+                "region": "Valencia region",
+                "dateinsert": "2024-11-21T08:16:42.8",
+                "description": "62 [people] Fatalities in Valencia region, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "B",
+                "sendainame": "displaced",
+                "sendaivalue": "100",
+                "country": "Spain",
+                "region": "Alfafar",
+                "dateinsert": "2024-11-21T08:16:42.833",
+                "description": "100 [people] Evacuated in Alfafar, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "A",
+                "sendainame": "missing",
+                "sendaivalue": "5",
+                "country": "Spain",
+                "region": "Letur",
+                "dateinsert": "2024-11-21T08:16:42.843",
+                "description": "5 [people] Missing People in Letur, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": true,
+                "sendaitype": "D",
+                "sendainame": "bridges destroyed",
+                "sendaivalue": "1",
+                "country": "Spain",
+                "region": "Ribarroja del Turia",
+                "dateinsert": "2024-11-21T08:16:42.853",
+                "description": "1 [bridge] Bridge destroyed in Ribarroja del Turia, Spain",
+                "onset_date": "2024-10-28T01:00:00",
+                "expires_date": "2024-10-30T01:00:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "3",
+                "country": "Spain",
+                "region": "Castile-La Mancha",
+                "dateinsert": "2024-11-21T13:14:40.933",
+                "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
+                "onset_date": "2024-10-27T16:13:00",
+                "expires_date": "2024-11-04T16:13:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "217",
+                "country": "Spain",
+                "region": "Valencian Community",
+                "dateinsert": "2024-11-21T13:14:40.943",
+                "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
+                "onset_date": "2024-10-27T15:57:00",
+                "expires_date": "2024-11-04T15:57:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "C",
+                "sendainame": "houses damaged",
+                "sendaivalue": "4500",
+                "country": "Spain",
+                "region": "Valencian Community",
+                "dateinsert": "2024-11-21T13:14:40.95",
+                "description": "As of 4 November, the Department of National Security of Spain (DSN) reports that about 4,500 buildings across at least 65 municipalities in Valencia province have been affected.",
+                "onset_date": "2024-10-27T11:09:00",
+                "expires_date": "2024-11-04T11:09:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "A",
+                "sendainame": "death",
+                "sendaivalue": "1",
+                "country": "Spain",
+                "region": "Andalusia",
+                "dateinsert": "2024-11-21T13:14:40.96",
+                "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
+                "onset_date": "2024-10-27T16:14:00",
+                "expires_date": "2024-11-04T16:14:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "B",
+                "sendainame": "displaced",
+                "sendaivalue": "447",
+                "country": "Spain",
+                "region": "Valencian Community",
+                "dateinsert": "2024-11-21T13:14:40.97",
+                "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
+                "onset_date": "2024-10-27T16:12:00",
+                "expires_date": "2024-11-04T16:12:00",
+                "effective_date": null
+            },
+            {
+                "latest": false,
+                "sendaitype": "A",
+                "sendainame": "missing",
+                "sendaivalue": "114",
+                "country": "Spain",
+                "region": "Valencian Community",
+                "dateinsert": "2024-11-21T13:14:40.977",
+                "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia.",
+                "onset_date": "2024-10-27T10:16:00",
+                "expires_date": "2024-11-04T10:16:00",
+                "effective_date": null
+            }
+        ],
+        "impacts": [],
+        "images": {
+            "populationmap": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983/2rest.png",
+            "floodmap_cached": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983/7rest.png",
+            "thumbnailmap_cached": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983.png",
+            "rainmap_cached": "https://www.gdacs.org/contentdata/resources/FL/1102983/6rest.png",
+            "overviewmap_cached": "https://www.gdacs.org/contentdata/resources/FL/1102983/flood_overview_1102983.png",
+            "overviewmap": "https://www.gdacs.org/contentdata/resources/FL/1102983/flood_overview_1102983.png",
+            "floodmap": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983/7rest.png",
+            "rainmap": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983/6rest.png",
+            "rainmap_legend": "http://dma.gdacs.org/arcgisoutput/GFDS_GFDS_activeDG_MapServer/wms/default37.png",
+            "floodmap_legend": "http://dma.gdacs.org/arcgisoutput/GFDS_GFDS_activeDG_MapServer/wms/default41.png",
+            "overviewmap_legend": "http://dma.gdacs.org/arcgisoutput/GFDS_GFDS_activeDG_MapServer/wms/default78.png",
+            "rainimage": "https://www.gdacs.org/rainimage/2024/10/3B42RT.2024103000.7.7day.tif",
+            "meteoimages": "https://www.gdacs.org/contentdata/resources/FL/1102983/meteo/",
+            "mslpimages": "https://www.gdacs.org/contentdata/img/mslp/",
+            "event_icon_map": "https://www.gdacs.org/images/gdacs_icons/maps/Green/FL.png",
+            "event_icon": "https://www.gdacs.org/images/gdacs_icons/big/Orange/FL.png",
+            "thumbnailmap": "https://www.gdacs.org/contentdata/resources/FL/1102983/dfo2024_1102983.png",
+            "npp_icon": "https://www.gdacs.org/images/gdacs_icons/iconmap/Nuclear.png"
+        },
+        "additionalinfos": {},
+        "documents": {}
+    }
+}

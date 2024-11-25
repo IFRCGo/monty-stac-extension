@@ -207,7 +207,7 @@ In the Monty model, a hazard is **ALWAYS** linked to an event and per event, haz
 Therefore, a hazard item **MUST** have at least one link with the [relationship type](#relation-types) `reference-event`.
 It is also recommended to have a link with the relationship type `source-event` pointing to the event of the same source if available.
 
-An hazard object **MUST** have the `monty:hazard_detail` field with all the details of the hazard.
+An hazard object **MUST** have the [`monty:hazard_detail`](#montyhazard_detail) field with all the details of the hazard.
 
 Hazards may be linked between each others.
 This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a `*-hazard` [relationship](#relation-types).
