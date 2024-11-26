@@ -108,6 +108,7 @@ The following fields are available in the object:
 
 | Field Name    | Type      | Description                                                                                                                                                                                                                                                                                                 |
 | ------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| clusters      | \[string] | The clusters of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard).                                                                                                                                                                                                    |
 | codes         | \[string] | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). |
 | max_value     | number    | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                                                                                                                                                                                                            |
 | max_unit      | string    | The unit of the max_value.                                                                                                                                                                                                                                                                                  |
@@ -148,9 +149,10 @@ This section describes the rules and best practises to apply on the STAC core fi
 More detail on the fields is available in the [Montandon model analysis](./model/README.md#event).
 
 - Examples:
-  - [Reference Event example](examples/item-ref-event-flood-PAR.json): Shows usage of the extension for a reference event
-  <!-- - [Source Collection example](examples/collection-source-event-GLIDE.json): Shows the usage of the extension in a STAC Collection representing an event data source. -->
-  - [Source Event example](examples/item-source-event-flood-PAR-GLIDE.json): Shows usage of the extension for a source event
+  - [Reference Events Collection example](examples/reference-events/reference-events.json): Shows usage of the extension in a STAC Collection of reference events.
+  - [Reference Event example](examples/reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json): Shows usage of the extension for a reference event
+  - [Source Collection example](examples/gdacs-events/gdacs-events.json): Shows the usage of the extension in a STAC Collection for source events.
+  - [Source Event example](examples/gdacs-events/1102983-1.json): Shows usage of the extension for a source event
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -170,7 +172,7 @@ The table below describes the rules for the core fields in the representation of
 The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
 The global crisis data bank records multiple instances of events that are related to a single event:
 
-- One **unique reference** event that is used to "pair" all the instances of the event
+- One **unique reference** event that is used to "[pair](model/event_paring.md)" all the instances of the event
 - Multiple instances of the event that are recorded for different sources. Each source event **MUST** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
   - A link to the resource from which the event was sourced with 
@@ -197,8 +199,7 @@ This section describes in details the usage of the fields and links for the haza
 More detail on the field definition is available in the [Montandon model analysis](./model/README.md#hazard).
 
 - Examples:
-  - [Earthquake Hazard example](examples/item-hazard-eq-PAR.json): Shows usage of the extension for a earthquake hazard
-  - [Landslide Hazard example](examples/item-hazard-ls-PAR.json): Shows usage of the extension for a earthquake hazard
+  - [Flood Hazard example](examples/gdacs-hazards/1102983-1-affected.json): Shows usage of the extension for a flood hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
 property damage, social and economic disruption or environmental degradation. UNDRR - https://www.undrr.org/terminology/hazard.
@@ -212,6 +213,14 @@ An hazard object **MUST** have the [`monty:hazard_detail`](#montyhazard_detail) 
 Hazards may be linked between each others.
 This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a `*-hazard` [relationship](#relation-types).
 The link may also have specific `occ-*` [attributes](#link-attributes) to describe the occurrence of the linked hazard.
+
+### Impact
+
+This section describes in details the usage of the fields and links for the impact object.
+More detail on the field definition is available in the [Montandon model analysis](./model/README.md#impact).
+
+- Examples:
+  - [Impact example](examples/item-impact-flood-PAR.json): Shows usage of the extension for a flood impact
 
 ## Contributing
 

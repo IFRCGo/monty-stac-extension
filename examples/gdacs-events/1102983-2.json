@@ -1,0 +1,101 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "1102983",
+  "collection": "gdacs-events",
+  "bbox": [
+    -2.6232332,
+    39.4177902,
+    -2.6232332,
+    39.4177902
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -2.6232332,
+      39.4177902
+    ]
+  },
+  "properties": {
+    "title": "Flood in Spain",
+    "description": "Orange Flood in Spain from: 27 Oct 2024 15 to: 04 Nov 2024 11.",
+    "datetime": "2024-10-27T15:00:00Z",
+    "start_datetime": "2024-10-27T15:00:00Z",
+    "end_datetime": "2024-11-04T11:00:00Z",
+    "modified": "2024-11-21T18:35:23",
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "MH0004",
+      "MH0005",
+      "MH0006",
+      "MH0007"
+    ],
+    "monty:corr_id": "20241027T150000-ESP-HM-FLOOD-001-GCDB",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "keywords": [
+      "flood",
+      "spain",
+      "Coastal Flood",
+      "Estuarine (Coastal) Flood",
+      "Flash Flood",
+      "Fluvial (Riverine) Flood"
+    ]
+  },
+  "assets": {
+    "icon": {
+      "href": "https://www.gdacs.org/images/gdacs_icons/maps/Red/FL.png",
+      "title": "Icon",
+      "type": "image/png",
+      "roles": [
+        "icon"
+      ]
+    },
+    "report": {
+      "href": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL",
+      "title": "GDACS Report",
+      "type": "text/html",
+      "roles": [
+        "report"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "1102983.json",
+      "rel": "self"
+    },
+    {
+      "href": "gdacs-events.json",
+      "rel": "collection"
+    },
+    {
+      "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2",
+      "rel": "via"
+    },
+    {
+      "href": "../reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json",
+      "rel": "related",
+      "roles": [
+        "event",
+        "reference"
+      ],
+      "type": "application/json"
+    },
+    {
+      "href": "../glide-events/FL-2024-000199-ESP.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/json"
+    }
+  ]
+}
