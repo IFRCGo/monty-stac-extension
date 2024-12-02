@@ -42,13 +42,13 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name          | Type                                        | Description                                                                                                                                                                                                                                                                                                 |
-| ------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:country_codes | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                        |
-| monty:corr_id       | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/event_paring.md) page.                                        |
-| monty:hazard_codes  | \[string]                                   | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). |
-| monty:hazard_detail | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                                                                                                                                  |
-| monty:impact_detail | [Impact Detail object](#montyimpact_detail) | The details of the impact.                                                                                                                                                                                                                                                                                  |
+| Field Name          | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:country_codes | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                                                                                                                                    |
+| monty:corr_id       | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/event_paring.md) page.                                                                                                                                                    |
+| monty:hazard_codes  | \[string]                                   | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). For compatibility purpose, the array MAY also contains other code from another domain (e.g. `FL` for flood) |
+| monty:hazard_detail | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                                                                                                                                                                                                                                              |
+| monty:impact_detail | [Impact Detail object](#montyimpact_detail) | The details of the impact.                                                                                                                                                                                                                                                                                                                                                                                              |
 
 > [!NOTE]  
 > Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
@@ -86,13 +86,18 @@ It must at least contain the countries intersected by the item's geometry.
 ##### monty:hazard_codes
 
 It is a list of hazard codes of the hazards concerned by the item. 
-The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.
+The hazard code SHOULD follow the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.
 With that identifier, it is possible to derive a set of additional properties associated with the hazard:
 
 - The name of the hazard
 - The type of the hazard
 - The description of the hazard
 - The cluster of the hazard
+
+for which a human-readable keyword can be generated and stored in the `keywords` field.
+
+> [!NOTE]
+> For compatibility purpose, the array MAY also contains other code from another domain (e.g. `FL` for flood).
 
 ##### monty:corr_id
 
@@ -106,13 +111,12 @@ A source event should also contain a [`reference-event` link](#relation-types) t
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following fields are available in the object:
 
-| Field Name    | Type      | Description                                                                                                                                                                                                                                                                                                 |
-| ------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| clusters      | \[string] | The clusters of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard).                                                                                                                                                                                                    |
-| codes         | \[string] | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). |
-| max_value     | number    | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                                                                                                                                                                                                            |
-| max_unit      | string    | The unit of the max_value.                                                                                                                                                                                                                                                                                  |
-| estimate_type | string    | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).                                                                                                                                                                                             |
+| Field Name    | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| cluster       | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
+| max_value     | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                     |
+| max_unit      | string | The unit of the max_value.                                                                                           |
+| estimate_type | string | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).      |
 
 ##### monty:impact_detail
 
