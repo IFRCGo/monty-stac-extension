@@ -4,7 +4,7 @@
     "https://raw.githubusercontent.com/IFRCGo/monty-stac-extension/refs/heads/main/json-schema/schema.json"
   ],
   "type": "Feature",
-  "id": "1102983",
+  "id": "20241027T150000-ESP-HM-FLOOD-001-GCDB",
   "collection": "gdacs-events",
   "bbox": [
     -3.4110253455683806,
