@@ -116,7 +116,7 @@ The following fields are available in the object:
 | cluster       | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
 | max_value     | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                     |
 | max_unit      | string | The unit of the max_value.                                                                                           |
-| estimate_type | string | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).      |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                             |
 
 ##### monty:impact_detail
 

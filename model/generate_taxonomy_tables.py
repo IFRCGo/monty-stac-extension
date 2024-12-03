@@ -38,15 +38,6 @@ with open('taxonomy.md', 'w') as file:
     # Common Subtitle
     file.write("## Common\n\n")
     
-    # Extract the values for Estimation Type
-    code = data['properties']['taxonomies']['properties']['est_type']['items']['properties']['est_type_code'].get('enum', [])
-    label = data['properties']['taxonomies']['properties']['est_type']['items']['properties']['est_type_lab'].get('enum', [])
-    
-    # Write the Estimation Type table
-    file.write("### Estimation Type\n\n")
-    write_table(file, ['Estimation Type Code', 'Estimation Type Label'], [code, label])
-    file.write("\n")
-    
     # Hazard Subtitle
     file.write("## Hazard\n\n")
     

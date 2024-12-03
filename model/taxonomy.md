@@ -2,14 +2,6 @@
 
 ## Common
 
-### Estimation Type
-
-| Estimation Type Code | Estimation Type Label |
-| --- | --- |
-| esttype_prim | Primary Data |
-| esttype_second | Secondary Data |
-| esttype_model | Modelled (no event-specific data included) |
-
 ## Hazard
 
 ### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
