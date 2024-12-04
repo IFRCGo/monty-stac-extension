@@ -4,7 +4,7 @@
     "https://ifrcgo.github.io/monty/v1.0.0/schema.json"
   ],
   "type": "Collection",
-  "id": "collection",
+  "id": "gdacs-events",
   "title": "GDACS Source Events",
   "description": "Global Disaster Alert and Coordination System (GDACS)",
   "license": "MIT",
