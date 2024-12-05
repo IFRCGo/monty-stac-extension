@@ -1,7 +1,7 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.github.io/monty/v1.0.0/schema.json"
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "type": "Feature",
   "id": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB",
