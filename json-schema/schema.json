@@ -103,6 +103,9 @@
       "$comment": "Monty prefixed fields",
       "type": "object",
       "properties": {
+        "monty:episode_number": {
+          "type": "integer"
+        },
         "monty:country_codes": {
           "type": "array",
           "items": {
@@ -114,7 +117,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[A-Z]{2}\\d{4}$"
+            "pattern": "^[A-Z]{2}(?:\\d{4}$){0,1}"
           }
         },
         "monty:corr_id": {
