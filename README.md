@@ -116,12 +116,12 @@ A source event should also contain a [`reference-event` link](#relation-types) t
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following fields are available in the object:
 
-| Field Name    | Type   | Description                                                                                                          |
-| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster       | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
-| max_value     | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                     |
-| max_unit      | string | The unit of the max_value.                                                                                           |
-| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                             |
+| Field Name     | Type   | Description                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
+| severity_value | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                     |
+| severity_unit  | string | The unit of the max_value.                                                                                           |
+| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                             |
 
 ##### monty:impact_detail
 

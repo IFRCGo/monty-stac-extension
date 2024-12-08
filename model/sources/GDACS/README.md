@@ -97,12 +97,11 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 
 The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:
 
-| STAC field | GDACS field                  | Description           |
-| ---------- | ---------------------------- | --------------------- |
-| clusters   | properties.eventtype         | Hazard clusters codes |
-| codes      | properties.eventtype         | List of hazard codes  |
-| max_value  | properties.episodealertlevel | GDACS alert score     |
-| max_unit   | `gdacs`                      | GDACS alert level     |
+| STAC field     | GDACS field                  | Description                                               |
+| -------------- | ---------------------------- | --------------------------------------------------------- |
+| clusters       | properties.eventtype         | Hazard clusters codes                                     |
+| severity_value | properties.episodealertlevel | GDACS alert score                                         |
+| severity_unit  | `gdacs`                      | GDACS alert level according to GDCAS event type and model |
 
 ##### Mapping from GDACS event type to Hazard profile
 
@@ -120,6 +119,16 @@ setting the clusters field as the following:
 
 More specific [hazard codes](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) can be added to the `codes` field following the characteristics of the event.
 
+##### Hazard Magnitude and Units
+
+In GDACS, the alert level is a score that is calculated based on the event type. Each event ype uses a specific model to calculate the alert level. The alert level is a score that is used to determine the magnitude of the event.
+The following table shows the magnitude scale and unit to be used for each event type:
+
+| GDACS event type                                                                                                                         | Magnitude scale | Magnitude unit               |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ---------------------------- |
+| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx) event type uses a severity score based on the Global Flood Detection System | 1-3             | `GDACS Flood Severity Score` |
+
+
 ### Impact Item
 
 According to the event type and the fields available in the GDACS event, one or more [**impact STAC items**](../../../README.md#impact) can be created. 
@@ -130,7 +139,6 @@ The following sections describe the mapping of specific GDACS event information 
 When the `sendai` field is present in the GDACS [event](#event-item), it contains an array of Sendai indicators. 
 Each Sendai indicator is a JSON object that shall produce an [impact item](../../../README.md#impact). 
 The impact item shall have the following fields from both the GDACS event and the Sendai indicator:
-
 
 | STAC field                                                                                                             | GDACS field                                                                                                                                                    | Description                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -150,4 +158,3 @@ The impact item shall have the following fields from both the GDACS event and th
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                                                                                                                          | Asset with the link to the GDACS report                                                                                       |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                                                                                                                         | Link to the GDACS event details page                                                                                          |
 | `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid                                                                                                                  | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`) |
-| `related` link in [links]                                                                                              | properties.glide                                                                                                                                               | If the glide number is present, create a `related` link to the item in `glide-events` collection                              |

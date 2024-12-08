@@ -122,7 +122,28 @@
         },
         "monty:corr_id": {
           "type": "string"
-        }
+        },
+        "monty:hazard_detail": {
+          "type": "object",
+          "properties": {
+            "severity_value": {
+              "type": "number"
+            },
+            "severity_unit": {
+              "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            }
+          }
+      },
+      "estimate_type": {
+        "type": "string",
+        "enum": [
+          "primary",
+          "secondary",
+          "modelled"
+        ]
       },
       "patternProperties": {
         "^(?!monty:)": {
