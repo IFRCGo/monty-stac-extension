@@ -138,20 +138,20 @@
           }
         }
       },
-      "estimate_type": {
-        "type": "string",
-        "enum": [
-          "primary",
-          "secondary",
-          "modelled"
-        ]
-      },
       "patternProperties": {
         "^(?!monty:)": {
           "$comment": "Prevent additional monty prefixed field"
         }
       },
       "additionalProperties": false
+    },
+    "estimate_type": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary",
+        "modelled"
+      ]
     },
     "roles": {
       "$comment": "Roles field",
