@@ -127,15 +127,13 @@ The following fields are available in the object:
 
 It is an object that contains the details of the impact estimate. Preferably used only in an Impact item.
 
-| Field Name    | Type         | Description                                                                                                                                                                                                                                       |
-| ------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category      | string       | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](./model/taxonomy.md#exposure-category).                          |
-| type          | string       | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type).                                                                                                            |
-| value         | number       | **REQUIRED** The estimated impact value, as a number, without the units.                                                                                                                                                                          |
-| unit          | string       | The units of the impact estimate.                                                                                                                                                                                                                 |
-| datetime      | string\|null | If the impact estimate is a cost, provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, `datetime` of the impact will be used. It is formatted according to RFC 3339, section 5.6. |
-| validity      | \[string]    | The validity of the impact estimate as an array of 2 dates (start and end) formatted according to RFC 3339, section 5.6.                                                                                                                          |
-| estimate_type | string       | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).                                                                                                                                   |
+| Field Name    | Type   | Description                                                                                                                                                                                                              |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](./model/taxonomy.md#exposure-category). |
+| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type).                                                                                   |
+| value         | number | **REQUIRED** The estimated impact value, as a number, without the units.                                                                                                                                                 |
+| unit          | string | The units of the impact estimate.                                                                                                                                                                                        |
+| estimate_type | string | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).                                                                                                          |
 
 ## Relation types
 
@@ -202,6 +200,7 @@ The table below describes the rules for the core fields in the representation of
 | title                 | The name of the data assigned by the issuer (source) of the data.                                                            |
 | roles                 | It MUST include the data type role: `hazard`, `impact` or `response`                                                         |
 | keywords              | A list of keywords that describe the data. This list includes the human-readable names of any codification used in the item. |
+| created               | The date and time of the creation of the data by the issuer (source) of the data.                                            |
 
 ### Hazard
 
