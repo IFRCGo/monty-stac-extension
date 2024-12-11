@@ -136,7 +136,23 @@
               "$ref": "#/definitions/estimate_type"
             }
           }
-        }
+        },
+        "monty:impact_detail": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "value": {
+              "type": "number"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
       },
       "patternProperties": {
         "^(?!monty:)": {
