@@ -153,6 +153,7 @@
               "type": "string"
             }
           }
+        }
       },
       "patternProperties": {
         "^(?!monty:)": {
