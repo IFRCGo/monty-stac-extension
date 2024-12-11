@@ -185,6 +185,14 @@
               "$ref": "#/definitions/is_hazard"
             }
           ]
+        },
+        {
+          "$comment": "Impact",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_impact"
+            }
+          ]
         }
       ]
     },
@@ -228,6 +236,17 @@
           "minItems": 1,
           "contains": {
             "const": "hazard"
+          }
+        }
+      }
+    },
+    "is_impact": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "impact"
           }
         }
       }
