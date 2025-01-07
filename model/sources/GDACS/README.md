@@ -4,7 +4,7 @@ GDACS is a cooperation framework between the United Nations, the European Commis
 
 ## Collection: `gdacs-events`
 
-A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](../collections/gdacs-events.json).
+A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](../../../examples/gdacs-events/gdacs-events.json).
 
 * Name: Global Disaster Alert and Coordination System (GDACS)
 * Code: GDACS
@@ -16,7 +16,7 @@ A STAC collection hold all the GDACS events. An example of the GDACS collection 
 * Source Data license: MIT License
 * Source for: event, hazard, impact
 
-* implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R
+* previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R
 
 ### Data
 
@@ -25,8 +25,8 @@ Individual events can be accessed via the API endpoint `https://www.gdacs.org/gd
 
 * Documentation: https://www.gdacs.org/floodmerge/data_v2.aspx
 
-It is important to note that GDACS has its [own specific models](https://www.gdacs.org/Knowledge/models_eq.aspx) according to the type of event.
-This must be taken into account when mapping the data to the STAC model. When necessary, the present document will provide the specific mapping for each type of event.
+> [!IMPORTANT]  
+  It is important to note that GDACS has its [own specific models](https://www.gdacs.org/Knowledge/models_eq.aspx) according to the type of event. This must be taken into account when mapping the data to the STAC model. When necessary, the present document will provide the specific mapping for each type of event.
 
 ### Event Item
 
@@ -43,25 +43,25 @@ The event URL of the `geteventdata` API endpoint is stored in the `links` field 
 
 Here is a table with the fields that are mapped from the GDACS event to the STAC event:
 
-| STAC field                                                                                                             | GDACS field                                           | Description                                                                                                                   |
-| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | properties.eventid + properties.episodeid             | Unique identifier for the event per episode                                                                                   |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                              | bbox                                                  | Bounding box of the event                                                                                                     |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | geometry                                              | Geometry of the event                                                                                                         |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `gdcas-events`                                        | The collection for GDACS events                                                                                               |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                       | properties.name                                       | Name of the event                                                                                                             |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                 | properties.description<br/>properties.htmldescription | Description of the event. HTML description should be privileged over plain text description and translated to markdown        |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.fromdate                                   | Date and time of the event converted in UTC ISO 8601 format                                                                   |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.fromdate                                   | Start date of the event converted in UTC ISO 8601 format                                                                      |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.todate                                     | End date of the event converted in UTC ISO 8601 format                                                                        |
-| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                        | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                |
-| [monty:country_codes](../../../README.md#montycountry_codes)[1..*]                                                     | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                               |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | properties.eventtype                                  | List of hazard codes converted following the [GDACS event type to Hazard profile mapping]                                     |
-| [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                       | Asset with the icon of the event                                                                                              |
-| [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                 | Asset with the link to the GDACS report                                                                                       |
-| [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                | Link to the GDACS event details page                                                                                          |
-| `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid         | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`) |
-| `related` link in [links]                                                                                              | properties.glide                                      | If the glide number is present, create a `related` link to the item in `glide-events` collection                              |
+| STAC field                                                                                                             | GDACS field                                           | Description                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | properties.eventid + properties.episodeid             | Unique identifier for the event per episode                                                                                                 |
+| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                              | bbox                                                  | Bounding box of the event                                                                                                                   |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | geometry                                              | Geometry of the event                                                                                                                       |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `gdcas-events`                                        | The collection for GDACS events                                                                                                             |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                       | properties.name                                       | Name of the event                                                                                                                           |
+| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                 | properties.description<br/>properties.htmldescription | Description of the event. HTML description should be privileged over plain text description and translated to markdown                      |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.fromdate                                   | Date and time of the event converted in UTC ISO 8601 format                                                                                 |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.fromdate                                   | Start date of the event converted in UTC ISO 8601 format                                                                                    |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.todate                                     | End date of the event converted in UTC ISO 8601 format                                                                                      |
+| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                        | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
+| [monty:country_codes](../../../README.md#montycountry_codes)[1..*]                                                     | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                                             |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | properties.eventtype                                  | List of hazard codes converted following the [GDACS event type to Hazard profile mapping](#mapping-from-gdacs-event-type-to-hazard-profile) |
+| [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                       | Asset with the icon of the event                                                                                                            |
+| [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                 | Asset with the link to the GDACS report                                                                                                     |
+| [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                | Link to the GDACS event details page                                                                                                        |
+| `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid         | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`)               |
+| `related` link in [links]                                                                                              | properties.glide                                      | If the glide number is present, create a `related` link to the item in `glide-events` collection                                            |
 
 ### Hazard Item
 
