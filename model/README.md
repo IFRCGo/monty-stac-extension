@@ -184,7 +184,7 @@ The event class has the following attributes:
 - **country_codes**: The country codes of the countries affected by the event.
   The country codes are based on the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard.
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
-  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
+  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips). [See hazard codes in the taxonomy](https://github.com/IFRCGo/monty-stac-extension/blob/main/model/taxonomy.md#hazard)
 - **correlation_id**: The unique identifier assigned by the Monty system to the reference event.
   It is used to "pair" all the instances of the event.
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
@@ -248,7 +248,7 @@ The impact class has the following attributes:
 - **impact_detail**: A detailed description of the impact including:
   - **category**: The category of impact, which is the specific asset or population demographic that has been impacted by the hazard.
   - **value**: The estimated value of the impact, as a number, without the units. For example, for an estimate of 1000 people displaced, you would enter 1000.
-  - **type**: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'.
+  - **type**: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'. [Refer to the taxonomy](https://github.com/IFRCGo/monty-stac-extension/blob/main/model/taxonomy.md#impact-type) for all possible impact types.
   - **unit**: The units of the impact estimate. For example, 10 deaths would be a count value, thus 'unitscountnum' should be used.
   - **date**: If the impact estimate is a cost, provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, imp_sdate will be used.  **OPTIONAL**
   - **estimate_type**: The type of data source that was used to create this impact estimate:
