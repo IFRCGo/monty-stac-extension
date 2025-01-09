@@ -133,7 +133,7 @@ It is an object that contains the details of the impact estimate. Preferably use
 | type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type).                                                                                   |
 | value         | number | **REQUIRED** The estimated impact value, as a number, without the units.                                                                                                                                                 |
 | unit          | string | The units of the impact estimate.                                                                                                                                                                                        |
-| estimate_type | string | The type of the estimate. The possible values are defined in [this table](./model/taxonomy.md#estimation-type).                                                                                                          |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                                                                                                                                 |
 
 ## Relation types
 
@@ -184,7 +184,7 @@ The global crisis data bank records multiple instances of events that are relate
 - Multiple instances of the event that are recorded for different sources. Each source event **MUST** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
   - A link to the resource from which the event was sourced with 
-    the [relationship]([#relation-types](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md#using-relation-types)) type `via`.
+    the [relationship](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md#using-relation-types) type `via`.
 
 ## Data
 
@@ -211,7 +211,7 @@ More detail on the field definition is available in the [Montandon model analysi
   - [Flood Hazard example](examples/gdacs-hazards/1102983-1-affected.json): Shows usage of the extension for a flood hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
-property damage, social and economic disruption or environmental degradation. UNDRR - https://www.undrr.org/terminology/hazard.
+property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
 
 In the Monty model, a hazard is **ALWAYS** linked to an event and per event, hazards are recorded from multiple sources.
 Therefore, a hazard item **MUST** have at least one link with the [relationship type](#relation-types) `reference-event`.
@@ -236,6 +236,10 @@ The impact class represents the consequences of a hazard on the affected assets 
 In the [Monty model](model/README.md#data-overview), an impact is **ALWAYS** linked to an hasard as a source of the impact, impacts are recorded from multiple [sources](model/sources/).
 
 An impact object **MUST** have the [`monty:impact_detail`](#montyimpact_detail) field with all the details of the impact.
+
+### Response
+
+*This section still needs to be defined.*
 
 ## Contributing
 

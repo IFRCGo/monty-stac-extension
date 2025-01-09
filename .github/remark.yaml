@@ -10,12 +10,11 @@ plugins:
 # General formatting
   - - remark-lint-emphasis-marker
     - '*'
-  - remark-lint-no-undefined-references
+  - - remark-lint-no-undefined-references
+    - allow: ['!NOTE', '!TIP', '!WARNING', '!IMPORTANT', '!CAUTION', '!TODO']
   - remark-lint-hard-break-spaces
   - remark-lint-blockquote-indentation
   - remark-lint-no-consecutive-blank-lines
-  - - remark-lint-maximum-line-length
-    - 150
 # Code
   - remark-lint-fenced-code-flag
   - remark-lint-fenced-code-marker
