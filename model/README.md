@@ -193,7 +193,7 @@ The event class has the following attributes:
 
 ### Hazard
 
-The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - https://www.undrr.org/terminology/hazard.
+The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
 In the Monty model, a hazard is always linked to an event and as per event, every hazard is recorded from multiple sources.
 
 The hazard class has the following attributes:
@@ -231,7 +231,7 @@ The link has also specific occurence attributes:
 
 ### Impact
 
-Impact data represent an estimate of the effect, including negative effects (e.g., economic losses) and positive effects (e.g., economic gains), of a hazardous event or a disaster. The term includes economic, human and environmental impacts, and may include death, injuries, disease and other negative effects on human physical, mental and social well-being'. UNDRR - https://www.undrr.org/terminology/disaster
+Impact data represent an estimate of the effect, including negative effects (e.g., economic losses) and positive effects (e.g., economic gains), of a hazardous event or a disaster. The term includes economic, human and environmental impacts, and may include death, injuries, disease and other negative effects on human physical, mental and social well-being'. UNDRR - <https://www.undrr.org/terminology/disaster>
 
 The impact class has the following attributes:
 
@@ -255,4 +255,3 @@ The impact class has the following attributes:
     - Primary data
     - Secondary data
     - Modelled data: estimated without any event-specific data
-

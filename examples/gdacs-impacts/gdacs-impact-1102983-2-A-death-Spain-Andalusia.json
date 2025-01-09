@@ -1,0 +1,75 @@
+{
+    "type": "Feature",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+      "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+    ],
+    "id": "gdacs-impact-1102983-2-A-death-Spain-Andalusia",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -2.6232332,
+        39.4177902
+      ]
+    },
+    "bbox": [
+      -2.6232332,
+      39.4177902,
+      -2.6232332,
+      39.4177902
+    ],
+    "properties": {
+      "title": "Flood in Spain",
+      "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
+      "start_datetime": "2024-10-27T16:14:00Z",
+      "end_datetime": "2024-11-04T16:14:00Z",
+      "monty:episode_number": 2,
+      "monty:hazard_codes": [
+        "FL"
+      ],
+      "monty:country_codes": [
+        "ESP"
+      ],
+      "monty:corr_id": "20241027-ESP-FL-2-GCDB",
+      "roles": [
+        "source",
+        "impact"
+      ],
+      "created": "2025-01-05T13:10:23Z",
+      "monty:impact_detail": {
+        "category": "allpeop",
+        "type": "miss",
+        "value": 114,
+        "unit": "sendai",
+        "estimate_type": "primary"
+      },
+      "datetime": "2024-10-27T15:00:00Z"
+    },
+    "links": [
+      {
+        "rel": "via",
+        "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2",
+        "type": "application/json",
+        "title": "GDACS Event Data"
+      },
+      {
+        "rel": "collection",
+        "href": "/home/emathot/Workspace/IFRCGo/pystac-monty/gdacs-impacts.json",
+        "type": "application/json",
+        "title": "GDACS Impacts"
+      }
+    ],
+    "assets": {
+      "icon": {
+        "href": "https://www.gdacs.org/images/gdacs_icons/maps/Green/FL.png",
+        "type": "image/png",
+        "title": "Icon"
+      },
+      "report": {
+        "href": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL",
+        "type": "text/html",
+        "title": "Report"
+      }
+    },
+    "collection": "gdacs-impacts"
+  }
