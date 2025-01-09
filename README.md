@@ -229,7 +229,13 @@ This section describes in details the usage of the fields and links for the impa
 More detail on the field definition is available in the [Montandon model analysis](./model/README.md#impact).
 
 - Examples:
-  - [Impact example](examples/item-impact-flood-PAR.json): Shows usage of the extension for a flood impact
+  - [Impact for fllod in Spain example](examples/gdacs-impacts/gdacs-impact-1102983-2-A-death-Spain-Andalusia.json): Shows usage of the extension for a flood impact
+
+The impact class represents the consequences of a hazard on the affected assets or population.
+
+In the [Monty model](model/README.md#data-overview), an impact is **ALWAYS** linked to an hasard as a source of the impact, impacts are recorded from multiple [sources](model/sources/).
+
+An impact object **MUST** have the [`monty:impact_detail`](#montyimpact_detail) field with all the details of the impact.
 
 ## Contributing
 
