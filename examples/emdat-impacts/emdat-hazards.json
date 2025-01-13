@@ -1,0 +1,51 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "emdat-impacts",
+  "title": "EM-DAT Source Impacts",
+  "description": "Global Disaster Events from the Emergency Events Database (EM-DAT).",
+  "license": "MIT",
+  "roles": [
+    "impact",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "EM-DAT",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.emdat.be/",
+      "email": "contact@cred.be"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1988-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "emdat-impacts.json",
+      "rel": "self"
+    }
+  ]
+}
