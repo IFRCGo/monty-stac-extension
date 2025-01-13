@@ -7,7 +7,7 @@ GDACS is a cooperation framework between the United Nations, the European Commis
 A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](../../../examples/gdacs-events/gdacs-events.json).
 
 * Name: Global Disaster Alert and Coordination System (GDACS)
-* Code: GDACS
+* Code: `GDACS`
 * Source organisation: European Commission - Joint Research Centre (JRC)
 * Source code: EC-JRC
 * Source Type: Regional Intergovernmental Organisation
