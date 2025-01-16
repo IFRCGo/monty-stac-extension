@@ -6,32 +6,32 @@ EM-DAT is a global database on natural and technological disasters, containing e
 
 A STAC collection hold all the EM-DAT events. An example of the EM-DAT collection is [here](../../../examples/emdat-events/emdat-events.json).
 
-- Name: Global Disaster Events from the Emergency Events Database (EM-DAT) 
+- Name: Global Disaster Events from the Emergency Events Database (EM-DAT)
 - Code: `EM-DAT`
 - Source organisation: Centre for Research on the Epidemiology of Disasters (CRED)
 - Source code: CRED
 - Source Type: Regional Intergovernmental Organisation
-- Source organization email: contact@cred.be
-- Source URL: https://www.emdat.be/
+- Source organization email: <contact@cred.be>
+- Source URL: <https://www.emdat.be/>
 - Source Data license: [proprietary license](https://doc.emdat.be/docs/legal/terms-of-use/)
 - Source for: event, hazard, impact
 
-- previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyImpactData/GetEMDAT.R
+- previous implementation (R): <https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyImpactData/GetEMDAT.R>
 
 ### Data
 
 After registration and login, the data can be downloaded using the EM-DAT “Access Data” Tab or Toolbox as a flat table in Microsoft Excel format (.xlsx). The EM-DAT database is described in the [Data Structure Description](https://doc.emdat.be/docs/data-structure-and-content/) section. In particular, the [Column Description](https://doc.emdat.be/docs/data-structure-and-content/emdat-public-table/#column-description) section contains the description of each column of the public table found in the Excel file.
 
-- Documentation: https://doc.emdat.be/docs/
+- Documentation: <https://doc.emdat.be/docs/>
 
 #### GraphQL API
 
-- EM-DAT Public Table: https://doc.emdat.be/docs/data-structure-and-content/emdat-public-table/
-- For shapefiles tutorial: https://doc.emdat.be/docs/additional-resources-and-tutorials/tutorials/python_tutorial_2/
-- API cookbook: https://files.emdat.be/docs/emdat_api_cookbook.pdf
-- EM-DAT GraphQL API: https://files.emdat.be/docs/emdat_api_python.pdf
-- EM-DAT R API: https://files.emdat.be/docs/emdat_api_rlang.pdf
-- GraphiQL: https://api.emdat.be/
+- EM-DAT Public Table: <https://doc.emdat.be/docs/data-structure-and-content/emdat-public-table/>
+- For shapefiles tutorial: <https://doc.emdat.be/docs/additional-resources-and-tutorials/tutorials/python_tutorial_2/>
+- API cookbook: <https://files.emdat.be/docs/emdat_api_cookbook.pdf>
+- EM-DAT GraphQL API: <https://files.emdat.be/docs/emdat_api_python.pdf>
+- EM-DAT R API: <https://files.emdat.be/docs/emdat_api_rlang.pdf>
+- GraphiQL: <https://api.emdat.be/>
 API Key as JSON header: (Mention this in Headers to access queries)
 
 ```json
@@ -115,10 +115,10 @@ Filter records with a start_year field lower or equal to the value, ecluding oth
 Filter records which occurred in the list of countries passed (passed as 3-letter codes as in the iso field of the Data type).
 
 `region_code`: \[Int!]
-Filter records which occurred in the list of regions selected, passed as codes based on the (UN M49 Standard)[https://unstats.un.org/unsd/methodology/m49/].
+Filter records which occurred in the list of regions selected, passed as codes based on the [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/).
 
 `subregion_code`: \[Int!]
-Filter records which occurred in the list of subregions selected, passed as codes based on the (UN M49 Standard)[https://unstats.un.org/unsd/methodology/m49/].
+Filter records which occurred in the list of subregions selected, passed as codes based on the [UN M49 Standard](https://unstats.un.org/unsd/methodology/m49/).
 
 `classif`: \[String!]
 Return records with matching classif_key, to include all categories under a specific level, the end of the classif_key can be omitted or replaced by -*. This wildcard/omit pattern only works from left to right.
@@ -155,8 +155,8 @@ Here is a table with the fields that are mapped from the EM-DAT event to the STA
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | start year + start month + start day                                                                         | Date and time of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                         |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | start year + start month + start day                                                                         | Start date of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                            |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | start year + start month + start day                                                                         | End date of the event converted in UTC ISO 8601 format                                                                                                                                                                                                     |
-| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                        | iso                                                                                                          | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                                                                                                                                             |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Classification Key [mapped to Hazard profile](#mapping-from-em-dat-event-type-to-hazard-profile)             | List of hazard codes converted following the [EM-DAT event type to Hazard profile mapping](#mapping-from-EM-DAT-event-type-to-hazard-profile)                                                                                                              |
+| [monty:country_codes][../../../README.md#montycountry_codes](0)                                                        | iso                                                                                                          | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                                                                                                                                             |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Classification Key [mapped to Hazard profile](#mapping-from-em-dat-event-type-to-hazard-profile)             | List of hazard codes converted following the [EM-DAT event type to Hazard profile mapping](#mapping-from-em-dat-event-type-to-hazard-profile)                                                                                                              |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | graphql request                                                                                              | Link to the EM-DAT event details page                                                                                                                                                                                                                      |
 
 #### Mapping from EM-DAT event type to Hazard profile

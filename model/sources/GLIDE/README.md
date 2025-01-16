@@ -11,18 +11,18 @@ A STAC collection hold all the GLIDE events. An example of the GLIDE collection 
 - Source organisation: Asian Disaster Reduction Center (ADRC)
 - Source code: ADRC
 - Source Type: Regional Intergovernmental Organisation
-- Source organization email: gliderep@adrc.asia
-- Source URL: https://glidenumber.net
+- Source organization email: <gliderep@adrc.asia>
+- Source URL: <https://glidenumber.net>
 - Source Data license: ?
 - Source for: event, hazard
 
-- previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGLIDEnumber.R
+- previous implementation (R): <https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGLIDEnumber.R>
 
 ### Data
 
 Accessible data is a set of GLIDE entries. Each entry is a disaster event. The event data list is available in the form of a array called "glideset" via the API endpoint `https://www.glidenumber.net/glide/jsonglideset.jsp`.
 
-- Documentation: https://glidenumber.net/glide/public/GLIDEnumber%20API.docx
+- Documentation: <https://glidenumber.net/glide/public/GLIDEnumber%20API.docx>
 
 > [!IMPORTANT]
 > Despite what's described in the documentation, the API endpoint `https://www.glidenumber.net/glide/jsonglideset.jsp` cannot retrieve individual events. It is necessary to add other filter to narrow down the search (e.g. h`ttps://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199`)
@@ -46,8 +46,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | humaran readable from event, location, year, month, day                      | Name of the event                                                                                                                           |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | comments                                                                     | Description of the event. HTML description should be privileged over plain text description and translated to markdown                      |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | year + month + date                                                          | Date and time of the event converted in UTC ISO 8601 format                                                                                 |
-| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                            | geocode                                                                      | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
-| [monty:country_codes](../../../README.md#montycountry_codes)[1..*]                                         | geocode                                                                      | List of ISO3 codes of the other countries affected by the event                                                                             |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                            | geocode                                                                      | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                         | geocode                                                                      | List of ISO3 codes of the other countries affected by the event                                                                             |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | event                                                                        | List of hazard codes converted following the [GLIDE event type to Hazard profile mapping](#mapping-from-glide-event-type-to-hazard-profile) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
@@ -69,8 +69,8 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | humaran readable from event, location, year, month, day                      | Name of the event                                                                                                                           |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | comments                                                                     | Description of the event. HTML description should be privileged over plain text description and translated to markdown                      |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | year + month + date                                                          | Date and time of the event converted in UTC ISO 8601 format                                                                                 |
-| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                            | geocode                                                                      | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
-| [monty:country_codes](../../../README.md#montycountry_codes)[1..*]                                         | geocode                                                                      | List of ISO3 codes of the other countries affected by the event                                                                             |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                            | geocode                                                                      | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                         | geocode                                                                      | List of ISO3 codes of the other countries affected by the event                                                                             |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | event                                                                        | List of hazard codes converted following the [GLIDE event type to Hazard profile mapping](#mapping-from-glide-event-type-to-hazard-profile) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
