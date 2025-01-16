@@ -1,0 +1,51 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "idu-events",
+  "title": "IDU Source Events",
+  "description": "Internal displacement updates (IDU)",
+  "license": "MIT",
+  "roles": [
+    "event",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "IDU",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.internal-displacement.org/internal-displacement-updates/",
+      "email": "info@idmc.ch"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1988-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "idu-events.json",
+      "rel": "self"
+    }
+  ]
+}
