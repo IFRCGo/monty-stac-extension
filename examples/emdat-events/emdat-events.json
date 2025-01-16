@@ -42,6 +42,25 @@
       ]
     }
   },
+  "summaries": {
+    "datetime": {
+      "minimum": "2015-06-23T00:00:00Z",
+      "maximum": "2019-07-10T13:44:56Z"
+    },
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "CHN",
+      "SPN"
+    ],
+    "monty:hazard_codes": [
+      "MH0004",
+      "MH0005",
+      "MH0006"
+    ]
+  },
   "links": [
     {
       "href": "emdat-events.json",
