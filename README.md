@@ -85,12 +85,12 @@ It is the unique identifier assigned by the Monty system to an episode of the ev
 
 ##### monty:country_codes
 
-It is a list of country codes of the countries concerned by the item. 
+It is a list of country codes of the countries concerned by the item.
 It must at least contain the countries intersected by the item's geometry.
 
 ##### monty:hazard_codes
 
-It is a list of hazard codes of the hazards concerned by the item. 
+It is a list of hazard codes of the hazards concerned by the item.
 The hazard code SHOULD follow the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.
 With that identifier, it is possible to derive a set of additional properties associated with the hazard:
 
@@ -183,7 +183,7 @@ The global crisis data bank records multiple instances of events that are relate
 - One **unique reference** event that is used to "[pair](model/event_paring.md)" all the instances of the event
 - Multiple instances of the event that are recorded for different sources. Each source event **MUST** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
-  - A link to the resource from which the event was sourced with 
+  - A link to the resource from which the event was sourced with
     the [relationship](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md#using-relation-types) type `via`.
 
 ## Data
@@ -251,16 +251,18 @@ for running tests are copied here for convenience.
 
 ### Running tests
 
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
+The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid.
 To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
 
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
+First you'll need to install everything with npm once. Just navigate to the root of this repository and on
 your command line run:
+
 ```bash
 npm install
 ```
 
 Then to check markdown formatting and test the examples against the JSON schema, you can run:
+
 ```bash
 npm test
 ```
@@ -268,6 +270,7 @@ npm test
 This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
 
 If the tests reveal formatting problems with the examples, you can fix them with:
+
 ```bash
 npm run format-examples
 ```
