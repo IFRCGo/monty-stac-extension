@@ -42,4 +42,3 @@ plugins:
     - space
 # Tables
   - remark-lint-table-pipes
-  - remark-lint-no-literal-urls

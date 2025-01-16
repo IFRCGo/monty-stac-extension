@@ -6,38 +6,38 @@ GDACS is a cooperation framework between the United Nations, the European Commis
 
 A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](../../../examples/gdacs-events/gdacs-events.json).
 
-* Name: Global Disaster Alert and Coordination System (GDACS)
-* Code: `GDACS`
-* Source organisation: European Commission - Joint Research Centre (JRC)
-* Source code: EC-JRC
-* Source Type: Regional Intergovernmental Organisation
-* Source organization email: coordination@gdacs.org
-* Source URL: https://www.gdacs.org
-* Source Data license: MIT License
-* Source for: event, hazard, impact
+- Name: Global Disaster Alert and Coordination System (GDACS)
+- Code: `GDACS`
+- Source organisation: European Commission - Joint Research Centre (JRC)
+- Source code: EC-JRC
+- Source Type: Regional Intergovernmental Organisation
+- Source organization email: coordination@gdacs.org
+- Source URL: https://www.gdacs.org
+- Source Data license: MIT License
+- Source for: event, hazard, impact
 
-* previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R
+- previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R
 
 ### Data
 
 Accessible data is a set of GDACS entries. Each entry is a disaster event. The event data list is available in the form of a geojson collections via the API endpoint `https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?`.
 Individual events can be accessed via the API endpoint `https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983`.
 
-* Documentation: https://www.gdacs.org/floodmerge/data_v2.aspx
+- Documentation: https://www.gdacs.org/floodmerge/data_v2.aspx
 
 > [!IMPORTANT]  
-  It is important to note that GDACS has its [own specific models](https://www.gdacs.org/Knowledge/models_eq.aspx) according to the type of event. This must be taken into account when mapping the data to the STAC model. When necessary, the present document will provide the specific mapping for each type of event.
+> It is important to note that GDACS has its [own specific models](https://www.gdacs.org/Knowledge/models_eq.aspx) according to the type of event. This must be taken into account when mapping the data to the STAC model. When necessary, the present document will provide the specific mapping for each type of event.
 
 ### Event Item
 
 A GDACS event and episode will **ALWAYS** produce an [**event STAC item**](../../../README.md#event) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL).
 
-* The source events are
-    1. Episode #1 in the file [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=1) API endpoint.
-    2. Episode #2 in the file [1102983-2-geteventdata-source.json](1102983-2-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2) API endpoint.
-* The produced event STAC items are
-    1. Episode #1 in the file [gdacs-events/1102983-1.json](../../../examples/gdacs-events/1102983-1.json).
-    2. Episode #2 in the file [gdacs-events/1102983-2.json](../../../examples/gdacs-events/1102983-2.json).
+- The source events are
+  1. Episode #1 in the file [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=1) API endpoint.
+  2. Episode #2 in the file [1102983-2-geteventdata-source.json](1102983-2-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2) API endpoint.
+- The produced event STAC items are
+  1. Episode #1 in the file [gdacs-events/1102983-1.json](../../../examples/gdacs-events/1102983-1.json).
+  2. Episode #2 in the file [gdacs-events/1102983-2.json](../../../examples/gdacs-events/1102983-2.json).
 
 The event URL of the `geteventdata` API endpoint is stored in the `links` field of the STAC item with the `via` relation.
 
@@ -67,10 +67,10 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 
 A GDACS event and episode will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL).
 
-* There are 2 sources for the hazards:
-    1. The general event [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) that is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983) API endpoint.
-    2. the detailed geometries [1102983-getgeometry-source.json](1102983-getgeometry-source.json) that is the output of the [`getgeometry`](https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=2) API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the **affected** areas. It has a property `properties.Class` set to `Poly_Affected`.
-* The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1-affected.json](../../../examples/gdacs-hazards/1102983-1-affected.json).
+- There are 2 sources for the hazards:
+  1. The general event [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) that is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983) API endpoint.
+  2. the detailed geometries [1102983-1-getgeometry-source.json](1102983-1-getgeometry-source.json) that is the output of the [`getgeometry`](https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=2) API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the **affected** areas. It has a property `properties.Class` set to `Poly_Affected`.
+- The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1-affected.json](../../../examples/gdacs-hazards/1102983-1-affected.json).
 
 Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:
 
@@ -127,7 +127,6 @@ The following table shows the magnitude scale and unit to be used for each event
 | GDACS event type                                                                                                                         | Magnitude scale | Magnitude unit               |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ---------------------------- |
 | [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx) event type uses a severity score based on the Global Flood Detection System | 1-3             | `GDACS Flood Severity Score` |
-
 
 ### Impact Item
 

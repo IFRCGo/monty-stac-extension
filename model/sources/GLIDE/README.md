@@ -6,24 +6,24 @@ GLIDE is a globally common Unique ID code for disasters and emergencies. It is a
 
 A STAC collection hold all the GLIDE events. An example of the GLIDE collection is [here](../../../examples/glide-events/glide-events.json).
 
-* Name: GLobal IDEntifier Number (GLIDE)
-* Code: GLIDE
-* Source organisation: Asian Disaster Reduction Center (ADRC)
-* Source code: ADRC
-* Source Type: Regional Intergovernmental Organisation
-* Source organization email: gliderep@adrc.asia
-* Source URL: https://glidenumber.net
-* Source Data license: ?
-* Source for: event, hazard
+- Name: GLobal IDEntifier Number (GLIDE)
+- Code: GLIDE
+- Source organisation: Asian Disaster Reduction Center (ADRC)
+- Source code: ADRC
+- Source Type: Regional Intergovernmental Organisation
+- Source organization email: gliderep@adrc.asia
+- Source URL: https://glidenumber.net
+- Source Data license: ?
+- Source for: event, hazard
 
-* previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGLIDEnumber.R
+- previous implementation (R): https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGLIDEnumber.R
 
 ### Data
 
 Accessible data is a set of GLIDE entries. Each entry is a disaster event. The event data list is available in the form of a array called "glideset" via the API endpoint `https://www.glidenumber.net/glide/jsonglideset.jsp`.
 
-* Documentation: https://glidenumber.net/glide/public/GLIDEnumber%20API.docx
-* 
+- Documentation: https://glidenumber.net/glide/public/GLIDEnumber%20API.docx
+
 > [!IMPORTANT]
 > Despite what's described in the documentation, the API endpoint `https://www.glidenumber.net/glide/jsonglideset.jsp` cannot retrieve individual events. It is necessary to add other filter to narrow down the search (e.g. h`ttps://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199`)
 
@@ -31,8 +31,8 @@ Accessible data is a set of GLIDE entries. Each entry is a disaster event. The e
 
 A GLIDE event and episode will **ALWAYS** produce an [**event STAC item**](../../../README.md#event) as in the example for the [flood in Spain](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199).
 
-* The source events is in the file [FL-2024-000199-ESP.json](FL-2024-000199-ESP.json) and is the output of the [`jsonglideset`](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199) API endpoint.
-* The produced event STAC items is in the file [glide-events/FL-2024-000199-ESP.json](../../../examples/glide-events/FL-2024-000199-ESP.json).
+- The source events is in the file [FL-2024-000199-ESP.json](FL-2024-000199-ESP.json) and is the output of the [`jsonglideset`](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199) API endpoint.
+- The produced event STAC items is in the file [glide-events/FL-2024-000199-ESP.json](../../../examples/glide-events/FL-2024-000199-ESP.json).
 
 The event URL of the `jsonglideset` API endpoint is stored in the `links` field of the STAC item with the `via` relation.
 
@@ -56,8 +56,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 
 A GLIDE event and episode will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard) as in the example for the [flood in Spain](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199).
 
-* The source events is in the file [FL-2024-000199-ESP.json](FL-2024-000199-ESP.json) and is the output of the [`jsonglideset`](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199) API endpoint.
-* The produced hazard STAC item is in the examples [glide-hazards/FL-2024-000199-ESP.json](../../../examples/glide-hazards/FL-2024-000199-ESP.json).
+- The source events is in the file [FL-2024-000199-ESP.json](FL-2024-000199-ESP.json) and is the output of the [`jsonglideset`](https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199) API endpoint.
+- The produced hazard STAC item is in the examples [glide-hazards/FL-2024-000199-ESP.json](../../../examples/glide-hazards/FL-2024-000199-ESP.json).
 
 Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:
 

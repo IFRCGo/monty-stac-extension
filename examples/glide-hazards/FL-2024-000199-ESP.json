@@ -1,0 +1,69 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "glide-hazard-FL-2024-000199-ESP",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -3.41102534556838,
+      38.6013316868745
+    ]
+  },
+  "bbox": [
+    -3.41102534556838,
+    38.6013316868745,
+    -3.41102534556838,
+    38.6013316868745
+  ],
+  "properties": {
+    "title": "",
+    "description": "GDACS - Medium humanitarian impact in for Spain.According to the authorities (CENEM), as of 30 October at 14.00 UTC , the number of deaths stands at 62 in the Autonomous Region of Valencia (eastern Spain), with an undetermined number of missing in Autonomous Region of Valencia, in Albacete province in Castilla La Mancha autonomous Region. Dozens have been rescued and several have been displaced in Valencia province. In addition, a bridge collapsed in Ribarroja del Turia (Valencia province), several roads have been closed, including some in Granada and Malaga cities in the Andalucia region, and train disruptions have been recorded in the affected area. ",
+    "magnitude": "0",
+    "source": "GDACS",
+    "docid": 23388,
+    "status": "A",
+    "roles": [
+      "source",
+      "hazard"
+    ],
+    "monty:episode_number": 1,
+    "monty:hazard_codes": [
+      "FL"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:corr_id": "20241027-ESP-FL-1-GCDB",
+    "monty:hazard_detail": {
+      "cluster": "FL",
+      "severity_unit": "glide",
+      "estimate_type": "primary"
+    },
+    "datetime": "2024-10-27T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199",
+      "type": "application/json",
+      "title": "Glide Event Data"
+    },
+    {
+      "rel": "collection",
+      "href": "/home/emathot/Workspace/IFRCGo/pystac-monty/glide-hazards.json",
+      "type": "application/json",
+      "title": "GLIDE Source Hazards"
+    }
+  ],
+  "assets": {
+    "report": {
+      "href": "https://www.glidenumber.net/glide/public/search/details.jsp?glide=23388",
+      "type": "application/json",
+      "title": "Report"
+    }
+  },
+  "collection": "glide-hazards"
+}
