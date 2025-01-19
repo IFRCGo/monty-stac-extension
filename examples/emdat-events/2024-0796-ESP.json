@@ -1,0 +1,76 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "emdat-event-2024-0796-ESP",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -9,
+          36
+        ],
+        [
+          -9,
+          44
+        ],
+        [
+          3,
+          44
+        ],
+        [
+          3,
+          36
+        ],
+        [
+          -9,
+          36
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -9,
+    36,
+    3,
+    44
+  ],
+  "properties": {
+    "title": "Flood (Flood (General)) in Spain of October 2024",
+    "description": "Flood (Flood (General)) in Alaquàs, Albal, Aldaya, Alfafar, Algemesí, Benerússer, Catarroja, Llocnou de la Corona, Massanassa, Paiporta, Picanya, Sedaví, Utiel and La Torre municipalties (Valencia);, Letur, lbacete provinces; Castilla-La Mancha communities, Andalusia, Murcia, and the Balearic Islands, Catalonia, Spain of October 2024",
+    "start_datetime": "2024-10-27T00:00:00Z",
+    "end_datetime": "2024-11-04T00:00:00Z",
+    "monty:episode_number": 1,
+    "monty:hazard_codes": [
+      "FL"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:corr_id": "20241027-ESP-FL-1-GCDB",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "datetime": "2024-10-27T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "collection",
+      "href": "/home/emathot/Workspace/IFRCGo/pystac-monty/emdat-events.json",
+      "type": "application/json",
+      "title": "EM-DAT Source Events"
+    },
+    {
+      "rel": "via",
+      "href": "https://public.emdat.be/data/2024-0796-ESP",
+      "type": "text/html",
+      "title": "EM-DAT Event Data"
+    }
+  ],
+  "assets": {},
+  "collection": "emdat-events"
+}
