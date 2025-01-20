@@ -1,6 +1,3 @@
-// 20250120154118
-// https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/json/losses.json
-
 {
     "empirical_fatality": {
       "total_fatalities": 291,
