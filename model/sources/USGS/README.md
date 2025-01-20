@@ -64,6 +64,8 @@ where `<event_id>` is the unique identifier of the event. This endpoint provides
 - Moment tensor solutions
 - Felt reports and testimonials
 
+Example of a detailed event feed: [us6000pi9w.geojson](us6000pi9w.geojson)
+
 #### Products
 
 The USGS can provide several products for each earthquake event.
@@ -75,6 +77,8 @@ The following supported ones are linked to the section where the information mus
 ### Event Item
 
 A USGS earthquake event will **ALWAYS** produce an [**event STAC item**](../../../README.md#event).
+
+Example of generated STAC item: [examples/usgs-events/us6000pi9w.json](../../../examples/usgs-events/us6000pi9w.json)
 
 Here is a table with the fields that are mapped from the USGS event to the STAC event:
 
@@ -96,6 +100,8 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 ### Hazard Item (from ShakeMap)
 
 The [Shakemap product](https://earthquake.usgs.gov/data/shakemap/) of a USGS earthquake event will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard) that implements the [STAC Earthquake Extension](https://github.com/stac-extensions/earthquake).
+
+Example of generated STAC item: [examples/usgs-hazards/us6000pi9w-shakemap.json](../../../examples/usgs-hazards/us6000pi9w-shakemap.json)
 
 Here is a table with the STAC fields that are mapped from the USGS event to the STAC hazard:
 
@@ -158,8 +164,8 @@ The [monty:hazard_detail](../../../README.md#montyhazard_detail) field contains 
 
 The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event will produce two [**impact STAC items**](../../../README.md#impact):
 
-1. Estimated Fatalities Impact
-2. Estimated Economic Losses Impact
+1. Estimated Fatalities Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-fatalities.json](../../../examples/usgs-impacts/us6000pi9w-fatalities.json)
+2. Estimated Economic Losses Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-economic.json](../../../examples/usgs-impacts/us6000pi9w-economic.json)
 
 The PAGER data is found in the `losspager` product within the USGS event data. Here is a detailed mapping of fields from the USGS PAGER data to the STAC impacts:
 
