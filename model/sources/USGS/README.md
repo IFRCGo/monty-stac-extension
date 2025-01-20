@@ -184,15 +184,17 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 
 #### Impact Detail
 
-The [monty:impact_detail](../../../README.md#montyimpact_detail) field contains specific information about each type of impact. The values are extracted from the PAGER product data in the USGS event:
+The [monty:impact_detail](../../../README.md#montyimpact_detail) field contains specific information about each type of impact. 
+The values are extracted from the PAGER product data in the USGS event and requires to get an additional content file from the USGS event data
+under `json/losses.json`.
 
 For Estimated Fatalities:
 
 ```json
 {
-  "category": "human",
-  "type": "fatalities",
-  "value": "<from products.losspager.contents['json/alerts.json'].fatality.exposure>",
+  "category": "expspec_allpeop",
+  "type": "imptypdeat",
+  "value": "<from products.losspager.contents['json/losses.json'].empirical_fatality.total_fatalities>",
   "unit": "people",
   "estimate_type": "modelled"
 }
@@ -202,17 +204,10 @@ For Estimated Economic Losses:
 
 ```json
 {
-  "category": "economic",
-  "type": "losses", 
-  "value": "<from products.losspager.contents['json/alerts.json'].economic.exposure>",
+  "category": "expspec_build",
+  "type": "imptypcost", 
+  "value": "<from products.losspager.contents['json/losses.json'].empirical_economic.total_dollars>",
   "unit": "usd",
   "estimate_type": "modelled"
 }
 ```
-
-The impact values are extracted from the PAGER product's alert data:
-
-- Fatality estimates are found in the `products.losspager.contents['json/alerts.json']` file under the `fatality.exposure` field
-- Economic loss estimates are found in the same file under the `economic.exposure` field
-- Both values are modelled estimates based on PAGER's impact assessment algorithms
-- The alert level (green, yellow, orange, red) can be found in `properties.alert` and indicates the severity of the impact

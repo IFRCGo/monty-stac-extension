@@ -35,8 +35,8 @@
     ],
     "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
     "monty:impact_detail": {
-      "category": "economic",
-      "type": "losses",
+      "category": "expspec_build",
+      "type": "imptypcost",
       "value": 1000000000,
       "unit": "usd",
       "estimate_type": "modelled"

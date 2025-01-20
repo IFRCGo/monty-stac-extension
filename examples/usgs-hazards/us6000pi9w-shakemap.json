@@ -35,7 +35,7 @@
     ],
     "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
     "monty:hazard_detail": {
-      "clusters": "GEO-SEIS",
+      "cluster": "GEO-SEIS",
       "severity_value": 7.1,
       "severity_unit": "mww"
     },

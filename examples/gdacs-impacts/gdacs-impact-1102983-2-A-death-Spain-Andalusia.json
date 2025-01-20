@@ -37,8 +37,8 @@
     ],
     "created": "2025-01-05T13:10:23Z",
     "monty:impact_detail": {
-      "category": "allpeop",
-      "type": "miss",
+      "category": "expspec_allpeop",
+      "type": "imptypmiss",
       "value": 114,
       "unit": "sendai",
       "estimate_type": "primary"
