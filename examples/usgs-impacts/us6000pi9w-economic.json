@@ -1,0 +1,80 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "us6000pi9w-economic",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      87.3608,
+      28.639
+    ]
+  },
+  "bbox": [
+    87.3608,
+    28.639,
+    87.3608,
+    28.639
+  ],
+  "properties": {
+    "datetime": "2025-01-07T01:05:16Z",
+    "title": "Estimated Economic Losses for 2025 Southern Tibetan Plateau Earthquake",
+    "description": "PAGER estimated economic losses for M7.1 earthquake in Southern Tibetan Plateau",
+    "roles": [
+      "impact",
+      "source"
+    ],
+    "monty:country_codes": [
+      "CHN"
+    ],
+    "monty:hazard_codes": [
+      "GH0004"
+    ],
+    "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+    "monty:impact_detail": {
+      "category": "economic",
+      "type": "losses",
+      "value": 1000000000,
+      "unit": "usd",
+      "estimate_type": "modelled"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000pi9w-economic.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-impacts.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000pi9w.json",
+      "roles": ["event"]
+    }
+  ],
+  "assets": {
+    "pager_onepager": {
+      "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/onepager.pdf",
+      "type": "application/pdf",
+      "title": "PAGER One-Pager Report",
+      "roles": ["data"]
+    },
+    "pager_exposure": {
+      "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/json/exposures.json",
+      "type": "application/json",
+      "title": "PAGER Exposure Data",
+      "roles": ["data"]
+    },
+    "pager_alert": {
+      "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/alertecon.pdf",
+      "type": "application/pdf",
+      "title": "PAGER Economic Alert",
+      "roles": ["data"]
+    }
+  },
+  "collection": "usgs-impacts"
+}
