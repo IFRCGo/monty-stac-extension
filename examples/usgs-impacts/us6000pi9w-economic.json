@@ -53,7 +53,9 @@
     {
       "rel": "related",
       "href": "../usgs-events/us6000pi9w.json",
-      "roles": ["event"]
+      "roles": [
+        "event"
+      ]
     }
   ],
   "assets": {
@@ -61,19 +63,25 @@
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/onepager.pdf",
       "type": "application/pdf",
       "title": "PAGER One-Pager Report",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "pager_exposure": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/json/exposures.json",
       "type": "application/json",
       "title": "PAGER Exposure Data",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "pager_alert": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/alertecon.pdf",
       "type": "application/pdf",
       "title": "PAGER Economic Alert",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   },
   "collection": "usgs-impacts"

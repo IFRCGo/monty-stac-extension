@@ -53,7 +53,9 @@
     {
       "rel": "related",
       "href": "../usgs-events/us6000pi9w.json",
-      "roles": ["event"]
+      "roles": [
+        "event"
+      ]
     }
   ],
   "assets": {
@@ -61,19 +63,25 @@
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/onepager.pdf",
       "type": "application/pdf",
       "title": "PAGER One-Pager Report",
-      "roles": ["pager-report"]
+      "roles": [
+        "pager-report"
+      ]
     },
     "pager_exposure": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/json/exposures.json",
       "type": "application/json",
       "title": "PAGER Exposure Data",
-      "roles": ["pager-exposure"]
+      "roles": [
+        "pager-exposure"
+      ]
     },
     "pager_alert": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/alertfatal.pdf",
       "type": "application/pdf",
       "title": "PAGER Fatality Alert",
-      "roles": ["pager-alert"]
+      "roles": [
+        "pager-alert"
+      ]
     }
   },
   "collection": "usgs-impacts"

@@ -59,7 +59,9 @@
     {
       "rel": "related",
       "href": "../usgs-events/us6000pi9w.json",
-      "roles": ["event"]
+      "roles": [
+        "event"
+      ]
     }
   ],
   "assets": {
@@ -67,55 +69,73 @@
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity.jpg",
       "type": "image/jpeg",
       "title": "Intensity Map",
-      "roles": ["overview"]
+      "roles": [
+        "overview"
+      ]
     },
     "intensity_overlay": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity_overlay.png",
       "type": "image/png",
       "title": "Intensity Overlay",
-      "roles": ["visual"]
+      "roles": [
+        "visual"
+      ]
     },
     "pga_map": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pga.jpg",
       "type": "image/jpeg",
       "title": "Peak Ground Acceleration Map",
-      "roles": ["overview"]
+      "roles": [
+        "overview"
+      ]
     },
     "pgv_map": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pgv.jpg",
       "type": "image/jpeg",
       "title": "Peak Ground Velocity Map",
-      "roles": ["overview"]
+      "roles": [
+        "overview"
+      ]
     },
     "mmi_contours": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/cont_mi.json",
       "type": "application/json",
       "title": "MMI Contours",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "grid": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/grid.xml",
       "type": "application/xml",
       "title": "Ground Motion Grid",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "uncertainty": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/uncertainty.xml",
       "type": "application/xml",
       "title": "Uncertainty Grid",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "stations": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/stationlist.json",
       "type": "application/json",
       "title": "Station List",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     },
     "rupture": {
       "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/rupture.json",
       "type": "application/json",
       "title": "Fault Rupture",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   },
   "collection": "usgs-hazards"
