@@ -101,7 +101,7 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 
 | STAC field                                                                                                 | USGS field                          | Description                                         |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | properties.id                       | Unique identifier for the hazard                    |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | properties.id + `-shakemap`         | Unique identifier for the hazard                    |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                  | bbox                                | Bounding box of the hazard                          |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                            | Point geometry of the earthquake epicenter          |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-hazards`                      | The collection for USGS hazards                     |
