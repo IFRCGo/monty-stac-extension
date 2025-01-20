@@ -84,7 +84,7 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 
 | STAC field                                                                                                 | USGS field                 | Description                                          |
 | ---------------------------------------------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | properties.id              | Unique identifier for the event                      |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | id                         | Unique identifier for the event                      |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                  | bbox                       | Bounding box of the event                            |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                   | Point geometry of the earthquake epicenter           |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-events`              | The collection for USGS events                       |
@@ -107,7 +107,7 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 
 | STAC field                                                                                                 | USGS field                          | Description                                         |
 | ---------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | properties.id + `-shakemap`         | Unique identifier for the hazard                    |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | id + `-shakemap`                    | Unique identifier for the hazard                    |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                  | bbox                                | Bounding box of the hazard                          |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                            | Point geometry of the earthquake epicenter          |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-hazards`                      | The collection for USGS hazards                     |
@@ -169,18 +169,18 @@ The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment 
 
 The PAGER data is found in the `losspager` product within the USGS event data. Here is a detailed mapping of fields from the USGS PAGER data to the STAC impacts:
 
-| STAC field                                                                                                 | USGS field                                   | Source Location & Details                                                                        |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | properties.id + "-fatalities" or "-economic" | Append "-fatalities" or "-economic" to the event's properties.id                                 |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                  | bbox                                         | Use the event's bbox directly                                                                    |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                                     | Use the event's geometry (earthquake epicenter) directly                                         |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-impacts`                               | Fixed value for all USGS impact items                                                            |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                              | Found in event's properties.time, convert from Unix timestamp to ISO 8601                        |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                               | Derived from coordinates                     | Use reverse geocoding on event's geometry.coordinates[0,1] to get ISO3 country code              |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | [`GEO-SEIS`]                                 | Always `GEO-SEIS` for all earthquake impacts                                                     |
-| [roles](../../../README.md#roles)                                                                          | ["impact", "source"]                         | Always `["impact"]` for all impact items                                                         |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | Derived                                      | "Estimated Fatalities" or "Estimated Economic Losses" based on impact type                       |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | Derived                                      | Combine event location and impact type, e.g. "Estimated fatalities for {event.properties.place}" |
+| STAC field                                                                                                 | USGS field                        | Source Location & Details                                                                        |
+| ---------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                      | id + "-fatalities" or "-economic" | Append "-fatalities" or "-economic" to the event's properties.id                                 |
+| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                  | bbox                              | Use the event's bbox directly                                                                    |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                          | Use the event's geometry (earthquake epicenter) directly                                         |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-impacts`                    | Fixed value for all USGS impact items                                                            |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                   | Found in event's properties.time, convert from Unix timestamp to ISO 8601                        |
+| [monty:country_codes](../../../README.md#montycountry_codes)                                               | Derived from coordinates          | Use reverse geocoding on event's geometry.coordinates[0,1] to get ISO3 country code              |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | [`GEO-SEIS`]                      | Always `GEO-SEIS` for all earthquake impacts                                                     |
+| [roles](../../../README.md#roles)                                                                          | ["impact", "source"]              | Always `["impact"]` for all impact items                                                         |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | Derived                           | "Estimated Fatalities" or "Estimated Economic Losses" based on impact type                       |
+| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | Derived                           | Combine event location and impact type, e.g. "Estimated fatalities for {event.properties.place}" |
 
 #### Impact Detail
 
