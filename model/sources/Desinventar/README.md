@@ -214,15 +214,15 @@ The following table shows the mapping of Desinventar impact fields to STAC items
 
 For each available impact metric in the Desinventar data, a separate impact item is created with:
 
-| STAC field                                                                                                  | Value                                | Description                                        |
-| ----------------------------------------------------------------------------------------------------------- | ------------------------------------ | -------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                       | desinventar-impact-{serial}-{metric} | Unique ID combining event serial and impact metric |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties) | {event title} - {metric}             | Title combining event name and impact type         |
-| [monty:impact_detail](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:impact_detail)                |                                      | Object containing impact details                   |
-| impact_detail.category                                                                                      | From mapping table                   | Impact category code                               |
-| impact_detail.type                                                                                          | From mapping table                   | Impact type code                                   |
-| impact_detail.value                                                                                         | From Desinventar field               | Numeric impact value                               |
-| impact_detail.unit                                                                                          | From mapping table                   | Unit of measurement                                |
-| impact_detail.estimate_type                                                                                 | "primary"                            | All Desinventar data is considered primary         |
+| STAC field                                                                                                  | Value                      | Description                                        |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                       | {level0}-{serial}-{metric} | Unique ID combining event serial and impact metric |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties) | {event title} - {metric}   | Title combining event name and impact type         |
+| [monty:impact_detail](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:impact_detail)                |                            | Object containing impact details                   |
+| monty:impact_detail.category                                                                                | From mapping table         | Impact category code                               |
+| monty:impact_detail.type                                                                                    | From mapping table         | Impact type code                                   |
+| monty:impact_detail.value                                                                                   | From Desinventar field     | Numeric impact value                               |
+| monty:impact_detail.unit                                                                                    | From mapping table         | Unit of measurement                                |
+| monty:impact_detail.estimate_type                                                                           | "primary"                  | All Desinventar data is considered primary         |
 
 The geometry, bbox, datetime and other base fields are inherited from the source event item.
