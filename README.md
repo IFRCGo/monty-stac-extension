@@ -134,6 +134,7 @@ It is an object that contains the details of the impact estimate. Preferably use
 | value         | number | **REQUIRED** The estimated impact value, as a number, without the units.                                                                                                                                                 |
 | unit          | string | The units of the impact estimate.                                                                                                                                                                                        |
 | estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                                                                                                                                 |
+| description   | string | The description of the impact.                                                                                                                                                                                           |
 
 ## Relation types
 
