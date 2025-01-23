@@ -19,9 +19,19 @@ A STAC collection holding IDMC disaster-related displacement events.
 
 ### Data
 
+- Swagger JSON URL: https://helix-tools-api.idmcdb.org/external-api/
+- openAPI : https://helix-tools-api.idmcdb.org/external-api/api-schema/
+
 #### Disasters Dataset
 
 The [GIDD Disasters Dataset](https://www.internal-displacement.org/database/api-documentation/#gidd-disasters-dataset) provides event information through the `/gidd/disasters/` API endpoint.
+
+Example of a request to the API:
+
+```http
+https://helix-tools-api.idmcdb.org/external-api/gidd/disasters/?client_id<secret>
+```
+
 The disasters dataset provides information on disaster events that are used to reference both GIDD and IDU data. Each disaster record contains the following fields:
 
 Each event record contains the following fields:
