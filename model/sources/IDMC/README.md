@@ -109,41 +109,8 @@ The geometry of the event is derived from the geometry of the displacement items
 2. If all the geometries are polygons, the event geometry is a MultiPolygon geometry.
 3. If the geometries are a mix of points and polygons, the event geometry is a MultiPolygon geometry with the points converted to polygons.
 
-# Hazard Type Mapping 
+#### Hazard Type Mapping 
 
-IDMC uses the same hazard classification as [EM-DAT](../EM-DAT/README.md#mapping-from-em-dat-event-type-to-hazard-profile), mapped to [UNDRR-ISC 2020 Hazard Information Profile](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) codes following this mapping table:
-
-| Hazard Category | Hazard sub category | Hazard Type           | Hazard sub type | UNDRR-ISC 2020 Hazard Information Profile |
-| --------------- | ------------------- | --------------------- | --------------- | ----------------------------------------- |
-| Meteorological  | Storm               | Extra-tropical Storm  | -               | MH0031                                    |
-| Meteorological  | Storm               | Tropical Cyclone      | -               | MH0057                                    |
-| Meteorological  | Storm               | Sand/Dust storm       | -               | MH0015                                    |
-| Meteorological  | Storm               | Local Storm           | Tornado         | MH0059                                    |
-| Meteorological  | Extreme Temperature | Cold Wave             | -               | MH0040                                    |
-| Meteorological  | Extreme Temperature | Heat Wave             | -               | MH0047                                    |
-| Meteorological  | Extreme Temperature | Severe Winter         | -               | MH0040, MH0047                            |
-| Hydrological    | Flood               | Flash Flood           | -               | MH0006                                    |
-| Hydrological    | Flood               | General Flood         | -               | MH0007                                    |
-| Hydrological    | Flood               | Storm Surge           | Coastal Flood   | MH0004                                    |
-| Hydrological    | Flood               | Ice Jam Flood         | -               | MH0009                                    |
-| Climatological  | Drought             | Drought               | -               | MH0035                                    |
-| Climatological  | Wildfire            | Forest Fire           | -               | EN0013                                    |
-| Climatological  | Wildfire            | Land Fire             | -               | EN0013                                    |
-| Climatological  | Wildfire            | Bush/Brush Fire       | -               | EN0013                                    |
-| Climatological  | Glacial             | Glacial Lake Outburst | -               | MH0013                                    |
-| Geophysical     | Earthquake          | Ground Movement       | -               | GH0004                                    |
-| Geophysical     | Earthquake          | Tsunami               | -               | GH0006                                    |
-| Geophysical     | Volcanic Activity   | Ash Fall              | -               | GH0010                                    |
-| Geophysical     | Volcanic Activity   | Lahar                 | -               | GH0013                                    |
-| Geophysical     | Volcanic Activity   | Lava Flow             | -               | GH0009                                    |
-| Geophysical     | Volcanic Activity   | Pyroclastic Flow      | -               | GH0012                                    |
-| Geophysical     | Mass Movement (dry) | Landslide             | -               | GH0007                                    |
-| Geophysical     | Mass Movement (dry) | Rockfall              | -               | GH0032                                    |
-| Geophysical     | Mass Movement (dry) | Subsidence            | -               | GH0024                                    |
-
-When implementing the mapping:
-
-1. The primary hazard code is used in the `monty:hazard_codes` field  
-2. Original hazard codes are included in `keywords` for improved searchability
+IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-dat-cred-classification-tree) and must follow the general rule for hazard code generation.
 
 This mapping enables standardized hazard categorization while preserving IDMC's original classification in the source properties.
