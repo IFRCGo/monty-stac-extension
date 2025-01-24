@@ -13,7 +13,7 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Source Type: International Non-Governmental Organization
 - Source organization email: <info@idmc.ch>
 - Source URL: <https://www.internal-displacement.org/database>
-- Source Data license: [TBD]
+- Source Data license: \[TBD]
 - Source for: event
 - API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
