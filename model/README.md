@@ -173,9 +173,8 @@ The event class has the following attributes:
 - **country_codes**: The country codes of the countries affected by the event.
   The country codes are based on the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard.
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
-  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips). [See hazard codes in the taxonomy](./taxonomy.md#hazards)
-- **correlation_id**: The unique identifier assigned by the Monty system to the reference event.
-  It is used to "pair" all the instances of the event.
+  The hazard codes are based on the [multiple classification systems](./taxonomy.md#hazards)
+- **correlation_id**: The unique identifier assigned by the Monty system to the reference event.  It is used to "pair" all the instances of the event. More information about the correlation identifier can be found [here](./correlation_identifier.md).
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
   - the countries affected by the event
   - the hazard types affecting the event
@@ -184,6 +183,7 @@ The event class has the following attributes:
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
 In the Monty model, a hazard is always linked to an event and as per event, every hazard is recorded from multiple sources.
+A hazard can be observed or forecasted and **MUST** contains details on its severity or magnitude.
 
 The hazard class has the following attributes:
 
@@ -197,9 +197,8 @@ The hazard class has the following attributes:
 - **source_event_id**: The identifier of the source event to which is associated the hazard. **OPTIONAL**
 - **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this data.
 - **hazard_detail**: A detailed description of the hazard including:
-  - **codes**: The hazard codes defining the hazard.
-  - **max_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
-  - **max_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
+  - **severity_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
+  - **severity_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
   - **estimate_type**: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:
     - Primary data
     - Secondary data
