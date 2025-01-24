@@ -1,0 +1,28 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [],
+  "id": "idmc-gidd-impact-108364-displaced",
+  "collection": "idmc-gidd-impacts",
+  "geometry": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [36.688499, 36.395481]
+    ]
+  },
+  "properties": {
+    "title": "Internal Displacements of People for Syria: Storm - Northern Syria - 29/03/2023",
+    "datetime": "2023-03-29T00:00:00Z",
+    "start_datetime": "2023-03-29T00:00:00Z",
+    "end_datetime": "2023-03-29T00:00:00Z",
+    "monty:country_codes": ["SYR"],
+    "monty:hazard_codes": ["nat-met-sto-sto"],
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "displaced",
+      "value": 20,
+      "unit": "count",
+      "estimate_type": "primary"
+    }
+  }
+}

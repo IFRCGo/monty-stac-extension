@@ -1,5 +1,5 @@
 {
-  "id": "idmc-impacts",
+  "id": "idmc-gidd-impacts",
   "type": "Collection",
   "stac_version": "1.0.0",
   "description": "IDMC Global Internal Displacement Database (GIDD) Impacts - Collection of displacement impacts from disasters and conflicts",
@@ -21,9 +21,9 @@
     },
     {
       "rel": "item",
-      "href": "./idmc-impact-107479.json",
+      "href": "./idmc-gidd-impact-107479-displaced.json",
       "type": "application/json",
-      "title": "Syria Earthquake Displacement Impact - Aleppo"
+      "title": "Internal Displacements of People for Syria, Türkiye: Earthquake - 06/02/2023"
     }
   ],
   "stac_extensions": [],

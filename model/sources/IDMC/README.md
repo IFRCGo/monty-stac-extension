@@ -78,8 +78,6 @@ The returned data is a geojson feature collection. Each feature represents a dis
 - `Locations type`: Type of displacement location (Origin/Destination)
 - `Displacement occurred`: Indicates if preventive evacuations were reported
 
-####
-
 ### Event Items
 
 The IDMC event items are derived from the GIDD disaggregated data.
@@ -111,7 +109,7 @@ The geometry of the event is derived from the geometry of the displacement items
 2. If all the geometries are polygons, the event geometry is a MultiPolygon geometry.
 3. If the geometries are a mix of points and polygons, the event geometry is a MultiPolygon geometry with the points converted to polygons.
 
-#### Hazard Type Mapping 
+#### Hazard Type Mapping
 
 IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-dat-cred-classification-tree) and must follow the general rule for hazard codes generation.
 
@@ -125,31 +123,32 @@ The following table shows how IDMC displacement item fields map to STAC Item fie
 
 | STAC field                                                                                                               | IDMC field                                                      | Required | Notes                                                     |
 | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- | -------- | --------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-impact-`{ID}                                         | Yes      | Use format `idmc-impact-{id}`                             |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-impact-`{ID}`-displaced`                             | Yes      | Use format `idmc-impact-{ID}-displaced`                   |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | [feature geometry]                                              | Yes      | Direct mapping from feature geometry                      |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-gidd-impacts`                                             | Yes      |                                                           |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | '{Figure category} of {Figure unit} for {Event name} '          | Yes      |                                                           |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Start date}                                                    | Yes      | Convert to datetime with UTC timezone                     |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Start date}                                                    | Yes      | Convert to datetime with UTC timezone                     |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {End date}                                                      | Yes      | Convert to datetime with UTC timezone                     |
 | [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                         | {ISO3}                                                          | Yes      | Direct mapping to array                                   |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                               | {Hazard Category} and {Hazard Type}                             | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
-| [monty:impact_detail](../../../README.md#montyimpact_detail)                                                             | See [Displacement Impact details](#displacement-impact-details) | Yes      |
+| [monty:impact_detail](../../../README.md#montyimpact_detail)                                                             | See [Displacement Impact details](#displacement-impact-details) | Yes      |                                                           |
 
 ##### Displacement Impact details
 
 The following table shows how IDMC displacement impact fields map to [impact_detail](../../../README.md#montyimpact_detail) STAC Item fields:
 
-| STAC field    | IDMC field        | Required | Notes                                             |
-| ------------- | ----------------- | -------- | ------------------------------------------------- |
-| category      | `imptypdispl`     | Yes      | Always "displaced" for IDMC impacts               |
-| type          | `expspec_allpeop` | Yes      | Always "displacement" for IDMC impacts            |
-| value         | {Total figures}   | Yes      | Direct mapping                                    |
-| unit          | `count`           | Yes      | Always "people" (household figures are converted) |
-| estimate_type | `primary`         | Yes      | Always "primary" for IDMC impacts                 |
+| STAC field    | IDMC field        | Required | Notes                                                 |
+| ------------- | ----------------- | -------- | ----------------------------------------------------- |
+| category      | `expspec_allpeop` | Yes      | Always "people" for IDMC impacts                      |
+| type          | `imptypdispl`     | Yes      | Always "displaced" for IDMC impacts                   |
+| value         | {Total figures}   | Yes      | Direct mapping                                        |
+| unit          | `count`           | Yes      | Always people count (household figures are converted) |
+| estimate_type | `primary`         | Yes      | Always "primary" for IDMC impacts                     |
 
 ##### Impact Item Generation Rules
 
 1. Each displacement item in the GIDD dataset becomes a separate impact item
-3. Geometry is taken directly from the displacement item's feature geometry
-4. Dates are converted to UTC timezone
-5. Event ID reference uses the format `idmc-gidd-event-{id}`
+2. Geometry is taken directly from the displacement item's feature geometry
+3. Dates are converted to UTC timezone
+4. Event ID reference uses the format `idmc-gidd-event-{id}`

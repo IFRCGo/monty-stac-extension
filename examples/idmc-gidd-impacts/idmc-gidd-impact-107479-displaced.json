@@ -1,0 +1,28 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [],
+  "id": "idmc-gidd-impact-107479-displaced",
+  "collection": "idmc-gidd-impacts",
+  "geometry": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [37.411121, 36.15263]
+    ]
+  },
+  "properties": {
+    "title": "Internal Displacements of People for Syria, Türkiye: Earthquake - 06/02/2023",
+    "datetime": "2023-02-06T00:00:00Z",
+    "start_datetime": "2023-02-06T00:00:00Z",
+    "end_datetime": "2023-03-09T00:00:00Z",
+    "monty:country_codes": ["SYR"],
+    "monty:hazard_codes": ["nat-geo-ear-gro"],
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "displaced",
+      "value": 193245,
+      "unit": "count",
+      "estimate_type": "primary"
+    }
+  }
+}
