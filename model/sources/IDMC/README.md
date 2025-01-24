@@ -11,16 +11,16 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Source organisation: Internal Displacement Monitoring Centre (IDMC)
 - Source code: IDMC
 - Source Type: International Non-Governmental Organization
-- Source organization email: info@idmc.ch
-- Source URL: https://www.internal-displacement.org/database
+- Source organization email: <info@idmc.ch>
+- Source URL: <https://www.internal-displacement.org/database>
 - Source Data license: [TBD]
 - Source for: event
-- API Documentation: https://helix-tools-api.idmcdb.org/external-api/
+- API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
 ### Data
 
-- Swagger JSON URL: https://helix-tools-api.idmcdb.org/external-api/
-- openAPI : https://helix-tools-api.idmcdb.org/external-api/api-schema/
+- Swagger JSON URL: <https://helix-tools-api.idmcdb.org/external-api/>
+- openAPI : <https://helix-tools-api.idmcdb.org/external-api/api-schema/>
 
 #### Disasters Dataset
 
@@ -32,7 +32,7 @@ Nevertheless, the items in this dataset are not consolidated into a single event
 
 The [GIDD Disaggregated Data](https://www.internal-displacement.org/database/api-documentation/#gidd-disaggregated-data) provides quality-controlled, annually validated data on internal displacement due to conflicts and disasters, disaggregated by caseload. This dataset is disaggregated by caseload, location and event.
 
-Endpoint URL: <https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/?client_id=<secret>>
+Endpoint URL: <<https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/?client_id=><secret>>
 
 The returned data is a geojson feature collection. Each feature represents a displacement item that includes the following properties:
 
@@ -77,7 +77,6 @@ The returned data is a geojson feature collection. Each feature represents a dis
 - `Locations accuracy`: Precision level of reported locations
 - `Locations type`: Type of displacement location (Origin/Destination)
 - `Displacement occurred`: Indicates if preventive evacuations were reported
-
 
 ### Event Items
 
