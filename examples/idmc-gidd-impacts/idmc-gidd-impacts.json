@@ -1,0 +1,52 @@
+{
+  "id": "idmc-impacts",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "description": "IDMC Global Internal Displacement Database (GIDD) Impacts - Collection of displacement impacts from disasters and conflicts",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "./idmc-impacts.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./idmc-impact-107479.json",
+      "type": "application/json",
+      "title": "Syria Earthquake Displacement Impact - Aleppo"
+    }
+  ],
+  "stac_extensions": [],
+  "title": "IDMC GIDD Impacts",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [-180, -90, 180, 90]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        ["2008-01-01T00:00:00Z", null]
+      ]
+    }
+  },
+  "license": "TBD",
+  "providers": [
+    {
+      "name": "Internal Displacement Monitoring Centre",
+      "description": "The Internal Displacement Monitoring Centre (IDMC) maintains the Global Internal Displacement Database (GIDD), providing comprehensive information on global internal displacement",
+      "roles": ["producer", "processor", "licensor"],
+      "url": "https://www.internal-displacement.org"
+    }
+  ]
+}
