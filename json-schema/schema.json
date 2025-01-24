@@ -323,6 +323,9 @@
           "contains": {
             "const": "hazard"
           }
+        },
+        "monty:hazard_codes": {
+          "maxItems": 1
         }
       }
     },
