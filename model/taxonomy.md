@@ -88,7 +88,6 @@
 | tec-mis-exp-exp    | Technological | Miscellaneous Accident | Explosion             | Explosion (Miscellaneous)   |
 | tec-mis-fir-fir    | Technological | Miscellaneous Accident | Fire                  | Fire (Miscellaneous)        |
 
-
 ### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
 
 | Hazard Code | Hazard Label                                                                                                                                           | Cluster ID       | Cluster Label                                                     | Family Label                 |

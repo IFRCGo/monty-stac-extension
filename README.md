@@ -93,10 +93,10 @@ It must at least contain the countries intersected by the item's geometry.
 It is a list of hazard codes of the hazards concerned by the item. Theere are multiple various classification systems for hazards so the field is open to any code.
 Nevertheless, the field is recommended to follow the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier and [EM_DAT CRED Classification Key](https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree) to enforce interoperability.
 
-Tables with the possible values are available in the [hazard section of the taxonomy](./model/taxonomy.md#hazard) with:
+Tables with the possible values are available in the [hazard section of the taxonomy](./model/taxonomy.md#hazards) with:
 
 - [UNDRR-ISC 2020 Hazard Information Profiles](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
-- [EM_DAT CRED Classification Key](./model/taxonomy.md#em-dat-classification-tree)
+- [EM_DAT CRED Classification Key](./model/taxonomy.md#em-dat-cred-classification-tree)
 - [GLIDE classification](./model/taxonomy.md#glide-classification)
 - [A crosswalk classification systems mapping](./model/taxonomy.md#cross-classification-mapping)
 
@@ -130,7 +130,7 @@ The following fields are available in the object:
 
 | Field Name     | Type   | Description                                                                                                          |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
+| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazards). |
 | severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.        |
 | severity_unit  | string | **REQUIRED** The unit of the max_value.                                                                              |
 | estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                             |

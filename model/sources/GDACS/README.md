@@ -109,7 +109,7 @@ setting the clusters field as the following:
 
 | GDACS event type                                                         | UNDRR Hazard profile cluster | UNDRR Hazard Profile codes |
 | ------------------------------------------------------------------------ | ---------------------------- | -------------------------- |
-| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`                   | `MH0012`                   | 
+| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`                   | `MH0012`                   |
 | [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`                   | `GH0004`                   |
 | [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`                  | `MH0057`                   |
 | [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`                   | `GH0006`                   |

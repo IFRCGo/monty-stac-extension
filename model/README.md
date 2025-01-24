@@ -173,7 +173,7 @@ The event class has the following attributes:
 - **country_codes**: The country codes of the countries affected by the event.
   The country codes are based on the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard.
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
-  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips). [See hazard codes in the taxonomy](https://github.com/IFRCGo/monty-stac-extension/blob/main/model/taxonomy.md#hazard)
+  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips). [See hazard codes in the taxonomy](./taxonomy.md#hazards)
 - **correlation_id**: The unique identifier assigned by the Monty system to the reference event.
   It is used to "pair" all the instances of the event.
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
