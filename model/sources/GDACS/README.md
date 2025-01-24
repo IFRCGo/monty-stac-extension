@@ -54,8 +54,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.fromdate                                   | Date and time of the event converted in UTC ISO 8601 format                                                                                 |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.fromdate                                   | Start date of the event converted in UTC ISO 8601 format                                                                                    |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.todate                                     | End date of the event converted in UTC ISO 8601 format                                                                                      |
-| [monty:country_codes](../../../README.md#montycountry_codes)(0)                                                        | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
-| [monty:country_codes](../../../README.md#montycountry_codes)(1..*)                                                     | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                                             |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                       | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
+| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                                             |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | properties.eventtype                                  | List of hazard codes converted following the [GDACS event type to Hazard profile mapping](#mapping-from-gdacs-event-type-to-hazard-profile) |
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                       | Asset with the icon of the event                                                                                                            |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                 | Asset with the link to the GDACS report                                                                                                     |
@@ -99,7 +99,6 @@ The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON objec
 
 | STAC field     | GDACS field                  | Description                                               |
 | -------------- | ---------------------------- | --------------------------------------------------------- |
-| clusters       | properties.eventtype         | Hazard clusters codes                                     |
 | severity_value | properties.episodealertlevel | GDACS alert score                                         |
 | severity_unit  | `gdacs`                      | GDACS alert level according to GDCAS event type and model |
 
@@ -108,14 +107,14 @@ The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON objec
 There is not straightforward mapping from the GDACS event type to the [hazard profile](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles). The current mapping only considers
 setting the clusters field as the following:
 
-| GDACS event type                                                         | Hazard profile cluster | Hazard Profile codes |
-| ------------------------------------------------------------------------ | ---------------------- | -------------------- |
-| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`             |                      |
-| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`             | `GH0004`             |
-| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`            | `MH0057`             |
-| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`             | `GH0006`             |
-| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`             |                      |
-| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `HM-PRECIP`            | `MH0035`             |
+| GDACS event type                                                         | UNDRR Hazard profile cluster | UNDRR Hazard Profile codes |
+| ------------------------------------------------------------------------ | ---------------------------- | -------------------------- |
+| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`                   | `MH0012`                   | 
+| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`                   | `GH0004`                   |
+| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`                  | `MH0057`                   |
+| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`                   | `GH0006`                   |
+| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`                   |                            |
+| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `HM-PRECIP`                  | `MH0035`                   |
 
 More specific [hazard codes](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) can be added to the `codes` field following the characteristics of the event.
 

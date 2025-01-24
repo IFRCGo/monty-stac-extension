@@ -67,68 +67,56 @@ classDiagram
         +hazard_codes: string[]
     }
 
-    Item <|-- Event
+    MontyData <|-- Event
 
-    class Data {
-        +ref_event_id: string
-        +source_event_id: string
-        +source: string
+    class MontyData {
+        +corr_id: string
+        +collection: string
     }
 
-    Item <|-- Data
+    Item <|-- MontyData
 
-    class ReferenceEvent["Reference Event"] {
-    }
-
-    class SourceEvent["Source Event"] {
-        +correlation_id: string
-    }
-
-    Data "0..*" --> "1" ReferenceEvent : is related to
-    Data "0..*" --> "0" SourceEvent : is associated with
-
-    Event <|-- ReferenceEvent
-    Event <|-- SourceEvent
-    SourceEvent "1..*" --> "1" ReferenceEvent : is paired with
+    MontyData "0..*" --> "1" Event : is associated with
 
     class Hazard {
         +hazard_detail: HazardDetail[]
     }
 
-    Hazard --|> Data
+    Hazard --|> MontyData
 
     class Impact {
         +impact_detail: ImpactDetail[]
     }
 
-    Impact --|> Data
-    Impact "0..*" --> "1" Hazard : is the effect of
+    Impact --|> MontyData
+    Impact "0..*" --> "1..*" Hazard : is the effect of
 
     class Response {
     }
 
-    Response --|> Data
+    Response --|> MontyData
     
     class HazardDetail {
-        +codes: string[]
-        +max_value: number
-        +max_unit: string
+        +severity_value: number
+        +severity_unit: string
         +estimate_type: string
     }
 
     HazardDetail --* Hazard
     
-    class HazardProfile["UNDRR-ISC 2020\nHazard Information Profiles"] {
+    class HazardCode {
         +code: string
         +name: string
+        +group: string
+        +subgroup: string
         +type: string
-        +cluster: string
+        +subtype: string
     }
 
-    Event "*" --> "*" HazardProfile : has
-    HazardDetail "*" --> "*" HazardProfile : is defined by
+    Event "*" --> "*" HazardCode : has
+    HazardDetail "*" --> "1" HazardCode : is defined by
 
-    link HazardProfile "https://www.preventionweb.net/drr-glossary/hips"
+    link HazardCode "./taxonomy#hazards" "See hazard codes in the taxonomy"
 
     class ac["&ZeroWidthSpace;"] ::: invisible
     Hazard "0..*" -- ac : is concurrent with
@@ -151,6 +139,7 @@ classDiagram
     }
 
     ImpactDetail --* Impact
+    Impact "*" --> "*" HazardCode : has
 
     
 ```
