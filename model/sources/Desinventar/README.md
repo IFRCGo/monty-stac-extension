@@ -136,23 +136,23 @@ Example event items for grenada export at [DI_export_GRD.xml](DI_export_grd.xml)
 
 Here is the mapping of fields from Desinventar XML to STAC event items:
 
-| STAC field                                                                                                         | Desinventar field                                  | Description                                                                   |
-| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                              | level0 (lower case) + '-' + serial                 | Unique identifier combining country code and event serial                     |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries                               |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                          | Calculated from geometry                           | Bounding box of the event area                                                |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#datetime)                  | fechano, fechames, fechadia                        | Date of the event                                                             |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time) | fechano, fechames, fechadia                        | Start date of the event                                                       |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)   | fechano, fechames, fechadia + [duracion]           | End date of the event                                                         |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties)        | evento + lugar + date                              | Human-readable title combining event type and location                        |
-| [monty:episode_number](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:episode_number)                     | 1                                                  | Set to 1 as Desinventar doesn't track episodes                                |
-| [monty:country_codes](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                |
-| [monty:hazard_codes](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)          |
-| [monty:corr_id](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../event_paring.md) convention |
+| STAC field                                                                                                         | Desinventar field                                  | Description                                                                             |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                              | level0 (lower case) + '-' + serial                 | Unique identifier combining country code and event serial                               |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries                                         |
+| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                          | Calculated from geometry                           | Bounding box of the event area                                                          |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#datetime)                  | fechano, fechames, fechadia                        | Date of the event                                                                       |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time) | fechano, fechames, fechadia                        | Start date of the event                                                                 |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)   | fechano, fechames, fechadia + [duracion]           | End date of the event                                                                   |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties)        | evento + lugar + date                              | Human-readable title combining event type and location                                  |
+| [monty:episode_number](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:episode_number)                     | 1                                                  | Set to 1 as Desinventar doesn't track episodes                                          |
+| [monty:country_codes](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                          |
+| [monty:hazard_codes](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)                    |
+| [monty:corr_id](https://ifrcgo.github.io/monty/v0.1.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
 
 #### Hazard Code Mapping
 
-The following table shows how Desinventar event types map to [UNDRR-ISC Hazard Information Profiles](../../taxonomy.md#hazard):
+The following table shows how Desinventar event types map to [UNDRR-ISC Hazard Information Profiles](../../taxonomy.md#hazards):
 
 | Desinventar Event | Hazard Code | Description      |
 | ----------------- | ----------- | ---------------- |
