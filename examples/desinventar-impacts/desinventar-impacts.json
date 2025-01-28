@@ -16,6 +16,7 @@
     }
   ],
   "title": "DesInventar Impacts",
+  "license": "proprietary",
   "extent": {
     "spatial": {
       "bbox": [
