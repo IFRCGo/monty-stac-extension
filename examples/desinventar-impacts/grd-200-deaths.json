@@ -42,8 +42,8 @@
     "datetime": "1854-07-01T00:00:00Z",
     "title": "Deaths from Cholera Epidemic in Carriacou",
     "monty:impact_detail": {
-      "category": "expspec_allpeop",
-      "type": "imptypdeat",
+      "category": "people",
+      "type": "deaths",
       "value": 386,
       "unit": "count",
       "estimate_type": "primary"
