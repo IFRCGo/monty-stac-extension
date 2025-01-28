@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json",
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+  ],
+  "id": "us6000pi9w-shakemap",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      87.3608,
+      28.639
+    ]
+  },
+  "bbox": [
+    87.3608,
+    28.639,
+    87.3608,
+    28.639
+  ],
+  "properties": {
+    "datetime": "2025-01-07T01:05:16Z",
+    "title": "ShakeMap for 2025 Southern Tibetan Plateau Earthquake",
+    "description": "Ground motion and intensity map for M7.1 earthquake in Southern Tibetan Plateau",
+    "roles": [
+      "source",
+      "hazard"
+    ],
+    "monty:country_codes": [
+      "CHN"
+    ],
+    "monty:hazard_codes": [
+      "GH0004"
+    ],
+    "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+    "monty:hazard_detail": {
+      "cluster": "GEO-SEIS",
+      "severity_value": 7.1,
+      "severity_unit": "mww"
+    },
+    "eq:magnitude": 7.1,
+    "eq:magnitude_type": "mww",
+    "eq:depth": 10,
+    "eq:status": "reviewed",
+    "eq:tsunami": false,
+    "eq:sources": [
+      {
+        "name": "us",
+        "code": "6000pi9w",
+        "catalog": "USGS-NEIC"
+      }
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000pi9w-shakemap.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-hazards.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000pi9w.json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "intensity_map": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity.jpg",
+      "type": "image/jpeg",
+      "title": "Intensity Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "intensity_overlay": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity_overlay.png",
+      "type": "image/png",
+      "title": "Intensity Overlay",
+      "roles": [
+        "visual"
+      ]
+    },
+    "pga_map": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pga.jpg",
+      "type": "image/jpeg",
+      "title": "Peak Ground Acceleration Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "pgv_map": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pgv.jpg",
+      "type": "image/jpeg",
+      "title": "Peak Ground Velocity Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "mmi_contours": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/cont_mi.json",
+      "type": "application/json",
+      "title": "MMI Contours",
+      "roles": [
+        "data"
+      ]
+    },
+    "grid": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/grid.xml",
+      "type": "application/xml",
+      "title": "Ground Motion Grid",
+      "roles": [
+        "data"
+      ]
+    },
+    "uncertainty": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/uncertainty.xml",
+      "type": "application/xml",
+      "title": "Uncertainty Grid",
+      "roles": [
+        "data"
+      ]
+    },
+    "stations": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/stationlist.json",
+      "type": "application/json",
+      "title": "Station List",
+      "roles": [
+        "data"
+      ]
+    },
+    "rupture": {
+      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/rupture.json",
+      "type": "application/json",
+      "title": "Fault Rupture",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "usgs-hazards"
+}

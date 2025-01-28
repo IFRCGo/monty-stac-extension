@@ -156,36 +156,5 @@ Here is a table with the fields that are mapped from the EM-DAT event to the STA
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | start year + start month + start day                                                                         | Start date of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                            |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | start year + start month + start day                                                                         | End date of the event converted in UTC ISO 8601 format                                                                                                                                                                                                     |
 | [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                       | iso                                                                                                          | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                                                                                                                                             |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Classification Key [mapped to Hazard profile](#mapping-from-em-dat-event-type-to-hazard-profile)             | List of hazard codes converted following the [EM-DAT event type to Hazard profile mapping](#mapping-from-em-dat-event-type-to-hazard-profile)                                                                                                              |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Classification Key                                                                                           | [EN-DAT CRED Classification Key](../../taxonomy.md#em-dat-classification-tree                                                                                                                                                                              |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | graphql request                                                                                              | Link to the EM-DAT event details page                                                                                                                                                                                                                      |
-
-#### Mapping from EM-DAT event type to Hazard profile
-
-The EM-DAT event type is mapped to the hazard profile using the following table:
-
-| EM-DAT Event Type     | Hazard Profile                                 |
-| --------------------- | ---------------------------------------------- |
-| Animal incident       | BI0006, BI0007                                 |
-| Bacterial disease     | BI0010, BI0011                                 |
-| Viral disease         | BI0016, BI0017, BI0018, BI0019, BI0020         |
-| Fungal disease        | BI0013                                         |
-| Prion disease         | BI0029                                         |
-| Infestation           | BI0002, BI0003, BI0004                         |
-| Drought               | MH0035                                         |
-| Glacial lake outburst | MH0013                                         |
-| Wildfire              | EN0013                                         |
-| Forest fire           | EN0013                                         |
-| Land fire             | EN0013                                         |
-| Impact                | ET0001, ET0004                                 |
-| Space weather         | ET0002, ET0005, ET0006, ET0007                 |
-| Earthquake            | GH0001, GH0002                                 |
-| Mass movement (dry)   | GH0007                                         |
-| Volcanic activity     | GH0009, GH0010, GH0011, GH0012                 |
-| Flood                 | MH0004, MH0005, MH0006, MH0007                 |
-| Mass movement (wet)   | MH0050, MH0051, MH0052                         |
-| Wave action           | MH0022, MH0026                                 |
-| Extreme temperature   | MH0040, MH0047                                 |
-| Fog                   | MH0016                                         |
-| Storm                 | MH0053, MH0054, MH0055, MH0056, MH0057, MH0058 |
-| Industrial accident   | TL0027, TL0028, TL0029, TL0030                 |
-| Transport accident    | TL0048, TL0049, TL0050, TL0051, TL0052         |

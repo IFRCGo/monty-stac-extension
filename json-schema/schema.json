@@ -125,7 +125,13 @@
         },
         "monty:hazard_detail": {
           "type": "object",
+          "required": [
+            "cluster"
+          ],
           "properties": {
+            "cluster": {
+              "type": "string"
+            },
             "severity_value": {
               "type": "number"
             },
@@ -135,24 +141,87 @@
             "estimate_type": {
               "$ref": "#/definitions/estimate_type"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "monty:impact_detail": {
           "type": "object",
           "properties": {
             "category": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "expspec_allpeop",
+                "expspec_crop",
+                "expspec_women",
+                "expspec_men",
+                "expspec_elder",
+                "expspec_chld14",
+                "expspec_chld18",
+                "expspec_wheelch",
+                "expspec_road",
+                "expspec_trainlin",
+                "expspec_vulempl",
+                "expspec_build",
+                "expspec_reccost",
+                "expspec_hosp",
+                "expspec_educ",
+                "expspec_loccur",
+                "expspec_globdate",
+                "expspec_infloccur",
+                "expspec_infglobdate",
+                "expspec_usdunsure",
+                "expspec_cattle",
+                "expspec_aidgen",
+                "expspec_ecoifrcall",
+                "expspec_ecoifrcreq",
+                "expspec_alert"
+              ]
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "imptypunspec",
+                "imptypunaff",
+                "imptypdama",
+                "imptypdest",
+                "imptyppotdam",
+                "imptypaffe",
+                "imptypdiraffe",
+                "imptypindaffe",
+                "imptypdeat",
+                "imptypmiss",
+                "imptypinju",
+                "imptypevac",
+                "imptypereloc",
+                "imptypeassist",
+                "imptypeemshel",
+                "imptypetempacc",
+                "imptypelongacc",
+                "imptypneed",
+                "imptyptarg",
+                "imptypdisr",
+                "imptypcost",
+                "imptyphomles",
+                "imptypidp",
+                "imptypextdisp",
+                "imptypedisp",
+                "imptypalert"
+              ]
             },
             "value": {
               "type": "number"
             },
             "unit": {
               "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            },
+            "description": {
+              "type": "string"
             }
-          }
+          },
+          "additionalProperties": false
         }
       },
       "patternProperties": {
@@ -254,6 +323,9 @@
           "contains": {
             "const": "hazard"
           }
+        },
+        "monty:hazard_codes": {
+          "maxItems": 1
         }
       }
     },
