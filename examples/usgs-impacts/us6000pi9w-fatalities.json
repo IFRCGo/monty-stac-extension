@@ -36,7 +36,7 @@
     "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
     "monty:impact_detail": {
       "category": "people",
-      "type": "deaths",
+      "type": "death",
       "value": 858,
       "unit": "people",
       "estimate_type": "modelled"

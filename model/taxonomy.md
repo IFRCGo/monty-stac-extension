@@ -497,7 +497,7 @@
 
 | Exposure Category Code | Exposure Category Label                           |
 | ---------------------- | ------------------------------------------------- |
-| people             | People (All Demographics)                         |
+| people                 | People (All Demographics)                         |
 | crops                  | Crops                                             |
 | women                  | Women                                             |
 | men                    | Men                                               |
@@ -505,13 +505,13 @@
 | children_under14       | Children (Under 14)                               |
 | children_under18       | Children (Under 18)                               |
 | wheelchair_users       | Wheelchair Users                                  |
-| roads                  | Road                                              |
+| roads                  | Roads                                             |
 | railways               | Train-lines                                       |
 | vulnerable_employment  | Population in Vulnerable Employment               |
 | buildings              | Buildings                                         |
 | reconstruction_costs   | Reconstruction Costs                              |
 | hospitals              | Hospitals                                         |
-| education_centers      | Education Centers                                 |
+| schools                | Schools                                           |
 | local_currency         | Local Currency [Date of Event]                    |
 | global_currency        | Global/Regional Currency (e.g. USD)               |
 | local_currency_adj     | Inflation-Adjusted Local Currency [Date of Event] |
@@ -535,7 +535,7 @@
 | affected_total      | Total Affected                                            |
 | affected_direct     | Directly Affected                                         |
 | affected_indirect   | Indirectly Affected                                       |
-| deaths              | Deaths                                                    |
+| death               | Death                                                     |
 | missing             | Missing                                                   |
 | injured             | Injured                                                   |
 | evacuated           | Evacuated                                                 |
@@ -549,7 +549,7 @@
 | disrupted           | Disrupted                                                 |
 | cost                | Loss (Cost)                                               |
 | homeless            | Homeless                                                  |
-| idp                 | Internally Displaced Persons (IDPs)                       |
+| displaced_internal  | Internally Displaced Persons (IDPs)                       |
 | displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
 | displaced_total     | Displaced Persons (Internal & External)                   |
 | alertscore          | Alertscore                                                |

@@ -43,7 +43,7 @@
     "title": "Deaths from Cholera Epidemic in Carriacou",
     "monty:impact_detail": {
       "category": "people",
-      "type": "deaths",
+      "type": "death",
       "value": 386,
       "unit": "count",
       "estimate_type": "primary"

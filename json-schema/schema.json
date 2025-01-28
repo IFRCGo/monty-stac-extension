@@ -188,7 +188,7 @@
                 "affected_total",
                 "affected_direct",
                 "affected_indirect",
-                "deaths",
+                "death",
                 "missing",
                 "injured",
                 "evacuated",
@@ -202,7 +202,7 @@
                 "disrupted",
                 "cost",
                 "homeless",
-                "idp",
+                "displaced_internal",
                 "displaced_external",
                 "displaced_total",
                 "alertscore"
