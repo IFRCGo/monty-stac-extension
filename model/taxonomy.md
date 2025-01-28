@@ -497,59 +497,59 @@
 
 | Exposure Category Code | Exposure Category Label                           |
 | ---------------------- | ------------------------------------------------- |
-| expspec_allpeop        | People (All Demographics)                         |
-| expspec_crop           | Crops                                             |
-| expspec_women          | Women                                             |
-| expspec_men            | Men                                               |
-| expspec_elder          | Elderly (Over 65)                                 |
-| expspec_chld14         | Children (Under 14)                               |
-| expspec_chld18         | Children (Under 18)                               |
-| expspec_wheelch        | Wheelchair Users                                  |
-| expspec_road           | Road                                              |
-| expspec_trainlin       | Train-lines                                       |
-| expspec_vulempl        | Population in Vulnerable Employment               |
-| expspec_build          | Buildings                                         |
-| expspec_reccost        | Reconstruction Costs                              |
-| expspec_hosp           | Hospitals                                         |
-| expspec_educ           | Education Centers                                 |
-| expspec_loccur         | Local Currency [Date of Event]                    |
-| expspec_globdate       | Global/Regional Currency (e.g. USD)               |
-| expspec_infloccur      | Inflation-Adjusted Local Currency [Date of Event] |
-| expspec_infglobdate    | Inflation-Adjusted Global/Regional Currency (USD) |
-| expspec_usdunsure      | USD [Unsure]                                      |
-| expspec_cattle         | Cattle                                            |
-| expspec_aidgen         | General Aid Contributions                         |
-| expspec_ecoifrcall     | IFRC Appeal Contribution                          |
-| expspec_ecoifrcreq     | IFRC Appeal Requested                             |
-| expspec_alert          | Alertscore                                        |
+| people             | People (All Demographics)                         |
+| crops                  | Crops                                             |
+| women                  | Women                                             |
+| men                    | Men                                               |
+| elderly                | Elderly (Over 65)                                 |
+| children_under14       | Children (Under 14)                               |
+| children_under18       | Children (Under 18)                               |
+| wheelchair_users       | Wheelchair Users                                  |
+| roads                  | Road                                              |
+| railways               | Train-lines                                       |
+| vulnerable_employment  | Population in Vulnerable Employment               |
+| buildings              | Buildings                                         |
+| reconstruction_costs   | Reconstruction Costs                              |
+| hospitals              | Hospitals                                         |
+| education_centers      | Education Centers                                 |
+| local_currency         | Local Currency [Date of Event]                    |
+| global_currency        | Global/Regional Currency (e.g. USD)               |
+| local_currency_adj     | Inflation-Adjusted Local Currency [Date of Event] |
+| global_currency_adj    | Inflation-Adjusted Global/Regional Currency (USD) |
+| usd_uncertain          | USD [Unsure]                                      |
+| cattle                 | Cattle                                            |
+| aid_general            | General Aid Contributions                         |
+| ifrc_contribution      | IFRC Appeal Contribution                          |
+| ifrc_requested         | IFRC Appeal Requested                             |
+| alertscore             | Alertscore                                        |
 
 ### Impact Type
 
-| Impact Type Code | Impact Type Label                                         |
-| ---------------- | --------------------------------------------------------- |
-| imptypunspec     | Unspecified                                               |
-| imptypunaff      | Unaffected                                                |
-| imptypdama       | Damaged                                                   |
-| imptypdest       | Destroyed                                                 |
-| imptyppotdam     | Potentially Damaged                                       |
-| imptypaffe       | Total Affected                                            |
-| imptypdiraffe    | Directly Affected                                         |
-| imptypindaffe    | Indirectly Affected                                       |
-| imptypdeat       | Deaths                                                    |
-| imptypmiss       | Missing                                                   |
-| imptypinju       | Injured                                                   |
-| imptypevac       | Evacuated                                                 |
-| imptypereloc     | Relocated                                                 |
-| imptypeassist    | Assisted (Recieved Aid/Support)                           |
-| imptypeemshel    | Emergency Sheltered                                       |
-| imptypetempacc   | Temporary Accommodated                                    |
-| imptypelongacc   | Long-Term Accommodated                                    |
-| imptypneed       | In Need                                                   |
-| imptyptarg       | Targeted                                                  |
-| imptypdisr       | Disrupted                                                 |
-| imptypcost       | Loss (Cost)                                               |
-| imptyphomles     | Homeless                                                  |
-| imptypidp        | Internally Displaced Persons (IDPs)                       |
-| imptypextdisp    | Refugees, Asylum Seekers and Externally Displaced Persons |
-| imptypedisp      | Displaced Persons (Internal & External)                   |
-| imptypalert      | Alertscore                                                |
+| Impact Type Code    | Impact Type Label                                         |
+| ------------------- | --------------------------------------------------------- |
+| unspecified         | Unspecified                                               |
+| unaffected          | Unaffected                                                |
+| damaged             | Damaged                                                   |
+| destroyed           | Destroyed                                                 |
+| potentially_damaged | Potentially Damaged                                       |
+| affected_total      | Total Affected                                            |
+| affected_direct     | Directly Affected                                         |
+| affected_indirect   | Indirectly Affected                                       |
+| deaths              | Deaths                                                    |
+| missing             | Missing                                                   |
+| injured             | Injured                                                   |
+| evacuated           | Evacuated                                                 |
+| relocated           | Relocated                                                 |
+| assisted            | Assisted (Recieved Aid/Support)                           |
+| shelter_emergency   | Emergency Sheltered                                       |
+| shelter_temporary   | Temporary Accommodated                                    |
+| shelter_longterm    | Long-Term Accommodated                                    |
+| in_need             | In Need                                                   |
+| targeted            | Targeted                                                  |
+| disrupted           | Disrupted                                                 |
+| cost                | Loss (Cost)                                               |
+| homeless            | Homeless                                                  |
+| idp                 | Internally Displaced Persons (IDPs)                       |
+| displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
+| displaced_total     | Displaced Persons (Internal & External)                   |
+| alertscore          | Alertscore                                                |
