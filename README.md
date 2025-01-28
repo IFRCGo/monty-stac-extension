@@ -42,14 +42,14 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
-| -------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event.                                                                                                                                                                                                                                                                                                                   |
-| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                                                                                                                                    |
-| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/event_paring.md) page.                                                                                                                                                    |
-| monty:hazard_codes   | \[string]                                   | The hazard codes of the hazards affecting the event. The hazard code follows the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier. The possible values are defined in [this table](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles). For compatibility purpose, the array MAY also contains other code from another domain (e.g. `FL` for flood) |
-| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                                                                                                                                                                                                                                              |
-| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact.                                                                                                                                                                                                                                                                                                                                                                                              |
+| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event.                                                                                                                                                                                                                                                                                               |
+| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format.                                                                                                                                                                                |
+| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/correlation_identifier.md) page.                                                                                                                      |
+| monty:hazard_codes   | \[string]                                   | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least the codes from the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier and [EM_DAT CRED Classification Key](https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree). |
+| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard.                                                                                                                                                                                                                                                                                                                                                                          |
+| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact.                                                                                                                                                                                                                                                                                                                                                                          |
 
 > [!NOTE]  
 > Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
@@ -90,9 +90,19 @@ It must at least contain the countries intersected by the item's geometry.
 
 ##### monty:hazard_codes
 
-It is a list of hazard codes of the hazards concerned by the item.
-The hazard code SHOULD follow the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier.
-With that identifier, it is possible to derive a set of additional properties associated with the hazard:
+It is a list of hazard codes of the hazards concerned by the item. Theere are multiple various classification systems for hazards so the field is open to any code.
+
+Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](./model/taxonomy.md#hazards) 
+and then to include their other system counterparts following the [rosswalk classification systems mapping](./model/taxonomy.md#cross-classification-mapping) to enforce interoperability.
+
+Tables with the possible values are available in the [hazard section of the taxonomy](./model/taxonomy.md#hazards) with:
+
+- [UNDRR-ISC 2020 Hazard Information Profiles](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
+- [EM_DAT CRED Classification Key](./model/taxonomy.md#em-dat-cred-classification-tree)
+- [GLIDE classification](./model/taxonomy.md#glide-classification)
+- [A crosswalk classification systems mapping](./model/taxonomy.md#cross-classification-mapping)
+
+With those codes, it is possible to derive a set of additional properties associated with the hazard:
 
 - The name of the hazard
 - The type of the hazard
@@ -101,27 +111,28 @@ With that identifier, it is possible to derive a set of additional properties as
 
 for which a human-readable keyword can be generated and stored in the `keywords` field.
 
-> [!NOTE]
-> For compatibility purpose, the array MAY also contains other code from another domain (e.g. `FL` for flood).
+> [!IMPORTANT]
+> [Hazard items](#hazard) **MUST** have a **single** `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
+> the event [correlation process](./model/correlation_identifier.md).
 
 ##### monty:corr_id
 
-It is the unique identifier assigned by the Monty system to the reference event.
-This correlation identifier is critical to associate the events to the reference event.
-Each source event MUST have one in order to make a search of the source events efficiently.
-A source event should also contain a [`reference-event` link](#relation-types) to the reference event.
+It is the unique identifier assigned by the Monty system to every item in the system.
+This correlation identifier is critical to associate event, hazard, impact and response items together.
+Each item *MUST* have one.
+More information about the correlation identifier is available in the [event correlation](./model/correlation_identifier.md) page.
 
 ##### monty:hazard_detail
 
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following fields are available in the object:
 
-| Field Name     | Type   | Description                                                                                                          |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazard). |
-| severity_value | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.                     |
-| severity_unit  | string | The unit of the max_value.                                                                                           |
-| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                             |
+| Field Name     | Type   | Description                                                                                                           |
+| -------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazards). |
+| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.         |
+| severity_unit  | string | **REQUIRED** The unit of the max_value.                                                                               |
+| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`.                              |
 
 ##### monty:impact_detail
 
@@ -181,7 +192,7 @@ The table below describes the rules for the core fields in the representation of
 The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
 The global crisis data bank records multiple instances of events that are related to a single event:
 
-- One **unique reference** event that is used to "[pair](model/event_paring.md)" all the instances of the event
+- One **unique reference** event that is used to "[pair](model/correlation_identifier.md)" all the instances of the event
 - Multiple instances of the event that are recorded for different sources. Each source event **MUST** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
   - A link to the resource from which the event was sourced with
@@ -214,8 +225,8 @@ More detail on the field definition is available in the [Montandon model analysi
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
 property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
 
-In the Monty model, a hazard is **ALWAYS** linked to an event and per event, hazards are recorded from multiple sources.
-Therefore, a hazard item **MUST** have at least one link with the [relationship type](#relation-types) `reference-event`.
+In the Monty model, a hazard is **ALWAYS** linked to one or multiple event(s) and each event **MUST** be linked to at least one hazard.
+Therefore, a hazard item **MUST** have at least one link with the [relationship type](#relation-types) `source-event`.
 It is also recommended to have a link with the relationship type `source-event` pointing to the event of the same source if available.
 
 An hazard object **MUST** have the [`monty:hazard_detail`](#montyhazard_detail) field with all the details of the hazard.
@@ -223,6 +234,10 @@ An hazard object **MUST** have the [`monty:hazard_detail`](#montyhazard_detail) 
 Hazards may be linked between each others.
 This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a `*-hazard` [relationship](#relation-types).
 The link may also have specific `occ-*` [attributes](#link-attributes) to describe the occurrence of the linked hazard.
+
+> [!IMPORTANT]
+> [Hazard items](#hazard) MUST have a single `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
+> the event correlation process.
 
 ### Impact
 
