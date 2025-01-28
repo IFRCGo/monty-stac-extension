@@ -138,6 +138,9 @@
             "severity_unit": {
               "type": "string"
             },
+            "severity_label": {
+              "type": "string"
+            },
             "estimate_type": {
               "$ref": "#/definitions/estimate_type"
             }
@@ -174,7 +177,8 @@
                 "aid_general",
                 "ifrc_contribution",
                 "ifrc_requested",
-                "alertscore"
+                "alertscore",
+                "total_affected"
               ]
             },
             "type": {
