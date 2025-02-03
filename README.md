@@ -42,14 +42,14 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event |
-| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format |
-| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/correlation_identifier.md) page |
+| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                                                                                               |
+| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                                                                                                |
+| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/correlation_identifier.md) page                                                                                                                      |
 | monty:hazard_codes   | \[string]                                   | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least the codes from the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) identifier and [EM_DAT CRED Classification Key](https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree) |
-| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard |
-| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact |
+| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                                                                                                                                          |
+| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                                                                                                                                          |
 
 > [!NOTE]  
 > Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
@@ -58,24 +58,24 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 A set of roles are defined to describe the type of the data. The following roles are defined:
 
-| Role      | Description                    |
-| --------- | ------------------------------ |
-| event     | The data is an event |
+| Role      | Description                   |
+| --------- | ----------------------------- |
+| event     | The data is an event          |
 | reference | The data is a reference event |
-| source    | The data is a source event |
-| hazard    | The data is a hazard |
-| impact    | The data is an impact |
-| response  | The data is a response |
+| source    | The data is a source event    |
+| hazard    | The data is a hazard          |
+| impact    | The data is an impact         |
+| response  | The data is a response        |
 
 The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item. This is useful to find exactly the item needed. For instance, to find the reference event of a data, a link with both `event` and `reference` roles is needed.
 
 ### Link Attributes
 
-| Field Name  | Type   | Description                                                                                                         |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
-| occ_type    | string | The type of the occurrence. It can be one of the following values: `known`, `potential` |
+| Field Name  | Type   | Description                                                                                                        |
+| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| occ_type    | string | The type of the occurrence. It can be one of the following values: `known`, `potential`                            |
 | occ_prob    | string | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`) |
-| occ_probdef | uri    | It is a link to the definition of the probability for the hazard relationship |
+| occ_probdef | uri    | It is a link to the definition of the probability for the hazard relationship                                      |
 
 #### Additional Field Information
 
@@ -127,25 +127,25 @@ More information about the correlation identifier is available in the [event cor
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following fields are available in the object:
 
-| Field Name     | Type   | Description                                                                                                           |
-| -------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| Field Name     | Type   | Description                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazards) |
-| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units |
-| severity_unit  | string | **REQUIRED** The unit of the max_value |
-| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled` |
+| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
+| severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
+| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
 
 ##### monty:impact_detail
 
 It is an object that contains the details of the impact estimate. Preferably used only in an Impact item.
 
-| Field Name    | Type   | Description                                                                                                                                                                                                              |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Field Name    | Type   | Description                                                                                                                                                                                                             |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](./model/taxonomy.md#exposure-category) |
-| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type) |
-| value         | number | **REQUIRED** The estimated impact value, as a number, without the units |
-| unit          | string | The units of the impact estimate |
-| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled` |
-| description   | string | The description of the impact |
+| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type)                                                                                   |
+| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                 |
+| unit          | string | The units of the impact estimate                                                                                                                                                                                        |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                 |
+| description   | string | The description of the impact                                                                                                                                                                                           |
 
 ## Relation types
 
@@ -154,14 +154,14 @@ The following types should be used as applicable `rel` types in the
 
 | Type                | Description                                                                                                        |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| reference-event     | This link points to the reference event |
-| source-event        | This link points to the source event |
-| related-hazard      | This link points to a related hazard. For example, a flood related to the event |
-| related-impact      | This link points to a related impact. For example, a flood related to the impact |
-| triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide |
-| triggered-by-hazard | This link points to the hazard that triggered this hazard. For example, an earthquake that triggered a landslide |
+| reference-event     | This link points to the reference event                                                                            |
+| source-event        | This link points to the source event                                                                               |
+| related-hazard      | This link points to a related hazard. For example, a flood related to the event                                    |
+| related-impact      | This link points to a related impact. For example, a flood related to the impact                                   |
+| triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide                            |
+| triggered-by-hazard | This link points to the hazard that triggered this hazard. For example, an earthquake that triggered a landslide   |
 | concurrent-hazard   | This link points to a concurrent hazard. For example, thunderstorms can occur together with windstorms or cyclones |
-| complex-hazard      | This link points to a complex hazard when the relationship between the hazards is complex |
+| complex-hazard      | This link points to a complex hazard when the relationship between the hazards is complex                          |
 
 ## Event
 
@@ -182,11 +182,11 @@ The table below describes the rules for the core fields in the representation of
 
 | Field Name            | Description                                                                                                                                                                                                                         |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                    | The unique identifier for the event assigned by the issuer (source) of the event |
-| geometry              | Defines the location of the event, formatted according to RFC 7946. It is highly recommended to use a point |
+| id                    | The unique identifier for the event assigned by the issuer (source) of the event                                                                                                                                                    |
+| geometry              | Defines the location of the event, formatted according to RFC 7946. It is highly recommended to use a point                                                                                                                         |
 | **properties object** |                                                                                                                                                                                                                                     |
-| title                 | The name of the event assigned by the issuer (source) of the event |
-| roles                 | It MUST include the `event` role. The reference event MUST also contain `reference` |
+| title                 | The name of the event assigned by the issuer (source) of the event                                                                                                                                                                  |
+| roles                 | It MUST include the `event` role. The reference event MUST also contain `reference`                                                                                                                                                 |
 | keywords              | A list of keywords that describe the event. This list includes the human-readable names of<br/>- the countries affected by the event<br/>- the hazard types affecting the event<br/>- Any additional useful keyword from the source |
 
 The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
@@ -204,15 +204,15 @@ The global crisis data bank records multiple instances of events that are relate
 
 The table below describes the rules for the core fields in the representation of a data (Hazard, Impact or Response).
 
-| Field Name            | Description                                                                                                                  |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| id                    | The unique identifier for the data assigned by the issuer (source) of the data |
-| geometry              | Defines the location of the data, formatted according to RFC 7946 |
-| **properties object** |                                                                                                                              |
-| title                 | The name of the data assigned by the issuer (source) of the data |
-| roles                 | It MUST include the data type role: `hazard`, `impact` or `response` |
+| Field Name            | Description                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| id                    | The unique identifier for the data assigned by the issuer (source) of the data                                              |
+| geometry              | Defines the location of the data, formatted according to RFC 7946                                                           |
+| **properties object** |                                                                                                                             |
+| title                 | The name of the data assigned by the issuer (source) of the data                                                            |
+| roles                 | It MUST include the data type role: `hazard`, `impact` or `response`                                                        |
 | keywords              | A list of keywords that describe the data. This list includes the human-readable names of any codification used in the item |
-| created               | The date and time of the creation of the data by the issuer (source) of the data |
+| created               | The date and time of the creation of the data by the issuer (source) of the data                                            |
 
 ### Hazard
 
