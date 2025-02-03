@@ -5,9 +5,9 @@
   "description": "Impact records from the DesInventar disaster loss database",
   "links": [
     {
-        "rel": "self",
-        "href": "desinventar-impacts.json",
-        "type": "application/json"
+      "rel": "self",
+      "href": "desinventar-impacts.json",
+      "type": "application/json"
     },
     {
       "rel": "root",
