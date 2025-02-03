@@ -51,9 +51,6 @@ The fields in the sections below can be used in these parts of STAC documents:
 | monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                     |
 | monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                     |
 
-> [!NOTE]  
-> Either `monty:hazard_codes` OR `monty:hazard_detail` MUST be present in the item.
-
 ### Roles
 
 A set of roles are defined to describe the type of the data. The following roles are defined:
