@@ -13,7 +13,7 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Source Type: International Non-Governmental Organization
 - Source organization email: <info@idmc.ch>
 - Source URL: <https://www.internal-displacement.org/database>
-- Source Data license: [TBD]
+- Source Data license: \[TBD]
 - Source for: event
 - API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
@@ -99,7 +99,7 @@ The following table shows how IDMC event fields map to STAC Item fields:
 | [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                          | country_iso3                                                                                 | Yes      | Direct mapping to array                                                            |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                               | {Hazard Category} and {Hazard Type}                                                          | Yes      | Map using the [hazard type mapping](#hazard-type-mapping)                          |
 | [monty:hazard_codes](../../../README.md#montyepisode_number                                                              |                                                                                              | Yes      | Always 1 (IDMC doesn't track episodes)                                             |
-| [monty:corr_id](../../../README.md#montycorr_id)                                                                         | id                                                                                           | Yes      | Generated following the [event pairing procedure](../../event_paring.md)           |
+| [monty:corr_id](../../../README.md#montycorr_id)                                                                         | id                                                                                           | Yes      | Generated following the [event pairing procedure](../../correlation_identifier.md) |
 
 ### Displacement items geometry aggregagtion for event geometry
 

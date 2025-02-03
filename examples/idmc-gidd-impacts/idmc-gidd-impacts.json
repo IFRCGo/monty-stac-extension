@@ -26,26 +26,61 @@
       "title": "Internal Displacements of People for Syria, Türkiye: Earthquake - 06/02/2023"
     }
   ],
-  "stac_extensions": [],
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
   "title": "IDMC GIDD Impacts",
   "extent": {
     "spatial": {
       "bbox": [
-        [-180, -90, 180, 90]
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
       ]
     },
     "temporal": {
       "interval": [
-        ["2008-01-01T00:00:00Z", null]
+        [
+          "2008-01-01T00:00:00Z",
+          null
+        ]
       ]
     }
+  },
+  "roles": [
+    "impact",
+    "source"
+  ],
+  "summaries": {
+    "datetime": {
+      "minimum": "2008-01-01T00:00:00Z",
+      "maximum": "2025-01-23T00:00:00Z"
+    },
+    "roles": [
+      "impact",
+      "source"
+    ],
+    "monty:country_codes": [
+      "SYR"
+    ],
+    "monty:hazard_codes": [
+      "nat-met-sto-tro",
+      "nat-hyd-flo-flo"
+    ]
   },
   "license": "TBD",
   "providers": [
     {
       "name": "Internal Displacement Monitoring Centre",
       "description": "The Internal Displacement Monitoring Centre (IDMC) maintains the Global Internal Displacement Database (GIDD), providing comprehensive information on global internal displacement",
-      "roles": ["producer", "processor", "licensor"],
+      "roles": [
+        "producer",
+        "processor",
+        "licensor"
+      ],
       "url": "https://www.internal-displacement.org"
     }
   ]
