@@ -67,68 +67,56 @@ classDiagram
         +hazard_codes: string[]
     }
 
-    Item <|-- Event
+    MontyData <|-- Event
 
-    class Data {
-        +ref_event_id: string
-        +source_event_id: string
-        +source: string
+    class MontyData {
+        +corr_id: string
+        +collection: string
     }
 
-    Item <|-- Data
+    Item <|-- MontyData
 
-    class ReferenceEvent["Reference Event"] {
-    }
-
-    class SourceEvent["Source Event"] {
-        +correlation_id: string
-    }
-
-    Data "0..*" --> "1" ReferenceEvent : is related to
-    Data "0..*" --> "0" SourceEvent : is associated with
-
-    Event <|-- ReferenceEvent
-    Event <|-- SourceEvent
-    SourceEvent "1..*" --> "1" ReferenceEvent : is paired with
+    MontyData "0..*" --> "1" Event : is associated with
 
     class Hazard {
         +hazard_detail: HazardDetail[]
     }
 
-    Hazard --|> Data
+    Hazard --|> MontyData
 
     class Impact {
         +impact_detail: ImpactDetail[]
     }
 
-    Impact --|> Data
-    Impact "0..*" --> "1" Hazard : is the effect of
+    Impact --|> MontyData
+    Impact "0..*" --> "1..*" Hazard : is the effect of
 
     class Response {
     }
 
-    Response --|> Data
+    Response --|> MontyData
     
     class HazardDetail {
-        +codes: string[]
-        +max_value: number
-        +max_unit: string
+        +severity_value: number
+        +severity_unit: string
         +estimate_type: string
     }
 
     HazardDetail --* Hazard
     
-    class HazardProfile["UNDRR-ISC 2020\nHazard Information Profiles"] {
+    class HazardCode {
         +code: string
         +name: string
+        +group: string
+        +subgroup: string
         +type: string
-        +cluster: string
+        +subtype: string
     }
 
-    Event "*" --> "*" HazardProfile : has
-    HazardDetail "*" --> "*" HazardProfile : is defined by
+    Event "*" --> "*" HazardCode : has
+    HazardDetail "*" --> "1" HazardCode : is defined by
 
-    link HazardProfile "https://www.preventionweb.net/drr-glossary/hips"
+    link HazardCode "./taxonomy#hazards" "See hazard codes in the taxonomy"
 
     class ac["&ZeroWidthSpace;"] ::: invisible
     Hazard "0..*" -- ac : is concurrent with
@@ -151,6 +139,7 @@ classDiagram
     }
 
     ImpactDetail --* Impact
+    Impact "*" --> "*" HazardCode : has
 
     
 ```
@@ -184,9 +173,8 @@ The event class has the following attributes:
 - **country_codes**: The country codes of the countries affected by the event.
   The country codes are based on the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard.
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
-  The hazard codes are based on the [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips). [See hazard codes in the taxonomy](https://github.com/IFRCGo/monty-stac-extension/blob/main/model/taxonomy.md#hazard)
-- **correlation_id**: The unique identifier assigned by the Monty system to the reference event.
-  It is used to "pair" all the instances of the event.
+  The hazard codes are based on the [multiple classification systems](./taxonomy.md#hazards)
+- **correlation_id**: The unique identifier assigned by the Monty system to the reference event.  It is used to "pair" all the instances of the event. More information about the correlation identifier can be found [here](./correlation_identifier.md).
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
   - the countries affected by the event
   - the hazard types affecting the event
@@ -195,6 +183,7 @@ The event class has the following attributes:
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
 In the Monty model, a hazard is always linked to an event and as per event, every hazard is recorded from multiple sources.
+A hazard can be observed or forecasted and **MUST** contains details on its severity or magnitude.
 
 The hazard class has the following attributes:
 
@@ -208,9 +197,8 @@ The hazard class has the following attributes:
 - **source_event_id**: The identifier of the source event to which is associated the hazard. **OPTIONAL**
 - **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this data.
 - **hazard_detail**: A detailed description of the hazard including:
-  - **codes**: The hazard codes defining the hazard.
-  - **max_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
-  - **max_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
+  - **severity_value**: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.
+  - **severity_unit**: The unit of the estimated maximum hazard intensity/magnitude/severity value.
   - **estimate_type**: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:
     - Primary data
     - Secondary data

@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "grd-194",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -61.80208099999999,
+          11.98430500000012
+        ],
+        [
+          -61.80208099999999,
+          12.54013800000007
+        ],
+        [
+          -61.3781919999999,
+          12.54013800000007
+        ],
+        [
+          -61.3781919999999,
+          11.98430500000012
+        ],
+        [
+          -61.80208099999999,
+          11.98430500000012
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -61.80208099999999,
+    11.98430500000012,
+    -61.3781919999999,
+    12.54013800000007
+  ],
+  "properties": {
+    "datetime": "2012-08-03T00:00:00Z",
+    "title": "Tropical Storm Ernesto in Grenada",
+    "description": "Tropical Storm Watch issued but tropical storm conditions not experienced",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "GRD"
+    ],
+    "monty:hazard_codes": [
+      "MH0057"
+    ],
+    "monty:corr_id": "20120803T000000Z-GRD-MH-STORM-001-GCDB",
+    "roles": [
+      "event",
+      "source"
+    ]
+  },
+  "assets": {},
+  "collection": "desinventar-events",
+  "links": [
+    {
+      "rel": "collection",
+      "href": "../desinventar-events.json",
+      "type": "application/json",
+      "title": "Desinventar Events"
+    }
+  ]
+}

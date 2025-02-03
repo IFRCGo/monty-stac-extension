@@ -125,34 +125,107 @@
         },
         "monty:hazard_detail": {
           "type": "object",
+          "required": [
+            "cluster"
+          ],
           "properties": {
+            "cluster": {
+              "type": "string"
+            },
             "severity_value": {
               "type": "number"
             },
             "severity_unit": {
               "type": "string"
             },
+            "severity_label": {
+              "type": "string"
+            },
             "estimate_type": {
               "$ref": "#/definitions/estimate_type"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "monty:impact_detail": {
           "type": "object",
           "properties": {
             "category": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "people",
+                "crops",
+                "women",
+                "men",
+                "elderly",
+                "children_under14",
+                "children_under18",
+                "wheelchair_users",
+                "roads",
+                "railways",
+                "vulnerable_employment",
+                "buildings",
+                "reconstruction_costs",
+                "hospitals",
+                "education_centers",
+                "local_currency",
+                "global_currency",
+                "local_currency_adj",
+                "global_currency_adj",
+                "usd_uncertain",
+                "cattle",
+                "aid_general",
+                "ifrc_contribution",
+                "ifrc_requested",
+                "alertscore",
+                "total_affected"
+              ]
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "unspecified",
+                "unaffected",
+                "damaged",
+                "destroyed",
+                "potentially_damaged",
+                "affected_total",
+                "affected_direct",
+                "affected_indirect",
+                "death",
+                "missing",
+                "injured",
+                "evacuated",
+                "relocated",
+                "assisted",
+                "shelter_emergency",
+                "shelter_temporary",
+                "shelter_longterm",
+                "in_need",
+                "targeted",
+                "disrupted",
+                "cost",
+                "homeless",
+                "displaced_internal",
+                "displaced_external",
+                "displaced_total",
+                "alertscore"
+              ]
             },
             "value": {
               "type": "number"
             },
             "unit": {
               "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            },
+            "description": {
+              "type": "string"
             }
-          }
+          },
+          "additionalProperties": false
         }
       },
       "patternProperties": {
@@ -254,6 +327,9 @@
           "contains": {
             "const": "hazard"
           }
+        },
+        "monty:hazard_codes": {
+          "maxItems": 1
         }
       }
     },

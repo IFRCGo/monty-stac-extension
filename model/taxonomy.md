@@ -1,8 +1,92 @@
-# Taxonomy Tables
+# Taxonomy
 
-## Common
+## Hazards
 
-## Hazard
+### GLIDE Classification
+
+| Code | Description            |
+| ---- | ---------------------- |
+| CW   | Cold Wave              |
+| CE   | Complex Emergency      |
+| DR   | Drought                |
+| EQ   | Earthquake             |
+| EP   | Epidemic               |
+| EC   | Extra-tropical Cyclone |
+| FR   | Fire                   |
+| FF   | Flash Flood            |
+| FL   | Flood                  |
+| HT   | Heat Wave              |
+| IN   | Insect Infestation     |
+| LS   | Land Slide             |
+| MS   | Mud Slide              |
+| OT   | Other                  |
+| ST   | Severe Local Storm     |
+| AV   | Snow Avalanche         |
+| SS   | Storm Surge            |
+| AC   | Tech. Disaster         |
+| TO   | Tornadoes              |
+| TC   | Tropical Cyclone       |
+| TS   | Tsunami                |
+| VW   | Violent Wind           |
+| VO   | Volcano                |
+| WF   | Wild fire              |
+
+### [EM-DAT CRED Classification Tree](https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree)
+
+| Classification Key | Group         | Subgroup               | Type                  | Subtype                     |
+| ------------------ | ------------- | ---------------------- | --------------------- | --------------------------- |
+| nat-geo-ear-gro    | Natural       | Geophysical            | Earthquake            | Ground movement             |
+| nat-geo-ear-tsu    | Natural       | Geophysical            | Earthquake            | Tsunami                     |
+| nat-geo-mmd-roc    | Natural       | Geophysical            | Mass Movement (dry)   | Rockfall (dry)              |
+| nat-geo-mmd-lan    | Natural       | Geophysical            | Mass Movement (dry)   | Landslide (dry)             |
+| nat-geo-mmd-ava    | Natural       | Geophysical            | Mass Movement (dry)   | Avalanche (dry)             |
+| nat-geo-mmd-sub    | Natural       | Geophysical            | Mass Movement (dry)   | Sudden Subsidence (dry)     |
+| nat-geo-vol-ash    | Natural       | Geophysical            | Volcanic Activity     | Ash fall                    |
+| nat-geo-vol-lah    | Natural       | Geophysical            | Volcanic Activity     | Lahar                       |
+| nat-geo-vol-pyr    | Natural       | Geophysical            | Volcanic Activity     | Pyroclastic flow            |
+| nat-geo-vol-lav    | Natural       | Geophysical            | Volcanic Activity     | Lava flow                   |
+| nat-met-ext-hea    | Natural       | Meteorological         | Extreme Temperature   | Heat wave                   |
+| nat-met-ext-col    | Natural       | Meteorological         | Extreme Temperature   | Cold wave                   |
+| nat-met-ext-sev    | Natural       | Meteorological         | Extreme Temperature   | Severe winter conditions    |
+| nat-met-fog-fog    | Natural       | Meteorological         | Fog                   | Fog                         |
+| nat-met-sto-tro    | Natural       | Meteorological         | Storm                 | Tropical cyclone            |
+| nat-met-sto-ext    | Natural       | Meteorological         | Storm                 | Extra-tropical storm        |
+| nat-met-sto-der    | Natural       | Meteorological         | Storm                 | Derecho                     |
+| nat-hyd-flo-flo    | Natural       | Hydrological           | Flood                 | Flood                       |
+| nat-hyd-flo-coa    | Natural       | Hydrological           | Flood                 | Coastal flood               |
+| nat-hyd-flo-riv    | Natural       | Hydrological           | Flood                 | Riverine flood              |
+| nat-hyd-flo-fla    | Natural       | Hydrological           | Flood                 | Flash flood                 |
+| nat-hyd-flo-ice    | Natural       | Hydrological           | Flood                 | Ice jam flood               |
+| nat-hyd-mmw-lan    | Natural       | Hydrological           | Mass Movement (wet)   | Landslide (wet)             |
+| nat-hyd-wav-rog    | Natural       | Hydrological           | Wave Action           | Rogue wave                  |
+| nat-cli-dro-dro    | Natural       | Climatological         | Drought               | Drought                     |
+| nat-cli-glo-glo    | Natural       | Climatological         | Glacial Lake Outburst | Glacial lake outburst flood |
+| nat-cli-wil-for    | Natural       | Climatological         | Wildfire              | Forest fire                 |
+| nat-cli-wil-lan    | Natural       | Climatological         | Wildfire              | Land fire                   |
+| nat-bio-ani-ani    | Natural       | Biological             | Animal Incident       | Animal incident             |
+| nat-bio-epi-vir    | Natural       | Biological             | Epidemic              | Viral disease               |
+| nat-bio-epi-bac    | Natural       | Biological             | Epidemic              | Bacterial disease           |
+| nat-bio-epi-par    | Natural       | Biological             | Epidemic              | Parasitic disease           |
+| nat-bio-epi-fun    | Natural       | Biological             | Epidemic              | Fungal disease              |
+| nat-bio-epi-pri    | Natural       | Biological             | Epidemic              | Prion disease               |
+| nat-bio-inf-loc    | Natural       | Biological             | Infestation           | Locust infestation          |
+| nat-ext-imp-air    | Natural       | Extraterrestrial       | Impact                | Airburst                    |
+| nat-ext-spa-geo    | Natural       | Extraterrestrial       | Space Weather         | Geomagnetic storm           |
+| tec-ind-che-che    | Technological | Industrial Accident    | Chemical Spill        | Chemical spill              |
+| tec-ind-col-col    | Technological | Industrial Accident    | Collapse              | Collapse (Industrial)       |
+| tec-ind-exp-exp    | Technological | Industrial Accident    | Explosion             | Explosion (Industrial)      |
+| tec-ind-fir-fir    | Technological | Industrial Accident    | Fire                  | Fire (Industrial)           |
+| tec-ind-gas-gas    | Technological | Industrial Accident    | Gas Leak              | Gas leak                    |
+| tec-ind-oil-oil    | Technological | Industrial Accident    | Oil Spill             | Oil spill                   |
+| tec-ind-poi-poi    | Technological | Industrial Accident    | Poisoning             | Poisoning                   |
+| tec-ind-rad-rad    | Technological | Industrial Accident    | Radiation             | Radiation                   |
+| tec-tra-air-air    | Technological | Transport              | Air                   | Air                         |
+| tec-tra-rai-rai    | Technological | Transport              | Rail                  | Rail                        |
+| tec-tra-roa-roa    | Technological | Transport              | Road                  | Road                        |
+| tec-tra-wat-wat    | Technological | Transport              | Water                 | Water                       |
+| tec-mis-col-col    | Technological | Miscellaneous Accident | Collapse              | Collapse (Miscellaneous)    |
+| tec-mis-exp-exp    | Technological | Miscellaneous Accident | Explosion             | Explosion (Miscellaneous)   |
+| tec-mis-fir-fir    | Technological | Miscellaneous Accident | Fire                  | Fire (Miscellaneous)        |
 
 ### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
 
@@ -312,67 +396,160 @@
 | SO0007      | Stampede or Crushing (Human)                                                                                                                           | SOC-BEH          | Behavioural                                                       | Societal                     |
 | SO0008      | Financial shock                                                                                                                                        | SOC-ECO          | Economic                                                          | Societal                     |
 
+### Cross-Classification Mapping
+
+| GLIDE Code | EM-DAT Classification Key | Notes                                   | UNDRR-ISC Hazard Code |
+| ---------- | ------------------------- | --------------------------------------- | --------------------- |
+| CW         | nat-met-ext-col           | Cold wave                               | MH0040                |
+| DR         | nat-cli-dro-dro           | Drought                                 | MH0035                |
+| EQ         | nat-geo-ear-gro           | Earthquake                              | GH0001                |
+| EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0002                |
+| EP         | nat-bio-epi-vir           | Viral diseases                          | BI0016                |
+| EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0016                |
+| EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0016                |
+| EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0016                |
+| EP         | nat-bio-epi-pri           | Prion diseases                          | BI0016                |
+| EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0031                |
+| EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0099                |
+| FR         | tec-ind-fir-fir           | Industrial fire                         | TL0032                |
+| FR         | tec-mis-fir-fir           | Miscellaneous fire                      | TL0032                |
+| FF         | nat-hyd-flo-fla           | Flash flood                             | MH0006                |
+| FL         | nat-hyd-flo-riv           | Riverine flood                          | MH0007                |
+| FL         | nat-hyd-flo-coa           | Coastal flood                           | MH0004                |
+| FL         | nat-hyd-flo-flo           | General flood                           | MH0012                |
+| FL         | nat-hyd-flo-ice           | Ice jam flood                           | MH0009                |
+| FL         | nat-cli-glo-glo           | Glacial lake outburst flood             | MH0013                |
+| FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0008                |
+| FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0010                |
+| FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0011                |
+| HT         | nat-met-ext-hea           | Heat wave                               | MH0047                |
+| IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0002                |
+| IN         | nat-bio-inf-loc           | Locust infestation                      | BI0003                |
+| LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0007                |
+| LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0014                |
+| MS         | nat-hyd-mmw-lan           | Mud flow/slide                          | MH0051                |
+| ST         | nat-met-sto-tro           | Severe local storm                      | MH0003                |
+| ST         | nat-met-sto-tro           | Lightning                               | MH0002                |
+| ST         | nat-met-sto-tro           | Thunderstorm                            | MH0003                |
+| ST         | nat-met-sto-tro           | Downburst                               | MH0001                |
+| AV         | nat-geo-mmd-ava           | Avalanche                               | MH0050                |
+| SS         | nat-hyd-wav-rog           | Storm surge                             | MH0027                |
+| SS         | nat-hyd-wav-rog           | Storm tides                             | MH0028                |
+| TO         | nat-met-sto-tro           | Tornado                                 | MH0059                |
+| TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0057                |
+| TC         | nat-met-sto-tro           | Tropical storm                          | MH0058                |
+| TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0030                |
+| TC         | nat-met-sto-tro           | Sub-tropical cyclone                    | MH0032                |
+| TS         | nat-geo-ear-tsu           | Tsunami (general)                       | MH0029                |
+| TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | GH0006                |
+| TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | GH0017                |
+| TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | GH0035                |
+| VW         | nat-met-sto-tro           | Violent wind                            | MH0060                |
+| VW         | nat-met-sto-tro           | Strong gale                             | MH0054                |
+| VW         | nat-met-sto-tro           | Squall                                  | MH0055                |
+| VW         | nat-met-sto-tro           | Derecho                                 | MH0053                |
+| VO         | nat-geo-vol-lav           | Lava flows                              | GH0009                |
+| VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0010                |
+| VO         | nat-geo-vol-ash           | Volcanic ballistics                     | GH0011                |
+| VO         | nat-geo-vol-pyr           | Pyroclastic density current             | GH0012                |
+| VO         | nat-geo-vol-lah           | Volcanic debris flow/lahar              | GH0013                |
+| VO         | nat-geo-vol-ash           | Volcanic gases and aerosols             | GH0016                |
+| WF         | nat-cli-wil-for           | Forest fire                             | EN0013                |
+| WF         | nat-cli-wil-lan           | Land fire                               | EN0013                |
+| AC         | tec-ind-rad-rad           | Radioactive waste                       | TL0001                |
+| AC         | tec-ind-rad-rad           | Radioactive material                    | TL0002                |
+| AC         | tec-ind-rad-rad           | Radiation agents                        | TL0003                |
+| AC         | tec-ind-rad-rad           | Nuclear agents                          | TL0004                |
+| AC         | tec-ind-rad-rad           | Nuclear plant failure                   | TL0012                |
+| CE         | Multiple codes            | International armed conflict            | SO0001                |
+| CE         | Multiple codes            | Non-international armed conflict        | SO0002                |
+| CE         | Multiple codes            | Civil unrest                            | SO0003                |
+| CE         | Multiple codes            | Explosive remnants of war               | SO0004                |
+| CE         | Multiple codes            | Environmental degradation from conflict | SO0005                |
+| OT         | nat-met-fog-fog           | Fog                                     | MH0016                |
+| OT         | nat-met-ext-sev           | Severe winter conditions                | MH0041                |
+| OT         | nat-met-ext-sev           | Freeze                                  | MH0042                |
+| OT         | nat-met-ext-sev           | Frost                                   | MH0043                |
+| OT         | nat-met-ext-sev           | Freezing rain                           | MH0044                |
+| OT         | nat-met-ext-sev           | Glaze                                   | MH0045                |
+| OT         | nat-met-ext-sev           | Ground frost                            | MH0046                |
+| OT         | nat-met-ext-sev           | Icing                                   | MH0048                |
+| OT         | nat-met-ext-sev           | Thaw                                    | MH0049                |
+| OT         | nat-met-sto-tro           | Hail                                    | MH0036                |
+| OT         | nat-met-sto-tro           | Ice storm                               | MH0037                |
+| OT         | nat-met-sto-tro           | Snow                                    | MH0038                |
+| OT         | nat-met-sto-tro           | Snow storm                              | MH0039                |
+| OT         | nat-met-sto-tro           | Blizzard                                | MH0034                |
+| OT         | nat-met-sto-tro           | Acid rain                               | MH0033                |
+| OT         | nat-ext-imp-air           | Airburst                                | ET0001                |
+| OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0002                |
+| OT         | nat-ext-spa-geo           | UV radiation                            | ET0003                |
+| OT         | nat-ext-imp-air           | Meteorite impact                        | ET0004                |
+| OT         | nat-ext-spa-geo           | Ionospheric storms                      | ET0005                |
+| OT         | nat-ext-spa-geo           | Radio blackout                          | ET0006                |
+| OT         | nat-ext-spa-geo           | Solar storm                             | ET0007                |
+| OT         | nat-ext-spa-geo           | Space hazard                            | ET0008                |
+| OT         | nat-ext-imp-air           | Near-Earth object                       | ET0009                |
+
 ## Impact
 
 ### Exposure Category
 
 | Exposure Category Code | Exposure Category Label                           |
 | ---------------------- | ------------------------------------------------- |
-| expspec_allpeop        | People (All Demographics)                         |
-| expspec_crop           | Crops                                             |
-| expspec_women          | Women                                             |
-| expspec_men            | Men                                               |
-| expspec_elder          | Elderly (Over 65)                                 |
-| expspec_chld14         | Children (Under 14)                               |
-| expspec_chld18         | Children (Under 18)                               |
-| expspec_wheelch        | Wheelchair Users                                  |
-| expspec_household      | Households                                        |
-| expspec_road           | Road                                              |
-| expspec_trainlin       | Train-lines                                       |
-| expspec_vulempl        | Population in Vulnerable Employment               |
-| expspec_build          | Buildings                                         |
-| expspec_reccost        | Reconstruction Costs                              |
-| expspec_hosp           | Hospitals                                         |
-| expspec_educ           | Education Centers                                 |
-| expspec_loccur         | Local Currency [Date of Event]                    |
-| expspec_globdate       | Global/Regional Currency (e.g. USD)               |
-| expspec_infloccur      | Inflation-Adjusted Local Currency [Date of Event] |
-| expspec_infglobdate    | Inflation-Adjusted Global/Regional Currency (USD) |
-| expspec_usdunsure      | USD [Unsure]                                      |
-| expspec_cattle         | Cattle                                            |
-| expspec_aidgen         | General Aid Contributions                         |
-| expspec_ecoifrcall     | IFRC Appeal Contribution                          |
-| expspec_ecoifrcreq     | IFRC Appeal Requested                             |
-| expspec_alert          | Alertscore                                        |
+| people                 | People (All Demographics)                         |
+| crops                  | Crops                                             |
+| women                  | Women                                             |
+| men                    | Men                                               |
+| elderly                | Elderly (Over 65)                                 |
+| children_under14       | Children (Under 14)                               |
+| children_under18       | Children (Under 18)                               |
+| wheelchair_users       | Wheelchair Users                                  |
+| roads                  | Roads                                             |
+| railways               | Train-lines                                       |
+| vulnerable_employment  | Population in Vulnerable Employment               |
+| buildings              | Buildings                                         |
+| reconstruction_costs   | Reconstruction Costs                              |
+| hospitals              | Hospitals                                         |
+| schools                | Schools                                           |
+| local_currency         | Local Currency [Date of Event]                    |
+| global_currency        | Global/Regional Currency (e.g. USD)               |
+| local_currency_adj     | Inflation-Adjusted Local Currency [Date of Event] |
+| global_currency_adj    | Inflation-Adjusted Global/Regional Currency (USD) |
+| usd_uncertain          | USD [Unsure]                                      |
+| cattle                 | Cattle                                            |
+| aid_general            | General Aid Contributions                         |
+| ifrc_contribution      | IFRC Appeal Contribution                          |
+| ifrc_requested         | IFRC Appeal Requested                             |
+| alertscore             | Alertscore                                        |
 
 ### Impact Type
 
-| Impact Type Code | Impact Type Label                                         |
-| ---------------- | --------------------------------------------------------- |
-| imptypunspec     | Unspecified                                               |
-| imptypunaff      | Unaffected                                                |
-| imptypdama       | Damaged                                                   |
-| imptypdest       | Destroyed                                                 |
-| imptyppotdam     | Potentially Damaged                                       |
-| imptypaffe       | Total Affected                                            |
-| imptypdiraffe    | Directly Affected                                         |
-| imptypindaffe    | Indirectly Affected                                       |
-| imptypdeat       | Deaths                                                    |
-| imptypmiss       | Missing                                                   |
-| imptypinju       | Injured                                                   |
-| imptypdispl      | Displaced                                                 |
-| imptypevac       | Evacuated                                                 |
-| imptypereloc     | Relocated                                                 |
-| imptypeassist    | Assisted (Recieved Aid/Support)                           |
-| imptypeemshel    | Emergency Sheltered                                       |
-| imptypetempacc   | Temporary Accommodated                                    |
-| imptypelongacc   | Long-Term Accommodated                                    |
-| imptypneed       | In Need                                                   |
-| imptyptarg       | Targeted                                                  |
-| imptypdisr       | Disrupted                                                 |
-| imptypcost       | Loss (Cost)                                               |
-| imptyphomles     | Homeless                                                  |
-| imptypidp        | Internally Displaced Persons (IDPs)                       |
-| imptypextdisp    | Refugees, Asylum Seekers and Externally Displaced Persons |
-| imptypedisp      | Displaced Persons (Internal & External)                   |
-| imptypalert      | Alertscore                                                |
+| Impact Type Code    | Impact Type Label                                         |
+| ------------------- | --------------------------------------------------------- |
+| unspecified         | Unspecified                                               |
+| unaffected          | Unaffected                                                |
+| damaged             | Damaged                                                   |
+| destroyed           | Destroyed                                                 |
+| potentially_damaged | Potentially Damaged                                       |
+| affected_total      | Total Affected                                            |
+| affected_direct     | Directly Affected                                         |
+| affected_indirect   | Indirectly Affected                                       |
+| death               | Death                                                     |
+| missing             | Missing                                                   |
+| injured             | Injured                                                   |
+| evacuated           | Evacuated                                                 |
+| relocated           | Relocated                                                 |
+| assisted            | Assisted (Recieved Aid/Support)                           |
+| shelter_emergency   | Emergency Sheltered                                       |
+| shelter_temporary   | Temporary Accommodated                                    |
+| shelter_longterm    | Long-Term Accommodated                                    |
+| in_need             | In Need                                                   |
+| targeted            | Targeted                                                  |
+| disrupted           | Disrupted                                                 |
+| cost                | Loss (Cost)                                               |
+| homeless            | Homeless                                                  |
+| displaced_internal  | Internally Displaced Persons (IDPs)                       |
+| displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
+| displaced_total     | Displaced Persons (Internal & External)                   |
+| alertscore          | Alertscore                                                |

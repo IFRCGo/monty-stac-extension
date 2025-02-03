@@ -1,0 +1,65 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+  "collection": "reference-events",
+  "bbox": [
+    87.3608,
+    28.639,
+    87.3608,
+    28.639
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      87.3608,
+      28.639
+    ]
+  },
+  "properties": {
+    "title": "Earthquake in China, Southern Tibetan Plateau, 2025-01-07, 01:05:16 UTC",
+    "datetime": "2025-01-07T01:05:16Z",
+    "monty:country_codes": [
+      "CHN"
+    ],
+    "monty:hazard_codes": [
+      "GH0001",
+      "GH0002",
+      "GH0004"
+    ],
+    "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+    "roles": [
+      "event",
+      "reference"
+    ],
+    "keywords": [
+      "earthquake",
+      "china",
+      "Ground Shaking (Earthquake)",
+      "Earthquake Surface Rupture, Fissures, and Tectonic Uplift/Subsidence",
+      "Southern Tibetan Plateau"
+    ]
+  },
+  "links": [
+    {
+      "href": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB.json",
+      "rel": "self"
+    },
+    {
+      "href": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/json"
+    },
+    {
+      "href": "reference-events.json",
+      "rel": "collection"
+    }
+  ],
+  "assets": {}
+}

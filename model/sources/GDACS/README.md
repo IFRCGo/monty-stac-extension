@@ -99,7 +99,6 @@ The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON objec
 
 | STAC field     | GDACS field                  | Description                                               |
 | -------------- | ---------------------------- | --------------------------------------------------------- |
-| clusters       | properties.eventtype         | Hazard clusters codes                                     |
 | severity_value | properties.episodealertlevel | GDACS alert score                                         |
 | severity_unit  | `gdacs`                      | GDACS alert level according to GDCAS event type and model |
 
@@ -108,14 +107,14 @@ The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON objec
 There is not straightforward mapping from the GDACS event type to the [hazard profile](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles). The current mapping only considers
 setting the clusters field as the following:
 
-| GDACS event type                                                         | Hazard profile cluster | Hazard Profile codes |
-| ------------------------------------------------------------------------ | ---------------------- | -------------------- |
-| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`             |                      |
-| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`             | `GH0004`             |
-| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`            | `MH0057`             |
-| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`             | `GH0006`             |
-| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`             |                      |
-| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `HM-PRECIP`            | `MH0035`             |
+| GDACS event type                                                         | UNDRR Hazard profile cluster | UNDRR Hazard Profile codes |
+| ------------------------------------------------------------------------ | ---------------------------- | -------------------------- |
+| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`                   | `MH0012`                   |
+| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`                   | `GH0004`                   |
+| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`                  | `MH0057`                   |
+| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`                   | `GH0006`                   |
+| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`                   |                            |
+| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `HM-PRECIP`                  | `MH0035`                   |
 
 More specific [hazard codes](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) can be added to the `codes` field following the characteristics of the event.
 
