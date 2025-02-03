@@ -13,7 +13,7 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Source Type: International Non-Governmental Organization
 - Source organization email: <info@idmc.ch>
 - Source URL: <https://www.internal-displacement.org/database>
-- Source Data license: \[TBD]
+- Source Data license: [TBD]
 - Source for: event
 - API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
@@ -96,7 +96,7 @@ The following table shows how IDMC event fields map to STAC Item fields:
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Event start date}                                                                           | Yes      | Convert to datetime with UTC timezone                                              |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Event start date}                                                                           | Yes      | Convert to datetime with UTC timezone                                              |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {Event end date}                                                                             | Yes      | Convert to datetime with UTC timezone                                              |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                         | country_iso3                                                                                 | Yes      | Direct mapping to array                                                            |
+| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                          | country_iso3                                                                                 | Yes      | Direct mapping to array                                                            |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                               | {Hazard Category} and {Hazard Type}                                                          | Yes      | Map using the [hazard type mapping](#hazard-type-mapping)                          |
 | [monty:hazard_codes](../../../README.md#montyepisode_number                                                              |                                                                                              | Yes      | Always 1 (IDMC doesn't track episodes)                                             |
 | [monty:corr_id](../../../README.md#montycorr_id)                                                                         | id                                                                                           | Yes      | Generated following the [event pairing procedure](../../event_paring.md)           |
@@ -131,7 +131,7 @@ The following table shows how IDMC displacement item fields map to STAC Item fie
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Start date}                                                                                           | Yes      | Convert to datetime with UTC timezone                     |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {End date}                                                                                             | Yes      | Convert to datetime with UTC timezone                     |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | [{Locations name}, {Figure category}, {Figure unit}, {Country}, {Geographical region}, {Figure cause}] |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                         | {ISO3}                                                                                                 | Yes      | Direct mapping to array                                   |
+| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                          | {ISO3}                                                                                                 | Yes      | Direct mapping to array                                   |
 | [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                               | {Hazard Category} and {Hazard Type}                                                                    | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
 | [monty:impact_detail](../../../README.md#montyimpact_detail)                                                             | See [Displacement Impact details](#displacement-impact-details)                                        | Yes      |                                                           |
 
@@ -139,13 +139,13 @@ The following table shows how IDMC displacement item fields map to STAC Item fie
 
 The following table shows how IDMC displacement impact fields map to [impact_detail](../../../README.md#montyimpact_detail) STAC Item fields:
 
-| STAC field    | IDMC field        | Required | Notes                                                 |
-| ------------- | ----------------- | -------- | ----------------------------------------------------- |
-| category      | `expspec_allpeop` | Yes      | Always "people" for IDMC impacts                      |
-| type          | `imptypdispl`     | Yes      | Always "displaced" for IDMC impacts                   |
-| value         | {Total figures}   | Yes      | Direct mapping                                        |
-| unit          | `count`           | Yes      | Always people count (household figures are converted) |
-| estimate_type | `primary`         | Yes      | Always "primary" for IDMC impacts                     |
+| STAC field    | IDMC field           | Required | Notes                                                 |
+| ------------- | -------------------- | -------- | ----------------------------------------------------- |
+| category      | `people`             | Yes      | Always "people" for IDMC impacts                      |
+| type          | `displaced_internal` | Yes      | Always "displaced_internal" for IDMC impacts          |
+| value         | {Total figures}      | Yes      | Direct mapping                                        |
+| unit          | `count`              | Yes      | Always people count (household figures are converted) |
+| estimate_type | `primary`            | Yes      | Always "primary" for IDMC impacts                     |
 
 ##### Impact Item Generation Rules
 
@@ -153,3 +153,70 @@ The following table shows how IDMC displacement impact fields map to [impact_det
 2. Geometry is taken directly from the displacement item's feature geometry
 3. Dates are converted to UTC timezone
 4. Event ID reference uses the format `idmc-gidd-event-{id}`
+
+#### Internal Displacement Updates (IDU) Items
+
+The Internal Displacement Updates (IDU) provide near real-time information about displacement events. Key characteristics include:
+
+##### Impact Item Field Mapping
+
+The following table shows how IDU fields map to STAC Item fields for impact items:
+
+| STAC field                                                                                                               | IDU field                                                  | Required | Notes                                                     |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------- | --------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-idu-impact-`{id}`-displaced`                         | Yes      | Use format `idmc-idu-impact-{id}-displaced`               |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | {latitude}, {longitude}                                    | Yes      | Convert point coordinates to GeoJSON Point geometry       |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-idu-impacts`                                         | Yes      |                                                           |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | {displacement_type} displacement for {event_name}          | Yes      |                                                           |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {displacement_date}                                        | Yes      | Convert to datetime with UTC timezone                     |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {displacement_start_date}                                  | Yes      | Convert to datetime with UTC timezone                     |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {displacement_end_date}                                    | Yes      | Convert to datetime with UTC timezone                     |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | [{locations_name}, {displacement_type}, {role}, {sources}] | No       |                                                           |
+| [monty:country_codes](../../../README.md#montycountry_codes)[0]                                                          | {iso3}                                                     | Yes      | Direct mapping to array                                   |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                               | {category}, {type}                                         | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
+| [monty:impact_detail](../../../README.md#montyimpact_detail)                                                             | See [IDU Impact details](#idu-impact-details)              | Yes      |                                                           |
+
+##### IDU Impact details
+
+The following table shows how IDU fields map to [impact_detail](../../../README.md#montyimpact_detail) STAC Item fields:
+
+| STAC field    | IDU field            | Required | Notes                                                                  |
+| ------------- | -------------------- | -------- | ---------------------------------------------------------------------- |
+| category      | `people`             | Yes      | Always "people" for IDU impacts                                        |
+| type          | `displaced_internal` | Yes      | Always "displaced_internal" for IDU impacts                            |
+| value         | {figure}             | Yes      | Direct mapping                                                         |
+| unit          | `count`              | Yes      | Always people count                                                    |
+| estimate_type | {role}               | Yes      | Maps "Recommended figure" to "primary", "Triangulation" to "secondary" |
+
+##### IDU Impact Item Generation Rules
+
+1. Each IDU record becomes a separate impact item
+2. Point geometry is created from latitude/longitude coordinates
+3. Dates are converted to UTC timezone
+4. Event ID reference uses the format `idmc-idu-event-{event_id}`
+5. Role field determines estimate_type in impact_detail
+
+##### Hazard Classification
+
+Maps to standard hazard codes:
+
+- Wildfire → WF (GLIDE) / nat-cli-wil-for (EM-DAT) / EN0013 (UNDRR-ISC)
+- Flood → FL (GLIDE) / nat-hyd-flo-flo (EM-DAT) / MH0007 (UNDRR-ISC)
+- Mass Movement → LS (GLIDE) / nat-hyd-mmw-lan (EM-DAT) / GH0007 (UNDRR-ISC)
+- Sinkhole → OT (GLIDE) / nat-geo-mmd-sub (EM-DAT) / GH0026 (UNDRR-ISC)
+
+##### Impact Classification
+
+- Type: displaced_internal (internal displacements)
+- Category: people (total displaced population)
+- Two main categories:
+  1. Preventive evacuations (marked in displacement_occurred field)
+  2. Forced displacement due to damage/destruction
+
+##### Data Quality Notes
+
+- Provides near real-time updates compared to annually validated GIDD data
+- Includes source URLs for verification
+- Distinguishes between recommended figures and triangulation
+- Specifies accuracy of location information
+- Indicates if displacement was preventive or post-disaster
