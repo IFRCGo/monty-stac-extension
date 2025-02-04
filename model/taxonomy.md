@@ -425,7 +425,7 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 
 ### Cross-Classification Mapping
 
-| GLIDE Code | EM-DAT Classification Key | Notes                                   | UNDRR-ISC Hazard Code |
+| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC Hazard Code |
 | ---------- | ------------------------- | --------------------------------------- | --------------------- |
 | CW         | nat-met-ext-col           | Cold wave                               | MH0040                |
 | DR         | nat-cli-dro-dro           | Drought                                 | MH0035                |
