@@ -65,6 +65,9 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | nat-geo-mmd-lan    | Natural       | Geophysical            | Mass Movement (dry)    | Landslide (dry)                  |
 | nat-geo-mmd-roc    | Natural       | Geophysical            | Mass Movement (dry)    | Rockfall (dry)                   |
 | nat-geo-mmd-sub    | Natural       | Geophysical            | Mass Movement (dry)    | Sudden Subsidence (dry)          |
+| nat-geo-env-coa    | Natural       | Geophysical            | Environmental Change   | Coastal erosion                  |
+| nat-geo-env-sed    | Natural       | Geophysical            | Environmental Change   | Sedimentation                    |
+| nat-geo-env-slr    | Natural       | Geophysical            | Environmental Change   | Sea level rise                   |
 | nat-geo-vol-ash    | Natural       | Geophysical            | Volcanic Activity      | Ash fall                         |
 | nat-geo-vol-lah    | Natural       | Geophysical            | Volcanic Activity      | Lahar                            |
 | nat-geo-vol-lav    | Natural       | Geophysical            | Volcanic Activity      | Lava flow                        |
