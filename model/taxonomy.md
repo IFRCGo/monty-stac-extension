@@ -33,60 +33,87 @@
 
 ### [EM-DAT CRED Classification Tree](https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree)
 
-| Classification Key | Group         | Subgroup               | Type                  | Subtype                     |
-| ------------------ | ------------- | ---------------------- | --------------------- | --------------------------- |
-| nat-geo-ear-gro    | Natural       | Geophysical            | Earthquake            | Ground movement             |
-| nat-geo-ear-tsu    | Natural       | Geophysical            | Earthquake            | Tsunami                     |
-| nat-geo-mmd-roc    | Natural       | Geophysical            | Mass Movement (dry)   | Rockfall (dry)              |
-| nat-geo-mmd-lan    | Natural       | Geophysical            | Mass Movement (dry)   | Landslide (dry)             |
-| nat-geo-mmd-ava    | Natural       | Geophysical            | Mass Movement (dry)   | Avalanche (dry)             |
-| nat-geo-mmd-sub    | Natural       | Geophysical            | Mass Movement (dry)   | Sudden Subsidence (dry)     |
-| nat-geo-vol-ash    | Natural       | Geophysical            | Volcanic Activity     | Ash fall                    |
-| nat-geo-vol-lah    | Natural       | Geophysical            | Volcanic Activity     | Lahar                       |
-| nat-geo-vol-pyr    | Natural       | Geophysical            | Volcanic Activity     | Pyroclastic flow            |
-| nat-geo-vol-lav    | Natural       | Geophysical            | Volcanic Activity     | Lava flow                   |
-| nat-met-ext-hea    | Natural       | Meteorological         | Extreme Temperature   | Heat wave                   |
-| nat-met-ext-col    | Natural       | Meteorological         | Extreme Temperature   | Cold wave                   |
-| nat-met-ext-sev    | Natural       | Meteorological         | Extreme Temperature   | Severe winter conditions    |
-| nat-met-fog-fog    | Natural       | Meteorological         | Fog                   | Fog                         |
-| nat-met-sto-tro    | Natural       | Meteorological         | Storm                 | Tropical cyclone            |
-| nat-met-sto-ext    | Natural       | Meteorological         | Storm                 | Extra-tropical storm        |
-| nat-met-sto-der    | Natural       | Meteorological         | Storm                 | Derecho                     |
-| nat-hyd-flo-flo    | Natural       | Hydrological           | Flood                 | Flood                       |
-| nat-hyd-flo-coa    | Natural       | Hydrological           | Flood                 | Coastal flood               |
-| nat-hyd-flo-riv    | Natural       | Hydrological           | Flood                 | Riverine flood              |
-| nat-hyd-flo-fla    | Natural       | Hydrological           | Flood                 | Flash flood                 |
-| nat-hyd-flo-ice    | Natural       | Hydrological           | Flood                 | Ice jam flood               |
-| nat-hyd-mmw-lan    | Natural       | Hydrological           | Mass Movement (wet)   | Landslide (wet)             |
-| nat-hyd-wav-rog    | Natural       | Hydrological           | Wave Action           | Rogue wave                  |
-| nat-cli-dro-dro    | Natural       | Climatological         | Drought               | Drought                     |
-| nat-cli-glo-glo    | Natural       | Climatological         | Glacial Lake Outburst | Glacial lake outburst flood |
-| nat-cli-wil-for    | Natural       | Climatological         | Wildfire              | Forest fire                 |
-| nat-cli-wil-lan    | Natural       | Climatological         | Wildfire              | Land fire                   |
-| nat-bio-ani-ani    | Natural       | Biological             | Animal Incident       | Animal incident             |
-| nat-bio-epi-vir    | Natural       | Biological             | Epidemic              | Viral disease               |
-| nat-bio-epi-bac    | Natural       | Biological             | Epidemic              | Bacterial disease           |
-| nat-bio-epi-par    | Natural       | Biological             | Epidemic              | Parasitic disease           |
-| nat-bio-epi-fun    | Natural       | Biological             | Epidemic              | Fungal disease              |
-| nat-bio-epi-pri    | Natural       | Biological             | Epidemic              | Prion disease               |
-| nat-bio-inf-loc    | Natural       | Biological             | Infestation           | Locust infestation          |
-| nat-ext-imp-air    | Natural       | Extraterrestrial       | Impact                | Airburst                    |
-| nat-ext-spa-geo    | Natural       | Extraterrestrial       | Space Weather         | Geomagnetic storm           |
-| tec-ind-che-che    | Technological | Industrial Accident    | Chemical Spill        | Chemical spill              |
-| tec-ind-col-col    | Technological | Industrial Accident    | Collapse              | Collapse (Industrial)       |
-| tec-ind-exp-exp    | Technological | Industrial Accident    | Explosion             | Explosion (Industrial)      |
-| tec-ind-fir-fir    | Technological | Industrial Accident    | Fire                  | Fire (Industrial)           |
-| tec-ind-gas-gas    | Technological | Industrial Accident    | Gas Leak              | Gas leak                    |
-| tec-ind-oil-oil    | Technological | Industrial Accident    | Oil Spill             | Oil spill                   |
-| tec-ind-poi-poi    | Technological | Industrial Accident    | Poisoning             | Poisoning                   |
-| tec-ind-rad-rad    | Technological | Industrial Accident    | Radiation             | Radiation                   |
-| tec-tra-air-air    | Technological | Transport              | Air                   | Air                         |
-| tec-tra-rai-rai    | Technological | Transport              | Rail                  | Rail                        |
-| tec-tra-roa-roa    | Technological | Transport              | Road                  | Road                        |
-| tec-tra-wat-wat    | Technological | Transport              | Water                 | Water                       |
-| tec-mis-col-col    | Technological | Miscellaneous Accident | Collapse              | Collapse (Miscellaneous)    |
-| tec-mis-exp-exp    | Technological | Miscellaneous Accident | Explosion             | Explosion (Miscellaneous)   |
-| tec-mis-fir-fir    | Technological | Miscellaneous Accident | Fire                  | Fire (Miscellaneous)        |
+Note: In September 2023, the EM-DAT Classification Tree was updated and simplified to facilitate user queries and filtering. The current tree is based on four depth levels (group, subgroup, type, subtype), replacing the former tree with three plus two optional depth levels. The 'Complex' disaster group was removed.
+
+| Classification Key | Group         | Subgroup               | Type                   | Subtype                          |
+| ------------------ | ------------- | ---------------------- | ---------------------- | -------------------------------- |
+| nat-bio-ani-ani    | Natural       | Biological             | Animal Incident        | Animal incident                  |
+| nat-bio-epi-bac    | Natural       | Biological             | Epidemic               | Bacterial disease                |
+| nat-bio-epi-dis    | Natural       | Biological             | Epidemic               | Infectious disease (General)     |
+| nat-bio-epi-fun    | Natural       | Biological             | Epidemic               | Fungal disease                   |
+| nat-bio-epi-par    | Natural       | Biological             | Epidemic               | Parasitic disease                |
+| nat-bio-epi-pri    | Natural       | Biological             | Epidemic               | Prion disease                    |
+| nat-bio-epi-vir    | Natural       | Biological             | Epidemic               | Viral disease                    |
+| nat-bio-inf-gra    | Natural       | Biological             | Infestation            | Grasshopper infestation          |
+| nat-bio-inf-inf    | Natural       | Biological             | Infestation            | Infestation (General)            |
+| nat-bio-inf-loc    | Natural       | Biological             | Infestation            | Locust infestation               |
+| nat-bio-inf-wor    | Natural       | Biological             | Infestation            | Worms infestation                |
+| nat-cli-dro-dro    | Natural       | Climatological         | Drought                | Drought                          |
+| nat-cli-glo-glo    | Natural       | Climatological         | Glacial Lake Outburst  | Glacial lake outburst flood      |
+| nat-cli-wil-for    | Natural       | Climatological         | Wildfire               | Forest fire                      |
+| nat-cli-wil-lan    | Natural       | Climatological         | Wildfire               | Land fire                        |
+| nat-cli-wil-wil    | Natural       | Climatological         | Wildfire               | Wildfire (General)               |
+| nat-ext-imp-air    | Natural       | Extraterrestrial       | Impact                 | Airburst                         |
+| nat-ext-imp-col    | Natural       | Extraterrestrial       | Impact                 | Collision                        |
+| nat-ext-spa-ene    | Natural       | Extraterrestrial       | Space Weather          | Energetic particles              |
+| nat-ext-spa-geo    | Natural       | Extraterrestrial       | Space Weather          | Geomagnetic storm                |
+| nat-ext-spa-rad    | Natural       | Extraterrestrial       | Space Weather          | Radio disturbance                |
+| nat-ext-spa-sho    | Natural       | Extraterrestrial       | Space Weather          | Shockwave                        |
+| nat-geo-ear-gro    | Natural       | Geophysical            | Earthquake             | Ground movement                  |
+| nat-geo-ear-tsu    | Natural       | Geophysical            | Earthquake             | Tsunami                          |
+| nat-geo-mmd-ava    | Natural       | Geophysical            | Mass Movement (dry)    | Avalanche (dry)                  |
+| nat-geo-mmd-lan    | Natural       | Geophysical            | Mass Movement (dry)    | Landslide (dry)                  |
+| nat-geo-mmd-roc    | Natural       | Geophysical            | Mass Movement (dry)    | Rockfall (dry)                   |
+| nat-geo-mmd-sub    | Natural       | Geophysical            | Mass Movement (dry)    | Sudden Subsidence (dry)          |
+| nat-geo-vol-ash    | Natural       | Geophysical            | Volcanic Activity      | Ash fall                         |
+| nat-geo-vol-lah    | Natural       | Geophysical            | Volcanic Activity      | Lahar                            |
+| nat-geo-vol-lav    | Natural       | Geophysical            | Volcanic Activity      | Lava flow                        |
+| nat-geo-vol-pyr    | Natural       | Geophysical            | Volcanic Activity      | Pyroclastic flow                 |
+| nat-geo-vol-vol    | Natural       | Geophysical            | Volcanic Activity      | Volcanic activity (General)      |
+| nat-hyd-flo-coa    | Natural       | Hydrological           | Flood                  | Coastal flood                    |
+| nat-hyd-flo-fla    | Natural       | Hydrological           | Flood                  | Flash flood                      |
+| nat-hyd-flo-flo    | Natural       | Hydrological           | Flood                  | Flood (General)                  |
+| nat-hyd-flo-ice    | Natural       | Hydrological           | Flood                  | Ice jam flood                    |
+| nat-hyd-flo-riv    | Natural       | Hydrological           | Flood                  | Riverine flood                   |
+| nat-hyd-mmw-ava    | Natural       | Hydrological           | Mass Movement (wet)    | Avalanche (wet)                  |
+| nat-hyd-mmw-lan    | Natural       | Hydrological           | Mass Movement (wet)    | Landslide (wet)                  |
+| nat-hyd-mmw-mud    | Natural       | Hydrological           | Mass Movement (wet)    | Mudslide                         |
+| nat-hyd-mmw-roc    | Natural       | Hydrological           | Mass Movement (wet)    | Rockfall (wet)                   |
+| nat-hyd-mmw-sub    | Natural       | Hydrological           | Mass Movement (wet)    | Sudden Subsidence (wet)          |
+| nat-hyd-wav-rog    | Natural       | Hydrological           | Wave Action            | Rogue wave                       |
+| nat-hyd-wav-sei    | Natural       | Hydrological           | Wave Action            | Seiche                           |
+| nat-met-ext-col    | Natural       | Meteorological         | Extreme Temperature    | Cold wave                        |
+| nat-met-ext-hea    | Natural       | Meteorological         | Extreme Temperature    | Heat wave                        |
+| nat-met-ext-sev    | Natural       | Meteorological         | Extreme Temperature    | Severe winter conditions         |
+| nat-met-fog-fog    | Natural       | Meteorological         | Fog                    | Fog                              |
+| nat-met-sto-bli    | Natural       | Meteorological         | Storm                  | Blizzard/Winter storm            |
+| nat-met-sto-der    | Natural       | Meteorological         | Storm                  | Derecho                          |
+| nat-met-sto-ext    | Natural       | Meteorological         | Storm                  | Extra-tropical storm             |
+| nat-met-sto-hai    | Natural       | Meteorological         | Storm                  | Hail                             |
+| nat-met-sto-lig    | Natural       | Meteorological         | Storm                  | Lightning/Thunderstorms          |
+| nat-met-sto-san    | Natural       | Meteorological         | Storm                  | Sand/Dust storm                  |
+| nat-met-sto-sev    | Natural       | Meteorological         | Storm                  | Severe weather                   |
+| nat-met-sto-sto    | Natural       | Meteorological         | Storm                  | Storm (General)                  |
+| nat-met-sto-sur    | Natural       | Meteorological         | Storm                  | Storm surge                      |
+| nat-met-sto-tor    | Natural       | Meteorological         | Storm                  | Tornado                          |
+| nat-met-sto-tro    | Natural       | Meteorological         | Storm                  | Tropical cyclone                 |
+| tec-ind-che-che    | Technological | Industrial Accident    | Chemical Spill         | Chemical spill                   |
+| tec-ind-col-col    | Technological | Industrial Accident    | Collapse               | Collapse (Industrial)            |
+| tec-ind-exp-exp    | Technological | Industrial Accident    | Explosion              | Explosion (Industrial)           |
+| tec-ind-fir-fir    | Technological | Industrial Accident    | Fire                   | Fire (Industrial)                |
+| tec-ind-gas-gas    | Technological | Industrial Accident    | Gas Leak               | Gas leak                         |
+| tec-ind-ind-ind    | Technological | Industrial Accident    | Industrial accident    | Industrial accident (General)    |
+| tec-ind-oil-oil    | Technological | Industrial Accident    | Oil Spill              | Oil spill                        |
+| tec-ind-poi-poi    | Technological | Industrial Accident    | Poisoning              | Poisoning                        |
+| tec-ind-rad-rad    | Technological | Industrial Accident    | Radiation              | Radiation                        |
+| tec-mis-col-col    | Technological | Miscellaneous Accident | Collapse               | Collapse (Miscellaneous)         |
+| tec-mis-exp-exp    | Technological | Miscellaneous Accident | Explosion              | Explosion (Miscellaneous)        |
+| tec-mis-fir-fir    | Technological | Miscellaneous Accident | Fire                   | Fire (Miscellaneous)             |
+| tec-mis-mis-mis    | Technological | Miscellaneous Accident | Miscellaneous accident | Miscellaneous accident (General) |
+| tec-tra-air-air    | Technological | Transport              | Air                    | Air                              |
+| tec-tra-rai-rai    | Technological | Transport              | Rail                   | Rail                             |
+| tec-tra-roa-roa    | Technological | Transport              | Road                   | Road                             |
+| tec-tra-wat-wat    | Technological | Transport              | Water                  | Water                            |
 
 ### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
 
@@ -398,17 +425,21 @@
 
 ### Cross-Classification Mapping
 
-| GLIDE Code | EM-DAT Classification Key | Notes                                   | UNDRR-ISC Hazard Code |
+| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC Hazard Code |
 | ---------- | ------------------------- | --------------------------------------- | --------------------- |
 | CW         | nat-met-ext-col           | Cold wave                               | MH0040                |
 | DR         | nat-cli-dro-dro           | Drought                                 | MH0035                |
 | EQ         | nat-geo-ear-gro           | Earthquake                              | GH0001                |
 | EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0002                |
+| EQ         | nat-geo-ear-gro           | Liquefaction                            | GH0003                |
+| EQ         | nat-geo-ear-gro           | Surface rupture                         | GH0004                |
+| EQ         | nat-geo-ear-gro           | Subsidence and uplift                   | GH0005                |
 | EP         | nat-bio-epi-vir           | Viral diseases                          | BI0016                |
 | EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0016                |
 | EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0016                |
 | EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0016                |
 | EP         | nat-bio-epi-pri           | Prion diseases                          | BI0016                |
+| EP         | nat-bio-epi-dis           | General infectious disease              | BI0016                |
 | EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0031                |
 | EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0099                |
 | FR         | tec-ind-fir-fir           | Industrial fire                         | TL0032                |
@@ -422,20 +453,26 @@
 | FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0008                |
 | FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0010                |
 | FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0011                |
+| FL         | tec-mis-col-col           | Dam/levee break flood                   | TL0009                |
 | HT         | nat-met-ext-hea           | Heat wave                               | MH0047                |
 | IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0002                |
 | IN         | nat-bio-inf-loc           | Locust infestation                      | BI0003                |
+| IN         | nat-bio-inf-gra           | Grasshopper infestation                 | BI0002                |
+| IN         | nat-bio-inf-wor           | Worms infestation                       | BI0002                |
+| IN         | nat-bio-inf-inf           | General infestation                     | BI0002                |
 | LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0007                |
 | LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0014                |
-| MS         | nat-hyd-mmw-lan           | Mud flow/slide                          | MH0051                |
-| ST         | nat-met-sto-tro           | Severe local storm                      | MH0003                |
-| ST         | nat-met-sto-tro           | Lightning                               | MH0002                |
-| ST         | nat-met-sto-tro           | Thunderstorm                            | MH0003                |
-| ST         | nat-met-sto-tro           | Downburst                               | MH0001                |
-| AV         | nat-geo-mmd-ava           | Avalanche                               | MH0050                |
-| SS         | nat-hyd-wav-rog           | Storm surge                             | MH0027                |
+| LS         | nat-hyd-mmw-lan           | Landslide (wet)                         | GH0007                |
+| MS         | nat-hyd-mmw-mud           | Mud flow/slide                          | MH0051                |
+| ST         | nat-met-sto-sto           | Severe local storm                      | MH0003                |
+| ST         | nat-met-sto-lig           | Lightning                               | MH0002                |
+| ST         | nat-met-sto-hai           | Hail                                    | MH0036                |
+| ST         | nat-met-sto-sev           | Severe weather                          | MH0003                |
+| AV         | nat-geo-mmd-ava           | Avalanche (dry)                         | MH0050                |
+| AV         | nat-hyd-mmw-ava           | Avalanche (wet)                         | MH0050                |
+| SS         | nat-met-sto-sur           | Storm surge                             | MH0027                |
 | SS         | nat-hyd-wav-rog           | Storm tides                             | MH0028                |
-| TO         | nat-met-sto-tro           | Tornado                                 | MH0059                |
+| TO         | nat-met-sto-tor           | Tornado                                 | MH0059                |
 | TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0057                |
 | TC         | nat-met-sto-tro           | Tropical storm                          | MH0058                |
 | TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0030                |
@@ -444,23 +481,29 @@
 | TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | GH0006                |
 | TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | GH0017                |
 | TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | GH0035                |
-| VW         | nat-met-sto-tro           | Violent wind                            | MH0060                |
-| VW         | nat-met-sto-tro           | Strong gale                             | MH0054                |
-| VW         | nat-met-sto-tro           | Squall                                  | MH0055                |
-| VW         | nat-met-sto-tro           | Derecho                                 | MH0053                |
+| VW         | nat-met-sto-sto           | Violent wind                            | MH0060                |
+| VW         | nat-met-sto-der           | Derecho                                 | MH0053                |
+| VW         | nat-met-sto-san           | Sand/dust storm                         | MH0015                |
 | VO         | nat-geo-vol-lav           | Lava flows                              | GH0009                |
 | VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0010                |
-| VO         | nat-geo-vol-ash           | Volcanic ballistics                     | GH0011                |
-| VO         | nat-geo-vol-pyr           | Pyroclastic density current             | GH0012                |
-| VO         | nat-geo-vol-lah           | Volcanic debris flow/lahar              | GH0013                |
-| VO         | nat-geo-vol-ash           | Volcanic gases and aerosols             | GH0016                |
+| VO         | nat-geo-vol-vol           | Volcanic activity (general)             | GH0009                |
+| VO         | nat-geo-vol-pyr           | Pyroclastic flow                        | GH0012                |
+| VO         | nat-geo-vol-lah           | Lahar                                   | GH0013                |
+| VO         | nat-geo-vol-vol           | Volcanic gases                          | GH0016                |
 | WF         | nat-cli-wil-for           | Forest fire                             | EN0013                |
 | WF         | nat-cli-wil-lan           | Land fire                               | EN0013                |
-| AC         | tec-ind-rad-rad           | Radioactive waste                       | TL0001                |
-| AC         | tec-ind-rad-rad           | Radioactive material                    | TL0002                |
-| AC         | tec-ind-rad-rad           | Radiation agents                        | TL0003                |
-| AC         | tec-ind-rad-rad           | Nuclear agents                          | TL0004                |
-| AC         | tec-ind-rad-rad           | Nuclear plant failure                   | TL0012                |
+| WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0013                |
+| AC         | tec-ind-rad-rad           | Radiation                               | TL0001                |
+| AC         | tec-ind-che-che           | Chemical spill                          | TL0030                |
+| AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0029                |
+| AC         | tec-ind-gas-gas           | Gas leak                                | TL0030                |
+| AC         | tec-ind-oil-oil           | Oil spill                               | CH0017                |
+| AC         | tec-ind-poi-poi           | Poisoning                               | CH0024                |
+| AC         | tec-ind-ind-ind           | General industrial accident             | TL0027                |
+| AC         | tec-tra-air-air           | Air transport accident                  | TL0048                |
+| AC         | tec-tra-rai-rai           | Rail transport accident                 | TL0051                |
+| AC         | tec-tra-roa-roa           | Road transport accident                 | TL0052                |
+| AC         | tec-tra-wat-wat           | Water transport accident                | TL0050                |
 | CE         | Multiple codes            | International armed conflict            | SO0001                |
 | CE         | Multiple codes            | Non-international armed conflict        | SO0002                |
 | CE         | Multiple codes            | Civil unrest                            | SO0003                |
@@ -475,21 +518,13 @@
 | OT         | nat-met-ext-sev           | Ground frost                            | MH0046                |
 | OT         | nat-met-ext-sev           | Icing                                   | MH0048                |
 | OT         | nat-met-ext-sev           | Thaw                                    | MH0049                |
-| OT         | nat-met-sto-tro           | Hail                                    | MH0036                |
-| OT         | nat-met-sto-tro           | Ice storm                               | MH0037                |
-| OT         | nat-met-sto-tro           | Snow                                    | MH0038                |
-| OT         | nat-met-sto-tro           | Snow storm                              | MH0039                |
-| OT         | nat-met-sto-tro           | Blizzard                                | MH0034                |
-| OT         | nat-met-sto-tro           | Acid rain                               | MH0033                |
+| OT         | nat-met-sto-bli           | Blizzard                                | MH0034                |
 | OT         | nat-ext-imp-air           | Airburst                                | ET0001                |
 | OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0002                |
-| OT         | nat-ext-spa-geo           | UV radiation                            | ET0003                |
-| OT         | nat-ext-imp-air           | Meteorite impact                        | ET0004                |
-| OT         | nat-ext-spa-geo           | Ionospheric storms                      | ET0005                |
-| OT         | nat-ext-spa-geo           | Radio blackout                          | ET0006                |
-| OT         | nat-ext-spa-geo           | Solar storm                             | ET0007                |
-| OT         | nat-ext-spa-geo           | Space hazard                            | ET0008                |
-| OT         | nat-ext-imp-air           | Near-Earth object                       | ET0009                |
+| OT         | nat-ext-spa-ene           | Energetic particles                     | ET0002                |
+| OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0006                |
+| OT         | nat-ext-spa-sho           | Shockwave                               | ET0008                |
+| OT         | nat-ext-imp-col           | Space object collision                  | ET0004                |
 
 ## Impact
 
