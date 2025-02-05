@@ -1,0 +1,68 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "idmc-event-32145",
+  "collection": "idmc-events",
+  "bbox": [
+    117.8902,
+    -2.4833,
+    117.8902,
+    -2.4833
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      117.8902,
+      -2.4833
+    ]
+  },
+  "properties": {
+    "title": "Tropical Cyclone Seroja",
+    "description": "Tropical Cyclone Seroja in Indonesia from April 4-5, 2021 causing 17,882 new displacements",
+    "datetime": "2021-04-04T00:00:00Z",
+    "start_datetime": "2021-04-04T00:00:00Z",
+    "end_datetime": "2021-04-05T00:00:00Z",
+    "monty:country_codes": [
+      "IDN"
+    ],
+    "monty:hazard_codes": [
+      "nat-met-sto-tro"
+    ],
+    "monty:episode_number": 1,
+    "monty:corr_id": "20210404T000000-IDN-MH-CYCLN-001-GCDB",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "keywords": [
+      "tropical cyclone",
+      "storm",
+      "weather related",
+      "indonesia",
+      "displacement"
+    ]
+  },
+  "assets": {
+    "source": {
+      "href": "https://www.internal-displacement.org/database",
+      "title": "IDMC GIDD Database",
+      "type": "text/html",
+      "roles": [
+        "source"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "idmc-event-32145.json",
+      "rel": "self"
+    },
+    {
+      "href": "idmc-events.json",
+      "rel": "collection"
+    }
+  ]
+}

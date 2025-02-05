@@ -110,7 +110,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[A-Z]{3}$"
+            "pattern": "^([A-Z]{3})|AB9$",
+            "$comment": "AB9 is a special code for the Abyei area used by IDMC"
           }
         },
         "monty:hazard_codes": {

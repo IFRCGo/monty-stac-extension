@@ -1,0 +1,75 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "idmc-idu-impact-168623-displaced",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -4.5269466666666665,
+      36.76350916666667
+    ]
+  },
+  "bbox": [
+    -4.5269466666666665,
+    36.76350916666667,
+    -4.5269466666666665,
+    36.76350916666667
+  ],
+  "properties": {
+    "datetime": "2024-11-14T00:00:00Z",
+    "start_datetime": "2024-11-13T00:00:00Z",
+    "end_datetime": "2024-11-14T00:00:00Z",
+    "title": "Disaster displacement for Spain: Flood - Andalusia (Málaga) - 13/11/2024",
+    "keywords": [
+      "Alhaurín de la Torre, Malaga, Andalusia, Spain",
+      "Álora, Malaga, Andalusia, Spain",
+      "Cártama, Malaga, Andalusia, Spain",
+      "Málaga, Malaga, Andalusia, Spain",
+      "Pizarra, Malaga, Andalusia, Spain",
+      "Vélez-Málaga, La Axarquía, Malaga, Andalusia, Spain",
+      "Disaster",
+      "Recommended figure",
+      "Local Authorities"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "nat-hyd-flo-flo"
+    ],
+    "monty:corr_id": "20241111-ESP-nat-cli-wil-for-1-GDBC",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "displaced_internal",
+      "value": 4210,
+      "unit": "count",
+      "estimate_type": "primary"
+    },
+    "roles": [
+      "source",
+      "impact"
+    ]
+  },
+  "assets": {},
+  "collection": "idmc-idu-impacts",
+  "links": [
+    {
+      "rel": "collection",
+      "type": "application/json",
+      "href": "./idmc-idu-impacts.json"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "./idmc-idu-impacts.json"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "./idmc-idu-impacts.json"
+    }
+  ]
+}
