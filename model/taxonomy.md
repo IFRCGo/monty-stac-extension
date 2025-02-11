@@ -539,9 +539,20 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | crops                  | Crops                                             |
 | women                  | Women                                             |
 | men                    | Men                                               |
+| children_0_4           | Children (Age 0-4)                                |
+| children_5_9           | Children (Age 5-9)                                |
+| children_10_14         | Children (Age 10-14)                              |
+| children_15_19         | Children (Age 15-19)                              |
+| adult_20_24            | Adult (Age 20-24)                                 |
+| adult_25_29            | Adult (Age 25-29)                                 |
+| adult_30_34            | Adult (Age 30-34)                                 |
+| adult_35_39            | Adult (Age 35-39)                                 |
+| adult_40_44            | Adult (Age 40-44)                                 |
+| adult_45_49            | Adult (Age 45-49)                                 |
+| adult_50_54            | Adult (Age 50-54)                                 |
+| adult_55_59            | Adult (Age 55-59)                                 |
+| adult_60_65            | Adult (Age 60-65)                                 |
 | elderly                | Elderly (Over 65)                                 |
-| children_under14       | Children (Under 14)                               |
-| children_under18       | Children (Under 18)                               |
 | wheelchair_users       | Wheelchair Users                                  |
 | roads                  | Roads                                             |
 | railways               | Train-lines                                       |
@@ -560,6 +571,7 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | ifrc_contribution      | IFRC Appeal Contribution                          |
 | ifrc_requested         | IFRC Appeal Requested                             |
 | alertscore             | Alertscore                                        |
+| households             | Households                                        |
 
 ### Impact Type
 
