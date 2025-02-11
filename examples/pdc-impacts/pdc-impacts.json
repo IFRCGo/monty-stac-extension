@@ -1,5 +1,5 @@
 {
-    "id": "idmc-idu-impacts",
+    "id": "pdc-impacts",
     "type": "Collection",
     "stac_version": "1.0.0",
     "stac_extensions": [
@@ -51,7 +51,7 @@
     },
     "links": [
         {
-            "href": "pdc-hazards.json",
+            "href": "pdc-impacts.json",
             "rel": "self"
         }
     ]
