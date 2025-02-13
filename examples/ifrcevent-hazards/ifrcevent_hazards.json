@@ -9,8 +9,8 @@
   "description": "A collection of IFRC source events loaded into Monty",
   "license": "unknown",
   "roles": [
-    "event",
-    "source"
+    "source",
+    "hazard"
   ],
   "providers": [
     {
@@ -48,8 +48,8 @@
       "maximum": "2019-07-10T13:44:56Z"
     },
     "roles": [
-      "event",
-      "source"
+      "source",
+      "hazard"
     ],
     "monty:country_codes": [
       "CHN",
