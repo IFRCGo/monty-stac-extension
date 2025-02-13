@@ -9,8 +9,8 @@
   "description": "A collection of GFD source hazards loaded into Monty",
   "license": "unknown",
   "roles": [
-    "event",
-    "source"
+    "source",
+    "hazard"
   ],
   "providers": [
     {
