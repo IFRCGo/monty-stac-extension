@@ -4,8 +4,8 @@
     "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "type": "Feature",
-  "id": "idmc-event-32145",
-  "collection": "idmc-events",
+  "id": "idmc-gidd-event-32145",
+  "collection": "idmc-gidd-events",
   "bbox": [
     117.8902,
     -2.4833,
@@ -57,11 +57,11 @@
   },
   "links": [
     {
-      "href": "idmc-event-32145.json",
+      "href": "idmc-gidd-event-32145.json",
       "rel": "self"
     },
     {
-      "href": "idmc-events.json",
+      "href": "idmc-gidd-events.json",
       "rel": "collection"
     }
   ]
