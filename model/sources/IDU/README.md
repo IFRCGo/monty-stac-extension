@@ -2,6 +2,10 @@
 
 The IDU(Internal Displacements Updates) tracks the number of the people who are internally displaced in a region or a country due to `disaster` or `conflict`.
 
+```text
+Note: As of now, we only deal with disaster type events.
+```
+
 ## Data Sources
 
 API: <https://helix-tools-api.idmcdb.org/external-api/>
