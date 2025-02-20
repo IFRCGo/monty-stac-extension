@@ -603,3 +603,5 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
 | displaced_total     | Displaced Persons (Internal & External)                   |
 | alertscore          | Alertscore                                                |
+| potentially_affected| Potentially Affected                                      |
+| highest_risk        | Highest Risk                                              |
