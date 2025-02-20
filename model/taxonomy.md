@@ -575,31 +575,33 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 
 ### Impact Type
 
-| Impact Type Code    | Impact Type Label                                         |
-| ------------------- | --------------------------------------------------------- |
-| unspecified         | Unspecified                                               |
-| unaffected          | Unaffected                                                |
-| damaged             | Damaged                                                   |
-| destroyed           | Destroyed                                                 |
-| potentially_damaged | Potentially Damaged                                       |
-| affected_total      | Total Affected                                            |
-| affected_direct     | Directly Affected                                         |
-| affected_indirect   | Indirectly Affected                                       |
-| death               | Death                                                     |
-| missing             | Missing                                                   |
-| injured             | Injured                                                   |
-| evacuated           | Evacuated                                                 |
-| relocated           | Relocated                                                 |
-| assisted            | Assisted (Recieved Aid/Support)                           |
-| shelter_emergency   | Emergency Sheltered                                       |
-| shelter_temporary   | Temporary Accommodated                                    |
-| shelter_longterm    | Long-Term Accommodated                                    |
-| in_need             | In Need                                                   |
-| targeted            | Targeted                                                  |
-| disrupted           | Disrupted                                                 |
-| cost                | Loss (Cost)                                               |
-| homeless            | Homeless                                                  |
-| displaced_internal  | Internally Displaced Persons (IDPs)                       |
-| displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
-| displaced_total     | Displaced Persons (Internal & External)                   |
-| alertscore          | Alertscore                                                |
+| Impact Type Code     | Impact Type Label                                         |
+| -------------------- | --------------------------------------------------------- |
+| unspecified          | Unspecified                                               |
+| unaffected           | Unaffected                                                |
+| damaged              | Damaged                                                   |
+| destroyed            | Destroyed                                                 |
+| potentially_damaged  | Potentially Damaged                                       |
+| affected_total       | Total Affected                                            |
+| affected_direct      | Directly Affected                                         |
+| affected_indirect    | Indirectly Affected                                       |
+| death                | Death                                                     |
+| missing              | Missing                                                   |
+| injured              | Injured                                                   |
+| evacuated            | Evacuated                                                 |
+| relocated            | Relocated                                                 |
+| assisted             | Assisted (Recieved Aid/Support)                           |
+| shelter_emergency    | Emergency Sheltered                                       |
+| shelter_temporary    | Temporary Accommodated                                    |
+| shelter_longterm     | Long-Term Accommodated                                    |
+| in_need              | In Need                                                   |
+| targeted             | Targeted                                                  |
+| disrupted            | Disrupted                                                 |
+| cost                 | Loss (Cost)                                               |
+| homeless             | Homeless                                                  |
+| displaced_internal   | Internally Displaced Persons (IDPs)                       |
+| displaced_external   | Refugees, Asylum Seekers and Externally Displaced Persons |
+| displaced_total      | Displaced Persons (Internal & External)                   |
+| alertscore           | Alertscore                                                |
+| potentially_affected | Potentially Affected                                      |
+| highest_risk         | Highest Risk                                              |
