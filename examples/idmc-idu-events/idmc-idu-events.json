@@ -1,0 +1,74 @@
+{
+  "id": "idmc-idu-events",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "title": "IDMC Internal Displacement Updates (IDU) Impacts",
+  "description": "Collection of impact items from IDMC's Internal Displacement Updates (IDU) dataset",
+  "license": "TBD",
+  "roles": [
+    "event",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "Internal Displacement Monitoring Centre",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://www.internal-displacement.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2024-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "nat-cli-wil-for",
+      "nat-hyd-flo-flo",
+      "nat-geo-mmd-sub",
+      "nat-hyd-mmw-lan"
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "./idmc-idu-events.json"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "./idmc-idu-events.json"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "../idmc-idu-events.json"
+    }
+  ]
+}
