@@ -4,8 +4,8 @@
     "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "type": "Collection",
-  "id": "idmc-events",
-  "title": "IDMC Source Events",
+  "id": "idmc-gidd-events",
+  "title": "IDMC GIDD Source Events",
   "description": "Global Internal Displacement Database (GIDD) Events",
   "license": "TBD",
   "roles": [
@@ -60,7 +60,7 @@
   },
   "links": [
     {
-      "href": "idmc-events.json",
+      "href": "idmc-gidd-events.json",
       "rel": "self"
     }
   ]
