@@ -223,7 +223,9 @@
                 "displaced_internal",
                 "displaced_external",
                 "displaced_total",
-                "alertscore"
+                "alertscore",
+                "potentially_affected",
+                "highest_risk"
               ]
             },
             "value": {
