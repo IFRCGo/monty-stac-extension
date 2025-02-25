@@ -1,0 +1,93 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "ibtracs-hazards",
+  "title": "IBTrACS Hazards",
+  "description": "A collection of tropical cyclone hazards from the International Best Track Archive for Climate Stewardship (IBTrACS)",
+  "license": "Public Domain",
+  "roles": [
+    "hazard"
+  ],
+  "providers": [
+    {
+      "name": "NOAA",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.ncei.noaa.gov/products/international-best-track-archive",
+      "email": "IBTrACS.Team@noaa.gov"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -70,
+          180,
+          70
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1841-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "1841-01-01T00:00:00Z",
+      "maximum": "2025-01-01T00:00:00Z"
+    },
+    "roles": [
+      "hazard"
+    ],
+    "monty:country_codes": [
+      "USA",
+      "JPN",
+      "PHL",
+      "CHN",
+      "AUS",
+      "IND",
+      "MDG",
+      "MEX",
+      "CUB"
+    ],
+    "monty:hazard_codes": [
+      "HM-PRECIP",
+      "MH0057"
+    ],
+    "monty:hazard_detail": {
+      "clusters": [
+        "nat-met-sto-tro"
+      ],
+      "severity_value": {
+        "minimum": 20,
+        "maximum": 185
+      },
+      "severity_unit": [
+        "knots"
+      ],
+      "pressure": {
+        "minimum": 870,
+        "maximum": 1020
+      },
+      "pressure_unit": [
+        "mb"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "ibtracs-hazards.json",
+      "rel": "self"
+    }
+  ]
+}
