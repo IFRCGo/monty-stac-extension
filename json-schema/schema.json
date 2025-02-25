@@ -110,14 +110,15 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[A-Z]{3}$"
+            "pattern": "^([A-Z]{3})|AB9$",
+            "$comment": "AB9 is a special code for the Abyei area used by IDMC"
           }
         },
         "monty:hazard_codes": {
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[A-Z]{2}(?:\\d{4}$){0,1}"
+            "pattern": "^([A-Z]{2}(?:\\d{4}$){0,1})|([a-z]{3}-[a-z]{3}-[a-z]{3}-[a-z]{3})|([A-Z]{2})$"
           }
         },
         "monty:corr_id": {
@@ -125,34 +126,122 @@
         },
         "monty:hazard_detail": {
           "type": "object",
+          "required": [
+            "cluster"
+          ],
           "properties": {
+            "cluster": {
+              "type": "string"
+            },
             "severity_value": {
               "type": "number"
             },
             "severity_unit": {
               "type": "string"
             },
+            "severity_label": {
+              "type": "string"
+            },
             "estimate_type": {
               "$ref": "#/definitions/estimate_type"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "monty:impact_detail": {
           "type": "object",
           "properties": {
             "category": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "people",
+                "crops",
+                "women",
+                "men",
+                "children_0_4",
+                "children_5_9",
+                "children_10_14",
+                "children_15_19",
+                "adult_20_24",
+                "adult_25_29",
+                "adult_30_34",
+                "adult_35_39",
+                "adult_40_44",
+                "adult_45_49",
+                "adult_50_54",
+                "adult_55_59",
+                "adult_60_64",
+                "elderly",
+                "wheelchair_users",
+                "roads",
+                "railways",
+                "vulnerable_employment",
+                "buildings",
+                "reconstruction_costs",
+                "hospitals",
+                "schools",
+                "education_centers",
+                "local_currency",
+                "global_currency",
+                "local_currency_adj",
+                "global_currency_adj",
+                "usd_uncertain",
+                "cattle",
+                "aid_general",
+                "ifrc_contribution",
+                "ifrc_requested",
+                "alertscore",
+                "total_affected",
+                "households"
+              ]
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "unspecified",
+                "unaffected",
+                "damaged",
+                "destroyed",
+                "potentially_damaged",
+                "affected_total",
+                "affected_direct",
+                "affected_indirect",
+                "death",
+                "missing",
+                "injured",
+                "evacuated",
+                "relocated",
+                "assisted",
+                "shelter_emergency",
+                "shelter_temporary",
+                "shelter_longterm",
+                "in_need",
+                "targeted",
+                "disrupted",
+                "cost",
+                "homeless",
+                "displaced_internal",
+                "displaced_external",
+                "displaced_total",
+                "alertscore",
+                "potentially_affected",
+                "highest_risk"
+              ]
             },
             "value": {
               "type": "number"
             },
             "unit": {
               "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            },
+            "description": {
+              "type": "string"
             }
-          }
+          },
+          "additionalProperties": false
         }
       },
       "patternProperties": {
@@ -254,6 +343,9 @@
           "contains": {
             "const": "hazard"
           }
+        },
+        "monty:hazard_codes": {
+          "maxItems": 1
         }
       }
     },

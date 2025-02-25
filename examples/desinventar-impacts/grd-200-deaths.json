@@ -1,0 +1,73 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "id": "desinventar-impact-200-deaths",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -61.49958299999997,
+          12.401528000000098
+        ],
+        [
+          -61.49958299999997,
+          12.54013800000007
+        ],
+        [
+          -61.3781919999999,
+          12.54013800000007
+        ],
+        [
+          -61.3781919999999,
+          12.401528000000098
+        ],
+        [
+          -61.49958299999997,
+          12.401528000000098
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -61.49958299999997,
+    12.401528000000098,
+    -61.3781919999999,
+    12.54013800000007
+  ],
+  "properties": {
+    "datetime": "1854-07-01T00:00:00Z",
+    "title": "Deaths from Cholera Epidemic in Carriacou",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "death",
+      "value": 386,
+      "unit": "count",
+      "estimate_type": "primary"
+    },
+    "monty:country_codes": [
+      "GRD"
+    ],
+    "monty:hazard_codes": [
+      "BH0001"
+    ],
+    "monty:corr_id": "18540701T000000Z-GRD-BH-EPID-001-GCDB",
+    "roles": [
+      "impact",
+      "source"
+    ]
+  },
+  "assets": {},
+  "collection": "desinventar-impacts",
+  "links": [
+    {
+      "rel": "collection",
+      "href": "../desinventar-impacts.json",
+      "type": "application/json",
+      "title": "Desinventar Impacts"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "pdc-impacts",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "title": "PDC Impacts",
+  "description": "Collection of impact items from PDU",
+  "license": "TBD",
+  "roles": [
+    "impact",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "Pacific Disaster Center",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.pdc.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2024-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "nat-cli-wil-for"
+    ]
+  },
+  "links": [
+    {
+      "href": "pdc-impacts.json",
+      "rel": "self"
+    }
+  ]
+}

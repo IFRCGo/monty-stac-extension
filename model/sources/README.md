@@ -5,3 +5,5 @@ This folder identifies the sources of data used for Monty. This has been initiat
 - [GDACS](./GDACS/README.md)
 - [GLIDE](./GLIDE/README.md)
 - [EM-DAT](./EM-DAT/README.md)
+- [USGS](./USGS/README.md)
+- [DesInventar](./DesInventar/README.md)
