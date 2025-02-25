@@ -1,0 +1,85 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "ibtracs-events",
+  "title": "IBTrACS Source Events",
+  "description": "International Best Track Archive for Climate Stewardship (IBTrACS) - A global database of tropical cyclone best track data",
+  "license": "PDM",
+  "roles": [
+    "event",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "NOAA",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.ncei.noaa.gov/products/international-best-track-archive",
+      "email": "IBTrACS.Team@noaa.gov"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -70,
+          180,
+          70
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1841-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "1841-01-01T00:00:00Z",
+      "maximum": "2025-01-01T00:00:00Z"
+    },
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "USA",
+      "JPN",
+      "PHL",
+      "CHN",
+      "AUS",
+      "IND",
+      "MDG",
+      "MEX",
+      "CUB",
+      "JAM",
+      "HTI",
+      "DOM"
+    ],
+    "monty:hazard_codes": [
+      "HM-PRECIP",
+      "MH0057",
+      "nat-met-sto-tro",
+      "TC"
+    ]
+  },
+  "links": [
+    {
+      "href": "ibtracs-events.json",
+      "rel": "self"
+    },
+    {
+      "href": "2024178N09335.json",
+      "rel": "item"
+    }
+  ]
+}
