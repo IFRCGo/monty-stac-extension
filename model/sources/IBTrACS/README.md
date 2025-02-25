@@ -79,21 +79,21 @@ This approach ensures that the event item always represents the complete, up-to-
 
 Here is a table with the fields that are mapped from the IBTrACS data to the STAC event:
 
-| STAC field                                                                                                             | IBTrACS field                | Description                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | SID                          | Unique storm identifier assigned by IBTrACS algorithm                                                  |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                              | Derived from track positions | Bounding box of the complete storm track (updated as new positions are added)                          |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | LAT, LON                     | LineString geometry of the complete storm track (updated as new positions are added)                   |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `ibtracs-events`             | The collection for IBTrACS events                                                                      |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                       | NAME                         | Name of the storm if available (updated if the storm is named after creation)                          |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                 | Derived                      | Description of the storm including basin, season, and maximum intensity (updated as intensity changes) |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | ISO_TIME (first position)    | Time of the first observation in UTC ISO 8601 format                                                   |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | ISO_TIME (first position)    | Start time of the storm in UTC ISO 8601 format                                                         |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | ISO_TIME (latest position)   | End time of the storm in UTC ISO 8601 format (updated as new positions are added)                      |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                                           | Derived from track positions | ISO3 codes of countries affected by the storm track (updated as new countries are affected)            |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Fixed as tropical cyclone    | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                                                 |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                               |
-| [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                        |
+| STAC field                                                                                                             | IBTrACS field                | Description                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | SID                          | Unique storm identifier assigned by IBTrACS algorithm                                                                                                                                                                  |
+| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                              | Derived from track positions | Bounding box of the complete storm track (updated as new positions are added)                                                                                                                                          |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | LAT, LON                     | LineString geometry of the complete storm track (updated as new positions are added)                                                                                                                                   |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `ibtracs-events`             | The collection for IBTrACS events                                                                                                                                                                                      |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                       | NAME                         | Name of the storm if available (updated if the storm is named after creation)                                                                                                                                          |
+| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                 | Derived                      | Description of the storm including basin, season, and maximum intensity (updated as intensity changes)                                                                                                                 |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | ISO_TIME (first position)    | Time of the first observation in UTC ISO 8601 format                                                                                                                                                                   |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | ISO_TIME (first position)    | Start time of the storm in UTC ISO 8601 format                                                                                                                                                                         |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | ISO_TIME (latest position)   | End time of the storm in UTC ISO 8601 format (updated as new positions are added)                                                                                                                                      |
+| [monty:country_codes](../../../README.md#montycountry_codes)                                                           | Derived from track positions | ISO3 codes of countries affected by the storm track (updated as new countries are affected). For tropical cyclones initiated in international waters, the special code 'XYZ' should be used as the first country code. |
+| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Fixed as tropical cyclone    | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                                                                                                                                                                 |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                                                                                                                                               |
+| [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                                                                                                                                        |
 
 ## Collection: `ibtracs-hazards`
 
@@ -157,6 +157,47 @@ For a tropical cyclone with positions at times T1, T2, T3, ..., Tn:
 
 This creates a sequence of hazard items that show the progressive development of the storm track over time.
 
+### Example Items
+
+The following example items have been created to demonstrate the IBTrACS data representation in STAC format:
+
+#### Event Example
+
+An event item for Tropical Cyclone BERYL (2024) from the North Atlantic basin:
+- [2024178N09335.json](../../../examples/ibtracs-events/2024178N09335.json)
+- Represents the entire lifecycle of the storm with a LineString geometry of all positions
+- Includes metadata like name, dates, affected countries, and maximum intensity (Category 4 hurricane with 145 mph winds)
+- Time period: June 26, 2024 to July 11, 2024
+- Affected countries: USA, MEX, CUB, JAM, HTI, DOM
+
+#### Hazard Examples
+
+Four hazard items representing different stages of BERYL's development:
+
+1. **Initial Formation (Tropical Depression)**
+   - [2024178N09335-hazard-20240626T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240626T000000Z.json)
+   - Initial position with 15 knots wind speed and 1013 mb pressure
+   - Point geometry at the storm's origin
+
+2. **Tropical Storm Stage**
+   - [2024178N09335-hazard-20240629T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240629T000000Z.json)
+   - LineString geometry with positions from June 26-29, 2024
+   - 45 knots wind speed and 1000 mb pressure
+
+3. **Peak Intensity (Category 4 Hurricane)**
+   - [2024178N09335-hazard-20240702T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240702T000000Z.json)
+   - LineString geometry with positions from June 26-July 2, 2024
+   - 125 knots (145 mph) wind speed and 935 mb pressure
+   - Affected countries: JAM, HTI, DOM
+
+4. **Landfall in Texas (Category 1 Hurricane)**
+   - [2024178N09335-hazard-20240708T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240708T000000Z.json)
+   - LineString geometry with positions from June 26-July 8, 2024
+   - 75 knots (85 mph) wind speed and 975 mb pressure
+   - Affected countries: USA, MEX, CUB, JAM, HTI, DOM
+
+These examples demonstrate how IBTrACS data can be represented at different stages of a tropical cyclone's lifecycle, from formation to landfall, with appropriate metadata and geometries.
+
 ### Important Caveats
 
 1. **Wind Speed Reporting Differences**: Wind speeds are reported differently by various international agencies. Some use 1-minute averaging periods (US agencies), while others use 10-minute periods (most other agencies). There is no simple global conversion between these wind speeds.
@@ -176,3 +217,29 @@ This creates a sequence of hazard items that show the progressive development of
    - Aircraft reconnaissance (late 1940s-present, but only in North Atlantic since 1987)
    - Satellite observations (1960s-present)
    - Microwave satellites (late 1980s-present)
+
+### Correlation Identifier Format
+
+The [monty:corr_id](../../../README.md#montycorr_id) field follows a specific format for tropical cyclones:
+
+```text
+[datetime]-[country]-[hazard type]-[sequence]-[source]
+```
+
+For example: `20240626T000000-USA-MET-TC-001-GCDB`
+
+Where:
+- `[datetime]`: The start time of the event in UTC ISO 8601 format (e.g., `20240626T000000`)
+- `[country]`: The ISO3 country code of the affected country (e.g., `USA`)
+- `[hazard type]`: The type of hazard, always `MET-TC` for tropical cyclones
+- `[sequence]`: A sequence number, typically `001`
+- `[source]`: The source of the data, always `GCDB` for Global Crisis Data Bank
+
+**Special Case for International Waters**:
+For tropical cyclones that initiate in international waters, the special code `XYZ` should be used as the country code in the correlation identifier. For example:
+
+```text
+20240626T000000-XYZ-MET-TC-001-GCDB
+```
+
+This special code indicates that the tropical cyclone formed in international waters before potentially affecting any countries.

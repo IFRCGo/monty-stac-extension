@@ -1,0 +1,304 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "2024178N09335-hazard-20240702T000000Z",
+  "collection": "ibtracs-hazards",
+  "bbox": [
+    -65.9,
+    8.9,
+    -25.5,
+    13.8
+  ],
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -25.5,
+        9.4
+      ],
+      [
+        -26.2,
+        9.5
+      ],
+      [
+        -27,
+        9.6
+      ],
+      [
+        -27.9,
+        9.7
+      ],
+      [
+        -28.8,
+        9.8
+      ],
+      [
+        -29.5,
+        9.9
+      ],
+      [
+        -30.1,
+        9.9
+      ],
+      [
+        -30.8,
+        10
+      ],
+      [
+        -31.5,
+        10
+      ],
+      [
+        -32,
+        10
+      ],
+      [
+        -32.5,
+        10
+      ],
+      [
+        -33.1,
+        10
+      ],
+      [
+        -33.8,
+        9.9
+      ],
+      [
+        -34.6,
+        9.8
+      ],
+      [
+        -35.4,
+        9.7
+      ],
+      [
+        -36,
+        9.6
+      ],
+      [
+        -36.6,
+        9.5
+      ],
+      [
+        -37.3,
+        9.4
+      ],
+      [
+        -38,
+        9.2
+      ],
+      [
+        -38.7,
+        9
+      ],
+      [
+        -39.4,
+        8.9
+      ],
+      [
+        -40.2,
+        8.9
+      ],
+      [
+        -41,
+        9
+      ],
+      [
+        -41.8,
+        9.1
+      ],
+      [
+        -42.7,
+        9.2
+      ],
+      [
+        -43.4,
+        9.2
+      ],
+      [
+        -44.1,
+        9
+      ],
+      [
+        -44.9,
+        8.9
+      ],
+      [
+        -45.9,
+        8.9
+      ],
+      [
+        -46.9,
+        9
+      ],
+      [
+        -47.7,
+        9.1
+      ],
+      [
+        -48.5,
+        9.2
+      ],
+      [
+        -49.2,
+        9.3
+      ],
+      [
+        -50.3,
+        9.5
+      ],
+      [
+        -51.2,
+        9.8
+      ],
+      [
+        -52.2,
+        9.9
+      ],
+      [
+        -53.1,
+        9.8
+      ],
+      [
+        -54,
+        9.8
+      ],
+      [
+        -54.9,
+        9.9
+      ],
+      [
+        -55.7,
+        10
+      ],
+      [
+        -56.5,
+        10.2
+      ],
+      [
+        -57.3,
+        10.5
+      ],
+      [
+        -58.2,
+        10.6
+      ],
+      [
+        -59,
+        10.8
+      ],
+      [
+        -59.7,
+        11
+      ],
+      [
+        -60.5,
+        11.2
+      ],
+      [
+        -61.4,
+        11.7
+      ],
+      [
+        -62.3,
+        12.1
+      ],
+      [
+        -63.1,
+        12.5
+      ],
+      [
+        -64,
+        12.9
+      ],
+      [
+        -64.9,
+        13.3
+      ],
+      [
+        -65.9,
+        13.8
+      ]
+    ]
+  },
+  "properties": {
+    "title": "Tropical Cyclone BERYL - Peak Intensity",
+    "description": "Tropical Cyclone BERYL (2024) in the North Atlantic basin at peak intensity on July 2, 2024. Current status: Category 4 Hurricane with 125 knots (145 mph) wind speed and minimum pressure of 935 mb.",
+    "datetime": "2024-07-02T00:00:00Z",
+    "start_datetime": "2024-06-26T00:00:00Z",
+    "end_datetime": "2024-07-02T00:00:00Z",
+    "monty:country_codes": [
+      "JAM",
+      "HTI",
+      "DOM"
+    ],
+    "monty:hazard_codes": [
+      "MH0057"
+    ],
+    "monty:hazard_detail": {
+      "cluster": "nat-met-sto-tro",
+      "severity_value": 125,
+      "severity_unit": "knots"
+    },
+    "monty:corr_id": "20240626T000000-XYZ-MET-TC-001-GCDB",
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "keywords": [
+      "tropical cyclone",
+      "hurricane",
+      "major hurricane",
+      "category 4",
+      "BERYL",
+      "2024",
+      "North Atlantic",
+      "Caribbean"
+    ]
+  },
+  "assets": {
+    "data": {
+      "href": "https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/csv/ibtracs.NA.list.v04r00.csv",
+      "title": "IBTrACS North Atlantic Basin Data",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ]
+    },
+    "documentation": {
+      "href": "https://www.ncei.noaa.gov/products/international-best-track-archive",
+      "title": "IBTrACS Documentation",
+      "type": "text/html",
+      "roles": [
+        "documentation"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "2024178N09335-hazard-20240702T000000Z.json",
+      "rel": "self"
+    },
+    {
+      "href": "ibtracs-hazards.json",
+      "rel": "collection"
+    },
+    {
+      "href": "https://www.ncei.noaa.gov/products/international-best-track-archive",
+      "rel": "via"
+    },
+    {
+      "href": "../ibtracs-events/2024178N09335.json",
+      "rel": "related",
+      "roles": [
+        "event",
+        "source"
+      ],
+      "type": "application/json"
+    }
+  ]
+}

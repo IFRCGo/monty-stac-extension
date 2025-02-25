@@ -58,18 +58,23 @@
       "IND",
       "MDG",
       "MEX",
-      "CUB"
+      "CUB",
+      "JAM",
+      "HTI",
+      "DOM"
     ],
     "monty:hazard_codes": [
       "HM-PRECIP",
-      "MH0057"
+      "MH0057",
+      "nat-met-sto-tro",
+      "TC"
     ],
     "monty:hazard_detail": {
       "clusters": [
         "nat-met-sto-tro"
       ],
       "severity_value": {
-        "minimum": 20,
+        "minimum": 15,
         "maximum": 185
       },
       "severity_unit": [
@@ -88,6 +93,22 @@
     {
       "href": "ibtracs-hazards.json",
       "rel": "self"
+    },
+    {
+      "href": "2024178N09335-hazard-20240626T000000Z.json",
+      "rel": "item"
+    },
+    {
+      "href": "2024178N09335-hazard-20240629T000000Z.json",
+      "rel": "item"
+    },
+    {
+      "href": "2024178N09335-hazard-20240702T000000Z.json",
+      "rel": "item"
+    },
+    {
+      "href": "2024178N09335-hazard-20240708T000000Z.json",
+      "rel": "item"
     }
   ]
 }

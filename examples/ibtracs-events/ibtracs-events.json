@@ -60,17 +60,26 @@
       "IND",
       "MDG",
       "MEX",
-      "CUB"
+      "CUB",
+      "JAM",
+      "HTI",
+      "DOM"
     ],
     "monty:hazard_codes": [
       "HM-PRECIP",
-      "MH0057"
+      "MH0057",
+      "nat-met-sto-tro",
+      "TC"
     ]
   },
   "links": [
     {
       "href": "ibtracs-events.json",
       "rel": "self"
+    },
+    {
+      "href": "2024178N09335.json",
+      "rel": "item"
     }
   ]
 }
