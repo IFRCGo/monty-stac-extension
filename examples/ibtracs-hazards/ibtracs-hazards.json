@@ -7,7 +7,7 @@
   "id": "ibtracs-hazards",
   "title": "IBTrACS Hazards",
   "description": "A collection of tropical cyclone hazards from the International Best Track Archive for Climate Stewardship (IBTrACS)",
-  "license": "Public Domain",
+  "license": "PDM",
   "roles": [
     "hazard"
   ],

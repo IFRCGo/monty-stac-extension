@@ -7,7 +7,7 @@
   "id": "ibtracs-events",
   "title": "IBTrACS Source Events",
   "description": "International Best Track Archive for Climate Stewardship (IBTrACS) - A global database of tropical cyclone best track data",
-  "license": "Public Domain",
+  "license": "PDM",
   "roles": [
     "event",
     "source"
