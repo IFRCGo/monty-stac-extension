@@ -435,7 +435,7 @@
       "severity_value": 75,
       "severity_unit": "knots"
     },
-    "monty:corr_id": "20240626T000000-XYZ-MET-TC-001-GCDB",
+    "monty:corr_id": "20240626T000000-XYZ-NAT-MET-STO-TRO-001-GCDB",
     "roles": [
       "hazard",
       "source"

@@ -518,7 +518,7 @@
     "monty:hazard_codes": [
       "MH0057"
     ],
-    "monty:corr_id": "20240626T000000-XYZ-MET-TC-001-GCDB",
+    "monty:corr_id": "20240626T000000-XYZ-NAT-MET-STO-TRO-001-GCDB",
     "roles": [
       "event",
       "source"

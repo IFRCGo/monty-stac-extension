@@ -226,12 +226,12 @@ The [monty:corr_id](../../../README.md#montycorr_id) field follows a specific fo
 [datetime]-[country]-[hazard type]-[sequence]-[source]
 ```
 
-For example: `20240626T000000-USA-MET-TC-001-GCDB`
+For example: `20240626T000000-USA-NAT-MET-STO-TRO-001-GCDB`
 
 Where:
 - `[datetime]`: The start time of the event in UTC ISO 8601 format (e.g., `20240626T000000`)
 - `[country]`: The ISO3 country code of the affected country (e.g., `USA`)
-- `[hazard type]`: The type of hazard, always `MET-TC` for tropical cyclones
+- `[hazard type]`: The type of hazard, always `NAT-MET-STO-TRO` for tropical cyclones
 - `[sequence]`: A sequence number, typically `001`
 - `[source]`: The source of the data, always `GCDB` for Global Crisis Data Bank
 
@@ -239,7 +239,7 @@ Where:
 For tropical cyclones that initiate in international waters, the special code `XYZ` should be used as the country code in the correlation identifier. For example:
 
 ```text
-20240626T000000-XYZ-MET-TC-001-GCDB
+20240626T000000-XYZ-NAT-MET-STO-TRO-001-GCDB
 ```
 
 This special code indicates that the tropical cyclone formed in international waters before potentially affecting any countries.
