@@ -122,7 +122,7 @@ More information about the correlation identifier is available in the [event cor
 ##### monty:hazard_detail
 
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
-The following fields are available in the object:
+The following defined fields are available in the object:
 
 | Field Name     | Type   | Description                                                                                                          |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
@@ -130,6 +130,9 @@ The following fields are available in the object:
 | severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
 | severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
 | estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
+
+Any other field can be added to the object to provide more details about the hazard.
+For instance, `category` and  `pressure` can be added to provide the category and the pressure of a cyclone.
 
 ##### monty:impact_detail
 

@@ -146,7 +146,7 @@
               "$ref": "#/definitions/estimate_type"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         },
         "monty:impact_detail": {
           "type": "object",
