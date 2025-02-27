@@ -6,6 +6,61 @@
   "type": "Collection",
   "id": "desinventar-events",
   "description": "Events from the DesInventar disaster loss database",
+  "roles": [
+    "event",
+    "source"
+  ],
+  "title": "DesInventar Events",
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "DesInventar",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.desinventar.net/",
+      "email": "undrr-bonn@un.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1800-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "2015-06-23T00:00:00Z",
+      "maximum": "2019-07-10T13:44:56Z"
+    },
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "CHN",
+      "SPN"
+    ],
+    "monty:hazard_codes": [
+      "MH0004",
+      "MH0005",
+      "MH0006"
+    ]
+  },
   "links": [
     {
       "rel": "self",
@@ -32,27 +87,5 @@
       "href": "./grd-201.json",
       "type": "application/json"
     }
-  ],
-  "title": "DesInventar Events",
-  "license": "proprietary",
-  "extent": {
-    "spatial": {
-      "bbox": [
-        [
-          -180,
-          -90,
-          180,
-          90
-        ]
-      ]
-    },
-    "temporal": {
-      "interval": [
-        [
-          "1800-01-01T00:00:00Z",
-          null
-        ]
-      ]
-    }
-  }
+  ]
 }
