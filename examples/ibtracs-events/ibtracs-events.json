@@ -8,6 +8,24 @@
   "title": "IBTrACS Source Events",
   "description": "International Best Track Archive for Climate Stewardship (IBTrACS) - A global database of tropical cyclone best track data",
   "license": "PDM",
+  "keywords": [
+    "ibtracs",
+    "tropical cyclone",
+    "hurricane",
+    "typhoon",
+    "cyclonic storm",
+    "best track",
+    "storm track",
+    "wind speed",
+    "storm intensity",
+    "noaa",
+    "meteorology",
+    "climate",
+    "weather",
+    "coastal hazard",
+    "storm surge",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

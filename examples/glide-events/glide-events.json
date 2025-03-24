@@ -8,6 +8,23 @@
   "title": "GLIDE Source Events",
   "description": "A collection of GLIDE source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "glide",
+    "disaster identifier",
+    "global identifier",
+    "disaster event",
+    "disaster database",
+    "standardization",
+    "adrc",
+    "asian disaster reduction center",
+    "disaster reference",
+    "disaster registry",
+    "earthquake",
+    "flood",
+    "tropical cyclone",
+    "drought",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

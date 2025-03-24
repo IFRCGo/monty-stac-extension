@@ -8,6 +8,24 @@
   "title": "GDACS Hazards",
   "description": "A collection of GDACS hazards loaded into Monty",
   "license": "MIT",
+  "keywords": [
+    "gdacs",
+    "hazard",
+    "natural hazard",
+    "hazard footprint",
+    "hazard severity",
+    "earthquake intensity",
+    "flood extent",
+    "cyclone path",
+    "tsunami wave height",
+    "volcanic ash cloud",
+    "drought severity",
+    "wildfire extent",
+    "early warning",
+    "risk assessment",
+    "hazard modeling",
+    "global"
+  ],
   "roles": [
     "hazard"
   ],

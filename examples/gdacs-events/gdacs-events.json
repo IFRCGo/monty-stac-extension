@@ -8,6 +8,25 @@
   "title": "GDACS Source Events",
   "description": "Global Disaster Alert and Coordination System (GDACS)",
   "license": "MIT",
+  "keywords": [
+    "gdacs",
+    "disaster alert",
+    "early warning",
+    "coordination",
+    "emergency response",
+    "real-time",
+    "disaster event",
+    "united nations",
+    "european commission",
+    "global",
+    "earthquake",
+    "flood",
+    "tropical cyclone",
+    "tsunami",
+    "volcanic eruption",
+    "drought",
+    "wildfire"
+  ],
   "roles": [
     "event",
     "source"

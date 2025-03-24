@@ -5,14 +5,46 @@
   ],
   "type": "Collection",
   "id": "desinventar-impacts",
-  "description": "Impact records from the DesInventar disaster loss database",
+  "description": "Impact records mapped from the DesInventar disaster loss database. More information on the DesInventar mapping in Monty can be found in the [DesInventar Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#impact-item).",
   "roles": [
     "source",
     "impact"
   ],
   "title": "DesInventar Impacts",
   "license": "proprietary",
-  "r"{    180,
+  "keywords": [
+    "desinventar",
+    "disaster",
+    "impact",
+    "loss",
+    "damage",
+    "casualties",
+    "affected",
+    "economic loss",
+    "infrastructure damage",
+    "housing damage",
+    "disaster loss",
+    "latin america",
+    "undrr",
+    "disaster impact assessment"
+  ],
+  "providers": [
+    {
+      "name": "DesInventar",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.desinventar.net/",
+      "email": "undrr-bonn@un.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
           90
         ]
       ]
@@ -34,24 +66,8 @@
     "roles": [
       "impact",
       "source"
-    ],al": [
-        [
-          "1800-01-01T00:00:00Z",
-          null
-        ]
-      ]
-    }
-  },
-  "summaries": {
-    "datetime": {
-      "minimum": "2015-06-23T00:00:00Z",
-      "mximum": "2019-07-10T13:44:56Z"
-    },
-    "roes
-      "impact",
-      "source"
     ],
- "mo"monty:country_codes":nty:country_codes": [
+    "monty:country_codes": [
       "ARG",
       "BOL",
       "BRA",
@@ -132,6 +148,12 @@
       "rel": "item",
       "href": "./grd-200-deaths.json",
       "type": "application/json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#impact-item",
+      "type": "text/html",
+      "title": "DesInventar Impact Item Source Mappings"
     }
   ]
 }

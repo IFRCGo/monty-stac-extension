@@ -8,6 +8,21 @@
   "title": "EM-DAT Source Events",
   "description": "Global Disaster Events from the Emergency Events Database (EM-DAT).",
   "license": "MIT",
+  "keywords": [
+    "emdat",
+    "cred",
+    "disaster",
+    "event",
+    "natural hazard",
+    "technological disaster",
+    "global",
+    "emergency",
+    "disaster database",
+    "disaster epidemiology",
+    "humanitarian",
+    "disaster risk reduction",
+    "disaster management"
+  ],
   "roles": [
     "event",
     "source"

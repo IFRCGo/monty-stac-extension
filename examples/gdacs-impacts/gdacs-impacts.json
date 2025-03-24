@@ -8,6 +8,23 @@
   "title": "GDACS Impacts",
   "description": "A collection of GDACS impacts loaded into Monty",
   "license": "MIT",
+  "keywords": [
+    "gdacs",
+    "impact",
+    "disaster impact",
+    "casualties",
+    "fatalities",
+    "affected population",
+    "displaced",
+    "infrastructure damage",
+    "economic loss",
+    "sendai framework",
+    "impact assessment",
+    "humanitarian needs",
+    "emergency response",
+    "disaster management",
+    "global"
+  ],
   "roles": [
     "impact"
   ],

@@ -8,6 +8,23 @@
   "title": "EM-DAT Source Impacts",
   "description": "Global Disaster Events from the Emergency Events Database (EM-DAT).",
   "license": "MIT",
+  "keywords": [
+    "emdat",
+    "cred",
+    "impact",
+    "disaster impact",
+    "casualties",
+    "fatalities",
+    "affected population",
+    "economic loss",
+    "damage assessment",
+    "infrastructure damage",
+    "housing damage",
+    "displaced",
+    "humanitarian needs",
+    "disaster loss database",
+    "global"
+  ],
   "roles": [
     "impact",
     "source"

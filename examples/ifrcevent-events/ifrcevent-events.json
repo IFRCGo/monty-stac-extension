@@ -8,6 +8,23 @@
   "title": "IFRC Source Events",
   "description": "A collection of IFRC source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "ifrc",
+    "red cross",
+    "red crescent",
+    "humanitarian",
+    "disaster response",
+    "emergency",
+    "disaster event",
+    "disaster management",
+    "humanitarian assistance",
+    "emergency appeal",
+    "disaster relief",
+    "ifrc go",
+    "humanitarian action",
+    "disaster preparedness",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

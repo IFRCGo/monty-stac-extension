@@ -8,6 +8,23 @@
   "title": "IDMC GIDD Source Events",
   "description": "Global Internal Displacement Database (GIDD) Events",
   "license": "TBD",
+  "keywords": [
+    "idmc",
+    "gidd",
+    "internal displacement",
+    "forced displacement",
+    "disaster displacement",
+    "conflict displacement",
+    "displacement monitoring",
+    "humanitarian",
+    "migration",
+    "displacement event",
+    "displacement tracking",
+    "displacement data",
+    "global displacement",
+    "displacement statistics",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

@@ -8,6 +8,24 @@
   "title": "GLIDE Source Hazards",
   "description": "A collection of GLIDE source hazards loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "glide",
+    "hazard",
+    "natural hazard",
+    "hazard classification",
+    "hazard type",
+    "hazard severity",
+    "earthquake magnitude",
+    "flood depth",
+    "cyclone intensity",
+    "drought severity",
+    "wildfire extent",
+    "volcanic activity",
+    "tsunami height",
+    "landslide",
+    "disaster risk reduction",
+    "global"
+  ],
   "roles": [
     "hazard",
     "source"

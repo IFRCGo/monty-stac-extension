@@ -8,6 +8,23 @@
   "title": "GFD Source Events",
   "description": "A collection of GFD source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "gfd",
+    "global flood database",
+    "flood",
+    "inundation",
+    "flood event",
+    "flood monitoring",
+    "remote sensing",
+    "satellite imagery",
+    "water extent",
+    "floodplain",
+    "flood detection",
+    "flood mapping",
+    "surface water",
+    "hydrological hazard",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

@@ -8,6 +8,24 @@
   "title": "EM-DAT Source Hazards",
   "description": "Global Disaster Events from the Emergency Events Database (EM-DAT).",
   "license": "MIT",
+  "keywords": [
+    "emdat",
+    "cred",
+    "hazard",
+    "natural hazard",
+    "technological hazard",
+    "earthquake",
+    "flood",
+    "storm",
+    "drought",
+    "wildfire",
+    "volcanic activity",
+    "landslide",
+    "extreme temperature",
+    "epidemic",
+    "global",
+    "disaster risk"
+  ],
   "roles": [
     "hazard",
     "source"

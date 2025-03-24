@@ -8,6 +8,23 @@
   "title": "Reference Events",
   "description": "A collection of reference events loaded into Monty",
   "license": "Apache-2.0",
+  "keywords": [
+    "reference",
+    "disaster event",
+    "canonical event",
+    "event registry",
+    "disaster database",
+    "ifrc",
+    "red cross",
+    "red crescent",
+    "humanitarian",
+    "disaster management",
+    "event correlation",
+    "disaster response",
+    "event identification",
+    "global",
+    "monty"
+  ],
   "roles": [
     "event",
     "reference"

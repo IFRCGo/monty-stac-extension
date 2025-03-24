@@ -5,12 +5,12 @@
   ],
   "type": "Collection",
   "id": "desinventar-events",
-  "description": "Events from the DesInventar disaster loss database",
+  "description": "Events mapped from the DesInventar disaster loss database. More information on the DesInventar mapping in Monty can be found in the [DesInventar Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#event-item).",
   "roles": [
     "event",
     "source"
   ],
-  "title": "DesInventar Events",
+  "title": "DesInventar Mapped Events",
   "license": "proprietary",
   "keywords": [
     "desinventar",
@@ -61,7 +61,7 @@
   "summaries": {
     "datetime": {
       "minimum": "2015-06-23T00:00:00Z",
-      "maximum": "2019-07-10T13:44:56Z"
+      "maximum": "2024-07-10T13:44:56Z"
     },
     "roles": [
       "event",
@@ -143,6 +143,12 @@
       "rel": "root",
       "href": "../catalog.json",
       "type": "application/json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#event-item",
+      "type": "text/html",
+      "title": "DesInventar Event Item Source Mappings"
     },
     {
       "rel": "item",

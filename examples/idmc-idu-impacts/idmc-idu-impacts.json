@@ -8,6 +8,23 @@
   "title": "IDMC Internal Displacement Updates (IDU) Impacts",
   "description": "Collection of impact items from IDMC's Internal Displacement Updates (IDU) dataset",
   "license": "TBD",
+  "keywords": [
+    "idmc",
+    "idu",
+    "internal displacement",
+    "displacement impact",
+    "displacement figures",
+    "displaced persons",
+    "displacement statistics",
+    "humanitarian impact",
+    "disaster displacement",
+    "conflict displacement",
+    "displacement assessment",
+    "real-time displacement",
+    "displacement reporting",
+    "displacement data",
+    "global"
+  ],
   "roles": [
     "impact",
     "source"

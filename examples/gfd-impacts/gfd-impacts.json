@@ -8,6 +8,23 @@
   "title": "GFD Impacts",
   "description": "A collection of GFD impacts loaded into Monty",
   "license": "MIT",
+  "keywords": [
+    "gfd",
+    "global flood database",
+    "flood impact",
+    "flood damage",
+    "flood casualties",
+    "affected population",
+    "displaced population",
+    "economic loss",
+    "infrastructure damage",
+    "agricultural damage",
+    "property damage",
+    "flood recovery",
+    "flood response",
+    "impact assessment",
+    "global"
+  ],
   "roles": [
     "impact"
   ],

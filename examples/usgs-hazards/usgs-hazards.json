@@ -9,6 +9,24 @@
   "title": "USGS Hazards",
   "description": "A collection of hazards from the United States Geological Survey (USGS) ShakeMap products",
   "license": "Apache-2.0",
+  "keywords": [
+    "usgs",
+    "shakemap",
+    "earthquake hazard",
+    "ground motion",
+    "shaking intensity",
+    "peak ground acceleration",
+    "peak ground velocity",
+    "modified mercalli intensity",
+    "seismic hazard",
+    "ground shaking",
+    "liquefaction",
+    "landslide potential",
+    "earthquake damage",
+    "seismic risk",
+    "geological survey",
+    "global"
+  ],
   "roles": [
     "hazard",
     "source"

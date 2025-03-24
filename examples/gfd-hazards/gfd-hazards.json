@@ -8,6 +8,23 @@
   "title": "GFD Source Hazards",
   "description": "A collection of GFD source hazards loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "gfd",
+    "global flood database",
+    "flood hazard",
+    "flood extent",
+    "flood depth",
+    "inundation area",
+    "water level",
+    "flood severity",
+    "flood duration",
+    "flood frequency",
+    "flood risk",
+    "flood zone",
+    "hydrological hazard",
+    "water hazard",
+    "global"
+  ],
   "roles": [
     "source",
     "hazard"

@@ -9,6 +9,24 @@
   "title": "USGS Events",
   "description": "A collection of events from the United States Geological Survey (USGS)",
   "license": "Apache-2.0",
+  "keywords": [
+    "usgs",
+    "earthquake",
+    "seismic activity",
+    "seismology",
+    "magnitude",
+    "epicenter",
+    "hypocenter",
+    "fault",
+    "tectonic",
+    "plate boundary",
+    "aftershock",
+    "foreshock",
+    "ground motion",
+    "seismic hazard",
+    "geological survey",
+    "global"
+  ],
   "roles": [
     "event",
     "source"

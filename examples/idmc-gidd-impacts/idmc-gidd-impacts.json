@@ -3,6 +3,23 @@
   "type": "Collection",
   "stac_version": "1.0.0",
   "description": "IDMC Global Internal Displacement Database (GIDD) Impacts - Collection of displacement impacts from disasters and conflicts",
+  "keywords": [
+    "idmc",
+    "gidd",
+    "internal displacement",
+    "displacement impact",
+    "displaced persons",
+    "displacement figures",
+    "humanitarian impact",
+    "disaster displacement",
+    "conflict displacement",
+    "displacement statistics",
+    "population displacement",
+    "displacement monitoring",
+    "displacement assessment",
+    "displacement data",
+    "global"
+  ],
   "links": [
     {
       "rel": "root",
