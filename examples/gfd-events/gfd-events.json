@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "gfd-events",
   "title": "GFD Source Events",
-  "description": "A collection of GFD source events loaded into Monty",
+  "description": "Events from the Global Flood Database (GFD). GFD combines several years of flood data to create a comprehensive satellite-based resource for global flood risk management and mitigation. The database uses MODIS satellite imagery to detect and map flood events worldwide, providing information on flood extent, duration, and severity. Each event includes details about the flood's location, timing, and cause. More information on the GFD mapping in Monty can be found in the [GFD Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#event-item).",
   "license": "unknown",
   "keywords": [
     "gfd",
@@ -90,6 +90,12 @@
     {
       "href": "gfd-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#event-item",
+      "type": "text/html",
+      "title": "GFD Event Item Source Mappings"
     }
   ]
 }

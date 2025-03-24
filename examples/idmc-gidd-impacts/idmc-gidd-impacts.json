@@ -2,7 +2,7 @@
   "id": "idmc-gidd-impacts",
   "type": "Collection",
   "stac_version": "1.0.0",
-  "description": "IDMC Global Internal Displacement Database (GIDD) Impacts - Collection of displacement impacts from disasters and conflicts",
+  "description": "Impact records from the Internal Displacement Monitoring Centre (IDMC) Global Internal Displacement Database (GIDD). IDMC maintains comprehensive information on global internal displacement impacts from 2008 onwards, tracking both conflict and disaster-induced displacement. The GIDD provides quality-controlled, annually validated data on internal displacement, disaggregated by caseload, location, and event. Each impact record includes detailed information about the number of displaced persons, the cause of displacement, and the affected locations. More information on the IDMC mapping in Monty can be found in the [IDMC Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#displacement-items-gidd-disaggregated-data).",
   "keywords": [
     "idmc",
     "gidd",
@@ -33,8 +33,14 @@
     },
     {
       "rel": "self",
-      "href": "./idmc-impacts.json",
+      "href": "./idmc-gidd-impacts.json",
       "type": "application/json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#displacement-items-gidd-disaggregated-data",
+      "type": "text/html",
+      "title": "IDMC Impact Item Source Mappings"
     },
     {
       "rel": "item",

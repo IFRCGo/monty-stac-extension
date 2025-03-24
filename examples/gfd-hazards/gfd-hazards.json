@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "gfd-hazards",
   "title": "GFD Source Hazards",
-  "description": "A collection of GFD source hazards loaded into Monty",
+  "description": "Hazard records from the Global Flood Database (GFD). GFD combines several years of flood data to create a comprehensive satellite-based resource for global flood risk management and mitigation. The hazard records provide detailed information about flood characteristics including extent, severity, and duration. Each hazard record is derived from MODIS satellite imagery and includes a severity score that indicates the intensity of the flood event. More information on the GFD mapping in Monty can be found in the [GFD Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#hazard-item).",
   "license": "unknown",
   "keywords": [
     "gfd",
@@ -90,6 +90,12 @@
     {
       "href": "gfd-hazards.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#hazard-item",
+      "type": "text/html",
+      "title": "GFD Hazard Item Source Mappings"
     }
   ]
 }
