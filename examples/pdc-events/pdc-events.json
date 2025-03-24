@@ -57,6 +57,16 @@
       "nat-met-sto-tro"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://edit.uia.org/img/org_logos/XG9728.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Pacific Disaster Center Logo"
+    }
+  },
   "links": [
     {
       "href": "pdc-events.json",
@@ -64,4 +74,3 @@
     }
   ]
 }
-  

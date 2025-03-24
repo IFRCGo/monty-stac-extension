@@ -4,7 +4,7 @@
     "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "type": "Collection",
-  "id": "collection",
+  "id": "reference-events",
   "title": "Reference Events",
   "description": "A collection of reference events loaded into Monty",
   "license": "Apache-2.0",
@@ -60,6 +60,16 @@
       "GH0002",
       "GH0004"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://go-wiki.ifrc.org/go-ifrc_logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IFRC GO Logo"
+    }
   },
   "links": [
     {

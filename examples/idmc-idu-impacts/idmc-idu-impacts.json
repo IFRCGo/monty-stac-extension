@@ -89,6 +89,16 @@
       }
     }
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://geneve-int.ch/sites/default/files/styles/scale_450x450/public/2021-06/IDMC-logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IDMC Logo"
+    }
+  },
   "links": [
     {
       "rel": "self",

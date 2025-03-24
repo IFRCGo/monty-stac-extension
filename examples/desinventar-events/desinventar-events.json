@@ -52,14 +52,70 @@
       "source"
     ],
     "monty:country_codes": [
+      "ARG",
+      "BOL",
+      "BRA",
+      "CHL",
       "CHN",
-      "SPN"
+      "COL",
+      "CRI",
+      "CUB",
+      "DOM",
+      "ECU",
+      "ESP",
+      "GTM",
+      "HND",
+      "HTI",
+      "JAM",
+      "MEX",
+      "NIC",
+      "PAN",
+      "PER",
+      "PRI",
+      "PRY",
+      "SLV",
+      "URY",
+      "VEN"
     ],
     "monty:hazard_codes": [
-      "MH0004",
-      "MH0005",
-      "MH0006"
+      "nat-hyd-flo-coa",
+      "nat-hyd-flo-fla",
+      "nat-hyd-flo-riv",
+      "nat-hyd-flo-flo",
+      "nat-geo-ear-gro",
+      "nat-cli-wil-for",
+      "nat-cli-wil-lan",
+      "nat-cli-dro-dro",
+      "nat-met-sto-tro",
+      "nat-met-ext-col",
+      "nat-met-ext-hea",
+      "nat-geo-vol-vol",
+      "nat-geo-mmd-lan",
+      "nat-hyd-mmw-lan",
+      "nat-hyd-mmw-mud",
+      "nat-hyd-mmw-ava",
+      "nat-met-fog-fog",
+      "nat-met-sto-hai",
+      "nat-met-sto-lig",
+      "nat-met-sto-san",
+      "nat-met-sto-sur",
+      "nat-met-sto-tor",
+      "nat-geo-ear-tsu",
+      "nat-bio-epi-dis",
+      "nat-geo-env-coa",
+      "nat-geo-env-sed",
+      "nat-geo-mmd-sub"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://www.seesac.org/f/pics/News-1/DesInventar_m.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "DesInventar Logo"
+    }
   },
   "links": [
     {

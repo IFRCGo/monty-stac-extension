@@ -60,6 +60,16 @@
       "GH0004"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://edit.uia.org/img/org_logos/XG9728.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Pacific Disaster Center Logo"
+    }
+  },
   "links": [
     {
       "href": "pdc-hazards.json",

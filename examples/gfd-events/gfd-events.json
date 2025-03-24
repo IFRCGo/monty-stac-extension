@@ -59,6 +59,16 @@
       "FL"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://wbwaterdata.org/uploads/group/2021-08-06-135510.709932DFOLogoWhite.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Global Flood Database Logo"
+    }
+  },
   "links": [
     {
       "href": "gfd-events.json",
