@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "gdacs-events",
   "title": "GDACS Source Events",
-  "description": "Global Disaster Alert and Coordination System (GDACS)",
+  "description": "Events from the Global Disaster Alert and Coordination System (GDACS). GDACS is a cooperation framework between the United Nations, the European Commission and disaster managers worldwide to improve alerts, information exchange and coordination in the first phase after major sudden-onset disasters. It provides real-time alerts and impact assessments for earthquakes, tsunamis, floods, tropical cyclones, volcanic eruptions, and wildfires. More information on the GDACS mapping in Monty can be found in the [GDACS Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GDACS#event-item).",
   "license": "MIT",
   "keywords": [
     "gdacs",
@@ -288,6 +288,12 @@
     {
       "href": "gdacs-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GDACS#event-item",
+      "type": "text/html",
+      "title": "GDACS Event Item Source Mappings"
     }
   ]
 }

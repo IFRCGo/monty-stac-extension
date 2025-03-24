@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "emdat-events",
   "title": "EM-DAT Source Events",
-  "description": "Global Disaster Events from the Emergency Events Database (EM-DAT).",
+  "description": "Global Disaster Events from the Emergency Events Database (EM-DAT). EM-DAT is a global database on natural and technological disasters, containing essential core data on the occurrence and effects of more than 22,000 disasters worldwide from 1900 to the present day. It is maintained by the Centre for Research on the Epidemiology of Disasters (CRED) at the School of Public Health of the Université catholique de Louvain (UCLouvain) in Brussels, Belgium. The database is compiled from various sources, including UN agencies, non-governmental organizations, insurance companies, research institutes, and press agencies. More information on the EM-DAT mapping in Monty can be found in the [EM-DAT Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/EM-DAT#event-item).",
   "license": "MIT",
   "keywords": [
     "emdat",
@@ -357,6 +357,12 @@
     {
       "href": "emdat-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/EM-DAT#event-item",
+      "type": "text/html",
+      "title": "EM-DAT Event Item Source Mappings"
     }
   ]
 }

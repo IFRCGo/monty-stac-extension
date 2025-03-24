@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "glide-events",
   "title": "GLIDE Source Events",
-  "description": "A collection of GLIDE source events loaded into Monty",
+  "description": "Events from the GLobal IDEntifier Number (GLIDE) system. GLIDE is a globally common Unique ID code for disasters and emergencies, assigned to each disaster event by the Asian Disaster Reduction Center (ADRC). It serves as a standardized identifier that helps organizations track and share information about disasters across different systems and databases. Each event includes information about the disaster type, location, date, and other key parameters. More information on the GLIDE mapping in Monty can be found in the [GLIDE Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GLIDE#event-item).",
   "license": "unknown",
   "keywords": [
     "glide",
@@ -294,6 +294,12 @@
     {
       "href": "glide-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GLIDE#event-item",
+      "type": "text/html",
+      "title": "GLIDE Event Item Source Mappings"
     }
   ]
 }

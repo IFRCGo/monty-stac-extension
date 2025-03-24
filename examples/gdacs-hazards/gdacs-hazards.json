@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "gdacs-hazards",
   "title": "GDACS Hazards",
-  "description": "A collection of GDACS hazards loaded into Monty",
+  "description": "Hazard records from the Global Disaster Alert and Coordination System (GDACS). GDACS is a cooperation framework between the United Nations, the European Commission and disaster managers worldwide to improve alerts, information exchange and coordination in the first phase after major sudden-onset disasters. It provides detailed hazard information including affected areas, alert levels, and severity scores for earthquakes, tsunamis, floods, tropical cyclones, volcanic eruptions, and wildfires. Each hazard includes specific information based on the hazard type and uses specialized models for assessment. More information on the GDACS mapping in Monty can be found in the [GDACS Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GDACS#hazard-item).",
   "license": "MIT",
   "keywords": [
     "gdacs",
@@ -285,6 +285,12 @@
     {
       "href": "gdacs-hazards.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GDACS#hazard-item",
+      "type": "text/html",
+      "title": "GDACS Hazard Item Source Mappings"
     }
   ]
 }

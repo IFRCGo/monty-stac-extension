@@ -7,7 +7,7 @@
   "type": "Collection",
   "id": "usgs-hazards",
   "title": "USGS Hazards",
-  "description": "A collection of hazards from the United States Geological Survey (USGS) ShakeMap products",
+  "description": "Hazard records from the United States Geological Survey (USGS) ShakeMap products. The USGS ShakeMap provides near real-time maps of ground motion and shaking intensity following significant earthquakes. These maps include detailed information about ground shaking intensity, peak ground acceleration, peak ground velocity, and potential damage. Each hazard record includes comprehensive data about the earthquake's impact on the surrounding area, with specialized visualizations and data products. More information on the USGS mapping in Monty can be found in the [USGS Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#hazard-item-from-shakemap).",
   "license": "Apache-2.0",
   "keywords": [
     "usgs",
@@ -218,6 +218,12 @@
     {
       "href": "usgs-hazards.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#hazard-item-from-shakemap",
+      "type": "text/html",
+      "title": "USGS Hazard Item Source Mappings"
     }
   ]
 }

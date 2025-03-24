@@ -7,7 +7,7 @@
   "type": "Collection",
   "id": "usgs-events",
   "title": "USGS Events",
-  "description": "A collection of events from the United States Geological Survey (USGS)",
+  "description": "Events from the United States Geological Survey (USGS) Earthquake Hazards Program. The USGS provides comprehensive earthquake data through their public API, offering real-time and historical earthquake information globally, with the most complete coverage for the United States. Each event includes detailed information about the earthquake's location, magnitude, depth, and other seismic parameters. More information on the USGS mapping in Monty can be found in the [USGS Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#event-item).",
   "license": "Apache-2.0",
   "keywords": [
     "usgs",
@@ -218,6 +218,12 @@
     {
       "href": "usgs-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#event-item",
+      "type": "text/html",
+      "title": "USGS Event Item Source Mappings"
     }
   ]
 }
