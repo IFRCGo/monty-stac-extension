@@ -14,37 +14,37 @@ The following properties from the Monty STAC Extension can be used as queryables
 
 ### Core Queryables
 
-| Field Name           | Type                | Description                                                                                                                                                                                                                                                                   |
-| -------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:episode_number | integer             | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                          |
-| monty:country_codes  | array[string]       | The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                         |
-| monty:corr_id        | string              | The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](../model/correlation_identifier.md) page              |
-| monty:hazard_codes   | array[string]       | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](../model/taxonomy.md#hazards)                                                                               |
-| roles                | array[string]       | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, response)                                                                                                                                                                 |
+| Field Name           | Type          | Description                                                                                                                                                                                                                                                      |
+| -------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:episode_number | integer       | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                             |
+| monty:country_codes  | array[string] | The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                            |
+| monty:corr_id        | string        | The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](../correlation_identifier.md) page |
+| monty:hazard_codes   | array[string] | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](../taxonomy.md#hazards)                                                                  |
+| roles                | array[string] | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, response)                                                                                                                                                    |
 
 ### Hazard Detail Queryables
 
 The following properties from the `monty:hazard_detail` object can be used as queryables:
 
-| Field Name                      | Type    | Description                                                                                                          |
-| ------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
-| monty:hazard_detail.cluster     | string  | The cluster of the hazard. The possible values are defined in [this table](../model/taxonomy.md#hazards)             |
-| monty:hazard_detail.severity_value | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units                     |
-| monty:hazard_detail.severity_unit | string | The unit of the max_value                                                                                           |
-| monty:hazard_detail.estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
+| Field Name                         | Type   | Description                                                                                              |
+| ---------------------------------- | ------ | -------------------------------------------------------------------------------------------------------- |
+| monty:hazard_detail.cluster        | string | The cluster of the hazard. The possible values are defined in [this table](../taxonomy.md#hazards) |
+| monty:hazard_detail.severity_value | number | The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units          |
+| monty:hazard_detail.severity_unit  | string | The unit of the max_value                                                                                |
+| monty:hazard_detail.estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                  |
 
 ### Impact Detail Queryables
 
 The following properties from the `monty:impact_detail` object can be used as queryables:
 
-| Field Name                     | Type    | Description                                                                                                                                                                                                             |
-| ------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:impact_detail.category   | string  | The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](../model/taxonomy.md#exposure-category)             |
-| monty:impact_detail.type       | string  | The estimated value type of the impact. The possible values are defined in [this table](../model/taxonomy.md#impact-type)                                                                                               |
-| monty:impact_detail.value      | number  | The estimated impact value, as a number, without the units                                                                                                                                                             |
-| monty:impact_detail.unit       | string  | The units of the impact estimate                                                                                                                                                                                        |
-| monty:impact_detail.estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                |
-| monty:impact_detail.description | string | The description of the impact                                                                                                                                                                                           |
+| Field Name                        | Type   | Description                                                                                                                                                                                                 |
+| --------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:impact_detail.category      | string | The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](../taxonomy.md#exposure-category) |
+| monty:impact_detail.type          | string | The estimated value type of the impact. The possible values are defined in [this table](../taxonomy.md#impact-type)                                                                                   |
+| monty:impact_detail.value         | number | The estimated impact value, as a number, without the units                                                                                                                                                  |
+| monty:impact_detail.unit          | string | The units of the impact estimate                                                                                                                                                                            |
+| monty:impact_detail.estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                     |
+| monty:impact_detail.description   | string | The description of the impact                                                                                                                                                                               |
 
 ## Example Queryables Definition
 
@@ -178,45 +178,45 @@ Below is an example of a queryables definition for a STAC API implementing the M
 
 Here are some examples of CQL2 filter expressions using the Monty STAC Extension queryables:
 
-### Find all items related to a specific event
+**Find all items related to a specific event**
 
-```
+```console
 monty:corr_id = '20241027T150000-ESP-HM-FLOOD-001-GCDB'
 ```
 
-### Find all items related to events in a specific country
+**Find all items related to events in a specific country**
 
-```
+```console
 'ESP' IN monty:country_codes
 ```
 
-### Find all items with a specific hazard code
+**Find all items with a specific hazard code**
 
-```
+```console
 'FL' IN monty:hazard_codes
 ```
 
-### Find all reference events
+**Find all reference events**
 
-```
+```console
 'event' IN roles AND 'reference' IN roles
 ```
 
-### Find all hazard items with high severity
+**Find all hazard items with high severity**
 
-```
+```console
 'hazard' IN roles AND monty:hazard_detail.severity_value > 5
 ```
 
-### Find all impact items with deaths
+**Find all impact items with deaths**
 
-```
+```console
 'impact' IN roles AND monty:impact_detail.type = 'death'
 ```
 
-### Find all impact items with a specific category and above a certain value
+**Find all impact items with a specific category and above a certain value**
 
-```
+```console
 'impact' IN roles AND monty:impact_detail.category = 'people' AND monty:impact_detail.value > 100
 ```
 
