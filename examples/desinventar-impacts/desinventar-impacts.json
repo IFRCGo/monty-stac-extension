@@ -12,23 +12,7 @@
   ],
   "title": "DesInventar Impacts",
   "license": "proprietary",
-  "providers": [
-    {
-      "name": "DesInventar",
-      "roles": [
-        "producer"
-      ],
-      "url": "https://www.desinventar.net/",
-      "email": "undrr-bonn@un.org"
-    }
-  ],
-  "extent": {
-    "spatial": {
-      "bbox": [
-        [
-          -180,
-          -90,
-          180,
+  "r"{    180,
           90
         ]
       ]
@@ -50,8 +34,24 @@
     "roles": [
       "impact",
       "source"
+    ],al": [
+        [
+          "1800-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "2015-06-23T00:00:00Z",
+      "mximum": "2019-07-10T13:44:56Z"
+    },
+    "roes
+      "impact",
+      "source"
     ],
-    "monty:country_codes": [
+ "mo"monty:country_codes":nty:country_codes": [
       "ARG",
       "BOL",
       "BRA",

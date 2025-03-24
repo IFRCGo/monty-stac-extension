@@ -12,6 +12,22 @@
   ],
   "title": "DesInventar Events",
   "license": "proprietary",
+  "keywords": [
+    "desinventar",
+    "disaster",
+    "event",
+    "natural hazard",
+    "flood",
+    "earthquake",
+    "wildfire",
+    "drought",
+    "tropical cyclone",
+    "landslide",
+    "tsunami",
+    "latin america",
+    "disaster loss",
+    "undrr"
+  ],
   "providers": [
     {
       "name": "DesInventar",
