@@ -38,7 +38,7 @@ previous implementation (R): none
 
 | STAC field                                                                                                                        | IDU Field                                     | Remarks                                                             |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                             | event_id                                      | Prepend text for uniqueness                                         |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                             | `idmc-idu-event-{event_id}`                   | Prepend text for uniqueness                                         |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                             | `idmc-idu-events`                             | Collection name for STAC                                            |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                                  | event_name                                    | Name of the event                                                   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                            | standard_popup_text                           |                                                                     |
@@ -95,7 +95,7 @@ According to the event type and the fields available in the IDU event, an impact
 Here is the table with the STAC fields that are mapped from IDU event to the STAC.
 | STAC field                                                                                                                        | IDU Field                                     | Remarks                                                             |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                             | event_id                                      | Prepend text for uniqueness                                         |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | `idmc-idu-impact-{id}-{impact_type}` | Prepend text for uniqueness, Note that `impact_type` is extracted from the `description` field. If the proper `impact_type` is not found, the default value `displaced` is used. |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                             | `idmc-idu-impacts`                            | Collection name for STAC                                            |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                                  | event_name                                    | Name of the event                                                   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                            | standard_popup_text                           |                                                                     |
@@ -116,7 +116,24 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 | monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                     |
 
 #### Impact Detail
-The ImpactDetail is constructed using the following
+
+The following mappings are used to create ImpactDetail objects.
+| impact_type   | Monty Impact Exposure Category         | Monty Impact Type |
+| ------------- | -------------------------------------- | ----------------- |
+| evacuated     | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EVACUATED |
+| displaced     | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
+| relocated     | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.RELOCATED |
+| sheltered     | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EMERGENCY_SHELTERED |
+| homeless      | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.HOMELESS |
+| affected      | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.TOTAL_AFFECTED |
+| IDPs          | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
+| Internal Displacements | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
+| Deaths | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.DEATH |
+| evacuated | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EVACUATED |
+| People displaced across borders | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EXTERNALLY_DISPLACED_PERSONS |
+
+Below is an example to construct the ImpactDetail object:
+
 | Key           | Value                                        |
 | ------------- | -------------------------------------------- |
 | category      | MontyImpactExposureCategory.ALL_PEOPLE       |
