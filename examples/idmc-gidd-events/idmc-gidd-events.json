@@ -6,8 +6,25 @@
   "type": "Collection",
   "id": "idmc-gidd-events",
   "title": "IDMC GIDD Source Events",
-  "description": "Global Internal Displacement Database (GIDD) Events",
+  "description": "Events from the Internal Displacement Monitoring Centre (IDMC) Global Internal Displacement Database (GIDD). IDMC maintains comprehensive information on global internal displacement events from 2008 onwards, tracking both conflict and disaster-induced displacement. The GIDD provides quality-controlled, annually validated data on internal displacement, disaggregated by caseload, location, and event. Each event includes information about the displacement trigger, affected locations, and temporal details. More information on the IDMC mapping in Monty can be found in the [IDMC Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#event-items).",
   "license": "TBD",
+  "keywords": [
+    "idmc",
+    "gidd",
+    "internal displacement",
+    "forced displacement",
+    "disaster displacement",
+    "conflict displacement",
+    "displacement monitoring",
+    "humanitarian",
+    "migration",
+    "displacement event",
+    "displacement tracking",
+    "displacement data",
+    "global displacement",
+    "displacement statistics",
+    "global"
+  ],
   "roles": [
     "event",
     "source"
@@ -58,10 +75,26 @@
       "nat-met-sto-tro"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://geneve-int.ch/sites/default/files/styles/scale_450x450/public/2021-06/IDMC-logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IDMC Logo"
+    }
+  },
   "links": [
     {
       "href": "idmc-gidd-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#event-items",
+      "type": "text/html",
+      "title": "IDMC Event Item Source Mappings"
     }
   ]
 }

@@ -26,6 +26,7 @@ The specification is organized as follows
   - [Hazard](#hazard): Describes the mandatory fields for the hazard object.
   - [Impact](#impact): Describes the mandatory fields for the impact object.
   - [Response](#response): Describes the mandatory fields for the response object.
+- [Queryables](model/stac-api/queryables.md): Describes the properties that can be used as queryables in a STAC API implementing the Filter Extension.
 
 The specifications of the fields and the objects are grouped by their data types.
 

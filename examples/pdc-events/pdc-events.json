@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "pdc-events",
   "title": "PDC Source Events",
-  "description": "PDC Events",
+  "description": "Events from the Pacific Disaster Center (PDC). PDC tracks a wide range of natural and human-made hazards including tropical cyclones, earthquakes, floods, landslides, wildfires, droughts, and volcanic eruptions to support disaster preparedness, response, and risk reduction efforts. Each event includes information about the hazard type, location, and temporal details. More information on the PDC mapping in Monty can be found in the [PDC Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#event-item).",
   "license": "TBD",
   "roles": [
     "event",
@@ -57,11 +57,26 @@
       "nat-met-sto-tro"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://edit.uia.org/img/org_logos/XG9728.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Pacific Disaster Center Logo"
+    }
+  },
   "links": [
     {
       "href": "pdc-events.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#event-item",
+      "type": "text/html",
+      "title": "PDC Event Item Source Mappings"
     }
   ]
 }
-  

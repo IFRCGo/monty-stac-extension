@@ -6,8 +6,25 @@
   "type": "Collection",
   "id": "gfd-impacts",
   "title": "GFD Impacts",
-  "description": "A collection of GFD impacts loaded into Monty",
+  "description": "Impact records from the Global Flood Database (GFD). GFD combines several years of flood data to create a comprehensive satellite-based resource for global flood risk management and mitigation. The impact records provide information about the human and economic consequences of flood events, including deaths, displaced populations, and other effects. Each impact record is linked to a specific flood event and provides quantitative measurements of the flood's impact on people and communities. More information on the GFD mapping in Monty can be found in the [GFD Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#impact-item).",
   "license": "MIT",
+  "keywords": [
+    "gfd",
+    "global flood database",
+    "flood impact",
+    "flood damage",
+    "flood casualties",
+    "affected population",
+    "displaced population",
+    "economic loss",
+    "infrastructure damage",
+    "agricultural damage",
+    "property damage",
+    "flood recovery",
+    "flood response",
+    "impact assessment",
+    "global"
+  ],
   "roles": [
     "impact"
   ],
@@ -57,10 +74,26 @@
       "FL"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://wbwaterdata.org/uploads/group/2021-08-06-135510.709932DFOLogoWhite.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Global Flood Database Logo"
+    }
+  },
   "links": [
     {
       "href": "gfd-impacts.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/GFD#impact-item",
+      "type": "text/html",
+      "title": "GFD Impact Item Source Mappings"
     }
   ]
 }

@@ -8,6 +8,23 @@
   "title": "IFRC Source Hazards",
   "description": "A collection of IFRC source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "ifrc",
+    "red cross",
+    "red crescent",
+    "hazard",
+    "natural hazard",
+    "disaster risk",
+    "hazard monitoring",
+    "early warning",
+    "hazard assessment",
+    "multi-hazard",
+    "hazard mapping",
+    "disaster preparedness",
+    "humanitarian",
+    "ifrc go",
+    "global"
+  ],
   "roles": [
     "source",
     "hazard"
@@ -60,6 +77,16 @@
       "GH0002",
       "GH0004"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://go-wiki.ifrc.org/go-ifrc_logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IFRC GO Logo"
+    }
   },
   "links": [
     {

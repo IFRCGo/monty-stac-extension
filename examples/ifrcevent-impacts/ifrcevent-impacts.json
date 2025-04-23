@@ -8,6 +8,23 @@
   "title": "IFRC Source Impacts",
   "description": "A collection of IFRC source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "ifrc",
+    "red cross",
+    "red crescent",
+    "impact assessment",
+    "disaster impact",
+    "humanitarian needs",
+    "casualties",
+    "affected population",
+    "emergency response",
+    "damage assessment",
+    "humanitarian assistance",
+    "disaster relief",
+    "needs assessment",
+    "ifrc go",
+    "global"
+  ],
   "roles": [
     "source",
     "impact"
@@ -60,6 +77,16 @@
       "GH0002",
       "GH0004"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://go-wiki.ifrc.org/go-ifrc_logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IFRC GO Logo"
+    }
   },
   "links": [
     {
