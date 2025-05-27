@@ -4,7 +4,7 @@ The International Best Track Archive for Climate Stewardship (IBTrACS) is a glob
 
 ## Collection: `ibtracs-events`
 
-A STAC collection holds all the IBTrACS events. An example of the IBTrACS collection is [here](../../../examples/ibtracs-events/ibtracs-events.json).
+A STAC collection holds all the IBTrACS events. An example of the IBTrACS collection is [here](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-events/ibtracs-events.json).
 
 - Name: International Best Track Archive for Climate Stewardship (IBTrACS)
 - Code: `IBTrACS`
@@ -60,7 +60,7 @@ In addition to global data files that contain all storms available in IBTrACS, s
 
 ### Event Item
 
-An IBTrACS tropical cyclone will **ALWAYS** produce an [**event STAC item**](../../../README.md#event). Unlike the hazard items which create a new item for each position, the event item is a single item that is **continuously updated** with the latest storm information as new data becomes available.
+An IBTrACS tropical cyclone will **ALWAYS** produce an [**event STAC item**](https://github.com/IFRCGo/monty-stac-extension#event). Unlike the hazard items which create a new item for each position, the event item is a single item that is **continuously updated** with the latest storm information as new data becomes available.
 
 #### Implementation Approach
 
@@ -90,18 +90,18 @@ Here is a table with the fields that are mapped from the IBTrACS data to the STA
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | ISO_TIME (first position)    | Time of the first observation in UTC ISO 8601 format                                                                                                                                                                   |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | ISO_TIME (first position)    | Start time of the storm in UTC ISO 8601 format                                                                                                                                                                         |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | ISO_TIME (latest position)   | End time of the storm in UTC ISO 8601 format (updated as new positions are added)                                                                                                                                      |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                                           | Derived from track positions | ISO3 codes of countries affected by the storm track (updated as new countries are affected). For tropical cyclones initiated in international waters, the special code 'XYZ' should be used as the first country code. |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Fixed as tropical cyclone    | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                                                                                                                                                                 |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                                           | Derived from track positions | ISO3 codes of countries affected by the storm track (updated as new countries are affected). For tropical cyclones initiated in international waters, the special code 'XYZ' should be used as the first country code. |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Fixed as tropical cyclone    | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                                                                                                                                                                 |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                                                                                                                                               |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                                                                                                                                        |
 
 ## Collection: `ibtracs-hazards`
 
-A STAC collection holds all the IBTrACS hazards. An example of the IBTrACS hazards collection is [here](../../../examples/ibtracs-hazards/ibtracs-hazards.json).
+A STAC collection holds all the IBTrACS hazards. An example of the IBTrACS hazards collection is [here](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/ibtracs-hazards.json).
 
 ### Hazard Items
 
-An IBTrACS tropical cyclone will produce **MULTIPLE** [**hazard STAC items**](../../../README.md#hazard), one for each position in the storm track. Each hazard item represents the cumulative track of the storm up to that point in time.
+An IBTrACS tropical cyclone will produce **MULTIPLE** [**hazard STAC items**](https://github.com/IFRCGo/monty-stac-extension#hazard), one for each position in the storm track. Each hazard item represents the cumulative track of the storm up to that point in time.
 
 #### Implementation Approach
 
@@ -128,15 +128,15 @@ Here is a table with the STAC fields that are mapped from the IBTrACS data to ea
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | ISO_TIME (current position)            | Time of the current observation in UTC ISO 8601 format                           |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | ISO_TIME (first position)              | Start time of the storm in UTC ISO 8601 format                                   |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | ISO_TIME (current position)            | End time (current time) of the hazard in UTC ISO 8601 format                     |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                                           | Derived from track positions           | ISO3 codes of countries affected by the storm track up to the current position   |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | Fixed as tropical cyclone              | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                           |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                                           | Derived from track positions           | ISO3 codes of countries affected by the storm track up to the current position   |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Fixed as tropical cyclone              | Always `['MH0057', 'nat-met-sto-tro', 'TC']` for codes                           |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                                   | Keywords should include the cyclone name                                         |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL                        | Link to the IBTrACS data source                                                  |
-| [monty:hazard_detail](../../../README.md#montyhazard_detail)                                                           | USA_WIND, WMO_WIND, USA_PRES, WMO_PRES | Detailed description of the hazard at the current position                       |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                                           | USA_WIND, WMO_WIND, USA_PRES, WMO_PRES | Detailed description of the hazard at the current position                       |
 
 #### Hazard Detail
 
-The [monty:hazard_detail](../../../README.md#montyhazard_detail) field contains detailed information about the tropical cyclone at the current position:
+The [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) field contains detailed information about the tropical cyclone at the current position:
 
 | Field          | IBTrACS field        | Description                                                            |
 | -------------- | -------------------- | ---------------------------------------------------------------------- |
@@ -164,7 +164,7 @@ The following example items have been created to demonstrate the IBTrACS data re
 #### Event Example
 
 An event item for Tropical Cyclone BERYL (2024) from the North Atlantic basin:
-- [2024178N09335.json](../../../examples/ibtracs-events/2024178N09335.json)
+- [2024178N09335.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-events/2024178N09335.json)
 - Represents the entire lifecycle of the storm with a LineString geometry of all positions
 - Includes metadata like name, dates, affected countries, and maximum intensity (Category 4 hurricane with 145 mph winds)
 - Time period: June 26, 2024 to July 11, 2024
@@ -175,23 +175,23 @@ An event item for Tropical Cyclone BERYL (2024) from the North Atlantic basin:
 Four hazard items representing different stages of BERYL's development:
 
 1. **Initial Formation (Tropical Depression)**
-   - [2024178N09335-hazard-20240626T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240626T000000Z.json)
+   - [2024178N09335-hazard-20240626T000000Z.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/2024178N09335-hazard-20240626T000000Z.json)
    - Initial position with 15 knots wind speed and 1013 mb pressure
    - Point geometry at the storm's origin
 
 2. **Tropical Storm Stage**
-   - [2024178N09335-hazard-20240629T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240629T000000Z.json)
+   - [2024178N09335-hazard-20240629T000000Z.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/2024178N09335-hazard-20240629T000000Z.json)
    - LineString geometry with positions from June 26-29, 2024
    - 45 knots wind speed and 1000 mb pressure
 
 3. **Peak Intensity (Category 4 Hurricane)**
-   - [2024178N09335-hazard-20240702T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240702T000000Z.json)
+   - [2024178N09335-hazard-20240702T000000Z.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/2024178N09335-hazard-20240702T000000Z.json)
    - LineString geometry with positions from June 26-July 2, 2024
    - 125 knots (145 mph) wind speed and 935 mb pressure
    - Affected countries: JAM, HTI, DOM
 
 4. **Landfall in Texas (Category 1 Hurricane)**
-   - [2024178N09335-hazard-20240708T000000Z.json](../../../examples/ibtracs-hazards/2024178N09335-hazard-20240708T000000Z.json)
+   - [2024178N09335-hazard-20240708T000000Z.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/2024178N09335-hazard-20240708T000000Z.json)
    - LineString geometry with positions from June 26-July 8, 2024
    - 75 knots (85 mph) wind speed and 975 mb pressure
    - Affected countries: USA, MEX, CUB, JAM, HTI, DOM
@@ -220,7 +220,7 @@ These examples demonstrate how IBTrACS data can be represented at different stag
 
 ### Correlation Identifier Format
 
-The [monty:corr_id](../../../README.md#montycorr_id) field follows a specific format for tropical cyclones:
+The [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) field follows a specific format for tropical cyclones:
 
 ```text
 [datetime]-[country]-[hazard type]-[sequence]-[source]

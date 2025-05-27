@@ -76,9 +76,9 @@ The following supported ones are linked to the section where the information mus
 
 ### Event Item
 
-A USGS earthquake event will **ALWAYS** produce an [**event STAC item**](../../../README.md#event).
+A USGS earthquake event will **ALWAYS** produce an [**event STAC item**](https://github.com/IFRCGo/monty-stac-extension#event).
 
-Example of generated STAC item: [examples/usgs-events/us6000pi9w.json](../../../examples/usgs-events/us6000pi9w.json)
+Example of generated STAC item: [examples/usgs-events/us6000pi9w.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-events/us6000pi9w.json)
 
 Here is a table with the fields that are mapped from the USGS event to the STAC event:
 
@@ -91,17 +91,17 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | properties.title           | Title of the event                                   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place           | Description of the event location                    |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time            | Time of the event in UTC ISO 8601 format             |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                               | Derived from coordinates   | ISO3 code of the country where the event occurred    |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0004` for code  |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates   | ISO3 code of the country where the event occurred    |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0004` for code  |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url             | Link to the USGS event details page                  |
 | [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/map"    | Link to the USGS interactive map for this event      |
 | [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/region" | Link to the USGS regional information for this event |
 
 ### Hazard Item (from ShakeMap)
 
-The [Shakemap product](https://earthquake.usgs.gov/data/shakemap/) of a USGS earthquake event will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard) that implements the [STAC Earthquake Extension](https://github.com/stac-extensions/earthquake).
+The [Shakemap product](https://earthquake.usgs.gov/data/shakemap/) of a USGS earthquake event will **ALWAYS** produce one [**hazard STAC item**](https://github.com/IFRCGo/monty-stac-extension#hazard) that implements the [STAC Earthquake Extension](https://github.com/stac-extensions/earthquake).
 
-Example of generated STAC item: [examples/usgs-hazards/us6000pi9w-shakemap.json](../../../examples/usgs-hazards/us6000pi9w-shakemap.json)
+Example of generated STAC item: [examples/usgs-hazards/us6000pi9w-shakemap.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-hazards/us6000pi9w-shakemap.json)
 
 Here is a table with the STAC fields that are mapped from the USGS event to the STAC hazard:
 
@@ -114,10 +114,10 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | properties.title                    | Title of the hazard                                 |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place                    | Description of the hazard location                  |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                     | Time of the hazard in UTC ISO 8601 format           |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                               | Derived from coordinates            | ISO3 code of the country where the hazard occurred  |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | Fixed as earthquake                 | Always `GEO-SEIS` for cluster and `GH0004` for code |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates            | ISO3 code of the country where the hazard occurred  |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake                 | Always `GEO-SEIS` for cluster and `GH0004` for code |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url                      | Link to the USGS hazard details page                |
-| [monty:hazard_detail](../../../README.md#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
 | [`assets`](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                        | [ShakeMap assets](#shakemap-assets) | Assets from the USGS ShakeMap product               |
 
 #### ShakeMap Assets
@@ -152,7 +152,7 @@ The following fields from the [STAC Earthquake Extension](https://github.com/sta
 
 #### Hazard Detail
 
-The [monty:hazard_detail](../../../README.md#montyhazard_detail) field contains detailed information about the earthquake:
+The [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) field contains detailed information about the earthquake:
 
 | Field          | USGS field         | Description                                                                                  |
 | -------------- | ------------------ | -------------------------------------------------------------------------------------------- |
@@ -162,10 +162,10 @@ The [monty:hazard_detail](../../../README.md#montyhazard_detail) field contains 
 
 ### Impact Items (from PAGER)
 
-The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event will produce two [**impact STAC items**](../../../README.md#impact):
+The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event will produce two [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact):
 
-1. Estimated Fatalities Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-fatalities.json](../../../examples/usgs-impacts/us6000pi9w-fatalities.json)
-2. Estimated Economic Losses Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-economic.json](../../../examples/usgs-impacts/us6000pi9w-economic.json)
+1. Estimated Fatalities Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-fatalities.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-fatalities.json)
+2. Estimated Economic Losses Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-economic.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-economic.json)
 
 The PAGER data is found in the `losspager` product within the USGS event data. Here is a detailed mapping of fields from the USGS PAGER data to the STAC impacts:
 
@@ -176,15 +176,15 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)          | geometry                          | Use the event's geometry (earthquake epicenter) directly                                         |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-impacts`                    | Fixed value for all USGS impact items                                                            |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                   | Found in event's properties.time, convert from Unix timestamp to ISO 8601                        |
-| [monty:country_codes](../../../README.md#montycountry_codes)                                               | Derived from coordinates          | Use reverse geocoding on event's geometry.coordinates[0,1] to get ISO3 country code              |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                 | [`GEO-SEIS`]                      | Always `GEO-SEIS` for all earthquake impacts                                                     |
-| [roles](../../../README.md#roles)                                                                          | ["impact", "source"]              | Always `["impact"]` for all impact items                                                         |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates          | Use reverse geocoding on event's geometry.coordinates[0,1] to get ISO3 country code              |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | [`GEO-SEIS`]                      | Always `GEO-SEIS` for all earthquake impacts                                                     |
+| [roles](https://github.com/IFRCGo/monty-stac-extension#roles)                                                                          | ["impact", "source"]              | Always `["impact"]` for all impact items                                                         |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | Derived                           | "Estimated Fatalities" or "Estimated Economic Losses" based on impact type                       |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | Derived                           | Combine event location and impact type, e.g. "Estimated fatalities for {event.properties.place}" |
 
 #### Impact Detail
 
-The [monty:impact_detail](../../../README.md#montyimpact_detail) field contains specific information about each type of impact. 
+The [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) field contains specific information about each type of impact. 
 The values are extracted from the PAGER product data in the USGS event and requires to get an additional content file from the USGS event data
 under `json/losses.json`.
 

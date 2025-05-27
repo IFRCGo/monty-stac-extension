@@ -127,12 +127,12 @@ Each disaster event is stored as a `<TR>` element within the `<fichas>` section:
 
 ### Event Item
 
-A Desinventar event will **ALWAYS** produce an [**event STAC item**](../../../README.md#event).
+A Desinventar event will **ALWAYS** produce an [**event STAC item**](https://github.com/IFRCGo/monty-stac-extension#event).
 
 Example event items for grenada export at [DI_export_GRD.xml](DI_export_grd.xml):
 
-- [STORM grd-194.json](../../../examples/desinventar-events/grd-194.json)
-- [EPIDEMIC grd-200.json](../../../examples/desinventar-events/grd-200.json)
+- [STORM grd-194.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events/grd-194.json)
+- [EPIDEMIC grd-200.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events/grd-200.json)
 
 Here is the mapping of fields from Desinventar XML to STAC event items:
 
@@ -187,11 +187,11 @@ No hazard items are generated from Desinventar data as the hazard information is
 
 ### Impact Item
 
-Desinventar events will produce multiple [**impact STAC items**](../../../README.md#impact) when impact data is available.
+Desinventar events will produce multiple [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) when impact data is available.
 
 Example impact items:
 
-- [EPIDEMIC deaths grd-200-deaths.json](../../../examples/desinventar-impacts/grd-200-deaths.json)
+- [EPIDEMIC deaths grd-200-deaths.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-impacts/grd-200-deaths.json)
 
 The following table shows the mapping of Desinventar impact fields to STAC items:
 
