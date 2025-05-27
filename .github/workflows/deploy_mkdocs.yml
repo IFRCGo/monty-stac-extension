@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy documentation
         run: |
-          git checkout gh-pages
+          git checkout --track origin/gh-pages
           # Remove all content except .git, site and vx.x.x directory
           find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'v*.*.*' ! -name 'site' -exec rm -rf {} +
           # Copy MkDocs output
