@@ -236,7 +236,7 @@ The impact class has the following attributes:
 - **impact_detail**: A detailed description of the impact including:
   - **category**: The category of impact, which is the specific asset or population demographic that has been impacted by the hazard.
   - **value**: The estimated value of the impact, as a number, without the units. For example, for an estimate of 1000 people displaced, you would enter 1000.
-  - **type**: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'. [Refer to the taxonomy](https://github.com/IFRCGo/monty-stac-extension/blob/main/model/taxonomy.md#impact-type) for all possible impact types.
+  - **type**: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'. [Refer to the taxonomy](taxonomy.md#impact-type) for all possible impact types.
   - **unit**: The units of the impact estimate. For example, 10 deaths would be a count value, thus 'unitscountnum' should be used.
   - **date**: If the impact estimate is a cost, provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, imp_sdate will be used.  **OPTIONAL**
   - **estimate_type**: The type of data source that was used to create this impact estimate:

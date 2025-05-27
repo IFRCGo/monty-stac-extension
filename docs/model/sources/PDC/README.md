@@ -51,13 +51,13 @@ A PDC event will always produce an Event STAC Item. Here is a table with the fie
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
 | roles | ["source", "event"] | Default roles for event item |   |
-| [monty:country_codes](../../../README.md#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 
 ## Hazard Item
 
-A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard). Here is a table with the STAC fields that are managed from the PDC event to the STAC hazard.
+A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one [**hazard STAC item**](https://github.com/IFRCGo/monty-stac-extension#hazard). Here is a table with the STAC fields that are managed from the PDC event to the STAC hazard.
 
 | STAC field | PDC Field | Description |
 | -----------|-----------|-------------|
@@ -69,14 +69,14 @@ A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
 | roles | ["source", "hazard"] | Default roles for hazard item |    |
-| [monty:country_codes](../../../README.md#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
-| [monty:hazard_detail](../../../README.md#montyhazard_detail) |      |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) |      |
 
 ## Impact item
 
-The PDC events will produce multiple [**Impact STAC Items**](../../../README.md#impact) when impact related data is available through exposure endpoint.
+The PDC events will produce multiple [**Impact STAC Items**](https://github.com/IFRCGo/monty-stac-extension#impact) when impact related data is available through exposure endpoint.
 
 The following table shows the mapping of PDC impact fields to STAC items.
 
@@ -90,8 +90,8 @@ The following table shows the mapping of PDC impact fields to STAC items.
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
 | roles | ["source", "impact"] | Default roles for impact item |    |
-| [monty:country_codes](../../../README.md#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:impact_detail] | Impact items using different fields | Several impact items are created based on several fields available from the exposure endpoint |
 

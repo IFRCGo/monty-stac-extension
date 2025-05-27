@@ -36,12 +36,12 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |        |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start | |
-| [monty:country_codes](../../../README.md#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
 
 ## Hazard Item
 
-A GFD event and episode will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard). Here is a table with the STAC fields that are mapped from the GFD event to the STAC hazad.
+A GFD event and episode will **ALWAYS** produce one [**hazard STAC item**](https://github.com/IFRCGo/monty-stac-extension#hazard). Here is a table with the STAC fields that are mapped from the GFD event to the STAC hazad.
 
 | STAC field | GFD Field | Description |
 | -----------|-----------|-------------|
@@ -52,12 +52,12 @@ A GFD event and episode will **ALWAYS** produce one [**hazard STAC item**](../..
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |    |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |        |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start |     |
-| [monty:country_codes](../../../README.md#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
-| [monty:hazard_detail](../../../README.md#montyhazard_detail) | Hazard detail based on dfo_severity | Detailed description of the hazard |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) | Hazard detail based on dfo_severity | Detailed description of the hazard |
 
 ### Hazard Detail
-The [hazard_detail](../../../README.md#montyhazard_detail) is constructed using the following fields.
+The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) is constructed using the following fields.
 
 | STAC field | GFD Field | Description |
 |------------|-----------|-------------|
@@ -66,7 +66,7 @@ The [hazard_detail](../../../README.md#montyhazard_detail) is constructed using 
 
 ## Impact Item
 
-According to the event type and the fields available in the GFD event, one or more [**Impact STAC Items**](../../../README.md#impact) can be created.
+According to the event type and the fields available in the GFD event, one or more [**Impact STAC Items**](https://github.com/IFRCGo/monty-stac-extension#impact) can be created.
 The following sections describe the mapping of specific GFD event information to the STAC impact item.
 
 | STAC field | GFD Field | Description |
@@ -78,8 +78,8 @@ The following sections describe the mapping of specific GFD event information to
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause | |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start | |
-| [monty:country_codes](../../../README.md#montycountry_codes) | `cc`      | Split the `cc` field to get the list of iso3 |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `cc`      | Split the `cc` field to get the list of iso3 |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
 | monty:impact_detail | Impact items using *dfo_dead*, *dfo_displaced fields* | Several impact items are created based on *dfo_dead*, *dfo_displaced* fields |
 
 ### Impact Details

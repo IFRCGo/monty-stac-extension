@@ -16,7 +16,7 @@ and provide a more complete picture of disaster risk for the National Societies.
 For more information about the Montandon project, please check out [this 5-minute video](https://www.youtube.com/watch?v=BEWxqYfrQek).
 
 This document explains the Montandon Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-It provides a way to include Montandon data from [Montandon model analysis](./model/README.md) in a STAC Item or Collection.
+It provides a way to include Montandon data from [Montandon model analysis](./docs/model/README.md) in a STAC Item or Collection.
 The specification is organized as follows
 
 - [Fields](#fields): Describes the fields that are added to the STAC Item and Collection objects.
@@ -47,8 +47,8 @@ The fields in the sections below can be used in these parts of STAC documents:
 | -------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                          |
 | monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                           |
-| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./model/correlation_identifier.md) page |
-| monty:hazard_codes   | \[string]                                   | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](./model/taxonomy.md#hazards)                                                                  |
+| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](./docs/model/correlation_identifier.md) page |
+| monty:hazard_codes   | \[string]                                   | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](./docs/model/taxonomy.md#hazards)                                                                  |
 | monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                     |
 | monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                     |
 
@@ -90,15 +90,15 @@ It must at least contain the countries intersected by the item's geometry.
 
 It is a list of hazard codes of the hazards concerned by the item. There are multiple various classification systems for hazards so the field is open to any code.
 
-Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](./model/taxonomy.md#hazards) 
-and then to include their other system counterparts following the [crosswalk classification systems mapping](./model/taxonomy.md#cross-classification-mapping) to enforce interoperability.
+Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](./docs/model/taxonomy.md#hazards) 
+and then to include their other system counterparts following the [crosswalk classification systems mapping](./docs/model/taxonomy.md#cross-classification-mapping) to enforce interoperability.
 
-Tables with the possible values are available in the [hazard section of the taxonomy](./model/taxonomy.md#hazards) with:
+Tables with the possible values are available in the [hazard section of the taxonomy](./docs/model/taxonomy.md#hazards) with:
 
-- [UNDRR-ISC 2020 Hazard Information Profiles](./model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
-- [EM_DAT CRED Classification Key](./model/taxonomy.md#em-dat-cred-classification-tree)
-- [GLIDE classification](./model/taxonomy.md#glide-classification)
-- [A crosswalk classification systems mapping](./model/taxonomy.md#cross-classification-mapping)
+- [UNDRR-ISC 2020 Hazard Information Profiles](./docs/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
+- [EM_DAT CRED Classification Key](./docs/model/taxonomy.md#em-dat-cred-classification-tree)
+- [GLIDE classification](./docs/model/taxonomy.md#glide-classification)
+- [A crosswalk classification systems mapping](./docs/model/taxonomy.md#cross-classification-mapping)
 
 With those codes, it is possible to derive a set of additional properties associated with the hazard:
 
@@ -111,14 +111,14 @@ for which a human-readable keyword can be generated and stored in the `keywords`
 
 > [!IMPORTANT]
 > [Hazard items](#hazard) **MUST** have a **single** `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
-> the event [correlation process](./model/correlation_identifier.md).
+> the event [correlation process](./docs/model/correlation_identifier.md).
 
 ##### monty:corr_id
 
 It is the unique identifier assigned by the Monty system to every item in the system.
 This correlation identifier is critical to associate event, hazard, impact and response items together.
 Each item *MUST* have one.
-More information about the correlation identifier is available in the [event correlation](./model/correlation_identifier.md) page.
+More information about the correlation identifier is available in the [event correlation](./docs/model/correlation_identifier.md) page.
 
 ##### monty:hazard_detail
 
@@ -127,7 +127,7 @@ The following defined fields are available in the object:
 
 | Field Name     | Type   | Description                                                                                                          |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./model/taxonomy.md#hazards) |
+| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](./docs/model/taxonomy.md#hazards) |
 | severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
 | severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
 | estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
@@ -141,8 +141,8 @@ It is an object that contains the details of the impact estimate. Preferably use
 
 | Field Name    | Type   | Description                                                                                                                                                                                                             |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](./model/taxonomy.md#exposure-category) |
-| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./model/taxonomy.md#impact-type)                                                                                   |
+| category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](./docs/model/taxonomy.md#exposure-category) |
+| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](./docs/model/taxonomy.md#impact-type)                                                                                   |
 | value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                 |
 | unit          | string | The units of the impact estimate                                                                                                                                                                                        |
 | estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                 |
@@ -167,7 +167,7 @@ The following types should be used as applicable `rel` types in the
 ## Event
 
 This section describes the rules and best practises to apply on the STAC core fields for the event object.
-More detail on the fields is available in the [Montandon model analysis](./model/README.md#event).
+More detail on the fields is available in the [Montandon model analysis](./docs/model/README.md#event).
 
 - Examples:
   - [Reference Events Collection example](examples/reference-events/reference-events.json): Shows usage of the extension in a STAC Collection of reference events
@@ -193,7 +193,7 @@ The table below describes the rules for the core fields in the representation of
 The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
 The global crisis data bank records multiple instances of events that are related to a single event:
 
-- One **unique reference** event that is used to "[pair](model/correlation_identifier.md)" all the instances of the event
+- One **unique reference** event that is used to "[pair](./docs/model/correlation_identifier.md)" all the instances of the event
 - Multiple instances of the event that are recorded for different sources. Each source event **must** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
   - A link to the resource from which the event was sourced with
@@ -218,7 +218,7 @@ The table below describes the rules for the core fields in the representation of
 ### Hazard
 
 This section describes in details the usage of the fields and links for the hazard object.
-More detail on the field definition is available in the [Montandon model analysis](./model/README.md#hazard).
+More detail on the field definition is available in the [Montandon model analysis](./docs/model/README.md#hazard).
 
 - Examples:
   - [Flood Hazard example](examples/gdacs-hazards/1102983-1-affected.json): Shows usage of the extension for a flood hazard
@@ -243,14 +243,14 @@ The link may also have specific `occ-*` [attributes](#link-attributes) to descri
 ### Impact
 
 This section describes in details the usage of the fields and links for the impact object.
-More detail on the field definition is available in the [Montandon model analysis](./model/README.md#impact).
+More detail on the field definition is available in the [Montandon model analysis](./docs/model/README.md#impact).
 
 - Examples:
   - [Impact for flood in Spain example](examples/gdacs-impacts/gdacs-impact-1102983-2-A-death-Spain-Andalusia.json): Shows usage of the extension for a flood impact
 
 The impact class represents the consequences of a hazard on the affected assets or population.
 
-In the [Monty model](model/README.md#data-overview), an impact is **ALWAYS** linked to a hazard as a source of the impact, impacts are recorded from multiple [sources](model/sources/).
+In the [Monty model](./docs/model/README.md#data-overview), an impact is **ALWAYS** linked to a hazard as a source of the impact, impacts are recorded from multiple [sources](./docs/model/sources/).
 
 An impact object **MUST** have the [`monty:impact_detail`](#montyimpact_detail) field with all the details of the impact.
 

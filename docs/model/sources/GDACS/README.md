@@ -4,7 +4,7 @@ GDACS is a cooperation framework between the United Nations, the European Commis
 
 ## Collection: `gdacs-events`
 
-A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](../../../examples/gdacs-events/gdacs-events.json).
+A STAC collection hold all the GDACS events. An example of the GDACS collection is [here](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-events.json).
 
 - Name: Global Disaster Alert and Coordination System (GDACS)
 - Code: `GDACS`
@@ -30,14 +30,14 @@ Individual events can be accessed via the API endpoint `https://www.gdacs.org/gd
 
 ### Event Item
 
-A GDACS event and episode will **ALWAYS** produce an [**event STAC item**](../../../README.md#event) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL).
+A GDACS event and episode will **ALWAYS** produce an [**event STAC item**](https://github.com/IFRCGo/monty-stac-extension#event) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL).
 
 - The source events are
   1. Episode #1 in the file [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=1) API endpoint.
   2. Episode #2 in the file [1102983-2-geteventdata-source.json](1102983-2-geteventdata-source.json) and is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2) API endpoint.
 - The produced event STAC items are
-  1. Episode #1 in the file [gdacs-events/1102983-1.json](../../../examples/gdacs-events/1102983-1.json).
-  2. Episode #2 in the file [gdacs-events/1102983-2.json](../../../examples/gdacs-events/1102983-2.json).
+  1. Episode #1 in the file [gdacs-events/1102983-1.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-1.json).
+  2. Episode #2 in the file [gdacs-events/1102983-2.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-2.json).
 
 The event URL of the `geteventdata` API endpoint is stored in the `links` field of the STAC item with the `via` relation.
 
@@ -54,9 +54,9 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.fromdate                                   | Date and time of the event converted in UTC ISO 8601 format                                                                                 |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.fromdate                                   | Start date of the event converted in UTC ISO 8601 format                                                                                    |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.todate                                     | End date of the event converted in UTC ISO 8601 format                                                                                      |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                       | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                                             |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | properties.eventtype                                  | List of hazard codes converted following the [GDACS event type to Hazard profile mapping](#mapping-from-gdacs-event-type-to-hazard-profile) |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[0]                                                       | properties.iso3                                       | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                              |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                     | List of ISO3 codes of the other countries affected by the event                                                                             |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | properties.eventtype                                  | List of hazard codes converted following the [GDACS event type to Hazard profile mapping](#mapping-from-gdacs-event-type-to-hazard-profile) |
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                       | Asset with the icon of the event                                                                                                            |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                 | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | properties.url.details                                | Link to the GDACS event details page                                                                                                        |
@@ -65,12 +65,12 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 
 ### Hazard Item
 
-A GDACS event and episode will **ALWAYS** produce one [**hazard STAC item**](../../../README.md#hazard) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL).
+A GDACS event and episode will **ALWAYS** produce one [**hazard STAC item**](https://github.com/IFRCGo/monty-stac-extension#hazard) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL).
 
 - There are 2 sources for the hazards:
   1. The general event [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) that is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983) API endpoint.
   2. the detailed geometries [1102983-1-getgeometry-source.json](1102983-1-getgeometry-source.json) that is the output of the [`getgeometry`](https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=2) API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the **affected** areas. It has a property `properties.Class` set to `Poly_Affected`.
-- The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1-affected.json](../../../examples/gdacs-hazards/1102983-1-affected.json).
+- The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1-affected.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1102983-1-affected.json).
 
 Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:
 
@@ -85,17 +85,17 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.fromdate                                                                    | Date and time of the hazard converted in UTC ISO 8601 format                                                            |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.fromdate                                                                    | Start date of the hazard converted in UTC ISO 8601 format                                                               |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.todate                                                                      | End date of the hazard converted in UTC ISO 8601 format                                                                 |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                       | properties.iso3                                                                        | ISO3 code of the country where the hazard occurred. Keywords shall also contain the human readable country name         |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                                                      | List of ISO3 codes of the other countries affected by the hazard                                                        |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile) | List of hazard codes converted following the GDACS hazard type to Hazard profile mapping                                |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[0]                                                       | properties.iso3                                                                        | ISO3 code of the country where the hazard occurred. Keywords shall also contain the human readable country name         |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                                                      | List of ISO3 codes of the other countries affected by the hazard                                                        |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile) | List of hazard codes converted following the GDACS hazard type to Hazard profile mapping                                |
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                                                        | Asset with the icon of the hazard                                                                                       |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                                                  | Asset with the link to the GDACS report                                                                                 |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | properties.url.details                                                                 | Link to the GDACS hazard details page                                                                                   |
-| [monty:hazard_detail](../../../README.md#montyhazard_detail)                                                           | properties.hazard_detail                                                               | Detailed description of the hazard (more details in next section)                                                       |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                                           | properties.hazard_detail                                                               | Detailed description of the hazard (more details in next section)                                                       |
 
 #### Hazard Detail
 
-The [hazard_detail](../../../README.md#montyhazard_detail) field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:
+The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:
 
 | STAC field     | GDACS field                  | Description                                               |
 | -------------- | ---------------------------- | --------------------------------------------------------- |
@@ -129,13 +129,13 @@ The following table shows the magnitude scale and unit to be used for each event
 
 ### Impact Item
 
-According to the event type and the fields available in the GDACS event, one or more [**impact STAC items**](../../../README.md#impact) can be created.
+According to the event type and the fields available in the GDACS event, one or more [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) can be created.
 The following sections describe the mapping of specific GDACS event information to the STAC impact item.
 
 #### Sendai indicators
 
 When the `sendai` field is present in the GDACS [event](#event-item), it contains an array of Sendai indicators.
-Each Sendai indicator is a JSON object that shall produce an [impact item](../../../README.md#impact).
+Each Sendai indicator is a JSON object that shall produce an [impact item](https://github.com/IFRCGo/monty-stac-extension#impact).
 The impact item shall have the following fields from both the GDACS event and the Sendai indicator:
 
 | STAC field                                                                                                             | GDACS field                                                                                                                                                    | Description                                                                                                                   |
@@ -149,9 +149,9 @@ The impact item shall have the following fields from both the GDACS event and th
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | properties.sendai.onset_date                                                                                                                                   | Date and time of the event converted in UTC ISO 8601 format                                                                   |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | properties.sendai.onset_date                                                                                                                                   | Start date of the event converted in UTC ISO 8601 format                                                                      |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | properties.sendai.expires_date                                                                                                                                 | End date of the event converted in UTC ISO 8601 format                                                                        |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[0]                                                       | properties.iso3                                                                                                                                                | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                |
-| [monty:country_codes](../../../README.md#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                                                                                                                              | List of ISO3 codes of the other countries affected by the event                                                               |
-| [monty:hazard_codes](../../../README.md#montyhazard_codes)                                                             | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile)                                                                         | List of hazard codes converted following the GDACS event type to Hazard profile mapping                                       |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[0]                                                       | properties.iso3                                                                                                                                                | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[1..*]                                                    | properties.affectedcountries.iso3                                                                                                                              | List of ISO3 codes of the other countries affected by the event                                                               |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile)                                                                         | List of hazard codes converted following the GDACS event type to Hazard profile mapping                                       |
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                                                                                                                                | Asset with the icon of the event                                                                                              |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                                                                                                                          | Asset with the link to the GDACS report                                                                                       |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                                                                                                                         | Link to the GDACS event details page                                                                                          |

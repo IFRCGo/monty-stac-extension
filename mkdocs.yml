@@ -1,0 +1,83 @@
+site_name: Monty Extension Documentation
+repo_url: https://github.com/IFRCGo/monty-stac-extension
+repo_name: IFRCGo/monty-stac-extension
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: [!relative $config_dir]
+      check_paths: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - github-callouts
+
+docs_dir: docs
+site_dir: site
+
+plugins:
+  - search
+  - mermaid2
+
+nav:
+  - Home: index.md
+  - Model:
+    - Overview: model/README.md
+    - Taxonomy: model/taxonomy.md
+    - Event Correlation: model/correlation_identifier.md
+    - Questions: model/questions.md
+  - Examples: examples/index.md
+  - Sources:
+    - Overview: model/sources/README.md
+    - DesInventar: model/sources/DesInventar/README.md
+    - EM-DAT: model/sources/EM-DAT/README.md
+    - GDACS: model/sources/GDACS/README.md
+    - GFD: model/sources/GFD/README.md
+    - GLIDE: model/sources/GLIDE/README.md
+    - IBTrACS: model/sources/IBTrACS/README.md
+    - IDMC: model/sources/IDMC/README.md
+    - IFRC-DREF: model/sources/IFRC-DREF/README.md
+    - PDC: model/sources/PDC/README.md
+    - USGS: model/sources/USGS/README.md
+
+extra_css:
+  - styles/extra.css
