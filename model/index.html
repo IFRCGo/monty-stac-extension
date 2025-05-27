@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href=".." rel="prev"/>
+<link href="taxonomy/" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.14" name="generator"/>
+<title>Overview - Monty Extension Documentation</title>
+<link href="../assets/stylesheets/main.342714a4.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../styles/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="red" data-md-color-primary="red" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#monty-model">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Monty Extension Documentation" class="md-header__button md-logo" data-md-component="logo" href=".." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Monty Extension Documentation" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    Monty Extension Documentation
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Model
+    
+  </span>
+</a>
+<label class="md-nav__link md-nav__link--active" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="taxonomy/">
+<span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="correlation_identifier/">
+<span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="questions/">
+<span class="md-ellipsis">
+    Questions
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../examples/README.md">
+<span class="md-ellipsis">
+    Examples
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-ellipsis">
+    API
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="stac-api/queryables/">
+<span class="md-ellipsis">
+    Queryables
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="sources/">
+<span class="md-ellipsis">
+    Sources
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/DesInventar/">
+<span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/EM-DAT/">
+<span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/GDACS/">
+<span class="md-ellipsis">
+    GDACS
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/GFD/">
+<span class="md-ellipsis">
+    GFD
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/GLIDE/">
+<span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/IBTrACS/">
+<span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/IDMC/">
+<span class="md-ellipsis">
+    IDMC
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/IFRC-DREF/">
+<span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/PDC/">
+<span class="md-ellipsis">
+    PDC
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="sources/USGS/">
+<span class="md-ellipsis">
+    USGS
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#eoapi-risk">
+<span class="md-ellipsis">
+      eoAPI risk
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#model-normalization">
+<span class="md-ellipsis">
+      Model Normalization
+    </span>
+</a>
+<nav aria-label="Model Normalization" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-overview">
+<span class="md-ellipsis">
+      Data Overview
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#event">
+<span class="md-ellipsis">
+      Event
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard">
+<span class="md-ellipsis">
+      Hazard
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#impact">
+<span class="md-ellipsis">
+      Impact
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!-- remark-ignore -->
+<h1 id="monty-model">Monty Model</h1>
+<p>The <a href="Montandon_Schema_V1-00.json">Monty model</a> is maintained in the <a href="https://github.com/IFRCGo/GCDB">GDBC repository</a>
+and is used to generate the Monty model documentation. 
+This JSON schema is the authoritative source for the Monty model and is used to build the STAC model.</p>
+<h2 id="eoapi-risk">eoAPI risk</h2>
+<p>The STAC extension aims to provide a way to include Montandon data in STAC items and collections.
+eoAPI risk is a flavor of <a href="https://eoapi.dev/">eoAPI</a> dedicated to risk data.
+The Monty model is transformed into a STAC model that is assimilable by the eoAPI data store.</p>
+<h2 id="model-normalization">Model Normalization</h2>
+<p>The first step in the process is to normalize the Monty model.
+This is done by converting the Monty model into a format that is easier to work with and compliant with the STAC specifications model.
+The normalized model must keep all the information from the Monty model and cover the applications intented that will use the eoAPI risk data.</p>
+<h3 id="data-overview">Data Overview</h3>
+<p>The Monty model is based on <strong>Event</strong> data type that consititutes the core of the model.
+In STAC, they will be represented as an item. Then for each event,
+3 kinds of data are collected:</p>
+<ul>
+<li><strong>Hazard</strong>: The type of hazard, its location and the intensity</li>
+<li><strong>Impact</strong>: All type of impact affecting the population, the infrastructure, the environment, etc
+  in terms of number of people affected, financial loss, dmaage to infrastructure, etc.</li>
+<li><strong>Response</strong>: Anticipatory measures and actions taken in response to the event</li>
+</ul>
+<p><img alt="GCDB" src="gcdb.png"/></p>
+<p>The original Monty model is a relational model with a lot of redundant taxonomy attributes in various forms (e.g. country code + name). 
+In the STAC model, we try to use unambiguous and normalized attributes as much as possible
+but keeping the capacity to query the data with the original taxonomy.
+For example, the country code is used as a normalized attribute in a specific field but the country name is kept as a keyword for free text search.</p>
+<p>The following classs diagram shows the relationships between the different classes in the Monty model and their high-level attributes.</p>
+<style>
+  .invisible {
+    display: none;
+  }
+</style>
+<pre class="mermaid"><code>---
+title: Montandon STAC Model
+---
+classDiagram
+    direction TD
+    linkStyle default interpolate basis
+
+    class Item["STAC Item"] {
+        +id: string
+        +title: string
+        +geometry: GeoJson geometry
+        +datetime: datetime
+        +start_datetime: datetime
+        +end_datetime: datetime
+        +keywords: string[]
+    }
+
+    class Event {
+        +country_codes: string[]
+        +hazard_codes: string[]
+    }
+
+    MontyData &lt;|-- Event
+
+    class MontyData {
+        +corr_id: string
+        +collection: string
+    }
+
+    Item &lt;|-- MontyData
+
+    MontyData "0..*" --&gt; "1" Event : is associated with
+
+    class Hazard {
+        +hazard_detail: HazardDetail[]
+    }
+
+    Hazard --|&gt; MontyData
+
+    class Impact {
+        +impact_detail: ImpactDetail[]
+    }
+
+    Impact --|&gt; MontyData
+    Impact "0..*" --&gt; "1..*" Hazard : is the effect of
+
+    class Response {
+    }
+
+    Response --|&gt; MontyData
+
+    class HazardDetail {
+        +severity_value: number
+        +severity_unit: string
+        +estimate_type: string
+    }
+
+    HazardDetail --* Hazard
+
+    class HazardCode {
+        +code: string
+        +name: string
+        +group: string
+        +subgroup: string
+        +type: string
+        +subtype: string
+    }
+
+    Event "*" --&gt; "*" HazardCode : has
+    HazardDetail "*" --&gt; "1" HazardCode : is defined by
+
+    link HazardCode "./taxonomy#hazards" "See hazard codes in the taxonomy"
+
+    class ac["&amp;ZeroWidthSpace;"] ::: invisible
+    Hazard "0..*" -- ac : is concurrent with
+    Hazard "0..*" &lt;-- ac
+
+    ac .. Occurence
+    class Occurence {
+        +type: string
+        +prob: string
+        +probdef: string
+    }
+
+    class ImpactDetail {
+        +category: string
+        +value: number
+        +type: string
+        +unit: string
+        +date: datetime
+        +estimate_type: string
+    }
+
+    ImpactDetail --* Impact
+    Impact "*" --&gt; "*" HazardCode : has
+
+</code></pre>
+<h3 id="event">Event</h3>
+<p>The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
+The global crisis data bank records multiple instances of events that are related to a single event:</p>
+<ul>
+<li>One unique reference event that is used to "pair" all the instances of the event</li>
+<li>Multiple instances of the event that are recorded for different sources</li>
+</ul>
+<p>The event class has the following attributes:</p>
+<ul>
+<li><strong>id</strong>: A unique identifier for the event. Preferably, the identifier assigned by the issuer (source) of the event.</li>
+<li>The reference event uses a <a href="questions/">?</a> generated by the Monty system</li>
+<li>The source events use the identifier assigned by the source (issuer) of the event</li>
+</ul>
+<p>Generated by the Monty system (currently <a href="https://github.com/IFRCGo/Monty-IFRC/blob/main/API/helpers/DREF_forecasting.R#L13">this method</a>). The event pairing page describes the algorithm used to generate the event id and the convention to follow.
+  This identifier is used as the correlation id for all the sources events registered in the Monty system.
+- <strong>title</strong>: The name of the event assigned by the issuer (source) of the event.
+- <strong>geometry</strong> (GeoJSON geometry): The location of the event in the form of a GeoJSON geometry.
+  It is recommanded to use a point geometry for the event so that it can be easily searched, displayed and clustered on a map.
+  More geometries can be used for the hazard, impact and response data to represent the affected area.
+- <strong>datetime</strong>: The date and time when the event occurred.
+  For forecasted events, it is the date and time when the event is forecasted to occur.
+- <strong>start_datetime</strong>: The date and time when the event started.
+  For forecasted events, it is the date and time when the event is forecasted to start. <strong>OPTIONAL</strong>
+- <strong>end_datetime</strong>: The date and time when the event ended.
+  For forecasted events, it is the date and time when the event is forecasted to end. <strong>OPTIONAL</strong>
+- <strong>country_codes</strong>: The country codes of the countries affected by the event.
+  The country codes are based on the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO 3166-1 alpha-3</a> standard.
+- <strong>hazard_codes</strong>: The hazard codes of the hazards affecting the event.
+  The hazard codes are based on the <a href="taxonomy/#hazards">multiple classification systems</a>
+- <strong>correlation_id</strong>: The unique identifier assigned by the Monty system to the reference event.  It is used to "pair" all the instances of the event. More information about the correlation identifier can be found <a href="correlation_identifier/">here</a>.
+- <strong>keywords</strong>: A list of keywords that describe the event. This list includes the human-readable names of
+  - the countries affected by the event
+  - the hazard types affecting the event</p>
+<h3 id="hazard">Hazard</h3>
+<p>The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - <a href="https://www.undrr.org/terminology/hazard">https://www.undrr.org/terminology/hazard</a>.
+In the Monty model, a hazard is always linked to an event and as per event, every hazard is recorded from multiple sources.
+A hazard can be observed or forecasted and <strong>MUST</strong> contains details on its severity or magnitude.</p>
+<p>The hazard class has the following attributes:</p>
+<ul>
+<li><strong>id</strong>: A unique identifier for the hazard. Preferably, the identifier assigned by the issuer (source) of the hazard. If not available, an identifier can be generated and should be prefixed with the related event id.</li>
+<li><strong>title</strong>: The name of the hazard assigned by the issuer (source) of the hazard.</li>
+<li><strong>geometry</strong> (GeoJSON geometry): The location of the hazard in the form of a GeoJSON geometry.</li>
+<li><strong>datetime</strong>: The date and time when the hazard occurrs or is forecasted to occur.</li>
+<li><strong>start_datetime</strong>: The date and time when the hazard started or is forecasted to start. <strong>OPTIONAL</strong></li>
+<li><strong>end_datetime</strong>: The date and time when the hazard ended or is forecasted to end. <strong>OPTIONAL</strong></li>
+<li><strong>ref_event_id</strong>: The identifier of the reference event to which is associated the hazard.</li>
+<li><strong>source_event_id</strong>: The identifier of the source event to which is associated the hazard. <strong>OPTIONAL</strong></li>
+<li><strong>source</strong>: Information about the organization and the database capturing, producing, processing, hosting or publishing this data.</li>
+<li><strong>hazard_detail</strong>: A detailed description of the hazard including:</li>
+<li><strong>severity_value</strong>: The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.</li>
+<li><strong>severity_unit</strong>: The unit of the estimated maximum hazard intensity/magnitude/severity value.</li>
+<li><strong>estimate_type</strong>: The type of data source that was used to create this hazard intensity/magnitude/severity estimate:<ul>
+<li>Primary data</li>
+<li>Secondary data</li>
+<li>Modelled data: estimated without any event-specific data</li>
+</ul>
+</li>
+</ul>
+<p>Hazards may be linked between each others. This linkage is called "concurrent hazard" and is linking the observed and potentially unobserved hazards together with a specific relationship:</p>
+<ul>
+<li><strong>Triggers</strong>: as the current hazard triggers the linked hazard. For example, an earthquake triggers a landslide.</li>
+<li><strong>Triggered by</strong>: as the current hazard is triggered by the linked hazard. For example, a landslide is triggered by an earthquake.</li>
+<li><strong>Concurrent</strong>: For hazards that do not necessarily trigger one-another, but occur together. For example, thunderstorms can occur together with windstorms or cyclones, thus, we would use 'concurrent'.</li>
+<li><strong>Complex</strong>: When the relationship between two hazards is complex.</li>
+</ul>
+<p>The link has also specific occurence attributes:</p>
+<ul>
+<li><strong>occurence_type</strong>: the linked hazard actually observed to have occurred with the main hazard, or is this link only a potential link. Montandon allows for hazards to be linked together by actual observed occurrences, or the possibility that the linked hazard occurred with the principal hazard. This is especially useful when handling hazards such as tropical cyclones, whereby more than half of all deaths from cyclones in the US were actually caused by inland flooding.</li>
+<li><strong>occurence_prob</strong> of the linked hazard occurring with the main hazard. This is a subjective probability, and is not a statistical probability. It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard.</li>
+<li><strong>occurenece_probdef</strong>: definition of occurrence probability is for the hazard relationship. For example, if the probability is 'high', where is 'high' defined?</li>
+</ul>
+<h3 id="impact">Impact</h3>
+<p>Impact data represent an estimate of the effect, including negative effects (e.g., economic losses) and positive effects (e.g., economic gains), of a hazardous event or a disaster. The term includes economic, human and environmental impacts, and may include death, injuries, disease and other negative effects on human physical, mental and social well-being'. UNDRR - <a href="https://www.undrr.org/terminology/disaster">https://www.undrr.org/terminology/disaster</a></p>
+<p>The impact class has the following attributes:</p>
+<ul>
+<li><strong>id</strong>: A unique identifier for the impact. Preferably, the identifier assigned by the issuer (source) of the impact estimate data. If not available, an identifier can be generated and should be prefixed with the related event id.</li>
+<li><strong>title</strong>: The name of the impact assigned by the issuer (source) of the impact estimate data.</li>
+<li><strong>geometry</strong> (GeoJSON geometry): The location of the impact in the form of a GeoJSON geometry.</li>
+<li><strong>datetime</strong>: The date and time periods of the impact estimates.</li>
+<li><strong>start_datetime</strong>: The date and time when the impact estimate started or is forecasted to start. <strong>OPTIONAL</strong></li>
+<li><strong>end_datetime</strong>: The date and time when the impact estimate ended or is forecasted to end. <strong>OPTIONAL</strong></li>
+<li><strong>ref_event_id</strong>: The identifier of the reference event to which is associated the impact.</li>
+<li><strong>source_event_id</strong>: The identifier of the source event to which is associated the impact. <strong>OPTIONAL</strong></li>
+<li><strong>hazard_id</strong>: The identifier of the hazard to which is associated the impact. <strong>OPTIONAL</strong></li>
+<li><strong>source</strong>: Information about the organization and the database capturing, producing, processing, hosting or publishing this estimate impact data.</li>
+<li><strong>impact_detail</strong>: A detailed description of the impact including:</li>
+<li><strong>category</strong>: The category of impact, which is the specific asset or population demographic that has been impacted by the hazard.</li>
+<li><strong>value</strong>: The estimated value of the impact, as a number, without the units. For example, for an estimate of 1000 people displaced, you would enter 1000.</li>
+<li><strong>type</strong>: The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'. <a href="taxonomy/#impact-type">Refer to the taxonomy</a> for all possible impact types.</li>
+<li><strong>unit</strong>: The units of the impact estimate. For example, 10 deaths would be a count value, thus 'unitscountnum' should be used.</li>
+<li><strong>date</strong>: If the impact estimate is a cost, provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, imp_sdate will be used.  <strong>OPTIONAL</strong></li>
+<li><strong>estimate_type</strong>: The type of data source that was used to create this impact estimate:<ul>
+<li>Primary data</li>
+<li>Secondary data</li>
+<li>Modelled data: estimated without any event-specific data</li>
+</ul>
+</li>
+</ul>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+</body>
+</html>

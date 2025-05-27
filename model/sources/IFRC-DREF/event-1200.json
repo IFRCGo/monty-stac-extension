@@ -1,0 +1,59 @@
+i/ 20250204122504
+// https://alpha-1-api.ifrc-go.dev.datafriendlyspace.org/api/v2/appeal/?limit=10&offset=0&ordering=-id&format=json
+
+{
+  "count": 3911,
+  "next": "https://alpha-1-api.ifrc-go.dev.datafriendlyspace.org/api/v2/appeal/?format=json&limit=10&offset=10&ordering=-id",
+  "previous": null,
+  "results": [
+    {
+      "aid": "3550",
+      "name": "Mozambique - Floods & Cyclones",
+      "dtype": {
+        "id": 12,
+        "name": "Flood",
+        "summary": "",
+        "translation_module_original_language": "en"
+      },
+      "atype": 1,
+      "atype_display": "Emergency Appeal",
+      "status": 1,
+      "status_display": "Closed",
+      "code": "MDRMZ002",
+      "sector": "Country cluster for Mozambique and Angola",
+      "num_beneficiaries": 117235,
+      "amount_requested": 20633392.0,
+      "amount_funded": 8513236.83,
+      "start_date": "2007-01-19T00:00:00Z",
+      "end_date": "2007-08-16T00:00:00Z",
+      "real_data_update": "2023-01-03 10:45:02+00:00",
+      "created_at": "2018-02-22 04:43:28.710144+00:00",
+      "modified_at": "2024-09-09 02:46:05.663711+00:00",
+      "event": 1200,
+      "needs_confirmation": false,
+      "country": {
+        "iso": "MZ",
+        "iso3": "MOZ",
+        "id": 120,
+        "record_type": 1,
+        "record_type_display": "Country",
+        "region": 0,
+        "independent": true,
+        "is_deprecated": false,
+        "fdrs": "DMZ001",
+        "average_household_size": null,
+        "name": "Mozambique",
+        "society_name": "Mozambique Red Cross Society",
+        "translation_module_original_language": "en"
+      },
+      "region": {
+        "name": 0,
+        "id": 0,
+        "region_name": "Africa",
+        "label": "Africa",
+        "translation_module_original_language": "en"
+      },
+      "id": "2139"
+    }
+  ]
+}

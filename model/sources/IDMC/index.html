@@ -1,0 +1,1828 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../IBTrACS/">
+      
+      
+        <link rel="next" href="../IFRC-DREF/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>IDMC - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#idmc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IDMC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queryables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Sources
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-idmc-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: idmc-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: idmc-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disasters-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disasters Dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gidd-disaggregated-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      GIDD disaggregated data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Items
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displacement-items-geometry-aggregagtion-for-event-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement items geometry aggregagtion for event geometry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Displacement items geometry aggregagtion for event geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Type Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#displacement-items-gidd-disaggregated-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement Items (GIDD Disaggregated Data)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Displacement Items (GIDD Disaggregated Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#displacement-impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement Impact details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item-generation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item Generation Rules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-displacement-updates-idu-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal Displacement Updates (IDU) Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Displacement Updates (IDU) Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-item-field-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item Field Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idu-impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDU Impact details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idu-impact-item-generation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDU Impact Item Generation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Quality Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USGS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-idmc-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: idmc-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: idmc-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disasters-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disasters Dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gidd-disaggregated-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      GIDD disaggregated data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Items
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displacement-items-geometry-aggregagtion-for-event-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement items geometry aggregagtion for event geometry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Displacement items geometry aggregagtion for event geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Type Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#displacement-items-gidd-disaggregated-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement Items (GIDD Disaggregated Data)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Displacement Items (GIDD Disaggregated Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#displacement-impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Displacement Impact details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item-generation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item Generation Rules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-displacement-updates-idu-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal Displacement Updates (IDU) Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal Displacement Updates (IDU) Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-item-field-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item Field Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idu-impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDU Impact details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idu-impact-item-generation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDU Impact Item Generation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Quality Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="idmc">IDMC</h1>
+<p>The Internal Displacement Monitoring Centre (IDMC) maintains the Global Internal Displacement Database (GIDD), which provides comprehensive information on global internal displacement events from 2008 onwards.</p>
+<h2 id="collection-idmc-events">Collection: <code>idmc-events</code></h2>
+<p>A STAC collection holding IDMC disaster-related displacement events.</p>
+<ul>
+<li>Name: Global Internal Displacement Database (GIDD) Events</li>
+<li>Code: <code>IDMC</code></li>
+<li>Source organisation: Internal Displacement Monitoring Centre (IDMC)</li>
+<li>Source code: IDMC</li>
+<li>Source Type: International Non-Governmental Organization</li>
+<li>Source organization email: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#105;&#100;&#109;&#99;&#46;&#99;&#104;">&#105;&#110;&#102;&#111;&#64;&#105;&#100;&#109;&#99;&#46;&#99;&#104;</a></li>
+<li>Source URL: <a href="https://www.internal-displacement.org/database">https://www.internal-displacement.org/database</a></li>
+<li>Source Data license: [TBD]</li>
+<li>Source for: event</li>
+<li>API Documentation: <a href="https://helix-tools-api.idmcdb.org/external-api/">https://helix-tools-api.idmcdb.org/external-api/</a></li>
+</ul>
+<h3 id="data">Data</h3>
+<ul>
+<li>Swagger JSON URL: <a href="https://helix-tools-api.idmcdb.org/external-api/">https://helix-tools-api.idmcdb.org/external-api/</a></li>
+<li>openAPI : <a href="https://helix-tools-api.idmcdb.org/external-api/api-schema/">https://helix-tools-api.idmcdb.org/external-api/api-schema/</a></li>
+</ul>
+<h4 id="disasters-dataset">Disasters Dataset</h4>
+<p>The <a href="https://www.internal-displacement.org/database/api-documentation/#gidd-disasters-dataset">GIDD Disasters Dataset</a> provides event information through the <code>/gidd/disasters/</code> API endpoint.</p>
+<p>Nevertheless, the items in this dataset are not consolidated into a single event. Instead, they are individual records of displacement events. We will focus on the event information provided in the <a href="#gidd-disaggregated-data">GIDD disaggregated data</a>.</p>
+<h4 id="gidd-disaggregated-data">GIDD disaggregated data</h4>
+<p>The <a href="https://www.internal-displacement.org/database/api-documentation/#gidd-disaggregated-data">GIDD Disaggregated Data</a> provides quality-controlled, annually validated data on internal displacement due to conflicts and disasters, disaggregated by caseload. This dataset is disaggregated by caseload, location and event.</p>
+<p>Endpoint URL: &lt;<a href="https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/?client_id=">https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/?client_id=</a><secret>&gt;</p>
+<p>The returned data is a geojson feature collection. Each feature represents a displacement item that includes the following properties:</p>
+<ul>
+<li><code>ID</code>: IDMC figure unique identifier</li>
+<li><code>ISO3</code>: ISO 3166-1 alpha-3 country code</li>
+<li><code>Country</code>: Country or territory name</li>
+<li><code>Geographical region</code>: IDMC's geographical region classification</li>
+<li><code>Figure cause</code>: Trigger of displacement (e.g., Conflict, Disaster)</li>
+<li><code>Year</code>: Reporting year</li>
+<li><code>Figure category</code>: Type of displacement metric (Internal Displacements or Total Number of IDPs)</li>
+<li><code>Figure unit</code>: Unit of measurement (Person, Household)</li>
+<li><code>Reported figures</code>: Values reported by original source</li>
+<li><code>Household size</code>: Average number of individuals per household</li>
+<li><code>Total figures</code>: Total number of displaced people</li>
+<li><code>Hazard category</code>: Primary hazard classification (e.g., Geophysical, Weather related)</li>
+<li><code>Hazard sub category</code>: Secondary hazard classification</li>
+<li><code>Hazard type</code>: Specific hazard type</li>
+<li><code>Hazard sub type</code>: Detailed hazard classification</li>
+<li><code>Start date</code>: Displacement start date</li>
+<li><code>Start date accuracy</code>: Accuracy of start date</li>
+<li><code>End date</code>: Displacement end date</li>
+<li><code>End date accuracy</code>: Accuracy of end date</li>
+<li><code>Stock date</code>: Date of IDP metric collection (for stock figures)</li>
+<li><code>Stock date accuracy</code>: Accuracy of stock date</li>
+<li><code>Stock reporting date</code>: IDMC reporting year for total IDPs</li>
+<li><code>Publishers</code>: Organizations distributing the data</li>
+<li><code>Sources</code>: Primary data providers</li>
+<li><code>Sources type</code>: Category of data source</li>
+<li><code>Event ID</code>: Unique identifier for events</li>
+<li><code>Event name</code>: Coded event name including location and date</li>
+<li><code>Event cause</code>: Trigger of the event</li>
+<li><code>Event main trigger</code>: Primary hazard or conflict type</li>
+<li><code>Event start date</code>: Event start date</li>
+<li><code>Event end date</code>: Event end date</li>
+<li><code>Event start date accuracy</code>: Accuracy of event start date</li>
+<li><code>Event end date accuracy</code>: Accuracy of event end date</li>
+<li><code>Is housing destruction</code>: Indicates if displacement includes housing destruction</li>
+<li><code>Violence type</code>: Category of violence (for conflict events)</li>
+<li><code>Event codes</code>: External reference codes (e.g., GLIDE numbers)</li>
+<li><code>Locations name</code>: Names of affected locations</li>
+<li><code>Locations coordinates</code>: Geographic coordinates of locations</li>
+<li><code>Locations accuracy</code>: Precision level of reported locations</li>
+<li><code>Locations type</code>: Type of displacement location (Origin/Destination)</li>
+<li><code>Displacement occurred</code>: Indicates if preventive evacuations were reported</li>
+</ul>
+<h3 id="event-items">Event Items</h3>
+<p>The IDMC event items are derived from the GIDD disaggregated data.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A GIDD geojson is a collection of displacement items. Multiple items can be associated with a single event. The event item is created by consolidating these items into a single event.</p>
+</div>
+<p>The following table shows how IDMC event fields map to STAC Item fields:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDMC field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td><code Event="Event" ID="ID">idmc-event-</code></td>
+<td>Yes</td>
+<td>Use format <code>idmc-event-{id}</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td><a href="#displacement-items-geometry-aggregagtion-for-event-geometry">feature geometry aggregation</a></td>
+<td>Yes</td>
+<td>Aggregation in multi points or multipolygon of all the items referencing the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>idmc-events</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields">title</a></td>
+<td>{Event name}</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">datetime</a></td>
+<td>{Event start date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>{Event start date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>{Event end date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>country_iso3</td>
+<td>Yes</td>
+<td>Direct mapping to array</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td Hazard="Hazard" Type="Type">{Hazard Category} and</td>
+<td>Yes</td>
+<td>Map using the <a href="#hazard-type-mapping">hazard type mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyepisode_number">monty:hazard_codes</a></td>
+<td></td>
+<td>Yes</td>
+<td>Always 1 (IDMC doesn't track episodes)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycorr_id">monty:corr_id</a></td>
+<td>id</td>
+<td>Yes</td>
+<td>Generated following the <a href="../../correlation_identifier/">event pairing procedure</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="displacement-items-geometry-aggregagtion-for-event-geometry">Displacement items geometry aggregagtion for event geometry</h3>
+<p>The geometry of the event is derived from the geometry of the displacement items. The geometry of the event is an aggregation of the geometries of all the displacement items associated with the event. The aggregation is done based on the following rules:</p>
+<ol>
+<li>If all the geometries are points, the event geometry is a MultiPoint geometry.</li>
+<li>If all the geometries are polygons, the event geometry is a MultiPolygon geometry.</li>
+<li>If the geometries are a mix of points and polygons, the event geometry is a MultiPolygon geometry with the points converted to polygons.</li>
+</ol>
+<h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
+<p>IDMC uses the same hazard classification as <a href="../../taxonomy/#em-dat-cred-classification-tree">EM-DAT CRED</a> and must follow the general rule for hazard codes generation.</p>
+<p>This mapping enables standardized hazard categorization while preserving IDMC's original classification in the source properties.</p>
+<h3 id="impact-items">Impact Items</h3>
+<h4 id="displacement-items-gidd-disaggregated-data">Displacement Items (GIDD Disaggregated Data)</h4>
+<p>The following table shows how IDMC displacement item fields map to STAC Item fields:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDMC field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td><code ID="ID">idmc-gidd-impact-</code><code>-displaced</code></td>
+<td>Yes</td>
+<td>Use format <code>idmc-impact-{ID}-displaced</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>[feature geometry]</td>
+<td>Yes</td>
+<td>Direct mapping from feature geometry</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>idmc-gidd-impacts</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields">title</a></td>
+<td>'{Figure category} of {Figure unit} for {Event name} '</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">datetime</a></td>
+<td>{Start date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>{Start date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>{End date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics">keywords</a></td>
+<td>[{Locations name}, {Figure category}, {Figure unit}, {Country}, {Geographical region}, {Figure cause}]</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>{ISO3}</td>
+<td>Yes</td>
+<td>Direct mapping to array</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td Hazard="Hazard" Type="Type">{Hazard Category} and</td>
+<td>Yes</td>
+<td>Map using the <a href="#hazard-type-mapping">hazard type mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">monty:impact_detail</a></td>
+<td>See <a href="#displacement-impact-details">Displacement Impact details</a></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="displacement-impact-details">Displacement Impact details</h5>
+<p>The following table shows how IDMC displacement impact fields map to <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">impact_detail</a> STAC Item fields:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDMC field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td><code>people</code></td>
+<td>Yes</td>
+<td>Always "people" for IDMC impacts</td>
+</tr>
+<tr>
+<td>type</td>
+<td><code>displaced_internal</code></td>
+<td>Yes</td>
+<td>Always "displaced_internal" for IDMC impacts</td>
+</tr>
+<tr>
+<td>value</td>
+<td>{Total figures}</td>
+<td>Yes</td>
+<td>Direct mapping</td>
+</tr>
+<tr>
+<td>unit</td>
+<td><code>count</code></td>
+<td>Yes</td>
+<td>Always people count (household figures are converted)</td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td><code>primary</code></td>
+<td>Yes</td>
+<td>Always "primary" for IDMC impacts</td>
+</tr>
+</tbody>
+</table>
+<h5 id="impact-item-generation-rules">Impact Item Generation Rules</h5>
+<ol>
+<li>Each displacement item in the GIDD dataset becomes a separate impact item</li>
+<li>Geometry is taken directly from the displacement item's feature geometry</li>
+<li>Dates are converted to UTC timezone</li>
+<li>Event ID reference uses the format <code>idmc-gidd-event-{id}</code></li>
+</ol>
+<h4 id="internal-displacement-updates-idu-items">Internal Displacement Updates (IDU) Items</h4>
+<p>The Internal Displacement Updates (IDU) provide near real-time information about displacement events. Key characteristics include:</p>
+<h5 id="impact-item-field-mapping">Impact Item Field Mapping</h5>
+<p>The following table shows how IDU fields map to STAC Item fields for impact items:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDU field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td><code id="id">idmc-idu-impact-</code><code>-displaced</code></td>
+<td>Yes</td>
+<td>Use format <code>idmc-idu-impact-{id}-displaced</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td longitude="longitude">{latitude},</td>
+<td>Yes</td>
+<td>Convert point coordinates to GeoJSON Point geometry</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>idmc-idu-impacts</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields">title</a></td>
+<td event_name="event_name">{displacement_type} displacement for</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">datetime</a></td>
+<td>{displacement_date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>{displacement_start_date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>{displacement_end_date}</td>
+<td>Yes</td>
+<td>Convert to datetime with UTC timezone</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics">keywords</a></td>
+<td>[{locations_name}, {displacement_type}, {role}, {sources}]</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>{iso3}</td>
+<td>Yes</td>
+<td>Direct mapping to array</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td type="type">{category},</td>
+<td>Yes</td>
+<td>Map using the <a href="#hazard-type-mapping">hazard type mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">monty:impact_detail</a></td>
+<td>See <a href="#idu-impact-details">IDU Impact details</a></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="idu-impact-details">IDU Impact details</h5>
+<p>The following table shows how IDU fields map to <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">impact_detail</a> STAC Item fields:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDU field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td><code>people</code></td>
+<td>Yes</td>
+<td>Always "people" for IDU impacts</td>
+</tr>
+<tr>
+<td>type</td>
+<td><code>displaced_internal</code></td>
+<td>Yes</td>
+<td>Always "displaced_internal" for IDU impacts</td>
+</tr>
+<tr>
+<td>value</td>
+<td>{figure}</td>
+<td>Yes</td>
+<td>Direct mapping</td>
+</tr>
+<tr>
+<td>unit</td>
+<td><code>count</code></td>
+<td>Yes</td>
+<td>Always people count</td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>{role}</td>
+<td>Yes</td>
+<td>Maps "Recommended figure" to "primary", "Triangulation" to "secondary"</td>
+</tr>
+</tbody>
+</table>
+<h5 id="idu-impact-item-generation-rules">IDU Impact Item Generation Rules</h5>
+<ol>
+<li>Each IDU record becomes a separate impact item</li>
+<li>Point geometry is created from latitude/longitude coordinates</li>
+<li>Dates are converted to UTC timezone</li>
+<li>Event ID reference uses the format <code>idmc-idu-event-{event_id}</code></li>
+<li>Role field determines estimate_type in impact_detail</li>
+</ol>
+<h5 id="hazard-classification">Hazard Classification</h5>
+<p>Maps to standard hazard codes:</p>
+<ul>
+<li>Wildfire → WF (GLIDE) / nat-cli-wil-for (EM-DAT) / EN0013 (UNDRR-ISC)</li>
+<li>Flood → FL (GLIDE) / nat-hyd-flo-flo (EM-DAT) / MH0007 (UNDRR-ISC)</li>
+<li>Mass Movement → LS (GLIDE) / nat-hyd-mmw-lan (EM-DAT) / GH0007 (UNDRR-ISC)</li>
+<li>Sinkhole → OT (GLIDE) / nat-geo-mmd-sub (EM-DAT) / GH0026 (UNDRR-ISC)</li>
+</ul>
+<h5 id="impact-classification">Impact Classification</h5>
+<ul>
+<li>Type: displaced_internal (internal displacements)</li>
+<li>Category: people (total displaced population)</li>
+<li>Two main categories:</li>
+<li>Preventive evacuations (marked in displacement_occurred field)</li>
+<li>Forced displacement due to damage/destruction</li>
+</ul>
+<h5 id="data-quality-notes">Data Quality Notes</h5>
+<ul>
+<li>Provides near real-time updates compared to annually validated GIDD data</li>
+<li>Includes source URLs for verification</li>
+<li>Distinguishes between recommended figures and triangulation</li>
+<li>Specifies accuracy of location information</li>
+<li>Indicates if displacement was preventive or post-disaster</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1609 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../EM-DAT/">
+      
+      
+        <link rel="next" href="../GFD/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>GDACS - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gdacs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GDACS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queryables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Sources
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-gdacs-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: gdacs-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: gdacs-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazard Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Detail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazard Detail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping-from-gdacs-event-type-to-hazard-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping from GDACS event type to Hazard profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-magnitude-and-units" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Magnitude and Units
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sendai-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sendai indicators
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USGS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-gdacs-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: gdacs-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: gdacs-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazard Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Detail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazard Detail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping-from-gdacs-event-type-to-hazard-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping from GDACS event type to Hazard profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-magnitude-and-units" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Magnitude and Units
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sendai-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sendai indicators
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="gdacs">GDACS</h1>
+<p>GDACS is a cooperation framework between the United Nations, the European Commission and disaster managers worldwide to improve alerts, information exchange and coordination in the first phase after major sudden-onset disasters.</p>
+<h2 id="collection-gdacs-events">Collection: <code>gdacs-events</code></h2>
+<p>A STAC collection hold all the GDACS events. An example of the GDACS collection is <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-events.json">here</a>.</p>
+<ul>
+<li>Name: Global Disaster Alert and Coordination System (GDACS)</li>
+<li>Code: <code>GDACS</code></li>
+<li>Source organisation: European Commission - Joint Research Centre (JRC)</li>
+<li>Source code: EC-JRC</li>
+<li>Source Type: Regional Intergovernmental Organisation</li>
+<li>Source organization email: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#111;&#114;&#100;&#105;&#110;&#97;&#116;&#105;&#111;&#110;&#64;&#103;&#100;&#97;&#99;&#115;&#46;&#111;&#114;&#103;">&#99;&#111;&#111;&#114;&#100;&#105;&#110;&#97;&#116;&#105;&#111;&#110;&#64;&#103;&#100;&#97;&#99;&#115;&#46;&#111;&#114;&#103;</a></li>
+<li>Source URL: <a href="https://www.gdacs.org">https://www.gdacs.org</a></li>
+<li>Source Data license: MIT License</li>
+<li>
+<p>Source for: event, hazard, impact</p>
+</li>
+<li>
+<p>previous implementation (R): <a href="https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R">https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R</a></p>
+</li>
+</ul>
+<h3 id="data">Data</h3>
+<p>Accessible data is a set of GDACS entries. Each entry is a disaster event. The event data list is available in the form of a geojson collections via the API endpoint <code>https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?</code>.
+Individual events can be accessed via the API endpoint <code>https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983</code>.</p>
+<ul>
+<li>Documentation: <a href="https://www.gdacs.org/floodmerge/data_v2.aspx">https://www.gdacs.org/floodmerge/data_v2.aspx</a></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It is important to note that GDACS has its <a href="https://www.gdacs.org/Knowledge/models_eq.aspx">own specific models</a> according to the type of event. This must be taken into account when mapping the data to the STAC model. When necessary, the present document will provide the specific mapping for each type of event.</p>
+</div>
+<h3 id="event-item">Event Item</h3>
+<p>A GDACS event and episode will <strong>ALWAYS</strong> produce an <a href="https://github.com/IFRCGo/monty-stac-extension#event"><strong>event STAC item</strong></a> as in the example for the <a href="https://www.gdacs.org/report.aspx?eventid=1102983&amp;episodeid=1&amp;eventtype=FL">flood in Spain from 27 Oct 2024 04 Nov 2024</a>.</p>
+<ul>
+<li>The source events are</li>
+<li>Episode #1 in the file <a href="1102983-1-geteventdata-source.json">1102983-1-geteventdata-source.json</a> and is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983&amp;episodeid=1"><code>geteventdata</code></a> API endpoint.</li>
+<li>Episode #2 in the file <a href="1102983-2-geteventdata-source.json">1102983-2-geteventdata-source.json</a> and is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983&amp;episodeid=2"><code>geteventdata</code></a> API endpoint.</li>
+<li>The produced event STAC items are</li>
+<li>Episode #1 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-1.json">gdacs-events/1102983-1.json</a>.</li>
+<li>Episode #2 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-2.json">gdacs-events/1102983-2.json</a>.</li>
+</ul>
+<p>The event URL of the <code>geteventdata</code> API endpoint is stored in the <code>links</code> field of the STAC item with the <code>via</code> relation.</p>
+<p>Here is a table with the fields that are mapped from the GDACS event to the STAC event:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>properties.eventid + properties.episodeid</td>
+<td>Unique identifier for the event per episode</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>bbox</td>
+<td>Bounding box of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>geometry</td>
+<td>Geometry of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>gdcas-events</code></td>
+<td>The collection for GDACS events</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>properties.name</td>
+<td>Name of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>properties.description<br/>properties.htmldescription</td>
+<td>Description of the event. HTML description should be privileged over plain text description and translated to markdown</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>properties.fromdate</td>
+<td>Date and time of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>properties.fromdate</td>
+<td>Start date of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>properties.todate</td>
+<td>End date of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>properties.iso3</td>
+<td>ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
+<td>properties.affectedcountries.iso3</td>
+<td>List of ISO3 codes of the other countries affected by the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td>properties.eventtype</td>
+<td>List of hazard codes converted following the <a href="#mapping-from-gdacs-event-type-to-hazard-profile">GDACS event type to Hazard profile mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">assets.icon</a></td>
+<td>properties.icon</td>
+<td>Asset with the icon of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>properties.url.report</td>
+<td>Asset with the link to the GDACS report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]</td>
+<td>properties.url.details</td>
+<td>Link to the GDACS event details page</td>
+</tr>
+<tr>
+<td><code>related</code> link in [links]</td>
+<td>properties.source and&lt;br&gt;properties.sourceid</td>
+<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>)</td>
+</tr>
+<tr>
+<td><code>related</code> link in [links]</td>
+<td>properties.glide</td>
+<td>If the glide number is present, create a <code>related</code> link to the item in <code>glide-events</code> collection</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hazard-item">Hazard Item</h3>
+<p>A GDACS event and episode will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a> as in the example for the <a href="https://www.gdacs.org/report.aspx?eventid=1102983&amp;episodeid=2&amp;eventtype=FL">flood in Spain from 27 Oct 2024 04 Nov 2024</a>.</p>
+<ul>
+<li>There are 2 sources for the hazards:</li>
+<li>The general event <a href="1102983-1-geteventdata-source.json">1102983-1-geteventdata-source.json</a> that is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983"><code>geteventdata</code></a> API endpoint.</li>
+<li>the detailed geometries <a href="1102983-1-getgeometry-source.json">1102983-1-getgeometry-source.json</a> that is the output of the <a href="https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&amp;eventid=1102983&amp;episodeid=2"><code>getgeometry</code></a> API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the <strong>affected</strong> areas. It has a property <code>properties.Class</code> set to <code>Poly_Affected</code>.</li>
+<li>The produced hazard STAC item is in the examples <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1102983-1-affected.json">gdacs-hazards/1102983-1-affected.json</a>.</li>
+</ul>
+<p>Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>properties.eventid + properties.episodeid</td>
+<td>Unique identifier for the hazard per episode</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>bbox</td>
+<td>Bounding box of the hazard</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>geometry</td>
+<td>Geometry of the hazard</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>gdcas-hazards</code></td>
+<td>The collection for GDACS hazards</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>properties.name</td>
+<td>Name of the hazard</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>properties.description<br/>properties.htmldescription</td>
+<td>Description of the hazard. HTML description should be privileged over plain text description and translated to markdown</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>properties.fromdate</td>
+<td>Date and time of the hazard converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>properties.fromdate</td>
+<td>Start date of the hazard converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>properties.todate</td>
+<td>End date of the hazard converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>properties.iso3</td>
+<td>ISO3 code of the country where the hazard occurred. Keywords shall also contain the human readable country name</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
+<td>properties.affectedcountries.iso3</td>
+<td>List of ISO3 codes of the other countries affected by the hazard</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td><a href="#mapping-from-gdacs-event-type-to-hazard-profile">mappings from properties.eventtype</a></td>
+<td>List of hazard codes converted following the GDACS hazard type to Hazard profile mapping</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">assets.icon</a></td>
+<td>properties.icon</td>
+<td>Asset with the icon of the hazard</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>properties.url.report</td>
+<td>Asset with the link to the GDACS report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]</td>
+<td>properties.url.details</td>
+<td>Link to the GDACS hazard details page</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">monty:hazard_detail</a></td>
+<td>properties.hazard_detail</td>
+<td>Detailed description of the hazard (more details in next section)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hazard-detail">Hazard Detail</h4>
+<p>The <a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">hazard_detail</a> field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>severity_value</td>
+<td>properties.episodealertlevel</td>
+<td>GDACS alert score</td>
+</tr>
+<tr>
+<td>severity_unit</td>
+<td><code>gdacs</code></td>
+<td>GDACS alert level according to GDCAS event type and model</td>
+</tr>
+</tbody>
+</table>
+<h5 id="mapping-from-gdacs-event-type-to-hazard-profile">Mapping from GDACS event type to Hazard profile</h5>
+<p>There is not straightforward mapping from the GDACS event type to the <a href="../../taxonomy/#undrr-isc-2020-hazard-information-profiles">hazard profile</a>. The current mapping only considers
+setting the clusters field as the following:</p>
+<table>
+<thead>
+<tr>
+<th>GDACS event type</th>
+<th>UNDRR Hazard profile cluster</th>
+<th>UNDRR Hazard Profile codes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_fl.aspx">Flood [FL]</a></td>
+<td><code>HM-FLOOD</code></td>
+<td><code>MH0012</code></td>
+</tr>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_eq.aspx">Earthquakes [EQ]</a></td>
+<td><code>GEO-SEIS</code></td>
+<td><code>GH0004</code></td>
+</tr>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_tc.aspx">Tropical Cyclones [TC]</a></td>
+<td><code>HM-PRECIP</code></td>
+<td><code>MH0057</code></td>
+</tr>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_ts.aspx">Tsunami [TS]</a></td>
+<td><code>GEO-SEIS</code></td>
+<td><code>GH0006</code></td>
+</tr>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_vo.aspx">Volcano [VO]</a></td>
+<td><code>GEO-VOLC</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_dr.aspx">Drought [DR]</a></td>
+<td><code>HM-PRECIP</code></td>
+<td><code>MH0035</code></td>
+</tr>
+</tbody>
+</table>
+<p>More specific <a href="../../taxonomy/#undrr-isc-2020-hazard-information-profiles">hazard codes</a> can be added to the <code>codes</code> field following the characteristics of the event.</p>
+<h5 id="hazard-magnitude-and-units">Hazard Magnitude and Units</h5>
+<p>In GDACS, the alert level is a score that is calculated based on the event type. Each event ype uses a specific model to calculate the alert level. The alert level is a score that is used to determine the magnitude of the event.
+The following table shows the magnitude scale and unit to be used for each event type:</p>
+<table>
+<thead>
+<tr>
+<th>GDACS event type</th>
+<th>Magnitude scale</th>
+<th>Magnitude unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.gdacs.org/Knowledge/models_fl.aspx">Flood [FL]</a> event type uses a severity score based on the Global Flood Detection System</td>
+<td>1-3</td>
+<td><code>GDACS Flood Severity Score</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="impact-item">Impact Item</h3>
+<p>According to the event type and the fields available in the GDACS event, one or more <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>impact STAC items</strong></a> can be created.
+The following sections describe the mapping of specific GDACS event information to the STAC impact item.</p>
+<h4 id="sendai-indicators">Sendai indicators</h4>
+<p>When the <code>sendai</code> field is present in the GDACS <a href="#event-item">event</a>, it contains an array of Sendai indicators.
+Each Sendai indicator is a JSON object that shall produce an <a href="https://github.com/IFRCGo/monty-stac-extension#impact">impact item</a>.
+The impact item shall have the following fields from both the GDACS event and the Sendai indicator:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>properties.eventid + properties.episodeid + properties.sendai.sendaitype + properties.sendai.sendainame + properties.sendai.country + properties.sendai.region</td>
+<td>Unique identifier for the impact</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>bbox of the geocoding of the properties.sendai.country + properties.sendai.region</td>
+<td>Bounding box of the impact</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>geometry of the geocoding of the properties.sendai.country + properties.sendai.region</td>
+<td>Geometry of the impact</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>gdcas-impacts</code></td>
+<td>The collection for GDACS impacts</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>properties.name + properties.sendai.sendaitype + properties.sendai.sendainame + properties.sendai.country + properties.sendai.region</td>
+<td>Name of the impact</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>properties.sendai.description</td>
+<td>Description of the impact. HTML description should be privileged over plain text description and translated to markdown</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>properties.sendai.onset_date</td>
+<td>Date and time of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>properties.sendai.onset_date</td>
+<td>Start date of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>properties.sendai.expires_date</td>
+<td>End date of the event converted in UTC ISO 8601 format</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
+<td>properties.iso3</td>
+<td>ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
+<td>properties.affectedcountries.iso3</td>
+<td>List of ISO3 codes of the other countries affected by the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td><a href="#mapping-from-gdacs-event-type-to-hazard-profile">mappings from properties.eventtype</a></td>
+<td>List of hazard codes converted following the GDACS event type to Hazard profile mapping</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">assets.icon</a></td>
+<td>properties.icon</td>
+<td>Asset with the icon of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>properties.url.report</td>
+<td>Asset with the link to the GDACS report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]</td>
+<td>properties.url.details</td>
+<td>Link to the GDACS event details page</td>
+</tr>
+<tr>
+<td><code>related</code> link in [links]</td>
+<td>properties.source and&lt;br&gt;properties.sourceid</td>
+<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

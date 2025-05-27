@@ -1,0 +1,1666 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../EM-DAT/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>DesInventar - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#desinventar" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DesInventar
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queryables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Sources
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-desinventar-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: desinventar-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: desinventar-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-code-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Code Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USGS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-desinventar-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: desinventar-events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collection: desinventar-events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazard-code-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Code Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Item
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="desinventar">Desinventar</h1>
+<p><a href="https://www.desinventar.net/">Desinventar</a> is a conceptual and methodological tool for generating national disaster databases that provides access to disaster effects information at various scales. It is maintained by the United Nations Office for Disaster Risk Reduction (UNDRR).</p>
+<h2 id="collection-desinventar-events">Collection: <code>desinventar-events</code></h2>
+<p>A STAC collection holds all Desinventar events. The example collection is at <code>examples/desinventar-events/desinventar-events.json</code>.</p>
+<ul>
+<li>Name: Desinventar Event Data</li>
+<li>Code: <code>Desinventar</code></li>
+<li>Source organisation: United Nations Office for Disaster Risk Reduction (UNDRR)</li>
+<li>Source code: UNDRR</li>
+<li>Source Type: International Organization</li>
+<li>Source organization email: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#101;&#115;&#105;&#110;&#118;&#101;&#110;&#116;&#97;&#114;&#64;&#117;&#110;&#46;&#111;&#114;&#103;">&#100;&#101;&#115;&#105;&#110;&#118;&#101;&#110;&#116;&#97;&#114;&#64;&#117;&#110;&#46;&#111;&#114;&#103;</a> </li>
+<li>Source URL: <a href="https://www.desinventar.net">https://www.desinventar.net</a></li>
+<li>Source Data license: <a href="https://www.desinventar.net/terms_of_use.html">License</a></li>
+<li>Source for: event, hazard, impact</li>
+</ul>
+<h3 id="data">Data</h3>
+<p>Desinventar data is available as downloadable ZIP files containing:</p>
+<ul>
+<li>An XML file with event data (DI_export_{country_code}.xml)</li>
+<li>Shapefiles for administrative boundaries</li>
+<li>Additional metadata files</li>
+</ul>
+<h4 id="api-endpoints">API Endpoints</h4>
+<ul>
+<li>Base URL: <code>https://www.desinventar.net</code></li>
+<li>Export endpoint: <code>https://www.desinventar.net/DesInventar/download/DI_export_{country_code}.zip</code></li>
+</ul>
+<p>The country code must be provided in lowercase (e.g., 'npl' for Nepal).</p>
+<p>The zip archive contains the following files:</p>
+<ul>
+<li>DI_export_{country_code}.xml: Event data in Desinventar XML format</li>
+<li>district.shp/dbf/prj/shx: Shapefiles for disctrict administrative boundaries</li>
+<li>region.shp/dbf/prj/shx: Shapefiles for region administrative boundaries</li>
+<li>village.shp/dbf/prj/shx: Shapefiles for village administrative boundaries</li>
+</ul>
+<h5 id="xml-data">XML Data</h5>
+<p>The XML file is structured as follows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;DESINVENTAR&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&lt;datamodel&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="cm">&lt;!-- Data model definition --&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&lt;/datamodel&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&lt;eventos&gt;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="cm">&lt;!-- Event type list --&gt;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">&lt;/eventos&gt;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&lt;causas&gt;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="cm">&lt;!-- Hazard type (Cause) list --&gt;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">&lt;/causas&gt;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">&lt;niveles&gt;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="cm">&lt;!-- Administrative level list --&gt;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">&lt;/niveles&gt;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">&lt;lev0&gt;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="cm">&lt;!-- Top-level administrative names list --&gt;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">&lt;/lev0&gt;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">&lt;lev1&gt;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="cm">&lt;!-- First-level administrative names list --&gt;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">&lt;/lev1&gt;</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nt">&lt;lev2&gt;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">        </span><span class="cm">&lt;!-- Second-level administrative names list --&gt;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nt">&lt;/lev2&gt;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="nt">&lt;regiones&gt;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">        </span><span class="cm">&lt;!-- Administrative boundaries (bounding boxes) for each administrative name --&gt;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="nt">&lt;/regiones&gt;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nt">&lt;diccionario&gt;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">        </span><span class="cm">&lt;!-- Taxonomy of impact categories --&gt;</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="nt">&lt;/diccionario&gt;</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">    </span><span class="nt">&lt;fichas&gt;</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="cm">&lt;!-- Event data --&gt;</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="nt">&lt;/fichas&gt;</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="nt">&lt;level_maps&gt;</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="cm">&lt;!-- Shapefile listing --&gt;</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">    </span><span class="nt">&lt;/level_maps&gt;</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="nt">&lt;/DESINVENTAR&gt;</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>Each<span class="w"> </span>disaster<span class="w"> </span>event<span class="w"> </span>is<span class="w"> </span>stored<span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>`<span class="nt">&lt;TR&gt;</span>`<span class="w"> </span>element<span class="w"> </span>within<span class="w"> </span>the<span class="w"> </span>`<span class="nt">&lt;fichas&gt;</span>`<span class="w"> </span>section:
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>```xml
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="nt">&lt;fichas&gt;</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="nt">&lt;TR&gt;</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">        </span><span class="nt">&lt;serial&gt;</span>194<span class="nt">&lt;/serial&gt;</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">        </span><span class="nt">&lt;level0&gt;</span>GRD<span class="nt">&lt;/level0&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Country code --&gt;</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">        </span><span class="nt">&lt;level1&gt;</span>GRD01<span class="nt">&lt;/level1&gt;</span><span class="w">            </span><span class="cm">&lt;!-- Region code --&gt;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">        </span><span class="nt">&lt;level2&gt;</span>GRD01001<span class="nt">&lt;/level2&gt;</span><span class="w">         </span><span class="cm">&lt;!-- District code --&gt;</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">        </span><span class="nt">&lt;name0&gt;</span>Grenada<span class="nt">&lt;/name0&gt;</span><span class="w">            </span><span class="cm">&lt;!-- Country name --&gt;</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="w">        </span><span class="nt">&lt;name1&gt;</span>Saint<span class="w"> </span>George<span class="nt">&lt;/name1&gt;</span><span class="w">       </span><span class="cm">&lt;!-- Region name --&gt;</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="w">        </span><span class="nt">&lt;name2&gt;</span>Saint<span class="w"> </span>George<span class="w"> </span>City<span class="nt">&lt;/name2&gt;</span><span class="w">  </span><span class="cm">&lt;!-- District name --&gt;</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="w">        </span><span class="nt">&lt;evento&gt;</span>STORM<span class="nt">&lt;/evento&gt;</span><span class="w">            </span><span class="cm">&lt;!-- Hazard type --&gt;</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="w">        </span><span class="nt">&lt;lugar&gt;</span>National<span class="w"> </span>-<span class="w"> </span>TS<span class="w"> </span>Ernesto<span class="nt">&lt;/lugar&gt;</span><span class="w"> </span><span class="cm">&lt;!-- Location description --&gt;</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="w">        </span><span class="cm">&lt;!-- Temporal information --&gt;</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="nt">&lt;fechano&gt;</span>2012<span class="nt">&lt;/fechano&gt;</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">        </span><span class="nt">&lt;fechames&gt;</span>8<span class="nt">&lt;/fechames&gt;</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="w">        </span><span class="nt">&lt;fechadia&gt;</span>3<span class="nt">&lt;/fechadia&gt;</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="w">        </span><span class="nt">&lt;duracion&gt;</span>0<span class="nt">&lt;/duracion&gt;</span><span class="w">            </span><span class="cm">&lt;!-- Duration in days --&gt;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="w">        </span><span class="cm">&lt;!-- Impact metrics --&gt;</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="w">        </span><span class="nt">&lt;muertos&gt;</span>0<span class="nt">&lt;/muertos&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Deaths --&gt;</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="w">        </span><span class="nt">&lt;heridos&gt;</span>0<span class="nt">&lt;/heridos&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Injured --&gt;</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="w">        </span><span class="nt">&lt;desaparece&gt;</span>0<span class="nt">&lt;/desaparece&gt;</span><span class="w">        </span><span class="cm">&lt;!-- Missing --&gt;</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="w">        </span><span class="nt">&lt;damnificados&gt;</span>0<span class="nt">&lt;/damnificados&gt;</span><span class="w">    </span><span class="cm">&lt;!-- Directly affected --&gt;</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">        </span><span class="nt">&lt;afectados&gt;</span>0<span class="nt">&lt;/afectados&gt;</span><span class="w">          </span><span class="cm">&lt;!-- Indirectly affected --&gt;</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="w">        </span><span class="nt">&lt;vivdest&gt;</span>0<span class="nt">&lt;/vivdest&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Houses destroyed --&gt;</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="w">        </span><span class="nt">&lt;vivafec&gt;</span>0<span class="nt">&lt;/vivafec&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Houses damaged --&gt;</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="w">        </span><span class="nt">&lt;evacuados&gt;</span>0<span class="nt">&lt;/evacuados&gt;</span><span class="w">          </span><span class="cm">&lt;!-- Evacuated --&gt;</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="w">        </span><span class="nt">&lt;reubicados&gt;</span>0<span class="nt">&lt;/reubicados&gt;</span><span class="w">        </span><span class="cm">&lt;!-- Relocated --&gt;</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="w">        </span><span class="nt">&lt;valorus&gt;</span>0<span class="nt">&lt;/valorus&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Losses in USD --&gt;</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">        </span><span class="nt">&lt;valorloc&gt;</span>0<span class="nt">&lt;/valorloc&gt;</span><span class="w">            </span><span class="cm">&lt;!-- Losses in local currency --&gt;</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="w">        </span><span class="nt">&lt;nhectareas&gt;</span>0<span class="nt">&lt;/nhectareas&gt;</span><span class="w">        </span><span class="cm">&lt;!-- Crop area damaged (ha) --&gt;</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="w">        </span><span class="nt">&lt;cabezas&gt;</span>0<span class="nt">&lt;/cabezas&gt;</span><span class="w">              </span><span class="cm">&lt;!-- Cattle lost --&gt;</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="w">        </span><span class="nt">&lt;kmvias&gt;</span>0<span class="nt">&lt;/kmvias&gt;</span><span class="w">                </span><span class="cm">&lt;!-- Roads damaged (m) --&gt;</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="w">        </span><span class="cm">&lt;!-- Additional information --&gt;</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">        </span><span class="nt">&lt;magnitud2&gt;&lt;/magnitud2&gt;</span><span class="w">           </span><span class="cm">&lt;!-- Hazard magnitude --&gt;</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="w">        </span><span class="nt">&lt;glide&gt;&lt;/glide&gt;</span><span class="w">                   </span><span class="cm">&lt;!-- GLIDE number if available --&gt;</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="w">        </span><span class="nt">&lt;latitude&gt;</span>0<span class="nt">&lt;/latitude&gt;</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a><span class="w">        </span><span class="nt">&lt;longitude&gt;</span>0<span class="nt">&lt;/longitude&gt;</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="w">    </span><span class="nt">&lt;/TR&gt;</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a><span class="nt">&lt;/fichas&gt;</span>
+</code></pre></div>
+<h3 id="event-item">Event Item</h3>
+<p>A Desinventar event will <strong>ALWAYS</strong> produce an <a href="https://github.com/IFRCGo/monty-stac-extension#event"><strong>event STAC item</strong></a>.</p>
+<p>Example event items for grenada export at <a href="DI_export_grd.xml">DI_export_GRD.xml</a>:</p>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events/grd-194.json">STORM grd-194.json</a></li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events/grd-200.json">EPIDEMIC grd-200.json</a></li>
+</ul>
+<p>Here is the mapping of fields from Desinventar XML to STAC event items:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>Desinventar field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>level0 (lower case) + '-' + serial</td>
+<td>Unique identifier combining country code and event serial</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>Based on shapefile data using level2/level1/level0</td>
+<td>Geometry derived from administrative boundaries</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>Calculated from geometry</td>
+<td>Bounding box of the event area</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#datetime">datetime</a></td>
+<td>fechano, fechames, fechadia</td>
+<td>Date of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">start_datetime</a></td>
+<td>fechano, fechames, fechadia</td>
+<td>Start date of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">end_datetime</a></td>
+<td>fechano, fechames, fechadia + [duracion]</td>
+<td>End date of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties">title</a></td>
+<td>evento + lugar + date</td>
+<td>Human-readable title combining event type and location</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:episode_number">monty:episode_number</a></td>
+<td>1</td>
+<td>Set to 1 as Desinventar doesn't track episodes</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:country_codes">monty:country_codes</a></td>
+<td>level0</td>
+<td>ISO3 code of the event country</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:hazard_codes">monty:hazard_codes</a></td>
+<td><a href="#hazard-code-mapping">mapped from evento</a></td>
+<td>Hazard codes mapped from Desinventar event types (see mapping below)</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:corr_id">monty:corr_id</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../correlation_identifier/">event correlation</a> convention</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hazard-code-mapping">Hazard Code Mapping</h4>
+<p>The following table shows how Desinventar event types map to <a href="../../taxonomy/#hazards">UNDRR-ISC Hazard Information Profiles</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Desinventar Event</th>
+<th>Hazard Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALLUVION</td>
+<td>MH0051</td>
+<td>Mud flow</td>
+</tr>
+<tr>
+<td>AVALANCHE</td>
+<td>MH0050</td>
+<td>Avalanche</td>
+</tr>
+<tr>
+<td>COASTAL EROSION</td>
+<td>EN0020</td>
+<td>Coastal erosion</td>
+</tr>
+<tr>
+<td>COLD WAVE</td>
+<td>MH0049</td>
+<td>Cold wave</td>
+</tr>
+<tr>
+<td>CYCLONE</td>
+<td>MH0057</td>
+<td>Tropical cyclone</td>
+</tr>
+<tr>
+<td>DROUGHT</td>
+<td>MH0035</td>
+<td>Drought</td>
+</tr>
+<tr>
+<td>EARTHQUAKE</td>
+<td>GH0001</td>
+<td>Earthquake</td>
+</tr>
+<tr>
+<td>ELECTRIC STORM</td>
+<td>MH0002</td>
+<td>Lightning</td>
+</tr>
+<tr>
+<td>EROSION</td>
+<td>EN0019</td>
+<td>Soil erosion</td>
+</tr>
+<tr>
+<td>FLASH FLOOD</td>
+<td>MH0006</td>
+<td>Flash flood</td>
+</tr>
+<tr>
+<td>FLOOD</td>
+<td>FL</td>
+<td>Flood (general)</td>
+</tr>
+<tr>
+<td>FOG</td>
+<td>MH0016</td>
+<td>Fog</td>
+</tr>
+<tr>
+<td>FOREST FIRE</td>
+<td>EN0013</td>
+<td>Forest fire</td>
+</tr>
+<tr>
+<td>FROST</td>
+<td>MH0043</td>
+<td>Frost</td>
+</tr>
+<tr>
+<td>HAIL STORM</td>
+<td>MH0036</td>
+<td>Hail</td>
+</tr>
+<tr>
+<td>HEAT WAVE</td>
+<td>MH0047</td>
+<td>Heat wave</td>
+</tr>
+<tr>
+<td>LAHAR</td>
+<td>GH0013</td>
+<td>Lahar</td>
+</tr>
+<tr>
+<td>LANDSLIDE</td>
+<td>GH0007</td>
+<td>Landslide</td>
+</tr>
+<tr>
+<td>LIQUEFACTION</td>
+<td>GH0003</td>
+<td>Liquefaction</td>
+</tr>
+<tr>
+<td>SANDSTORM</td>
+<td>MH0015</td>
+<td>Dust/sand storm</td>
+</tr>
+<tr>
+<td>SNOW STORM</td>
+<td>MH0039</td>
+<td>Snow storm</td>
+</tr>
+<tr>
+<td>STORM SURGE</td>
+<td>MH0027</td>
+<td>Storm surge</td>
+</tr>
+<tr>
+<td>TSUNAMI</td>
+<td>MH0029</td>
+<td>Tsunami</td>
+</tr>
+<tr>
+<td>TORNADO</td>
+<td>MH0060</td>
+<td>Tornado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hazard-item">Hazard Item</h3>
+<p>No hazard items are generated from Desinventar data as the hazard information is almost never available (<code>magnitud2</code> field is empty) and when available, it is hardly standardized.</p>
+<h3 id="impact-item">Impact Item</h3>
+<p>Desinventar events will produce multiple <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>impact STAC items</strong></a> when impact data is available.</p>
+<p>Example impact items:</p>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-impacts/grd-200-deaths.json">EPIDEMIC deaths grd-200-deaths.json</a></li>
+</ul>
+<p>The following table shows the mapping of Desinventar impact fields to STAC items:</p>
+<table>
+<thead>
+<tr>
+<th>Desinventar field</th>
+<th>Category</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deaths</td>
+<td>ALL_PEOPLE</td>
+<td>DEATHS</td>
+<td>count</td>
+<td>Number of deaths</td>
+</tr>
+<tr>
+<td>injured</td>
+<td>ALL_PEOPLE</td>
+<td>INJURED</td>
+<td>count</td>
+<td>Number of injured people</td>
+</tr>
+<tr>
+<td>missing</td>
+<td>ALL_PEOPLE</td>
+<td>MISSING</td>
+<td>count</td>
+<td>Number of missing people</td>
+</tr>
+<tr>
+<td>houses_destroyed</td>
+<td>BUILDINGS</td>
+<td>DESTROYED</td>
+<td>count</td>
+<td>Houses completely destroyed</td>
+</tr>
+<tr>
+<td>houses_damaged</td>
+<td>BUILDINGS</td>
+<td>DAMAGED</td>
+<td>count</td>
+<td>Houses partially damaged</td>
+</tr>
+<tr>
+<td>directly_affected</td>
+<td>ALL_PEOPLE</td>
+<td>DIRECTLY_AFFECTED</td>
+<td>count</td>
+<td>People directly affected</td>
+</tr>
+<tr>
+<td>indirectly_affected</td>
+<td>ALL_PEOPLE</td>
+<td>INDIRECTLY_AFFECTED</td>
+<td>count</td>
+<td>People indirectly affected</td>
+</tr>
+<tr>
+<td>relocated</td>
+<td>ALL_PEOPLE</td>
+<td>RELOCATED</td>
+<td>count</td>
+<td>People relocated</td>
+</tr>
+<tr>
+<td>evacuated</td>
+<td>ALL_PEOPLE</td>
+<td>EVACUATED</td>
+<td>count</td>
+<td>People evacuated</td>
+</tr>
+<tr>
+<td>losses_in_dollar</td>
+<td>TOTAL_COST_UNSPECIFIED</td>
+<td>LOSS_COST</td>
+<td>USD</td>
+<td>Economic losses in USD</td>
+</tr>
+<tr>
+<td>losses_local_currency</td>
+<td>TOTAL_COST_UNSPECIFIED</td>
+<td>LOSS_COST</td>
+<td>Unknown</td>
+<td>Economic losses in local currency</td>
+</tr>
+<tr>
+<td>damages_in_crops_ha</td>
+<td>CROP</td>
+<td>DAMAGED</td>
+<td>hectare</td>
+<td>Crop area damaged</td>
+</tr>
+<tr>
+<td>lost_cattle</td>
+<td>CATTLE</td>
+<td>MISSING</td>
+<td>count</td>
+<td>Number of cattle lost</td>
+</tr>
+<tr>
+<td>damages_in_roads_mts</td>
+<td>ALL_PEOPLE</td>
+<td>DAMAGED</td>
+<td>m</td>
+<td>Length of roads damaged</td>
+</tr>
+</tbody>
+</table>
+<p>For each available impact metric in the Desinventar data, a separate impact item is created with:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>{level0}-{serial}-{metric}</td>
+<td>Unique ID combining event serial and impact metric</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties">title</a></td>
+<td metric="metric">{event title} -</td>
+<td>Title combining event name and impact type</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:impact_detail">monty:impact_detail</a></td>
+<td></td>
+<td>Object containing impact details</td>
+</tr>
+<tr>
+<td>monty:impact_detail.category</td>
+<td>From mapping table</td>
+<td>Impact category code</td>
+</tr>
+<tr>
+<td>monty:impact_detail.type</td>
+<td>From mapping table</td>
+<td>Impact type code</td>
+</tr>
+<tr>
+<td>monty:impact_detail.value</td>
+<td>From Desinventar field</td>
+<td>Numeric impact value</td>
+</tr>
+<tr>
+<td>monty:impact_detail.unit</td>
+<td>From mapping table</td>
+<td>Unit of measurement</td>
+</tr>
+<tr>
+<td>monty:impact_detail.estimate_type</td>
+<td>"primary"</td>
+<td>All Desinventar data is considered primary</td>
+</tr>
+</tbody>
+</table>
+<p>The geometry, bbox, datetime and other base fields are inherited from the source event item.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,59 @@
+{
+    "type": "Feature",
+    "bbox": [
+        -3.4110253455683806,
+        38.60133168687446,
+        -3.4110253455683806,
+        38.60133168687446
+    ],
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -3.4110253455683806,
+            38.60133168687446
+        ]
+    },
+    "properties": {
+        "eventtype": "FL",
+        "eventid": 1102983,
+        "episodeid": 1,
+        "eventname": "",
+        "glide": "FL-2024-000199-ESP",
+        "name": "Flood in Spain",
+        "description": "Flood in Spain",
+        "htmldescription": "Red Flood in Spain from: 27 Oct 2024 15 to: 04 Nov 2024 11.",
+        "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Red/FL.png",
+        "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Red/FL.png",
+        "url": {
+            "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=1",
+            "report": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=1&eventtype=FL",
+            "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983"
+        },
+        "alertlevel": "Red",
+        "alertscore": 3,
+        "episodealertlevel": "Red",
+        "episodealertscore": 2.5,
+        "istemporary": "false",
+        "iscurrent": "false",
+        "country": "Spain",
+        "fromdate": "2024-10-27T15:00:00",
+        "todate": "2024-11-04T11:00:00",
+        "datemodified": "2024-11-08T11:10:45",
+        "iso3": "ESP",
+        "source": "GLOFAS",
+        "sourceid": "5c949dea-419b-4f50-90f0-e7271adf619d",
+        "polygonlabel": "Centroid",
+        "Class": "Point_Centroid",
+        "affectedcountries": [
+            {
+                "iso3": "ESP",
+                "countryname": "Spain"
+            }
+        ],
+        "severitydata": {
+            "severity": 0.0,
+            "severitytext": "Magnitude 0 ",
+            "severityunit": ""
+        }
+    }
+}

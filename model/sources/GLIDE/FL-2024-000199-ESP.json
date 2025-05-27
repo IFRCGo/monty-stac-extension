@@ -1,0 +1,31 @@
+// 20250109104354
+// https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&fromyear=2024&toyear=2024&events=FL&number=2024-000199
+
+{
+    "glideset": [
+      {
+        "comments": "GDACS - Medium humanitarian impact in for Spain.According to the authorities (CENEM), as of 30 October at 14.00 UTC , the number of deaths stands at 62 in the Autonomous Region of Valencia (eastern Spain), with an undetermined number of missing in Autonomous Region of Valencia, in Albacete province in Castilla La Mancha autonomous Region. Dozens have been rescued and several have been displaced in Valencia province. In addition, a bridge collapsed in Ribarroja del Turia (Valencia province), several roads have been closed, including some in Granada and Malaga cities in the Andalucia region, and train disruptions have been recorded in the affected area. ",
+        "year": 2024,
+        "docid": 23388,
+        "latitude": 38.6013316868745,
+        "homeless": 0,
+        "source": "GDACS",
+        "idsource": "",
+        "killed": 0,
+        "affected": 0,
+        "duration": 8,
+        "number": "2024-000199",
+        "injured": 0,
+        "month": 10,
+        "geocode": "ESP",
+        "location": "Spain",
+        "magnitude": "0",
+        "time": "",
+        "id": "",
+        "event": "FL",
+        "day": 27,
+        "status": "A",
+        "longitude": -3.41102534556838
+      }
+    ]
+  }

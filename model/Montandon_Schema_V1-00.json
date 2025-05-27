@@ -1,0 +1,1330 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://goadmin.ifrc.org/docs/Montandon/MontandonSchema.json",
+    "title": "Hazard-Impact Event Dataset - The Montandon Schema",
+    "description": "The data allows the user to assemble many different hazard-impact estimates, potentially for different impact types, across different organisations and with spatio-temporal coverage, and more. The structure and form of this dataset conforms with the Montandon Data Standards.",
+    "type": "object",
+    "required": ["monty_Info", "event_Level", "impact_Data", "hazard_Data", "response_Data"],
+    "properties": {
+      "monty_Info": {
+        "title": "Monty Object Instance-Specific Information",
+        "description": "Information about this Montandon object instance and general information on the data within this instance.",
+        "type": "object",
+        "properties": {
+          "class_version": {
+            "title": "Montandon Version",
+            "description": "The version of the Montandon from which the data was extracted.",
+            "type": "string",
+            "pattern": "^Montandon V\\d\\.\\d\\d$"
+          },
+          "db_pubdate": {
+            "title": "Date of Publication",
+            "description": "The date this data was published in the Montandon database.",
+            "$ref": "#/$defs/Date_obj"
+          },
+          "helpful_resources": {
+            "title": "Helpful Monty-Related Resources",
+            "description": "A few helpful resources that may help the user through their journey into Monty's world!",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "URL": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              }
+            }
+          }
+        }
+      },
+      "event_Level": {
+        "title": "Event-Level Metadata",
+        "description": "This section describes all the event-level information, without listing any information about impacts or the specific hazards involved. Note that an 'event' is defined as the occurrence of a single or multiple hazards.",
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Event_obj"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "impact_Data": {
+        "title": "Impact Data",
+        "type": "array",
+        "description": "A collection of impact estimate data",
+        "items": {
+          "$ref": "#/$defs/Impact_obj"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "hazard_Data": {
+        "title": "Hazard Data",
+        "description": "A collection of hazard severity estimate data",
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Hazard_obj"
+        },
+        "uniqueItems": true
+      },
+      "response_Data": {
+        "title": "Response Data",
+        "description": "A collection of data on the response/interventions to the hazard event",
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Response_obj"
+        },
+        "uniqueItems": true
+      },
+      "taxonomies": {
+        "title": "Montandon Taxonomy Codes",
+        "description": "The full list of required taxonomy codes necessary to interpret the data",
+        "type": "object",
+        "properties": {
+          "ISO_info": {
+            "title": "Country and Region Information",
+            "description": "Information concerning the country, such as ISO3C code, country name, region, continent, etc.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ISO3": {
+                  "title": "ISO3 Character Code",
+                  "description": "The character-based three letter country code with respect to the alpha-3 ISO 3166-1 standard",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["AFG", "ALB", "DZA", "AND", "AGO", "AIA", "ATG", "ARG", "ARM", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BTN", "BOL", "BIH", "BWA", "BRA", "VGB", "BRN", "BGR", "BFA", "BDI", "CPV", "KHM", "CMR", "CAN", "CAF", "TCD", "CHL", "CHN", "COL", "COM", "COG", "COK", "CRI", "CIV", "HRV", "CUB", "CYP", "CZE", "PRK", "COD", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FJI", "FIN", "FRA", "GAB", "GMB", "GEO", "DEU", "GHA", "GRC", "GRD", "GTM", "GIN", "GNB", "GUY", "HTI", "VAT", "HND", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "ISR", "ITA", "JAM", "JPN", "JOR", "KAZ", "KEN", "KIR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MRT", "MUS", "MEX", "FSM", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "NZL", "NIC", "NER", "NGA", "NIU", "NOR", "OMN", "PAK", "PLW", "PAN", "PNG", "PRY", "PER", "PHL", "POL", "PRT", "QAT", "KOR", "MDA", "ROU", "RUS", "RWA", "KNA", "LCA", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SVK", "SVN", "SLB", "SOM", "ZAF", "SSD", "ESP", "LKA", "PSE", "SDN", "SUR", "SWZ", "SWE", "CHE", "SYR", "TJK", "THA", "MKD", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "TZA", "USA", "URY", "UZB", "VUT", "VEN", "VNM", "YEM", "ZMB", "ZWE", "ALA", "ASM", "ATA", "ABW", "BMU", "BES", "BVT", "IOT", "CYM", "CXR", "CCK", "CUW", "FLK", "FRO", "GUF", "PYF", "ATF", "GIB", "GRL", "GLP", "GUM", "GGY", "HMD", "HKG", "IMN", "JEY", "XKX", "MAC", "MTQ", "MYT", "NCL", "NFK", "MNP", "PCN", "PRI", "REU", "BLM", "SHN", "MAF", "SPM", "SXM", "SGS", "SJM", "TWN", "XTX", "UMI", "VIR", "WLF", "ESH"]
+                },
+                "country": {
+                  "title": "Country Name",
+                  "description": "The country name",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia (Plurinational State of)", "Bosnia and Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Côte d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czechia", "Democratic People's Republic of Korea", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia (Federated States of)", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Republic of Korea", "Republic of Moldova", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "State of Palestine", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Tajikistan", "Thailand", "The former Yugoslav Republic of Macedonia", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United Republic of Tanzania", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Yemen", "Zambia", "Zimbabwe", "Åland Islands", "American Samoa", "Antarctica", "Aruba", "Bermuda", "Caribbean Netherlands", "Bouvet Island", "British Indian Ocean Territory", "Cayman Islands", "Christmas Island", "Cocos (Keeling) Islands", "Curaçao", "Falkland Islands", "Faroe Islands", "French Guiana", "French Polynesia", "French Southern Territories", "Gibraltar", "Greenland", "Guadeloupe", "Guam", "Guernsey", "Heard & McDonald Islands", "Hong Kong SAR China", "Isle of Man", "Jersey", "Macao SAR China", "Martinique", "Mayotte", "New Caledonia", "Norfolk Island", "Northern Mariana Islands", "Pitcairn Islands", "Puerto Rico", "Réunion", "St. Barthélemy", "St. Helena", "Saint Martin (French part)", "St. Pierre & Miquelon", "Sint Maarten", "South Georgia & South Sandwich Islands", "Svalbard & Jan Mayen", "Taiwan", "United States Minor Outlying Islands (the)", "U.S. Virgin Islands", "Wallis & Futuna", "Western Sahara"]
+                },
+                "unregion": {
+                  "title": "UN-Defined Region",
+                  "description": "The region, as defined by the UN",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["Asia", "Europe", "Africa", "Not Classified", "Latin America and the Caribbean", "Oceania", "Northern America"]
+                },
+                "worldbankregion": {
+                  "title": "World Bank-Defined Region",
+                  "description": "The region, as defined by the World Bank",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["South Asia", "Europe & Central Asia", "Middle East & North Africa", "Sub-Saharan Africa", "Not Classified", "Latin America & Caribbean", "East Asia & Pacific", "North America"]
+                },
+                "continent": {
+                  "title": "Continent",
+                  "description": "The continent",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["Asia", "Europe", "Africa", "North America", "South America", "Oceania", "Antarctica"]
+                },
+                "unsubregion": {
+                  "title": "UN-Defined Sub-Region",
+                  "description": "The sub-region, as defined by the UN",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["Southern Asia", "Southern Europe", "Northern Africa", "Middle Africa", "Not Classified", "Caribbean", "South America", "Western Asia", "Australia/New Zealand", "Western Europe", "Eastern Europe", "Central America", "Western Africa", "Southern Africa", "South-Eastern Asia", "Eastern Africa", "Northern America", "Eastern Asia", "Polynesia", "Northern Europe", "Melanesia", "Central Asia", "Micronesia"]
+                },
+                "worldbankincomegroup": {
+                  "title": "Country Income Group",
+                  "description": "The country income group, as defined by the World Bank",
+                  "type": "string",
+                  "codelist": "IsoContinentRegion.csv",
+                  "openCodelist": false,
+                  "enum": ["Low Income", "Upper Middle Income", "High Income", "Lower Middle Income", "Not Classified"]
+                }
+              }
+            }
+          },
+          "exp_class": {
+            "title": "Exposure Taxonomy",
+            "description": "The taxonomy of the different exposure categorisations",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "exp_spec_code": {
+                  "title": "Exposure Detail Code",
+                  "description": "The code of the exposure detail",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["expspec_allpeop", "expspec_crop", "expspec_women", "expspec_men", "expspec_elder", "expspec_chld14", "expspec_chld18", "expspec_wheelch", "expspec_road", "expspec_trainlin", "expspec_vulempl", "expspec_build", "expspec_reccost", "expspec_hosp", "expspec_educ", "expspec_loccur", "expspec_globdate", "expspec_infloccur", "expspec_infglobdate", "expspec_usdunsure", "expspec_cattle", "expspec_aidgen", "expspec_ecoifrcall", "expspec_ecoifrcreq", "expspec_alert"]
+                },
+                "exp_spec_lab": {
+                  "title": "Exposure Detail Label",
+                  "description": "The label or full name of the exposure detail",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["People (All Demographics)", "Crops", "Women", "Men", "Elderly (Over 65)", "Children (Under 14)", "Children (Under 18)", "Wheelchair Users", "Road", "Train-lines", "Population in Vulnerable Employment", "Buildings", "Reconstruction Costs", "Hospitals", "Education Centers", "Local Currency [Date of Event]", "Global/Regional Currency (e.g. USD)", "Inflation-Adjusted Local Currency [Date of Event]", "Inflation-Adjusted Global/Regional Currency (USD)", "USD [Unsure]", "Cattle", "General Aid Contributions", "IFRC Appeal Contribution", "IFRC Appeal Requested", "Alertscore"]
+                },
+                "exp_subcat_code": {
+                  "title": "Exposure Sub-Category Code",
+                  "description": "The code for the exposure sub-category",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["expsubcat_popcnt", "expsubcat_infarabl", "expsubcat_popgend", "expsubcat_popage", "expsubcat_popdis", "expsubcat_infrds", "expsubcat_popvuln", "expsubcat_inftot", "expsubcat_ecotot", "expsubcat_phyhealth", "expsubcat_phyedu", "expsubcat_envliv", "expsubcat_ecoaid", "expsubcat_risk", "expsubcat_infprec", "expsubcat_infmin", "expsubcat_infwater", "expsubcat_finfor", "expsubcat_envaqu", "expsubcat_envgreen", "expsubcat_enveco", "expsubcat_envhab", "expsubcat_detreccost", "expsubcat_ecoins", "expsubcat_ecounins", "expsubcat_ecodirtot", "expsubcat_ecoindtot", "expsubcat_physinfo", "expsubcat_physwater", "expsubcat_infres", "expsubcat_infnonres", "expsubcat_infind", "expsubcat_infener", "expsubcat_infnonmov", "expsubcat_popindig"]
+                },
+                "exp_subcat_lab": {
+                  "title": "Exposure Sub-Category Label",
+                  "description": "The label or full name of the exposure sub-category",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Total Population", "Arable Land & Agricultural Produce", "Gender &/or Sex (SAAB) Demographic", "Age Demographic", "Disabled Population", "Transportation Systems (Roads, Railways, Harbours, Airports, etc)", "Vulnerable Population", "Total Buildings", "Total Cost", "Health Facilities – Non-Residential", "Educational Facilities – Non-Residential", "Livestock", "Aid Contributions", "Alertscore or risk indicator", "Other Precious Resources", "Mining Resources", "Water", "Forestry & Natural Vegetation", "Aquaculture & Fisheries", "Green Infrastructure", "Ecological Zones & Nature Reserves", "Sensitive Habitats or Species", "Reconstruction Costs", "Insured Cost", "Uninsured Cost", "Total Direct Cost", "Total Indirect Cost", "Information & Communication", "Water & Sanitation Systems", "Residential Buildings", "Other Non-Residential Buildings", "Industrial Buildings", "Energy Supply & Electricity infrastructure", "Socio-cultural Infrastructure (monuments, museums, etc)", "Indigenous or first nations people"]
+                },
+                "exp_cat_code": {
+                  "title": "Exposure Category Code",
+                  "description": "The code of the exposure category",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["expcat_pop", "expcat_env", "expcat_phyinf", "expcat_fineco", "expcat_other"]
+                },
+                "exp_cat_lab": {
+                  "title": "Exposure Category Label",
+                  "description": "The label or full name of the exposure category",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Population", "Environmental & Ecological Assets", "Built Environment & Cultural Assets", "Financial/Economic Assets", "Other"]
+                }
+              }
+            }
+          },
+          "imp_class": {
+            "title": "Impact Taxonomy",
+            "description": "The taxonomy of the different impact and loss categorisations",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "imp_type_code": {
+                  "title": "Impact Type Code",
+                  "description": "The code of the impact type",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["imptypunspec", "imptypunaff", "imptypdama", "imptypdest", "imptyppotdam", "imptypaffe", "imptypdiraffe", "imptypindaffe", "imptypdeat", "imptypmiss", "imptypinju", "imptypevac", "imptypereloc", "imptypeassist", "imptypeemshel", "imptypetempacc", "imptypelongacc", "imptypneed", "imptyptarg", "imptypdisr", "imptypcost", "imptyphomles", "imptypidp", "imptypextdisp", "imptypedisp", "imptypalert"]
+                },
+                "imp_type_lab": {
+                  "title": "Impact Type Label",
+                  "description": "The label or full name of the impact type",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Unspecified", "Unaffected", "Damaged", "Destroyed", "Potentially Damaged", "Total Affected", "Directly Affected", "Indirectly Affected", "Deaths", "Missing", "Injured", "Evacuated", "Relocated", "Assisted (Recieved Aid/Support)", "Emergency Sheltered", "Temporary Accommodated", "Long-Term Accommodated", "In Need", "Targeted", "Disrupted", "Loss (Cost)", "Homeless", "Internally Displaced Persons (IDPs)", "Refugees, Asylum Seekers and Externally Displaced Persons", "Displaced Persons (Internal & External)", "Alertscore"]
+                }
+              }
+            }
+          },
+          "haz_class": {
+            "title": "Hazard Taxonomy",
+            "description": "The taxonomy of the different hazard categorisations",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "haz_spec_code": {
+                  "title": "Specific Hazard Code",
+                  "description": "The coded name of the specific hazard",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["MH0001", "MH0002", "MH0003", "MH0004", "MH0005", "MH0006", "MH0007", "MH0008", "MH0009", "MH0010", "MH0011", "MH0012", "MH0013", "MH0014", "MH0015", "MH0016", "MH0017", "MH0018", "MH0019", "MH0020", "MH0021", "MH0022", "MH0023", "MH0024", "MH0025", "MH0026", "MH0027", "MH0028", "MH0029", "MH0030", "MH0031", "MH0032", "MH0033", "MH0034", "MH0035", "MH0036", "MH0037", "MH0038", "MH0039", "MH0040", "MH0041", "MH0042", "MH0043", "MH0044", "MH0045", "MH0046", "MH0047", "MH0048", "MH0049", "MH0050", "MH0051", "MH0052", "MH0053", "MH0054", "MH0055", "MH0056", "MH0057", "MH0058", "MH0099", "MH0059", "MH0060", "ET0001", "ET0002", "ET0003", "ET0004", "ET0005", "ET0006", "ET0007", "ET0008", "ET0009", "GH0001", "GH0002", "GH0003", "GH0004", "GH0005", "GH0006", "GH0007", "GH0008", "GH0009", "GH0010", "GH0011", "GH0012", "GH0013", "GH0014", "GH0015", "GH0016", "GH0017", "GH0018", "GH0019", "GH0020", "GH0021", "GH0022", "GH0023", "GH0024", "GH0025", "GH0026", "GH0027", "GH0028", "GH0029", "GH0030", "GH0031", "GH0032", "GH0033", "GH0034", "GH0035", "EN0001", "EN0002", "EN0003", "EN0004", "EN0005", "EN0006", "EN0007", "EN0008", "EN0009", "EN0010", "EN0011", "EN0012", "EN0013", "EN0014", "EN0015", "EN0016", "EN0017", "EN0018", "EN0019", "EN0020", "EN0021", "EN0022", "EN0023", "EN0024", "CH0001", "CH0002", "CH0003", "CH0004", "CH0005", "CH0006", "CH0007", "CH0008", "CH0009", "CH0010", "CH0011", "CHO012", "CH0013", "CH0014", "CH0015", "CH0016", "CH0017", "CH0018", "CH0019", "CH0020", "CH0021", "CH0022", "CH0023", "CH0024", "CH0025", "BI0001", "BI0002", "BI0003", "BI0004", "BI0005", "BI0006", "BI0007", "BI0008", "BI0009", "BI0010", "BI0011", "BI0012", "BI0013", "BI0014", "BI0015", "BI0016", "BI0017", "BI0018", "BI0019", "BI0020", "BI0021", "BI0022", "BI0023", "BI0024", "BI0025", "BI0026", "BI0027", "BI0028", "BI0029", "BI0030", "BI0031", "BI0032", "BI0033", "BI0034", "BI0035", "BI0036", "BI0037", "BI0038", "BI0039", "BI0040", "BI0041", "BI0042", "BI0043", "BI0044", "BI0045", "BI0046", "BI0047", "BI0048", "BI0049", "BI0050", "BI0051", "BI0052", "BI0053", "BI0054", "BI0055", "BI0056", "BI0057", "BI0058", "BI0059", "BI0060", "BI0061", "BI0062", "BI0063", "BI0064", "BI0065", "BI0066", "BI0067", "BI0068", "BI0069", "BI0070", "BI0071", "BI0072", "BI0073", "BI0074", "BI0075", "BI0076", "BI0077", "BI0078", "BI0079", "BI0080", "BI0081", "BI0082", "BI0083", "BI0084", "BI0085", "BI0086", "BI0087", "BI0088", "TL0001", "TL0002", "TL0003", "TL0004", "TL0005", "TL0006", "TL0007", "TL0008", "TL0009", "TL0010", "TL0011", "TL0012", "TL0013", "TL0014", "TL0015", "TL0016", "TL0017", "TL0018", "TL0019", "TL0020", "TL0021", "TL0022", "TL0023", "TL0024", "TL0025", "TL0026", "TL0027", "TL0028", "TL0029", "TL0030", "TL0031", "TL0032", "TL0033", "TL0034", "TL0035", "TL0036", "TL0037", "TL0038", "TL0039", "TL0040", "TL0041", "TL0042", "TL0043", "TL0044", "TL0045", "TL0046", "TL0047", "TL0048", "TL0049", "TL0050", "TL0051", "TL0052", "TL0053", "SO0001", "SO0002", "SO0003", "SO0004", "SO0005", "SO0006", "SO0007", "SO0008"]
+                },
+                "haz_spec_lab": {
+                  "title": "Specific Hazard Name",
+                  "description": "The name of the specific hazard",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Downburst", "Lightning (Electrical Storm)", "Thunderstorm", "Coastal Flood", "Estuarine (Coastal) Flood", "Flash Flood", "Fluvial (Riverine) Flood", "Groundwater Flood", "Ice-Jam Flood Including Debris", "Ponding (Drainage) Flood", "Snowmelt Flood", "Surface Water Flooding", "Glacial Lake Outburst Flood", "Black Carbon (Brown Clouds)", "Dust storm or Sandstorm", "Fog", "Haze", "Polluted Air", "Sand haze", "Smoke", "Ocean Acidification", "Rogue Wave", "Sea Water Intrusion", "Sea Ice (Icebergs)", "Ice Flow", "Seiche", "Storm Surge", "Storm Tides", "Tsunami", "Depression or Cyclone (Low Pressure Area)", "Extra-tropical Cyclone", "Sub-Tropical Cyclone", "Acid Rain", "Blizzard", "Drought", "Hail", "Ice Storm", "Snow", "Snow Storm", "Cold Wave", "Dzud", "Freeze", "Frost (Hoar Frost)", "Freezing Rain (Supercooled Rain)", "Glaze", "Ground Frost", "Heatwave", "Icing (including Ice)", "Thaw", "Avalanche", "Mud Flow", "Rock Slide", "Derecho", "Gale (Strong Gale)", "Squall", "Subtropical Storm", "Tropical Cyclone (Cyclonic Wind, Rain [Storm] surge)", "Tropical Storm", "Extra-tropical Storm", "Tornado", "Wind", "Airburst", "Geomagnetic Storm (including energetic particles related to space weather, and solar flare radio blackout [R Scale])", "UV Radiation", "Meteorite Impact", "Ionospheric Storms", "Radio Blackout", "Solar Storm (Solar Radiation Storm) (S Scale)", "Space Hazard / Accident", "Near-Earth Object", "Earthquake", "Ground Shaking (Earthquake)", "Liquefaction (Earthquake Trigger)", "Earthquake Surface Rupture, Fissures, and Tectonic Uplift/Subsidence", "Subsidence and Uplift, Including Shoreline Change (Earthquake Trigger)", "Tsunami (Earthquake Trigger)", "Landslide or Debris Flow (Earthquake Trigger)", "Ground Gases (Seismogenic)", "Lava Flows (Lava Domes)", "Ash/Tephra Fall (Physical and Chemical)", "Ballistics (Volcanic)", "Pyroclastic Density Current", "Debris Flow/Lahars/Floods", "Landslide (Volcanic Trigger)", "Ground Shaking (Volcanic Earthquake)", "Volcanic Gases and Aerosols", "Tsunami (Volcanic Trigger)", "Lightning (Volcanic Trigger)", "Urban Fire (During/Following Volcanic Eruption)", "Subsidence and Uplift, Including Shoreline Change (Magmatic/Volcanic Trigger)", "Ground Shaking (induced earthquake, reservoir fill, dams, cavity collapse, underground explosion, impact, hydrocarbon fields, shale exploration, etc.)", "Liquefaction (Groundwater Trigger)", "Ground Fissuring", "Subsidence and Uplift Including Shoreline Change", "Shrink-Swell Subsidence", "Sinkhole", "Ground Gases (CH4, Rn, etc.)", "Riverbank Erosion", "Sand Encroachment", "Aquifer Recharge (Systems Failure/ Outages)", "Submarine Landslide", "Rockfall", "Landscape Creep", "Sediment Rock Avalanche", "Tsunami (Submarine Landslide Trigger)", "Household Air Pollution", "Air Pollution (Point Source)", "Ambient (Outdoor) Air Pollution", "Land Degradation", "Soil Degradation", "Runoff / Nonpoint Source Pollution", "Salinity", "Biodiversity Loss", "Deforestation", "Forest Declines and Diebacks", "Forest Disturbances", "Forest Invasive Species", "Wildfires", "Desertification", "Loss of Mangroves", "Wetland Loss/Degradation", "Coral Bleaching", "Compressive Soils", "Soil Erosion", "Coastal Erosion and Shoreline Change", "Permafrost Loss", "Sand Mining", "Sea Level Rise", "Eutrophication", "Ammonia", "Carbon Monoxide", "Arsenic", "Cadmium", "Lead", "Mercury", "Levels of Contaminants in Food and Feed", "Pesticides – Highly Hazardous", "Residue of Pesticides", "Hazardous Pesticide Contamination in Soils", "Insecticides", "Fungicides", "Dioxins and Dioxin-like Substances", "Microplastics", "Phosphine", "Chlorine", "Oil Pollution", "Benzene", "Chemical Warfare Agents", "Asbestos", "Aflatoxins", "Fluoride - Excess or inadequate intake", "Methanol", "Substandard and Falsified Medical Products", "Marine Toxins", "Harmful Algal Blooms", "Insect Pest Infestations", "Locust", "Invasive Weeds", "Invasive Species", "Snake Envenomation", "Human-Wildlife Conflict", "Biological Agents", "Suicide Cluster", "Antimicrobial Resistance", "Foodborne Microbial Hazards (including human enteric virus and foodborne parasite)", "Bacterial Plant Disease", "Fungal Plant Disease", "Viral, Mycoplasma and Viroid Plant Disease Epidemics", "Anthrax", "Airborne Diseases", "Blood Borne Viruses", "Waterborne Diseases", "Foodborne Diseases", "Sexually Transmitted Diseases (Human)", "Neglected Tropical Diseases (Human)", "Vaccine-Preventable Diseases (Human)", "Vector Borne Diseases (VBD) (Human)", "Viral Haemorrhagic Fevers (Human)", "Antimicrobial Resistant Microorganisms (Human)", "Animal Diseases (Not Zoonoses)", "Zoonotic Diseases", "Diarrhoeal Diseases (Human)", "Prion Diseases", "Hepatitis B (Human)", "Hepatitis C (Human)", "HIV and AIDS (Human)", "COVID-19 (SARS-CoV-2) (Human)", "Cholera (Human)", "Cryptosporidium (Human)", "Paratyphoid fever (Human)", "Typhoid Fever (Human)", "Hepatitis A (Human)", "Escherichia Coli (STEC) (Human)", "Listeriosis (Human)", "Shigellosis (Human)", "Avian Influenza (Human and Animal)", "Pandemic Influenza (Human)", "Seasonal Influenza (Human)", "Cysticercosis", "Leptospirosis (Human)", "Plague (Human)", "Leprosy", "Chikungunya", "Zika Virus (human)", "Diphtheria (Human)", "Measles (Human)", "Meningococcal Meningitis (Human)", "Pertussis (Human)", "Polio (Human)", "Smallpox (Human)", "Varicella and herpes zoster (Human)", "Yellow Fever (Human)", "Dengue (Human)", "Malaria (Human)", "Crimean-Congo Haemorrhagic Fever (Human)", "Ebola (Human)", "Lassa Fever (Human)", "Tuberculosis (Human and Animal)", "Middle East Respiratory Syndrome (MERS) (Human)", "Monkeypox (Human)", "Rabies (Animal and Human)", "Severe Acute Respiratory Syndrome (SARS) (Human)", "Rotavirus (Human)", "African Swine Fever (Animal)", "Vector-borne diseases (VBD) (Animals)", "Brucellosis (Animal)", "Classical Swine Fever (Animal)", "Contagious Bovine Pleuropneumonia (CBPP) (Animal)", "Contagious Caprine Pleuropneumonia (CCPP) (Animal)", "Foot and Mouth Disease Virus (Animal)", "Lumpy Skin Disease (Animal)", "New World Screwworm (NWS) (Animal)", "Newcastle Disease Virus (Animal)", "Peste Des Petits Ruminants (Animal)", "Q Fever", "Rift Valley Fever (Animal)", "Trypanosomosis (Animal)", "West Nile Fever (Human)", "Rinderpest (Animal)", "Trypanosomiasis (Human)", "Shrimp disease (bacterial) - Acute Hepatic pancreatic necrosis", "Oyster Disease Aquaculture", "Radioactive Waste", "Radioactive Material", "Radiation Agents", "Nuclear Agents", "Building Collapse", "Building, highrise, cladding", "Structural Failure", "Bridge Failure", "Dam Failure", "Supply Chain Failure", "Critical Infrastructure Failure", "Nuclear Plant Failure", "Power Outage/ or Blackout", "Emergency Telecommunications Failure", "Water Supply Failure", "Radio and Other Telecommunication Failures", "Misconfiguration of Software and Hardware", "Non-Conformity and Interoperability", "Malware", "Data Breach", "Data Security-Related Hazards", "Disrupt", "Outage", "Personally Identifiable Information (PII) Breach", "Internet of Things (IOT)-Related Hazards", "Cyberbullying", "Natech", "Pollution", "Explosion", "Leaks and Spills", "Soil Pollution", "Fire", "Mining Hazards", "Safety Hazards Associated with Oil and Gas Extraction Activities", "Disaster Waste", "Solid Waste", "Wastewater", "Hazardous Waste", "Plastic Waste", "Marine Debris", "Electronic Waste (E-Waste)", "Healthcare Risk Waste", "Landfilling", "Tailings", "Waste Treatment Lagoons", "Drain and Sewer Flooding", "Reservoir Flooding", "Air Transportation Accident", "Inland Water Ways", "Marine Accident", "Rail Accident", "Road Traffic Accident", "Explosive agents", "International Armed Conflict (IAC)", "Non-International Armed Conflict (NIAC)", "Civil Unrest", "Explosive Remnants of War", "Environmental Degradation from Conflict", "Violence", "Stampede or Crushing (Human)", "Financial shock"]
+                },
+                "haz_cluster_code": {
+                  "title": "Hazard Cluster Code",
+                  "description": "The coded name of the hazard cluster",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["hazhmconv", "hazhmflood", "hazhmlitho", "hazhmmarine", "hazhmpress", "hazhmprecip", "hazhmtemp", "hazhmterr", "hazhmwind", "hazetextraterr", "hazgeoseis", "hazgeovolc", "hazgeoother", "hazenvenvdeg", "hazchemgas", "hazchemmetal", "hazchemfoodsaf", "hazchempest", "hazchempops", "hazchemhydrocar", "hazchemcbrne", "hazchemother", "hazchemfishaqua", "hazbiofishaqua", "hazbioinfest", "hazbioinvspe", "hazbiohumani", "hazbiocbrne", "hazbiomenthe", "hazbiofoodsaf", "hazbioinfdispla", "hazbioinfdisanihum", "hazbioinfdisani", "hazbioinfdisaqua", "haztechrad", "haztechcbrne", "haztechstrfail", "haztechinffail", "haztechcyb", "haztechindfail", "haztechwaste", "haztechflood", "haztechtransp", "hazsocconf", "hazsocpostconf", "hazsocbeh", "hazsoceco"]
+                },
+                "haz_cluster_lab": {
+                  "title": "Hazard Cluster Name",
+                  "description": "The name of the hazard cluster",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Convective-Related", "Flood", "Lithometeors", "Marine", "Pressure-Related", "Precipitation-Related", "Temperature-Related", "Terrestrial", "Wind-Related", "Extraterrestrial", "Seismogenic (Earthquakes)", "Volcanogenic (volcanoes and geothermal)", "Other Geohazard", "Environmental Degradation", "Gases", "Heavy Metals", "Food Safety", "Pesticides", "Persistent Organic Pollutants (POPs)", "Hydrocarbons", "CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)", "Other Chemical Hazards and Toxins", "Fisheries and Aquaculture", "Insect Infestation", "Invasive Species", "Human-Animal Interaction", "Mental Health", "Infectious Disease (Plant)", "Infectious Diseases (Human and Animal)", "Infectious Diseases (Animal)", "Infectious Diseases (Aquaculture)", "Radiation", "Construction/ Structural Failure", "Infrastructure Failure", "Cyber Hazard", "Industrial Failure", "Waste", "Transportation", "Conflict", "Post-Conflict", "Behavioural", "Economic"]
+                },
+                "haz_type_code": {
+                  "title": "Hazard Type Code",
+                  "description": "The coded name of the hazard type",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["haztypehydromet", "haztypeextraterr", "haztypegeohaz", "haztypeenviron", "haztypechem", "haztypebio", "haztypetech", "haztypesoc"]
+                },
+                "haz_type_lab": {
+                  "title": "Hazard Type Label",
+                  "description": "The name of the hazard type",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Meterological & Hydrological", "Extraterrestrial", "Geohazards", "Environmental", "Chemical", "Biological", "Technological", "Societal"]
+                }
+              }
+            }
+          },
+          "src_info": {
+            "title": "Source Information",
+            "description": "The list of all source information relevant to this specific dataset.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "src_org_code": {
+                  "title": "Organisation Coded Name",
+                  "description": "The organisation coded name.",
+                  "type": "string"
+                },
+                "src_org_lab": {
+                  "title": "Organisation Label Name",
+                  "description": "The organisation name, in the format '<name> (<acronym>)'.",
+                  "type": "string"
+                },
+                "src_orgtype_code": {
+                  "title": "Organisation Type Code",
+                  "description": "The code name of the organisation type. See the taxonomy for organisation type under 'organtypes'.",
+                  "$ref": "#/$defs/SrcOrgType_obj"
+                },
+                "src_orgtype_lab": {
+                  "title": "Organisation Type Label",
+                  "description": "The label name of the organisation type. See the taxonomy for organisation type under 'organtypes'.",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["UN & International Organisations", "Governmental", "Regional Intergovernmental Organisation", "Non Governmental Organisation", "Academic & Scientific", "Private Sector", "News & Media", "Others"]
+                },
+                "src_org_email": {
+                  "title": "Impact Data Source Contact Email",
+                  "description": "Email address of the source organisation that hosts the impact data estimate.",
+                  "type": "string",
+                  "format": "email"
+                },
+                "src_db_code": {
+                  "title": "Database Coded Name",
+                  "description": "The coded name of the database.",
+                  "type": "string"
+                },
+                "src_db_lab": {
+                  "title": "Database Label Name",
+                  "description": "The label name of the database.",
+                  "type": "string"
+                },
+                "src_db_attr": {
+                  "title": "Organisation Attribution to Database",
+                  "description": "The attribution of the database to the source organisation. For example, the curator.",
+                  "type": "string"
+                },
+                "src_db_lic": {
+                  "title": "Database License Information",
+                  "description": "Information concerning the license and proprietary information for the database.",
+                  "type": "string"
+                },
+                "src_db_URL": {
+                  "title": "Impact Data Source URL",
+                  "description": "The website URL where the impact estimate was published",
+                  "type": "string",
+                  "format": "iri"
+                },
+                "src_addinfo": {
+                  "title": "Impact Data Source Additional Information",
+                  "description": "Any additional comments or information about the dataset or the source organisation.",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "units_info": {
+            "title": "Units Taxonomy",
+            "description": "The full list of taxonomies of the units.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "unit_codes": {
+                  "title": "Unit Code",
+                  "description": "The coded name of the unit.",
+                  "$ref": "#/$defs/MeasUnits_obj"
+                },
+                "units_lab": {
+                  "title": "Unit Name",
+                  "description": "The label name of the unit.",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": true,
+                  "enum": ["Unitless", "Unknown", "mm_per_sec2", "cm_per_sec2", "m_per_sec2", "km_per_sec2", "grav", "inch_per_sec2", "ft_per_sec2", "mi_per_sec2", "kph_per_sec", "mph_per_sec", "degree", "radian", "grad", "arcmin", "arcsec", "turn", "nm2", "um2", "mm2", "cm2", "m2", "hectare", "km2", "inch2", "ft2", "yd2", "acre", "mi2", "naut_mi2", "dec_deg", "deg_dec_min", "deg_min_sec", "count", "fmol", "pmol", "nmol", "umol", "mmol", "mol", "nsec", "usec", "msec", "sec", "min", "hr", "day", "wk", "mon", "yr", "dec", "cen", "mil", "Ma", "J", "kJ", "erg", "cal", "Cal", "Wsec", "kWh", "MWh", "BTU", "byte", "KB", "MB", "GB", "TB", "PB", "bit", "Kbit", "Mbit", "Gbit", "Tbit", "Pbit", "ml_per_sec", "ml_per_min", "ml_per_hr", "l_per_sec", "l_per_min", "l_per_hr", "m3_per_sec", "m3_per_min", "m3_per_hr", "gal_per_sec", "gal_per_min", "gal_per_hr", "ft3_per_sec", "ft3_per_min", "ft3_per_hr", "Sv", "angstrom", "nm", "um", "mm", "cm", "dm", "m", "km", "inch", "ft", "yd", "fathom", "mi", "naut_mi", "au", "light_yr", "parsec", "point", "Da", "fg", "pg", "ng", "ug", "mg", "g", "kg", "Mg", "Gg", "Tg", "Pg", "carat", "metric_tonne", "oz", "lbs", "short_ton_US", "long_ton_UK", "stone", "uW", "mW", "W", "kW", "MW", "GW", "erg_per_sec", "cal_per_sec", "cal_per_hr", "Cal_per_sec", "Cal_per_hr", "BTU_per_sec", "BTU_per_hr", "hp", "uatm", "atm", "Pa", "hPa", "kPa", "torr", "mmHg", "inHg", "cmH2O", "inH2O", "mbar", "bar", "dbar", "psi", "mm_per_sec", "cm_per_sec", "m_per_sec", "km_per_sec", "inch_per_sec", "ft_per_sec", "kph", "mph", "km_per_day", "mi_per_day", "knot", "mach", "light", "C", "F", "K", "R", "N-m", "ft-lbs", "inch-lbs", "ul", "ml", "dl", "l", "cm3", "dm3", "m3", "km3", "us_tsp", "us_tbsp", "us_oz", "us_cup", "us_pint", "us_quart", "us_gal", "inch3", "ft3", "mi3", "imp_tsp", "imp_tbsp", "imp_oz", "imp_cup", "imp_pint", "imp_quart", "imp_gal", "Afghani", "Euro", "Lek", "Algerian Dinar", "US Dollar", "Euro", "Kwanza", "East Caribbean Dollar", "East Caribbean Dollar", "Argentine Peso", "Armenian Dram", "Aruban Florin", "Australian Dollar", "Euro", "Azerbaijan Manat", "Bahamian Dollar", "Bahraini Dinar", "Taka", "Barbados Dollar", "Belarusian Ruble", "Euro", "Belize Dollar", "CFA Franc BCEAO", "Bermudian Dollar", "Indian Rupee", "Ngultrum", "Boliviano", "Mvdol", "US Dollar", "Convertible Mark", "Pula", "Norwegian Krone", "Brazilian Real", "US Dollar", "Brunei Dollar", "Bulgarian Lev", "CFA Franc BCEAO", "Burundi Franc", "Cabo Verde Escudo", "Riel", "CFA Franc BEAC", "Canadian Dollar", "Cayman Islands Dollar", "CFA Franc BEAC", "CFA Franc BEAC", "Chilean Peso", "Unidad de Fomento", "Yuan Renminbi", "Australian Dollar", "Australian Dollar", "Colombian Peso", "Unidad de Valor Real", "Comorian Franc", "Congolese Franc", "CFA Franc BEAC", "New Zealand Dollar", "Costa Rican Colon", "CFA Franc BCEAO", "Kuna", "Cuban Peso", "Peso Convertible", "Netherlands Antillean Guilder", "Euro", "Czech Koruna", "Danish Krone", "Djibouti Franc", "East Caribbean Dollar", "Dominican Peso", "US Dollar", "Egyptian Pound", "El Salvador Colon", "US Dollar", "CFA Franc BEAC", "Nakfa", "Euro", "Lilangeni", "Ethiopian Birr", "Euro", "Falkland Islands Pound", "Danish Krone", "Fiji Dollar", "Euro", "Euro", "Euro", "CFP Franc", "Euro", "CFA Franc BEAC", "Dalasi", "Lari", "Euro", "Ghana Cedi", "Gibraltar Pound", "Euro", "Danish Krone", "East Caribbean Dollar", "Euro", "US Dollar", "Quetzal", "Pound Sterling", "Guinean Franc", "CFA Franc BCEAO", "Guyana Dollar", "Gourde", "US Dollar", "Australian Dollar", "Euro", "Lempira", "Hong Kong Dollar", "Forint", "Iceland Krona", "Indian Rupee", "Rupiah", "SDR (Special Drawing Right)", "Iranian Rial", "Iraqi Dinar", "Euro", "Pound Sterling", "New Israeli Sheqel", "Euro", "Jamaican Dollar", "Yen", "Pound Sterling", "Jordanian Dinar", "Tenge", "Kenyan Shilling", "Australian Dollar", "North Korean Won", "Won", "Kuwaiti Dinar", "Som", "Lao Kip", "Euro", "Lebanese Pound", "Loti", "Rand", "Liberian Dollar", "Libyan Dinar", "Swiss Franc", "Euro", "Euro", "Pataca", "Denar", "Malagasy Ariary", "Malawi Kwacha", "Malaysian Ringgit", "Rufiyaa", "CFA Franc BCEAO", "Euro", "US Dollar", "Euro", "Ouguiya", "Mauritius Rupee", "Euro", "ADB Unit of Account", "Mexican Peso", "Mexican Unidad de Inversion (UDI)", "US Dollar", "Moldovan Leu", "Euro", "Tugrik", "Euro", "East Caribbean Dollar", "Moroccan Dirham", "Mozambique Metical", "Kyat", "Namibia Dollar", "Rand", "Australian Dollar", "Nepalese Rupee", "Euro", "CFP Franc", "New Zealand Dollar", "Cordoba Oro", "CFA Franc BCEAO", "Naira", "New Zealand Dollar", "Australian Dollar", "US Dollar", "Norwegian Krone", "Rial Omani", "Pakistan Rupee", "US Dollar", "Balboa", "US Dollar", "Kina", "Guarani", "Sol", "Philippine Peso", "New Zealand Dollar", "Zloty", "Euro", "US Dollar", "Qatari Rial", "Euro", "Romanian Leu", "Russian Ruble", "Rwanda Franc", "Euro", "Saint Helena Pound", "East Caribbean Dollar", "East Caribbean Dollar", "Euro", "Euro", "East Caribbean Dollar", "Tala", "Euro", "Dobra", "Saudi Riyal", "CFA Franc BCEAO", "Serbian Dinar", "Seychelles Rupee", "Leone", "Singapore Dollar", "Netherlands Antillean Guilder", "Sucre", "Euro", "Euro", "Solomon Islands Dollar", "Somali Shilling", "Rand", "South Sudanese Pound", "Euro", "Sri Lanka Rupee", "Sudanese Pound", "Surinam Dollar", "Norwegian Krone", "Swedish Krona", "Swiss Franc", "WIR Euro", "WIR Franc", "Syrian Pound", "New Taiwan Dollar", "Somoni", "Tanzanian Shilling", "Baht", "US Dollar", "CFA Franc BCEAO", "New Zealand Dollar", "Pa'anga", "Trinidad and Tobago Dollar", "Tunisian Dinar", "Turkish Lira", "Turkmenistan New Manat", "US Dollar", "Australian Dollar", "Uganda Shilling", "Hryvnia", "UAE Dirham", "Pound Sterling", "US Dollar", "US Dollar", "US Dollar (Next day)", "Peso Uruguayo", "Uruguay Peso en Unidades Indexadas (UI)", "Unidad Previsional", "Uzbekistan Sum", "Vatu", "Bolívar Soberano", "Dong", "US Dollar", "US Dollar", "CFP Franc", "Moroccan Dirham", "Yemeni Rial", "Zambian Kwacha", "Zimbabwe Dollar", "Bond Markets Unit European Composite Unit (EURCO)", "Bond Markets Unit European Monetary Unit (E.M.U.-6)", "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)", "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)", "Codes specifically reserved for testing purposes", "The codes assigned for transactions where no currency is involved", "Gold", "Palladium", "Platinum", "Silver", "Afghani", "Markka", "Old Lek", "Andorran Peseta", "Spanish Peseta", "French Franc", "Kwanza", "New Kwanza", "Kwanza Reajustado", "Austral", "Peso Argentino", "Peso", "Russian Ruble", "Schilling", "Azerbaijan Manat", "Azerbaijanian Manat", "Russian Ruble", "Belarusian Ruble", "Belarusian Ruble", "Russian Ruble", "Convertible Franc", "Belgian Franc", "Financial Franc", "Peso boliviano", "Dinar", "Cruzeiro", "Cruzado", "Cruzeiro", "New Cruzado", "Cruzeiro Real", "Lev A/52", "Lev A/62", "Lev", "Kyat", "Croatian Dinar", "Croatian Kuna", "Cyprus Pound", "Krona A/53", "Koruna", "Sucre", "Unidad de Valor Constante (UVC)", "Ekwele", "Kroon", "European Currency Unit (E.C.U)", "Markka", "French Franc", "French Franc", "French Franc", "Georgian Coupon", "Russian Ruble", "Mark der DDR", "Deutsche Mark", "Cedi", "Ghana Cedi", "Drachma", "French Franc", "Syli", "Syli", "Guinea Escudo", "Guinea-Bissau Peso", "Italian Lira", "Old Krona", "Irish Pound", "Pound", "Old Shekel", "Italian Lira", "Russian Ruble", "Russian Ruble", "Pathet Lao Kip", "Latvian Lats", "Latvian Ruble", "Loti", "Financial Rand", "Lithuanian Litas", "Talonas", "Luxembourg Convertible Franc", "Luxembourg Franc", "Luxembourg Financial Franc", "Malagasy Franc", "Kwacha", "Maldive Rupee", "Mali Franc", "Maltese Lira", "Maltese Pound", "French Franc", "Ouguiya", "French Franc", "Mexican Peso", "Russian Ruble", "French Franc", "Mozambique Escudo", "Mozambique Metical", "Netherlands Guilder", "Netherlands Antillean Guilder", "Cordoba", "Sol", "Inti", "Nuevo Sol", "Sol", "Zloty", "Portuguese Escudo", "French Franc", "Leu A/52", "Old Leu", "New Romanian Leu", "Russian Ruble", "French Franc", "French Franc", "French Franc", "Italian Lira", "Dobra", "Slovak Koruna", "Tolar", "Financial Rand", "Sudanese Pound", "Rhodesian Dollar", "Spanish Peseta", "\"A\" Account (convertible Peseta Account)", "Spanish Peseta", "Sudanese Dinar", "Sudanese Pound", "Surinam Guilder", "Lilangeni", "WIR Franc (for electronic)", "Russian Ruble", "Tajik Ruble", "Rupiah", "Timor Escudo", "Old Turkish Lira", "New Turkish Lira", "Russian Ruble", "Turkmenistan Manat", "Uganda Shilling", "Old Shilling", "Karbovanet", "Rouble", "US Dollar (Same day)", "Old Uruguay Peso", "Uruguayan Peso", "Russian Ruble", "Bolivar", "Bolivar Fuerte", "Bolivar", "Bolívar", "Old Dong", "Yemeni Dinar", "New Yugoslavian Dinar", "New Dinar", "Yugoslavian Dinar", "New Zaire", "Zaire", "Zambian Kwacha", "Rhodesian Dollar", "Zimbabwe Dollar (old)", "Zimbabwe Dollar", "Zimbabwe Dollar (new)", "Zimbabwe Dollar", "Serbian Dinar", "Euro", "Max Administrative Boundary Level (admin level)", "Unofficial area-aggregation shape/outline", "Other", "Unknown", "Number of locations", "Number of nodes in line(s)", "GDACS alertscore", "Modified Mercalli Index – earthquakes", "Richter scale – earthquakes", "Saffir-Simpson scale – tropical cyclones", "Enhanced Fujita scale – tornados"]
+                },
+                "unit_groups_code": {
+                  "title": "Unit Group Code",
+                  "description": "The code of the hierarchical group that the unit belongs to.",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": true,
+                  "enum": ["unitsgrpunknown", "unitsgrpunknown", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsacceleration", "unitsangle", "unitsangle", "unitsangle", "unitsangle", "unitsangle", "unitsangle", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitsarea", "unitscoordinate", "unitscoordinate", "unitscoordinate", "unitscount", "unitscount", "unitscount", "unitscount", "unitscount", "unitscount", "unitscount", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsduration", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsenergy", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsfile.size", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitsflow", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitslength", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitsmass", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspower", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitspressure", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitsspeed", "unitstemperature", "unitstemperature", "unitstemperature", "unitstemperature", "unitstorque", "unitstorque", "unitstorque", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitsvolume", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitscurrency", "unitsspatial", "unitsspatial", "unitsspatial", "unitsspatial", "unitsspatial", "unitsspatial", "unitsalert", "unitshazint", "unitshazmag", "unitshazmag", "unitshazmag"]
+                },
+                "unit_groups_lab": {
+                  "title": "Unit Group Label",
+                  "description": "The name of the hierarchical group that the unit belongs to.",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": true,
+                  "enum": ["Unknown Group", "Unknown Group", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Acceleration", "Angle", "Angle", "Angle", "Angle", "Angle", "Angle", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Area", "Coordinate", "Coordinate", "Coordinate", "Count", "Count", "Count", "Count", "Count", "Count", "Count", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Duration", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "File.size", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Flow", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Length", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Mass", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Power", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Pressure", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Speed", "Temperature", "Temperature", "Temperature", "Temperature", "Torque", "Torque", "Torque", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Volume", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Currency", "Spatial-Data Related", "Spatial-Data Related", "Spatial-Data Related", "Spatial-Data Related", "Spatial-Data Related", "Spatial-Data Related", "Alertscore (possibly unitless)", "Hazard intensity scales", "Hazard magnitude scales", "Hazard magnitude scales", "Hazard magnitude scales"]
+                }
+              }
+            }
+          },
+          "est_type": {
+            "title": "Estimation Type",
+            "description": "The full list of taxonomies of the estimation type.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "est_type_code": {
+                  "title": "Estimate Type Code",
+                  "description": "The codes that describe the estimate types",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["esttype_prim", "esttype_second", "esttype_model"]
+                },
+                "est_type_lab": {
+                  "title": "Estimate Type Label",
+                  "description": "The label that describes the estimate types",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Primary Data", "Secondary Data", "Modelled (no event-specific data included)"]
+                }
+              }
+            }
+          },
+          "spatial_coverage": {
+            "title": "Spatial Coverage Taxonomy",
+            "description": "The full list of taxonomies of the spatial coverage.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "spat_cov_code": {
+                  "title": "General Spatial Coverage Codes",
+                  "description": "The codes for the most succinct grouping of spatial coverage data, including polygon, point and line data",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["spat_polygon", "spat_raster", "spat_points", "spat_lines", "spat_other"]
+                },
+                "spat_cov_lab": {
+                  "title": "General Spatial Coverage Names",
+                  "description": "The labels for the most succinct grouping of spatial coverage data, including polygon, point and line data",
+                  "type": "string",
+                  "codelist": "ImpactInformationProfiles.csv",
+                  "openCodelist": false,
+                  "enum": ["Aggregated to administrative level or specific region outline/shape", "Gridded data (raster/pixel)", "Points (Non-gridded)", "Lines (Non-gridded)", "Other/Unknown"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "$defs": {
+      "Event_obj": {
+        "title": "Event-Level Information",
+        "description": "Information about the event, without taking into account any impact estimates or hazard data.",
+        "type": "object",
+        "properties": {
+          "ID_linkage": {
+            "title": "Event IDs and Names",
+            "description": "Event ID information and names of the event in different languages.",
+            "type": "object",
+            "properties": {
+              "event_ID": {
+                "title": "Event ID",
+                "type": "string",
+                "description": "Event-level identifier code that is unique and distinct from that of any other hazard occurrence, we generate this by condensing the abbreviated hazard title (e.g. EQ for earthquake), the event start date, and the countries affected (separated by commas)",
+                "minLength": 1
+              },
+              "ev_name": {
+                "title": "Event Name",
+                "type": "string",
+                "description": "Name of the event, for general use, in any given language."
+              },
+              "all_ext_IDs": {
+                "title": "External IDs",
+                "description": "List of ID codes that are used by external organisations (outside of the Montandon) to uniquely identify the hazard event. For example, GLIDE numbers.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ExtIDs_obj"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "event_ID"
+            ]
+          },
+          "spatial": {
+            "title": "Event IDs and Names",
+            "description": "Event ID information and names of the event in different languages.",
+            "type": "object",
+            "properties": {
+              "ev_ISO3s": {
+                "title": "Country ISO3 Codes",
+                "description": "List of countries affected, by ISO3 code.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ISO3_obj"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "gen_location": {
+                "title": "General Descriptive Event Location",
+                "type": "string",
+                "description": "Brief character description of where the event took place, this is unimportant but could be used to check the spatial-information of the data at a later stage"
+              }
+            },
+            "required": [
+              "ev_ISO3s"
+            ]
+          },
+          "temporal": {
+            "title": "Time-Related Data",
+            "description": "Data related to dates and time periods of the hazards. Note that, for multiple hazards, the event start and end dates would be the minimum and the maximum dates over all of the hazards.",
+            "type": "object",
+            "properties": {
+              "ev_sdate": {
+                "title": "Event Start Date",
+                "description": "Start date of the hazard event. For unclear start dates, please use the earliest plausible date.",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "ev_fdate": {
+                "title": "Event End Date",
+                "description": "End date of the hazard event. For unclear end dates, please use the latest plausible date. Please note that this is when the hazard ended, not when the post-disaster recovery was achieved.",
+                "$ref": "#/$defs/Date_obj"
+              }
+            },
+            "required": [
+              "ev_sdate",
+              "ev_fdate"
+            ]
+          },
+          "allhaz_class": {
+            "title": "Taxonomy of All Hazards",
+            "description": "Classification of the hazards associated to the event, with respect to the UNDRR-ISC 2020 Hazard Information Profiles report.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "all_hazs_Ab": {
+                  "title": "Abbreviated Hazard ID",
+                  "description": "Two-letter abbreviated ID for the hazards. For example, floods would be 'FL' and earthquakes 'EQ'. These abbreviations are pre-determined and standardised, and should be found online.",
+                  "$ref": "#/$defs/HazAb_obj"
+                },
+                "all_hazs_spec": {
+                  "title": "All Specific Hazards",
+                  "description": "The specific hazards is the final layer in the categorisation of the hazards. Please see the UNDRR-ISC 2020 Hazard Information Profiles report for more information.",
+                  "$ref": "#/$defs/HazSpec_obj"
+                }
+              }
+            },
+            "required": [
+              "all_hazs_Ab",
+              "all_hazs_spec"
+            ]
+          }
+        },
+        "required": [
+          "ID_linkage",
+          "spatial",
+          "temporal",
+          "allhaz_class"
+        ]
+      },
+      "Impact_obj": {
+        "title": "Impact Object of Montandon",
+        "type": "object",
+        "description": "'Disaster impact is the total effect, including negative effects (e.g., economic losses) and positive effects (e.g., economic gains), of a hazardous event or a disaster. The term includes economic, human and environmental impacts, and may include death, injuries, disease and other negative effects on human physical, mental and social well-being'. UNDRR - https://www.undrr.org/terminology/disaster",
+        "properties": {
+          "ID_linkage": {
+            "title": "Impact ID and Links",
+            "description": "Impact ID information and links to other object instances within an event. For example, linking to hazard IDs. Note: no spatial IDs are linked here, see the spatial element.",
+            "type": "object",
+            "properties": {
+              "event_ID": {
+                "title": "Event ID",
+                "description": "ID of the overall event that this impact estimate refers to",
+                "type": "string",
+                "minLength": 1
+              },
+              "imp_sub_ID": {
+                "title": "Impact Estimate ID",
+                "description": "ID of each impact element, within the overall event",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_sub_ID": {
+                "title": "Hazard ID Link",
+                "description": "ID of each hazard event data element, within the overall event",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "uniqueItems": true
+                }
+              },
+              "imp_ext_IDs": {
+                "title": "Impact External ID",
+                "description": "External ID associated to this impact record",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "required": [
+              "event_ID",
+              "imp_sub_ID"
+            ]
+          },
+          "source": {
+            "title": "Impact Data Source Information",
+            "description": "Information regarding the source of the impact data",
+            "type": "object",
+            "properties": {
+              "imp_src_db": {
+                "title": "Impact Data Source Database",
+                "description": "The database name from where the impact estimate was extracted",
+                "type": "string",
+                "minLength": 1
+              },
+              "imp_src_org": {
+                "title": "Impact Data Source Organisation",
+                "description": "The organisation who published the impact estimate",
+                "type": "string"
+              },
+              "imp_src_URL": {
+                "title": "Impact Data Source URL",
+                "description": "The website URL where the impact data was published",
+                "type": "string",
+                "format": "iri"
+              }
+            },
+            "required": [
+              "imp_src_db",
+              "imp_src_URL"
+            ]
+          },
+          "impact_detail": {
+            "title": "Impact Value Data",
+            "description": "Impact estimate value and unit information, including the exposure classification of what was impacted.",
+            "type": "object",
+            "properties": {
+              "exp_spec": {
+                "title": "Impact Detail",
+                "description": "The sub-sub category of impact, which is the specific asset or population demographic that has been impacted by the hazard.",
+                "type": "string",
+                "codelist": "ImpactInformationProfiles.csv",
+                "openCodelist": true,
+                "enum": ["expspec_allpeop", "expspec_crop", "expspec_women", "expspec_men", "expspec_elder", "expspec_chld14", "expspec_chld18", "expspec_wheelch", "expspec_road", "expspec_trainlin", "expspec_vulempl", "expspec_build", "expspec_reccost", "expspec_hosp", "expspec_educ", "expspec_loccur", "expspec_globdate", "expspec_infloccur", "expspec_infglobdate", "expspec_usdunsure", "expspec_cattle", "expspec_aidgen", "expspec_ecoifrcall", "expspec_ecoifrcreq", "expspec_alert"]
+              },
+              "imp_value": {
+                "title": "Estimated Impact Value",
+                "description": "The estimated value of the impact, as a number, without the units. For example, for an estimate of 1000 people displaced, you would enter 1000.",
+                "type": "number",
+                "minimum": 0
+              },
+              "imp_type": {
+                "title": "Estimated Impact Value Type",
+                "description": "The estimated value type of the impact. For example, for an estimate of 1000 people displaced, the value type is people displaced, thus you would enter 'imptypedisp'. Please use the ImpactInformationProfiles.csv file to help find the coded name of the impact type.",
+                "type": "string",
+                "codelist": "ImpactInformationProfiles.csv",
+                "openCodelist": false,
+                "enum": ["imptypunspec", "imptypunaff", "imptypdama", "imptypdest", "imptyppotdam", "imptypaffe", "imptypdiraffe", "imptypindaffe", "imptypdeat", "imptypmiss", "imptypinju", "imptypevac", "imptypereloc", "imptypeassist", "imptypeemshel", "imptypetempacc", "imptypelongacc", "imptypneed", "imptyptarg", "imptypdisr", "imptypcost", "imptyphomles", "imptypidp", "imptypextdisp", "imptypedisp", "imptypalert"]
+              },
+              "imp_units": {
+                "title": "Impact Estimate Units",
+                "description": "The units of the impact estimate. For example, 10 deaths would be a count value, thus 'unitscountnum' should be used.",
+                "$ref": "#/$defs/MeasUnits_obj"
+              },
+              "imp_unitdate": {
+                "title": "Impact Estimate Unit Date",
+                "description": "If the impact estimate is a cost, please provide the date that the estimate was made on, to adjust for currency value and inflation. If no value is provided, imp_sdate will be used.",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "imp_est_type": {
+                "title": "Impact Estimate Data Type",
+                "description": "What was the type of data source that was used to create this impact estimate? Primary data? Secondary data? Modelled data: was it estimated without any event-specific data?",
+                "$ref": "#/$defs/EstType_obj"
+              }
+            },
+            "required": [
+              "exp_spec",
+              "imp_value",
+              "imp_type",
+              "imp_units",
+              "imp_est_type"
+            ]
+          },
+          "temporal": {
+            "title": "Time-Related Data",
+            "description": "Data related to dates and time periods of the impact estimates",
+            "type": "object",
+            "properties": {
+              "imp_sdate": {
+                "title": "Impact Start Date",
+                "description": "Starting date of the impact estimate. For example, the total cost of a disaster and the number of people displaced is usually estimated between two dates. The start date would be the earliest date that the impact estimate covers. Some estimates like the death toll might have been made within the first few days or weeks of the event, and thus reflects the impact estimate based on preliminary data.",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "imp_fdate": {
+                "title": "Impact End Date",
+                "description": "Final date of the impact estimate. For example, the total cost of a disaster and the number of people displaced is usually estimated between two dates. The end date would be the latest date that the impact estimate covers. Some estimates like the death toll might have been made within the first few days or weeks of the event, and thus reflects the impact estimate based on preliminary data. Note: if the impact estimate is a stock estimate, such that it makes a statement only about a given day (e.g. 'there were 1000 people still displaced on March 12th' instead of 'there were 1000 people displaced between March 5th to April 5th'), then the end date is the same as the start date (imp_sdate = imp_fdate).",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "imp_credate": {
+                "title": "Impact Report Creation Date",
+                "description": "Date that the impact record was created",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "imp_moddate": {
+                "title": "Impact Report Update Date",
+                "description": "Date that the impact record was last updated",
+                "$ref": "#/$defs/Date_obj"
+              }},
+            "required": [
+              "imp_sdate",
+              "imp_fdate"
+            ]
+          },
+          "spatial": {
+            "title": "Spatial-Related Data",
+            "description": "Data related to the spatial coverage of the impact estimates",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SpatialImpact_obj"
+            }
+          }
+        },
+        "required": [
+          "ID_linkage",
+          "source",
+          "impact_detail",
+          "temporal",
+          "spatial"
+        ]
+      },
+      "Hazard_obj": {
+        "title": "Hazard Object for Montandon",
+        "type": "object",
+        "description": "'A process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation.' UNDRR - https://www.undrr.org/terminology/hazard",
+        "properties": {
+          "ID_linkage": {
+            "title": "Hazard and Event ID",
+            "description": "Impact ID information and links to other object instances within an event. Note: no spatial IDs are linked here, see the spatial element.",
+            "type": "object",
+            "properties": {
+              "event_ID": {
+                "title": "Event ID",
+                "description": "ID of the overall event that this hazard refers to",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_sub_ID": {
+                "title": "Hazard Event ID",
+                "description": "ID of each hazard event, within the overall event",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_ext_IDs": {
+                "title": "External IDs",
+                "description": "List of ID codes that are used by external organisations (outside of the Montandon) to uniquely identify the hazard event. For example, GLIDE numbers.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ExtIDs_obj"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "event_ID",
+              "haz_sub_ID"
+            ]
+          },
+          "source": {
+            "title": "Hazard Data Source Information",
+            "description": "Information regarding the source of the impact data",
+            "type": "object",
+            "properties": {
+              "haz_src_db": {
+                "title": "Hazard Data Source Database",
+                "description": "The database name from where the hazard data was extracted",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_src_org": {
+                "title": "Hazard Data Source Organisation",
+                "description": "The organisation who published the hazard data",
+                "type": "string"
+              },
+              "haz_src_URL": {
+                "title": "Hazard Data Source URL",
+                "description": "The website URL where the hazard data was published",
+                "type": "string",
+                "format": "iri"
+              }
+            },
+            "required": [
+              "haz_src_db",
+              "haz_src_URL"
+            ]
+          },
+          "hazard_detail": {
+            "title": "Basic Hazard Information",
+            "description": "Basic information about the hazard, including things like the maximum magnitude/intensity/severity values and any related trigger/triggering/concurrent hazards (observed or even potential).",
+            "type": "object",
+            "properties": {
+              "haz_Ab": {
+                "title": "Abbreviated Hazard ID",
+                "description": "Two-letter abbreviated ID for the hazard. For example, floods would be 'FL' and earthquakes 'EQ'. These abbreviations are pre-determined and standardised, and should be found online.",
+                "$ref": "#/$defs/HazAb_obj"
+              },
+              "haz_spec": {
+                "title": "Specific Hazard",
+                "description": "The specific hazard is the final layer in the categorisation of the hazards. Please see the UNDRR-ISC 2020 Hazard Information Profiles report for more information.",
+                "$ref": "#/$defs/HazSpec_obj"
+              },
+              "haz_maxvalue": {
+                "title": "Maximum Hazard Severity Value",
+                "description": "The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units.",
+                "type": "number",
+                "minimum": 0
+              },
+              "haz_maxunits": {
+                "title": "Maximum Hazard Severity Units",
+                "description": "The units of the estimated hazard intensity/magnitude/severity.",
+                "$ref": "#/$defs/MeasUnits_obj"
+              },
+              "haz_est_type": {
+                "title": "Hazard Data Estimate Type",
+                "description": "What was the type of data source that was used to create this hazard intensity/magnitude/severity estimate? Primary data? Secondary data? Modelled data: was it estimated without any event-specific data?",
+                "$ref": "#/$defs/EstType_obj"
+              },
+              "concur_haz": {
+                "title": "Concurrent Hazard Linkage",
+                "description": "Linking the observed and potentially unobserved hazards linked to each specific hazard in the event.",
+                "type": "array",
+                "items": {
+                  "title": "Concurrent Hazard Linkage Object",
+                  "description": "Hazard linkage object",
+                  "type": "object",
+                  "properties": {
+                    "haz_sub_ID": {
+                      "title": "Monty-Based Hazard IDs",
+                      "description": "The ID of the specific hazard that is linked to this hazard instance entry, using the Montandon ID. If the hazard is not in Montandon, leave this blank.",
+                      "type": "string"
+                    },
+                    "linkhaz_ext_IDs": {
+                      "title": "Linked External IDs",
+                      "description": "List of ID codes that are used by external organisations (outside of the Montandon) to uniquely identify the hazard event. For example, GLIDE numbers.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/ExtIDs_obj"
+                      },
+                      "uniqueItems": true
+                    },
+                    "linkhaz_spec": {
+                      "title": "Specific Hazard of Linked Hazard",
+                      "description": "The specific hazard is the final layer in the categorisation of the hazards. Please see the UNDRR-ISC 2020 Hazard Information Profiles report for more information.",
+                      "$ref": "#/$defs/HazSpec_obj"
+                    },
+                    "linkhaz_occ_known": {
+                      "title": "Is Linked Hazard Occurence Known or Potential",
+                      "description": "Was the linked hazard actually observed to have occurred with the main hazard, or is this link only a potential link. In the Montandon, we allow for hazards to be linked together by actual observed occurrences, or the possibility that the linked hazard occurred with the principal hazard. This is especially useful when handling hazards such as tropical cyclones, whereby more than half of all deaths from cyclones in the US were actually caused by inland flooding.",
+                      "type": "boolean"
+                    },
+                    "linkhaz_occ_prob": {
+                      "title": "Probability of Occurrence of Linked Hazard",
+                      "description": "As a string, describe the probability of occurrence of the linked hazard with the main hazard. Numbers can also be used, but must be placed inside quotations.",
+                      "type": "string"
+                    },
+                    "linkhaz_occ_probdef": {
+                      "title": "URL to Definition of Probability of Occurrence",
+                      "description": "Please provide a link to where the definition of occurrence probability is for the hazard relationship. For example, if the probability is 'high', where is 'high' defined?",
+                      "type": "string",
+                      "format": "iri"
+                    },
+                    "relationship": {
+                      "title": "Relationship Between Hazards",
+                      "type": "string",
+                      "description": "The relationship between this linked hazard to the main hazard instance of this object. Therefore, if this hazard object instance is an earthquake, and the user is linking a landslide to the earthquake hazard object and data, then the relationship would be 'linkhaz-triggered-by-mainhaz', as the landslide way triggered by the earthquake. However, if the hazard object instance was a landslide, and the linked hazard was the earthquake data, then we would use 'mainhaz-triggers-linkhaz'. For hazards that do not necessarily trigger one-another, but occur together, then we use 'concurrent-hazards'. For example, thunderstorms can occur together with windstorms or cyclones, thus, we would use 'concurrent'. When the relationship between two hazards is complex, use 'complex-relationship'. For all other relationships, add as you want, but let us know what we're missing!.",
+                      "enum": [
+                        "linkhaz-triggered-by-mainhaz",
+                        "mainhaz-triggers-linkhaz",
+                        "concurrent-hazards",
+                        "complex-relationship"
+                      ],
+                      "openCodelist": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "temporal": {
+            "title": "Time-Related Data",
+            "description": "Data related to dates and time periods of the hazard",
+            "type": "object",
+            "properties": {
+              "haz_sdate": {
+                "title": "Hazard Start Date",
+                "description": "Starting date of this specific hazard. For unclear start dates, please use the earliest plausible date.",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "haz_fdate": {
+                "title": "Hazard End Date",
+                "description": "End date of this specific hazard. For unclear end dates, please use the latest plausible date. Please note that this is when the hazard ended, not when the post-disaster recovery was achieved.",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "haz_credate": {
+                "title": "Hazard Report Creation Date",
+                "description": "Date that the impact record was created",
+                "$ref": "#/$defs/Date_obj"
+              },
+              "haz_moddate": {
+                "title": "Hazard Report Update Date",
+                "description": "Date that the impact record was last updated",
+                "$ref": "#/$defs/Date_obj"
+              }
+            }
+          },
+          "spatial": {
+            "title": "Spatial-Related Data",
+            "description": "Data related to the spatial coverage of the hazard",
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SpatialHazard_obj"
+            }
+          }
+        },
+        "required": [
+          "ID_linkage",
+          "source",
+          "hazard_detail",
+          "temporal",
+          "spatial"
+        ]
+      },
+      "Response_obj": {
+        "title": "Response Object of Montandon",
+        "type": "object",
+        "description": "Responses and interventions to the disaster, which aim to reduce the impact or speed up recovery.",
+        "properties": {
+          "ID_linkage": {
+            "title": "Impact ID and Links",
+            "description": "Impact ID information and links to other object instances within an event. For example, linking to hazard IDs. Note: no spatial IDs are linked here, see the spatial element.",
+            "type": "object",
+            "properties": {
+              "event_ID": {
+                "title": "Event ID",
+                "description": "ID of the overall event that this impact estimate refers to",
+                "type": "string",
+                "minLength": 1
+              },
+              "res_sub_ID": {
+                "title": "Response ID",
+                "description": "ID of each response element, within the overall event",
+                "type": "string",
+                "minLength": 1
+              },
+              "imp_sub_ID": {
+                "title": "Impact Estimate ID",
+                "description": "ID of each impact element, within the overall event",
+                "type": "string"
+              },
+              "haz_sub_ID": {
+                "title": "Hazard ID Link",
+                "description": "ID of each hazard event data element, within the overall event",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "required": [
+              "event_ID",
+              "res_sub_ID"
+            ]
+          }
+        },
+        "required": [
+          "ID_linkage"
+        ]
+      },
+      "SpatialImpact_obj": {
+        "title": "Impact Spatial Data",
+        "description": "All information about the impact-specific spatial data.",
+        "type": "object",
+        "properties": {
+          "ID_linkage": {
+            "title": "Spatial Impact Data IDs and Linkages",
+            "description": "Information about the IDs and linkages associated to this spatial impact data",
+            "type": "object",
+            "properties": {
+              "imp_spat_ID": {
+                "title": "Impact Spatial ID",
+                "description": "ID of the spatial impact data",
+                "type": "string",
+                "minLength": 1
+              },
+              "imp_spat_fileloc": {
+                "title": "Spatial Data File Location",
+                "description": "Location of where the spatial data can be found. Note that this can be either a local folder or a direct URL to the source.",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "imp_spat_ID",
+              "imp_spat_fileloc"
+            ]
+          },
+          "spatial_info": {
+            "title": "Spatial Data Information",
+            "description": "Information that is directly related to the spatial data itself, such as the form: raster, point, line or polygon.",
+            "type": "object",
+            "properties": {
+              "imp_ISO3s": {
+                "title": "Country ISO3 Codes",
+                "description": "List of countries affected, by ISO3 code.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ISO3_obj"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "imp_lon": {
+                "title": "Impact Longitude Coordinate",
+                "description": "Longitudinal value of the impact estimate",
+                "type": "number"
+              },
+              "imp_lat": {
+                "title": "Impact Latitude Coordinate",
+                "description": "Latitude value of the impact estimate",
+                "type": "number"
+              },
+              "imp_spat_covcode": {
+                "title": "Impact Spatial Data Type",
+                "description": "The spatial data type of a given spatial dataset. For example, spatial polygon data which is of administrative boundaries and at admin-level 2. You would enter 'adminlevel' here, which is the correct coded name for administrative boundary spatial data.",
+                "type": "string",
+                "openCodelist": false,
+                "enum": ["spat_polygon", "spat_raster", "spat_points", "spat_lines", "spat_other"]
+              },
+              "imp_spat_res": {
+                "title": "Impact Spatial Resolution Value",
+                "description": "The resolution of the given spatial dataset. For example, spatial polygon data which is of administrative boundaries and at admin-level 2. You would enter '2' here.",
+                "type": "number"
+              },
+              "imp_spat_resunits": {
+                "title": "Impact Spatial Resolution Units",
+                "description": "The units of the resolution of the given spatial dataset.",
+                "type": "string",
+                "codelist": "ImpactInformationProfiles.csv",
+                "openCodelist": true,
+                "enum": ["adminlevel", "othershape", "spatresother", "spatresunknown", "spatrespoints", "spatreslines"]
+              },
+              "imp_spat_crs": {
+                "title": "Impact Spatial Data Coordinate System",
+                "description": "The spatial coordinate reference system code of the given spatial dataset, such as EPSG:4326. Note that this can either be in ESRI or EPSG format",
+                "type": "string",
+                "pattern": "^(ESRI:|EPSG:)[0-9]+$"
+              }
+            },
+            "required": [
+              "imp_ISO3s",
+              "imp_spat_covcode",
+              "imp_spat_res",
+              "imp_spat_resunits"
+            ]
+          },
+          "source": {
+            "title": "Source Information of Impact Spatial Data",
+            "description": "Information regarding the source of the spatial data of the impact estimate",
+            "type": "object",
+            "properties": {
+              "imp_spat_srcdb": {
+                "title": "Impact Spatial Data Source Database",
+                "description": "The database name from where the spatial data of the impact estimate depends",
+                "type": "string",
+                "minLength": 1
+              },
+              "imp_spat_srcorg": {
+                "title": "Impact Spatial Data Source Organisation",
+                "description": "The organisation who published the spatial data used by the impact estimate",
+                "type": "string"
+              },
+              "imp_spat_URL": {
+                "title": "Impact Spatial Data Source URL",
+                "description": "The website URL where the spatial data of the impact estimate can be found",
+                "type": "string",
+                "format": "iri"
+              }
+            },
+            "required": [
+              "imp_spat_srcdb",
+              "imp_spat_URL"
+            ]
+          }
+        },
+        "required": [
+          "ID_linkage",
+          "spatial_info",
+          "source"
+        ],
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "SpatialHazard_obj": {
+        "title": "Hazard Spatial Data",
+        "description": "All information about the hazard-specific spatial data.",
+        "type": "object",
+        "properties": {
+          "ID_linkage": {
+            "title": "Spatial Hazard Data IDs and Linkages",
+            "description": "Information about the IDs and linkages associated to this spatial hazard data",
+            "type": "object",
+            "properties": {
+              "haz_spat_ID": {
+                "title": "Hazard Spatial ID",
+                "description": "ID of the spatial hazard data",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_spat_fileloc": {
+                "title": "Spatial Data File Location",
+                "description": "Location of where the spatial data can be found. Note that this can be either a local folder or a direct URL to the source.",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "haz_spat_ID",
+              "haz_spat_fileloc"
+            ]
+          },
+          "spatial_info": {
+            "title": "Spatial Data Information",
+            "description": "Information that is directly related to the spatial data itself, such as the countries associated to the area, or the data form: raster, point, line or polygon.",
+            "type": "object",
+            "properties": {
+              "haz_ISO3s": {
+                "title": "Country ISO3 Codes",
+                "description": "List of countries affected, by ISO3 code.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ISO3_obj"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "haz_lon": {
+                "title": "Hazard Longitude Coordinate",
+                "description": "Longitudinal value of the hazard estimate",
+                "type": "number"
+              },
+              "haz_lat": {
+                "title": "Hazard Latitude Coordinate",
+                "description": "Latitude value of the hazard estimate",
+                "type": "number"
+              },
+              "haz_spat_covcode": {
+                "title": "Hazard Spatial Data Type",
+                "description": "The spatial data type of a given spatial dataset.",
+                "type": "string",
+                "openCodelist": false,
+                "enum": [
+                  "raster",
+                  "points",
+                  "lines",
+                  "polygons"
+                ]
+              },
+              "haz_spat_res": {
+                "title": "Hazard Spatial Resolution Value",
+                "description": "The resolution of the given spatial dataset.",
+                "type": "number"
+              },
+              "haz_spat_resunits": {
+                "title": "Hazard Spatial Resolution Units",
+                "description": "The units of the resolution of the given spatial dataset, such as arc-seconds or admin-level.",
+                "type": "string",
+                "codelist": "ImpactInformationProfiles.csv",
+                "openCodelist": true,
+                "enum": ["adminlevel", "othershape", "spatresother", "spatresunknown", "spatrespoints", "spatreslines"]
+              },
+              "haz_spat_crs": {
+                "title": "Hazard Spatial Data Coordinate System",
+                "description": "The spatial coordinate reference system code of the given spatial dataset, such as EPSG-4326.",
+                "type": "string",
+                "pattern": "^(ESRI:|EPSG:)[0-9]+$"
+              },
+              "haz_spat_unit": {
+                "title": "Hazard Spatial Data Units",
+                "description": "The units of the given spatial hazard dataset, given the IFRC units category found in the Impact Information Profiles tabular data. For example, the Richter scale could be used for earthquakes.",
+                "$ref": "#/$defs/MeasUnits_obj"
+              }
+            },
+            "required": [
+              "haz_ISO3s",
+              "haz_spat_covcode",
+              "haz_spat_res",
+              "haz_spat_resunits"
+            ]
+          },
+          "source": {
+            "title": "Source Information of Hazard Spatial Data",
+            "description": "Information regarding the source of the spatial data of the hazard data",
+            "type": "object",
+            "properties": {
+              "haz_spat_srcdb": {
+                "title": "Hazard Spatial Data Source Database",
+                "description": "The database name from where the spatial data of the hazard data depends",
+                "type": "string",
+                "minLength": 1
+              },
+              "haz_spat_srcorg": {
+                "title": "Hazard Spatial Data Source Organisation",
+                "description": "The organisation who published the spatial data used by the hazard data",
+                "type": "string"
+              },
+              "haz_spat_URL": {
+                "title": "Hazard Spatial Data Source URL",
+                "description": "The website URL where the spatial data of the hazard data can be found",
+                "type": "string",
+                "format": "iri"
+              }
+            },
+            "required": [
+              "haz_spat_srcdb",
+              "haz_spat_URL"
+            ]
+          }
+        },
+        "required": [
+          "ID_linkage",
+          "spatial_info",
+          "source"
+        ],
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "HazAb_obj": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      },
+      "HazType_obj": {
+        "type": "string",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["haztypehydromet", "haztypeextraterr", "haztypegeohaz", "haztypeenviron", "haztypechem", "haztypebio", "haztypetech", "haztypesoc"]
+      },
+      "HazCluster_obj": {
+        "type": "string",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["hazhmconv", "hazhmflood", "hazhmlitho", "hazhmmarine", "hazhmpress", "hazhmprecip", "hazhmtemp", "hazhmterr", "hazhmwind", "hazetextraterr", "hazgeoseis", "hazgeovolc", "hazgeoother", "hazenvenvdeg", "hazchemgas", "hazchemmetal", "hazchemfoodsaf", "hazchempest", "hazchempops", "hazchemhydrocar", "hazchemcbrne", "hazchemother", "hazchemfishaqua", "hazbiofishaqua", "hazbioinfest", "hazbioinvspe", "hazbiohumani", "hazbiocbrne", "hazbiomenthe", "hazbiofoodsaf", "hazbioinfdispla", "hazbioinfdisanihum", "hazbioinfdisani", "hazbioinfdisaqua", "haztechrad", "haztechcbrne", "haztechstrfail", "haztechinffail", "haztechcyb", "haztechindfail", "haztechwaste", "haztechmarine", "haztechflood", "haztechtransp", "hazsocconf", "hazsocpostconf", "hazsocbeh", "hazsoceco"]
+      },
+      "HazSpec_obj": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}\\d{4}$",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["MH0001", "MH0002", "MH0003", "MH0004", "MH0005", "MH0006", "MH0007", "MH0008", "MH0009", "MH0010", "MH0011", "MH0012", "MH0013", "MH0014", "MH0015", "MH0016", "MH0017", "MH0018", "MH0019", "MH0020", "MH0021", "MH0022", "MH0023", "MH0024", "MH0025", "MH0026", "MH0027", "MH0028", "MH0029", "MH0030", "MH0031", "MH0032", "MH0033", "MH0034", "MH0035", "MH0036", "MH0037", "MH0038", "MH0039", "MH0040", "MH0041", "MH0042", "MH0043", "MH0044", "MH0045", "MH0046", "MH0047", "MH0048", "MH0049", "MH0050", "MH0051", "MH0052", "MH0053", "MH0054", "MH0055", "MH0056", "MH0057", "MH0058", "MH0099", "MH0059", "MH0060", "ET0001", "ET0002", "ET0003", "ET0004", "ET0005", "ET0006", "ET0007", "ET0008", "ET0009", "GH0001", "GH0002", "GH0003", "GH0004", "GH0005", "GH0006", "GH0007", "GH0008", "GH0009", "GH0010", "GH0011", "GH0012", "GH0013", "GH0014", "GH0015", "GH0016", "GH0017", "GH0018", "GH0019", "GH0020", "GH0021", "GH0022", "GH0023", "GH0024", "GH0025", "GH0026", "GH0027", "GH0028", "GH0029", "GH0030", "GH0031", "GH0032", "GH0033", "GH0034", "GH0035", "EN0001", "EN0002", "EN0003", "EN0004", "EN0005", "EN0006", "EN0007", "EN0008", "EN0009", "EN0010", "EN0011", "EN0012", "EN0013", "EN0014", "EN0015", "EN0016", "EN0017", "EN0018", "EN0019", "EN0020", "EN0021", "EN0022", "EN0023", "EN0024", "CH0001", "CH0002", "CH0003", "CH0004", "CH0005", "CH0006", "CH0007", "CH0008", "CH0009", "CH0010", "CH0011", "CHO012", "CH0013", "CH0014", "CH0015", "CH0016", "CH0017", "CH0018", "CH0019", "CH0020", "CH0021", "CH0022", "CH0023", "CH0024", "CH0025", "BI0001", "BI0002", "BI0003", "BI0004", "BI0005", "BI0006", "BI0007", "BI0008", "BI0009", "BI0010", "BI0011", "BI0012", "BI0013", "BI0014", "BI0015", "BI0016", "BI0017", "BI0018", "BI0019", "BI0020", "BI0021", "BI0022", "BI0023", "BI0024", "BI0025", "BI0026", "BI0027", "BI0028", "BI0029", "BI0030", "BI0031", "BI0032", "BI0033", "BI0034", "BI0035", "BI0036", "BI0037", "BI0038", "BI0039", "BI0040", "BI0041", "BI0042", "BI0043", "BI0044", "BI0045", "BI0046", "BI0047", "BI0048", "BI0049", "BI0050", "BI0051", "BI0052", "BI0053", "BI0054", "BI0055", "BI0056", "BI0057", "BI0058", "BI0059", "BI0060", "BI0061", "BI0062", "BI0063", "BI0064", "BI0065", "BI0066", "BI0067", "BI0068", "BI0069", "BI0070", "BI0071", "BI0072", "BI0073", "BI0074", "BI0075", "BI0076", "BI0077", "BI0078", "BI0079", "BI0080", "BI0081", "BI0082", "BI0083", "BI0084", "BI0085", "BI0086", "BI0087", "BI0088", "TL0001", "TL0002", "TL0003", "TL0004", "TL0005", "TL0006", "TL0007", "TL0008", "TL0009", "TL0010", "TL0011", "TL0012", "TL0013", "TL0014", "TL0015", "TL0016", "TL0017", "TL0018", "TL0019", "TL0020", "TL0021", "TL0022", "TL0023", "TL0024", "TL0025", "TL0026", "TL0027", "TL0028", "TL0029", "TL0030", "TL0031", "TL0032", "TL0033", "TL0034", "TL0035", "TL0036", "TL0037", "TL0038", "TL0039", "TL0040", "TL0041", "TL0042", "TL0043", "TL0044", "TL0045", "TL0046", "TL0047", "TL0048", "TL0049", "TL0050", "TL0051", "TL0052", "TL0053", "SO0001", "SO0002", "SO0003", "SO0004", "SO0005", "SO0006", "SO0007", "SO0008"]
+      },
+      "ISO3_obj": {
+        "title": "ISO-3C Codes",
+        "description": "3-letter abbreviated country codes (as characters), with respect to the ISO 3166 standard.",
+        "type": "string",
+        "pattern": "^[A-Z]{3}$",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BES", "BIH", "BWA", "BVT", "BRA", "IOT", "BRN", "BGR", "BFA", "BDI", "KHM", "CMR", "CAN", "CPV", "CYM", "CAF", "TCD", "CHL", "CHN", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CUW", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "ATF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "HMD", "VAT", "HND", "HKG", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "XKX", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MAC", "MKD", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MNP", "NOR", "OMN", "PAK", "PLW", "PSE", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "SRB", "REU", "ROU", "RUS", "RWA", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SYC", "SLE", "SGP", "SXM", "SVK", "SVN", "SLB", "SOM", "ZAF", "SGS", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWZ", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "XTX", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "UMI", "URY", "UZB", "VUT", "VEN", "VNM", "VGB", "VIR", "WLF", "ESH", "YEM", "ZMB", "ZWE"]
+      },
+      "ExtIDs_obj": {
+        "title": "External ID Codes",
+        "description": "Any IDs, such as the GLIDE number ID, that are linked to this specific event",
+        "type": "object",
+        "properties": {
+          "ext_ID": {
+            "type": "string"
+          },
+          "ext_ID_db": {
+            "type": "string"
+          },
+          "ext_ID_org": {
+            "type": "string"
+          }
+        },
+        "minLength": 1
+      },
+      "Date_obj": {
+        "title": "Date in UTC+00:00",
+        "type": "string",
+        "format": "date",
+        "pattern": "^[012]{1}\\d{3}-[01]{1}\\d{1}-[0123]{1}\\d{1}$"
+      },
+      "SrcOrgType_obj": {
+        "type": "string",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["orgtypeun", "orgtypegov", "orgtyperio", "orgtypengo", "orgtypeacad", "orgtypepriv", "orgtypenews", "orgtypeother"]
+      },
+      "EstType_obj": {
+        "type": "string",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["esttype_prim", "esttype_second", "esttype_model"]
+      },
+      "MeasUnits_obj": {
+        "type": "string",
+        "codelist": "ImpactInformationProfiles.csv",
+        "openCodelist": false,
+        "enum": ["unitsna", "unitsunknown", "unitsmm_per_sec2", "unitscm_per_sec2", "unitsm_per_sec2", "unitskm_per_sec2", "unitsgrav", "unitsinch_per_sec2", "unitsft_per_sec2", "unitsmi_per_sec2", "unitskph_per_sec", "unitsmph_per_sec", "unitsdegree", "unitsradian", "unitsgrad", "unitsarcmin", "unitsarcsec", "unitsturn", "unitsnm2", "unitsum2", "unitsmm2", "unitscm2", "unitsm2", "unitshectare", "unitskm2", "unitsinch2", "unitsft2", "unitsyd2", "unitsacre", "unitsmi2", "unitsnaut_mi2", "unitsdec_deg", "unitsdeg_dec_min", "unitsdeg_min_sec", "unitscountnum", "unitsfmol", "unitspmol", "unitsnmol", "unitsumol", "unitsmmol", "unitsmol", "unitsnsec", "unitsusec", "unitsmsec", "unitssec", "unitsmin", "unitshr", "unitsday", "unitswk", "unitsmon", "unitsyr", "unitsdec", "unitscen", "unitsmil", "unitsMa", "unitsJ", "unitskJ", "unitserg", "unitscal", "unitsCal", "unitsWsec", "unitskWh", "unitsMWh", "unitsBTU", "unitsbyte", "unitsKB", "unitsMB", "unitsGB", "unitsTB", "unitsPB", "unitsbit", "unitsKbit", "unitsMbit", "unitsGbit", "unitsTbit", "unitsPbit", "unitsml_per_sec", "unitsml_per_min", "unitsml_per_hr", "unitsl_per_sec", "unitsl_per_min", "unitsl_per_hr", "unitsm3_per_sec", "unitsm3_per_min", "unitsm3_per_hr", "unitsgal_per_sec", "unitsgal_per_min", "unitsgal_per_hr", "unitsft3_per_sec", "unitsft3_per_min", "unitsft3_per_hr", "unitsSv", "unitsangstrom", "unitsnm", "unitsum", "unitsmm", "unitscm", "unitsdm", "unitsm", "unitskm", "unitsinch", "unitsft", "unitsyd", "unitsfathom", "unitsmi", "unitsnaut_mi", "unitsau", "unitslight_yr", "unitsparsec", "unitspoint", "unitsDa", "unitsfg", "unitspg", "unitsng", "unitsug", "unitsmg", "unitsg", "unitskg", "unitsMg", "unitsGg", "unitsTg", "unitsPg", "unitscarat", "unitsmetric_tonne", "unitsoz", "unitslbs", "unitsshort_ton_US", "unitslong_ton_UK", "unitsstone", "unitsuW", "unitsmW", "unitsW", "unitskW", "unitsMW", "unitsGW", "unitserg_per_sec", "unitscal_per_sec", "unitscal_per_hr", "unitsCal_per_sec", "unitsCal_per_hr", "unitsBTU_per_sec", "unitsBTU_per_hr", "unitshp", "unitsuatm", "unitsatm", "unitsPa", "unitshPa", "unitskPa", "unitstorr", "unitsmmHg", "unitsinHg", "unitscmH2O", "unitsinH2O", "unitsmbar", "unitsbar", "unitsdbar", "unitspsi", "unitsmm_per_sec", "unitscm_per_sec", "unitsm_per_sec", "unitskm_per_sec", "unitsinch_per_sec", "unitsft_per_sec", "unitskph", "unitsmph", "unitskm_per_day", "unitsmi_per_day", "unitsknot", "unitsmach", "unitslight", "unitsC", "unitsF", "unitsK", "unitsR", "unitsN-m", "unitsft-lbs", "unitsinch-lbs", "unitsul", "unitsml", "unitsdl", "unitsl", "unitscm3", "unitsdm3", "unitsm3", "unitskm3", "unitsus_tsp", "unitsus_tbsp", "unitsus_oz", "unitsus_cup", "unitsus_pint", "unitsus_quart", "unitsus_gal", "unitsinch3", "unitsft3", "unitsmi3", "unitsimp_tsp", "unitsimp_tbsp", "unitsimp_oz", "unitsimp_cup", "unitsimp_pint", "unitsimp_quart", "unitsimp_gal", "unitISO4217C-AFN", "unitISO4217C-EUR", "unitISO4217C-ALL", "unitISO4217C-DZD", "unitISO4217C-USD", "unitISO4217C-EUR", "unitISO4217C-AOA", "unitISO4217C-XCD", "unitISO4217C-XCD", "unitISO4217C-ARS", "unitISO4217C-AMD", "unitISO4217C-AWG", "unitISO4217C-AUD", "unitISO4217C-EUR", "unitISO4217C-AZN", "unitISO4217C-BSD", "unitISO4217C-BHD", "unitISO4217C-BDT", "unitISO4217C-BBD", "unitISO4217C-BYN", "unitISO4217C-EUR", "unitISO4217C-BZD", "unitISO4217C-XOF", "unitISO4217C-BMD", "unitISO4217C-INR", "unitISO4217C-BTN", "unitISO4217C-BOB", "unitISO4217C-BOV", "unitISO4217C-USD", "unitISO4217C-BAM", "unitISO4217C-BWP", "unitISO4217C-NOK", "unitISO4217C-BRL", "unitISO4217C-USD", "unitISO4217C-BND", "unitISO4217C-BGN", "unitISO4217C-XOF", "unitISO4217C-BIF", "unitISO4217C-CVE", "unitISO4217C-KHR", "unitISO4217C-XAF", "unitISO4217C-CAD", "unitISO4217C-KYD", "unitISO4217C-XAF", "unitISO4217C-XAF", "unitISO4217C-CLP", "unitISO4217C-CLF", "unitISO4217C-CNY", "unitISO4217C-AUD", "unitISO4217C-AUD", "unitISO4217C-COP", "unitISO4217C-COU", "unitISO4217C-KMF", "unitISO4217C-CDF", "unitISO4217C-XAF", "unitISO4217C-NZD", "unitISO4217C-CRC", "unitISO4217C-XOF", "unitISO4217C-HRK", "unitISO4217C-CUP", "unitISO4217C-CUC", "unitISO4217C-ANG", "unitISO4217C-EUR", "unitISO4217C-CZK", "unitISO4217C-DKK", "unitISO4217C-DJF", "unitISO4217C-XCD", "unitISO4217C-DOP", "unitISO4217C-USD", "unitISO4217C-EGP", "unitISO4217C-SVC", "unitISO4217C-USD", "unitISO4217C-XAF", "unitISO4217C-ERN", "unitISO4217C-EUR", "unitISO4217C-SZL", "unitISO4217C-ETB", "unitISO4217C-EUR", "unitISO4217C-FKP", "unitISO4217C-DKK", "unitISO4217C-FJD", "unitISO4217C-EUR", "unitISO4217C-EUR", "unitISO4217C-EUR", "unitISO4217C-XPF", "unitISO4217C-EUR", "unitISO4217C-XAF", "unitISO4217C-GMD", "unitISO4217C-GEL", "unitISO4217C-EUR", "unitISO4217C-GHS", "unitISO4217C-GIP", "unitISO4217C-EUR", "unitISO4217C-DKK", "unitISO4217C-XCD", "unitISO4217C-EUR", "unitISO4217C-USD", "unitISO4217C-GTQ", "unitISO4217C-GBP", "unitISO4217C-GNF", "unitISO4217C-XOF", "unitISO4217C-GYD", "unitISO4217C-HTG", "unitISO4217C-USD", "unitISO4217C-AUD", "unitISO4217C-EUR", "unitISO4217C-HNL", "unitISO4217C-HKD", "unitISO4217C-HUF", "unitISO4217C-ISK", "unitISO4217C-INR", "unitISO4217C-IDR", "unitISO4217C-XDR", "unitISO4217C-IRR", "unitISO4217C-IQD", "unitISO4217C-EUR", "unitISO4217C-GBP", "unitISO4217C-ILS", "unitISO4217C-EUR", "unitISO4217C-JMD", "unitISO4217C-JPY", "unitISO4217C-GBP", "unitISO4217C-JOD", "unitISO4217C-KZT", "unitISO4217C-KES", "unitISO4217C-AUD", "unitISO4217C-KPW", "unitISO4217C-KRW", "unitISO4217C-KWD", "unitISO4217C-KGS", "unitISO4217C-LAK", "unitISO4217C-EUR", "unitISO4217C-LBP", "unitISO4217C-LSL", "unitISO4217C-ZAR", "unitISO4217C-LRD", "unitISO4217C-LYD", "unitISO4217C-CHF", "unitISO4217C-EUR", "unitISO4217C-EUR", "unitISO4217C-MOP", "unitISO4217C-MKD", "unitISO4217C-MGA", "unitISO4217C-MWK", "unitISO4217C-MYR", "unitISO4217C-MVR", "unitISO4217C-XOF", "unitISO4217C-EUR", "unitISO4217C-USD", "unitISO4217C-EUR", "unitISO4217C-MRU", "unitISO4217C-MUR", "unitISO4217C-EUR", "unitISO4217C-XUA", "unitISO4217C-MXN", "unitISO4217C-MXV", "unitISO4217C-USD", "unitISO4217C-MDL", "unitISO4217C-EUR", "unitISO4217C-MNT", "unitISO4217C-EUR", "unitISO4217C-XCD", "unitISO4217C-MAD", "unitISO4217C-MZN", "unitISO4217C-MMK", "unitISO4217C-NAD", "unitISO4217C-ZAR", "unitISO4217C-AUD", "unitISO4217C-NPR", "unitISO4217C-EUR", "unitISO4217C-XPF", "unitISO4217C-NZD", "unitISO4217C-NIO", "unitISO4217C-XOF", "unitISO4217C-NGN", "unitISO4217C-NZD", "unitISO4217C-AUD", "unitISO4217C-USD", "unitISO4217C-NOK", "unitISO4217C-OMR", "unitISO4217C-PKR", "unitISO4217C-USD", "unitISO4217C-PAB", "unitISO4217C-USD", "unitISO4217C-PGK", "unitISO4217C-PYG", "unitISO4217C-PEN", "unitISO4217C-PHP", "unitISO4217C-NZD", "unitISO4217C-PLN", "unitISO4217C-EUR", "unitISO4217C-USD", "unitISO4217C-QAR", "unitISO4217C-EUR", "unitISO4217C-RON", "unitISO4217C-RUB", "unitISO4217C-RWF", "unitISO4217C-EUR", "unitISO4217C-SHP", "unitISO4217C-XCD", "unitISO4217C-XCD", "unitISO4217C-EUR", "unitISO4217C-EUR", "unitISO4217C-XCD", "unitISO4217C-WST", "unitISO4217C-EUR", "unitISO4217C-STN", "unitISO4217C-SAR", "unitISO4217C-XOF", "unitISO4217C-RSD", "unitISO4217C-SCR", "unitISO4217C-SLL", "unitISO4217C-SGD", "unitISO4217C-ANG", "unitISO4217C-XSU", "unitISO4217C-EUR", "unitISO4217C-EUR", "unitISO4217C-SBD", "unitISO4217C-SOS", "unitISO4217C-ZAR", "unitISO4217C-SSP", "unitISO4217C-EUR", "unitISO4217C-LKR", "unitISO4217C-SDG", "unitISO4217C-SRD", "unitISO4217C-NOK", "unitISO4217C-SEK", "unitISO4217C-CHF", "unitISO4217C-CHE", "unitISO4217C-CHW", "unitISO4217C-SYP", "unitISO4217C-TWD", "unitISO4217C-TJS", "unitISO4217C-TZS", "unitISO4217C-THB", "unitISO4217C-USD", "unitISO4217C-XOF", "unitISO4217C-NZD", "unitISO4217C-TOP", "unitISO4217C-TTD", "unitISO4217C-TND", "unitISO4217C-TRY", "unitISO4217C-TMT", "unitISO4217C-USD", "unitISO4217C-AUD", "unitISO4217C-UGX", "unitISO4217C-UAH", "unitISO4217C-AED", "unitISO4217C-GBP", "unitISO4217C-USD", "unitISO4217C-USD", "unitISO4217C-USN", "unitISO4217C-UYU", "unitISO4217C-UYI", "unitISO4217C-UYW", "unitISO4217C-UZS", "unitISO4217C-VUV", "unitISO4217C-VES", "unitISO4217C-VND", "unitISO4217C-USD", "unitISO4217C-USD", "unitISO4217C-XPF", "unitISO4217C-MAD", "unitISO4217C-YER", "unitISO4217C-ZMW", "unitISO4217C-ZWL", "unitISO4217C-XBA", "unitISO4217C-XBB", "unitISO4217C-XBC", "unitISO4217C-XBD", "unitISO4217C-XTS", "unitISO4217C-XXX", "unitISO4217C-XAU", "unitISO4217C-XPD", "unitISO4217C-XPT", "unitISO4217C-XAG", "unitISO4217C-AFA", "unitISO4217C-FIM", "unitISO4217C-ALK", "unitISO4217C-ADP", "unitISO4217C-ESP", "unitISO4217C-FRF", "unitISO4217C-AOK", "unitISO4217C-AON", "unitISO4217C-AOR", "unitISO4217C-ARA", "unitISO4217C-ARP", "unitISO4217C-ARY", "unitISO4217C-RUR", "unitISO4217C-ATS", "unitISO4217C-AYM", "unitISO4217C-AZM", "unitISO4217C-RUR", "unitISO4217C-BYB", "unitISO4217C-BYR", "unitISO4217C-RUR", "unitISO4217C-BEC", "unitISO4217C-BEF", "unitISO4217C-BEL", "unitISO4217C-BOP", "unitISO4217C-BAD", "unitISO4217C-BRB", "unitISO4217C-BRC", "unitISO4217C-BRE", "unitISO4217C-BRN", "unitISO4217C-BRR", "unitISO4217C-BGJ", "unitISO4217C-BGK", "unitISO4217C-BGL", "unitISO4217C-BUK", "unitISO4217C-HRD", "unitISO4217C-HRK", "unitISO4217C-CYP", "unitISO4217C-CSJ", "unitISO4217C-CSK", "unitISO4217C-ECS", "unitISO4217C-ECV", "unitISO4217C-GQE", "unitISO4217C-EEK", "unitISO4217C-XEU", "unitISO4217C-FIM", "unitISO4217C-FRF", "unitISO4217C-FRF", "unitISO4217C-FRF", "unitISO4217C-GEK", "unitISO4217C-RUR", "unitISO4217C-DDM", "unitISO4217C-DEM", "unitISO4217C-GHC", "unitISO4217C-GHP", "unitISO4217C-GRD", "unitISO4217C-FRF", "unitISO4217C-GNE", "unitISO4217C-GNS", "unitISO4217C-GWE", "unitISO4217C-GWP", "unitISO4217C-ITL", "unitISO4217C-ISJ", "unitISO4217C-IEP", "unitISO4217C-ILP", "unitISO4217C-ILR", "unitISO4217C-ITL", "unitISO4217C-RUR", "unitISO4217C-RUR", "unitISO4217C-LAJ", "unitISO4217C-LVL", "unitISO4217C-LVR", "unitISO4217C-LSM", "unitISO4217C-ZAL", "unitISO4217C-LTL", "unitISO4217C-LTT", "unitISO4217C-LUC", "unitISO4217C-LUF", "unitISO4217C-LUL", "unitISO4217C-MGF", "unitISO4217C-MWK", "unitISO4217C-MVQ", "unitISO4217C-MLF", "unitISO4217C-MTL", "unitISO4217C-MTP", "unitISO4217C-FRF", "unitISO4217C-MRO", "unitISO4217C-FRF", "unitISO4217C-MXP", "unitISO4217C-RUR", "unitISO4217C-FRF", "unitISO4217C-MZE", "unitISO4217C-MZM", "unitISO4217C-NLG", "unitISO4217C-ANG", "unitISO4217C-NIC", "unitISO4217C-PEH", "unitISO4217C-PEI", "unitISO4217C-PEN", "unitISO4217C-PES", "unitISO4217C-PLZ", "unitISO4217C-PTE", "unitISO4217C-FRF", "unitISO4217C-ROK", "unitISO4217C-ROL", "unitISO4217C-RON", "unitISO4217C-RUR", "unitISO4217C-FRF", "unitISO4217C-FRF", "unitISO4217C-FRF", "unitISO4217C-ITL", "unitISO4217C-STD", "unitISO4217C-SKK", "unitISO4217C-SIT", "unitISO4217C-ZAL", "unitISO4217C-SDG", "unitISO4217C-RHD", "unitISO4217C-ESA", "unitISO4217C-ESB", "unitISO4217C-ESP", "unitISO4217C-SDD", "unitISO4217C-SDP", "unitISO4217C-SRG", "unitISO4217C-SZL", "unitISO4217C-CHC", "unitISO4217C-RUR", "unitISO4217C-TJR", "unitISO4217C-IDR", "unitISO4217C-TPE", "unitISO4217C-TRL", "unitISO4217C-TRY", "unitISO4217C-RUR", "unitISO4217C-TMM", "unitISO4217C-UGS", "unitISO4217C-UGW", "unitISO4217C-UAK", "unitISO4217C-SUR", "unitISO4217C-USS", "unitISO4217C-UYN", "unitISO4217C-UYP", "unitISO4217C-RUR", "unitISO4217C-VEB", "unitISO4217C-VEF", "unitISO4217C-VEF", "unitISO4217C-VEF", "unitISO4217C-VNC", "unitISO4217C-YDD", "unitISO4217C-YUD", "unitISO4217C-YUM", "unitISO4217C-YUN", "unitISO4217C-ZRN", "unitISO4217C-ZRZ", "unitISO4217C-ZMK", "unitISO4217C-ZWC", "unitISO4217C-ZWD", "unitISO4217C-ZWD", "unitISO4217C-ZWN", "unitISO4217C-ZWR", "unitISO4217C-CSD", "unitISO4217C-EUR", "adminlevel", "othershape", "spatresother", "spatresunknown", "spatrespoints", "spatreslines", "unitsgdacsalert", "unitsmmi", "unitsrichter", "unitssaffsimp", "unitsenhfuj"]
+      }
+    },
+    "minProperties": 1,
+    "schema_version": "Monty Schema V1.00"
+  }

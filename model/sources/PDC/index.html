@@ -1,0 +1,2105 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../IFRC-DREF/">
+      
+      
+        <link rel="next" href="../USGS/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>PDC - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pacific-disaster-center-pdc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PDC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queryables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Sources
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-pdc-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: pdc-events
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-for-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints for Extraction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Schema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USGS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#collection-pdc-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection: pdc-events
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-for-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints for Extraction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Schema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hazard-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazard Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact item
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="pacific-disaster-center-pdc">Pacific Disaster Center (PDC)</h1>
+<p>The Pacific Disaster Center (PDC) tracks a wide range of natural and human made hazards viz. <strong>Tropical Cyclone</strong>, <strong>Earthquake</strong>, <strong>Flood</strong>, <strong>Landslides</strong>, <strong>Wildfire</strong>, <strong>Drought</strong>, <strong>Volcanic Eruptions</strong> etc to support disaster preparedness, response, and risk reduction efforts.</p>
+<h2 id="collection-pdc-events">Collection: <code>pdc-events</code></h2>
+<p>A STAC collection hold all the PDC events.</p>
+<ul>
+<li>Name: Pacific Disaster Center</li>
+<li>Code: PDC</li>
+<li>Source organization:</li>
+<li>Source code:</li>
+<li>Source type:</li>
+<li>Source organization email: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#112;&#100;&#99;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#112;&#100;&#99;&#46;&#111;&#114;&#103;</a></li>
+<li>Source URL: <a href="https://www.pdc.org/">https://www.pdc.org/</a></li>
+<li>Source Data License: UNKNOWN</li>
+<li>Source for: event, hazard, impact</li>
+</ul>
+<h2 id="endpoints-for-extraction">Endpoints for Extraction</h2>
+<p>To get the relevant PDC data, we use the following endpoints:</p>
+<ol>
+<li>Get a list of Active Hazards: <a href="https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards">https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards</a></li>
+<li>Get exposure list for each Hazard: <a href="https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure">https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure</a></li>
+<li>Get exposure details for each exposure: <a href="https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}">https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}</a></li>
+</ol>
+<h2 id="data-schema">Data Schema</h2>
+<p>The <code>PDCDataSource</code> class when instantiated takes two parameters viz. <code>source_url: str</code> and <code>data: Any</code>.</p>
+<p>The <code>data</code> parameter primarily takes a json object of the following format.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;hazards_file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;exposure_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;exposure_detail_file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">&quot;geojson_file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">nal</span><span class="p">[</span><span class="err">s</span><span class="kc">tr</span><span class="p">]</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="event-item">Event Item</h2>
+<p>A PDC event will always produce an Event STAC Item. Here is a table with the fields that are mapped from the PDC event to the STAC event:</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>id</td>
+<td>Unique Identifier</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>latitude, longitude</td>
+<td>Geometric point using latitude and longitude</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>pdc-events</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>longitude, latitude, longitude, latitude</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>create_Date</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>hazard_Name</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>description</td>
+<td></td>
+</tr>
+<tr>
+<td>roles</td>
+<td>["source", "event"]</td>
+<td>Default roles for event item</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
+<td><code>country</code> field in the list <code>totalByCountry</code></td>
+<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td>type_ID</td>
+<td>The hazard codes are generated using the mapping</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>snc_url</td>
+<td>Asset with the link to the PDC report</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hazard-item">Hazard Item</h2>
+<p>A PDC event and the timestamp from exposure endpoint will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a>. Here is a table with the STAC fields that are managed from the PDC event to the STAC hazard.</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>id</td>
+<td>Unique Identifier</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>latitude, longitude</td>
+<td>Geometric point using latitude and longitude</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>pdc-hazards</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>longitude, latitude, longitude, latitude</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>create_Date</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>hazard_Name</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>description</td>
+<td></td>
+</tr>
+<tr>
+<td>roles</td>
+<td>["source", "hazard"]</td>
+<td>Default roles for hazard item</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
+<td><code>country</code> field in the list <code>totalByCountry</code></td>
+<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td>type_ID</td>
+<td>The hazard codes are generated using the mapping</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>snc_url</td>
+<td>Asset with the link to the PDC report</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">monty:hazard_detail</a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="impact-item">Impact item</h2>
+<p>The PDC events will produce multiple <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>Impact STAC Items</strong></a> when impact related data is available through exposure endpoint.</p>
+<p>The following table shows the mapping of PDC impact fields to STAC items.</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td>id</td>
+<td>Unique Identifier</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>latitude, longitude</td>
+<td>Geometric point using latitude and longitude</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>pdc-impacts</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>longitude, latitude, longitude, latitude</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>create_Date</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>hazard_Name</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>description</td>
+<td></td>
+</tr>
+<tr>
+<td>roles</td>
+<td>["source", "impact"]</td>
+<td>Default roles for impact item</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
+<td><code>country</code> field in the list <code>totalByCountry</code></td>
+<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td>type_ID</td>
+<td>The hazard codes are generated using the mapping</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>snc_url</td>
+<td>Asset with the link to the PDC report</td>
+</tr>
+<tr>
+<td>[monty:impact_detail]</td>
+<td>Impact items using different fields</td>
+<td>Several impact items are created based on several fields available from the exposure endpoint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="impact-details">Impact Details</h3>
+<p>The following fields are used to create several <strong>Impact Details</strong> items.</p>
+<ol>
+<li>Population -&gt; Age group 0 - 4</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.CHILDREN_0_4</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total0_4]</code></td>
+<td>Get the value using the key <code>[population][total0_4]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 5 - 9</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.CHILDREN_5_9</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total5_9]</code></td>
+<td>Get the value using the key <code>[population][total5_9]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 10 - 14</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.CHILDREN_10_14</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total10_14]</code></td>
+<td>Get the value using the key <code>[population][total10_14]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 15 - 19</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.CHILDREN_15_19</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total15_19]</code></td>
+<td>Get the value using the key <code>[population][total15_19]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 20 - 24</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_20_24</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total20_24]</code></td>
+<td>Get the value using the key <code>[population][total20_24]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 25 - 29</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_25_29</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total25_29]</code></td>
+<td>Get the value using the key <code>[population][total25_29]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 30 - 34</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_30_34</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total30_34]</code></td>
+<td>Get the value using the key <code>[population][total30_34]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 35 - 39</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_35_39</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total35_39]</code></td>
+<td>Get the value using the key <code>[population][total35_39]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 40 - 44</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_40_44</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total40_44]</code></td>
+<td>Get the value using the key <code>[population][total40_44]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 45 - 49</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_45_49</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total45_49]</code></td>
+<td>Get the value using the key <code>[population][total45_49]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 50 - 54</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_50_54</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total50_54]</code></td>
+<td>Get the value using the key <code>[population][total50_54]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 55 - 59</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_55_59</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total55_59]</code></td>
+<td>Get the value using the key <code>[population][total55_59]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 60 - 64</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ADULT_60_64</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total60_64]</code></td>
+<td>Get the value using the key <code>[population][total60_64]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Age group 65 and plus</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ELDERLY</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total65_plus]</code></td>
+<td>Get the value using the key <code>[population][total65_plus]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Total population</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][total]</code></td>
+<td>Get the value using the key <code>[population][total]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Population -&gt; Households</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.HOUSEHOLDS</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[population][houselholds]</code></td>
+<td>Get the value using the key <code>[population][households]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Capital -&gt; Total</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.GLOBAL_CURRENCY</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.LOSS_COUNT</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[capital][total]</code></td>
+<td>Get the value using the key <code>[capital][total]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Capital -&gt; School</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.SCHOOLS</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[capital][school]</code></td>
+<td>Get the value using the key <code>[capital][school]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Capital -&gt; Hospital</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>STAC Field</th>
+<th>PDC Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category</td>
+<td>MontyImpactExposureCategory.HOSPITALS</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>value from <code>[capital][hospital]</code></td>
+<td>Get the value using the key <code>[capital][hospital]</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td>MontyEstimateType.PRIMARY</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4847 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../correlation_identifier/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Taxonomy - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#taxonomy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Taxonomy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Taxonomy
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hazards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glide-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      GLIDE Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-dat-cred-classification-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      EM-DAT CRED Classification Tree
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undrr-isc-2020-hazard-information-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      UNDRR-ISC 2020 Hazard Information Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-classification-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Classification Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exposure-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposure Category
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Correlation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Queryables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../sources/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Sources
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Sources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DesInventar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EM-DAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GDACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GLIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IBTrACS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IDMC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IFRC-DREF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USGS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hazards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glide-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      GLIDE Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-dat-cred-classification-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      EM-DAT CRED Classification Tree
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undrr-isc-2020-hazard-information-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      UNDRR-ISC 2020 Hazard Information Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-classification-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Classification Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exposure-category" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposure Category
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="taxonomy">Taxonomy</h1>
+<h2 id="hazards">Hazards</h2>
+<h3 id="glide-classification">GLIDE Classification</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CW</td>
+<td>Cold Wave</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Complex Emergency</td>
+</tr>
+<tr>
+<td>DR</td>
+<td>Drought</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>Earthquake</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>Epidemic</td>
+</tr>
+<tr>
+<td>EC</td>
+<td>Extra-tropical Cyclone</td>
+</tr>
+<tr>
+<td>FR</td>
+<td>Fire</td>
+</tr>
+<tr>
+<td>FF</td>
+<td>Flash Flood</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>Flood</td>
+</tr>
+<tr>
+<td>HT</td>
+<td>Heat Wave</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>Insect Infestation</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>Land Slide</td>
+</tr>
+<tr>
+<td>MS</td>
+<td>Mud Slide</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>Severe Local Storm</td>
+</tr>
+<tr>
+<td>AV</td>
+<td>Snow Avalanche</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>Storm Surge</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>Tech. Disaster</td>
+</tr>
+<tr>
+<td>TO</td>
+<td>Tornadoes</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>Tropical Cyclone</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>Tsunami</td>
+</tr>
+<tr>
+<td>VW</td>
+<td>Violent Wind</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>Volcano</td>
+</tr>
+<tr>
+<td>WF</td>
+<td>Wild fire</td>
+</tr>
+</tbody>
+</table>
+<h3 id="em-dat-cred-classification-tree"><a href="https://doc.emdat.be/docs/data-structure-and-content/disaster-classification-system/#main-classification-tree">EM-DAT CRED Classification Tree</a></h3>
+<p>Note: In September 2023, the EM-DAT Classification Tree was updated and simplified to facilitate user queries and filtering. The current tree is based on four depth levels (group, subgroup, type, subtype), replacing the former tree with three plus two optional depth levels. The 'Complex' disaster group was removed.</p>
+<table>
+<thead>
+<tr>
+<th>Classification Key</th>
+<th>Group</th>
+<th>Subgroup</th>
+<th>Type</th>
+<th>Subtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nat-bio-ani-ani</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Animal Incident</td>
+<td>Animal incident</td>
+</tr>
+<tr>
+<td>nat-bio-epi-bac</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Bacterial disease</td>
+</tr>
+<tr>
+<td>nat-bio-epi-dis</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Infectious disease (General)</td>
+</tr>
+<tr>
+<td>nat-bio-epi-fun</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Fungal disease</td>
+</tr>
+<tr>
+<td>nat-bio-epi-par</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Parasitic disease</td>
+</tr>
+<tr>
+<td>nat-bio-epi-pri</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Prion disease</td>
+</tr>
+<tr>
+<td>nat-bio-epi-vir</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Epidemic</td>
+<td>Viral disease</td>
+</tr>
+<tr>
+<td>nat-bio-inf-gra</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Infestation</td>
+<td>Grasshopper infestation</td>
+</tr>
+<tr>
+<td>nat-bio-inf-inf</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Infestation</td>
+<td>Infestation (General)</td>
+</tr>
+<tr>
+<td>nat-bio-inf-loc</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Infestation</td>
+<td>Locust infestation</td>
+</tr>
+<tr>
+<td>nat-bio-inf-wor</td>
+<td>Natural</td>
+<td>Biological</td>
+<td>Infestation</td>
+<td>Worms infestation</td>
+</tr>
+<tr>
+<td>nat-cli-dro-dro</td>
+<td>Natural</td>
+<td>Climatological</td>
+<td>Drought</td>
+<td>Drought</td>
+</tr>
+<tr>
+<td>nat-cli-glo-glo</td>
+<td>Natural</td>
+<td>Climatological</td>
+<td>Glacial Lake Outburst</td>
+<td>Glacial lake outburst flood</td>
+</tr>
+<tr>
+<td>nat-cli-wil-for</td>
+<td>Natural</td>
+<td>Climatological</td>
+<td>Wildfire</td>
+<td>Forest fire</td>
+</tr>
+<tr>
+<td>nat-cli-wil-lan</td>
+<td>Natural</td>
+<td>Climatological</td>
+<td>Wildfire</td>
+<td>Land fire</td>
+</tr>
+<tr>
+<td>nat-cli-wil-wil</td>
+<td>Natural</td>
+<td>Climatological</td>
+<td>Wildfire</td>
+<td>Wildfire (General)</td>
+</tr>
+<tr>
+<td>nat-ext-imp-air</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Impact</td>
+<td>Airburst</td>
+</tr>
+<tr>
+<td>nat-ext-imp-col</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Impact</td>
+<td>Collision</td>
+</tr>
+<tr>
+<td>nat-ext-spa-ene</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Space Weather</td>
+<td>Energetic particles</td>
+</tr>
+<tr>
+<td>nat-ext-spa-geo</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Space Weather</td>
+<td>Geomagnetic storm</td>
+</tr>
+<tr>
+<td>nat-ext-spa-rad</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Space Weather</td>
+<td>Radio disturbance</td>
+</tr>
+<tr>
+<td>nat-ext-spa-sho</td>
+<td>Natural</td>
+<td>Extraterrestrial</td>
+<td>Space Weather</td>
+<td>Shockwave</td>
+</tr>
+<tr>
+<td>nat-geo-ear-gro</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Earthquake</td>
+<td>Ground movement</td>
+</tr>
+<tr>
+<td>nat-geo-ear-tsu</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Earthquake</td>
+<td>Tsunami</td>
+</tr>
+<tr>
+<td>nat-geo-mmd-ava</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Mass Movement (dry)</td>
+<td>Avalanche (dry)</td>
+</tr>
+<tr>
+<td>nat-geo-mmd-lan</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Mass Movement (dry)</td>
+<td>Landslide (dry)</td>
+</tr>
+<tr>
+<td>nat-geo-mmd-roc</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Mass Movement (dry)</td>
+<td>Rockfall (dry)</td>
+</tr>
+<tr>
+<td>nat-geo-mmd-sub</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Mass Movement (dry)</td>
+<td>Sudden Subsidence (dry)</td>
+</tr>
+<tr>
+<td>nat-geo-env-coa</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Environmental Change</td>
+<td>Coastal erosion</td>
+</tr>
+<tr>
+<td>nat-geo-env-sed</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Environmental Change</td>
+<td>Sedimentation</td>
+</tr>
+<tr>
+<td>nat-geo-env-slr</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Environmental Change</td>
+<td>Sea level rise</td>
+</tr>
+<tr>
+<td>nat-geo-vol-ash</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Volcanic Activity</td>
+<td>Ash fall</td>
+</tr>
+<tr>
+<td>nat-geo-vol-lah</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Volcanic Activity</td>
+<td>Lahar</td>
+</tr>
+<tr>
+<td>nat-geo-vol-lav</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Volcanic Activity</td>
+<td>Lava flow</td>
+</tr>
+<tr>
+<td>nat-geo-vol-pyr</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Volcanic Activity</td>
+<td>Pyroclastic flow</td>
+</tr>
+<tr>
+<td>nat-geo-vol-vol</td>
+<td>Natural</td>
+<td>Geophysical</td>
+<td>Volcanic Activity</td>
+<td>Volcanic activity (General)</td>
+</tr>
+<tr>
+<td>nat-hyd-flo-coa</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Flood</td>
+<td>Coastal flood</td>
+</tr>
+<tr>
+<td>nat-hyd-flo-fla</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Flood</td>
+<td>Flash flood</td>
+</tr>
+<tr>
+<td>nat-hyd-flo-flo</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Flood</td>
+<td>Flood (General)</td>
+</tr>
+<tr>
+<td>nat-hyd-flo-ice</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Flood</td>
+<td>Ice jam flood</td>
+</tr>
+<tr>
+<td>nat-hyd-flo-riv</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Flood</td>
+<td>Riverine flood</td>
+</tr>
+<tr>
+<td>nat-hyd-mmw-ava</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Mass Movement (wet)</td>
+<td>Avalanche (wet)</td>
+</tr>
+<tr>
+<td>nat-hyd-mmw-lan</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Mass Movement (wet)</td>
+<td>Landslide (wet)</td>
+</tr>
+<tr>
+<td>nat-hyd-mmw-mud</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Mass Movement (wet)</td>
+<td>Mudslide</td>
+</tr>
+<tr>
+<td>nat-hyd-mmw-roc</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Mass Movement (wet)</td>
+<td>Rockfall (wet)</td>
+</tr>
+<tr>
+<td>nat-hyd-mmw-sub</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Mass Movement (wet)</td>
+<td>Sudden Subsidence (wet)</td>
+</tr>
+<tr>
+<td>nat-hyd-wav-rog</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Wave Action</td>
+<td>Rogue wave</td>
+</tr>
+<tr>
+<td>nat-hyd-wav-sei</td>
+<td>Natural</td>
+<td>Hydrological</td>
+<td>Wave Action</td>
+<td>Seiche</td>
+</tr>
+<tr>
+<td>nat-met-ext-col</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Extreme Temperature</td>
+<td>Cold wave</td>
+</tr>
+<tr>
+<td>nat-met-ext-hea</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Extreme Temperature</td>
+<td>Heat wave</td>
+</tr>
+<tr>
+<td>nat-met-ext-sev</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Extreme Temperature</td>
+<td>Severe winter conditions</td>
+</tr>
+<tr>
+<td>nat-met-fog-fog</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Fog</td>
+<td>Fog</td>
+</tr>
+<tr>
+<td>nat-met-sto-bli</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Blizzard/Winter storm</td>
+</tr>
+<tr>
+<td>nat-met-sto-der</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Derecho</td>
+</tr>
+<tr>
+<td>nat-met-sto-ext</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Extra-tropical storm</td>
+</tr>
+<tr>
+<td>nat-met-sto-hai</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Hail</td>
+</tr>
+<tr>
+<td>nat-met-sto-lig</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Lightning/Thunderstorms</td>
+</tr>
+<tr>
+<td>nat-met-sto-san</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Sand/Dust storm</td>
+</tr>
+<tr>
+<td>nat-met-sto-sev</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Severe weather</td>
+</tr>
+<tr>
+<td>nat-met-sto-sto</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Storm (General)</td>
+</tr>
+<tr>
+<td>nat-met-sto-sur</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Storm surge</td>
+</tr>
+<tr>
+<td>nat-met-sto-tor</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Tornado</td>
+</tr>
+<tr>
+<td>nat-met-sto-tro</td>
+<td>Natural</td>
+<td>Meteorological</td>
+<td>Storm</td>
+<td>Tropical cyclone</td>
+</tr>
+<tr>
+<td>tec-ind-che-che</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Chemical Spill</td>
+<td>Chemical spill</td>
+</tr>
+<tr>
+<td>tec-ind-col-col</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Collapse</td>
+<td>Collapse (Industrial)</td>
+</tr>
+<tr>
+<td>tec-ind-exp-exp</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Explosion</td>
+<td>Explosion (Industrial)</td>
+</tr>
+<tr>
+<td>tec-ind-fir-fir</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Fire</td>
+<td>Fire (Industrial)</td>
+</tr>
+<tr>
+<td>tec-ind-gas-gas</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Gas Leak</td>
+<td>Gas leak</td>
+</tr>
+<tr>
+<td>tec-ind-ind-ind</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Industrial accident</td>
+<td>Industrial accident (General)</td>
+</tr>
+<tr>
+<td>tec-ind-oil-oil</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Oil Spill</td>
+<td>Oil spill</td>
+</tr>
+<tr>
+<td>tec-ind-poi-poi</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Poisoning</td>
+<td>Poisoning</td>
+</tr>
+<tr>
+<td>tec-ind-rad-rad</td>
+<td>Technological</td>
+<td>Industrial Accident</td>
+<td>Radiation</td>
+<td>Radiation</td>
+</tr>
+<tr>
+<td>tec-mis-col-col</td>
+<td>Technological</td>
+<td>Miscellaneous Accident</td>
+<td>Collapse</td>
+<td>Collapse (Miscellaneous)</td>
+</tr>
+<tr>
+<td>tec-mis-exp-exp</td>
+<td>Technological</td>
+<td>Miscellaneous Accident</td>
+<td>Explosion</td>
+<td>Explosion (Miscellaneous)</td>
+</tr>
+<tr>
+<td>tec-mis-fir-fir</td>
+<td>Technological</td>
+<td>Miscellaneous Accident</td>
+<td>Fire</td>
+<td>Fire (Miscellaneous)</td>
+</tr>
+<tr>
+<td>tec-mis-mis-mis</td>
+<td>Technological</td>
+<td>Miscellaneous Accident</td>
+<td>Miscellaneous accident</td>
+<td>Miscellaneous accident (General)</td>
+</tr>
+<tr>
+<td>tec-tra-air-air</td>
+<td>Technological</td>
+<td>Transport</td>
+<td>Air</td>
+<td>Air</td>
+</tr>
+<tr>
+<td>tec-tra-rai-rai</td>
+<td>Technological</td>
+<td>Transport</td>
+<td>Rail</td>
+<td>Rail</td>
+</tr>
+<tr>
+<td>tec-tra-roa-roa</td>
+<td>Technological</td>
+<td>Transport</td>
+<td>Road</td>
+<td>Road</td>
+</tr>
+<tr>
+<td>tec-tra-wat-wat</td>
+<td>Technological</td>
+<td>Transport</td>
+<td>Water</td>
+<td>Water</td>
+</tr>
+</tbody>
+</table>
+<h3 id="undrr-isc-2020-hazard-information-profiles"><a href="https://www.preventionweb.net/drr-glossary/hips">UNDRR-ISC 2020 Hazard Information Profiles</a></h3>
+<table>
+<thead>
+<tr>
+<th>Hazard Code</th>
+<th>Hazard Label</th>
+<th>Cluster ID</th>
+<th>Cluster Label</th>
+<th>Family Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MH0001</td>
+<td>Downburst</td>
+<td>HM-CONV</td>
+<td>Convective-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0002</td>
+<td>Lightning (Electrical Storm)</td>
+<td>HM-CONV</td>
+<td>Convective-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0003</td>
+<td>Thunderstorm</td>
+<td>HM-CONV</td>
+<td>Convective-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0004</td>
+<td>Coastal Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0005</td>
+<td>Estuarine (Coastal) Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0006</td>
+<td>Flash Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0007</td>
+<td>Fluvial (Riverine) Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0008</td>
+<td>Groundwater Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0009</td>
+<td>Ice-Jam Flood Including Debris</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0010</td>
+<td>Ponding (Drainage) Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0011</td>
+<td>Snowmelt Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0012</td>
+<td>Surface Water Flooding</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0013</td>
+<td>Glacial Lake Outburst Flood</td>
+<td>HM-FLOOD</td>
+<td>Flood</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0014</td>
+<td>Black Carbon (Brown Clouds)</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0015</td>
+<td>Dust storm or Sandstorm</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0016</td>
+<td>Fog</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0017</td>
+<td>Haze</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0018</td>
+<td>Polluted Air</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0019</td>
+<td>Sand haze</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0020</td>
+<td>Smoke</td>
+<td>HM-LITHO</td>
+<td>Lithometeors</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0021</td>
+<td>Ocean Acidification</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0022</td>
+<td>Rogue Wave</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0023</td>
+<td>Sea Water Intrusion</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0024</td>
+<td>Sea Ice (Icebergs)</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0025</td>
+<td>Ice Flow</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0026</td>
+<td>Seiche</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0027</td>
+<td>Storm Surge</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0028</td>
+<td>Storm Tides</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0029</td>
+<td>Tsunami</td>
+<td>HM-MARINE</td>
+<td>Marine</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0030</td>
+<td>Depression or Cyclone (Low Pressure Area)</td>
+<td>HM-PRESS</td>
+<td>Pressure-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0031</td>
+<td>Extra-tropical Cyclone</td>
+<td>HM-PRESS</td>
+<td>Pressure-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0032</td>
+<td>Sub-Tropical Cyclone</td>
+<td>HM-PRESS</td>
+<td>Pressure-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0033</td>
+<td>Acid Rain</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0034</td>
+<td>Blizzard</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0035</td>
+<td>Drought</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0036</td>
+<td>Hail</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0037</td>
+<td>Ice Storm</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0038</td>
+<td>Snow</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0039</td>
+<td>Snow Storm</td>
+<td>HM-PRECIP</td>
+<td>Precipitation-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0040</td>
+<td>Cold Wave</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0041</td>
+<td>Dzud</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0042</td>
+<td>Freeze</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0043</td>
+<td>Frost (Hoar Frost)</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0044</td>
+<td>Freezing Rain (Supercooled Rain)</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0045</td>
+<td>Glaze</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0046</td>
+<td>Ground Frost</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0047</td>
+<td>Heatwave</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0048</td>
+<td>Icing (including Ice)</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0049</td>
+<td>Thaw</td>
+<td>HM-TEMP</td>
+<td>Temperature-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0050</td>
+<td>Avalanche</td>
+<td>HM-TERR</td>
+<td>Terrestrial</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0051</td>
+<td>Mud Flow</td>
+<td>HM-TERR</td>
+<td>Terrestrial</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0052</td>
+<td>Rock Slide</td>
+<td>HM-TERR</td>
+<td>Terrestrial</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0053</td>
+<td>Derecho</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0054</td>
+<td>Gale (Strong Gale)</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0055</td>
+<td>Squall</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0056</td>
+<td>Subtropical Storm</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0057</td>
+<td>Tropical Cyclone (Cyclonic Wind, Rain [Storm] surge)</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0058</td>
+<td>Tropical Storm</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0099</td>
+<td>Extra-tropical Storm</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0059</td>
+<td>Tornado</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>MH0060</td>
+<td>Wind</td>
+<td>HM-WIND</td>
+<td>Wind-Related</td>
+<td>Meterological &amp; Hydrological</td>
+</tr>
+<tr>
+<td>ET0001</td>
+<td>Airburst</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0002</td>
+<td>Geomagnetic Storm (including energetic particles related to space weather, and solar flare radio blackout [R Scale])</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0003</td>
+<td>UV Radiation</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0004</td>
+<td>Meteorite Impact</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0005</td>
+<td>Ionospheric Storms</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0006</td>
+<td>Radio Blackout</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0007</td>
+<td>Solar Storm (Solar Radiation Storm) (S Scale)</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0008</td>
+<td>Space Hazard / Accident</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>ET0009</td>
+<td>Near-Earth Object</td>
+<td>ET-EXTRATERR</td>
+<td>Extraterrestrial</td>
+<td>Extraterrestrial</td>
+</tr>
+<tr>
+<td>GH0001</td>
+<td>Earthquake</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0002</td>
+<td>Ground Shaking (Earthquake)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0003</td>
+<td>Liquefaction (Earthquake Trigger)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0004</td>
+<td>Earthquake Surface Rupture, Fissures, and Tectonic Uplift/Subsidence</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0005</td>
+<td>Subsidence and Uplift, Including Shoreline Change (Earthquake Trigger)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0006</td>
+<td>Tsunami (Earthquake Trigger)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0007</td>
+<td>Landslide or Debris Flow (Earthquake Trigger)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0008</td>
+<td>Ground Gases (Seismogenic)</td>
+<td>GEO-SEIS</td>
+<td>Seismogenic (Earthquakes)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0009</td>
+<td>Lava Flows (Lava Domes)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0010</td>
+<td>Ash/Tephra Fall (Physical and Chemical)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0011</td>
+<td>Ballistics (Volcanic)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0012</td>
+<td>Pyroclastic Density Current</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0013</td>
+<td>Debris Flow/Lahars/Floods</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0014</td>
+<td>Landslide (Volcanic Trigger)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0015</td>
+<td>Ground Shaking (Volcanic Earthquake)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0016</td>
+<td>Volcanic Gases and Aerosols</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0017</td>
+<td>Tsunami (Volcanic Trigger)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0018</td>
+<td>Lightning (Volcanic Trigger)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0019</td>
+<td>Urban Fire (During/Following Volcanic Eruption)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0020</td>
+<td>Subsidence and Uplift, Including Shoreline Change (Magmatic/Volcanic Trigger)</td>
+<td>GEO-VOLC</td>
+<td>Volcanogenic (volcanoes and geothermal)</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0021</td>
+<td>Ground Shaking (induced earthquake, reservoir fill, dams, cavity collapse, underground explosion, impact, hydrocarbon fields, shale exploration, etc.)</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0022</td>
+<td>Liquefaction (Groundwater Trigger)</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0023</td>
+<td>Ground Fissuring</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0024</td>
+<td>Subsidence and Uplift Including Shoreline Change</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0025</td>
+<td>Shrink-Swell Subsidence</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0026</td>
+<td>Sinkhole</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0027</td>
+<td>Ground Gases (CH4, Rn, etc.)</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0028</td>
+<td>Riverbank Erosion</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0029</td>
+<td>Sand Encroachment</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0030</td>
+<td>Aquifer Recharge (Systems Failure/ Outages)</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0031</td>
+<td>Submarine Landslide</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0032</td>
+<td>Rockfall</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0033</td>
+<td>Landscape Creep</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0034</td>
+<td>Sediment Rock Avalanche</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>GH0035</td>
+<td>Tsunami (Submarine Landslide Trigger)</td>
+<td>GEO-OTHER</td>
+<td>Other Geohazard</td>
+<td>Geohazards</td>
+</tr>
+<tr>
+<td>EN0001</td>
+<td>Household Air Pollution</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0002</td>
+<td>Air Pollution (Point Source)</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0003</td>
+<td>Ambient (Outdoor) Air Pollution</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0004</td>
+<td>Land Degradation</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0005</td>
+<td>Soil Degradation</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0006</td>
+<td>Runoff / Nonpoint Source Pollution</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0007</td>
+<td>Salinity</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0008</td>
+<td>Biodiversity Loss</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0009</td>
+<td>Deforestation</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0010</td>
+<td>Forest Declines and Diebacks</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0011</td>
+<td>Forest Disturbances</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0012</td>
+<td>Forest Invasive Species</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0013</td>
+<td>Wildfires</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0014</td>
+<td>Desertification</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0015</td>
+<td>Loss of Mangroves</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0016</td>
+<td>Wetland Loss/Degradation</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0017</td>
+<td>Coral Bleaching</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0018</td>
+<td>Compressive Soils</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0019</td>
+<td>Soil Erosion</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0020</td>
+<td>Coastal Erosion and Shoreline Change</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0021</td>
+<td>Permafrost Loss</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0022</td>
+<td>Sand Mining</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0023</td>
+<td>Sea Level Rise</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>EN0024</td>
+<td>Eutrophication</td>
+<td>ENV-DEG</td>
+<td>Environmental Degradation</td>
+<td>Environmental</td>
+</tr>
+<tr>
+<td>CH0001</td>
+<td>Ammonia</td>
+<td>CHEM-GAS</td>
+<td>Gases</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0002</td>
+<td>Carbon Monoxide</td>
+<td>CHEM-GAS</td>
+<td>Gases</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0003</td>
+<td>Arsenic</td>
+<td>CHEM-METAL</td>
+<td>Heavy Metals</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0004</td>
+<td>Cadmium</td>
+<td>CHEM-METAL</td>
+<td>Heavy Metals</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0005</td>
+<td>Lead</td>
+<td>CHEM-METAL</td>
+<td>Heavy Metals</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0006</td>
+<td>Mercury</td>
+<td>CHEM-METAL</td>
+<td>Heavy Metals</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0007</td>
+<td>Levels of Contaminants in Food and Feed</td>
+<td>CHEM-FOODSAF</td>
+<td>Food Safety</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0008</td>
+<td>Pesticides – Highly Hazardous</td>
+<td>CHEM-PEST</td>
+<td>Pesticides</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0009</td>
+<td>Residue of Pesticides</td>
+<td>CHEM-PEST</td>
+<td>Pesticides</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0010</td>
+<td>Hazardous Pesticide Contamination in Soils</td>
+<td>CHEM-POPS</td>
+<td>Persistent Organic Pollutants (POPs)</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0011</td>
+<td>Insecticides</td>
+<td>CHEM-PEST</td>
+<td>Pesticides</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CHO012</td>
+<td>Fungicides</td>
+<td>CHEM-PEST</td>
+<td>Pesticides</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0013</td>
+<td>Dioxins and Dioxin-like Substances</td>
+<td>CHEM-POPS</td>
+<td>Persistent Organic Pollutants (POPs)</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0014</td>
+<td>Microplastics</td>
+<td>CHEM-POPS</td>
+<td>Persistent Organic Pollutants (POPs)</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0015</td>
+<td>Phosphine</td>
+<td>CHEM-GAS</td>
+<td>Gases</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0016</td>
+<td>Chlorine</td>
+<td>CHEM-GAS</td>
+<td>Gases</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0017</td>
+<td>Oil Pollution</td>
+<td>CHEM-HYDROCAR</td>
+<td>Hydrocarbons</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0018</td>
+<td>Benzene</td>
+<td>CHEM-HYDROCAR</td>
+<td>Hydrocarbons</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0019</td>
+<td>Chemical Warfare Agents</td>
+<td>CHEM-CBRNE</td>
+<td>CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0020</td>
+<td>Asbestos</td>
+<td>CHEM-OTHER</td>
+<td>Other Chemical Hazards and Toxins</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0021</td>
+<td>Aflatoxins</td>
+<td>CHEM-OTHER</td>
+<td>Other Chemical Hazards and Toxins</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0022</td>
+<td>Fluoride - Excess or inadequate intake</td>
+<td>CHEM-OTHER</td>
+<td>Other Chemical Hazards and Toxins</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0023</td>
+<td>Methanol</td>
+<td>CHEM-OTHER</td>
+<td>Other Chemical Hazards and Toxins</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0024</td>
+<td>Substandard and Falsified Medical Products</td>
+<td>CHEM-OTHER</td>
+<td>Other Chemical Hazards and Toxins</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>CH0025</td>
+<td>Marine Toxins</td>
+<td>CHEM-FISHAQUA</td>
+<td>Fisheries and Aquaculture</td>
+<td>Chemical</td>
+</tr>
+<tr>
+<td>BI0001</td>
+<td>Harmful Algal Blooms</td>
+<td>BIO-FISHAQUA</td>
+<td>Fisheries and Aquaculture</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0002</td>
+<td>Insect Pest Infestations</td>
+<td>BIO_INFEST</td>
+<td>Insect Infestation</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0003</td>
+<td>Locust</td>
+<td>BIO_INFEST</td>
+<td>Insect Infestation</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0004</td>
+<td>Invasive Weeds</td>
+<td>BIO_INVSPE</td>
+<td>Invasive Species</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0005</td>
+<td>Invasive Species</td>
+<td>BIO_INVSPE</td>
+<td>Invasive Species</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0006</td>
+<td>Snake Envenomation</td>
+<td>BIO_HUMANI</td>
+<td>Human-Animal Interaction</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0007</td>
+<td>Human-Wildlife Conflict</td>
+<td>BIO_HUMANI</td>
+<td>Human-Animal Interaction</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0008</td>
+<td>Biological Agents</td>
+<td>BIO-CBRNE</td>
+<td>CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0009</td>
+<td>Suicide Cluster</td>
+<td>BIO-MENTHE</td>
+<td>Mental Health</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0010</td>
+<td>Antimicrobial Resistance</td>
+<td>BIO-FOODSAF</td>
+<td>Food Safety</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0011</td>
+<td>Foodborne Microbial Hazards (including human enteric virus and foodborne parasite)</td>
+<td>BIO-FOODSAF</td>
+<td>Food Safety</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0012</td>
+<td>Bacterial Plant Disease</td>
+<td>BIO-INFDISPL</td>
+<td>Infectious Disease (Plant)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0013</td>
+<td>Fungal Plant Disease</td>
+<td>BIO-INFDISPL</td>
+<td>Infectious Disease (Plant)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0014</td>
+<td>Viral, Mycoplasma and Viroid Plant Disease Epidemics</td>
+<td>BIO-INFDISPL</td>
+<td>Infectious Disease (Plant)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0015</td>
+<td>Anthrax</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0016</td>
+<td>Airborne Diseases</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0017</td>
+<td>Blood Borne Viruses</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0018</td>
+<td>Waterborne Diseases</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0019</td>
+<td>Foodborne Diseases</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0020</td>
+<td>Sexually Transmitted Diseases (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0021</td>
+<td>Neglected Tropical Diseases (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0022</td>
+<td>Vaccine-Preventable Diseases (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0023</td>
+<td>Vector Borne Diseases (VBD) (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0024</td>
+<td>Viral Haemorrhagic Fevers (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0025</td>
+<td>Antimicrobial Resistant Microorganisms (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0026</td>
+<td>Animal Diseases (Not Zoonoses)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0027</td>
+<td>Zoonotic Diseases</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0028</td>
+<td>Diarrhoeal Diseases (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0029</td>
+<td>Prion Diseases</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0030</td>
+<td>Hepatitis B (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0031</td>
+<td>Hepatitis C (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0032</td>
+<td>HIV and AIDS (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0033</td>
+<td>COVID-19 (SARS-CoV-2) (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0034</td>
+<td>Cholera (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0035</td>
+<td>Cryptosporidium (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0036</td>
+<td>Paratyphoid fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0037</td>
+<td>Typhoid Fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0038</td>
+<td>Hepatitis A (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0039</td>
+<td>Escherichia Coli (STEC) (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0040</td>
+<td>Listeriosis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0041</td>
+<td>Shigellosis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0042</td>
+<td>Avian Influenza (Human and Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0043</td>
+<td>Pandemic Influenza (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0044</td>
+<td>Seasonal Influenza (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0045</td>
+<td>Cysticercosis</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0046</td>
+<td>Leptospirosis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0047</td>
+<td>Plague (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0048</td>
+<td>Leprosy</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0049</td>
+<td>Chikungunya</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0050</td>
+<td>Zika Virus (human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0051</td>
+<td>Diphtheria (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0052</td>
+<td>Measles (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0053</td>
+<td>Meningococcal Meningitis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0054</td>
+<td>Pertussis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0055</td>
+<td>Polio (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0056</td>
+<td>Smallpox (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0057</td>
+<td>Varicella and herpes zoster (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0058</td>
+<td>Yellow Fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0059</td>
+<td>Dengue (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0060</td>
+<td>Malaria (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0061</td>
+<td>Crimean-Congo Haemorrhagic Fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0062</td>
+<td>Ebola (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0063</td>
+<td>Lassa Fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0064</td>
+<td>Tuberculosis (Human and Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0065</td>
+<td>Middle East Respiratory Syndrome (MERS) (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0066</td>
+<td>Monkeypox (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0067</td>
+<td>Rabies (Animal and Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0068</td>
+<td>Severe Acute Respiratory Syndrome (SARS) (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0069</td>
+<td>Rotavirus (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0070</td>
+<td>African Swine Fever (Animal)</td>
+<td>BIO-INFDISANI</td>
+<td>Infectious Diseases (Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0071</td>
+<td>Vector-borne diseases (VBD) (Animals)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0072</td>
+<td>Brucellosis (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0073</td>
+<td>Classical Swine Fever (Animal)</td>
+<td>BIO-INFDISANI</td>
+<td>Infectious Diseases (Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0074</td>
+<td>Contagious Bovine Pleuropneumonia (CBPP) (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0075</td>
+<td>Contagious Caprine Pleuropneumonia (CCPP) (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0076</td>
+<td>Foot and Mouth Disease Virus (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0077</td>
+<td>Lumpy Skin Disease (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0078</td>
+<td>New World Screwworm (NWS) (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0079</td>
+<td>Newcastle Disease Virus (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0080</td>
+<td>Peste Des Petits Ruminants (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0081</td>
+<td>Q Fever</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0082</td>
+<td>Rift Valley Fever (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0083</td>
+<td>Trypanosomosis (Animal)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0084</td>
+<td>West Nile Fever (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0085</td>
+<td>Rinderpest (Animal)</td>
+<td>BIO-INFDISANI</td>
+<td>Infectious Diseases (Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0086</td>
+<td>Trypanosomiasis (Human)</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Infectious Diseases (Human and Animal)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0087</td>
+<td>Shrimp disease (bacterial) - Acute Hepatic pancreatic necrosis</td>
+<td>BIO-INFDISAQUA</td>
+<td>Infectious Diseases (Aquaculture)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>BI0088</td>
+<td>Oyster Disease Aquaculture</td>
+<td>BIO-INFDISAQUA</td>
+<td>Infectious Diseases (Aquaculture)</td>
+<td>Biological</td>
+</tr>
+<tr>
+<td>TL0001</td>
+<td>Radioactive Waste</td>
+<td>TECH-RAD</td>
+<td>Radiation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0002</td>
+<td>Radioactive Material</td>
+<td>TECH-RAD</td>
+<td>Radiation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0003</td>
+<td>Radiation Agents</td>
+<td>TECH-CBRNE</td>
+<td>CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0004</td>
+<td>Nuclear Agents</td>
+<td>TECH-CBRNE</td>
+<td>CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0005</td>
+<td>Building Collapse</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0006</td>
+<td>Building, highrise, cladding</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0007</td>
+<td>Structural Failure</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0008</td>
+<td>Bridge Failure</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0009</td>
+<td>Dam Failure</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0010</td>
+<td>Supply Chain Failure</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0011</td>
+<td>Critical Infrastructure Failure</td>
+<td>TECH-STRFAIL</td>
+<td>Construction/ Structural Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0012</td>
+<td>Nuclear Plant Failure</td>
+<td>TECH-INFFAIL</td>
+<td>Infrastructure Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0013</td>
+<td>Power Outage/ or Blackout</td>
+<td>TECH-INFFAIL</td>
+<td>Infrastructure Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0014</td>
+<td>Emergency Telecommunications Failure</td>
+<td>TECH-INFFAIL</td>
+<td>Infrastructure Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0015</td>
+<td>Water Supply Failure</td>
+<td>TECH-INFFAIL</td>
+<td>Infrastructure Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0016</td>
+<td>Radio and Other Telecommunication Failures</td>
+<td>TECH-INFFAIL</td>
+<td>Infrastructure Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0017</td>
+<td>Misconfiguration of Software and Hardware</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0018</td>
+<td>Non-Conformity and Interoperability</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0019</td>
+<td>Malware</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0020</td>
+<td>Data Breach</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0021</td>
+<td>Data Security-Related Hazards</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0022</td>
+<td>Disrupt</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0023</td>
+<td>Outage</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0024</td>
+<td>Personally Identifiable Information (PII) Breach</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0025</td>
+<td>Internet of Things (IOT)-Related Hazards</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0026</td>
+<td>Cyberbullying</td>
+<td>TECH-CYB</td>
+<td>Cyber Hazard</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0027</td>
+<td>Natech</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0028</td>
+<td>Pollution</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0029</td>
+<td>Explosion</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0030</td>
+<td>Leaks and Spills</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0031</td>
+<td>Soil Pollution</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0032</td>
+<td>Fire</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0033</td>
+<td>Mining Hazards</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0034</td>
+<td>Safety Hazards Associated with Oil and Gas Extraction Activities</td>
+<td>TECH-INDFAIL</td>
+<td>Industrial Failure</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0035</td>
+<td>Disaster Waste</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0036</td>
+<td>Solid Waste</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0037</td>
+<td>Wastewater</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0038</td>
+<td>Hazardous Waste</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0039</td>
+<td>Plastic Waste</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0040</td>
+<td>Marine Debris</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0041</td>
+<td>Electronic Waste (E-Waste)</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0042</td>
+<td>Healthcare Risk Waste</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0043</td>
+<td>Landfilling</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0044</td>
+<td>Tailings</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0045</td>
+<td>Waste Treatment Lagoons</td>
+<td>TECH-WASTE</td>
+<td>Waste</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0046</td>
+<td>Drain and Sewer Flooding</td>
+<td>TECH-FLOOD</td>
+<td>Flood</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0047</td>
+<td>Reservoir Flooding</td>
+<td>TECH-FLOOD</td>
+<td>Flood</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0048</td>
+<td>Air Transportation Accident</td>
+<td>TECH-TRANSP</td>
+<td>Transportation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0049</td>
+<td>Inland Water Ways</td>
+<td>TECH-TRANSP</td>
+<td>Transportation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0050</td>
+<td>Marine Accident</td>
+<td>TECH-TRANSP</td>
+<td>Transportation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0051</td>
+<td>Rail Accident</td>
+<td>TECH-TRANSP</td>
+<td>Transportation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0052</td>
+<td>Road Traffic Accident</td>
+<td>TECH-TRANSP</td>
+<td>Transportation</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>TL0053</td>
+<td>Explosive agents</td>
+<td>TECH-CBRNE</td>
+<td>CBRNE (Chemical, Biological, Radiological, Nuclear and Explosive)</td>
+<td>Technological</td>
+</tr>
+<tr>
+<td>SO0001</td>
+<td>International Armed Conflict (IAC)</td>
+<td>SOC-CONF</td>
+<td>Conflict</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0002</td>
+<td>Non-International Armed Conflict (NIAC)</td>
+<td>SOC-CONF</td>
+<td>Conflict</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0003</td>
+<td>Civil Unrest</td>
+<td>SOC-CONF</td>
+<td>Conflict</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0004</td>
+<td>Explosive Remnants of War</td>
+<td>SOC-POSTCONF</td>
+<td>Post-Conflict</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0005</td>
+<td>Environmental Degradation from Conflict</td>
+<td>SOC-POSTCONF</td>
+<td>Post-Conflict</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0006</td>
+<td>Violence</td>
+<td>SOC-BEH</td>
+<td>Behavioural</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0007</td>
+<td>Stampede or Crushing (Human)</td>
+<td>SOC-BEH</td>
+<td>Behavioural</td>
+<td>Societal</td>
+</tr>
+<tr>
+<td>SO0008</td>
+<td>Financial shock</td>
+<td>SOC-ECO</td>
+<td>Economic</td>
+<td>Societal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-classification-mapping">Cross-Classification Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>GLIDE Code</th>
+<th>EM-DAT Classification Key</th>
+<th>Name</th>
+<th>UNDRR-ISC Hazard Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CW</td>
+<td>nat-met-ext-col</td>
+<td>Cold wave</td>
+<td>MH0040</td>
+</tr>
+<tr>
+<td>DR</td>
+<td>nat-cli-dro-dro</td>
+<td>Drought</td>
+<td>MH0035</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td>Earthquake</td>
+<td>GH0001</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td>Ground shaking</td>
+<td>GH0002</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td>Liquefaction</td>
+<td>GH0003</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td>Surface rupture</td>
+<td>GH0004</td>
+</tr>
+<tr>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td>Subsidence and uplift</td>
+<td>GH0005</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-vir</td>
+<td>Viral diseases</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-bac</td>
+<td>Bacterial diseases</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-par</td>
+<td>Parasitic diseases</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-fun</td>
+<td>Fungal diseases</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-pri</td>
+<td>Prion diseases</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EP</td>
+<td>nat-bio-epi-dis</td>
+<td>General infectious disease</td>
+<td>BI0016</td>
+</tr>
+<tr>
+<td>EC</td>
+<td>nat-met-sto-ext</td>
+<td>Extra-tropical cyclone</td>
+<td>MH0031</td>
+</tr>
+<tr>
+<td>EC</td>
+<td>nat-met-sto-ext</td>
+<td>Extra-tropical storm</td>
+<td>MH0099</td>
+</tr>
+<tr>
+<td>FR</td>
+<td>tec-ind-fir-fir</td>
+<td>Industrial fire</td>
+<td>TL0032</td>
+</tr>
+<tr>
+<td>FR</td>
+<td>tec-mis-fir-fir</td>
+<td>Miscellaneous fire</td>
+<td>TL0032</td>
+</tr>
+<tr>
+<td>FF</td>
+<td>nat-hyd-flo-fla</td>
+<td>Flash flood</td>
+<td>MH0006</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-riv</td>
+<td>Riverine flood</td>
+<td>MH0007</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-coa</td>
+<td>Coastal flood</td>
+<td>MH0004</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-flo</td>
+<td>General flood</td>
+<td>MH0012</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-ice</td>
+<td>Ice jam flood</td>
+<td>MH0009</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-cli-glo-glo</td>
+<td>Glacial lake outburst flood</td>
+<td>MH0013</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-flo</td>
+<td>Groundwater flood</td>
+<td>MH0008</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-flo</td>
+<td>Ponding flood</td>
+<td>MH0010</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>nat-hyd-flo-flo</td>
+<td>Snowmelt flood</td>
+<td>MH0011</td>
+</tr>
+<tr>
+<td>FL</td>
+<td>tec-mis-col-col</td>
+<td>Dam/levee break flood</td>
+<td>TL0009</td>
+</tr>
+<tr>
+<td>HT</td>
+<td>nat-met-ext-hea</td>
+<td>Heat wave</td>
+<td>MH0047</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>nat-bio-inf-loc</td>
+<td>Insect pest infestation</td>
+<td>BI0002</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>nat-bio-inf-loc</td>
+<td>Locust infestation</td>
+<td>BI0003</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>nat-bio-inf-gra</td>
+<td>Grasshopper infestation</td>
+<td>BI0002</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>nat-bio-inf-wor</td>
+<td>Worms infestation</td>
+<td>BI0002</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>nat-bio-inf-inf</td>
+<td>General infestation</td>
+<td>BI0002</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>nat-geo-mmd-lan</td>
+<td>Landslide (earthquake trigger)</td>
+<td>GH0007</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>nat-geo-mmd-lan</td>
+<td>Landslide (volcanic trigger)</td>
+<td>GH0014</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>nat-hyd-mmw-lan</td>
+<td>Landslide (wet)</td>
+<td>GH0007</td>
+</tr>
+<tr>
+<td>MS</td>
+<td>nat-hyd-mmw-mud</td>
+<td>Mud flow/slide</td>
+<td>MH0051</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>nat-met-sto-sto</td>
+<td>Severe local storm</td>
+<td>MH0003</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>nat-met-sto-lig</td>
+<td>Lightning</td>
+<td>MH0002</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>nat-met-sto-hai</td>
+<td>Hail</td>
+<td>MH0036</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>nat-met-sto-sev</td>
+<td>Severe weather</td>
+<td>MH0003</td>
+</tr>
+<tr>
+<td>AV</td>
+<td>nat-geo-mmd-ava</td>
+<td>Avalanche (dry)</td>
+<td>MH0050</td>
+</tr>
+<tr>
+<td>AV</td>
+<td>nat-hyd-mmw-ava</td>
+<td>Avalanche (wet)</td>
+<td>MH0050</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>nat-met-sto-sur</td>
+<td>Storm surge</td>
+<td>MH0027</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>nat-hyd-wav-rog</td>
+<td>Storm tides</td>
+<td>MH0028</td>
+</tr>
+<tr>
+<td>TO</td>
+<td>nat-met-sto-tor</td>
+<td>Tornado</td>
+<td>MH0059</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>nat-met-sto-tro</td>
+<td>Tropical cyclone</td>
+<td>MH0057</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>nat-met-sto-tro</td>
+<td>Tropical storm</td>
+<td>MH0058</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>nat-met-sto-tro</td>
+<td>Depression or cyclone</td>
+<td>MH0030</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>nat-met-sto-tro</td>
+<td>Sub-tropical cyclone</td>
+<td>MH0032</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>nat-geo-ear-tsu</td>
+<td>Tsunami (general)</td>
+<td>MH0029</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>nat-geo-ear-tsu</td>
+<td>Tsunami (earthquake trigger)</td>
+<td>GH0006</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>nat-geo-ear-tsu</td>
+<td>Tsunami (volcanic trigger)</td>
+<td>GH0017</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>nat-geo-ear-tsu</td>
+<td>Tsunami (submarine landslide trigger)</td>
+<td>GH0035</td>
+</tr>
+<tr>
+<td>VW</td>
+<td>nat-met-sto-sto</td>
+<td>Violent wind</td>
+<td>MH0060</td>
+</tr>
+<tr>
+<td>VW</td>
+<td>nat-met-sto-der</td>
+<td>Derecho</td>
+<td>MH0053</td>
+</tr>
+<tr>
+<td>VW</td>
+<td>nat-met-sto-san</td>
+<td>Sand/dust storm</td>
+<td>MH0015</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-lav</td>
+<td>Lava flows</td>
+<td>GH0009</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-ash</td>
+<td>Ash/tephra fall</td>
+<td>GH0010</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-vol</td>
+<td>Volcanic activity (general)</td>
+<td>GH0009</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-pyr</td>
+<td>Pyroclastic flow</td>
+<td>GH0012</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-lah</td>
+<td>Lahar</td>
+<td>GH0013</td>
+</tr>
+<tr>
+<td>VO</td>
+<td>nat-geo-vol-vol</td>
+<td>Volcanic gases</td>
+<td>GH0016</td>
+</tr>
+<tr>
+<td>WF</td>
+<td>nat-cli-wil-for</td>
+<td>Forest fire</td>
+<td>EN0013</td>
+</tr>
+<tr>
+<td>WF</td>
+<td>nat-cli-wil-lan</td>
+<td>Land fire</td>
+<td>EN0013</td>
+</tr>
+<tr>
+<td>WF</td>
+<td>nat-cli-wil-wil</td>
+<td>Wildfire (general)</td>
+<td>EN0013</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-rad-rad</td>
+<td>Radiation</td>
+<td>TL0001</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-che-che</td>
+<td>Chemical spill</td>
+<td>TL0030</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-exp-exp</td>
+<td>Industrial explosion</td>
+<td>TL0029</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-gas-gas</td>
+<td>Gas leak</td>
+<td>TL0030</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-oil-oil</td>
+<td>Oil spill</td>
+<td>CH0017</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-poi-poi</td>
+<td>Poisoning</td>
+<td>CH0024</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-ind-ind-ind</td>
+<td>General industrial accident</td>
+<td>TL0027</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-tra-air-air</td>
+<td>Air transport accident</td>
+<td>TL0048</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-tra-rai-rai</td>
+<td>Rail transport accident</td>
+<td>TL0051</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-tra-roa-roa</td>
+<td>Road transport accident</td>
+<td>TL0052</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>tec-tra-wat-wat</td>
+<td>Water transport accident</td>
+<td>TL0050</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Multiple codes</td>
+<td>International armed conflict</td>
+<td>SO0001</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Multiple codes</td>
+<td>Non-international armed conflict</td>
+<td>SO0002</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Multiple codes</td>
+<td>Civil unrest</td>
+<td>SO0003</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Multiple codes</td>
+<td>Explosive remnants of war</td>
+<td>SO0004</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Multiple codes</td>
+<td>Environmental degradation from conflict</td>
+<td>SO0005</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-fog-fog</td>
+<td>Fog</td>
+<td>MH0016</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Severe winter conditions</td>
+<td>MH0041</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Freeze</td>
+<td>MH0042</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Frost</td>
+<td>MH0043</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Freezing rain</td>
+<td>MH0044</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Glaze</td>
+<td>MH0045</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Ground frost</td>
+<td>MH0046</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Icing</td>
+<td>MH0048</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td>Thaw</td>
+<td>MH0049</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-met-sto-bli</td>
+<td>Blizzard</td>
+<td>MH0034</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-imp-air</td>
+<td>Airburst</td>
+<td>ET0001</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-spa-geo</td>
+<td>Geomagnetic storm</td>
+<td>ET0002</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-spa-ene</td>
+<td>Energetic particles</td>
+<td>ET0002</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-spa-rad</td>
+<td>Radio disturbance</td>
+<td>ET0006</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-spa-sho</td>
+<td>Shockwave</td>
+<td>ET0008</td>
+</tr>
+<tr>
+<td>OT</td>
+<td>nat-ext-imp-col</td>
+<td>Space object collision</td>
+<td>ET0004</td>
+</tr>
+</tbody>
+</table>
+<h2 id="impact">Impact</h2>
+<h3 id="exposure-category">Exposure Category</h3>
+<table>
+<thead>
+<tr>
+<th>Exposure Category Code</th>
+<th>Exposure Category Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>people</td>
+<td>People (All Demographics)</td>
+</tr>
+<tr>
+<td>crops</td>
+<td>Crops</td>
+</tr>
+<tr>
+<td>women</td>
+<td>Women</td>
+</tr>
+<tr>
+<td>men</td>
+<td>Men</td>
+</tr>
+<tr>
+<td>children_0_4</td>
+<td>Children (Age 0-4)</td>
+</tr>
+<tr>
+<td>children_5_9</td>
+<td>Children (Age 5-9)</td>
+</tr>
+<tr>
+<td>children_10_14</td>
+<td>Children (Age 10-14)</td>
+</tr>
+<tr>
+<td>children_15_19</td>
+<td>Children (Age 15-19)</td>
+</tr>
+<tr>
+<td>adult_20_24</td>
+<td>Adult (Age 20-24)</td>
+</tr>
+<tr>
+<td>adult_25_29</td>
+<td>Adult (Age 25-29)</td>
+</tr>
+<tr>
+<td>adult_30_34</td>
+<td>Adult (Age 30-34)</td>
+</tr>
+<tr>
+<td>adult_35_39</td>
+<td>Adult (Age 35-39)</td>
+</tr>
+<tr>
+<td>adult_40_44</td>
+<td>Adult (Age 40-44)</td>
+</tr>
+<tr>
+<td>adult_45_49</td>
+<td>Adult (Age 45-49)</td>
+</tr>
+<tr>
+<td>adult_50_54</td>
+<td>Adult (Age 50-54)</td>
+</tr>
+<tr>
+<td>adult_55_59</td>
+<td>Adult (Age 55-59)</td>
+</tr>
+<tr>
+<td>adult_60_65</td>
+<td>Adult (Age 60-65)</td>
+</tr>
+<tr>
+<td>elderly</td>
+<td>Elderly (Over 65)</td>
+</tr>
+<tr>
+<td>wheelchair_users</td>
+<td>Wheelchair Users</td>
+</tr>
+<tr>
+<td>roads</td>
+<td>Roads</td>
+</tr>
+<tr>
+<td>railways</td>
+<td>Train-lines</td>
+</tr>
+<tr>
+<td>vulnerable_employment</td>
+<td>Population in Vulnerable Employment</td>
+</tr>
+<tr>
+<td>buildings</td>
+<td>Buildings</td>
+</tr>
+<tr>
+<td>reconstruction_costs</td>
+<td>Reconstruction Costs</td>
+</tr>
+<tr>
+<td>hospitals</td>
+<td>Hospitals</td>
+</tr>
+<tr>
+<td>schools</td>
+<td>Schools</td>
+</tr>
+<tr>
+<td>local_currency</td>
+<td>Local Currency [Date of Event]</td>
+</tr>
+<tr>
+<td>global_currency</td>
+<td>Global/Regional Currency (e.g. USD)</td>
+</tr>
+<tr>
+<td>local_currency_adj</td>
+<td>Inflation-Adjusted Local Currency [Date of Event]</td>
+</tr>
+<tr>
+<td>global_currency_adj</td>
+<td>Inflation-Adjusted Global/Regional Currency (USD)</td>
+</tr>
+<tr>
+<td>usd_uncertain</td>
+<td>USD [Unsure]</td>
+</tr>
+<tr>
+<td>cattle</td>
+<td>Cattle</td>
+</tr>
+<tr>
+<td>aid_general</td>
+<td>General Aid Contributions</td>
+</tr>
+<tr>
+<td>ifrc_contribution</td>
+<td>IFRC Appeal Contribution</td>
+</tr>
+<tr>
+<td>ifrc_requested</td>
+<td>IFRC Appeal Requested</td>
+</tr>
+<tr>
+<td>alertscore</td>
+<td>Alertscore</td>
+</tr>
+<tr>
+<td>households</td>
+<td>Households</td>
+</tr>
+</tbody>
+</table>
+<h3 id="impact-type">Impact Type</h3>
+<table>
+<thead>
+<tr>
+<th>Impact Type Code</th>
+<th>Impact Type Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unspecified</td>
+<td>Unspecified</td>
+</tr>
+<tr>
+<td>unaffected</td>
+<td>Unaffected</td>
+</tr>
+<tr>
+<td>damaged</td>
+<td>Damaged</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>Destroyed</td>
+</tr>
+<tr>
+<td>potentially_damaged</td>
+<td>Potentially Damaged</td>
+</tr>
+<tr>
+<td>affected_total</td>
+<td>Total Affected</td>
+</tr>
+<tr>
+<td>affected_direct</td>
+<td>Directly Affected</td>
+</tr>
+<tr>
+<td>affected_indirect</td>
+<td>Indirectly Affected</td>
+</tr>
+<tr>
+<td>death</td>
+<td>Death</td>
+</tr>
+<tr>
+<td>missing</td>
+<td>Missing</td>
+</tr>
+<tr>
+<td>injured</td>
+<td>Injured</td>
+</tr>
+<tr>
+<td>evacuated</td>
+<td>Evacuated</td>
+</tr>
+<tr>
+<td>relocated</td>
+<td>Relocated</td>
+</tr>
+<tr>
+<td>assisted</td>
+<td>Assisted (Recieved Aid/Support)</td>
+</tr>
+<tr>
+<td>shelter_emergency</td>
+<td>Emergency Sheltered</td>
+</tr>
+<tr>
+<td>shelter_temporary</td>
+<td>Temporary Accommodated</td>
+</tr>
+<tr>
+<td>shelter_longterm</td>
+<td>Long-Term Accommodated</td>
+</tr>
+<tr>
+<td>in_need</td>
+<td>In Need</td>
+</tr>
+<tr>
+<td>targeted</td>
+<td>Targeted</td>
+</tr>
+<tr>
+<td>disrupted</td>
+<td>Disrupted</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>Loss (Cost)</td>
+</tr>
+<tr>
+<td>homeless</td>
+<td>Homeless</td>
+</tr>
+<tr>
+<td>displaced_internal</td>
+<td>Internally Displaced Persons (IDPs)</td>
+</tr>
+<tr>
+<td>displaced_external</td>
+<td>Refugees, Asylum Seekers and Externally Displaced Persons</td>
+</tr>
+<tr>
+<td>displaced_total</td>
+<td>Displaced Persons (Internal &amp; External)</td>
+</tr>
+<tr>
+<td>alertscore</td>
+<td>Alertscore</td>
+</tr>
+<tr>
+<td>potentially_affected</td>
+<td>Potentially Affected</td>
+</tr>
+<tr>
+<td>highest_risk</td>
+<td>Highest Risk</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
