@@ -1,5 +1,4 @@
-name: Publish docs via GitHub Pages
-
+name: Deploy MkDocs
 on:
   push:
     branches:
@@ -11,6 +10,11 @@ on:
       - 'CONTRIBUTING.md'
       - 'docs/**'
       - '.github/workflows/deploy_mkdocs.yml'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -28,8 +32,47 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install .["docs"]
+          pip install -e .[docs]
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
 
-      - name: Deploy docs
-        run: mkdocs gh-deploy --force -f mkdocs.yml
+      - name: Checkout gh-pages branch
+        run: |
+          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
+          git checkout gh-pages
+          git reset --hard  # Clean working directory
+
+      - name: Save existing content
+        run: |
+          mkdir -p temp
+          # Save important files/directories that should be preserved
+          # Copy all the vx.x.x folders to preserve them
+          for dir in $(find . -maxdepth 1 -type d -name 'vx.*'); do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" temp/
+            fi
+          done
+
+      - name: Build documentation
+        run: |
+          git checkout main
+          mkdocs build
+
+      - name: Deploy documentation
+        run: |
+          git checkout gh-pages
+          # Remove all content except .git and temp directory
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'temp' -exec rm -rf {} +
+          # Copy MkDocs output
+          cp -r site/* .
+          # Restore preserved content
+          cp -r temp/* .
+          # Clean up
+          rm -rf site temp
+          # Commit and push
+          git add -A
+          git commit -m "Deploy documentation updates" || echo "No changes to commit"
+          git push origin gh-pages --force
