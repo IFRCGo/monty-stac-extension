@@ -65,7 +65,9 @@ nav:
     - Taxonomy: model/taxonomy.md
     - Event Correlation: model/correlation_identifier.md
     - Questions: model/questions.md
-  - Examples: examples/index.md
+  - Examples: examples/README.md
+  - API:
+    - Queryables: model/stac-api/queryables.md
   - Sources:
     - Overview: model/sources/README.md
     - DesInventar: model/sources/DesInventar/README.md

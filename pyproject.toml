@@ -1,7 +1,7 @@
 [project]
-name = "monty-stac-extension-docs"
-version = "0.1.0"
-description = "Documentation for the Monty STAC Extension"
+name = "monty-stac-extension"
+version = "1.0.0"
+description = "Monty STAC Extension"
 requires-python = ">=3.8"
 
 [build-system]

@@ -3,7 +3,7 @@
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json"
   ],
   "title": "IDMC Internal Displacement Updates (IDU) Impacts",
   "description": "Events from the Internal Displacement Monitoring Centre (IDMC) Internal Displacement Updates (IDU) dataset. The IDU provides near real-time information about displacement events, offering more timely data compared to the annually validated GIDD. Each event includes information about the displacement trigger, affected locations, and temporal details. The IDU data includes source URLs for verification, distinguishes between recommended figures and triangulation, and specifies the accuracy of location information. More information on the IDMC mapping in Monty can be found in the [IDMC IDU Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#internal-displacement-updates-idu-items).",
