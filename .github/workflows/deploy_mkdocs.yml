@@ -60,6 +60,7 @@ jobs:
         run: |
           git checkout main
           mkdocs build
+          ls -l site/
 
       - name: Deploy documentation
         run: |
