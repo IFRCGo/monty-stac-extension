@@ -1,7 +1,7 @@
 # Monty Extension Specification
 
 - **Title:** Monty
-- **Identifier:** <https://ifrcgo.github.io/monty/v0.1.0/schema.json>
+- **Identifier:** <https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json>
 - **Field Name Prefix:** monty
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
