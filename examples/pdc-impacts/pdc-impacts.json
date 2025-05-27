@@ -6,7 +6,7 @@
     "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "title": "PDC Impacts",
-  "description": "Collection of impact items from PDU",
+  "description": "Impact records from the Pacific Disaster Center (PDC). PDC tracks a wide range of natural and human-made hazards and provides detailed impact assessments to support disaster preparedness, response, and risk reduction efforts. The impact records provide comprehensive information about the human and economic consequences of disasters, including affected populations by age group, households, capital losses, and impacts on critical infrastructure such as schools and hospitals. Each impact record is derived from PDC's exposure analysis and includes quantitative measurements with standardized units. More information on the PDC mapping in Monty can be found in the [PDC Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#impact-item).",
   "license": "TBD",
   "roles": [
     "impact",
@@ -49,10 +49,26 @@
       "nat-cli-wil-for"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://edit.uia.org/img/org_logos/XG9728.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Pacific Disaster Center Logo"
+    }
+  },
   "links": [
     {
       "href": "pdc-impacts.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#impact-item",
+      "type": "text/html",
+      "title": "PDC Impact Item Source Mappings"
     }
   ]
 }

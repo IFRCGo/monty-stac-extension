@@ -7,7 +7,7 @@
   "type": "Collection",
   "id": "usgs-impacts",
   "title": "USGS Impacts",
-  "description": "A collection of impacts from the United States Geological Survey (USGS) PAGER products",
+  "description": "Impact records from the United States Geological Survey (USGS) PAGER (Prompt Assessment of Global Earthquakes for Response) products. PAGER provides rapid estimates of the impact of significant earthquakes around the world, including the number of people and settlements exposed to severe shaking, as well as possible fatalities and economic losses. The system combines earthquake parameters, population exposure, vulnerability, and economic data to estimate potential impacts. Each impact record includes detailed information about estimated fatalities or economic losses with confidence intervals. More information on the USGS mapping in Monty can be found in the [USGS Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#impact-items-from-pager).",
   "license": "Apache-2.0",
   "roles": [
     "impact",
@@ -63,6 +63,12 @@
     {
       "href": "usgs-impacts.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/USGS#impact-items-from-pager",
+      "type": "text/html",
+      "title": "USGS Impact Item Source Mappings"
     }
   ]
 }

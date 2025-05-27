@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "pdc-hazards",
   "title": "PDC Source Hazards",
-  "description": "PDC Hazards data collection",
+  "description": "Hazard records from the Pacific Disaster Center (PDC). PDC tracks a wide range of natural and human-made hazards including tropical cyclones, earthquakes, floods, landslides, wildfires, droughts, and volcanic eruptions to support disaster preparedness, response, and risk reduction efforts. The hazard records provide detailed information about hazard characteristics including severity, extent, and potential impacts. Each hazard record is derived from PDC's exposure analysis and includes information about the affected areas. More information on the PDC mapping in Monty can be found in the [PDC Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#hazard-item).",
   "license": "unknown",
   "roles": [
     "source",
@@ -60,10 +60,26 @@
       "GH0004"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://edit.uia.org/img/org_logos/XG9728.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Pacific Disaster Center Logo"
+    }
+  },
   "links": [
     {
       "href": "pdc-hazards.json",
       "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/PDC#hazard-item",
+      "type": "text/html",
+      "title": "PDC Hazard Item Source Mappings"
     }
   ]
 }

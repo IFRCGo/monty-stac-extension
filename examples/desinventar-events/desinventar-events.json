@@ -5,13 +5,29 @@
   ],
   "type": "Collection",
   "id": "desinventar-events",
-  "description": "Events from the DesInventar disaster loss database",
+  "description": "Events mapped from the DesInventar disaster loss database. DesInventar is a conceptual and methodological tool for generating national disaster databases that provides access to disaster effects information at various scales, maintained by the United Nations Office for Disaster Risk Reduction (UNDRR). The database covers primarily Latin American countries and includes detailed information on disaster events with their impacts. Each event includes information on the hazard type, location, date, and various impact metrics. More information on the DesInventar mapping in Monty can be found in the [DesInventar Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#event-item).",
   "roles": [
     "event",
     "source"
   ],
-  "title": "DesInventar Events",
+  "title": "DesInventar Mapped Events",
   "license": "proprietary",
+  "keywords": [
+    "desinventar",
+    "disaster",
+    "event",
+    "natural hazard",
+    "flood",
+    "earthquake",
+    "wildfire",
+    "drought",
+    "tropical cyclone",
+    "landslide",
+    "tsunami",
+    "latin america",
+    "disaster loss",
+    "undrr"
+  ],
   "providers": [
     {
       "name": "DesInventar",
@@ -45,21 +61,77 @@
   "summaries": {
     "datetime": {
       "minimum": "2015-06-23T00:00:00Z",
-      "maximum": "2019-07-10T13:44:56Z"
+      "maximum": "2024-07-10T13:44:56Z"
     },
     "roles": [
       "event",
       "source"
     ],
     "monty:country_codes": [
+      "ARG",
+      "BOL",
+      "BRA",
+      "CHL",
       "CHN",
-      "SPN"
+      "COL",
+      "CRI",
+      "CUB",
+      "DOM",
+      "ECU",
+      "ESP",
+      "GTM",
+      "HND",
+      "HTI",
+      "JAM",
+      "MEX",
+      "NIC",
+      "PAN",
+      "PER",
+      "PRI",
+      "PRY",
+      "SLV",
+      "URY",
+      "VEN"
     ],
     "monty:hazard_codes": [
-      "MH0004",
-      "MH0005",
-      "MH0006"
+      "nat-hyd-flo-coa",
+      "nat-hyd-flo-fla",
+      "nat-hyd-flo-riv",
+      "nat-hyd-flo-flo",
+      "nat-geo-ear-gro",
+      "nat-cli-wil-for",
+      "nat-cli-wil-lan",
+      "nat-cli-dro-dro",
+      "nat-met-sto-tro",
+      "nat-met-ext-col",
+      "nat-met-ext-hea",
+      "nat-geo-vol-vol",
+      "nat-geo-mmd-lan",
+      "nat-hyd-mmw-lan",
+      "nat-hyd-mmw-mud",
+      "nat-hyd-mmw-ava",
+      "nat-met-fog-fog",
+      "nat-met-sto-hai",
+      "nat-met-sto-lig",
+      "nat-met-sto-san",
+      "nat-met-sto-sur",
+      "nat-met-sto-tor",
+      "nat-geo-ear-tsu",
+      "nat-bio-epi-dis",
+      "nat-geo-env-coa",
+      "nat-geo-env-sed",
+      "nat-geo-mmd-sub"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://www.seesac.org/f/pics/News-1/DesInventar_m.jpg",
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "DesInventar Logo"
+    }
   },
   "links": [
     {
@@ -71,6 +143,12 @@
       "rel": "root",
       "href": "../catalog.json",
       "type": "application/json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/DesInventar#event-item",
+      "type": "text/html",
+      "title": "DesInventar Event Item Source Mappings"
     },
     {
       "rel": "item",

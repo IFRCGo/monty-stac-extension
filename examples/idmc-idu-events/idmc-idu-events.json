@@ -6,8 +6,25 @@
     "https://ifrcgo.github.io/monty/v0.1.0/schema.json"
   ],
   "title": "IDMC Internal Displacement Updates (IDU) Impacts",
-  "description": "Collection of impact items from IDMC's Internal Displacement Updates (IDU) dataset",
+  "description": "Events from the Internal Displacement Monitoring Centre (IDMC) Internal Displacement Updates (IDU) dataset. The IDU provides near real-time information about displacement events, offering more timely data compared to the annually validated GIDD. Each event includes information about the displacement trigger, affected locations, and temporal details. The IDU data includes source URLs for verification, distinguishes between recommended figures and triangulation, and specifies the accuracy of location information. More information on the IDMC mapping in Monty can be found in the [IDMC IDU Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#internal-displacement-updates-idu-items).",
   "license": "TBD",
+  "keywords": [
+    "idmc",
+    "idu",
+    "internal displacement",
+    "displacement updates",
+    "recent displacement",
+    "displacement monitoring",
+    "displacement event",
+    "disaster displacement",
+    "conflict displacement",
+    "displacement tracking",
+    "humanitarian",
+    "real-time displacement",
+    "displacement reporting",
+    "displacement data",
+    "global"
+  ],
   "roles": [
     "event",
     "source"
@@ -54,6 +71,16 @@
       "nat-hyd-mmw-lan"
     ]
   },
+  "assets": {
+    "thumbnail": {
+      "href": "https://geneve-int.ch/sites/default/files/styles/scale_450x450/public/2021-06/IDMC-logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IDMC Logo"
+    }
+  },
   "links": [
     {
       "rel": "self",
@@ -69,6 +96,12 @@
       "rel": "parent",
       "type": "application/json",
       "href": "../idmc-idu-events.json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#internal-displacement-updates-idu-items",
+      "type": "text/html",
+      "title": "IDMC IDU Source Mappings"
     }
   ]
 }

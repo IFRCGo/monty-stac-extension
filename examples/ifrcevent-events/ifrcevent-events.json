@@ -8,6 +8,23 @@
   "title": "IFRC Source Events",
   "description": "A collection of IFRC source events loaded into Monty",
   "license": "unknown",
+  "keywords": [
+    "ifrc",
+    "red cross",
+    "red crescent",
+    "humanitarian",
+    "disaster response",
+    "emergency",
+    "disaster event",
+    "disaster management",
+    "humanitarian assistance",
+    "emergency appeal",
+    "disaster relief",
+    "ifrc go",
+    "humanitarian action",
+    "disaster preparedness",
+    "global"
+  ],
   "roles": [
     "event",
     "source"
@@ -60,6 +77,16 @@
       "GH0002",
       "GH0004"
     ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://go-wiki.ifrc.org/go-ifrc_logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "IFRC GO Logo"
+    }
   },
   "links": [
     {
