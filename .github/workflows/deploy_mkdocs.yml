@@ -39,40 +39,20 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@users.noreply.github.com"
 
-      - name: Checkout gh-pages branch
-        run: |
-          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
-          git checkout gh-pages
-          git reset --hard  # Clean working directory
-
-      - name: Save existing content
-        run: |
-          mkdir -p temp
-          # Save important files/directories that should be preserved
-          # Copy all the vx.x.x folders to preserve them
-          for dir in $(find . -maxdepth 1 -type d -name 'vx.*'); do
-            if [ -d "$dir" ]; then
-              cp -r "$dir" temp/
-            fi
-          done
-
       - name: Build documentation
         run: |
           git checkout main
           mkdocs build
-          ls -l site/
 
       - name: Deploy documentation
         run: |
           git checkout gh-pages
-          # Remove all content except .git and temp directory
-          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'temp' -exec rm -rf {} +
+          # Remove all content except .git, site and vx.x.x directory
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name 'v*.*.*' ! -name 'site' -exec rm -rf {} +
           # Copy MkDocs output
           cp -r site/* .
-          # Restore preserved content
-          cp -r temp/* .
           # Clean up
-          rm -rf site temp
+          rm -rf site
           # Commit and push
           git add -A
           git commit -m "Deploy documentation updates" || echo "No changes to commit"
