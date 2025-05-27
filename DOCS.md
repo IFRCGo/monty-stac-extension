@@ -4,7 +4,7 @@ This directory contains the documentation for the Monty Extension Specification,
 
 ## Project Structure
 
-```
+```console
 .
 ├── model/                  # Core model documentation
 ├── examples/              # Example implementations
@@ -20,21 +20,24 @@ This directory contains the documentation for the Monty Extension Specification,
 ## Setting up locally
 
 1. Create a Python virtual environment and install dependencies:
+
 ```bash
 ./scripts/setup.sh
 ```
 
 2. Start the documentation server:
+
 ```bash
 source .venv/bin/activate
 mkdocs serve
 ```
 
-The documentation will be available at http://127.0.0.1:8000/
+The documentation will be available at [http://127.0.0.1:8000/]
 
 ## Building the documentation
 
 To build the static site:
+
 ```bash
 source .venv/bin/activate
 mkdocs build
