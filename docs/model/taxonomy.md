@@ -118,7 +118,98 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | tec-tra-roa-roa    | Technological | Transport              | Road                   | Road                             |
 | tec-tra-wat-wat    | Technological | Transport              | Water                  | Water                            |
 
-### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
+### UNDRR-ISC Hazard Information Profiles
+
+#### [2025 Update](https://www.undrr.org/media/107380/download?startDownload=20250613)
+
+The 2025 update of the UNDRR-ISC Hazard Information Profiles represents a significant revision and consolidation:
+
+- **281 hazards** (consolidated from 302 in 2020)
+- **8 hazard types** (unchanged)
+- **39 clusters** (reorganized)
+- **New identifier system**: Based on hazard clusters with format: `XX-CCSS` where:
+  - XX = 2-letter hazard type code
+  - CC = 2-digit cluster code
+  - SS = 2-digit specific hazard code
+- **Chapeau HIPs**: New umbrella/general hazard profiles providing information applicable to multiple similar hazards without individual profiles (e.g., MH0600 Flooding, GH0300 Gravitational Mass Movement, CH0300 Toxic Gases)
+- **Multi-hazard context**: New section in each HIP describing triggering relationships between hazards
+
+**Key Changes:**
+- Multiple hazards merged (e.g., all tsunami types consolidated into MH0705)
+- Hazards reclassified across types (e.g., Polluted Air moved to Environmental from Meteorological)
+- New open coding system allows future additions within clusters
+- Enhanced monitoring and multi-hazard context sections
+
+**The 8 Hazard Types and 39 Clusters:**
+
+1. **Meteorological and Hydrological (MH)**: 8 clusters
+   - Convective-Related, Particle-related, Wind & Pressure-related, Precipitation-related, Temperature-related, Water-related, Marine-related, Terrestrial
+
+2. **Extraterrestrial (ET)**: 2 clusters
+   - Space Weather, Extraterrestrial Hazard
+
+3. **Geological (GH)**: 4 clusters
+   - Seismic, Volcanic, Ground Failure, Other Hazards
+
+4. **Environmental (EN)**: 5 clusters
+   - Environmental Degradation (Air, Forest, Land, Water, Biodiversity)
+
+5. **Chemical (CH)**: 9 clusters
+   - Heavy Metals & Trace Elements, Carcinogens, Toxic Gases, Asphyxiant Gases, Persistent Organic Pollutants, Chemical Hazards in Food & Pharmaceuticals, Other Chemical Hazards
+
+6. **Biological (BI)**: 6 clusters
+   - Infectious Diseases, Specific Infectious Diseases of Public Health Concern, Animal Infectious Diseases, Insect-related Diseases, Plant Diseases, Other Biological Hazards
+
+7. **Technological (TL)**: 6 clusters
+   - Cyberhazards, Construction/Structural Failure, Industrial Failure, Transportation Accidents, Radiation, Waste
+
+8. **Societal (SO)**: 3 clusters
+   - Conflict, Post-conflict, Behavioural, Economic
+
+For the complete list of 281 hazards with their new identifiers, see the [2025 HIPs Report](https://www.undrr.org/media/107380/download?startDownload=20250613). The correspondence between 2020 and 2025 identifiers is provided in Annex 1 of the report.
+
+**Examples of Key Changes:**
+
+| Change Type | 2020 Code | 2020 Name | 2025 Code | 2025 Name | Notes |
+|-------------|-----------|-----------|-----------|-----------|-------|
+| **Merged** | MH0056 | Subtropical Storm | MH0308 | Sub-tropical Cyclone | Merged with MH0032 |
+| **Merged** | MH0058 | Tropical Storm | MH0309 | Tropical Cyclone | Merged with MH0057 |
+| **Merged** | GH0006 | Tsunami (Earthquake Trigger) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Merged** | GH0017 | Tsunami (Volcanic Trigger) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Merged** | GH0035 | Tsunami (Submarine Landslide) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Moved** | MH0014 | Black Carbon | EN0104 | Black Carbon | Moved to Environmental |
+| **Moved** | MH0018 | Polluted Air | EN0102/EN0103 | Air Pollution (Point/Ambient) | Moved to Environmental & split |
+| **Moved** | MH0021 | Ocean Acidification | EN0401 | Ocean Acidification | Moved to Environmental |
+| **Moved** | MH0051 | Mud Flow | GH0303 | Flows | Moved to Geological |
+| **Moved** | EN0018 | Compressive Soils | GH0401 | Compressive Soils | Moved to Geological |
+| **Moved** | EN0019 | Soil Erosion | GH0403 | Soil Erosion | Moved to Geological |
+| **Moved** | BI0009 | Suicide Cluster | SO0303 | Suicide Cluster | Moved to Societal |
+| **New Chapeau** | - | - | MH0600 | Flooding | General flooding information |
+| **New Chapeau** | - | - | GH0300 | Gravitational Mass Movement | General landslide information |
+| **New Chapeau** | - | - | CH0300 | Toxic Gases | General toxic gas information |
+| **New** | - | - | MH0708 | Marine Heatwave | New hazard |
+| **New** | - | - | MH0402 | Rain | New hazard |
+| **New** | - | - | ET0206 | Space Debris | New hazard |
+| **New** | - | - | BI0220 | Marburg Virus | New hazard |
+| **Removed** | GH0018 | Lightning (Volcanic Trigger) | - | - | Removed (covered elsewhere) |
+| **Removed** | GH0019 | Urban Fire (Volcanic) | - | - | Removed (covered elsewhere) |
+| **Removed** | GH0030 | Aquifer Recharge Failure | - | - | Removed |
+
+**Cluster Code Structure (Examples):**
+
+The new 2-digit cluster code (positions 3-4) allows grouping related hazards:
+
+- **MH01XX**: Convective-Related hazards (MH0101=Downburst, MH0102=Lightning, MH0103=Thunderstorm)
+- **MH03XX**: Wind & Pressure-related hazards (MH0301=Wind, MH0302=Derecho, MH0303=Gale, etc.)
+- **MH06XX**: Water-related/Flooding hazards (MH0600=Flooding chapeau, MH0601-MH0610=specific flood types)
+- **GH01XX**: Seismic hazards (GH0101=Earthquake, covering all earthquake-related phenomena)
+- **GH02XX**: Volcanic hazards (GH0201-GH0205=volcanic phenomena)
+- **GH03XX**: Ground Failure/Gravitational Mass Movements (GH0300=chapeau, GH0301-GH0311=specific types)
+- **BI02XX**: Specific Infectious Diseases of Public Health Concern (BI0201-BI0245=named diseases)
+
+This open system allows future hazards to be added within appropriate clusters (e.g., MH0611 for a new flood type).
+
+#### [2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) (Historical Reference)
 
 | Hazard Code | Hazard Label                                                                                                                                           | Cluster ID       | Cluster Label                                                     | Family Label                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ----------------------------------------------------------------- | ---------------------------- |
@@ -427,6 +518,12 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | SO0008      | Financial shock                                                                                                                                        | SOC-ECO          | Economic                                                          | Societal                     |
 
 ### Cross-Classification Mapping
+
+**Note:** The cross-classification mapping below uses 2020 UNDRR-ISC codes. When working with the 2025 HIPs, please refer to the correspondence table in the [2025 HIPs Report Annex 1](https://www.undrr.org/media/107380/download?startDownload=20250613) to convert these codes to the new identifier system. Key changes affecting this mapping include:
+- Tsunami codes (GH0006, GH0017, GH0035) → MH0705
+- Flood-related codes → MH06XX series
+- Earthquake codes → GH0101 (consolidated)
+- Landslide codes → GH03XX series (Ground Failure cluster)
 
 | GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC Hazard Code |
 | ---------- | ------------------------- | --------------------------------------- | --------------------- |
