@@ -388,7 +388,7 @@ This open system allows future hazards to be added within appropriate clusters (
 | BI0221 | Measles (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
 | BI0222 | Meningococcal Meningitis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
 | BI0223 | Middle East Respiratory Syndrome (MERS) (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
-| BI0204 | Mpox (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0224 | Mpox (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
 | BI0225 | Paratyphoid Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
 | BI0226 | Typhoid Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
 | BI0227 | Pertussis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
