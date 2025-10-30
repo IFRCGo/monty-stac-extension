@@ -70,7 +70,7 @@ A GDACS event and episode will **ALWAYS** produce one [**hazard STAC item**](htt
 - There are 2 sources for the hazards:
   1. The general event [1102983-1-geteventdata-source.json](1102983-1-geteventdata-source.json) that is the output of the [`geteventdata`](https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983) API endpoint.
   2. the detailed geometries [1102983-1-getgeometry-source.json](1102983-1-getgeometry-source.json) that is the output of the [`getgeometry`](https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&eventid=1102983&episodeid=2) API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the **affected** areas. It has a property `properties.Class` set to `Poly_Affected`.
-- The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1-affected.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1102983-1-affected.json).
+- The produced hazard STAC item is in the examples [gdacs-hazards/1102983-1.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1102983-1.json).
 
 Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:
 

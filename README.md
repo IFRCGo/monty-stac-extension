@@ -228,7 +228,7 @@ This section describes in details the usage of the fields and links for the haza
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#hazard).
 
 - Examples:
-  - [Flood Hazard example](examples/gdacs-hazards/1102983-1-affected.json): Shows usage of the extension for a flood hazard
+  - [Flood Hazard example](examples/gdacs-hazards/1102983-1.json): Shows usage of the extension for a flood hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
 property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
