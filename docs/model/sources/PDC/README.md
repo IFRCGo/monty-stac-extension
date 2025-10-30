@@ -52,8 +52,54 @@ A PDC event will always produce an Event STAC Item. Here is a table with the fie
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
 | roles | ["source", "event"] | Default roles for event item |   |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the [Hazard Type Mapping](#hazard-type-mapping) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
+
+#### Hazard Type Mapping
+
+PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical hazards. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+
+**Natural Hazards:**
+
+| PDC Type            | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
+| ------------------- | ----- | ------------------- | ------------------------------ | ------------ | -------------------------------- |
+| Avalanche           | AV    | nat-hyd-mmw-ava     | **MH0801**                     | MH-TERR      | Avalanche                        |
+| Biomedical          | EP    | nat-bio-epi-dis     | **BI0101**                     | BIO-INFECT   | Infectious Diseases              |
+| Drought             | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP    | Drought                          |
+| Earthquake          | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS     | Earthquake                       |
+| Extreme Temperature | HT/CW | nat-met-ext-hea     | **MH0501**                     | MH-TEMP      | Heatwave (or MH0502 for Cold)    |
+| Flood               | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER     | Flooding (chapeau)               |
+| High Surf           | OT    | nat-hyd-wav-wav     | **MH0702**                     | MH-MARINE    | Wave Action                      |
+| Landslide           | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL    | Gravitational Mass Movement      |
+| Marine              | OT    | nat-hyd-wav-wav     | **MH0700**                     | MH-MARINE    | Marine-related (chapeau)         |
+| Severe Weather      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
+| Storm               | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
+| Tornado             | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND      | Tornado                          |
+| Tropical Cyclone    | TC    | nat-met-sto-tro     | **MH0309**                     | MH-WIND      | Tropical Cyclone                 |
+| Tsunami             | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE    | Tsunami                          |
+| Volcano             | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC     | Lava Flows                       |
+| Wildfire            | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
+| Winter Storm        | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP    | Blizzard                         |
+
+**Geopolitical & Technological Hazards:**
+
+| PDC Type          | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
+| ----------------- | ----- | --------------- | ------------------------------ | ------------ | -------------------------------- |
+| Accident          | AC    | tec-mis-col-col | **TL0200**                     | TECH-STRFAIL | Structural Failure (chapeau)     |
+| Active Shooter    | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Civil Unrest      | OT    | soc-soc-vio-vio | **SO0202**                     | SOC-CONF     | Civil Unrest                     |
+| Combat            | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Cyber             | OT    | N/A             | **TL0601**                     | TECH-CYBER   | Cyber Incidents                  |
+| Man Made          | OT    | tec-tec-tec-tec | **TL0000**                     | TECH         | Technological (general)          |
+| Occurrence        | OT    | N/A             | **OT0000**                     | OTHER        | Other/Unspecified                |
+| Political Conflict| OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Terrorism         | OT    | soc-soc-vio-vio | **SO0203**                     | SOC-CONF     | Terrorism                        |
+| Weapons           | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event. For "Extreme Temperature", use MH0501 for heat-related events and MH0502 for cold-related events.
+
+This comprehensive mapping ensures standardized hazard categorization for all PDC tracked hazards, including both natural and geopolitical/technological events.
 
 ## Hazard Item
 
