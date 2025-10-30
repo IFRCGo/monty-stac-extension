@@ -135,7 +135,6 @@ The following defined fields are available in the object:
 
 | Field Name     | Type   | Description                                                                                                          |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) |
 | severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
 | severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
 | estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |

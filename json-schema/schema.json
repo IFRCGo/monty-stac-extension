@@ -127,14 +127,13 @@
         "monty:hazard_detail": {
           "type": "object",
           "required": [
-            "cluster"
+            "severity_value",
+            "severity_unit"
           ],
           "properties": {
-            "cluster": {
-              "type": "string"
-            },
             "severity_value": {
-              "type": "number"
+              "type": "number",
+              "description": "The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units."
             },
             "severity_unit": {
               "type": "string"
