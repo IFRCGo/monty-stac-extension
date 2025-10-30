@@ -114,8 +114,7 @@ With those codes, it is possible to derive a set of additional properties associ
 for which a human-readable keyword can be generated and stored in the `keywords` field.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) **MUST** have a **single** `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
-> the event [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+> [Hazard items](#hazard) **MUST** have at least **one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **one GLIDE code** (2 letters, e.g., FL, EQ) and **one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
 
 ##### monty:corr_id
 
@@ -241,8 +240,7 @@ This linkage is called "concurrent hazard" and is linking the observed and poten
 The link may also have specific `occ-*` [attributes](#link-attributes) to describe the occurrence of the linked hazard.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) MUST have a single `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
-> the event correlation process.
+> [Hazard items](#hazard) **MUST** have at least **one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **one GLIDE code** (2 letters, e.g., FL, EQ) and **one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
 
 ### Impact
 
