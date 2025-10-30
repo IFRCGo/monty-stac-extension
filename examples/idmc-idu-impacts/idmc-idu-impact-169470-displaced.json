@@ -33,7 +33,9 @@
       "ESP"
     ],
     "monty:hazard_codes": [
-      "nat-cli-wil-for"
+      "WF",
+      "nat-cli-wil-for",
+      "EN0205"
     ],
     "monty:corr_id": "20241111-ESP-nat-cli-wil-for-1-GDBC",
     "monty:impact_detail": {

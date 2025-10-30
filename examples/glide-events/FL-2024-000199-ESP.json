@@ -31,7 +31,9 @@
     ],
     "monty:episode_number": 1,
     "monty:hazard_codes": [
-      "FL"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ],
     "monty:country_codes": [
       "ESP"

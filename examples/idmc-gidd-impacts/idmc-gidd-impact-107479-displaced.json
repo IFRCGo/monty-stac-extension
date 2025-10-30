@@ -30,7 +30,9 @@
       "SYR"
     ],
     "monty:hazard_codes": [
-      "nat-geo-ear-gro"
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
     ],
     "monty:impact_detail": {
       "category": "people",

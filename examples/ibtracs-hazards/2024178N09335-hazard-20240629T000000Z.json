@@ -141,6 +141,8 @@
     "end_datetime": "2024-06-29T00:00:00Z",
     "monty:country_codes": [],
     "monty:hazard_codes": [
+      "TC",
+      "nat-met-sto-tro",
       "MH0309"
     ],
     "monty:hazard_detail": {
