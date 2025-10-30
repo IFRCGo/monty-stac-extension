@@ -37,7 +37,20 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |        |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start | |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source (see [Hazard Type Mapping](#hazard-type-mapping)). |
+
+#### Hazard Type Mapping
+
+GFD (Global Flood Database) exclusively tracks flood-related events. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+
+| GFD Type | GLIDE | EM-DAT           | **UNDRR-ISC 2025** (Reference) | Cluster  | Description            |
+| -------- | ----- | ---------------- | ------------------------------ | -------- | ---------------------- |
+| Flood    | FL    | nat-hyd-flo-flo  | **MH0600**                     | MH-WATER | Flooding (chapeau)     |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added based on the flood type if available (e.g., MH0603 for Flash Flooding, MH0604 for Fluvial/Riverine Flooding, MH0601 for Coastal Flooding).
+
+This mapping ensures standardized hazard categorization for flood events from the Global Flood Database.
 
 ## Hazard Item
 

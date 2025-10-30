@@ -57,37 +57,42 @@ previous implementation (R): none
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                         |
 
-### Hazard Codes
-For the Hazard codes, the following mappings are being considered.
+#### Hazard Type Mapping
 
-| Tuple of Category, Subcategory, Type, Subtype                                       | Hazard code                   |
-| ----------------------------------------------------------------------------------- | ----------------------------- |
-| ('geophysical', 'geophysical', 'earthquake', 'earthquake')                          | ["nat-geo-ear-gro"]           |
-| ('geophysical', 'geophysical', 'earthquake', 'tsunami')                             | ["nat-geo-ear-tsu"]           |
-| ('geophysical', 'geophysical', 'mass movement', 'dry mass movement')                | ["nat-geo-mmd-lan"]           |
-| ('geophysical', 'geophysical', 'mass movement', 'sinkhole')                         | ["nat-geo-mmd-sub"]           |
-| ('geophysical', 'geophysical', 'volcanic activity', 'volcanic activity')            | ["nat-geo-vol-vol"]           |
-| ('mixed disasters', 'mixed disasters', 'mixed disasters', 'mixed disasters')        | ["mix-mix-mix-mix"]           |
-| ('weather related', 'climatological', 'desertification', 'desertification')         | ["EN0006", "nat-geo-env-des"] |
-| ('weather related', 'climatological', 'drought', 'drought')                         | ["nat-cli-dro-dro"]           |
-| ('weather related', 'climatological', 'erosion', 'erosion')                         | ["EN0019", "nat-geo-env-soi"] |
-| ('weather related', 'climatological', 'salinisation', 'salinization')               | ["EN0007", "nat-geo-env-slr"] |
-| ('weather related', 'climatological', 'sea level rise', 'sea level rise')           | ["EN0023", "nat-geo-env-slr"] |
-| ('weather related', 'climatological', 'wildfire', 'wildfire')                       | ["nat-cli-wil-wil"]           |
-| ('weather related', 'hydrological', 'flood', 'dam release flood')                   | ["tec-mis-col-col"]           |
-| ('weather related', 'hydrological', 'flood', 'flood')                               | ["nat-hyd-flo-flo"]           |
-| ('weather related', 'hydrological', 'mass movement', 'avalanche')                   | ["nat-hyd-mmw-ava"]           |
-| ('weather related', 'hydrological', 'mass movement', 'landslide/wet mass movement') | ["nat-hyd-mmw-lan"]           |
-| ('weather related', 'hydrological', 'wave action', 'rogue wave')                    | ["nat-hyd-wav-rog"]           |
-| ('weather related', 'meteorological', 'extreme temperature', 'cold wave')           | ["nat-met-ext-col"]           |
-| ('weather related', 'meteorological', 'extreme temperature', 'heat wave')           | ["nat-met-ext-hea"]           |
-| ('weather related', 'meteorological', 'storm', 'hailstorm')                         | ["nat-met-sto-hai"]           |
-| ('weather related', 'meteorological', 'storm', 'sand/dust storm')                   | ["nat-met-sto-san"]           |
-| ('weather related', 'meteorological', 'storm', 'storm surge')                       | ["nat-met-sto-sur"]           |
-| ('weather related', 'meteorological', 'storm', 'storm')                             | ["nat-met-sto-sto"]           |
-| ('weather related', 'meteorological', 'storm', 'tornado')                           | ["nat-met-sto-tor"]           |
-| ('weather related', 'meteorological', 'storm', 'typhoon/hurricane/cyclone')         | ["nat-met-sto-tro"]           |
-| ('weather related', 'meteorological', 'storm', 'winter storm/blizzard')             | ["nat-met-sto-bli"]           |
+IDU uses EM-DAT classification and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension:
+
+| IDU Category/Subcategory/Type/Subtype                                                | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                         |
+| ------------------------------------------------------------------------------------ | ----- | ------------------- | ------------------------------ | ---------- | ----------------------------------- |
+| ('geophysical', 'geophysical', 'earthquake', 'earthquake')                           | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                          |
+| ('geophysical', 'geophysical', 'earthquake', 'tsunami')                              | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                             |
+| ('geophysical', 'geophysical', 'mass movement', 'dry mass movement')                 | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement         |
+| ('geophysical', 'geophysical', 'mass movement', 'sinkhole')                          | OT    | nat-geo-mmd-sub     | **GH0308**                     | GEO-GFAIL  | Sinkhole                            |
+| ('geophysical', 'geophysical', 'volcanic activity', 'volcanic activity')             | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC   | Lava Flows                          |
+| ('weather related', 'climatological', 'desertification', 'desertification')          | OT    | nat-geo-env-des     | **EN0206**                     | ENV-FOREST | Desertification                     |
+| ('weather related', 'climatological', 'drought', 'drought')                          | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                             |
+| ('weather related', 'climatological', 'erosion', 'erosion')                          | OT    | nat-geo-env-soi     | **GH0403**                     | GEO-OTHER  | Soil Erosion                        |
+| ('weather related', 'climatological', 'salinisation', 'salinization')                | OT    | nat-geo-env-slr     | **EN0303**                     | ENV-LAND   | Salinity & Sodicity                 |
+| ('weather related', 'climatological', 'sea level rise', 'sea level rise')            | OT    | nat-geo-env-slr     | **EN0402**                     | ENV-WATER  | Sea Level Rise                      |
+| ('weather related', 'climatological', 'wildfire', 'wildfire')                        | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST | Wildfires                           |
+| ('weather related', 'hydrological', 'flood', 'dam release flood')                    | FL    | tec-mis-col-col     | **TL0205**                     | TECH-STRFAIL | Dam Failure                       |
+| ('weather related', 'hydrological', 'flood', 'flood')                                | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)                  |
+| ('weather related', 'hydrological', 'mass movement', 'avalanche')                    | AV    | nat-hyd-mmw-ava     | **MH0801**                     | MH-TERR    | Avalanche                           |
+| ('weather related', 'hydrological', 'mass movement', 'landslide/wet mass movement')  | LS    | nat-hyd-mmw-lan     | **GH0304**                     | GEO-GFAIL  | Slides                              |
+| ('weather related', 'hydrological', 'wave action', 'rogue wave')                     | OT    | nat-hyd-wav-rog     | **MH0701**                     | MH-MARINE  | Rogue Wave                          |
+| ('weather related', 'meteorological', 'extreme temperature', 'cold wave')            | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                           |
+| ('weather related', 'meteorological', 'extreme temperature', 'heat wave')            | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                            |
+| ('weather related', 'meteorological', 'storm', 'hailstorm')                          | ST    | nat-met-sto-hai     | **MH0404**                     | MH-PRECIP  | Hail                                |
+| ('weather related', 'meteorological', 'storm', 'sand/dust storm')                    | VW    | nat-met-sto-san     | **MH0201**                     | MH-PART    | Dust Storm or Sandstorm             |
+| ('weather related', 'meteorological', 'storm', 'storm surge')                        | SS    | nat-met-sto-sur     | **MH0703**                     | MH-MARINE  | Storm Surge                         |
+| ('weather related', 'meteorological', 'storm', 'storm')                              | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV    | Thunderstorm                        |
+| ('weather related', 'meteorological', 'storm', 'tornado')                            | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND    | Tornado                             |
+| ('weather related', 'meteorological', 'storm', 'typhoon/hurricane/cyclone')          | TC    | nat-met-sto-tro     | **MH0309**                     | MH-WIND    | Tropical Cyclone                    |
+| ('weather related', 'meteorological', 'storm', 'winter storm/blizzard')              | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP  | Blizzard                            |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+
+This mapping enables standardized hazard categorization while preserving IDU's original classification in the source properties.
 
 ### Impact Item
 
