@@ -111,7 +111,27 @@ The geometry of the event is derived from the geometry of the displacement items
 
 #### Hazard Type Mapping
 
-IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-dat-cred-classification-tree) and must follow the general rule for hazard codes generation.
+IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-dat-cred-classification-tree) and must follow the **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+
+| IDMC Type           | IDMC SubType                | GLIDE | EM-DAT                             | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
+| ------------------- | --------------------------- | ----- | ---------------------------------- | ------------------------------ | ---------- | ------------------------------- |
+| Drought             | Drought                     | DR    | nat-cli-drt-drt                    | **MH0401**                     | MH-PRECIP  | Drought                         |
+| Earthquake          | Earthquake                  | EQ    | nat-geo-eqt-eqt                    | **GH0101**                     | GEO-SEIS   | Earthquake                      |
+| Erosion             | Erosion                     | OT    | nat-geo-env-coa                    | **GH0403**                     | GEO-OTHER  | Erosion                         |
+| Extreme Temperature | Cold wave                   | CW    | nat-met-ext-col                    | **MH0502**                     | MH-TEMP    | Extreme Temperature - Cold Wave |
+| Flood               | Flood                       | FL    | nat-hyd-flo-flo                    | **MH0600**                     | MH-PRECIP  | Flooding (chapeau)              |
+| Flood               | Dam release flood           | FL    | [nat-hyd-flo-flo, tec-mis-col-col] | [**MH0600**, **TL0205**]       | MH-PRECIP  | Dam Break Flood                 |
+| Mass Movement       | Landslide/Wet mass movement | LS    | nat-hyd-mmw-lan                    | **GH0300**                     | GEO-GFAIL  | Mass Movement (chapeau)         |
+| Mass Movement       | Sinkhole                    | OT    | -                                  | **GH0308**                     | GEO-GFAIL  | Sinkhole                        |
+| Sea level Rise      | Sea level rise              | OT    | nat-geo-env-slr                    | **EN0402**                     | ENV-WATER  | Sea Level Rise                  |
+| Storm               | Storm                       | VW    | nat-met-sto-sto                    | **MH0310**                     | MH-WIND    | Storm (chapeau)                 |
+| Storm               | Tornado                     | TO    | nat-met-sto-tor                    | **MH0305**                     | MH-WIND    | Tornado                         |
+| Storm               | Typhoon/Hurricane/Cyclone   | TC    | nat-met-sto-tro                    | **MH0309**                     | MH-WIND    | Tropical Cyclone                |
+| Volcanic Activity   | Volcanic activity           | VO    | nat-geo-vol-vol                    | **GH0201**                     | GEO-VOLC   | Volcanic Activity               |
+| Wildfire            | Wildfire                    | WF    | nat-cli-wil-for                    | **EN0205**                     | ENV-FOREST | Wildfire                        |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
 
 This mapping enables standardized hazard categorization while preserving IDMC's original classification in the source properties.
 
@@ -195,15 +215,6 @@ The following table shows how IDU fields map to [impact_detail](https://github.c
 3. Dates are converted to UTC timezone
 4. Event ID reference uses the format `idmc-idu-event-{event_id}`
 5. Role field determines estimate_type in impact_detail
-
-##### Hazard Classification
-
-Maps to standard hazard codes:
-
-- Wildfire → WF (GLIDE) / nat-cli-wil-for (EM-DAT) / EN0013 (UNDRR-ISC)
-- Flood → FL (GLIDE) / nat-hyd-flo-flo (EM-DAT) / MH0600 (UNDRR-ISC 2025 - General Flooding)
-- Mass Movement → LS (GLIDE) / nat-hyd-mmw-lan (EM-DAT) / GH0007 (UNDRR-ISC)
-- Sinkhole → OT (GLIDE) / nat-geo-mmd-sub (EM-DAT) / GH0026 (UNDRR-ISC)
 
 ##### Impact Classification
 
