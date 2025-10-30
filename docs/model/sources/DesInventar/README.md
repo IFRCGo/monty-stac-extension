@@ -160,7 +160,7 @@ The following table shows how Desinventar event types map to [UNDRR-ISC Hazard I
 | AVALANCHE         | MH0050      | Avalanche        |
 | COASTAL EROSION   | EN0020      | Coastal erosion  |
 | COLD WAVE         | MH0049      | Cold wave        |
-| CYCLONE           | MH0057      | Tropical cyclone |
+| CYCLONE           | MH0309      | Tropical Cyclone (updated 2025) |
 | DROUGHT           | MH0035      | Drought          |
 | EARTHQUAKE        | GH0001      | Earthquake       |
 | ELECTRIC STORM    | MH0002      | Lightning        |

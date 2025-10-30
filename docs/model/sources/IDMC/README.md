@@ -201,7 +201,7 @@ The following table shows how IDU fields map to [impact_detail](https://github.c
 Maps to standard hazard codes:
 
 - Wildfire → WF (GLIDE) / nat-cli-wil-for (EM-DAT) / EN0013 (UNDRR-ISC)
-- Flood → FL (GLIDE) / nat-hyd-flo-flo (EM-DAT) / MH0007 (UNDRR-ISC)
+- Flood → FL (GLIDE) / nat-hyd-flo-flo (EM-DAT) / MH0600 (UNDRR-ISC 2025 - General Flooding)
 - Mass Movement → LS (GLIDE) / nat-hyd-mmw-lan (EM-DAT) / GH0007 (UNDRR-ISC)
 - Sinkhole → OT (GLIDE) / nat-geo-mmd-sub (EM-DAT) / GH0026 (UNDRR-ISC)
 

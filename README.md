@@ -95,10 +95,14 @@ and then to include their other system counterparts following the [crosswalk cla
 
 Tables with the possible values are available in the [hazard section of the taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) with:
 
-- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
+- **[UNDRR-ISC 2025 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#2025-update)** (Reference Classification)
+- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles) (Historical Reference)
 - [EM_DAT CRED Classification Key](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#em-dat-cred-classification-tree)
 - [GLIDE classification](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#glide-classification)
 - [A crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#cross-classification-mapping)
+
+> [!IMPORTANT]
+> The **2025 UNDRR-ISC Hazard Information Profiles** is the **reference classification system** for all hazard codes in the Monty extension. This updated classification includes 281 hazards organized into 8 hazard types and 39 clusters, with improved organization and new chapeau HIPs for general hazard categories.
 
 With those codes, it is possible to derive a set of additional properties associated with the hazard:
 

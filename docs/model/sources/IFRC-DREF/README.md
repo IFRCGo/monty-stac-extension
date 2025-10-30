@@ -139,17 +139,20 @@ Each impact type gets its own item with:
 
 ### Hazard Code Mapping
 
-Example mappings from IFRC disaster types to standard codes:
+Example mappings from IFRC disaster types to **2025 UNDRR-ISC Hazard Information Profiles** codes:
 
 ```python
 {
-    "Earthquake": ["GH0001", "GH0002", "GH0003", "GH0004", "GH0005"],
-    "Cyclone": ["MH0030", "MH0031", "MH0032"],
-    "Flood": ["FL"],
-    "Tsunami": ["MH0029", "GH0006"],
+    "Earthquake": ["GH0101"],  # Consolidated in 2025 update
+    "Cyclone": ["MH0306", "MH0307", "MH0308", "MH0309"],  # Depression/Cyclone, Extra-tropical, Sub-tropical, Tropical
+    "Flood": ["MH0604"],  # Fluvial (Riverine) Flooding
+    "Tsunami": ["MH0705"],  # Moved to Marine-related in 2025
     # ... other mappings
 }
 ```
+
+> [!NOTE]
+> The 2025 update consolidated multiple earthquake-related HIPs (GH0001-GH0005) into a single Earthquake HIP (GH0101), and reclassified Tsunami from Geological to Meteorological & Hydrological hazards.
 
 ## Quality Control Notes
 
