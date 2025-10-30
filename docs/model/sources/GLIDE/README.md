@@ -88,25 +88,25 @@ The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_d
 
 ##### Mapping from GLIDE event type to Hazard profile
 
-There is not straightforward mapping from the GDACS event type to the [hazard profile](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles). The current mapping only considers
+There is not straightforward mapping from the GLIDE event type to the [hazard profile](../../taxonomy.md#2025-update). The current mapping only considers
 setting the clusters field as the following:
 
-| GLIDE event type               | Hazard profile cluster | Hazard Profile codes |
-| ------------------------------ | ---------------------- | -------------------- |
-| **CW** (Cold Wave)             | `HM-TEMP`              | `MH0040`             |
-| **CE** (Complex Emergency)     |                        |                      |
-| **DR** (Drought)               | `HM-PRECIP`            | `MH0035`             |
-| **EQ** Eartquake**             | `GEO-SEIS`             | `GH0004`             |
-| **EP** (Epidemic)              | `BIO-INFDISPL`         | `BI0014`             |
-| **EC** (Extratropical Cyclone) | `HM-PRESS`             | `MH0031`             |
-| **FR** (Fire)                  | `ENV-DEG`              | `EN0013`             |
-| **FF** (Flash Flood)           | `HM-FLOOD`             | `MH0006`             |
-| **FL** (Flood)                 | `HM-FLOOD`             |                      |
-| **HT** (Heat Wave)             | `HM-TEMP`              | `MH0047`             |
-| **IN** (Insect Infestation)    | `BIO-INFEST`           | `BI0002`             |
-| **LS** (Land Slide)            |                        |                      |
+| GLIDE event type               | Hazard profile cluster (2025) | Hazard Profile codes (2025) |
+| ------------------------------ | ----------------------------- | --------------------------- |
+| **CW** (Cold Wave)             | `MH-TEMP`                     | `MH0502` (Cold Wave)        |
+| **CE** (Complex Emergency)     | `SO-CONFLICT`                 | `SO0102` (NIAC)             |
+| **DR** (Drought)               | `MH-PRECIP`                   | `MH0401` (Drought)          |
+| **EQ** (Earthquake)            | `GEO-SEIS`                    | `GH0101` (Earthquake)       |
+| **EP** (Epidemic)              | `BIO-INFDIS`                  | Multiple codes              |
+| **EC** (Extratropical Cyclone) | `MH-WIND`                     | `MH0307` (Extra-tropical Cyclone) |
+| **FR** (Fire)                  | `ENV-DEG`                     | `EN0205` (Wildfires)        |
+| **FF** (Flash Flood)           | `MH-WATER`                    | `MH0603` (Flash Flooding)   |
+| **FL** (Flood)                 | `MH-WATER`                    | `MH0600` (Flooding chapeau) |
+| **HT** (Heat Wave)             | `MH-TEMP`                     | `MH0501` (Heatwave)         |
+| **IN** (Insect Infestation)    | `BIO-INSECT`                  | `BI0401` (Insect Pest Infestations) |
+| **LS** (Land Slide)            | `GEO-GROUND`                  | `GH0300` (Gravitational Mass Movement) |
 
-More specific [hazard codes](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) can be added to the `codes` field following the characteristics of the event.
+More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added to the `codes` field following the characteristics of the event.
 
 ##### Hazard Magnitude and Units
 

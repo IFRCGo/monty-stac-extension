@@ -104,19 +104,19 @@ The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_d
 
 ##### Mapping from GDACS event type to Hazard profile
 
-There is not straightforward mapping from the GDACS event type to the [hazard profile](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles). The current mapping only considers
+There is not straightforward mapping from the GDACS event type to the [hazard profile](../../taxonomy.md#2025-update). The current mapping only considers
 setting the clusters field as the following:
 
-| GDACS event type                                                         | UNDRR Hazard profile cluster | UNDRR Hazard Profile codes |
-| ------------------------------------------------------------------------ | ---------------------------- | -------------------------- |
-| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `HM-FLOOD`                   | `MH0012`                   |
-| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`                   | `GH0004`                   |
-| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `HM-PRECIP`                  | `MH0057`                   |
-| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `GEO-SEIS`                   | `GH0006`                   |
-| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`                   |                            |
-| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `HM-PRECIP`                  | `MH0035`                   |
+| GDACS event type                                                         | UNDRR Hazard profile cluster (2025) | UNDRR Hazard Profile codes (2025) |
+| ------------------------------------------------------------------------ | ----------------------------------- | --------------------------------- |
+| [Flood [FL]](https://www.gdacs.org/Knowledge/models_fl.aspx)             | `MH-WATER`                          | `MH0600` (Flooding chapeau)       |
+| [Earthquakes [EQ]](https://www.gdacs.org/Knowledge/models_eq.aspx)       | `GEO-SEIS`                          | `GH0101` (Earthquake)             |
+| [Tropical Cyclones [TC]](https://www.gdacs.org/Knowledge/models_tc.aspx) | `MH-WIND`                           | `MH0309` (Tropical Cyclone)       |
+| [Tsunami [TS]](https://www.gdacs.org/Knowledge/models_ts.aspx)           | `MH-MARINE`                         | `MH0705` (Tsunami)                |
+| [Volcano [VO]](https://www.gdacs.org/Knowledge/models_vo.aspx)           | `GEO-VOLC`                          | `GH0201` (Lava Flows)             |
+| [Drought [DR]](https://www.gdacs.org/Knowledge/models_dr.aspx)           | `MH-PRECIP`                         | `MH0401` (Drought)                |
 
-More specific [hazard codes](../../taxonomy.md#undrr-isc-2020-hazard-information-profiles) can be added to the `codes` field following the characteristics of the event.
+More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added to the `codes` field following the characteristics of the event.
 
 ##### Hazard Magnitude and Units
 
