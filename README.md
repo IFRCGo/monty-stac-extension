@@ -114,7 +114,12 @@ With those codes, it is possible to derive a set of additional properties associ
 for which a human-readable keyword can be generated and stored in the `keywords` field.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) **MUST** have at least **one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **one GLIDE code** (2 letters, e.g., FL, EQ) and **one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+>
+> **Valid examples**: `["MH0600"]`, `["FL", "MH0600"]`, `["FL", "nat-hyd-flo-flo", "MH0600"]`  
+> **Invalid examples**: `["FL"]` (missing UNDRR code), `["FL", "MH0600", "MH0601"]` (multiple UNDRR codes), `["FL", "TC", "MH0600"]` (multiple GLIDE codes)
+>
+> **Note**: The JSON Schema can validate patterns and require at least one UNDRR-ISC 2025 code, but due to JSON Schema draft-07 limitations, it cannot fully enforce "at most one code per classification type." Additional validation logic may be needed in implementation to strictly enforce this constraint.
 
 ##### monty:corr_id
 
