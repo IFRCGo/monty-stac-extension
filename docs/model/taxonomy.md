@@ -805,112 +805,116 @@ This open system allows future hazards to be added within appropriate clusters (
 
 ### Cross-Classification Mapping
 
-**Note:** The cross-classification mapping below uses 2020 UNDRR-ISC codes. When working with the 2025 HIPs, please refer to the correspondence table in the [2025 HIPs Report Annex 1](https://www.undrr.org/media/107380/download?startDownload=20250613) to convert these codes to the new identifier system. Key changes affecting this mapping include:
-- Tsunami codes (GH0006, GH0017, GH0035) → MH0705
-- Flood-related codes → MH06XX series
-- Earthquake codes → GH0101 (consolidated)
-- Landslide codes → GH03XX series (Ground Failure cluster)
+**Updated for 2025 UNDRR-ISC Hazard Information Profiles**
 
-| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC Hazard Code |
-| ---------- | ------------------------- | --------------------------------------- | --------------------- |
-| CW         | nat-met-ext-col           | Cold wave                               | MH0040                |
-| DR         | nat-cli-dro-dro           | Drought                                 | MH0035                |
-| EQ         | nat-geo-ear-gro           | Earthquake                              | GH0001                |
-| EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0002                |
-| EQ         | nat-geo-ear-gro           | Liquefaction                            | GH0003                |
-| EQ         | nat-geo-ear-gro           | Surface rupture                         | GH0004                |
-| EQ         | nat-geo-ear-gro           | Subsidence and uplift                   | GH0005                |
-| EP         | nat-bio-epi-vir           | Viral diseases                          | BI0016                |
-| EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0016                |
-| EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0016                |
-| EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0016                |
-| EP         | nat-bio-epi-pri           | Prion diseases                          | BI0016                |
-| EP         | nat-bio-epi-dis           | General infectious disease              | BI0016                |
-| EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0031                |
-| EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0099                |
-| FR         | tec-ind-fir-fir           | Industrial fire                         | TL0032                |
-| FR         | tec-mis-fir-fir           | Miscellaneous fire                      | TL0032                |
-| FF         | nat-hyd-flo-fla           | Flash flood                             | MH0006                |
-| FL         | nat-hyd-flo-riv           | Riverine flood                          | MH0007                |
-| FL         | nat-hyd-flo-coa           | Coastal flood                           | MH0004                |
-| FL         | nat-hyd-flo-flo           | General flood                           | MH0012                |
-| FL         | nat-hyd-flo-ice           | Ice jam flood                           | MH0009                |
-| FL         | nat-cli-glo-glo           | Glacial lake outburst flood             | MH0013                |
-| FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0008                |
-| FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0010                |
-| FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0011                |
-| FL         | tec-mis-col-col           | Dam/levee break flood                   | TL0009                |
-| HT         | nat-met-ext-hea           | Heat wave                               | MH0047                |
-| IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0002                |
-| IN         | nat-bio-inf-loc           | Locust infestation                      | BI0003                |
-| IN         | nat-bio-inf-gra           | Grasshopper infestation                 | BI0002                |
-| IN         | nat-bio-inf-wor           | Worms infestation                       | BI0002                |
-| IN         | nat-bio-inf-inf           | General infestation                     | BI0002                |
-| LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0007                |
-| LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0014                |
-| LS         | nat-hyd-mmw-lan           | Landslide (wet)                         | GH0007                |
-| MS         | nat-hyd-mmw-mud           | Mud flow/slide                          | MH0051                |
-| ST         | nat-met-sto-sto           | Severe local storm                      | MH0003                |
-| ST         | nat-met-sto-lig           | Lightning                               | MH0002                |
-| ST         | nat-met-sto-hai           | Hail                                    | MH0036                |
-| ST         | nat-met-sto-sev           | Severe weather                          | MH0003                |
-| AV         | nat-geo-mmd-ava           | Avalanche (dry)                         | MH0050                |
-| AV         | nat-hyd-mmw-ava           | Avalanche (wet)                         | MH0050                |
-| SS         | nat-met-sto-sur           | Storm surge                             | MH0027                |
-| SS         | nat-hyd-wav-rog           | Storm tides                             | MH0028                |
-| TO         | nat-met-sto-tor           | Tornado                                 | MH0059                |
-| TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0057                |
-| TC         | nat-met-sto-tro           | Tropical storm                          | MH0058                |
-| TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0030                |
-| TC         | nat-met-sto-tro           | Sub-tropical cyclone                    | MH0032                |
-| TS         | nat-geo-ear-tsu           | Tsunami (general)                       | MH0029                |
-| TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | GH0006                |
-| TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | GH0017                |
-| TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | GH0035                |
-| VW         | nat-met-sto-sto           | Violent wind                            | MH0060                |
-| VW         | nat-met-sto-der           | Derecho                                 | MH0053                |
-| VW         | nat-met-sto-san           | Sand/dust storm                         | MH0015                |
-| VO         | nat-geo-vol-lav           | Lava flows                              | GH0009                |
-| VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0010                |
-| VO         | nat-geo-vol-vol           | Volcanic activity (general)             | GH0009                |
-| VO         | nat-geo-vol-pyr           | Pyroclastic flow                        | GH0012                |
-| VO         | nat-geo-vol-lah           | Lahar                                   | GH0013                |
-| VO         | nat-geo-vol-vol           | Volcanic gases                          | GH0016                |
-| WF         | nat-cli-wil-for           | Forest fire                             | EN0013                |
-| WF         | nat-cli-wil-lan           | Land fire                               | EN0013                |
-| WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0013                |
-| AC         | tec-ind-rad-rad           | Radiation                               | TL0001                |
-| AC         | tec-ind-che-che           | Chemical spill                          | TL0030                |
-| AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0029                |
-| AC         | tec-ind-gas-gas           | Gas leak                                | TL0030                |
-| AC         | tec-ind-oil-oil           | Oil spill                               | CH0017                |
-| AC         | tec-ind-poi-poi           | Poisoning                               | CH0024                |
-| AC         | tec-ind-ind-ind           | General industrial accident             | TL0027                |
-| AC         | tec-tra-air-air           | Air transport accident                  | TL0048                |
-| AC         | tec-tra-rai-rai           | Rail transport accident                 | TL0051                |
-| AC         | tec-tra-roa-roa           | Road transport accident                 | TL0052                |
-| AC         | tec-tra-wat-wat           | Water transport accident                | TL0050                |
-| CE         | Multiple codes            | International armed conflict            | SO0001                |
-| CE         | Multiple codes            | Non-international armed conflict        | SO0002                |
-| CE         | Multiple codes            | Civil unrest                            | SO0003                |
-| CE         | Multiple codes            | Explosive remnants of war               | SO0004                |
-| CE         | Multiple codes            | Environmental degradation from conflict | SO0005                |
-| OT         | nat-met-fog-fog           | Fog                                     | MH0016                |
-| OT         | nat-met-ext-sev           | Severe winter conditions                | MH0041                |
-| OT         | nat-met-ext-sev           | Freeze                                  | MH0042                |
-| OT         | nat-met-ext-sev           | Frost                                   | MH0043                |
-| OT         | nat-met-ext-sev           | Freezing rain                           | MH0044                |
-| OT         | nat-met-ext-sev           | Glaze                                   | MH0045                |
-| OT         | nat-met-ext-sev           | Ground frost                            | MH0046                |
-| OT         | nat-met-ext-sev           | Icing                                   | MH0048                |
-| OT         | nat-met-ext-sev           | Thaw                                    | MH0049                |
-| OT         | nat-met-sto-bli           | Blizzard                                | MH0034                |
-| OT         | nat-ext-imp-air           | Airburst                                | ET0001                |
-| OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0002                |
-| OT         | nat-ext-spa-ene           | Energetic particles                     | ET0002                |
-| OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0006                |
-| OT         | nat-ext-spa-sho           | Shockwave                               | ET0008                |
-| OT         | nat-ext-imp-col           | Space object collision                  | ET0004                |
+This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 include:
+
+- All tsunami types consolidated to MH0705
+- Flood types reorganized in MH06XX series
+- All earthquake phenomena consolidated to GH0101
+- Landslides reorganized in GH03XX series (Ground Failure cluster)
+- Tropical storms merged into MH0309 (Tropical Cyclone)
+
+| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC 2025 Code |
+| ---------- | ------------------------- | --------------------------------------- | ------------------- |
+| CW         | nat-met-ext-col           | Cold wave                               | MH0502              |
+| DR         | nat-cli-dro-dro           | Drought                                 | MH0401              |
+| EQ         | nat-geo-ear-gro           | Earthquake                              | GH0101              |
+| EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0101              |
+| EQ         | nat-geo-ear-gro           | Liquefaction                            | GH0307              |
+| EQ         | nat-geo-ear-gro           | Surface rupture                         | GH0311              |
+| EQ         | nat-geo-ear-gro           | Subsidence and uplift                   | GH0309              |
+| EP         | nat-bio-epi-vir           | Viral diseases                          | BI0101              |
+| EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0101              |
+| EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0105              |
+| EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0101              |
+| EP         | nat-bio-epi-pri           | Prion diseases                          | BI0230              |
+| EP         | nat-bio-epi-dis           | General infectious disease              | BI0101              |
+| EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0307              |
+| EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0307              |
+| FR         | tec-ind-fir-fir           | Industrial fire                         | TL0305              |
+| FR         | tec-mis-fir-fir           | Miscellaneous fire                      | TL0305              |
+| FF         | nat-hyd-flo-fla           | Flash flood                             | MH0603              |
+| FL         | nat-hyd-flo-riv           | Riverine flood                          | MH0604              |
+| FL         | nat-hyd-flo-coa           | Coastal flood                           | MH0601              |
+| FL         | nat-hyd-flo-flo           | General flood                           | MH0600              |
+| FL         | nat-hyd-flo-ice           | Ice jam flood                           | MH0608              |
+| FL         | nat-cli-glo-glo           | Glacial lake outburst flood             | MH0607              |
+| FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0605              |
+| FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0609              |
+| FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0610              |
+| FL         | tec-mis-col-col           | Dam/levee break flood                   | TL0205              |
+| HT         | nat-met-ext-hea           | Heat wave                               | MH0501              |
+| IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0401              |
+| IN         | nat-bio-inf-loc           | Locust infestation                      | BI0402              |
+| IN         | nat-bio-inf-gra           | Grasshopper infestation                 | BI0401              |
+| IN         | nat-bio-inf-wor           | Worms infestation                       | BI0401              |
+| IN         | nat-bio-inf-inf           | General infestation                     | BI0401              |
+| LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0300              |
+| LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0300              |
+| LS         | nat-hyd-mmw-lan           | Landslide (wet)                         | GH0304              |
+| MS         | nat-hyd-mmw-mud           | Mud flow/slide                          | GH0303              |
+| ST         | nat-met-sto-sto           | Severe local storm                      | MH0103              |
+| ST         | nat-met-sto-lig           | Lightning                               | MH0102              |
+| ST         | nat-met-sto-hai           | Hail                                    | MH0404              |
+| ST         | nat-met-sto-sev           | Severe weather                          | MH0103              |
+| AV         | nat-geo-mmd-ava           | Avalanche (dry)                         | MH0801              |
+| AV         | nat-hyd-mmw-ava           | Avalanche (wet)                         | MH0801              |
+| SS         | nat-met-sto-sur           | Storm surge                             | MH0703              |
+| SS         | nat-hyd-wav-rog           | Storm tides                             | MH0704              |
+| TO         | nat-met-sto-tor           | Tornado                                 | MH0305              |
+| TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0309              |
+| TC         | nat-met-sto-tro           | Tropical storm                          | MH0309              |
+| TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0306              |
+| TC         | nat-met-sto-tro           | Sub-tropical cyclone                    | MH0308              |
+| TS         | nat-geo-ear-tsu           | Tsunami (general)                       | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | MH0705              |
+| VW         | nat-met-sto-sto           | Violent wind                            | MH0301              |
+| VW         | nat-met-sto-der           | Derecho                                 | MH0302              |
+| VW         | nat-met-sto-san           | Sand/dust storm                         | MH0201              |
+| VO         | nat-geo-vol-lav           | Lava flows                              | GH0201              |
+| VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0202              |
+| VO         | nat-geo-vol-vol           | Volcanic activity (general)             | GH0201              |
+| VO         | nat-geo-vol-pyr           | Pyroclastic flow                        | GH0203              |
+| VO         | nat-geo-vol-lah           | Lahar                                   | GH0204              |
+| VO         | nat-geo-vol-vol           | Volcanic gases                          | GH0205              |
+| WF         | nat-cli-wil-for           | Forest fire                             | EN0205              |
+| WF         | nat-cli-wil-lan           | Land fire                               | EN0205              |
+| WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0205              |
+| AC         | tec-ind-rad-rad           | Radiation                               | TL0601              |
+| AC         | tec-ind-che-che           | Chemical spill                          | TL0301              |
+| AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0304              |
+| AC         | tec-ind-gas-gas           | Gas leak                                | TL0301              |
+| AC         | tec-ind-oil-oil           | Oil spill                               | CH0203              |
+| AC         | tec-ind-poi-poi           | Poisoning                               | CH0602              |
+| AC         | tec-ind-ind-ind           | General industrial accident             | TL0309              |
+| AC         | tec-tra-air-air           | Air transport accident                  | TL0401              |
+| AC         | tec-tra-rai-rai           | Rail transport accident                 | TL0404              |
+| AC         | tec-tra-roa-roa           | Road transport accident                 | TL0405              |
+| AC         | tec-tra-wat-wat           | Water transport accident                | TL0403              |
+| CE         | Multiple codes            | International armed conflict            | SO0101              |
+| CE         | Multiple codes            | Non-international armed conflict        | SO0102              |
+| CE         | Multiple codes            | Civil unrest                            | SO0103              |
+| CE         | Multiple codes            | Explosive remnants of war               | SO0201              |
+| CE         | Multiple codes            | Environmental degradation from conflict | SO0202              |
+| OT         | nat-met-fog-fog           | Fog                                     | MH0202              |
+| OT         | nat-met-ext-sev           | Severe winter conditions                | MH0503              |
+| OT         | nat-met-ext-sev           | Freeze                                  | MH0504              |
+| OT         | nat-met-ext-sev           | Frost                                   | MH0505              |
+| OT         | nat-met-ext-sev           | Freezing rain                           | MH0506              |
+| OT         | nat-met-ext-sev           | Glaze                                   | MH0507              |
+| OT         | nat-met-ext-sev           | Ground frost                            | MH0508              |
+| OT         | nat-met-ext-sev           | Icing                                   | MH0509              |
+| OT         | nat-met-ext-sev           | Thaw                                    | MH0510              |
+| OT         | nat-met-sto-bli           | Blizzard                                | MH0403              |
+| OT         | nat-ext-imp-air           | Airburst                                | ET0201              |
+| OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0101              |
+| OT         | nat-ext-spa-ene           | Energetic particles                     | ET0104              |
+| OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0103              |
+| OT         | nat-ext-spa-sho           | Shockwave                               | ET0204              |
+| OT         | nat-ext-imp-col           | Space object collision                  | ET0203              |
 
 ## Impact
 
