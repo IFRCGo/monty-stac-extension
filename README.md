@@ -43,14 +43,14 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                   |
-| -------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                          |
-| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                           |
+| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                         |
+| -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
+| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
 | monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
 | monty:hazard_codes   | \[string]                                   | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)                                                                  |
-| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                     |
-| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                     |
+| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                                                           |
+| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                                                           |
 
 ### Roles
 
@@ -133,11 +133,11 @@ More information about the correlation identifier is available in the [event cor
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following defined fields are available in the object:
 
-| Field Name     | Type   | Description                                                                                                          |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
-| severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
-| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
+| Field Name     | Type   | Description                                                                                                  |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units |
+| severity_unit  | string | **REQUIRED** The unit of the max_value                                                                       |
+| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                      |
 
 Any other field can be added to the object to provide more details about the hazard.
 For instance, `category` and  `pressure` can be added to provide the category and the pressure of a cyclone.
@@ -146,14 +146,14 @@ For instance, `category` and  `pressure` can be added to provide the category an
 
 It is an object that contains the details of the impact estimate. Preferably used only in an Impact item.
 
-| Field Name    | Type   | Description                                                                                                                                                                                                             |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Field Name    | Type   | Description                                                                                                                                                                                                                                                   |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#exposure-category) |
 | type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#impact-type)                                                                                   |
-| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                 |
-| unit          | string | The units of the impact estimate                                                                                                                                                                                        |
-| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                 |
-| description   | string | The description of the impact                                                                                                                                                                                           |
+| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                                                       |
+| unit          | string | The units of the impact estimate                                                                                                                                                                                                                              |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                                                       |
+| description   | string | The description of the impact                                                                                                                                                                                                                                 |
 
 ## Relation types
 
