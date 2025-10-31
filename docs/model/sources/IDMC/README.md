@@ -126,7 +126,7 @@ IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-d
 | Sea level Rise      | Sea level rise              | OT    | nat-geo-env-slr                    | **EN0402**                     | ENV-WATER  | Sea Level Rise                  |
 | Storm               | Storm                       | VW    | nat-met-sto-sto                    | **MH0310**                     | MH-WIND    | Storm (chapeau)                 |
 | Storm               | Tornado                     | TO    | nat-met-sto-tor                    | **MH0305**                     | MH-WIND    | Tornado                         |
-| Storm               | Typhoon/Hurricane/Cyclone   | TC    | nat-met-sto-tro                    | **MH0309**                     | MH-WIND    | Tropical Cyclone                |
+| Storm               | Typhoon/Hurricane/Cyclone   | TC    | nat-met-sto-tro                    | **MH0306**                     | MH-WIND    | Cyclone or Depressions          |
 | Volcanic Activity   | Volcanic activity           | VO    | nat-geo-vol-vol                    | **GH0201**                     | GEO-VOLC   | Volcanic Activity               |
 | Wildfire            | Wildfire                    | WF    | nat-cli-wil-for                    | **EN0205**                     | ENV-FOREST | Wildfire                        |
 

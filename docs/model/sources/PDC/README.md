@@ -75,7 +75,7 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 | Severe Weather      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
 | Storm               | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
 | Tornado             | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND      | Tornado                          |
-| Tropical Cyclone    | TC    | nat-met-sto-tro     | **MH0309**                     | MH-WIND      | Tropical Cyclone                 |
+| Tropical Cyclone    | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND      | Tropical Cyclone                 |
 | Tsunami             | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE    | Tsunami                          |
 | Volcano             | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC     | Lava Flows                       |
 | Wildfire            | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST   | Wildfires                        |

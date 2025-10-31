@@ -160,7 +160,7 @@ DesInventar uses its own hazard classification and must follow the **2025 UNDRR-
 | AVALANCHE         | AV    | nat-geo-mmd-ava     | **MH0801**                     | MH-TERR    | Avalanche                       |
 | COASTAL EROSION   | OT    | nat-geo-env-coa     | **GH0405**                     | GEO-OTHER  | Coastal Erosion & Accretion     |
 | COLD WAVE         | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                       |
-| CYCLONE           | TC    | nat-met-sto-tro     | **MH0309**                     | MH-WIND    | Tropical Cyclone                |
+| CYCLONE           | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
 | DROUGHT           | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                         |
 | EARTHQUAKE        | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
 | ELECTRIC STORM    | ST    | nat-met-sto-lig     | **MH0102**                     | MH-CONV    | Lightning (electrical storm)    |

@@ -171,7 +171,7 @@ The EM-DAT Classification Key (e.g., `nat-hyd-flo-flo`) should be used along wit
 | ------------------------- | ----- | ------------------------------ | ---------- | ----------------------- |
 | nat-hyd-flo-flo           | FL    | **MH0600**                     | MH-WATER   | Flooding (chapeau)      |
 | nat-geo-ear-gro           | EQ    | **GH0101**                     | GEO-SEIS   | Earthquake              |
-| nat-met-sto-tro           | TC    | **MH0309**                     | MH-WIND    | Tropical Cyclone        |
+| nat-met-sto-tro           | TC    | **MH0306**                     | MH-WIND    | Cyclone or Depression   |
 | nat-cli-dro-dro           | DR    | **MH0401**                     | MH-PRECIP  | Drought                 |
 | nat-geo-vol-vol           | VO    | **GH0201**                     | GEO-VOLC   | Lava Flows              |
 | nat-geo-ear-tsu           | TS    | **MH0705**                     | MH-MARINE  | Tsunami                 |

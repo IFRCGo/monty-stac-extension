@@ -144,7 +144,7 @@ IFRC DREF uses disaster type names and must follow the **2025 UNDRR-ISC** code a
 | IFRC Disaster Type     | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
 | ---------------------- | ----- | ------------------- | ------------------------------ | ---------- | ------------------------------- |
 | Earthquake             | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
-| Cyclone                | TC    | nat-met-sto-tro     | **MH0309**                     | MH-WIND    | Tropical Cyclone                |
+| Cyclone                | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
 | Volcanic Eruption      | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC   | Lava Flows                      |
 | Tsunami                | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                         |
 | Flood                  | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
