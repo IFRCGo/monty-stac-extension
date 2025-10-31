@@ -39,7 +39,7 @@
     ],
     "monty:corr_id": "20241027-ESP-FL-1-GCDB",
     "monty:hazard_detail": {
-      "cluster": "FL",
+      "severity_value": 0,
       "severity_unit": "glide",
       "estimate_type": "primary"
     },
