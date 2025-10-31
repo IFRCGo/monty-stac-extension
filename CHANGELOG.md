@@ -84,4 +84,5 @@ Initial release of the Monty STAC Extension specification.
 - Some features may be subject to change based on community feedback
 - Additional sources may be added in future releases
 
+[Unreleased]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.0.0..HEAD
 [1.0.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.0.0
