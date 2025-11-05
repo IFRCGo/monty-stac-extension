@@ -65,7 +65,7 @@ nav:
     - Taxonomy: model/taxonomy.md
     - Event Correlation: model/correlation_identifier.md
     - Questions: model/questions.md
-  - Examples: examples/README.md
+  - Examples: examples/index.md
   - STAC API:
     - Overview: model/stac-api/README.md
     - Correlation Algorithms: model/stac-api/correlation_algorithms.md

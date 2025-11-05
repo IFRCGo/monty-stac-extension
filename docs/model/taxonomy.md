@@ -118,7 +118,7 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | tec-tra-roa-roa    | Technological | Transport              | Road                   | Road                             |
 | tec-tra-wat-wat    | Technological | Transport              | Water                  | Water                            |
 
-### UNDRR-ISC Hazard Information Profiles
+### UNDRR-ISC Hazard Information Profiles {#undrr-isc-hazard-information-profiles}
 
 #### [2025 Update](https://www.undrr.org/media/107380/download?startDownload=20250613)
 
@@ -209,7 +209,7 @@ The new 2-digit cluster code (positions 3-4) allows grouping related hazards:
 
 This open system allows future hazards to be added within appropriate clusters (e.g., MH0611 for a new flood type).
 
-**Complete 2025 Hazard List:**
+#### Complete 2025 Hazard List {#complete-2025-hazard-list}
 
 | Hazard Code | Hazard Label | Cluster ID | Cluster Label | Family Label |
 | ----------- | ------------ | ---------- | ------------- | ------------ |
@@ -496,6 +496,7 @@ This open system allows future hazards to be added within appropriate clusters (
 | SO0401 | Financial Shock | SOC-ECO | Economic | Societal |
 
 #### [2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) (Historical Reference)
+{#undrr-isc-2020-hazard-information-profiles}
 
 | Hazard Code | Hazard Label                                                                                                                                           | Cluster ID       | Cluster Label                                                     | Family Label                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ----------------------------------------------------------------- | ---------------------------- |

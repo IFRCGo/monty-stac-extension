@@ -57,7 +57,7 @@ Where:
 
 - `{datetime}`: The date and time of the event in the format `YYYYMMDDThhmmssZ` ([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)).
 - `{country_code}`: The country code of the related event in the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
-- `{hazard_cluster_code}`: A code that represents the cluster of the main hazards of the event. This code represents the cluster in the [UNDRR-ISC 2020 Hazard Information Profiles](./taxonomy.md#undrr-isc-2020-hazard-information-profiles). The cluster is slected based on the order of the hazards codes provided.
+- `{hazard_cluster_code}`: A code that represents the cluster of the main hazards of the event. This code represents the cluster in the [UNDRR-ISC Hazard Information Profiles](./taxonomy.md#undrr-isc-hazard-information-profiles). The cluster is slected based on the order of the hazards codes provided.
 - `{episode_number}`: A number that represents the episode of the event. This number is used to differentiate between events that have the same date, country, and hazard cluster. The episode number starts at 1 and is incremented by 1 for each new event with the same date, country, and hazard cluster.
 
 A reference implementation is provided with the pystac.monty module. *TBD*
