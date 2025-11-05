@@ -27,7 +27,9 @@
     "end_datetime": "2024-06-26T00:00:00Z",
     "monty:country_codes": [],
     "monty:hazard_codes": [
-      "MH0057"
+      "TC",
+      "nat-met-sto-tro",
+      "MH0309"
     ],
     "monty:hazard_detail": {
       "cluster": "nat-met-sto-tro",

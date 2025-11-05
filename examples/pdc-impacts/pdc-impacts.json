@@ -46,7 +46,9 @@
       "ESP"
     ],
     "monty:hazard_codes": [
-      "nat-cli-wil-for"
+      "WF",
+      "nat-cli-wil-for",
+      "EN0205"
     ]
   },
   "assets": {

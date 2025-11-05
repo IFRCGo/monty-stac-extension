@@ -65,10 +65,18 @@
       "ESP"
     ],
     "monty:hazard_codes": [
+      "WF",
       "nat-cli-wil-for",
+      "EN0205",
+      "FL",
       "nat-hyd-flo-flo",
+      "MH0600",
+      "OT",
       "nat-geo-mmd-sub",
-      "nat-hyd-mmw-lan"
+      "GH0308",
+      "LS",
+      "nat-hyd-mmw-lan",
+      "GH0304"
     ]
   },
   "assets": {

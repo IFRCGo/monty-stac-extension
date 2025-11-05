@@ -92,8 +92,21 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place           | Description of the event location                    |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time            | Time of the event in UTC ISO 8601 format             |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates   | ISO3 code of the country where the event occurred    |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0004` for code  |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0101` for code (see [Hazard Type Mapping](#hazard-type-mapping))  |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url             | Link to the USGS event details page                  |
+
+#### Hazard Type Mapping
+
+USGS (United States Geological Survey) exclusively tracks seismic events. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+
+| USGS Type  | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster  | Description  |
+| ---------- | ----- | --------------- | ------------------------------ | -------- | ------------ |
+| Earthquake | EQ    | nat-geo-ear-gro | **GH0101**                     | GEO-SEIS | Earthquake   |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. The 2025 update consolidated multiple earthquake-related HIPs (including tsunami, ground shaking, liquefaction, etc.) into a single Earthquake HIP (GH0101). While USGS data may include tsunami-related events through the `properties.tsunami` field, the primary hazard code remains GH0101 for all earthquake events.
+
+This mapping ensures standardized hazard categorization for seismic events from the USGS Earthquake Catalog.
 | [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/map"    | Link to the USGS interactive map for this event      |
 | [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/region" | Link to the USGS regional information for this event |
 
@@ -115,7 +128,7 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place                    | Description of the hazard location                  |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                     | Time of the hazard in UTC ISO 8601 format           |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates            | ISO3 code of the country where the hazard occurred  |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake                 | Always `GEO-SEIS` for cluster and `GH0004` for code |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake                 | Always `GEO-SEIS` for cluster and `GH0101` for code (2025: Earthquake) |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url                      | Link to the USGS hazard details page                |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
 | [`assets`](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                        | [ShakeMap assets](#shakemap-assets) | Assets from the USGS ShakeMap product               |

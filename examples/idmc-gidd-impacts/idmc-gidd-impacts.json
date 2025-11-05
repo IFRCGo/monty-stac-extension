@@ -90,8 +90,12 @@
       "SYR"
     ],
     "monty:hazard_codes": [
+      "TC",
       "nat-met-sto-tro",
-      "nat-hyd-flo-flo"
+      "MH0309",
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ]
   },
   "license": "TBD",

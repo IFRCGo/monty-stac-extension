@@ -47,7 +47,9 @@
       "GRD"
     ],
     "monty:hazard_codes": [
-      "MH0057"
+      "TC",
+      "nat-met-sto-tro",
+      "MH0306"
     ],
     "monty:corr_id": "20120803T000000Z-GRD-MH-STORM-001-GCDB",
     "roles": [

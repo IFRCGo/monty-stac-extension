@@ -152,34 +152,39 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 
 #### Hazard Code Mapping
 
-The following table shows how Desinventar event types map to [UNDRR-ISC Hazard Information Profiles](../../taxonomy.md#hazards):
+DesInventar uses its own hazard classification and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension. The following table provides cross-classification across multiple systems:
 
-| Desinventar Event | Hazard Code | Description      |
-| ----------------- | ----------- | ---------------- |
-| ALLUVION          | MH0051      | Mud flow         |
-| AVALANCHE         | MH0050      | Avalanche        |
-| COASTAL EROSION   | EN0020      | Coastal erosion  |
-| COLD WAVE         | MH0049      | Cold wave        |
-| CYCLONE           | MH0057      | Tropical cyclone |
-| DROUGHT           | MH0035      | Drought          |
-| EARTHQUAKE        | GH0001      | Earthquake       |
-| ELECTRIC STORM    | MH0002      | Lightning        |
-| EROSION           | EN0019      | Soil erosion     |
-| FLASH FLOOD       | MH0006      | Flash flood      |
-| FLOOD             | FL          | Flood (general)  |
-| FOG               | MH0016      | Fog              |
-| FOREST FIRE       | EN0013      | Forest fire      |
-| FROST             | MH0043      | Frost            |
-| HAIL STORM        | MH0036      | Hail             |
-| HEAT WAVE         | MH0047      | Heat wave        |
-| LAHAR             | GH0013      | Lahar            |
-| LANDSLIDE         | GH0007      | Landslide        |
-| LIQUEFACTION      | GH0003      | Liquefaction     |
-| SANDSTORM         | MH0015      | Dust/sand storm  |
-| SNOW STORM        | MH0039      | Snow storm       |
-| STORM SURGE       | MH0027      | Storm surge      |
-| TSUNAMI           | MH0029      | Tsunami          |
-| TORNADO           | MH0060      | Tornado          |
+| DesInventar Event | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
+| ----------------- | ----- | ------------------- | ------------------------------ | ---------- | ------------------------------- |
+| ALLUVION          | MS    | nat-hyd-mmw-mud     | **GH0303**                     | GEO-GFAIL  | Flows (includes mudflow)        |
+| AVALANCHE         | AV    | nat-geo-mmd-ava     | **MH0801**                     | MH-TERR    | Avalanche                       |
+| COASTAL EROSION   | OT    | nat-geo-env-coa     | **GH0405**                     | GEO-OTHER  | Coastal Erosion & Accretion     |
+| COLD WAVE         | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                       |
+| CYCLONE           | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
+| DROUGHT           | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                         |
+| EARTHQUAKE        | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
+| ELECTRIC STORM    | ST    | nat-met-sto-lig     | **MH0102**                     | MH-CONV    | Lightning (electrical storm)    |
+| EROSION           | OT    | nat-geo-env-soi     | **GH0403**                     | GEO-OTHER  | Soil Erosion                    |
+| FLASH FLOOD       | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
+| FLOOD             | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
+| FOG               | OT    | nat-met-fog-fog     | **MH0202**                     | MH-PART    | Fog                             |
+| FOREST FIRE       | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST | Wildfires                       |
+| FROST             | OT    | nat-met-ext-sev     | **MH0505**                     | MH-TEMP    | Frost (Hoar Frost)              |
+| HAIL STORM        | ST    | nat-met-sto-hai     | **MH0404**                     | MH-PRECIP  | Hail                            |
+| HEAT WAVE         | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                        |
+| LAHAR             | VO    | nat-geo-vol-lah     | **GH0204**                     | GEO-VOLC   | Lahars                          |
+| LANDSLIDE         | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement     |
+| LIQUEFACTION      | EQ    | nat-geo-ear-gro     | **GH0307**                     | GEO-GFAIL  | Liquefaction                    |
+| SANDSTORM         | VW    | nat-met-sto-san     | **MH0201**                     | MH-PART    | Dust Storm or Sandstorm         |
+| SNOW STORM        | OT    | nat-met-sto-bli     | **MH0406**                     | MH-PRECIP  | Snow Storm                      |
+| STORM SURGE       | SS    | nat-met-sto-sur     | **MH0703**                     | MH-MARINE  | Storm Surge                     |
+| TSUNAMI           | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                         |
+| TORNADO           | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND    | Tornado                         |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+
+This mapping enables standardized hazard categorization while preserving DesInventar's original classification in the source properties.
 
 ### Hazard Item
 

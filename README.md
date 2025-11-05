@@ -43,14 +43,14 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                   |
-| -------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                          |
-| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                           |
+| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                         |
+| -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
+| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
 | monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
 | monty:hazard_codes   | \[string]                                   | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)                                                                  |
-| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                     |
-| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                     |
+| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                                                           |
+| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                                                           |
 
 ### Roles
 
@@ -95,10 +95,14 @@ and then to include their other system counterparts following the [crosswalk cla
 
 Tables with the possible values are available in the [hazard section of the taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) with:
 
-- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles)
+- **[UNDRR-ISC 2025 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#2025-update)** (Reference Classification)
+- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles) (Historical Reference)
 - [EM_DAT CRED Classification Key](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#em-dat-cred-classification-tree)
 - [GLIDE classification](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#glide-classification)
 - [A crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#cross-classification-mapping)
+
+> [!IMPORTANT]
+> The **2025 UNDRR-ISC Hazard Information Profiles** is the **reference classification system** for all hazard codes in the Monty extension. This updated classification includes 281 hazards organized into 8 hazard types and 39 clusters, with improved organization and new chapeau HIPs for general hazard categories.
 
 With those codes, it is possible to derive a set of additional properties associated with the hazard:
 
@@ -110,8 +114,12 @@ With those codes, it is possible to derive a set of additional properties associ
 for which a human-readable keyword can be generated and stored in the `keywords` field.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) **MUST** have a **single** `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
-> the event [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+>
+> **Valid examples**: `["MH0600"]`, `["FL", "MH0600"]`, `["FL", "nat-hyd-flo-flo", "MH0600"]`  
+> **Invalid examples**: `["FL"]` (missing UNDRR code), `["FL", "MH0600", "MH0601"]` (multiple UNDRR codes), `["FL", "TC", "MH0600"]` (multiple GLIDE codes)
+>
+> **Note**: The JSON Schema can validate patterns and require at least one UNDRR-ISC 2025 code, but due to JSON Schema draft-07 limitations, it cannot fully enforce "at most one code per classification type." Additional validation logic may be needed in implementation to strictly enforce this constraint.
 
 ##### monty:corr_id
 
@@ -125,12 +133,11 @@ More information about the correlation identifier is available in the [event cor
 It is an object that contains the details of the hazard. Preferably used only in a Hazard item.
 The following defined fields are available in the object:
 
-| Field Name     | Type   | Description                                                                                                          |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| cluster        | string | **REQUIRED** The cluster of the hazard. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) |
-| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units         |
-| severity_unit  | string | **REQUIRED** The unit of the max_value                                                                               |
-| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                              |
+| Field Name     | Type   | Description                                                                                                  |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| severity_value | number | **REQUIRED** The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units |
+| severity_unit  | string | **REQUIRED** The unit of the max_value                                                                       |
+| estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                      |
 
 Any other field can be added to the object to provide more details about the hazard.
 For instance, `category` and  `pressure` can be added to provide the category and the pressure of a cyclone.
@@ -139,14 +146,14 @@ For instance, `category` and  `pressure` can be added to provide the category an
 
 It is an object that contains the details of the impact estimate. Preferably used only in an Impact item.
 
-| Field Name    | Type   | Description                                                                                                                                                                                                             |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Field Name    | Type   | Description                                                                                                                                                                                                                                                   |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#exposure-category) |
 | type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#impact-type)                                                                                   |
-| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                 |
-| unit          | string | The units of the impact estimate                                                                                                                                                                                        |
-| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                 |
-| description   | string | The description of the impact                                                                                                                                                                                           |
+| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                                                       |
+| unit          | string | The units of the impact estimate                                                                                                                                                                                                                              |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                                                       |
+| description   | string | The description of the impact                                                                                                                                                                                                                                 |
 
 ## Relation types
 
@@ -221,7 +228,7 @@ This section describes in details the usage of the fields and links for the haza
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#hazard).
 
 - Examples:
-  - [Flood Hazard example](examples/gdacs-hazards/1102983-1-affected.json): Shows usage of the extension for a flood hazard
+  - [Flood Hazard example](examples/gdacs-hazards/1102983-1.json): Shows usage of the extension for a flood hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
 property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
@@ -237,8 +244,12 @@ This linkage is called "concurrent hazard" and is linking the observed and poten
 The link may also have specific `occ-*` [attributes](#link-attributes) to describe the occurrence of the linked hazard.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) MUST have a single `monty:hazard_codes` in the array because the hazard is unique. This is also crucial for
-> the event correlation process.
+> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+>
+> **Valid examples**: `["MH0600"]`, `["FL", "MH0600"]`, `["FL", "nat-hyd-flo-flo", "MH0600"]`  
+> **Invalid examples**: `["FL"]` (missing UNDRR code), `["FL", "MH0600", "MH0601"]` (multiple UNDRR codes), `["FL", "TC", "MH0600"]` (multiple GLIDE codes)
+>
+> **Note**: The JSON Schema can validate patterns and require at least one UNDRR-ISC 2025 code, but due to JSON Schema draft-07 limitations, it cannot fully enforce "at most one code per classification type." Additional validation logic may be needed in implementation to strictly enforce this constraint.
 
 ### Impact
 

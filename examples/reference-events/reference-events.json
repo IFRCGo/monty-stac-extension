@@ -73,9 +73,9 @@
       "SPN"
     ],
     "monty:hazard_codes": [
-      "GH0001",
-      "GH0002",
-      "GH0004"
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
     ]
   },
   "assets": {

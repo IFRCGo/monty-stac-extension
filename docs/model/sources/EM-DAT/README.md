@@ -156,5 +156,31 @@ Here is a table with the fields that are mapped from the EM-DAT event to the STA
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | start year + start month + start day                                                                         | Start date of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                            |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | start year + start month + start day                                                                         | End date of the event converted in UTC ISO 8601 format                                                                                                                                                                                                     |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)\[0]                                                       | iso                                                                                                          | ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name                                                                                                                                             |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Classification Key                                                                                           | [EN-DAT CRED Classification Key](../../taxonomy.md#em-dat-classification-tree                                                                                                                                                                              |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Classification Key                                                                                           | List of hazard codes converted following the [Hazard Type Mapping](#hazard-type-mapping)                                                                                                                                                                   |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | graphql request                                                                                              | Link to the EM-DAT event details page                                                                                                                                                                                                                      |
+
+#### Hazard Type Mapping
+
+EM-DAT uses the [EM-DAT CRED Classification Tree](../../taxonomy.md#em-dat-cred-classification-tree) and must be mapped to the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension. The full cross-classification mapping is available in the [taxonomy documentation](../../taxonomy.md#cross-classification-mapping).
+
+The EM-DAT Classification Key (e.g., `nat-hyd-flo-flo`) should be used along with the corresponding 2025 UNDRR-ISC code (e.g., `MH0600`) for maximum interoperability.
+
+**Example mappings:**
+
+| EM-DAT Classification Key | GLIDE | **UNDRR-ISC 2025** (Reference) | Cluster    | Description             |
+| ------------------------- | ----- | ------------------------------ | ---------- | ----------------------- |
+| nat-hyd-flo-flo           | FL    | **MH0600**                     | MH-WATER   | Flooding (chapeau)      |
+| nat-geo-ear-gro           | EQ    | **GH0101**                     | GEO-SEIS   | Earthquake              |
+| nat-met-sto-tro           | TC    | **MH0306**                     | MH-WIND    | Cyclone or Depression   |
+| nat-cli-dro-dro           | DR    | **MH0401**                     | MH-PRECIP  | Drought                 |
+| nat-geo-vol-vol           | VO    | **GH0201**                     | GEO-VOLC   | Lava Flows              |
+| nat-geo-ear-tsu           | TS    | **MH0705**                     | MH-MARINE  | Tsunami                 |
+| nat-cli-wil-for           | WF    | **EN0205**                     | ENV-FOREST | Wildfires               |
+| nat-met-ext-hea           | HT    | **MH0501**                     | MH-TEMP    | Heatwave                |
+| nat-met-ext-col           | CW    | **MH0502**                     | MH-TEMP    | Cold Wave               |
+| nat-geo-mmd-lan           | LS    | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement (chapeau) |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. The complete mapping table with all EM-DAT disaster types is available in the [taxonomy cross-classification mapping](../../taxonomy.md#cross-classification-mapping). More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+
+This mapping enables standardized hazard categorization while preserving EM-DAT's original classification in the source properties.

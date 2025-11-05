@@ -40,7 +40,9 @@
       "SYR"
     ],
     "monty:hazard_codes": [
-      "nat-hyd-flo-flo"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ],
     "monty:impact_detail": {
       "category": "people",

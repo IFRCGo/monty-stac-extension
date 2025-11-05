@@ -30,10 +30,14 @@
       "ESP"
     ],
     "monty:hazard_codes": [
-      "MH0004",
-      "MH0005",
-      "MH0006",
-      "MH0007"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0601",
+      "MH0602",
+      "FF",
+      "nat-hyd-flo-fla",
+      "MH0603",
+      "MH0604"
     ],
     "monty:corr_id": "20241027T150000-ESP-HM-FLOOD-001-GCDB",
     "roles": [

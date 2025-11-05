@@ -25,7 +25,9 @@
     "end_datetime": "2024-11-04T16:14:00Z",
     "monty:episode_number": 2,
     "monty:hazard_codes": [
-      "FL"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ],
     "monty:country_codes": [
       "ESP"

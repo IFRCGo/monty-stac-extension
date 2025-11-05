@@ -118,7 +118,384 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 | tec-tra-roa-roa    | Technological | Transport              | Road                   | Road                             |
 | tec-tra-wat-wat    | Technological | Transport              | Water                  | Water                            |
 
-### [UNDRR-ISC 2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips)
+### UNDRR-ISC Hazard Information Profiles
+
+#### [2025 Update](https://www.undrr.org/media/107380/download?startDownload=20250613)
+
+The 2025 update of the UNDRR-ISC Hazard Information Profiles represents a significant revision and consolidation:
+
+- **281 hazards** (consolidated from 302 in 2020)
+- **8 hazard types** (unchanged)
+- **39 clusters** (reorganized)
+- **New identifier system**: Based on hazard clusters with format: `XX-CCSS` where:
+  - XX = 2-letter hazard type code
+  - CC = 2-digit cluster code
+  - SS = 2-digit specific hazard code
+- **Chapeau HIPs**: New umbrella/general hazard profiles providing information applicable to multiple similar hazards without individual profiles (e.g., MH0600 Flooding, GH0300 Gravitational Mass Movement, CH0300 Toxic Gases)
+- **Multi-hazard context**: New section in each HIP describing triggering relationships between hazards
+
+**Key Changes:**
+- Multiple hazards merged (e.g., all tsunami types consolidated into MH0705)
+- Hazards reclassified across types (e.g., Polluted Air moved to Environmental from Meteorological)
+- New open coding system allows future additions within clusters
+- Enhanced monitoring and multi-hazard context sections
+
+**The 8 Hazard Types and 39 Clusters:**
+
+1. **Meteorological and Hydrological (MH)**: 8 clusters
+   - Convective-Related, Particle-related, Wind & Pressure-related, Precipitation-related, Temperature-related, Water-related, Marine-related, Terrestrial
+
+2. **Extraterrestrial (ET)**: 2 clusters
+   - Space Weather, Extraterrestrial Hazard
+
+3. **Geological (GH)**: 4 clusters
+   - Seismic, Volcanic, Ground Failure, Other Hazards
+
+4. **Environmental (EN)**: 5 clusters
+   - Environmental Degradation (Air, Forest, Land, Water, Biodiversity)
+
+5. **Chemical (CH)**: 9 clusters
+   - Heavy Metals & Trace Elements, Carcinogens, Toxic Gases, Asphyxiant Gases, Persistent Organic Pollutants, Chemical Hazards in Food & Pharmaceuticals, Other Chemical Hazards
+
+6. **Biological (BI)**: 6 clusters
+   - Infectious Diseases, Specific Infectious Diseases of Public Health Concern, Animal Infectious Diseases, Insect-related Diseases, Plant Diseases, Other Biological Hazards
+
+7. **Technological (TL)**: 6 clusters
+   - Cyberhazards, Construction/Structural Failure, Industrial Failure, Transportation Accidents, Radiation, Waste
+
+8. **Societal (SO)**: 3 clusters
+   - Conflict, Post-conflict, Behavioural, Economic
+
+For the complete list of 281 hazards with their new identifiers, see the [2025 HIPs Report](https://www.undrr.org/media/107380/download?startDownload=20250613). The correspondence between 2020 and 2025 identifiers is provided in Annex 1 of the report.
+
+**Examples of Key Changes:**
+
+| Change Type | 2020 Code | 2020 Name | 2025 Code | 2025 Name | Notes |
+|-------------|-----------|-----------|-----------|-----------|-------|
+| **Merged** | MH0056 | Subtropical Storm | MH0308 | Sub-tropical Cyclone | Merged with MH0032 |
+| **Merged** | MH0058 | Tropical Storm | MH0309 | Tropical Cyclone | Merged with MH0057 |
+| **Merged** | GH0006 | Tsunami (Earthquake Trigger) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Merged** | GH0017 | Tsunami (Volcanic Trigger) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Merged** | GH0035 | Tsunami (Submarine Landslide) | MH0705 | Tsunami | All tsunami types merged into one |
+| **Moved** | MH0014 | Black Carbon | EN0104 | Black Carbon | Moved to Environmental |
+| **Moved** | MH0018 | Polluted Air | EN0102/EN0103 | Air Pollution (Point/Ambient) | Moved to Environmental & split |
+| **Moved** | MH0021 | Ocean Acidification | EN0401 | Ocean Acidification | Moved to Environmental |
+| **Moved** | MH0051 | Mud Flow | GH0303 | Flows | Moved to Geological |
+| **Moved** | EN0018 | Compressive Soils | GH0401 | Compressive Soils | Moved to Geological |
+| **Moved** | EN0019 | Soil Erosion | GH0403 | Soil Erosion | Moved to Geological |
+| **Moved** | BI0009 | Suicide Cluster | SO0303 | Suicide Cluster | Moved to Societal |
+| **New Chapeau** | - | - | MH0600 | Flooding | General flooding information |
+| **New Chapeau** | - | - | GH0300 | Gravitational Mass Movement | General landslide information |
+| **New Chapeau** | - | - | CH0300 | Toxic Gases | General toxic gas information |
+| **New** | - | - | MH0708 | Marine Heatwave | New hazard |
+| **New** | - | - | MH0402 | Rain | New hazard |
+| **New** | - | - | ET0206 | Space Debris | New hazard |
+| **New** | - | - | BI0220 | Marburg Virus | New hazard |
+| **Removed** | GH0018 | Lightning (Volcanic Trigger) | - | - | Removed (covered elsewhere) |
+| **Removed** | GH0019 | Urban Fire (Volcanic) | - | - | Removed (covered elsewhere) |
+| **Removed** | GH0030 | Aquifer Recharge Failure | - | - | Removed |
+
+**Cluster Code Structure (Examples):**
+
+The new 2-digit cluster code (positions 3-4) allows grouping related hazards:
+
+- **MH01XX**: Convective-Related hazards (MH0101=Downburst, MH0102=Lightning, MH0103=Thunderstorm)
+- **MH03XX**: Wind & Pressure-related hazards (MH0301=Wind, MH0302=Derecho, MH0303=Gale, etc.)
+- **MH06XX**: Water-related/Flooding hazards (MH0600=Flooding chapeau, MH0601-MH0610=specific flood types)
+- **GH01XX**: Seismic hazards (GH0101=Earthquake, covering all earthquake-related phenomena)
+- **GH02XX**: Volcanic hazards (GH0201-GH0205=volcanic phenomena)
+- **GH03XX**: Ground Failure/Gravitational Mass Movements (GH0300=chapeau, GH0301-GH0311=specific types)
+- **BI02XX**: Specific Infectious Diseases of Public Health Concern (BI0201-BI0245=named diseases)
+
+This open system allows future hazards to be added within appropriate clusters (e.g., MH0611 for a new flood type).
+
+**Complete 2025 Hazard List:**
+
+| Hazard Code | Hazard Label | Cluster ID | Cluster Label | Family Label |
+| ----------- | ------------ | ---------- | ------------- | ------------ |
+| MH0101 | Downburst | MH-CONV | Convective-Related | Meteorological & Hydrological |
+| MH0102 | Lightning (electrical storm) | MH-CONV | Convective-Related | Meteorological & Hydrological |
+| MH0103 | Thunderstorm | MH-CONV | Convective-Related | Meteorological & Hydrological |
+| MH0201 | Dust Storm or Sandstorm | MH-PART | Particle-related | Meteorological & Hydrological |
+| MH0202 | Fog | MH-PART | Particle-related | Meteorological & Hydrological |
+| MH0203 | Haze | MH-PART | Particle-related | Meteorological & Hydrological |
+| MH0204 | Sand Haze | MH-PART | Particle-related | Meteorological & Hydrological |
+| MH0205 | Smoke | MH-PART | Particle-related | Meteorological & Hydrological |
+| MH0301 | Wind | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0302 | Derecho | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0303 | Gale | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0304 | Squall | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0305 | Tornado | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0306 | Depression or Cyclone | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0307 | Extra-tropical Cyclone | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0308 | Sub-tropical Cyclone | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0309 | Tropical Cyclone | MH-WIND | Wind & Pressure-related | Meteorological & Hydrological |
+| MH0401 | Drought | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0402 | Rain | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0403 | Blizzard | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0404 | Hail | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0405 | Snow | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0406 | Snow Storm | MH-PRECIP | Precipitation-related | Meteorological & Hydrological |
+| MH0501 | Heatwave | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0502 | Cold Wave | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0503 | Dzud | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0504 | Freeze | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0505 | Frost (Hoar Frost) | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0506 | Freezing Rain (Supercooled Rain) | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0507 | Glaze | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0508 | Ground Frost | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0509 | Icing (Including Ice) | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0510 | Thaw | MH-TEMP | Temperature-related | Meteorological & Hydrological |
+| MH0600 | Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0601 | Coastal Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0602 | Estuarine (Coastal) Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0603 | Flash Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0604 | Fluvial (Riverine) Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0605 | Groundwater Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0606 | Surface water Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0607 | Glacial Lake Outburst Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0608 | Ice-Jam Flooding Including Debris | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0609 | Ponding (Drainage) Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0610 | Snowmelt Flooding | MH-WATER | Water-related | Meteorological & Hydrological |
+| MH0701 | Rogue Wave | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0702 | Seiche | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0703 | Storm Surge | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0704 | Storm Tides | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0705 | Tsunami | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0706 | Sea ice | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0707 | Ice flow | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0708 | Marine Heatwave | MH-MARINE | Marine-related | Meteorological & Hydrological |
+| MH0801 | Avalanche | MH-TERR | Terrestrial | Meteorological & Hydrological |
+| ET0101 | Geomagnetic Disturbance | ET-SPACE | Space Weather | Extraterrestrial |
+| ET0102 | Ionospheric Disturbance | ET-SPACE | Space Weather | Extraterrestrial |
+| ET0103 | Solar Flare | ET-SPACE | Space Weather | Extraterrestrial |
+| ET0104 | Solar Energetic Particles | ET-SPACE | Space Weather | Extraterrestrial |
+| ET0201 | Airburst | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| ET0202 | UV Radiation | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| ET0203 | Meteorite Impact | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| ET0204 | Space Hazard / Accident | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| ET0205 | Near-Earth Object | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| ET0206 | Space Debris | ET-EXTRA | Extraterrestrial Hazard | Extraterrestrial |
+| GH0101 | Earthquake | GEO-SEIS | Seismic | Geological |
+| GH0201 | Lava Flows (Lava Domes) | GEO-VOLC | Volcanic | Geological |
+| GH0202 | Ash/Tephra Fall (including Volcanic Ballistic projectiles) | GEO-VOLC | Volcanic | Geological |
+| GH0203 | Pyroclastic Density Current | GEO-VOLC | Volcanic | Geological |
+| GH0204 | Lahars | GEO-VOLC | Volcanic | Geological |
+| GH0205 | Volcanic Gases and Aerosols | GEO-VOLC | Volcanic | Geological |
+| GH0300 | Gravitational Mass Movement (Landslide) | GEO-GFAIL | Ground Failure | Geological |
+| GH0301 | Falls | GEO-GFAIL | Ground Failure | Geological |
+| GH0302 | Spreads | GEO-GFAIL | Ground Failure | Geological |
+| GH0303 | Flows | GEO-GFAIL | Ground Failure | Geological |
+| GH0304 | Slides | GEO-GFAIL | Ground Failure | Geological |
+| GH0305 | Topples | GEO-GFAIL | Ground Failure | Geological |
+| GH0306 | Submarine Landslide | GEO-GFAIL | Ground Failure | Geological |
+| GH0307 | Liquefaction | GEO-GFAIL | Ground Failure | Geological |
+| GH0308 | Sinkhole | GEO-GFAIL | Ground Failure | Geological |
+| GH0309 | Subsidence and Uplift | GEO-GFAIL | Ground Failure | Geological |
+| GH0310 | Shrink-Swell Subsidence | GEO-GFAIL | Ground Failure | Geological |
+| GH0311 | Surface Rupture & Fissure | GEO-GFAIL | Ground Failure | Geological |
+| GH0401 | Compressive Soils | GEO-OTHER | Other Hazards | Geological |
+| GH0402 | Soil Degradation | GEO-OTHER | Other Hazards | Geological |
+| GH0403 | Soil Erosion | GEO-OTHER | Other Hazards | Geological |
+| GH0404 | River Erosion & Accretion | GEO-OTHER | Other Hazards | Geological |
+| GH0405 | Coastal Erosion & Accretion | GEO-OTHER | Other Hazards | Geological |
+| GH0406 | Sand Encroachment | GEO-OTHER | Other Hazards | Geological |
+| GH0407 | Ground Gases (CH4, Rn, etc.) | GEO-OTHER | Other Hazards | Geological |
+| EN0101 | Household Air Pollution | ENV-AIR | Environmental Degradation | Environmental |
+| EN0102 | Air Pollution (Point Source) | ENV-AIR | Environmental Degradation | Environmental |
+| EN0103 | Ambient (Outdoor) Air Pollution | ENV-AIR | Environmental Degradation | Environmental |
+| EN0104 | Black Carbon | ENV-AIR | Environmental Degradation | Environmental |
+| EN0105 | Acid Rain | ENV-AIR | Environmental Degradation | Environmental |
+| EN0106 | Runoff / Nonpoint Source Pollution | ENV-AIR | Environmental Degradation | Environmental |
+| EN0201 | Deforestation | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0202 | Forest Declines and Diebacks | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0203 | Forest Disturbances | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0204 | Forest Invasive Species | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0205 | Wildfires | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0206 | Desertification | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0207 | Loss of Mangroves | ENV-FOREST | Environmental Degradation | Environmental |
+| EN0301 | Land Degradation | ENV-LAND | Environmental Degradation | Environmental |
+| EN0302 | Seawater intrusion | ENV-LAND | Environmental Degradation | Environmental |
+| EN0303 | Salinity & Sodicity | ENV-LAND | Environmental Degradation | Environmental |
+| EN0304 | Wetland Loss/Degradation | ENV-LAND | Environmental Degradation | Environmental |
+| EN0305 | Permafrost Loss | ENV-LAND | Environmental Degradation | Environmental |
+| EN0401 | Ocean Acidification | ENV-WATER | Environmental Degradation | Environmental |
+| EN0402 | Sea Level Rise | ENV-WATER | Environmental Degradation | Environmental |
+| EN0403 | Eutrophication | ENV-WATER | Environmental Degradation | Environmental |
+| EN0404 | Coral Bleaching | ENV-WATER | Environmental Degradation | Environmental |
+| EN0405 | Sand Mining | ENV-WATER | Environmental Degradation | Environmental |
+| EN0501 | Biodiversity Loss | ENV-BIO | Environmental Degradation | Environmental |
+| CH0100 | Heavy Metals & Trace Elements | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0101 | Arsenic | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0102 | Cadmium | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0103 | Lead | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0104 | Mercury | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0105 | Fluoride & Iodine/Iodide Excess or Inadequate Intake | CHEM-METAL | Heavy Metals & Trace Element Contaminants | Chemical |
+| CH0201 | Aflatoxins | CHEM-CARC | Carcinogens | Chemical |
+| CH0202 | Asbestos | CHEM-CARC | Carcinogens | Chemical |
+| CH0203 | Benzene & Hydrocarbons | CHEM-CARC | Carcinogens | Chemical |
+| CH0300 | Toxic Gases | CHEM-TGAS | Toxic Gases | Chemical |
+| CH0301 | Ammonia | CHEM-TGAS | Toxic Gases | Chemical |
+| CH0302 | Carbon Monoxide | CHEM-TGAS | Toxic Gases | Chemical |
+| CH0303 | Chlorine | CHEM-TGAS | Toxic Gases | Chemical |
+| CH0400 | Asphyxiant Gases | CHEM-AGAS | Asphyxiant Gases | Chemical |
+| CH0500 | Persistent Organic Pollutants | CHEM-POPS | Persistent Organic Pollutants | Chemical |
+| CH0501 | Pesticides | CHEM-POPS | Persistent Organic Pollutants | Chemical |
+| CH0502 | Dioxins & Dioxin-like Substance | CHEM-POPS | Persistent Organic Pollutants | Chemical |
+| CH0503 | Polyfluoroalkyl Substances | CHEM-POPS | Persistent Organic Pollutants | Chemical |
+| CH0504 | Microplastics | CHEM-POPS | Persistent Organic Pollutants | Chemical |
+| CH0601 | Levels of Contaminants in Food & Feed | CHEM-FOOD | Chemical Hazards in Food and Pharmaceuticals | Chemical |
+| CH0602 | Substandard & Falsified Medical Products | CHEM-FOOD | Chemical Hazards in Food and Pharmaceuticals | Chemical |
+| CH0603 | Methanol | CHEM-FOOD | Chemical Hazards in Food and Pharmaceuticals | Chemical |
+| CH0604 | Opioids & Other Addictive Substances | CHEM-FOOD | Chemical Hazards in Food and Pharmaceuticals | Chemical |
+| CH0605 | Marine Toxins | CHEM-FOOD | Chemical Hazards in Food and Pharmaceuticals | Chemical |
+| CH0901 | Corrosive Substances | CHEM-OTHER | Other Chemical Hazards | Chemical |
+| CH0902 | Ammonium Nitrate | CHEM-OTHER | Other Chemical Hazards | Chemical |
+| CH0903 | Chemical Warfare Agents | CHEM-OTHER | Other Chemical Hazards | Chemical |
+| BI0101 | Airborne Diseases (human and Animal) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0102 | Blood Borne Viruses (Human and Animal) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0103 | Diarrhoeal Diseases (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0104 | Foodborne Diseases (Human impact) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0105 | Neglected Tropical Diseases (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0106 | Sexually Transmitted Diseases (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0107 | Vaccine-Preventable Diseases (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0108 | Vector Borne Diseases (VBD) (Human and Animal) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0109 | Viral Haemorrhagic Fevers (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0110 | Waterborne Diseases (Human) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0111 | Cryptosporidium (Human and Animal) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0112 | Cysticercosis (Human and Animal) | BIO-INFECT | Infectious Diseases | Biological |
+| BI0113 | Zoonotic Diseases | BIO-INFECT | Infectious Diseases | Biological |
+| BI0201 | Anthrax | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0202 | Brucellosis (Human and Animal) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0203 | Chikungunya | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0204 | Cholera (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0205 | COVID-19 (SARS-CoV-2) (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0206 | Crimean-Congo Haemorrhagic Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0207 | Dengue (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0208 | Diphtheria (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0209 | Ebola (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0210 | Escherichia Coli (STEC) (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0211 | Hepatitis A (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0212 | Hepatitis B (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0213 | Hepatitis C (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0214 | HIV and AIDS (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0215 | Lassa Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0216 | Leprosy (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0217 | Leptospirosis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0218 | Listeriosis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0219 | Malaria (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0220 | Marburg Virus | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0221 | Measles (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0222 | Meningococcal Meningitis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0223 | Middle East Respiratory Syndrome (MERS) (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0224 | Mpox (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0225 | Paratyphoid Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0226 | Typhoid Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0227 | Pertussis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0228 | Plague (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0229 | Polio (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0230 | Prion Diseases | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0231 | Q Fever | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0232 | Rabies (Animal and Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0233 | Rotavirus (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0234 | Shigellosis (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0235 | Smallpox (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0236 | Severe Acute Respiratory Syndrome (SARS) (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0237 | Tuberculosis (Human and Animal) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0238 | Trypanosomiasis & Tripanomosis (Human and Animal) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0239 | Varicella and Herpes Zoster (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0240 | West Nile Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0241 | Yellow Fever (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0242 | Zika Virus (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0243 | Seasonal Influenza (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0244 | Pandemic Influenza (Human) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0245 | Avian Influenza (Human and Animal) | BIO-SPEC | Specific Infectious Disease of Public Health Concern | Biological |
+| BI0301 | Animal Diseases (Not Zoonoses) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0302 | African Swine Fever (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0303 | Classical Swine Fever (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0304 | Contagious Bovine Pleuropneumonia (CBPP) (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0305 | Contagious Caprine Pleuropneumonia (CCPP) (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0306 | Foot and Mouth Disease Virus (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0307 | Lumpy Skin Disease (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0308 | Newcastle Disease (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0309 | New World Screwworm (NWS) (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0310 | Peste des Petits Ruminants (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0311 | Rift Valley Fever (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0312 | Rinderpest (Animal) | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0313 | Oyster Disease Aquaculture | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0314 | Shrimp Diseases (Bacterial) - Acute Hepatic Pancreatic Necrosis | BIO-ANIMAL | Animal Infectious Diseases | Biological |
+| BI0401 | Insect Pest Infestations | BIO-INSECT | Insect-related Diseases | Biological |
+| BI0402 | Locust | BIO-INSECT | Insect-related Diseases | Biological |
+| BI0403 | Invasive weed/species | BIO-INSECT | Insect-related Diseases | Biological |
+| BI0501 | Bacterial Plant Disease | BIO-PLANT | Plant Diseases | Biological |
+| BI0502 | Fungal Plant Disease | BIO-PLANT | Plant Diseases | Biological |
+| BI0503 | Viral, Phytoplasma and Viroid Plant Disease Outbreaks | BIO-PLANT | Plant Diseases | Biological |
+| BI0601 | Antimicrobial Resistance | BIO-OTHER | Other Biological Hazards | Biological |
+| BI0602 | Biological Agents CBRNE | BIO-OTHER | Other Biological Hazards | Biological |
+| BI0603 | Harmful Algal Blooms | BIO-OTHER | Other Biological Hazards | Biological |
+| BI0604 | Human-Wildlife Conflict | BIO-OTHER | Other Biological Hazards | Biological |
+| BI0605 | Snakebite Envenoming | BIO-OTHER | Other Biological Hazards | Biological |
+| TL0101 | Malware | TECH-CYB | Cyberhazards | Technological |
+| TL0102 | Data Breach | TECH-CYB | Cyberhazards | Technological |
+| TL0103 | Advanced Persistent Threat | TECH-CYB | Cyberhazards | Technological |
+| TL0104 | Denial of Service | TECH-CYB | Cyberhazards | Technological |
+| TL0105 | Supply Chain Attack | TECH-CYB | Cyberhazards | Technological |
+| TL0106 | Cyberbullying | TECH-CYB | Cyberhazards | Technological |
+| TL0107 | Social Engineering | TECH-CYB | Cyberhazards | Technological |
+| TL0201 | Building Collapse | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0202 | Building, Highrise, Cladding | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0203 | Structural Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0204 | Bridge Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0205 | Dam Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0206 | Supply Chain Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0207 | Critical Infrastructure Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0208 | Nuclear Plant Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0209 | Power Outage / Blackout | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0210 | Water Supply Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0211 | Emergency Telecommunication Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0212 | Radio and other Telecommunication Failures | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0213 | Tunnel Failure | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0214 | Drain and Sewer Flooding | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0215 | Reservoir Flooding | TECH-STRFAIL | Construction / Structural Failure | Technological |
+| TL0301 | Leaks and Spills | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0302 | Pollution | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0303 | Soil Pollution | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0304 | Explosion | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0305 | Fire | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0306 | Explosive Agents | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0307 | Mining Hazards | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0308 | Safety Hazards Associated with Oil and Gas Extraction Activities | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0309 | Natech | TECH-INDFAIL | Industrial Failure | Technological |
+| TL0401 | Air Transportation Accident | TECH-TRANSP | Transportation Accidents | Technological |
+| TL0402 | Inland Water Way Accidents | TECH-TRANSP | Transportation Accidents | Technological |
+| TL0403 | Maritime Accident | TECH-TRANSP | Transportation Accidents | Technological |
+| TL0404 | Rail Accident | TECH-TRANSP | Transportation Accidents | Technological |
+| TL0405 | Road Traffic Accident | TECH-TRANSP | Transportation Accidents | Technological |
+| TL0501 | Disaster & Conflict Waste | TECH-WASTE | Waste | Technological |
+| TL0502 | Solid Waste | TECH-WASTE | Waste | Technological |
+| TL0503 | Wastewater | TECH-WASTE | Waste | Technological |
+| TL0504 | Hazardous Waste | TECH-WASTE | Waste | Technological |
+| TL0505 | Plastic Waste | TECH-WASTE | Waste | Technological |
+| TL0506 | Marine Debris | TECH-WASTE | Waste | Technological |
+| TL0507 | Electronic Waste (E-Waste) | TECH-WASTE | Waste | Technological |
+| TL0508 | Health-care Waste | TECH-WASTE | Waste | Technological |
+| TL0509 | Landfilling | TECH-WASTE | Waste | Technological |
+| TL0510 | Waste Treatment Lagoons | TECH-WASTE | Waste | Technological |
+| TL0511 | Tailings | TECH-WASTE | Waste | Technological |
+| TL0601 | Radioactive Waste | TECH-RAD | Radiation | Technological |
+| TL0602 | Radioactive Agents & Material | TECH-RAD | Radiation | Technological |
+| TL0603 | Nuclear Agents | TECH-RAD | Radiation | Technological |
+| SO0101 | International Armed Conflict (IAC) | SOC-CONF | Conflict | Societal |
+| SO0102 | Non-International Armed Conflict (NIAC) | SOC-CONF | Conflict | Societal |
+| SO0103 | Civil Unrest | SOC-CONF | Conflict | Societal |
+| SO0201 | Explosive Ordnance | SOC-POSTCONF | Post-conflict | Societal |
+| SO0202 | Environmental Degradation from Conflict | SOC-POSTCONF | Post-conflict | Societal |
+| SO0301 | Violence | SOC-BEH | Behavioural | Societal |
+| SO0302 | Stampede or Crushing (Human) | SOC-BEH | Behavioural | Societal |
+| SO0303 | Suicide Cluster | SOC-BEH | Behavioural | Societal |
+| SO0401 | Financial Shock | SOC-ECO | Economic | Societal |
+
+#### [2020 Hazard Information Profiles](https://www.preventionweb.net/drr-glossary/hips) (Historical Reference)
 
 | Hazard Code | Hazard Label                                                                                                                                           | Cluster ID       | Cluster Label                                                     | Family Label                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ----------------------------------------------------------------- | ---------------------------- |
@@ -428,106 +805,116 @@ Note: In September 2023, the EM-DAT Classification Tree was updated and simplifi
 
 ### Cross-Classification Mapping
 
-| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC Hazard Code |
-| ---------- | ------------------------- | --------------------------------------- | --------------------- |
-| CW         | nat-met-ext-col           | Cold wave                               | MH0040                |
-| DR         | nat-cli-dro-dro           | Drought                                 | MH0035                |
-| EQ         | nat-geo-ear-gro           | Earthquake                              | GH0001                |
-| EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0002                |
-| EQ         | nat-geo-ear-gro           | Liquefaction                            | GH0003                |
-| EQ         | nat-geo-ear-gro           | Surface rupture                         | GH0004                |
-| EQ         | nat-geo-ear-gro           | Subsidence and uplift                   | GH0005                |
-| EP         | nat-bio-epi-vir           | Viral diseases                          | BI0016                |
-| EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0016                |
-| EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0016                |
-| EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0016                |
-| EP         | nat-bio-epi-pri           | Prion diseases                          | BI0016                |
-| EP         | nat-bio-epi-dis           | General infectious disease              | BI0016                |
-| EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0031                |
-| EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0099                |
-| FR         | tec-ind-fir-fir           | Industrial fire                         | TL0032                |
-| FR         | tec-mis-fir-fir           | Miscellaneous fire                      | TL0032                |
-| FF         | nat-hyd-flo-fla           | Flash flood                             | MH0006                |
-| FL         | nat-hyd-flo-riv           | Riverine flood                          | MH0007                |
-| FL         | nat-hyd-flo-coa           | Coastal flood                           | MH0004                |
-| FL         | nat-hyd-flo-flo           | General flood                           | MH0012                |
-| FL         | nat-hyd-flo-ice           | Ice jam flood                           | MH0009                |
-| FL         | nat-cli-glo-glo           | Glacial lake outburst flood             | MH0013                |
-| FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0008                |
-| FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0010                |
-| FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0011                |
-| FL         | tec-mis-col-col           | Dam/levee break flood                   | TL0009                |
-| HT         | nat-met-ext-hea           | Heat wave                               | MH0047                |
-| IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0002                |
-| IN         | nat-bio-inf-loc           | Locust infestation                      | BI0003                |
-| IN         | nat-bio-inf-gra           | Grasshopper infestation                 | BI0002                |
-| IN         | nat-bio-inf-wor           | Worms infestation                       | BI0002                |
-| IN         | nat-bio-inf-inf           | General infestation                     | BI0002                |
-| LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0007                |
-| LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0014                |
-| LS         | nat-hyd-mmw-lan           | Landslide (wet)                         | GH0007                |
-| MS         | nat-hyd-mmw-mud           | Mud flow/slide                          | MH0051                |
-| ST         | nat-met-sto-sto           | Severe local storm                      | MH0003                |
-| ST         | nat-met-sto-lig           | Lightning                               | MH0002                |
-| ST         | nat-met-sto-hai           | Hail                                    | MH0036                |
-| ST         | nat-met-sto-sev           | Severe weather                          | MH0003                |
-| AV         | nat-geo-mmd-ava           | Avalanche (dry)                         | MH0050                |
-| AV         | nat-hyd-mmw-ava           | Avalanche (wet)                         | MH0050                |
-| SS         | nat-met-sto-sur           | Storm surge                             | MH0027                |
-| SS         | nat-hyd-wav-rog           | Storm tides                             | MH0028                |
-| TO         | nat-met-sto-tor           | Tornado                                 | MH0059                |
-| TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0057                |
-| TC         | nat-met-sto-tro           | Tropical storm                          | MH0058                |
-| TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0030                |
-| TC         | nat-met-sto-tro           | Sub-tropical cyclone                    | MH0032                |
-| TS         | nat-geo-ear-tsu           | Tsunami (general)                       | MH0029                |
-| TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | GH0006                |
-| TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | GH0017                |
-| TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | GH0035                |
-| VW         | nat-met-sto-sto           | Violent wind                            | MH0060                |
-| VW         | nat-met-sto-der           | Derecho                                 | MH0053                |
-| VW         | nat-met-sto-san           | Sand/dust storm                         | MH0015                |
-| VO         | nat-geo-vol-lav           | Lava flows                              | GH0009                |
-| VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0010                |
-| VO         | nat-geo-vol-vol           | Volcanic activity (general)             | GH0009                |
-| VO         | nat-geo-vol-pyr           | Pyroclastic flow                        | GH0012                |
-| VO         | nat-geo-vol-lah           | Lahar                                   | GH0013                |
-| VO         | nat-geo-vol-vol           | Volcanic gases                          | GH0016                |
-| WF         | nat-cli-wil-for           | Forest fire                             | EN0013                |
-| WF         | nat-cli-wil-lan           | Land fire                               | EN0013                |
-| WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0013                |
-| AC         | tec-ind-rad-rad           | Radiation                               | TL0001                |
-| AC         | tec-ind-che-che           | Chemical spill                          | TL0030                |
-| AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0029                |
-| AC         | tec-ind-gas-gas           | Gas leak                                | TL0030                |
-| AC         | tec-ind-oil-oil           | Oil spill                               | CH0017                |
-| AC         | tec-ind-poi-poi           | Poisoning                               | CH0024                |
-| AC         | tec-ind-ind-ind           | General industrial accident             | TL0027                |
-| AC         | tec-tra-air-air           | Air transport accident                  | TL0048                |
-| AC         | tec-tra-rai-rai           | Rail transport accident                 | TL0051                |
-| AC         | tec-tra-roa-roa           | Road transport accident                 | TL0052                |
-| AC         | tec-tra-wat-wat           | Water transport accident                | TL0050                |
-| CE         | Multiple codes            | International armed conflict            | SO0001                |
-| CE         | Multiple codes            | Non-international armed conflict        | SO0002                |
-| CE         | Multiple codes            | Civil unrest                            | SO0003                |
-| CE         | Multiple codes            | Explosive remnants of war               | SO0004                |
-| CE         | Multiple codes            | Environmental degradation from conflict | SO0005                |
-| OT         | nat-met-fog-fog           | Fog                                     | MH0016                |
-| OT         | nat-met-ext-sev           | Severe winter conditions                | MH0041                |
-| OT         | nat-met-ext-sev           | Freeze                                  | MH0042                |
-| OT         | nat-met-ext-sev           | Frost                                   | MH0043                |
-| OT         | nat-met-ext-sev           | Freezing rain                           | MH0044                |
-| OT         | nat-met-ext-sev           | Glaze                                   | MH0045                |
-| OT         | nat-met-ext-sev           | Ground frost                            | MH0046                |
-| OT         | nat-met-ext-sev           | Icing                                   | MH0048                |
-| OT         | nat-met-ext-sev           | Thaw                                    | MH0049                |
-| OT         | nat-met-sto-bli           | Blizzard                                | MH0034                |
-| OT         | nat-ext-imp-air           | Airburst                                | ET0001                |
-| OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0002                |
-| OT         | nat-ext-spa-ene           | Energetic particles                     | ET0002                |
-| OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0006                |
-| OT         | nat-ext-spa-sho           | Shockwave                               | ET0008                |
-| OT         | nat-ext-imp-col           | Space object collision                  | ET0004                |
+**Updated for 2025 UNDRR-ISC Hazard Information Profiles**
+
+This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 include:
+
+- All tsunami types consolidated to MH0705
+- Flood types reorganized in MH06XX series
+- All earthquake phenomena consolidated to GH0101
+- Landslides reorganized in GH03XX series (Ground Failure cluster)
+- Tropical storms merged into MH0309 (Tropical Cyclone)
+
+| GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC 2025 Code |
+| ---------- | ------------------------- | --------------------------------------- | ------------------- |
+| CW         | nat-met-ext-col           | Cold wave                               | MH0502              |
+| DR         | nat-cli-dro-dro           | Drought                                 | MH0401              |
+| EQ         | nat-geo-ear-gro           | Earthquake                              | GH0101              |
+| EQ         | nat-geo-ear-gro           | Ground shaking                          | GH0101              |
+| EQ         | nat-geo-ear-gro           | Liquefaction                            | GH0307              |
+| EQ         | nat-geo-ear-gro           | Surface rupture                         | GH0311              |
+| EQ         | nat-geo-ear-gro           | Subsidence and uplift                   | GH0309              |
+| EP         | nat-bio-epi-vir           | Viral diseases                          | BI0101              |
+| EP         | nat-bio-epi-bac           | Bacterial diseases                      | BI0101              |
+| EP         | nat-bio-epi-par           | Parasitic diseases                      | BI0105              |
+| EP         | nat-bio-epi-fun           | Fungal diseases                         | BI0101              |
+| EP         | nat-bio-epi-pri           | Prion diseases                          | BI0230              |
+| EP         | nat-bio-epi-dis           | General infectious disease              | BI0101              |
+| EC         | nat-met-sto-ext           | Extra-tropical cyclone                  | MH0307              |
+| EC         | nat-met-sto-ext           | Extra-tropical storm                    | MH0307              |
+| FR         | tec-ind-fir-fir           | Industrial fire                         | TL0305              |
+| FR         | tec-mis-fir-fir           | Miscellaneous fire                      | TL0305              |
+| FF         | nat-hyd-flo-fla           | Flash flood                             | MH0603              |
+| FL         | nat-hyd-flo-riv           | Riverine flood                          | MH0604              |
+| FL         | nat-hyd-flo-coa           | Coastal flood                           | MH0601              |
+| FL         | nat-hyd-flo-flo           | General flood                           | MH0600              |
+| FL         | nat-hyd-flo-ice           | Ice jam flood                           | MH0608              |
+| FL         | nat-cli-glo-glo           | Glacial lake outburst flood             | MH0607              |
+| FL         | nat-hyd-flo-flo           | Groundwater flood                       | MH0605              |
+| FL         | nat-hyd-flo-flo           | Ponding flood                           | MH0609              |
+| FL         | nat-hyd-flo-flo           | Snowmelt flood                          | MH0610              |
+| FL         | tec-mis-col-col           | Dam/levee break flood                   | TL0205              |
+| HT         | nat-met-ext-hea           | Heat wave                               | MH0501              |
+| IN         | nat-bio-inf-loc           | Insect pest infestation                 | BI0401              |
+| IN         | nat-bio-inf-loc           | Locust infestation                      | BI0402              |
+| IN         | nat-bio-inf-gra           | Grasshopper infestation                 | BI0401              |
+| IN         | nat-bio-inf-wor           | Worms infestation                       | BI0401              |
+| IN         | nat-bio-inf-inf           | General infestation                     | BI0401              |
+| LS         | nat-geo-mmd-lan           | Landslide (earthquake trigger)          | GH0300              |
+| LS         | nat-geo-mmd-lan           | Landslide (volcanic trigger)            | GH0300              |
+| LS         | nat-hyd-mmw-lan           | Landslide (wet)                         | GH0304              |
+| MS         | nat-hyd-mmw-mud           | Mud flow/slide                          | GH0303              |
+| ST         | nat-met-sto-sto           | Severe local storm                      | MH0103              |
+| ST         | nat-met-sto-lig           | Lightning                               | MH0102              |
+| ST         | nat-met-sto-hai           | Hail                                    | MH0404              |
+| ST         | nat-met-sto-sev           | Severe weather                          | MH0103              |
+| AV         | nat-geo-mmd-ava           | Avalanche (dry)                         | MH0801              |
+| AV         | nat-hyd-mmw-ava           | Avalanche (wet)                         | MH0801              |
+| SS         | nat-met-sto-sur           | Storm surge                             | MH0703              |
+| SS         | nat-hyd-wav-rog           | Storm tides                             | MH0704              |
+| TO         | nat-met-sto-tor           | Tornado                                 | MH0305              |
+| TC         | nat-met-sto-tro           | Tropical cyclone                        | MH0309              |
+| TC         | nat-met-sto-tro           | Tropical storm                          | MH0309              |
+| TC         | nat-met-sto-tro           | Depression or cyclone                   | MH0306              |
+| TC         | nat-met-sto-tro           | Sub-tropical cyclone                    | MH0308              |
+| TS         | nat-geo-ear-tsu           | Tsunami (general)                       | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (earthquake trigger)            | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (volcanic trigger)              | MH0705              |
+| TS         | nat-geo-ear-tsu           | Tsunami (submarine landslide trigger)   | MH0705              |
+| VW         | nat-met-sto-sto           | Violent wind                            | MH0301              |
+| VW         | nat-met-sto-der           | Derecho                                 | MH0302              |
+| VW         | nat-met-sto-san           | Sand/dust storm                         | MH0201              |
+| VO         | nat-geo-vol-lav           | Lava flows                              | GH0201              |
+| VO         | nat-geo-vol-ash           | Ash/tephra fall                         | GH0202              |
+| VO         | nat-geo-vol-vol           | Volcanic activity (general)             | GH0201              |
+| VO         | nat-geo-vol-pyr           | Pyroclastic flow                        | GH0203              |
+| VO         | nat-geo-vol-lah           | Lahar                                   | GH0204              |
+| VO         | nat-geo-vol-vol           | Volcanic gases                          | GH0205              |
+| WF         | nat-cli-wil-for           | Forest fire                             | EN0205              |
+| WF         | nat-cli-wil-lan           | Land fire                               | EN0205              |
+| WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0205              |
+| AC         | tec-ind-rad-rad           | Radiation                               | TL0601              |
+| AC         | tec-ind-che-che           | Chemical spill                          | TL0301              |
+| AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0304              |
+| AC         | tec-ind-gas-gas           | Gas leak                                | TL0301              |
+| AC         | tec-ind-oil-oil           | Oil spill                               | CH0203              |
+| AC         | tec-ind-poi-poi           | Poisoning                               | CH0602              |
+| AC         | tec-ind-ind-ind           | General industrial accident             | TL0309              |
+| AC         | tec-tra-air-air           | Air transport accident                  | TL0401              |
+| AC         | tec-tra-rai-rai           | Rail transport accident                 | TL0404              |
+| AC         | tec-tra-roa-roa           | Road transport accident                 | TL0405              |
+| AC         | tec-tra-wat-wat           | Water transport accident                | TL0403              |
+| CE         | Multiple codes            | International armed conflict            | SO0101              |
+| CE         | Multiple codes            | Non-international armed conflict        | SO0102              |
+| CE         | Multiple codes            | Civil unrest                            | SO0103              |
+| CE         | Multiple codes            | Explosive remnants of war               | SO0201              |
+| CE         | Multiple codes            | Environmental degradation from conflict | SO0202              |
+| OT         | nat-met-fog-fog           | Fog                                     | MH0202              |
+| OT         | nat-met-ext-sev           | Severe winter conditions                | MH0503              |
+| OT         | nat-met-ext-sev           | Freeze                                  | MH0504              |
+| OT         | nat-met-ext-sev           | Frost                                   | MH0505              |
+| OT         | nat-met-ext-sev           | Freezing rain                           | MH0506              |
+| OT         | nat-met-ext-sev           | Glaze                                   | MH0507              |
+| OT         | nat-met-ext-sev           | Ground frost                            | MH0508              |
+| OT         | nat-met-ext-sev           | Icing                                   | MH0509              |
+| OT         | nat-met-ext-sev           | Thaw                                    | MH0510              |
+| OT         | nat-met-sto-bli           | Blizzard                                | MH0403              |
+| OT         | nat-ext-imp-air           | Airburst                                | ET0201              |
+| OT         | nat-ext-spa-geo           | Geomagnetic storm                       | ET0101              |
+| OT         | nat-ext-spa-ene           | Energetic particles                     | ET0104              |
+| OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0103              |
+| OT         | nat-ext-spa-sho           | Shockwave                               | ET0204              |
+| OT         | nat-ext-imp-col           | Space object collision                  | ET0203              |
 
 ## Impact
 

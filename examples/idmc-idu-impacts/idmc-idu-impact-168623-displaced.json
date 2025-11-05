@@ -38,7 +38,9 @@
       "ESP"
     ],
     "monty:hazard_codes": [
-      "nat-hyd-flo-flo"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ],
     "monty:corr_id": "20241111-ESP-nat-cli-wil-for-1-GDBC",
     "monty:impact_detail": {

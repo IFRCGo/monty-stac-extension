@@ -137,19 +137,30 @@ Each impact type gets its own item with:
     - [value](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (first non-null value from the three source fields)
     - [estimate_type](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (PRIMARY)
 
-### Hazard Code Mapping
+#### Hazard Type Mapping
 
-Example mappings from IFRC disaster types to standard codes:
+IFRC DREF uses disaster type names and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension:
 
-```python
-{
-    "Earthquake": ["GH0001", "GH0002", "GH0003", "GH0004", "GH0005"],
-    "Cyclone": ["MH0030", "MH0031", "MH0032"],
-    "Flood": ["FL"],
-    "Tsunami": ["MH0029", "GH0006"],
-    # ... other mappings
-}
-```
+| IFRC Disaster Type     | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
+| ---------------------- | ----- | ------------------- | ------------------------------ | ---------- | ------------------------------- |
+| Earthquake             | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
+| Cyclone                | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
+| Volcanic Eruption      | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC   | Lava Flows                      |
+| Tsunami                | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                         |
+| Flood                  | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
+| Cold Wave              | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                       |
+| Fire                   | FR    | tec-ind-fir-fir     | **TL0305**                     | TECH-INDFAIL | Fire (Industrial)             |
+| Heat Wave              | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                        |
+| Drought                | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                         |
+| Storm Surge            | SS    | nat-met-sto-sur     | **MH0703**                     | MH-MARINE  | Storm Surge                     |
+| Landslide              | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement     |
+| Flash Flood            | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
+| Epidemic               | EP    | nat-bio-epi-dis     | **BI0101**                     | BIO-INFECT | Infectious Diseases             |
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event. The 2025 update consolidated multiple earthquake-related HIPs into a single Earthquake HIP (GH0101), and reclassified Tsunami from Geological to Meteorological & Hydrological hazards.
+
+This mapping enables standardized hazard categorization while preserving IFRC's original disaster type classification in the source properties.
 
 ## Quality Control Notes
 

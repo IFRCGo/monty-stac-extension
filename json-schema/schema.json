@@ -127,14 +127,13 @@
         "monty:hazard_detail": {
           "type": "object",
           "required": [
-            "cluster"
+            "severity_value",
+            "severity_unit"
           ],
           "properties": {
-            "cluster": {
-              "type": "string"
-            },
             "severity_value": {
-              "type": "number"
+              "type": "number",
+              "description": "The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units."
             },
             "severity_unit": {
               "type": "string"
@@ -345,7 +344,32 @@
           }
         },
         "monty:hazard_codes": {
-          "maxItems": 1
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "$comment": "REQUIRED: Exactly 1 UNDRR-ISC 2025 code (format: 2 letters + 4 digits, e.g., GH0101, MH0600). OPTIONAL: At most 1 GLIDE code (2 uppercase letters, e.g., FL, EQ) and at most 1 EM-DAT code (nat-xxx-xxx-xxx format). LIMITATION: JSON Schema draft-07 cannot fully enforce 'at most 1 per type' - custom validation may be needed to prevent multiple codes of the same classification type.",
+          "contains": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}\\d{4}$",
+            "$comment": "At least one UNDRR-ISC 2025 code is required"
+          },
+          "items": {
+            "type": "string",
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{2}\\d{4}$",
+                "$comment": "UNDRR-ISC 2025 format: 2 uppercase letters + 4 digits (e.g., GH0101, MH0600)"
+              },
+              {
+                "pattern": "^[A-Z]{2}$",
+                "$comment": "GLIDE format: 2 uppercase letters (e.g., FL, EQ, TC)"
+              },
+              {
+                "pattern": "^[a-z]{3}-[a-z]{3}-[a-z]{3}-[a-z]{3}$",
+                "$comment": "EM-DAT format: 4 groups of 3 lowercase letters separated by dashes (e.g., nat-hyd-flo-flo)"
+              }
+            ]
+          }
         }
       }
     },

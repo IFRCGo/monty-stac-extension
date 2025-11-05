@@ -72,7 +72,9 @@
       "IDN"
     ],
     "monty:hazard_codes": [
-      "nat-met-sto-tro"
+      "TC",
+      "nat-met-sto-tro",
+      "MH0309"
     ]
   },
   "assets": {

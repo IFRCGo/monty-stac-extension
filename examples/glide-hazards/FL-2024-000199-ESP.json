@@ -26,19 +26,20 @@
     "docid": 23388,
     "status": "A",
     "roles": [
-      "source",
       "hazard"
     ],
     "monty:episode_number": 1,
     "monty:hazard_codes": [
-      "FL"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ],
     "monty:country_codes": [
       "ESP"
     ],
     "monty:corr_id": "20241027-ESP-FL-1-GCDB",
     "monty:hazard_detail": {
-      "cluster": "FL",
+      "severity_value": 0,
       "severity_unit": "glide",
       "estimate_type": "primary"
     },

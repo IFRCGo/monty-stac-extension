@@ -261,13 +261,23 @@
       "ZWE"
     ],
     "monty:hazard_codes": [
+      "EQ",
       "nat-geo-ear-gro",
+      "GH0101",
+      "TC",
       "nat-met-sto-tro",
+      "MH0306",
+      "FL",
       "nat-hyd-flo-flo",
+      "MH0600",
       "nat-cli-dro-dro",
+      "WF",
       "nat-cli-wil-for",
+      "EN0205",
       "nat-geo-vol-vol",
-      "nat-geo-ear-tsu"
+      "TS",
+      "nat-geo-ear-tsu",
+      "MH0705"
     ]
   },
   "assets": {

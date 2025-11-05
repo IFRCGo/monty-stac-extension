@@ -201,7 +201,9 @@
       "ZWE"
     ],
     "monty:hazard_codes": [
-      "nat-geo-ear-gro"
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
     ]
   },
   "assets": {

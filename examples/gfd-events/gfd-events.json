@@ -73,7 +73,9 @@
       "SPN"
     ],
     "monty:hazard_codes": [
-      "FL"
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
     ]
   },
   "assets": {
