@@ -2,6 +2,12 @@
 
 This document describes the properties that can be used as queryables in a STAC API implementing the [Filter Extension](https://github.com/stac-api-extensions/filter) with the Monty STAC Extension.
 
+> [!TIP]
+> For comprehensive examples of using queryables with correlation algorithms, see:
+> - [Correlation Algorithms](./correlation_algorithms.md) - Algorithm specifications
+> - [Correlation Examples](./correlation_examples.md) - Real-world examples with code
+> - [Migration Guide](./migration_guide.md) - Transitioning from static to dynamic correlation
+
 ## Overview
 
 Queryables are a mechanism that allows clients to discover what terms are available for use when writing filter expressions in a STAC API. The Filter Extension enables clients to filter collections and items based on their properties using the Common Query Language (CQL2).
@@ -18,7 +24,7 @@ The following properties from the Monty STAC Extension can be used as queryables
 | -------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | monty:episode_number | integer       | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                             |
 | monty:country_codes  | array[string] | The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                            |
-| monty:corr_id        | string        | The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](. ./correlation_identifier.md) page |
+| monty:corr_id        | string        | The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](../correlation_identifier.md) page. See also [Correlation Algorithms](./correlation_algorithms.md) for dynamic correlation approaches |
 | monty:hazard_codes   | array[string] | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](../taxonomy.md#hazards)                                                                  |
 | roles                | array[string] | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, response)                                                                                                                                                    |
 
@@ -178,47 +184,223 @@ Below is an example of a queryables definition for a STAC API implementing the M
 
 Here are some examples of CQL2 filter expressions using the Monty STAC Extension queryables:
 
+### CQL2-Text Examples
+
 **Find all items related to a specific event**
 
-```console
-monty:corr_id = '20241027T150000-ESP-HM-FLOOD-001-GCDB'
+```
+monty:corr_id = '20241027-ESP-FL-2-GCDB'
 ```
 
-**Find all items related to events in a specific country**
+**Find all items related to events in a specific country (using array operator)**
 
-```console
-'ESP' IN monty:country_codes
+```
+a_contains(monty:country_codes, 'ESP')
 ```
 
-**Find all items with a specific hazard code**
+**Find all items with a specific hazard code (using array operator)**
 
-```console
-'FL' IN monty:hazard_codes
+```
+a_contains(monty:hazard_codes, 'MH0600')
 ```
 
 **Find all reference events**
 
-```console
+```
 'event' IN roles AND 'reference' IN roles
 ```
 
 **Find all hazard items with high severity**
 
-```console
+```
 'hazard' IN roles AND monty:hazard_detail.severity_value > 5
 ```
 
 **Find all impact items with deaths**
 
-```console
+```
 'impact' IN roles AND monty:impact_detail.type = 'death'
 ```
 
 **Find all impact items with a specific category and above a certain value**
 
-```console
+```
 'impact' IN roles AND monty:impact_detail.category = 'people' AND monty:impact_detail.value > 100
 ```
+
+### CQL2-JSON Examples
+
+**Find all items related to a specific event**
+
+```json
+{
+  "op": "=",
+  "args": [
+    {"property": "monty:corr_id"},
+    "20241027-ESP-FL-2-GCDB"
+  ]
+}
+```
+
+**Find all items related to events in a specific country (using array operator)**
+
+```json
+{
+  "op": "a_contains",
+  "args": [
+    {"property": "monty:country_codes"},
+    "ESP"
+  ]
+}
+```
+
+**Find events with multiple hazard codes (using array overlap)**
+
+```json
+{
+  "op": "and",
+  "args": [
+    {
+      "op": "a_overlaps",
+      "args": [
+        {"property": "monty:hazard_codes"},
+        ["MH0600", "FL", "nat-hyd-flo-flo"]
+      ]
+    },
+    {
+      "op": "in",
+      "args": ["event", {"property": "roles"}]
+    }
+  ]
+}
+```
+
+**Find all impact items with deaths above a threshold**
+
+```json
+{
+  "op": "and",
+  "args": [
+    {
+      "op": "in",
+      "args": ["impact", {"property": "roles"}]
+    },
+    {
+      "op": "=",
+      "args": [
+        {"property": "monty:impact_detail.type"},
+        "death"
+      ]
+    },
+    {
+      "op": ">",
+      "args": [
+        {"property": "monty:impact_detail.value"},
+        100
+      ]
+    }
+  ]
+}
+```
+
+**Complex correlation query - Find all impacts from floods in Spain during October 2024**
+
+```json
+{
+  "op": "and",
+  "args": [
+    {
+      "op": "a_contains",
+      "args": [
+        {"property": "monty:country_codes"},
+        "ESP"
+      ]
+    },
+    {
+      "op": "a_overlaps",
+      "args": [
+        {"property": "monty:hazard_codes"},
+        ["MH0600", "FL"]
+      ]
+    },
+    {
+      "op": "t_during",
+      "args": [
+        {"property": "datetime"},
+        {"interval": ["2024-10-01T00:00:00Z", "2024-10-31T23:59:59Z"]}
+      ]
+    },
+    {
+      "op": "in",
+      "args": ["impact", {"property": "roles"}]
+    }
+  ]
+}
+```
+
+### Python Examples using pystac-client
+
+```python
+from pystac_client import Client
+
+client = Client.open("https://montandon-eoapi-stage.ifrc.org/stac")
+
+# Find all items with a correlation ID
+search = client.search(
+    filter={
+        "op": "=",
+        "args": [
+            {"property": "monty:corr_id"},
+            "20241027-ESP-FL-2-GCDB"
+        ]
+    },
+    filter_lang="cql2-json"
+)
+
+# Find all impacts in a specific country
+search = client.search(
+    filter={
+        "op": "and",
+        "args": [
+            {"op": "a_contains", "args": [{"property": "monty:country_codes"}, "ESP"]},
+            {"op": "in", "args": ["impact", {"property": "roles"}]}
+        ]
+    },
+    filter_lang="cql2-json"
+)
+
+# Find all events with specific hazard codes
+search = client.search(
+    collections=["glide-events", "gdacs-events"],
+    filter={
+        "op": "a_overlaps",
+        "args": [
+            {"property": "monty:hazard_codes"},
+            ["MH0600", "MH0603", "FL"]
+        ]
+    },
+    filter_lang="cql2-json"
+)
+```
+
+For more comprehensive examples, see:
+- [Correlation Examples](./correlation_examples.md) - Complete workflows with Python code
+- [Correlation Algorithms](./correlation_algorithms.md) - Detailed algorithm specifications
+
+## Array Operators for Array Fields
+
+When querying array fields like `monty:country_codes` and `monty:hazard_codes`, use specialized array operators:
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `a_contains` | Array contains specific element | `a_contains(monty:country_codes, 'ESP')` |
+| `a_overlaps` | Arrays share at least one element | `a_overlaps(monty:hazard_codes, ['MH0600', 'FL'])` |
+| `a_equals` | Arrays are exactly equal | `a_equals(monty:country_codes, ['ESP'])` |
+| `a_containedBy` | All array elements are in the query array | `a_containedBy(monty:hazard_codes, ['MH0600', 'FL', 'MH0603'])` |
+
+**Important**: Regular equality operators (`=`, `IN`) may not work as expected with array fields. Use array operators for reliable results.
+
+For detailed information on array operators, see the [Array Operators](./correlation_algorithms.md#array-operators-explained) section in the Correlation Algorithms documentation.
 
 ## Implementation Notes
 
@@ -233,3 +415,13 @@ When implementing queryables for the Monty STAC Extension in a STAC API:
 4. The Landing Page endpoint (`/`) should have a Link with rel `http://www.opengis.net/def/rel/ogc/1.0/queryables` with an href to the endpoint `/queryables`.
 
 5. Each Collection resource should have a Link to the queryables resource for that collection, e.g., `/collections/collection1/queryables`.
+
+6. **Array Field Indexing**: Ensure that array fields like `monty:country_codes` and `monty:hazard_codes` are properly indexed to support efficient array operator queries.
+
+## Additional Resources
+
+- [Correlation Algorithms](./correlation_algorithms.md) - Comprehensive algorithm specifications
+- [Correlation Examples](./correlation_examples.md) - Real-world examples with Python code
+- [Migration Guide](./migration_guide.md) - Transitioning from static to dynamic correlation
+- [STAC Filter Extension](https://github.com/stac-api-extensions/filter) - Filter extension specification
+- [CQL2 Specification](https://docs.ogc.org/DRAFTS/21-065.html) - CQL2 language specification

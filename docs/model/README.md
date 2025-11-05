@@ -175,7 +175,14 @@ The event class has the following attributes:
 - **hazard_codes**: The hazard codes of the hazards affecting the event.
   The hazard codes are based on the **[2025 UNDRR-ISC Hazard Information Profiles](./taxonomy.md#2025-update)** (reference classification system).
   For interoperability, codes from [other classification systems](./taxonomy.md#hazards) are **recommended** to also be included.
-- **correlation_id**: The unique identifier assigned by the Monty system to the reference event.  It is used to "pair" all the instances of the event. More information about the correlation identifier can be found [here](./correlation_identifier.md).
+- **correlation_id**: The unique identifier assigned by the Monty system to the reference event. It is used to "pair" all the instances of the event. 
+  
+  > [!TIP]
+  > **Dynamic Correlation Available**: While static correlation IDs remain supported, the Monty system now offers **dynamic STAC-based correlation** using CQL2 filters. This provides greater flexibility for multi-hazard events and cross-classification queries. See:
+  > - [STAC-Based Correlation Algorithms](./stac-api/correlation_algorithms.md) - Dynamic correlation specifications
+  > - [Correlation Examples](./stac-api/correlation_examples.md) - Real-world examples with Python code
+  > - [Migration Guide](./stac-api/migration_guide.md) - Transitioning from static to dynamic correlation
+  > - [Legacy Correlation Identifier](./correlation_identifier.md) - Static ID algorithm (still supported)
 - **keywords**: A list of keywords that describe the event. This list includes the human-readable names of
   - the countries affected by the event
   - the hazard types affecting the event

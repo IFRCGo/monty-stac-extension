@@ -1,6 +1,15 @@
 # Correlation Identifier
 
-This page describes the algorithm used to generate the correlation identifier for the items for the Monty system.
+> **Note**: This document describes the **legacy static correlation identifier** system. For the **new dynamic STAC-based correlation approach**, see:
+> - [STAC-Based Correlation Algorithms](./stac-api/correlation_algorithms.md) - Main algorithm documentation
+> - [Correlation Examples](./stac-api/correlation_examples.md) - Practical examples with code
+> - [Migration Guide](./stac-api/migration_guide.md) - How to transition from static to dynamic correlation
+>
+> The static correlation identifier described below is still generated and remains available for backward compatibility, but the new dynamic approach offers greater flexibility and better support for multi-hazard events.
+
+---
+
+This page describes the **legacy algorithm** used to generate the static correlation identifier for items in the Monty system.
 
 ## Context
 
