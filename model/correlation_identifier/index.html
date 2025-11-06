@@ -495,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/README.md" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
@@ -520,6 +520,16 @@
     
       
         
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
       
     
     
@@ -539,25 +549,103 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../stac-api/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
-    API
+    STAC API
     
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            STAC API
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/correlation_algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correlation Algorithms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/correlation_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Correlation Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/migration_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -985,7 +1073,15 @@
 
 
 <h1 id="correlation-identifier">Correlation Identifier</h1>
-<p>This page describes the algorithm used to generate the correlation identifier for the items for the Monty system.</p>
+<blockquote>
+<p><strong>Note</strong>: This document describes the <strong>legacy static correlation identifier</strong> system. For the <strong>new dynamic STAC-based correlation approach</strong>, see:
+- <a href="../stac-api/correlation_algorithms/">STAC-Based Correlation Algorithms</a> - Main algorithm documentation
+- <a href="../stac-api/correlation_examples/">Correlation Examples</a> - Practical examples with code
+- <a href="../stac-api/migration_guide/">Migration Guide</a> - How to transition from static to dynamic correlation</p>
+<p>The static correlation identifier described below is still generated and remains available for backward compatibility, but the new dynamic approach offers greater flexibility and better support for multi-hazard events.</p>
+</blockquote>
+<hr />
+<p>This page describes the <strong>legacy algorithm</strong> used to generate the static correlation identifier for items in the Monty system.</p>
 <h2 id="context">Context</h2>
 <p>*The elements of context below are based on the article <a href="https://www.preventionweb.net/news/connecting-dots-importance-recognising-multi-hazard-events-disaster-reporting">Connecting the dots: the importance of recognising multi-hazard events in disaster reporting</a>.</p>
 <p>In the past year, the world has experienced numerous severe disasters caused by multiple overlapping hazards. In February 2023, two severe earthquakes struck Syria and Turkey in quick succession, followed by two more powerful earthquakes and over a hundred aftershocks in the subsequent weeks. This disaster resulted in over 48,000 fatalities, with many people still missing. Similarly, in June 2022, Afghanistan was hit by an earthquake while already grappling with a multi-year drought, which was then followed by extreme rainfall and flooding in August. Pakistan also faced a series of unfortunate events throughout 2022. After a period of drought, a heatwave-induced glacier melt combined with a heavy rain season led to devastating flooding, landslides, and disease outbreaks. Additionally, the country contended with severe wildfires in May and June 2022.</p>
@@ -1009,19 +1105,19 @@
 <p>For any type of item, there is a link to an event that represents the context of the item. The event pairing algorithm is used to generate a correlation identifier for the items based on the event metadata. The correlation identifier is used to link the items in the system.</p>
 <p>The event pairing algorithm is a function that takes the following parameters:</p>
 <ul>
-<li>Hazards codes: An array with the codes of the event hazards based on different <a href="../taxonomy/#hazards">hazard classification systems</a>. According to the combination of the hazard codes, the algorithm selects a group code that represents the cluster of the main hazards of the event.</li>
+<li>Hazard codes: An array with the codes of the event hazards based on different <a href="../taxonomy/#hazards">hazard classification systems</a>. The primary hazard code from the <a href="../taxonomy/#2025-update">2025 UNDRR-ISC Hazard Information Profiles</a> is used as the main hazard identifier.</li>
 <li>Country code: The country code of the related event in the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO 3166-1 alpha-3</a> format.</li>
 <li>Date and Time: The date and time of the related event.</li>
 </ul>
 <p>The algorithm returns a string with the event id. The event id is a string with the following format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">{datetime}-{country_code}-{hazard_cluster_code}-{episode_number}-GDBC</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">{datetime}-{country_code}-{hazard_code}-{episode_number}-GDBC</span>
 </code></pre></div>
 <p>Where:</p>
 <ul>
-<li><code>{datetime}</code>: The date and time of the event in the format <code>YYYYMMDDThhmmssZ</code> (<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>).</li>
+<li><code>{datetime}</code>: The date and time of the event in the format <code>YYYYMMDD</code> or <code>YYYYMMDDThhmmssZ</code> (<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>).</li>
 <li><code>{country_code}</code>: The country code of the related event in the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3">ISO 3166-1 alpha-3</a> format.</li>
-<li><code>{hazard_cluster_code}</code>: A code that represents the cluster of the main hazards of the event. This code represents the cluster in the <a href="../taxonomy/#undrr-isc-2020-hazard-information-profiles">UNDRR-ISC 2020 Hazard Information Profiles</a>. The cluster is slected based on the order of the hazards codes provided.</li>
-<li><code>{episode_number}</code>: A number that represents the episode of the event. This number is used to differentiate between events that have the same date, country, and hazard cluster. The episode number starts at 1 and is incremented by 1 for each new event with the same date, country, and hazard cluster.</li>
+<li><code>{hazard_code}</code>: The primary hazard code from the <a href="../taxonomy/#2025-update">2025 UNDRR-ISC Hazard Information Profiles</a> (e.g., <code>MH0600</code> for River Flood, <code>GH0101</code> for Earthquake). For multi-hazard events, the first hazard code in the array is used. Legacy codes may use simplified forms (e.g., <code>FL</code> for flood).</li>
+<li><code>{episode_number}</code>: A number that represents the episode of the event. This number is used to differentiate between events that have the same date, country, and hazard code. The episode number starts at 1 and is incremented by 1 for each new event with the same date, country, and hazard.</li>
 </ul>
 <p>A reference implementation is provided with the pystac.monty module. <em>TBD</em></p>
 
