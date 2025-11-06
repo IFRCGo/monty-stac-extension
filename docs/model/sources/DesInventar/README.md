@@ -145,10 +145,10 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time) | fechano, fechames, fechadia                        | Start date of the event                                                                 |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)   | fechano, fechames, fechadia + [duracion]           | End date of the event                                                                   |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties)        | evento + lugar + date                              | Human-readable title combining event type and location                                  |
-| [monty:episode_number](https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:episode_number)                     | 1                                                  | Set to 1 as Desinventar doesn't track episodes                                          |
-| [monty:country_codes](https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                          |
-| [monty:hazard_codes](https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)                    |
-| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [monty:episode_number](https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json#monty:episode_number)                     | 1                                                  | Set to 1 as Desinventar doesn't track episodes                                          |
+| [monty:country_codes](https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                          |
+| [monty:hazard_codes](https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)                    |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
 
 #### Hazard Code Mapping
 
@@ -223,7 +223,7 @@ For each available impact metric in the Desinventar data, a separate impact item
 | ----------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------------------------------- |
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                       | {level0}-{serial}-{metric} | Unique ID combining event serial and impact metric |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties) | {event title} - {metric}   | Title combining event name and impact type         |
-| [monty:impact_detail](https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#monty:impact_detail)                |                            | Object containing impact details                   |
+| [monty:impact_detail](https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json#monty:impact_detail)                |                            | Object containing impact details                   |
 | monty:impact_detail.category                                                                                | From mapping table         | Impact category code                               |
 | monty:impact_detail.type                                                                                    | From mapping table         | Impact type code                                   |
 | monty:impact_detail.value                                                                                   | From Desinventar field     | Numeric impact value                               |

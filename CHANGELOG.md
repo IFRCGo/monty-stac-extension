@@ -5,13 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2025-11-06
 
 ### Added
+
+- New dynamic correlation algorithms using STAC API and CQL2 filters [#33](https://github.com/IFRCGo/monty-stac-extension/pull/33)
 
 ### Changed
 
 - Updated taxonomy for 2025 UNDRR-ISC Hazard Information Profiles [#32](https://github.com/IFRCGo/monty-stac-extension/pull/32)
+- Deprecating static correlation_id in favor of dynamic STAC-based correlation [#33](https://github.com/IFRCGo/monty-stac-extension/pull/33)
 
 ### Fixed
 
@@ -84,5 +87,5 @@ Initial release of the Monty STAC Extension specification.
 - Some features may be subject to change based on community feedback
 - Additional sources may be added in future releases
 
-[Unreleased]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.0.0..HEAD
+[1.1.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.1.0
 [1.0.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.0.0

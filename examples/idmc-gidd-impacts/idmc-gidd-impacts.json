@@ -50,7 +50,7 @@
     }
   ],
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
   ],
   "title": "IDMC GIDD Impacts",
   "extent": {
