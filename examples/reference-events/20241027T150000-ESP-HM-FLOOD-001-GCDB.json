@@ -1,7 +1,7 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
   ],
   "type": "Feature",
   "id": "20241027T150000-ESP-HM-FLOOD-001-GCDB",
