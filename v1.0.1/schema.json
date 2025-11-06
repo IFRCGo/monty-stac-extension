@@ -1,0 +1,388 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json#",
+  "title": "Monty Extension",
+  "description": "STAC Monty Extension for STAC Items and STAC Collections.",
+  "oneOf": [
+    {
+      "$comment": "This is the schema for STAC Items.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/stac_extensions"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "properties"
+          ],
+          "properties": {
+            "type": {
+              "const": "Feature"
+            },
+            "properties": {
+              "allOf": [
+                {
+                  "$comment": "Require fields here for Item Properties.",
+                  "required": [
+                    "monty:country_codes",
+                    "monty:hazard_codes",
+                    "monty:corr_id",
+                    "roles"
+                  ]
+                },
+                {
+                  "$ref": "#/definitions/fields"
+                },
+                {
+                  "$ref": "#/definitions/roles"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "This is the schema for STAC Collections.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/stac_extensions"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "providers",
+            "license"
+          ],
+          "properties": {
+            "type": {
+              "const": "Collection"
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/roles"
+        }
+      ],
+      "anyOf": [
+        {
+          "$comment": "This is the schema for the fields in Summaries. By default, only checks the existence of the properties, but not the schema of the summaries.",
+          "required": [
+            "summaries"
+          ],
+          "properties": {
+            "summaries": {
+              "required": [
+                "monty:country_codes",
+                "monty:hazard_codes"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "stac_extensions": {
+      "type": "object",
+      "required": [
+        "stac_extensions"
+      ],
+      "properties": {
+        "stac_extensions": {
+          "type": "array",
+          "contains": {
+            "const": "https://ifrcgo.org/monty-stac-extension/v1.0.0/schema.json"
+          }
+        }
+      }
+    },
+    "fields": {
+      "$comment": "Monty prefixed fields",
+      "type": "object",
+      "properties": {
+        "monty:episode_number": {
+          "type": "integer"
+        },
+        "monty:country_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^([A-Z]{3})|AB9$",
+            "$comment": "AB9 is a special code for the Abyei area used by IDMC"
+          }
+        },
+        "monty:hazard_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^([A-Z]{2}(?:\\d{4}$){0,1})|([a-z]{3}-[a-z]{3}-[a-z]{3}-[a-z]{3})|([A-Z]{2})$"
+          }
+        },
+        "monty:corr_id": {
+          "type": "string"
+        },
+        "monty:hazard_detail": {
+          "type": "object",
+          "required": [
+            "severity_value",
+            "severity_unit"
+          ],
+          "properties": {
+            "severity_value": {
+              "type": "number",
+              "description": "The estimated maximum hazard intensity/magnitude/severity value, as a number, without the units."
+            },
+            "severity_unit": {
+              "type": "string"
+            },
+            "severity_label": {
+              "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            }
+          },
+          "additionalProperties": true
+        },
+        "monty:impact_detail": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "enum": [
+                "people",
+                "crops",
+                "women",
+                "men",
+                "children_0_4",
+                "children_5_9",
+                "children_10_14",
+                "children_15_19",
+                "adult_20_24",
+                "adult_25_29",
+                "adult_30_34",
+                "adult_35_39",
+                "adult_40_44",
+                "adult_45_49",
+                "adult_50_54",
+                "adult_55_59",
+                "adult_60_64",
+                "elderly",
+                "wheelchair_users",
+                "roads",
+                "railways",
+                "vulnerable_employment",
+                "buildings",
+                "reconstruction_costs",
+                "hospitals",
+                "schools",
+                "education_centers",
+                "local_currency",
+                "global_currency",
+                "local_currency_adj",
+                "global_currency_adj",
+                "usd_uncertain",
+                "cattle",
+                "aid_general",
+                "ifrc_contribution",
+                "ifrc_requested",
+                "alertscore",
+                "total_affected",
+                "households"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "unspecified",
+                "unaffected",
+                "damaged",
+                "destroyed",
+                "potentially_damaged",
+                "affected_total",
+                "affected_direct",
+                "affected_indirect",
+                "death",
+                "missing",
+                "injured",
+                "evacuated",
+                "relocated",
+                "assisted",
+                "shelter_emergency",
+                "shelter_temporary",
+                "shelter_longterm",
+                "in_need",
+                "targeted",
+                "disrupted",
+                "cost",
+                "homeless",
+                "displaced_internal",
+                "displaced_external",
+                "displaced_total",
+                "alertscore",
+                "potentially_affected",
+                "highest_risk"
+              ]
+            },
+            "value": {
+              "type": "number"
+            },
+            "unit": {
+              "type": "string"
+            },
+            "estimate_type": {
+              "$ref": "#/definitions/estimate_type"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "patternProperties": {
+        "^(?!monty:)": {
+          "$comment": "Prevent additional monty prefixed field"
+        }
+      },
+      "additionalProperties": false
+    },
+    "estimate_type": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary",
+        "modelled"
+      ]
+    },
+    "roles": {
+      "$comment": "Roles field",
+      "oneOf": [
+        {
+          "$comment": "Reference Event",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_event"
+            },
+            {
+              "$ref": "#/definitions/is_reference"
+            }
+          ]
+        },
+        {
+          "$comment": "Source Event",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_event"
+            },
+            {
+              "$ref": "#/definitions/is_source"
+            }
+          ]
+        },
+        {
+          "$comment": "Hazard",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_hazard"
+            }
+          ]
+        },
+        {
+          "$comment": "Impact",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_impact"
+            }
+          ]
+        }
+      ]
+    },
+    "is_event": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 2,
+          "contains": {
+            "const": "event"
+          }
+        }
+      }
+    },
+    "is_reference": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 2,
+          "contains": {
+            "const": "reference"
+          }
+        }
+      }
+    },
+    "is_source": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 2,
+          "contains": {
+            "const": "source"
+          }
+        }
+      }
+    },
+    "is_hazard": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "hazard"
+          }
+        },
+        "monty:hazard_codes": {
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "$comment": "REQUIRED: Exactly 1 UNDRR-ISC 2025 code (format: 2 letters + 4 digits, e.g., GH0101, MH0600). OPTIONAL: At most 1 GLIDE code (2 uppercase letters, e.g., FL, EQ) and at most 1 EM-DAT code (nat-xxx-xxx-xxx format). LIMITATION: JSON Schema draft-07 cannot fully enforce 'at most 1 per type' - custom validation may be needed to prevent multiple codes of the same classification type.",
+          "contains": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}\\d{4}$",
+            "$comment": "At least one UNDRR-ISC 2025 code is required"
+          },
+          "items": {
+            "type": "string",
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{2}\\d{4}$",
+                "$comment": "UNDRR-ISC 2025 format: 2 uppercase letters + 4 digits (e.g., GH0101, MH0600)"
+              },
+              {
+                "pattern": "^[A-Z]{2}$",
+                "$comment": "GLIDE format: 2 uppercase letters (e.g., FL, EQ, TC)"
+              },
+              {
+                "pattern": "^[a-z]{3}-[a-z]{3}-[a-z]{3}-[a-z]{3}$",
+                "$comment": "EM-DAT format: 4 groups of 3 lowercase letters separated by dashes (e.g., nat-hyd-flo-flo)"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "is_impact": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "impact"
+          }
+        }
+      }
+    }
+  }
+}
