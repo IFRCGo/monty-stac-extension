@@ -1,0 +1,228 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "id": "alerthub-event-6531608",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          42.364,
+          43.237
+        ],
+        [
+          42.381,
+          43.249
+        ],
+        [
+          42.479,
+          43.5
+        ],
+        [
+          42.457,
+          43.602
+        ],
+        [
+          42.665,
+          43.683
+        ],
+        [
+          42.683,
+          43.807
+        ],
+        [
+          42.663,
+          43.832
+        ],
+        [
+          42.6,
+          44.042
+        ],
+        [
+          42.487,
+          44.026
+        ],
+        [
+          42.43,
+          43.964
+        ],
+        [
+          42.308,
+          44.056
+        ],
+        [
+          42.303,
+          44.135
+        ],
+        [
+          42.563,
+          44.247
+        ],
+        [
+          42.53,
+          44.298
+        ],
+        [
+          42.348,
+          44.307
+        ],
+        [
+          41.946,
+          44.393
+        ],
+        [
+          41.923,
+          44.491
+        ],
+        [
+          41.729,
+          44.459
+        ],
+        [
+          41.686,
+          44.419
+        ],
+        [
+          41.693,
+          44.329
+        ],
+        [
+          41.714,
+          44.273
+        ],
+        [
+          41.629,
+          44.118
+        ],
+        [
+          41.445,
+          43.991
+        ],
+        [
+          41.323,
+          43.987
+        ],
+        [
+          41.339,
+          44.028
+        ],
+        [
+          41.258,
+          44.087
+        ],
+        [
+          40.933,
+          44.132
+        ],
+        [
+          40.871,
+          44.087
+        ],
+        [
+          40.958,
+          43.981
+        ],
+        [
+          40.789,
+          43.929
+        ],
+        [
+          40.696,
+          43.659
+        ],
+        [
+          40.693,
+          43.556
+        ],
+        [
+          40.696,
+          43.543
+        ],
+        [
+          40.719,
+          43.52
+        ],
+        [
+          40.864,
+          43.477
+        ],
+        [
+          41.069,
+          43.373
+        ],
+        [
+          41.168,
+          43.387
+        ],
+        [
+          41.597,
+          43.222
+        ],
+        [
+          42.031,
+          43.187
+        ],
+        [
+          42.189,
+          43.236
+        ],
+        [
+          42.364,
+          43.237
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    40.693,
+    43.187,
+    42.683,
+    44.491
+  ],
+  "properties": {
+    "title": "Avalanches",
+    "description": "В горах лавиноопасно.",
+    "start_datetime": "2026-02-10T07:38:00+00:00",
+    "end_datetime": "2026-02-11T18:00:00+00:00",
+    "monty:episode_number": 1,
+    "monty:hazard_codes": [
+      "MH0801",
+      "AV",
+      "nat-geo-mmd-ava"
+    ],
+    "monty:country_codes": [
+      "RUS"
+    ],
+    "keywords": [
+      "Terrestrial",
+      "Avalanche",
+      "Meteorological & Hydrological",
+      "RUS"
+    ],
+    "monty:corr_id": "20260210-RUS-MH0801-1-GCDB",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "datetime": "2026-02-10T07:38:00Z"
+  },
+  "links": [
+    {
+      "rel": "collection",
+      "href": "./pystac-monty/monty-stac-extension/examples/alerthub-events/alerthub-events.json",
+      "type": "application/json",
+      "title": "Alerthub Source Events"
+    },
+    {
+      "rel": "via",
+      "href": "https://meteoinfo.ru/hmc-output/cap/cap-feed/en/20260210073818-0190272.xml",
+      "type": "application/xml",
+      "title": "Alerthub Event data"
+    }
+  ],
+  "assets": {},
+  "collection": "alerthub-events"
+}
