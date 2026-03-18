@@ -54,6 +54,8 @@ A PDC event will always produce an Event STAC Item. Here is a table with the fie
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the [Hazard Type Mapping](#hazard-type-mapping) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) | Generated | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 #### Hazard Type Mapping
 
@@ -119,6 +121,8 @@ A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) |      |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) | Generated | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 ## Impact item
 
@@ -140,6 +144,8 @@ The following table shows the mapping of PDC impact fields to STAC items.
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:impact_detail] | Impact items using different fields | Several impact items are created based on several fields available from the exposure endpoint |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) | Generated | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 ### Impact Details
 The following fields are used to create several **Impact Details** items.

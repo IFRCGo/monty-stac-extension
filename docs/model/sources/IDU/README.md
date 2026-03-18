@@ -56,6 +56,8 @@ previous implementation (R): none
 | properties.roles                                                                                                                  | [`source`, `event`]                           |                                                                     |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                         |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)                                             | Generated                                                                                     | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 #### Hazard Type Mapping
 
@@ -119,6 +121,8 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                                                                                                                                  |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                                                                                                                                      |
 | monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)                                             | Generated                                                                                     | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 #### Impact Detail
 
