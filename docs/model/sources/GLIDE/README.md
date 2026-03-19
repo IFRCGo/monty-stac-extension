@@ -51,6 +51,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | event                                                                        | List of hazard codes converted following the [GLIDE event type to Hazard profile mapping](#mapping-from-glide-event-type-to-hazard-profile) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 ### Hazard Item
 
@@ -75,6 +77,8 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | ?                                                                            | Detailed description of the hazard (more details in next section)                                                                           |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 #### Hazard Detail
 

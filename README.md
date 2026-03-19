@@ -1,7 +1,7 @@
 # Monty Extension Specification
 
 - **Title:** Monty
-- **Identifier:** <https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json>
+- **Identifier:** <https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json>
 - **Field Name Prefix:** monty
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -127,6 +127,10 @@ It is the unique identifier assigned by the Monty system to every item in the sy
 This correlation identifier is critical to associate event, hazard, impact and response items together.
 Each item *MUST* have one.
 More information about the correlation identifier is available in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page.
+
+##### monty:guid
+
+It is a unique id assigned and associated with every generated item based on the information. Each item *MUST* have one. More information on the construction of this unique [guid](https://ifrcgo.org/monty-stac-extension/model/global_identifier.md) string.
 
 ##### monty:hazard_detail
 

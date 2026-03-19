@@ -94,6 +94,8 @@ Here is a table with the fields that are mapped from the IBTrACS data to the STA
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Fixed as tropical cyclone    | Always `['MH0309', 'nat-met-sto-tro', 'TC']` for codes                                                                                                                                                                 |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                                                                                                                                               |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                                                                                                                                        |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 ## Collection: `ibtracs-hazards`
 
@@ -133,6 +135,8 @@ Here is a table with the STAC fields that are mapped from the IBTrACS data to ea
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                                   | Keywords should include the cyclone name                                         |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL                        | Link to the IBTrACS data source                                                  |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                                           | USA_WIND, WMO_WIND, USA_PRES, WMO_PRES | Detailed description of the hazard at the current position                       |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 #### Hazard Detail
 

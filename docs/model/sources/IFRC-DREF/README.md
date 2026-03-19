@@ -112,6 +112,8 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
 | [episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number) | Fixed value (1)  | DREF doesn't track episodes     |
 | [hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)     | dtype.name       | Mapped to standard hazard codes |
 | [country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)   | countries[].iso3 | Array of ISO3 codes             |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)  | Generated  | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
 
 ### Impact Items
 
