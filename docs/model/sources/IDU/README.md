@@ -58,7 +58,7 @@ previous implementation (R): none
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                         |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
-#### Hazard Type Mapping
+### Hazard Type Mapping
 
 IDU uses EM-DAT classification and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension:
 
@@ -99,6 +99,7 @@ This mapping enables standardized hazard categorization while preserving IDU's o
 
 According to the event type and the fields available in the IDU event, an impact STAC Item can be created.
 Here is the table with the STAC fields that are mapped from IDU event to the STAC.
+
 | STAC field                                                                                                                        | IDU Field                                     | Remarks                                                                                                                                                                          |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                             | `idmc-idu-impact-{id}-{impact_type}`          | Prepend text for uniqueness, Note that `impact_type` is extracted from the `description` field. If the proper `impact_type` is not found, the default value `displaced` is used. |
@@ -125,6 +126,7 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 #### Impact Detail
 
 The following mappings are used to create ImpactDetail objects.
+
 | impact_type                     | Monty Impact Exposure Category         | Monty Impact Type                            |
 | ------------------------------- | -------------------------------------- | -------------------------------------------- |
 | evacuated                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EVACUATED                    |
