@@ -62,7 +62,7 @@
       "href": "../reference-events/20250107T010516Z-CHN-GEO-SEIS-001-GCDB.json",
       "rel": "related",
       "roles": [
-        "reference"
+        "event"
       ]
     }
   ],

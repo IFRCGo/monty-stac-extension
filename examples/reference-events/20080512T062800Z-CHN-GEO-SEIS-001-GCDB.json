@@ -48,7 +48,10 @@
     },
     {
       "href": "https://monty-api.ifrc.org/stac/glide-events/EQ-2008-000062-CHN",
-      "rel": "related"
+      "rel": "related",
+      "roles": [
+        "event"
+      ]
     },
     {
       "href": "20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",

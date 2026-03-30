@@ -54,7 +54,6 @@
       "href": "../reference-events/20080512T062800Z-CHN-GEO-SEIS-001-GCDB.json",
       "rel": "related",
       "roles": [
-        "reference",
         "event"
       ]
     },

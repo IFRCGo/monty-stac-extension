@@ -50,6 +50,18 @@ Each source has specific characteristics that determine how their data is used i
 
 For detailed information about each source, including specific data structures and integration methods, visit the respective source documentation pages linked above.
 
+## Role Conventions
+
+Use the following role conventions consistently in source mappings:
+
+- Item `properties.roles` should include the data type role plus `source` for source-derived items:
+    - event item: include `event` and `source`
+    - hazard item: include `hazard` and `source`
+    - impact item: include `impact` and `source`
+- For cross-item relationships using link `rel="related"`, link `roles` should contain exactly one target type value: `event`, `hazard`, or `impact`.
+
+Role order in arrays is not semantically significant.
+
 ## Source Analysis Process
 
 Each source in the Monty system follows a standard documentation template to ensure consistent analysis and integration. Below is the structure that should be followed when documenting a new source:

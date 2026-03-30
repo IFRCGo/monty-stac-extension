@@ -65,12 +65,15 @@ A set of roles are defined to describe the type of the data. The following roles
 | impact    | The data is an impact         |
 | response  | The data is a response        |
 
-The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item. This is useful to find exactly the item needed. For instance, to find the reference event of a data, a link with both `event` and `reference` roles is needed.
+The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item.
+
+For cross-item relationships represented by `rel="related"` links, the link `roles` field SHOULD include exactly one target type: `event`, `hazard`, or `impact`.
 
 ### Link Attributes
 
 | Field Name  | Type   | Description                                                                                                        |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| roles       | [string] | Semantic classification for the linked entity. For `rel="related"` links between Monty items, use `event`, `hazard` or `impact` |
 | occ_type    | string | The type of the occurrence. It can be one of the following values: `known`, `potential`                            |
 | occ_prob    | string | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`) |
 | occ_probdef | uri    | It is a link to the definition of the probability for the hazard relationship                                      |
@@ -162,6 +165,7 @@ The following types should be used as applicable `rel` types in the
 
 | Type                | Description                                                                                                        |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| related             | This link points to another related STAC item. Use link `roles` with exactly one target type: `event`, `hazard`, or `impact` |
 | reference-event     | This link points to the reference event                                                                            |
 | source-event        | This link points to the source event                                                                               |
 | related-hazard      | This link points to a related hazard. For example, a flood related to the event                                    |
