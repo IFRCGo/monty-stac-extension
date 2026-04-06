@@ -88,8 +88,7 @@
       "href": "../reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json",
       "rel": "related",
       "roles": [
-        "event",
-        "reference"
+        "event"
       ],
       "type": "application/json"
     },

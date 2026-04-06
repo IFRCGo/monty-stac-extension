@@ -187,6 +187,12 @@ The event class has the following attributes:
   - the countries affected by the event
   - the hazard types affecting the event
 
+#### Cross-item Link Typing
+
+Event, hazard, and impact items may be connected with STAC links using `rel="related"`.
+For these links, `roles` should contain exactly one target type value: `event`, `hazard`, or `impact`.
+This allows clients to resolve item relationships without custom fields.
+
 ### Hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts, property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.

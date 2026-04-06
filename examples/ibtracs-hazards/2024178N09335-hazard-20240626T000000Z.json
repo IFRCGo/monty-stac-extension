@@ -84,8 +84,7 @@
       "href": "../ibtracs-events/2024178N09335.json",
       "rel": "related",
       "roles": [
-        "event",
-        "source"
+        "event"
       ],
       "type": "application/json"
     }

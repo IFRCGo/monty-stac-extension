@@ -38,6 +38,19 @@
                   "$ref": "#/definitions/roles"
                 }
               ]
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/non_related_link"
+                  },
+                  {
+                    "$ref": "#/definitions/typed_related_link"
+                  }
+                ]
+              }
             }
           }
         }
@@ -257,6 +270,51 @@
         "secondary",
         "modelled"
       ]
+    },
+    "non_related_link": {
+      "allOf": [
+        {
+          "type": "object"
+        },
+        {
+          "not": {
+            "type": "object",
+            "required": [
+              "rel"
+            ],
+            "properties": {
+              "rel": {
+                "const": "related"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "typed_related_link": {
+      "type": "object",
+      "required": [
+        "rel",
+        "roles"
+      ],
+      "properties": {
+        "rel": {
+          "const": "related"
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "event",
+              "hazard",
+              "impact"
+            ]
+          }
+        }
+      }
     },
     "roles": {
       "$comment": "Roles field",

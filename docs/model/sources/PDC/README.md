@@ -50,7 +50,7 @@ A PDC event will always produce an Event STAC Item. Here is a table with the fie
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["source", "event"] | Default roles for event item |   |
+| roles | ["event", "source"] | Include both `event` and `source` roles (order does not matter) |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the [Hazard Type Mapping](#hazard-type-mapping) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
@@ -114,7 +114,7 @@ A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["source", "hazard"] | Default roles for hazard item |    |
+| roles | ["hazard", "source"] | Include both `hazard` and `source` roles (order does not matter) |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
@@ -135,7 +135,7 @@ The following table shows the mapping of PDC impact fields to STAC items.
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["source", "impact"] | Default roles for impact item |    |
+| roles | ["impact", "source"] | Include both `impact` and `source` roles (order does not matter) |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
