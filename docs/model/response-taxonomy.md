@@ -185,32 +185,61 @@ The scope boundary with Impact is: **Response = action taken / product produced;
 | UN channel | UN agencies activate via designated UN pathway |
 | Asia Pacific | Via Sentinel Asia / Asian Disaster Reduction Centre |
 
-**Product types:**
+**STAC data model: Terradue `disaster:` extension**
 
-The Charter does not publish a formal product type taxonomy with codes equivalent to CEMS, but its products fall into categories consistent with the CEMS framework:
+The Charter Mapper system ([charter.esa.int/mapper](https://charter.esa.int/mapper)) uses the **Terradue `disaster:` STAC extension** (`https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`) as its data model. This is the authoritative machine-readable schema for Charter items and must be used — not just referenced — in any Monty integration of Charter data.
 
-| Product category | Description | Analogous CEMS type |
-| --- | --- | --- |
-| Activation record | Formal activation log with event metadata | — |
-| Reference map | Pre-event baseline mapping (territory, infrastructure) | REF |
-| Delineation map | Affected area extent mapping | DEL |
-| Grading map | Damage intensity assessment | GRA |
-| Value-added product | Derived analysis (population exposure, sectoral damage) | — |
+**Object model** (defined by `disaster:class`):
+
+```text
+Activation  (disaster:class = activation)
+  └── Call  (collection — resource mobilization request)
+        ├── Acquisition  (disaster:class = acquisition)   ← raw satellite data
+        └── VAP          (disaster:class = vap)           ← processed product / map
+  └── Area  (disaster:class = area)                       ← affected geographic zone
+```
+
+**Fields defined by the `disaster:` extension:**
+
+| Field | Type | Controlled vocabulary | Notes |
+| --- | --- | --- | --- |
+| `disaster:class` | string (REQUIRED) | `activation`, `area`, `acquisition`, `vap` | Object type in the Charter workflow |
+| `disaster:activation_id` | integer | — | Numeric ID of the activation |
+| `disaster:call_ids` | [integer] | — | IDs of resource mobilization calls within the activation |
+| `disaster:types` | [string] | `fire`, `earthquake`, `volcano`, `storm_hurricane`, `flood`, `cyclone`, `tsunami`, `snow_hazard`, `landslide`, `ice`, `oil_spill`, `explosive_event`, `other` | Hazard type — overlaps with `monty:hazard_codes` |
+| `disaster:country` | string | ISO 3166-1 alpha-3 | Overlaps with `monty:country_codes` |
+| `disaster:regions` | [string] | Free text | Sub-national regions |
+| `disaster:activation_status` | string | `open`, `closed`, `archived` | Activation lifecycle state |
+| `disaster:resolution_class` | string | `VLR`, `LR`, `MR`, `HR`, `VHR` | Spatial resolution class of acquisition items |
+
+**Product types** (expressed via `disaster:class = vap`):
+
+The `disaster:` extension classifies all processed Charter outputs as `vap` (Value-Added Product). The specific product type within the VAP (reference map, delineation, grading) is not further differentiated by the extension — this is the gap that Monty response type codes fill.
+
+| Monty product concept | `disaster:class` | Analogous CEMS type | Notes |
+| --- | --- | --- | --- |
+| Activation record | `activation` | — | Event-level record; consider modelling as Monty Event, not Response item |
+| Satellite acquisition | `acquisition` | — | Source imagery; not a Response item; carries `sar:` / `eo:` / `sat:` fields |
+| Reference map | `vap` | `REF` | Pre-event basemap |
+| Delineation map | `vap` | `DEL` | Affected area extent |
+| Grading map | `vap` | `GRA` | Damage intensity |
+| Value-added analysis | `vap` | — | Population exposure, sectoral damage |
 
 **Imagery types delivered:** Optical (Landsat, SPOT, Pleiades) and SAR (TerraSAR-X, TanDEM-X, RADARSAT)
 
-**Machine-readable codes:** No. The Charter Mapper portal ([charter.esa.int/mapper](https://charter.esa.int/mapper)) provides metadata per activation, but there is no standardized product type code system.
+**Machine-readable codes:** The `disaster:` extension provides object-type codes (`activation`, `area`, `acquisition`, `vap`) and hazard-type codes, but **not** product-type codes distinguishing delineation from grading. Monty response type codes (`eo-charter-del`, `eo-charter-gra`, etc.) are needed to fill this gap.
 
 **Applicability to Monty:**
 
 | Aspect | Assessment |
 | --- | --- |
-| EO products | Yes — core use case |
+| EO products | Yes — core use case; `disaster:` extension is the live data model |
 | Humanitarian sectors | No |
-| Codes available | No — needs code assignment; can crosswalk to CEMS codes |
-| Adoption in Monty data | Target for integration (SW1.2) |
+| STAC extension exists | Yes — `disaster:` (Proposal, owned by @emmanuelmathot) |
+| Codes available | Partial — `disaster:class` classifies object type; response product type codes still needed |
+| Adoption in Monty data | Target for integration (SW1.2); `disaster:` must be declared alongside `monty:` |
 
-**Verdict:** High applicability for the EO response layer. Product types align well with CEMS; the CEMS code vocabulary (§2.6) can serve as the basis with Charter-specific extensions or mapping.
+**Verdict:** High applicability. Monty Charter Response items (`vap` objects) must declare both `monty:` and `disaster:` extensions. The `disaster:` extension covers object identity and Charter workflow fields; `monty:response_detail` adds the response type code and Monty-specific semantics. Fields already in `disaster:` (`activation_id`, `activation_status`, `resolution_class`) must not be duplicated in `response_detail`.
 
 ---
 
@@ -321,42 +350,9 @@ Before proposing new fields, we surveyed existing STAC extensions that model dis
 
 #### 2.9.1 Terradue Disaster Charter Extension (`disaster:`)
 
-**Schema URL:** `https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`
-**Maturity:** Proposal · **Owners:** @emmanuelmathot, @fabricebrito · **Scope:** Item, Collection
+The `disaster:` extension is the live data model powering the Charter Mapper system and is analysed in full as part of §2.5 (International Charter). See §2.5 for the complete field list, object model, and implications for Monty.
 
-This extension was built specifically to catalog International Charter activations and their associated satellite acquisitions and value-added products. It is the closest existing STAC prior art for Monty Response items.
-
-**Fields defined:**
-
-| Field | Type | Controlled vocabulary | Notes |
-| --- | --- | --- | --- |
-| `disaster:class` | string (REQUIRED) | `activation`, `area`, `acquisition`, `vap` | Core classifier — distinguishes activation record, geographic area, raw satellite acquisition, and value-added product |
-| `disaster:activation_id` | integer | — | Numeric ID of the Charter activation |
-| `disaster:call_ids` | [integer] | — | IDs of related Calls (resource mobilization requests within an activation) |
-| `disaster:types` | [string] | `fire`, `earthquake`, `volcano`, `storm_hurricane`, `flood`, `cyclone`, `tsunami`, `snow_hazard`, `landslide`, `ice`, `oil_spill`, `explosive_event`, `other` | Disaster hazard type — maps to Monty `monty:hazard_codes` |
-| `disaster:country` | string | ISO 3166-1 alpha-3 | Redundant with Monty `monty:country_codes` |
-| `disaster:regions` | [string] | Free text | Sub-national regions |
-| `disaster:activation_status` | string | `open`, `closed`, `archived` | Charter activation lifecycle state |
-| `disaster:resolution_class` | string | `VLR`, `LR`, `MR`, `HR`, `VHR` | For acquisition items only — imagery spatial resolution class |
-
-**Relationship model:**
-
-```
-Activation (disaster:class = activation)
-  └── Call (collection)
-        ├── Acquisition (disaster:class = acquisition)   ← raw satellite data
-        └── VAP (disaster:class = vap)                   ← processed product/map
-  └── Area (disaster:class = area)                       ← affected geographic zone
-```
-
-**Implications for Monty:**
-
-- The `vap` class is the Charter equivalent of a Monty Response item (a processed product delivered to the disaster manager). The `acquisition` class maps to the source satellite data.
-- `disaster:types` overlaps with `monty:hazard_codes` — both classify the triggering hazard, not the response action. No new taxonomy contribution here.
-- `disaster:activation_status` (`open` / `closed` / `archived`) is a useful field for Response items and should be considered for `monty:response_detail`.
-- `disaster:resolution_class` (VLR/LR/MR/HR/VHR) is a useful classification for both Charter acquisitions and CEMS source imagery.
-- `disaster:activation_id` and `disaster:call_ids` provide Charter-specific identifiers that would go in `monty:response_detail` as source-specific fields.
-- **Reuse vs. extend:** Rather than duplicating these fields, Monty Response items for Charter products should declare the `disaster:` extension alongside the Monty extension. This avoids schema drift and leverages existing work.
+**Summary:** Charter VAP items must declare both `monty:` and `disaster:` extensions. Fields already defined in `disaster:` (`activation_id`, `activation_status`, `resolution_class`) must not be duplicated in `monty:response_detail`.
 
 #### 2.9.2 CEMS Rapid Mapping — No STAC Extension Exists
 
