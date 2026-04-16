@@ -1,6 +1,6 @@
 # Response Taxonomy (Working Document — v0.1)
 
-> **Status:** Working document. Framework survey and crosswalk are complete; taxonomy structure recommendation and initial code proposals are pending team review.
+> **Status:** Working document. Framework survey (including existing STAC extensions) and crosswalk are complete; taxonomy structure recommendation and initial code proposals are pending team review.
 >
 > **Relates to:** [developmentseed/esa-montandon#12](https://github.com/developmentseed/esa-montandon/issues/12) · Contributes to D1.1 (KO+4m)
 
@@ -315,7 +315,90 @@ The Charter does not publish a formal product type taxonomy with codes equivalen
 
 ---
 
-### 2.9 Crosswalk Summary
+### 2.9 Existing STAC Extensions
+
+Before proposing new fields, we surveyed existing STAC extensions that model disaster response or EO product metadata.
+
+#### 2.9.1 Terradue Disaster Charter Extension (`disaster:`)
+
+**Schema URL:** `https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`
+**Maturity:** Proposal · **Owners:** @emmanuelmathot, @fabricebrito · **Scope:** Item, Collection
+
+This extension was built specifically to catalog International Charter activations and their associated satellite acquisitions and value-added products. It is the closest existing STAC prior art for Monty Response items.
+
+**Fields defined:**
+
+| Field | Type | Controlled vocabulary | Notes |
+| --- | --- | --- | --- |
+| `disaster:class` | string (REQUIRED) | `activation`, `area`, `acquisition`, `vap` | Core classifier — distinguishes activation record, geographic area, raw satellite acquisition, and value-added product |
+| `disaster:activation_id` | integer | — | Numeric ID of the Charter activation |
+| `disaster:call_ids` | [integer] | — | IDs of related Calls (resource mobilization requests within an activation) |
+| `disaster:types` | [string] | `fire`, `earthquake`, `volcano`, `storm_hurricane`, `flood`, `cyclone`, `tsunami`, `snow_hazard`, `landslide`, `ice`, `oil_spill`, `explosive_event`, `other` | Disaster hazard type — maps to Monty `monty:hazard_codes` |
+| `disaster:country` | string | ISO 3166-1 alpha-3 | Redundant with Monty `monty:country_codes` |
+| `disaster:regions` | [string] | Free text | Sub-national regions |
+| `disaster:activation_status` | string | `open`, `closed`, `archived` | Charter activation lifecycle state |
+| `disaster:resolution_class` | string | `VLR`, `LR`, `MR`, `HR`, `VHR` | For acquisition items only — imagery spatial resolution class |
+
+**Relationship model:**
+
+```
+Activation (disaster:class = activation)
+  └── Call (collection)
+        ├── Acquisition (disaster:class = acquisition)   ← raw satellite data
+        └── VAP (disaster:class = vap)                   ← processed product/map
+  └── Area (disaster:class = area)                       ← affected geographic zone
+```
+
+**Implications for Monty:**
+
+- The `vap` class is the Charter equivalent of a Monty Response item (a processed product delivered to the disaster manager). The `acquisition` class maps to the source satellite data.
+- `disaster:types` overlaps with `monty:hazard_codes` — both classify the triggering hazard, not the response action. No new taxonomy contribution here.
+- `disaster:activation_status` (`open` / `closed` / `archived`) is a useful field for Response items and should be considered for `monty:response_detail`.
+- `disaster:resolution_class` (VLR/LR/MR/HR/VHR) is a useful classification for both Charter acquisitions and CEMS source imagery.
+- `disaster:activation_id` and `disaster:call_ids` provide Charter-specific identifiers that would go in `monty:response_detail` as source-specific fields.
+- **Reuse vs. extend:** Rather than duplicating these fields, Monty Response items for Charter products should declare the `disaster:` extension alongside the Monty extension. This avoids schema drift and leverages existing work.
+
+#### 2.9.2 CEMS Rapid Mapping — No STAC Extension Exists
+
+CEMS provides a proprietary REST API (OpenAPI) rather than a STAC catalog. There is no published STAC extension for CEMS Rapid Mapping products. The Copernicus Data Space Ecosystem (CDSE) has a general STAC catalog for Sentinel satellite imagery but it does not cover CEMS emergency mapping products.
+
+**Key API fields that should inform Monty `response_detail`:**
+
+| API field | Type | Description | Monty mapping candidate |
+| --- | --- | --- | --- |
+| `code` | string | Activation identifier (EMSR-XXXX) | `response_detail.source_id` |
+| `category` / `subCategory` | string | Hazard event category | Already in `monty:hazard_codes` |
+| Product `type` | string | `REF`, `FEP`, `DEL`, `GRA`, `SR` | Response type code |
+| Product `monitoring` | boolean | Whether this is a monitoring update | `response_detail.monitoring` |
+| Product `monitoringNumber` | integer | Monitoring sequence number | `response_detail.monitoring_number` |
+| Product `statusCode` | string | `F`=Finished, `N`=No impact, `W`=Waiting, `I`=In production | `response_detail.status` |
+| Image `sensorType` | string | `optical` or `radar` | `response_detail.sensor_type` (or via `eo:`/`sar:` extensions) |
+| Image `resolutionClass` | string | `VHR1`, `HR`, etc. | `disaster:resolution_class` (reuse Terradue field) |
+| `charterNumber` | string | If Charter co-activation exists | `disaster:activation_id` |
+| Stats (`affected`, `total` per thematic) | object | Damage/exposure stats by theme | → Impact items, not Response |
+
+**Gap:** A Monty-aligned STAC extension (or profile) for CEMS Rapid Mapping products is a deliverable of this contract (SW1.1). It should build on the existing CEMS API field semantics while expressing them in STAC.
+
+#### 2.9.3 UNOSAT — No STAC Extension Exists
+
+No STAC extension or catalog for UNOSAT rapid mapping products has been found. UNOSAT distributes products via HDX (Humanitarian Data Exchange) in GIS formats with HTML metadata pages. There is no structured machine-readable schema equivalent to the CEMS API or the Charter extension.
+
+**Implication:** UNOSAT product metadata will need to be mapped to Monty Response fields without an existing STAC anchor. The phase-based structure (PSA / Damage Assessment / Population Exposure / Monitoring) and the CEMS crosswalk proposed in §4 are the primary structuring reference.
+
+#### 2.9.4 Other Relevant STAC Extensions
+
+| Extension | URL | Relevance to Response items |
+| --- | --- | --- |
+| `sar:` | [stac-extensions/sar](https://github.com/stac-extensions/sar) | For SAR-derived flood/damage products (UNOSAT Sentinel-1 based) |
+| `eo:` | [stac-extensions/eo](https://github.com/stac-extensions/eo) | For optical imagery products (Charter acquisitions) |
+| `sat:` | [stac-extensions/sat](https://github.com/stac-extensions/sat) | Satellite orbit/platform metadata for acquisition items |
+| `sentinel-1:` | [stac-extensions/sentinel-1](https://github.com/stac-extensions/sentinel-1) | Sentinel-1 specific fields for SAR acquisitions |
+| `eq:` (earthquake) | [stac-extensions/earthquake](https://github.com/stac-extensions/earthquake) | Structural pattern for hazard-type-specific fields; same owners (@emmanuelmathot) |
+| `processing:` | [stac-extensions/processing](https://github.com/stac-extensions/processing) | Processing chain metadata — relevant for derived EO products |
+
+These extensions apply to the **acquisition/source imagery layer**, not to the Response product layer. A Monty Response STAC item for a CEMS Grading Product would link to acquisition items (via `derived_from`) that carry the `sar:`, `eo:`, and `sat:` fields.
+
+### 2.10 Crosswalk Summary
 
 The table below maps response concepts across frameworks and assesses readiness for Monty integration.
 
@@ -338,16 +421,16 @@ The table below maps response concepts across frameworks and assesses readiness 
 
 **Code availability summary:**
 
-| Framework | Stable machine-readable codes? | Readiness |
-| --- | --- | --- |
-| CEMS Rapid Mapping | Yes (`REF`, `FEP`, `DEL`, `GRA`, `SR`) | Immediate |
-| Sendai Framework | Yes (indicator codes) | Wrong semantic layer |
-| IASC Cluster | No (names only) | Needs code assignment |
-| IFRC EPoA | No (names only) | Needs code assignment |
-| OCHA 3W | Partial (HXL cluster names) | Needs code assignment |
-| International Charter | No | Crosswalk to CEMS |
-| UNOSAT | No | Crosswalk to CEMS phases |
-| PDNA | No | Out of scope (v1) |
+| Framework | Stable machine-readable codes? | Existing STAC extension? | Readiness |
+| --- | --- | --- | --- |
+| CEMS Rapid Mapping | Yes (`REF`, `FEP`, `DEL`, `GRA`, `SR`) | No — REST API only | Immediate (codes), gap (STAC) |
+| International Charter | No | Yes — `disaster:` (Terradue) | Adopt `disaster:` extension + add Monty response type codes |
+| UNOSAT | No | No | Crosswalk to CEMS phases; no STAC anchor |
+| IFRC EPoA | No (names only) | No | Needs code assignment |
+| IASC Cluster | No (names only) | No | Needs code assignment |
+| OCHA 3W | Partial (HXL cluster names) | No | Needs code assignment |
+| Sendai Framework | Yes (indicator codes) | No | Wrong semantic layer |
+| PDNA | No | No | Out of scope (v1) |
 
 ---
 
@@ -355,7 +438,22 @@ The table below maps response concepts across frameworks and assesses readiness 
 
 > **Note:** This section presents a structural recommendation derived from the framework survey. The specific code values in §4 are proposals for team discussion — they are not final.
 
-### 3.1 Hierarchy: Two-level (domain → type)
+### 3.1 Relationship to Existing STAC Extensions
+
+The survey (§2.9) revealed one directly relevant existing STAC extension: the Terradue `disaster:` extension for International Charter items. This changes the design approach: **Monty Response items should declare multiple STAC extensions** rather than trying to replicate all fields under the `monty:` prefix.
+
+**Extension layering strategy:**
+
+| Item type | Extensions to declare | Notes |
+| --- | --- | --- |
+| Charter activation / VAP | `monty:` + `disaster:` | Reuse `disaster:class`, `disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class` |
+| CEMS rapid mapping product | `monty:` + `processing:` | No CEMS-specific STAC extension exists; `processing:` covers provenance chain |
+| UNOSAT product | `monty:` + `processing:` | No UNOSAT STAC extension exists |
+| Charter / CEMS acquisition (source imagery) | `disaster:` + `sar:` / `eo:` + `sat:` | These are linked via `derived_from`, not Monty Response items themselves |
+
+The `monty:response_detail` field (analogous to `hazard_detail` and `impact_detail`) remains the primary place for the **response type code** and Monty-specific metadata. Fields already covered by `disaster:` or `processing:` should not be duplicated in `response_detail`.
+
+### 3.2 Hierarchy: Two-level (domain → type)
 
 **Recommendation:** A **two-level hierarchy** — `domain → type` — is the appropriate structure for the Monty response taxonomy at this stage.
 
@@ -364,7 +462,7 @@ The table below maps response concepts across frameworks and assesses readiness 
 - The hazard taxonomy uses UNDRR's 4-level structure (type → cluster → specific hazard → variant) because there are 281 hazards requiring fine-grained disambiguation. The response space is much smaller and less settled.
 - The impact taxonomy uses a flat structure (category × type matrix). Response is closer to impact in complexity but has a domain axis (EO vs. humanitarian vs. financial) that warrants one grouping level.
 - A 3-level structure would be premature: the second level can always be split later without breaking existing codes.
-- All frameworks surveyed use either flat or 2-level structures; none warrant adopting 3+ levels now.
+- All frameworks surveyed use either flat or 2-level structures; the `disaster:class` vocabulary (`activation` / `area` / `acquisition` / `vap`) is itself 1-level flat.
 
 **Structure:**
 
@@ -374,20 +472,23 @@ domain      type
   eo          cems-fep
   eo          cems-del
   eo          cems-gra
+  eo          charter-vap
   hum         shelter
   hum         health
   ...
 ```
 
-### 3.2 Code Format
+### 3.3 Code Format
 
 **Recommendation:** Lowercase hyphenated slugs in the format `{domain}-{type}`.
 
 **Design principles:**
-- Two segments for simple types; three segments allowed when disambiguation requires a sub-group (e.g., `eo-cems-ref` vs `eo-unosat-ref`)
+
+- Two segments for simple types; three segments when disambiguation requires a sub-group (e.g., `eo-cems-del` vs `eo-unosat-del`)
 - All lowercase, ASCII, hyphen-separated — consistent with EM-DAT codes (`nat-hyd-flo-fla`) and IFRC GO conventions
 - No numeric suffixes unless truly needed (prefer descriptive slugs)
 - EO types use source-prefixed sub-group (`cems`, `charter`, `unosat`) since the same logical product type exists across sources
+- Avoid redundancy with fields already covered by `disaster:` — e.g., do not encode `disaster:activation_status` into the type code
 
 **Domain codes:**
 
@@ -397,7 +498,7 @@ domain      type
 | Humanitarian | `hum` | Cluster-based operational response |
 | Financial | `fin` | Appeals, funds, assessment budgets |
 
-### 3.3 Scope Boundary
+### 3.4 Scope Boundary
 
 The following rule governs what belongs in Response vs. Impact:
 
@@ -487,25 +588,31 @@ Humanitarian response types are placeholders for future issues (outside this con
 
 ### 5.1 Open Questions
 
-1. **Monitoring variants**: Should `eo-cems-del-mon` be a separate type code or a property on `eo-cems-del` items? Using a property (e.g., `monty:response_detail.monitoring: true`) avoids code proliferation.
+1. **`disaster:` extension adoption**: Should Monty Charter Response items declare the Terradue `disaster:` extension (`https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`) alongside `monty:`? This would reuse `disaster:class`, `disaster:activation_id`, `disaster:activation_status`, and `disaster:resolution_class` without duplicating them in `response_detail`. The extension is currently a Proposal and has the same owners — coordination is feasible.
 
-2. **Charter activation record**: Is a Charter activation a Response item in Monty, or an Event? An activation bundles multiple product deliveries — it may be better modelled as a collection/event rather than a single Response item.
+2. **`disaster:class` vs. `monty:response_type`**: The `disaster:class` vocabulary (`activation` / `area` / `acquisition` / `vap`) classifies *what kind of Charter object* this item is, not what kind of *response action* it represents. A `vap` is always a response product, but `monty:response_type` (`eo-charter-del`, `eo-charter-gra`, etc.) carries the semantic meaning for querying. Both are needed; they are complementary, not redundant.
 
-3. **UNOSAT vs. CEMS crosswalk depth**: Should UNOSAT codes be kept separate (as proposed) or collapsed into the CEMS codes with a source field? This depends on whether the distinction between `eo-cems-del` and `eo-unosat-psa` is meaningful for downstream query users.
+3. **Monitoring variants**: Should `eo-cems-del-mon` be a separate type code or a property on `eo-cems-del` items? The CEMS API already models this as `monitoring: boolean` + `monitoringNumber: integer` — replicating these as `response_detail` properties (avoiding code proliferation) is more consistent with how CEMS itself represents this.
 
-4. **Humanitarian code granularity**: The `hum-*` placeholders are coarse (cluster level). Should Protection sub-types (GBV, Child Protection, Mine Action, HLP) be first-class codes now or deferred?
+4. **Charter activation record modelling**: Is a Charter activation (`disaster:class = activation`) a Monty Response item or a Monty Event? An activation bundles multiple VAP deliveries — it may be better modelled as a Collection or Event rather than a single Response item.
 
-5. **Scope of `fin-*` types**: Are financial response types (DREF, EA) better represented as a sub-type of `hum-*` operations, or kept as a separate `fin` domain? DREF typically funds multi-sector operations; the financial record and the operational response may be separate items.
+5. **UNOSAT vs. CEMS code collapse**: Should UNOSAT codes (`eo-unosat-psa`, `eo-unosat-dam`, etc.) be kept separate or collapsed into CEMS codes with a source field in `response_detail`? Separate codes make queries like "all delineation products" harder; a source field plus shared type codes makes them easier. Decision depends on whether UNOSAT and CEMS delineations are semantically equivalent enough to share a code.
 
-6. **Sendai crosswalk fields**: Should response items carry an optional field indicating which Sendai target(s) the response contributes to? This would enable monitoring/reporting use cases without building Sendai into the taxonomy.
+6. **CEMS STAC extension gap**: CEMS currently has no STAC extension — only a REST API. SW1.1 may include drafting a `cems:` STAC extension (or a Monty CEMS profile) to express CEMS activation and product metadata as STAC fields. Should this be a separate extension repository (like `disaster:`) or part of the Monty extension?
+
+7. **Humanitarian code granularity**: The `hum-*` placeholders are coarse (cluster level). Should Protection sub-types (GBV, Child Protection, Mine Action, HLP) be first-class codes now or deferred?
+
+8. **Sendai crosswalk fields**: Should response items carry an optional field indicating which Sendai target(s) the response contributes to? This would enable monitoring/reporting use cases without encoding Sendai into the taxonomy itself.
 
 ### 5.2 Next Steps
 
 - [ ] Team review of the proposed taxonomy structure and code format (§3)
-- [ ] Team review of EO product codes (§4.1) — validate with Charter Mapper and CEMS API metadata fields
-- [ ] Decide on open questions 1–3 before finalising EO codes (these unblock SW1.2)
-- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`
-- [ ] Draft example STAC items for a CEMS activation (one per product type)
+- [ ] Team review of EO product codes (§4.1) — validate against Charter Mapper metadata and CEMS API field names
+- [ ] Decide on open questions 1–4 before finalising EO codes (these directly unblock SW1.1 and SW1.2)
+- [ ] Determine whether to propose updates to the `disaster:` extension or adopt it as-is for Charter items
+- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`, incorporating reusable fields from `disaster:` and CEMS API
+- [ ] Draft example STAC items for a CEMS activation (one per product type: REF, FEP, DEL, GRA, SR)
+- [ ] Draft example STAC items for a Charter activation (activation record + VAP)
 - [ ] Integrate response taxonomy into the main `taxonomy.md` once codes are finalised
 - [ ] Publish as v1.0 of this document at D1.1 (KO+4m, July 2026)
 
@@ -513,3 +620,4 @@ Humanitarian response types are placeholders for future issues (outside this con
 
 *Document history:*
 *v0.1 — 2026-04-16 — Initial framework survey and structural proposal (Emmanuel Mathot)*
+*v0.2 — 2026-04-16 — Added STAC extensions survey (§2.9); updated crosswalk and taxonomy recommendation to incorporate `disaster:` extension reuse strategy (Emmanuel Mathot)*
