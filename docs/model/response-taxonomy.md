@@ -562,35 +562,96 @@ Humanitarian response types are placeholders for future issues (outside this con
 | `fin-aa` | IFRC Anticipatory Action | IFRC Anticipatory Action allocation (pre-crisis) |
 | `fin-pdna` | PDNA Assessment | Post-Disaster Needs Assessment (WB/EU/UN) |
 
+### 4.4 Sendai Framework Crosswalk
+
+The Sendai Framework 2015–2030 defines 7 global targets (A–G) tracked by 38 indicators. Although Sendai targets are outcome metrics (not a response action taxonomy — see §2.2), they are highly valuable for monitoring and reporting: annotating response items with the targets they contribute to enables policy-level aggregation without encoding Sendai into the taxonomy itself.
+
+**Proposed integration:** An optional `monty:sendai_targets` array field on Response items (or inside `response_detail`) carrying one or more target letter codes. The crosswalk below provides default mappings per response type code; items may override or supplement these defaults.
+
+**Sendai targets:**
+
+| Target | Summary |
+| --- | --- |
+| A | Substantially reduce global disaster mortality |
+| B | Substantially reduce the number of affected people |
+| C | Reduce direct disaster economic loss relative to GDP |
+| D | Reduce disaster damage to critical infrastructure and services |
+| E | Increase countries with national/local DRR strategies |
+| F | Enhance international cooperation to developing countries |
+| G | Increase availability and access to multi-hazard early warning systems and EO data |
+
+**Default crosswalk — EO response products:**
+
+| Code | Sendai targets | Rationale |
+| --- | --- | --- |
+| `eo-ref` | G | Provides pre-event baseline — supports EO/early warning access |
+| `eo-fep` | D, G | Rapid post-event extent informs infrastructure damage response and EO data access |
+| `eo-del` | D, G | Affected area delineation supports critical infrastructure damage assessment |
+| `eo-gra` | C, D | Damage grade products directly inform economic loss (C) and infrastructure damage (D) estimates |
+| `eo-pop` | B | Population exposure analysis directly supports reduction of affected people (B) |
+| `eo-mon` | D, G | Ongoing monitoring supports infrastructure resilience tracking and EO access |
+| `eo-sr` | G | Situational reports support EO data access and dissemination |
+| `eo-vap` | D, G | Generic; specific targets depend on product content |
+
+**Default crosswalk — Humanitarian response (placeholder):**
+
+| Code | Sendai targets | Rationale |
+| --- | --- | --- |
+| `hum-shelter` | A, B | Reduces mortality (A) and people affected (B) |
+| `hum-health` | A, B | Direct mortality reduction (A) |
+| `hum-wash` | A, B | Reduces disease mortality and affected people |
+| `hum-food` | A, B | Reduces mortality from starvation and malnutrition |
+| `hum-nutrition` | A, B | Direct mortality and affected people |
+| `hum-protection` | A, B | Reduces mortality and harm to affected people |
+| `hum-education` | B | Supports affected populations |
+| `hum-cccm` | B | Supports displaced/affected populations |
+| `hum-early-recovery` | A, B, C | Addresses mortality, affected people, and economic recovery |
+| `hum-logistics` | D | Supports critical infrastructure and service continuity |
+| `hum-telecom` | D, G | Emergency telecom supports infrastructure (D) and early warning (G) |
+| `hum-drr` | D, E | Reduces infrastructure damage (D) and contributes to DRR strategies (E) |
+
+**Default crosswalk — Financial response (placeholder):**
+
+| Code | Sendai targets | Rationale |
+| --- | --- | --- |
+| `fin-dref` | A, B, F | DREF reduces mortality and affected people; funded via international cooperation (F) |
+| `fin-ea` | A, B, F | Emergency Appeals have same profile as DREF |
+| `fin-aa` | A, B, G | Anticipatory action reduces mortality and affected people; linked to early warning (G) |
+| `fin-pdna` | C, D | PDNA quantifies economic loss (C) and infrastructure damage (D) |
+
+> **Note:** These defaults are a starting point — they capture the primary contribution of each response type and should be reviewed against the Sendai Monitor indicator definitions before integration into the schema.
+
 ---
 
 ## 5. Open Questions and Next Steps
 
 ### 5.1 Open Questions
 
-1. **Charter VAP classification in practice**: The source-agnostic approach requires best-effort classification of Charter VAPs into `eo-del` / `eo-gra` / etc. How reliably can this be done from Charter Mapper metadata (VAP title, description, product category field)? If the Charter Mapper API exposes a product category field, this should be mapped explicitly in the ETL pipeline (SW1.2).
+**Resolved decisions:**
 
-2. **`eo-vap` fallback scope**: Should `eo-vap` be used only for Charter products where classification is impossible, or is it also the right code for novel EO product types not yet in the taxonomy (e.g., change detection, pre/post comparison mosaics)? Defining the fallback semantics clearly will prevent misuse.
+| # | Question | Decision |
+| --- | --- | --- |
+| 1 | Charter VAP best-effort classification — how reliably can `eo-del`/`eo-gra` be determined from Charter Mapper metadata? | Tracked in [developmentseed/esa-montandon#9](https://github.com/developmentseed/esa-montandon/issues/9) (Charter Data Source Analysis) |
+| 2 | `eo-vap` fallback scope — Charter-only or also for novel EO product types? | Same — resolved in [developmentseed/esa-montandon#9](https://github.com/developmentseed/esa-montandon/issues/9) |
+| 3 | `eo-sr` (Situational Report) — assess whether it should be modelled as a Hazard item rather than a Response item for CEMS | Needs a sub-task under [developmentseed/esa-montandon#6](https://github.com/developmentseed/esa-montandon/issues/6) (Epic: Copernicus EMS) |
+| 4 | `disaster:class = vap` and `monty:response_type = eo-del` are complementary, not redundant | **Accepted** — document explicitly in `response_detail` schema |
+| 5 | Should a separate `cems:` STAC extension be created? | **No** — CEMS-specific fields go in `monty:response_detail`; no separate extension |
+| 6 | Protection sub-types (GBV, Child Protection, Mine Action, HLP) as first-class codes? | **Deferred** — coarse `hum-protection` code sufficient for v1 |
 
-3. **`eo-sr` scope**: The Situational Report is currently CEMS-specific. Should it be generalised (e.g., to cover UNOSAT HTML reports or Charter activation summaries), or kept narrow and CEMS-only?
+**Open:**
 
-4. **`disaster:class` complementarity**: `disaster:class = vap` and `monty:response_type = eo-del` are complementary — the first classifies the Charter object type, the second classifies the product semantics. This should be explicitly stated in the `response_detail` schema documentation to prevent confusion.
-
-5. **CEMS STAC extension gap**: CEMS has no STAC extension — only a REST API. Should drafting a `cems:` STAC extension be in scope for SW1.1, or should CEMS-specific fields be expressed only via `monty:response_detail` properties? A separate `cems:` extension (analogous to `disaster:`) would be the cleaner long-term approach.
-
-6. **Humanitarian code granularity**: The `hum-*` placeholders are coarse (cluster level). Should Protection sub-types (GBV, Child Protection, Mine Action, HLP) be first-class codes now or deferred?
-
-7. **Sendai crosswalk fields**: Should response items carry an optional field indicating which Sendai target(s) the response contributes to? This would enable monitoring/reporting use cases without encoding Sendai into the taxonomy itself.
+1. **Sendai Framework integration** — Sendai target annotations are considered high value for monitoring and reporting. See the design proposal in §4.4 below.
 
 ### 5.2 Next Steps
 
 - [ ] Team review of the source-agnostic EO code set (§4.1) and classification guidance
-- [ ] Verify Charter Mapper API exposes a product category field usable for best-effort VAP classification (open question 1)
-- [ ] Resolve open questions 2–5 before finalising `response_detail` schema (these unblock SW1.1 and SW1.2)
-- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`, incorporating reusable fields from `disaster:` extension and CEMS API
+- [ ] Charter VAP field mapping — determine which Charter Mapper API fields enable best-effort classification ([developmentseed/esa-montandon#9](https://github.com/developmentseed/esa-montandon/issues/9))
+- [ ] Assess whether `eo-sr` (CEMS Situational Report) should be modelled as a Hazard item — sub-task of [developmentseed/esa-montandon#6](https://github.com/developmentseed/esa-montandon/issues/6)
+- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`; include `monitoring_number`, `status`, and optionally `sendai_targets`
+- [ ] Validate Sendai target crosswalk (§4.4) against the [Sendai Monitor indicator definitions](https://sendaimonitor.undrr.org/) before integrating into the schema
 - [ ] Draft example STAC items for a CEMS activation (one per product type: `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-sr`)
 - [ ] Draft example STAC items for a Charter activation (Event item + VAP Response item with `disaster:` + `monty:`)
-- [ ] Integrate response type codes into the main `taxonomy.md` once finalised
+- [ ] Integrate response type codes and Sendai crosswalk into the main `taxonomy.md` once finalised
 - [ ] Publish as v1.0 of this document at D1.1 (KO+4m, July 2026)
 
 ---
@@ -599,3 +660,4 @@ Humanitarian response types are placeholders for future issues (outside this con
 *v0.1 — 2026-04-16 — Initial framework survey and structural proposal (Emmanuel Mathot)*
 *v0.2 — 2026-04-16 — Added STAC extensions survey (§2.9); updated crosswalk and taxonomy recommendation to incorporate `disaster:` extension reuse strategy (Emmanuel Mathot)*
 *v0.3 — 2026-04-16 — Revised §4.1 to source-agnostic EO codes (`eo-del` not `eo-cems-del`); Charter activation mapped to Event not Response; `eo-vap` fallback for unclassifiable Charter VAPs; open questions updated to reflect resolved decisions (Emmanuel Mathot)*
+*v0.4 — 2026-04-16 — Closed open questions 1–6 with explicit decisions and issue cross-references; added §4.4 Sendai Framework crosswalk with default target mappings per response type code (Emmanuel Mathot)*
