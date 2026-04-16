@@ -479,11 +479,11 @@ domain      type
 
 **Design principles:**
 
-- Two segments for simple types; three segments when disambiguation requires a sub-group (e.g., `eo-cems-del` vs `eo-unosat-del`)
+- Two segments: `{domain}-{type}` — e.g., `eo-del`, `hum-shelter`
 - All lowercase, ASCII, hyphen-separated — consistent with EM-DAT codes (`nat-hyd-flo-fla`) and IFRC GO conventions
-- No numeric suffixes unless truly needed (prefer descriptive slugs)
-- EO types use source-prefixed sub-group (`cems`, `charter`, `unosat`) since the same logical product type exists across sources
-- Avoid redundancy with fields already covered by `disaster:` — e.g., do not encode `disaster:activation_status` into the type code
+- **Source-agnostic**: codes classify *what kind of product* was produced, not *who produced it*. A delineation map is `eo-del` whether it comes from CEMS, Charter, or UNOSAT. Source provenance is preserved through `monty:source`, `disaster:activation_id`, `derived_from` links, and the item `id` — not encoded in the type code.
+- **Generic fallback for unclassifiable products**: `eo-vap` serves as the fallback when the specific product type cannot be determined (e.g., Charter VAPs where the source does not distinguish delineation from grading). Best-effort classification to a more specific code is always preferred.
+- Avoid redundancy with fields already covered by `disaster:` — do not encode `disaster:activation_status` or source identity into the type code
 
 **Domain codes:**
 
@@ -512,42 +512,27 @@ A CEMS Grading Product is a **Response** item. The damage statistics it contains
 
 ### 4.1 EO Response Products
 
-EO response products are the primary use case for this contract. Codes use the `eo-{source}-{type}` pattern to preserve the product source in the code itself (since the same logical type — e.g., "delineation" — exists across CEMS, Charter, and UNOSAT with different semantics and metadata).
+EO response products are the primary use case for this contract. Codes are **source-agnostic**: a delineation product is `eo-del` regardless of whether it was produced by CEMS, the International Charter, or UNOSAT. Source provenance is preserved through `monty:source`, `disaster:` extension fields, and `derived_from` / `source-event` relation links — not encoded in the type code.
 
-#### 4.1.1 CEMS Rapid Mapping
+**Charter activation note:** A Charter activation (`disaster:class = activation`) is not a Response item — it is more naturally modelled as a Monty **Event** linked to the initiating call, since it bundles multiple subsequent VAP deliveries. Only the VAPs themselves (`disaster:class = vap`) become Monty Response items.
 
-Directly derived from CEMS published 3-letter codes (REF, FEP, DEL, GRA, SR).
+| Code | Name | Description | CEMS equivalent | Charter mapping | UNOSAT mapping |
+| --- | --- | --- | --- | --- | --- |
+| `eo-ref` | Reference Product | Pre-event baseline mapping of territory and assets | `REF` | Reference map VAP | Phase 0 basemap |
+| `eo-fep` | First Estimate Product | Fast, rough post-event extent assessment (~hours) | `FEP` | Best-effort from early VAPs | Phase 1 PSA |
+| `eo-del` | Delineation Product | Affected area extent and event impact mapping | `DEL` | Delineation VAP (best effort) | Phase 2 flood extent |
+| `eo-gra` | Grading Product | Damage grade, intensity and spatial distribution | `GRA` | Grading VAP (best effort) | Phase 2 damage assessment |
+| `eo-pop` | Population Exposure | Population in affected area analysis | — (derived) | Population exposure VAP | Phase 2 population analysis |
+| `eo-mon` | Monitoring Update | Iterative update of a previous delineation or grading product | `DEL-MON`, `GRA-MON` | — | Phase 3 flood monitoring |
+| `eo-sr` | Situational Report | Event overview report updated throughout the response | `SR` | — | — |
+| `eo-vap` | Value-Added Product | Generic EO product — used when specific type cannot be determined | — | Charter VAP (fallback) | — |
 
-| Code | Name | Description | Monitoring variant |
-| --- | --- | --- | --- |
-| `eo-cems-ref` | CEMS Reference Product | Pre-event baseline mapping of territory and assets | — |
-| `eo-cems-fep` | CEMS First Estimate Product | Fast, rough post-event affected area assessment (~hours) | — |
-| `eo-cems-del` | CEMS Delineation Product | Event impact extent and affected area | `eo-cems-del-mon` |
-| `eo-cems-gra` | CEMS Grading Product | Damage grade, spatial distribution and extent | `eo-cems-gra-mon` |
-| `eo-cems-sr` | CEMS Situational Report | Online report with event overview; updated throughout activation | — |
+**Classification guidance:**
 
-#### 4.1.2 International Charter
-
-Product types aligned with CEMS where possible. The Charter does not publish formal product codes, so the codes below are Monty-assigned.
-
-| Code | Name | Description | CEMS crosswalk |
-| --- | --- | --- | --- |
-| `eo-charter-act` | Charter Activation | Formal activation record with event metadata | — |
-| `eo-charter-ref` | Charter Reference Map | Pre-event baseline map | `eo-cems-ref` |
-| `eo-charter-del` | Charter Delineation Map | Affected area extent map | `eo-cems-del` |
-| `eo-charter-gra` | Charter Grading Map | Damage intensity map | `eo-cems-gra` |
-| `eo-charter-vap` | Charter Value-Added Product | Derived analysis (population exposure, sectoral damage) | — |
-
-#### 4.1.3 UNOSAT Rapid Mapping
-
-UNOSAT's phase-based structure mapped to Monty product types.
-
-| Code | Name | Description | UNOSAT phase | CEMS crosswalk |
-| --- | --- | --- | --- | --- |
-| `eo-unosat-psa` | UNOSAT Preliminary Situation Awareness | Early flood/damage extent (~24h) | Phase 1 | `eo-cems-fep` |
-| `eo-unosat-dam` | UNOSAT Damage Assessment | Damage density, sectoral damage (shelter/agriculture/health) | Phase 2 | `eo-cems-gra` |
-| `eo-unosat-pop` | UNOSAT Population Exposure | Population in affected area analysis | Phase 2 | — |
-| `eo-unosat-mon` | UNOSAT Flood Monitoring | Ongoing monitoring, cumulative flood extent | Phase 3 | `eo-cems-del-mon` |
+- **CEMS products**: always classifiable — use the CEMS product type code directly (`REF`→`eo-ref`, `FEP`→`eo-fep`, `DEL`→`eo-del`, `GRA`→`eo-gra`, `SR`→`eo-sr`). Monitoring updates use `eo-mon` with `response_detail.monitoring_number` to distinguish iterations.
+- **Charter VAPs**: classify as specifically as the Charter Mapper metadata allows. If delineation/grading intent is discernible from the VAP title or description, use `eo-del` / `eo-gra`. If the product type cannot be determined, fall back to `eo-vap`. Do not force classification where the source does not support it.
+- **UNOSAT products**: classify by phase and product description. Phase 1 → `eo-fep`; flood extent → `eo-del`; damage density → `eo-gra`; population exposure → `eo-pop`; monitoring → `eo-mon`.
+- **Monitoring variants**: expressed as `eo-mon` type code with a `response_detail.monitoring_number` integer, not as separate codes per source (`eo-cems-del-mon`, etc.). This mirrors the CEMS API model (`monitoring: true`, `monitoringNumber: int`).
 
 ### 4.2 Humanitarian Response (Placeholder Groups)
 
@@ -583,32 +568,29 @@ Humanitarian response types are placeholders for future issues (outside this con
 
 ### 5.1 Open Questions
 
-1. **`disaster:` extension adoption**: Should Monty Charter Response items declare the Terradue `disaster:` extension (`https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`) alongside `monty:`? This would reuse `disaster:class`, `disaster:activation_id`, `disaster:activation_status`, and `disaster:resolution_class` without duplicating them in `response_detail`. The extension is currently a Proposal and has the same owners — coordination is feasible.
+1. **Charter VAP classification in practice**: The source-agnostic approach requires best-effort classification of Charter VAPs into `eo-del` / `eo-gra` / etc. How reliably can this be done from Charter Mapper metadata (VAP title, description, product category field)? If the Charter Mapper API exposes a product category field, this should be mapped explicitly in the ETL pipeline (SW1.2).
 
-2. **`disaster:class` vs. `monty:response_type`**: The `disaster:class` vocabulary (`activation` / `area` / `acquisition` / `vap`) classifies *what kind of Charter object* this item is, not what kind of *response action* it represents. A `vap` is always a response product, but `monty:response_type` (`eo-charter-del`, `eo-charter-gra`, etc.) carries the semantic meaning for querying. Both are needed; they are complementary, not redundant.
+2. **`eo-vap` fallback scope**: Should `eo-vap` be used only for Charter products where classification is impossible, or is it also the right code for novel EO product types not yet in the taxonomy (e.g., change detection, pre/post comparison mosaics)? Defining the fallback semantics clearly will prevent misuse.
 
-3. **Monitoring variants**: Should `eo-cems-del-mon` be a separate type code or a property on `eo-cems-del` items? The CEMS API already models this as `monitoring: boolean` + `monitoringNumber: integer` — replicating these as `response_detail` properties (avoiding code proliferation) is more consistent with how CEMS itself represents this.
+3. **`eo-sr` scope**: The Situational Report is currently CEMS-specific. Should it be generalised (e.g., to cover UNOSAT HTML reports or Charter activation summaries), or kept narrow and CEMS-only?
 
-4. **Charter activation record modelling**: Is a Charter activation (`disaster:class = activation`) a Monty Response item or a Monty Event? An activation bundles multiple VAP deliveries — it may be better modelled as a Collection or Event rather than a single Response item.
+4. **`disaster:class` complementarity**: `disaster:class = vap` and `monty:response_type = eo-del` are complementary — the first classifies the Charter object type, the second classifies the product semantics. This should be explicitly stated in the `response_detail` schema documentation to prevent confusion.
 
-5. **UNOSAT vs. CEMS code collapse**: Should UNOSAT codes (`eo-unosat-psa`, `eo-unosat-dam`, etc.) be kept separate or collapsed into CEMS codes with a source field in `response_detail`? Separate codes make queries like "all delineation products" harder; a source field plus shared type codes makes them easier. Decision depends on whether UNOSAT and CEMS delineations are semantically equivalent enough to share a code.
+5. **CEMS STAC extension gap**: CEMS has no STAC extension — only a REST API. Should drafting a `cems:` STAC extension be in scope for SW1.1, or should CEMS-specific fields be expressed only via `monty:response_detail` properties? A separate `cems:` extension (analogous to `disaster:`) would be the cleaner long-term approach.
 
-6. **CEMS STAC extension gap**: CEMS currently has no STAC extension — only a REST API. SW1.1 may include drafting a `cems:` STAC extension (or a Monty CEMS profile) to express CEMS activation and product metadata as STAC fields. Should this be a separate extension repository (like `disaster:`) or part of the Monty extension?
+6. **Humanitarian code granularity**: The `hum-*` placeholders are coarse (cluster level). Should Protection sub-types (GBV, Child Protection, Mine Action, HLP) be first-class codes now or deferred?
 
-7. **Humanitarian code granularity**: The `hum-*` placeholders are coarse (cluster level). Should Protection sub-types (GBV, Child Protection, Mine Action, HLP) be first-class codes now or deferred?
-
-8. **Sendai crosswalk fields**: Should response items carry an optional field indicating which Sendai target(s) the response contributes to? This would enable monitoring/reporting use cases without encoding Sendai into the taxonomy itself.
+7. **Sendai crosswalk fields**: Should response items carry an optional field indicating which Sendai target(s) the response contributes to? This would enable monitoring/reporting use cases without encoding Sendai into the taxonomy itself.
 
 ### 5.2 Next Steps
 
-- [ ] Team review of the proposed taxonomy structure and code format (§3)
-- [ ] Team review of EO product codes (§4.1) — validate against Charter Mapper metadata and CEMS API field names
-- [ ] Decide on open questions 1–4 before finalising EO codes (these directly unblock SW1.1 and SW1.2)
-- [ ] Determine whether to propose updates to the `disaster:` extension or adopt it as-is for Charter items
-- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`, incorporating reusable fields from `disaster:` and CEMS API
-- [ ] Draft example STAC items for a CEMS activation (one per product type: REF, FEP, DEL, GRA, SR)
-- [ ] Draft example STAC items for a Charter activation (activation record + VAP)
-- [ ] Integrate response taxonomy into the main `taxonomy.md` once codes are finalised
+- [ ] Team review of the source-agnostic EO code set (§4.1) and classification guidance
+- [ ] Verify Charter Mapper API exposes a product category field usable for best-effort VAP classification (open question 1)
+- [ ] Resolve open questions 2–5 before finalising `response_detail` schema (these unblock SW1.1 and SW1.2)
+- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`, incorporating reusable fields from `disaster:` extension and CEMS API
+- [ ] Draft example STAC items for a CEMS activation (one per product type: `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-sr`)
+- [ ] Draft example STAC items for a Charter activation (Event item + VAP Response item with `disaster:` + `monty:`)
+- [ ] Integrate response type codes into the main `taxonomy.md` once finalised
 - [ ] Publish as v1.0 of this document at D1.1 (KO+4m, July 2026)
 
 ---
@@ -616,3 +598,4 @@ Humanitarian response types are placeholders for future issues (outside this con
 *Document history:*
 *v0.1 — 2026-04-16 — Initial framework survey and structural proposal (Emmanuel Mathot)*
 *v0.2 — 2026-04-16 — Added STAC extensions survey (§2.9); updated crosswalk and taxonomy recommendation to incorporate `disaster:` extension reuse strategy (Emmanuel Mathot)*
+*v0.3 — 2026-04-16 — Revised §4.1 to source-agnostic EO codes (`eo-del` not `eo-cems-del`); Charter activation mapped to Event not Response; `eo-vap` fallback for unclassifiable Charter VAPs; open questions updated to reflect resolved decisions (Emmanuel Mathot)*
