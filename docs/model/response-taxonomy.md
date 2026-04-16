@@ -388,7 +388,6 @@ No STAC extension or catalog for UNOSAT rapid mapping products has been found. U
 | `sar:` | [stac-extensions/sar](https://github.com/stac-extensions/sar) | For SAR-derived flood/damage products (UNOSAT Sentinel-1 based) |
 | `eo:` | [stac-extensions/eo](https://github.com/stac-extensions/eo) | For optical imagery products (Charter acquisitions) |
 | `sat:` | [stac-extensions/sat](https://github.com/stac-extensions/sat) | Satellite orbit/platform metadata for acquisition items |
-| `sentinel-1:` | [stac-extensions/sentinel-1](https://github.com/stac-extensions/sentinel-1) | Sentinel-1 specific fields for SAR acquisitions |
 | `eq:` (earthquake) | [stac-extensions/earthquake](https://github.com/stac-extensions/earthquake) | Structural pattern for hazard-type-specific fields; same owners (@emmanuelmathot) |
 | `processing:` | [stac-extensions/processing](https://github.com/stac-extensions/processing) | Processing chain metadata — relevant for derived EO products |
 
