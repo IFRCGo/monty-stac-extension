@@ -1,0 +1,58 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "charter-response",
+  "title": "International Charter Source Response",
+  "description": "Response products (acquisitions, datasets, VAPs). Items require partner/S3 access; collection is emitted empty until that pipeline exists.",
+  "license": "proprietary",
+  "keywords": [],
+  "roles": [
+    "response",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/",
+      "description": "The Charter is an international collaboration through which satellite data is made available for disaster management purposes."
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "roles": [
+      "response",
+      "source"
+    ]
+  },
+  "links": [
+    {
+      "href": "charter-response.json",
+      "rel": "self"
+    }
+  ]
+}

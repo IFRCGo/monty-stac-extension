@@ -1,0 +1,93 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "charter-events",
+  "title": "Charter Source Events",
+  "description": "International Charter Space and Major Disasters activation events providing satellite imagery for disaster response",
+  "license": "proprietary",
+  "keywords": [
+    "AFG",
+    "BRA",
+    "Earthquake",
+    "Flooding",
+    "Geological",
+    "Meteorological & Hydrological",
+    "Seismic",
+    "Water-related"
+  ],
+  "roles": [
+    "event",
+    "source"
+  ],
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/",
+      "description": "The Charter is an international collaboration through which satellite data is made available for disaster management purposes."
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -43.202124890625,
+          -21.547707218750002,
+          67.37058661497387,
+          36.57677101053992
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-03T12:03:00Z",
+          "2026-02-24T17:09:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "roles": [
+      "event",
+      "source"
+    ],
+    "datetime": {
+      "minimum": "2025-11-03T12:03:00Z",
+      "maximum": "2026-02-24T17:09:00Z"
+    },
+    "monty:country_codes": [
+      "AFG",
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "FL",
+      "GH0101",
+      "MH0901",
+      "nat-geo-ear-gro",
+      "nat-hyd-flo-flo"
+    ]
+  },
+  "links": [
+    {
+      "href": "charter-events.json",
+      "rel": "self"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-event-1000.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-event-1019.json",
+      "type": "application/json"
+    }
+  ]
+}
