@@ -1,0 +1,88 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "id": "charter-event-1019",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -43.202124890625,
+      -21.547707218750002
+    ]
+  },
+  "bbox": [
+    -43.202124890625,
+    -21.547707218750002,
+    -43.202124890625,
+    -21.547707218750002
+  ],
+  "properties": {
+    "title": "[Act-1019/Call-1166] Flood in Brazil",
+    "description": "<div style=\"float: left; width: 80px;\"><img src=\"https://docs.disasterscharter.org/media/various/icons/flood.png\" /></div>\n\n## [Act-1019/Call-1166] Flood in Brazil\n\n**24/02/2026 17:09:00**\n\n[Link on disastercharter.org](https://disasterscharter.org/activations/flood-in-brazil-activation-1019-)\n\n<div>\n\nAs of February 25, southeastern Brazil was hit by record‑breaking rainfall, triggering severe floods and landslides. Entire neighborhoods were swept away overnight as rivers burst their banks and hillsides collapsed.\n\n\n\n\nThe most affected areas include Minas Gerais (especially Juiz de Fora, Ubá, and surrounding mountainous municipalities), Espírito Santo (both coastal and inland communities), and Rio de Janeiro (mountainous and hillside neighborhoods).\n\n\n\n\nIt has been reported that over 400 people have been displaced, at least 30 have been killed, and dozens remain missing. The impacts were so severe due to overflowing rivers and landslides triggered by the intense rainfall. Entire districts were left underwater, streets turned into rivers, and urban centers like Porto Alegre and Canoas became heavily submerged.\n\n\n\n\nSearch and rescue operations are underway, with large‑scale evacuations being carried out by boat and helicopter. Emergency shelters are being set up, infrastructure is being assessed.\n\n\n\n\nPotential landslides are being monitored as the rain continues.\n</div>",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "MH0901",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "monty:episode_number": 1,
+    "monty:corr_id": "20260224-BRA-616285-MH0901-1-GCDB",
+    "keywords": [
+      "Meteorological & Hydrological",
+      "BRA",
+      "Water-related",
+      "Flooding"
+    ],
+    "datetime": "2026-02-24T17:09:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://supervisor.disasterscharter.org/api/activations/act-1019",
+      "type": "application/json"
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1019.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json",
+      "title": "Charter Source Events"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json",
+      "title": "Charter Source Events"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-events"
+}

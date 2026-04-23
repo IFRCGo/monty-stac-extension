@@ -1,0 +1,80 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "id": "charter-event-1000",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      67.37058661497387,
+      36.57677101053992
+    ]
+  },
+  "bbox": [
+    67.37058661497387,
+    36.57677101053992,
+    67.37058661497387,
+    36.57677101053992
+  ],
+  "properties": {
+    "title": "[Act-1000/Call-1144] Earthquake in Afghanistan",
+    "description": "<div style=\"float: left; width: 80px;\"><img src=\"https://docs.disasterscharter.org/media/various/icons/earthquake.png\" /></div>\n\n## [Act-1000/Call-1144] Earthquake in Afghanistan\n\n**03/11/2025 12:03:00**\n\n[Link on disastercharter.org](https://disasterscharter.org/activations/earthquake-in-afghanistan-activation-1000-)\n\n<div>\n\nA 6.3-magnitude earthquake struck northern Afghanistan near Mazar-e-Sharif on 3 November 2025, killing at least 30 people and injuring over 945.\n \n\nThe earthquake caused widespread damage across Balkh and Samangan provinces, destroying homes and blocking roads with landslides. More than 90 houses were damaged, including over 50 in Khulm District, Samangan. Hundreds of people were left displaced, with families enduring extended stays in temporary settlements. In addition to limited access to safe drinking water, the UN agency warned of widespread open defecation and poor access to health services, particularly for women.\n \n\nThe Shrine of Hazrat Ali, also known as the Blue Mosque, was reduced to rubble, devastating a revered site for Shia Muslims. A mountain collapse in the Tangi Tashqurghan valley temporarily blocked the Balkh–Kabul highway due to falling rocks, though the road was later cleared and reopened.\n \n\nEmergency teams were rapidly deployed to provide medical care and assess damage. Residents dug through rubble in search of survivors, while national disaster agencies coordinated ongoing relief efforts.\n</div>",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG"
+    ],
+    "monty:hazard_codes": [
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
+    ],
+    "monty:episode_number": 1,
+    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
+    "keywords": [
+      "Geological",
+      "AFG",
+      "Seismic",
+      "Earthquake"
+    ],
+    "datetime": "2025-11-03T12:03:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://supervisor.disasterscharter.org/api/activations/act-1000",
+      "type": "application/json"
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1000.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json",
+      "title": "Charter Source Events"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json",
+      "title": "Charter Source Events"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-events"
+}
