@@ -67,12 +67,12 @@ Charter VAP Response items declare `monty:` **+** `disaster:` (+ optionally `pro
 | Hazard types | `disaster:types` (and `monty:hazard_codes` for Monty / UNDRR-ISC interoperability) |
 | Country | `disaster:country` (and `monty:country_codes`) |
 | Product type code | `monty:response_detail.type` (best-effort: `eo-del` / `eo-gra` / `eo-pop` / `eo-vap` fallback) |
-| Charter-provided source id | `monty:response_detail.source_id` (e.g., `ACT-849`) |
+| Charter-provided VAP id | `monty:response_detail.source_id` (e.g., `1144-1` — `{call_id}-{vap_number}`; activation id is on `disaster:activation_id`) |
 | Source landing page | STAC `rel: derived_from` link to the source-system product page (`href` = canonical URL) |
 | Producer (VAP provider) | `monty:response_detail.producer` |
 | Methodology | `monty:response_detail.methodology` |
 
-> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. Only Charter VAPs become Monty Response items.
+> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. **VAPs** and **calibrated acquisition datasets** become Monty Response items (`eo-del` / `eo-gra` / … and `eo-dat` respectively). See [Charter source mapping](../sources/Charter/README.md).
 
 ### 3.3 UNOSAT Rapid Mapping
 
@@ -140,7 +140,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
     "disaster:country": "ESP",
     "monty:response_detail": {
       "type": "eo-vap",
-      "source_id": "ACT-849",
+      "source_id": "1421-1",
       "producer": "Airbus",
       "methodology": "human_interpreted",
       "sendai_targets": ["D", "G"]
@@ -148,10 +148,16 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
   },
   "links": [
     {
+      "rel": "related",
+      "href": "../charter-events/charter-event-849.json",
+      "type": "application/geo+json",
+      "roles": ["event"]
+    },
+    {
       "rel": "derived_from",
       "href": "https://disasterscharter.org/web/guest/activations/-/article/...",
       "type": "text/html",
-      "title": "International Charter activation ACT-849"
+      "title": "International Charter activation Act-849"
     }
   ]
 }
@@ -245,8 +251,9 @@ A Monty Response item typically participates in the following links:
 | --- | --- | --- | --- |
 | `self` | this item | — | Standard STAC self link |
 | `collection` | parent collection | — | Standard STAC parent link |
-| `reference-event` | the Monty reference event | — | Ties the response to the canonical Monty event |
-| `source-event` | the source-system event item | — | Ties the response to the source-side event |
+| `reference-event` | the Monty reference event | — | Ties the response to the canonical Monty event (cross-catalog) |
+| `source-event` | the source-system event item | — | Ties the response to the source-side event (cross-catalog) |
+| `related` | Event item | `["event"]` | Within a source collection, ties the response to its parent Event (typed link per Monty schema) |
 | `related` | another Response item | `["response"]` | Cross-reference to a sibling response (e.g., a CEMS Grading product references a prior Delineation product on the same activation) |
 | `related` | Hazard item(s) | `["hazard"]` | Indicates which hazard(s) the response addresses |
 | `related` | Impact item(s) | `["impact"]` | Optional back-reference to Impact items this response informs. The canonical provenance edge runs the **other way**: each derived Impact item carries a `rel: derived_from` link pointing to this Response item. |

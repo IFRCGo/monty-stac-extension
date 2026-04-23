@@ -1,0 +1,96 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/version/v1.0.0/schema.json",
+    "https://terradue.github.io/disaster/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "act-1000-vap-1144-1",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          67.69,
+          36.559
+        ],
+        [
+          67.799,
+          36.57
+        ],
+        [
+          67.751,
+          36.727
+        ],
+        [
+          67.642,
+          36.718
+        ],
+        [
+          67.69,
+          36.559
+        ],
+        [
+          67.69,
+          36.559
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "disaster:class": "ValueAddedProduct",
+    "cpe:status": {
+      "stage": "notificationImported",
+      "message": "1 assets imported",
+      "link": "https://supervisor.disasterscharter.org/hangfire/jobs/details/396664"
+    },
+    "updated": "2026-01-26T11:46:31.9938667Z",
+    "disaster:activation_id": 1000,
+    "cpe:cos2_id": "act-1000-vap-1144-1",
+    "datetime": "2025-11-11T08:00:29Z",
+    "cpe:cos2_xml": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<valueAddedProduct xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <identifier>1144-1</identifier>\n  <activationId>1000</activationId>\n  <recordCreated>2025-11-11T08:03:39Z</recordCreated>\n  <recordUpdated>2026-01-26T11:46:21Z</recordUpdated>\n  <title language=\"en\">Preliminary satellite-derived damage assessment (2 November 2025, M 6.3), Kholm Town and surrounding in Khulm District, Balkh Province, Afghanistan</title>\n  <acquisitionDate>2025-11-11T08:00:29Z</acquisitionDate>\n  <copyright language=\"en\">Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.;Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.;Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.</copyright>\n  <productFileUrl>https://disasterscharter.org/cos-api/service/vap/1144/1.pdf</productFileUrl>\n  <quicklookFileUrl>https://disasterscharter.org/cos-api/api/file/public/34309299/vap-1144-1-quicklook.jpg?version=1.0&amp;t=1762848218541</quicklookFileUrl>\n  <geoProductFileUrl>https://disasterscharter.org/cos-api/service/vap/1144/1.pdf</geoProductFileUrl>\n  <additionalInformation language=\"en\">Status:\nDamaged buildings observed.\nDamaged structures and buildings, including walls and roofs, were observed in Khulm District, Balkh Province, Afghanistan, as of 5 November 2025.\n\nFurther action(s):\nfull assessment to be conducted</additionalInformation>\n  <footprint>\n    <polyPoint>\n      <latitude>36.559</latitude>\n      <longitude>67.69</longitude>\n    </polyPoint>\n    <polyPoint>\n      <latitude>36.57</latitude>\n      <longitude>67.799</longitude>\n    </polyPoint>\n    <polyPoint>\n      <latitude>36.727</latitude>\n      <longitude>67.751</longitude>\n    </polyPoint>\n    <polyPoint>\n      <latitude>36.718</latitude>\n      <longitude>67.642</longitude>\n    </polyPoint>\n    <polyPoint>\n      <latitude>36.559</latitude>\n      <longitude>67.69</longitude>\n    </polyPoint>\n  </footprint>\n  <productFileSize>0</productFileSize>\n  <category>Dossier</category>\n  <status>ACCEPTED</status>\n</valueAddedProduct>",
+    "created": "2025-11-11T08:03:39Z",
+    "title": "Preliminary satellite-derived damage assessment (2 November 2025, M 6.3), Kholm Town and surrounding in Khulm District, Balkh Province, Afghanistan [11/11/2025 08:00:29]",
+    "source": null,
+    "copyright": "Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.;Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.;Includes Pleiades material \u00a9 CNES (2025), Distribution Airbus DS.",
+    "additional_information": "Status:\nDamaged buildings observed.\nDamaged structures and buildings, including walls and roofs, were observed in Khulm District, Balkh Province, Afghanistan, as of 5 November 2025.\n\nFurther action(s):\nfull assessment to be conducted",
+    "external_vap_id": null,
+    "vap_status": "ACCEPTED",
+    "cpe:notification_source": "cos2",
+    "cpe:notified": [
+      "2025-11-11T08:03:52.4959512Z",
+      "2026-01-26T11:46:22.0667931Z"
+    ],
+    "version": "2"
+  },
+  "bbox": [
+    67.642,
+    36.559,
+    67.799,
+    36.727
+  ],
+  "assets": {
+    "overview": {
+      "type": "image/jpeg",
+      "roles": [
+        "overview"
+      ],
+      "title": "Value Added Product Overview",
+      "href": "s3://cpe-operations-catalog/activations/act-1000/vaps/act-1000-vap-1144-1/vap-1144-1-quicklook.jpg",
+      "file:size": 674055
+    }
+  },
+  "links": [
+    {
+      "type": "application/geo+json",
+      "rel": "self",
+      "href": "s3://cpe-operations-catalog/activations/act-1000/vaps/act-1000-vap-1144-1/act-1000-vap-1144-1.json"
+    },
+    {
+      "type": "application/json",
+      "rel": "root",
+      "href": "s3://cpe-operations-catalog/catalog.json"
+    }
+  ]
+}
