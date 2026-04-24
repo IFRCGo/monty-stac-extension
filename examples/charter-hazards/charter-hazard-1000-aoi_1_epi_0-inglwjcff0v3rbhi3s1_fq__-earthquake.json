@@ -1,0 +1,101 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "id": "charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          67.51205662570842,
+          36.55731777510677
+        ],
+        [
+          67.38611292667153,
+          36.51311001861071
+        ],
+        [
+          67.3448318556961,
+          36.58305627866545
+        ],
+        [
+          67.4685768936711,
+          36.62141771742338
+        ],
+        [
+          67.51205662570842,
+          36.55731777510677
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    67.3448318556961,
+    36.51311001861071,
+    67.51205662570842,
+    36.62141771742338
+  ],
+  "properties": {
+    "title": "AOI_1_Epi_0",
+    "description": "Call-1144 AoI ID: 1, Priority: 1, SurfaceArea: 101, Comment:",
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG"
+    ],
+    "monty:hazard_codes": [
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
+    ],
+    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
+    "charter:area_priority": 1,
+    "keywords": [
+      "Geological",
+      "AFG",
+      "Seismic",
+      "Earthquake"
+    ],
+    "datetime": "2025-11-03T12:03:00Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1000.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1000.json",
+      "type": "application/json",
+      "title": "Parent Charter Event"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json",
+      "title": "Charter Source Hazards"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json",
+      "title": "Charter Source Hazards"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-hazards"
+}

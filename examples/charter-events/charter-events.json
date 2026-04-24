@@ -1,0 +1,105 @@
+{
+  "type": "Collection",
+  "id": "charter-events",
+  "stac_version": "1.1.0",
+  "description": "International Charter Space and Major Disasters activation events",
+  "links": [
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json",
+      "title": "Charter Source Events"
+    },
+    {
+      "rel": "item",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1000.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1019.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "roles": [
+    "event",
+    "source"
+  ],
+  "keywords": [
+    "AFG",
+    "BRA",
+    "Earthquake",
+    "Flooding",
+    "Geological",
+    "Meteorological & Hydrological",
+    "Seismic",
+    "Water-related"
+  ],
+  "title": "Charter Source Events",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -43.202124890625,
+          -21.547707218750002,
+          67.37058661497387,
+          36.57677101053992
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-03T12:03:00Z",
+          "2026-02-24T17:09:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG",
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "FL",
+      "GH0101",
+      "MH0901",
+      "nat-geo-ear-gro",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "AFG",
+      "BRA",
+      "Earthquake",
+      "Flooding",
+      "Geological",
+      "Meteorological & Hydrological",
+      "Seismic",
+      "Water-related"
+    ]
+  }
+}

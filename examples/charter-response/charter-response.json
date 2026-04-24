@@ -1,0 +1,62 @@
+{
+  "type": "Collection",
+  "id": "charter-response",
+  "stac_version": "1.1.0",
+  "description": "Response products (acquisitions, datasets, VAPs). Items require partner/S3 access; collection is emitted empty until that pipeline exists.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json",
+      "title": "International Charter Source Response"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json"
+    }
+  ],
+  "roles": [
+    "response",
+    "source"
+  ],
+  "keywords": [],
+  "title": "International Charter Source Response",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "response",
+      "source"
+    ]
+  },
+  "stac_extensions": []
+}

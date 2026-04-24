@@ -1,0 +1,117 @@
+{
+  "type": "Collection",
+  "id": "charter-hazards",
+  "stac_version": "1.1.0",
+  "description": "Areas of Interest from Charter activations",
+  "links": [
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json",
+      "title": "Charter Source Hazards"
+    },
+    {
+      "rel": "item",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "roles": [
+    "hazard",
+    "source"
+  ],
+  "keywords": [
+    "AFG",
+    "BRA",
+    "Earthquake",
+    "Flooding",
+    "Geological",
+    "Gravitational Mass Movement (Landslide)",
+    "Ground Failure",
+    "Meteorological & Hydrological",
+    "Seismic",
+    "Water-related"
+  ],
+  "title": "Charter Source Hazards",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -43.4377,
+          -21.831,
+          67.51205662570842,
+          36.62141771742338
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-03T12:03:00Z",
+          "2026-02-24T17:09:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG",
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "FL",
+      "GH0101",
+      "LS",
+      "MH0600",
+      "MH0901",
+      "nat-geo-ear-gro",
+      "nat-geo-mmd-lan",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "AFG",
+      "BRA",
+      "Earthquake",
+      "Flooding",
+      "Geological",
+      "Gravitational Mass Movement (Landslide)",
+      "Ground Failure",
+      "Meteorological & Hydrological",
+      "Seismic",
+      "Water-related"
+    ]
+  }
+}

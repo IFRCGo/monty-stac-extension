@@ -1,0 +1,219 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+  ],
+  "id": "charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -43.2829,
+          -21.7591
+        ],
+        [
+          -43.2844,
+          -21.7731
+        ],
+        [
+          -43.2888,
+          -21.7866
+        ],
+        [
+          -43.2959,
+          -21.7991
+        ],
+        [
+          -43.3055,
+          -21.81
+        ],
+        [
+          -43.3173,
+          -21.8189
+        ],
+        [
+          -43.3307,
+          -21.8255
+        ],
+        [
+          -43.3452,
+          -21.8296
+        ],
+        [
+          -43.3603,
+          -21.831
+        ],
+        [
+          -43.3754,
+          -21.8296
+        ],
+        [
+          -43.3899,
+          -21.8255
+        ],
+        [
+          -43.4033,
+          -21.8189
+        ],
+        [
+          -43.4151,
+          -21.81
+        ],
+        [
+          -43.4247,
+          -21.7991
+        ],
+        [
+          -43.4318,
+          -21.7866
+        ],
+        [
+          -43.4362,
+          -21.7731
+        ],
+        [
+          -43.4377,
+          -21.7591
+        ],
+        [
+          -43.4362,
+          -21.7451
+        ],
+        [
+          -43.4318,
+          -21.7316
+        ],
+        [
+          -43.4246,
+          -21.7192
+        ],
+        [
+          -43.415,
+          -21.7083
+        ],
+        [
+          -43.4033,
+          -21.6993
+        ],
+        [
+          -43.3899,
+          -21.6927
+        ],
+        [
+          -43.3754,
+          -21.6886
+        ],
+        [
+          -43.3603,
+          -21.6872
+        ],
+        [
+          -43.3452,
+          -21.6886
+        ],
+        [
+          -43.3307,
+          -21.6927
+        ],
+        [
+          -43.3173,
+          -21.6993
+        ],
+        [
+          -43.3056,
+          -21.7083
+        ],
+        [
+          -43.2959,
+          -21.7192
+        ],
+        [
+          -43.2888,
+          -21.7316
+        ],
+        [
+          -43.2844,
+          -21.7451
+        ],
+        [
+          -43.2829,
+          -21.7591
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -43.4377,
+    -21.831,
+    -43.2829,
+    -21.6872
+  ],
+  "properties": {
+    "title": "Juiz de Fora",
+    "description": "Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:",
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "monty:country_codes": [
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "MH0901",
+      "LS",
+      "nat-geo-mmd-lan"
+    ],
+    "monty:corr_id": "20260224-BRA-616285-MH0901-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": 8,
+      "severity_unit": "km",
+      "severity_label": "Area radius",
+      "estimate_type": "primary"
+    },
+    "charter:area_priority": 1,
+    "keywords": [
+      "BRA",
+      "Geological",
+      "Gravitational Mass Movement (Landslide)",
+      "Ground Failure"
+    ],
+    "datetime": "2026-02-24T17:09:00Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1019.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1019.json",
+      "type": "application/json",
+      "title": "Parent Charter Event"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "root",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json",
+      "title": "Charter Source Hazards"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json",
+      "title": "Charter Source Hazards"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-hazards"
+}
