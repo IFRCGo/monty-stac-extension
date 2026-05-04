@@ -2,7 +2,7 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "id": "gdacs-impact-1102983-2-A-death-Spain-Andalusia",
   "geometry": {
@@ -23,6 +23,7 @@
     "description": "As of 4 November, the death toll reached 217 people, with 114 people still missing, mainly in the Autonomous Region of Valencia. 3 casualties are reported in Castilla-La Mancha autonomous community, and 1 in Andalusia autonomous Regions. At least 447 people have been sheltered",
     "start_datetime": "2024-10-27T16:14:00Z",
     "end_datetime": "2024-11-04T16:14:00Z",
+    "monty:src_event_id": "1102983",
     "monty:episode_number": 2,
     "monty:hazard_codes": [
       "FL",

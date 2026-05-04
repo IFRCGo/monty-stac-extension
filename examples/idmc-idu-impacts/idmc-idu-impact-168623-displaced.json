@@ -2,7 +2,7 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "id": "idmc-idu-impact-168623-displaced",
   "geometry": {
@@ -34,6 +34,7 @@
       "Recommended figure",
       "Local Authorities"
     ],
+    "monty:src_event_id": "168623",
     "monty:country_codes": [
       "ESP"
     ],

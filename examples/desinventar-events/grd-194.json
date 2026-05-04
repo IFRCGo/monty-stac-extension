@@ -2,7 +2,7 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "id": "grd-194",
   "geometry": {
@@ -42,6 +42,7 @@
     "datetime": "2012-08-03T00:00:00Z",
     "title": "Tropical Storm Ernesto in Grenada",
     "description": "Tropical Storm Watch issued but tropical storm conditions not experienced",
+    "monty:src_event_id": "194",
     "monty:episode_number": 1,
     "monty:country_codes": [
       "GRD"

@@ -1,8 +1,8 @@
 {
   "type": "Feature",
-  "stac_version": "1.1.0",
+  "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "id": "alerthub-event-6531608",
   "geometry": {
@@ -187,6 +187,7 @@
     "description": "В горах лавиноопасно.",
     "start_datetime": "2026-02-10T07:38:00+00:00",
     "end_datetime": "2026-02-11T18:00:00+00:00",
+    "monty:src_event_id": "6531608",
     "monty:episode_number": 1,
     "monty:hazard_codes": [
       "MH0801",

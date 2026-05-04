@@ -2,7 +2,7 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "id": "emdat-event-2024-0796-ESP",
   "geometry": {
@@ -43,6 +43,7 @@
     "description": "Flood (Flood (General)) in Alaquàs, Albal, Aldaya, Alfafar, Algemesí, Benerússer, Catarroja, Llocnou de la Corona, Massanassa, Paiporta, Picanya, Sedaví, Utiel and La Torre municipalties (Valencia);, Letur, lbacete provinces; Castilla-La Mancha communities, Andalusia, Murcia, and the Balearic Islands, Catalonia, Spain of October 2024",
     "start_datetime": "2024-10-27T00:00:00Z",
     "end_datetime": "2024-11-04T00:00:00Z",
+    "monty:src_event_id": "0796",
     "monty:episode_number": 1,
     "monty:hazard_codes": [
       "FL",

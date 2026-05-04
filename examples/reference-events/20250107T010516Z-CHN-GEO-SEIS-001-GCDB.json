@@ -1,7 +1,7 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.1.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json"
   ],
   "type": "Feature",
   "id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
@@ -22,6 +22,7 @@
   "properties": {
     "title": "Earthquake in China, Southern Tibetan Plateau, 2025-01-07, 01:05:16 UTC",
     "datetime": "2025-01-07T01:05:16Z",
+    "monty:src_event_id": "001",
     "monty:country_codes": [
       "CHN"
     ],
