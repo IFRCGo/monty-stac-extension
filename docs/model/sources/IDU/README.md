@@ -56,6 +56,7 @@ previous implementation (R): none
 | properties.roles                                                                                                                  | [`source`, `event`]                           |                                                                     |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                         |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
 #### Hazard Type Mapping
 
@@ -119,6 +120,7 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                                                                                                                                  |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                                                                                                                                      |
 | monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
 #### Impact Detail
 

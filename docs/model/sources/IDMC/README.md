@@ -100,6 +100,7 @@ The following table shows how IDMC event fields map to STAC Item fields:
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {Hazard Category} and {Hazard Type}                                                          | Yes      | Map using the [hazard type mapping](#hazard-type-mapping)                          |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number)                                 |                                                                                              | Yes      | Always 1 (IDMC doesn't track episodes)                                             |
 | [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)                                             | id                                                                                           | Yes      | Generated following the [event pairing procedure](../../correlation_identifier.md) |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
 ### Displacement items geometry aggregagtion for event geometry
 
@@ -154,6 +155,7 @@ The following table shows how IDMC displacement item fields map to STAC Item fie
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)[0]                              | {ISO3}                                                                                                 | Yes      | Direct mapping to array                                   |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {Hazard Category} and {Hazard Type}                                                                    | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [Displacement Impact details](#displacement-impact-details)                                        | Yes      |                                                           |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
 ##### Displacement Impact details
 
@@ -195,6 +197,7 @@ The following table shows how IDU fields map to STAC Item fields for impact item
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)[0]                              | {iso3}                                                     | Yes      | Direct mapping to array                                   |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {category}, {type}                                         | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [IDU Impact details](#idu-impact-details)              | Yes      |                                                           |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 
 ##### IDU Impact details
 
