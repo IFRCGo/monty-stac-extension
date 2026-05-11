@@ -1,7 +1,7 @@
 # Monty Extension Specification
 
 - **Title:** Monty
-- **Identifier:** <https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json>
+- **Identifier:** <https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json>
 - **Field Name Prefix:** monty
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -45,6 +45,7 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 | Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                         |
 | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:src_event_id  | string | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`. |
 | monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
 | monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
 | monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
@@ -76,6 +77,10 @@ The roles are used at the item level in the `roles` field to characterize the da
 | occ_probdef | uri    | It is a link to the definition of the probability for the hazard relationship                                      |
 
 #### Additional Field Information
+
+##### monty:src_event_id
+
+The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`.
 
 ##### monty:episode_number
 
