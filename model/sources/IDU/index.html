@@ -1270,6 +1270,11 @@
 <td>main source url</td>
 <td>Link to the main source url</td>
 </tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
+<td>Source event ID</td>
+<td>Unique identifier of the event</td>
+</tr>
 </tbody>
 </table>
 <h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
@@ -1516,7 +1521,8 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 | properties.roles                                                                                                                  | [<code>source</code>, <code>impact</code>]                          |                                                                                                                                                                                  |
 | <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a>                                           | source_url                                    |                                                                                                                                                                                  |
 | <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]                                 | main source url                               | Link to the main source url                                                                                                                                                      |
-| monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |</p>
+| monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |
+| <a href="https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id">monty:src_event_id</a> | Source event ID | Unique identifier of the event |</p>
 <h4 id="impact-detail">Impact Detail</h4>
 <p>The following mappings are used to create ImpactDetail objects.
 | impact_type                     | Monty Impact Exposure Category         | Monty Impact Type                            |
