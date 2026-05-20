@@ -276,10 +276,29 @@
         "modelled"
       ]
     },
+    "base_link": {
+      "$comment": "Minimal STAC Link Object requirements shared by all link variants in this extension.",
+      "type": "object",
+      "required": [
+        "rel",
+        "href"
+      ],
+      "properties": {
+        "rel": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
     "non_related_link": {
       "allOf": [
         {
-          "type": "object"
+          "$ref": "#/definitions/base_link"
         },
         {
           "not": {
@@ -297,29 +316,36 @@
       ]
     },
     "typed_related_link": {
-      "type": "object",
-      "required": [
-        "rel",
-        "roles"
-      ],
-      "properties": {
-        "rel": {
-          "const": "related"
+      "allOf": [
+        {
+          "$ref": "#/definitions/base_link"
         },
-        "roles": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": {
-            "type": "string",
-            "enum": [
-              "event",
-              "hazard",
-              "impact"
-            ]
+        {
+          "type": "object",
+          "required": [
+            "rel",
+            "roles"
+          ],
+          "properties": {
+            "rel": {
+              "const": "related"
+            },
+            "roles": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "event",
+                  "hazard",
+                  "impact"
+                ]
+              }
+            }
           }
         }
-      }
+      ]
     },
     "roles": {
       "$comment": "Roles field",

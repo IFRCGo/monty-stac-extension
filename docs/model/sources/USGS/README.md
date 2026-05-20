@@ -97,7 +97,7 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Reference event item       | Link to reference event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
-| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identifier.md) convention |
 
 #### Hazard Type Mapping
 
@@ -111,8 +111,11 @@ USGS (United States Geological Survey) exclusively tracks seismic events. The **
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. The 2025 update consolidated multiple earthquake-related HIPs (including tsunami, ground shaking, liquefaction, etc.) into a single Earthquake HIP (GH0101). While USGS data may include tsunami-related events through the `properties.tsunami` field, the primary hazard code remains GH0101 for all earthquake events.
 
 This mapping ensures standardized hazard categorization for seismic events from the USGS Earthquake Catalog.
-| [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/map"    | Link to the USGS interactive map for this event (external resource, not a STAC item relationship) |
-| [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                  | properties.url + "/region" | Link to the USGS regional information for this event (external resource, not a STAC item relationship) |
+
+Additional external links produced for USGS events (not STAC item relationships):
+
+- [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) with `properties.url + "/map"`: Link to the USGS interactive map for this event (external resource, not a STAC item relationship)
+- [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) with `properties.url + "/region"`: Link to the USGS regional information for this event (external resource, not a STAC item relationship)
 
 ### Hazard Item (from ShakeMap)
 

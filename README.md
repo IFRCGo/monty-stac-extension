@@ -72,12 +72,12 @@ For cross-item relationships represented by `rel="related"` links, the link `rol
 
 ### Link Attributes
 
-| Field Name  | Type   | Description                                                                                                        |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
-| roles       | [string] | Semantic classification for the linked entity. For `rel="related"` links between Monty items, use `event`, `hazard` or `impact` |
-| occ_type    | string | The type of the occurrence. It can be one of the following values: `known`, `potential`                            |
-| occ_prob    | string | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`) |
-| occ_probdef | uri    | It is a link to the definition of the probability for the hazard relationship                                      |
+| Field Name  | Type      | Description                                                                                                                                          |
+| ----------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| roles       | \[string] | Semantic classification for the linked entity as an array of strings. For `rel="related"` links between Monty items, use `event`, `hazard` or `impact` |
+| occ_type    | string    | The type of the occurrence. It can be one of the following values: `known`, `potential`                                                              |
+| occ_prob    | string    | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`)                                   |
+| occ_probdef | uri       | It is a link to the definition of the probability for the hazard relationship                                                                        |
 
 #### Additional Field Information
 
