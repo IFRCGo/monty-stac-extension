@@ -1,6 +1,6 @@
-# Response Taxonomy (Working Document — v0.1)
+# Response Taxonomy (Working Document — v0.5)
 
-> **Status:** Working document. Framework survey (including existing STAC extensions) and crosswalk are complete; taxonomy structure recommendation and initial code proposals are pending team review.
+> **Status:** Working document. Framework survey (including existing STAC extensions) and crosswalk are complete; taxonomy structure recommendation and initial code proposals are proposed and pending team review.
 >
 > **Relates to:** [developmentseed/esa-montandon#12](https://github.com/developmentseed/esa-montandon/issues/12) · Contributes to D1.1 (KO+4m)
 
@@ -369,9 +369,11 @@ CEMS provides a proprietary REST API (OpenAPI) rather than a STAC catalog. There
 | Product `monitoringNumber` | integer | Monitoring sequence number | `response_detail.monitoring_number` |
 | Product `statusCode` | string | `F`=Finished, `N`=No impact, `W`=Waiting, `I`=In production | `response_detail.status` |
 | Image `sensorType` | string | `optical` or `radar` | `response_detail.sensor_type` (or via `eo:`/`sar:` extensions) |
-| Image `resolutionClass` | string | `VHR1`, `HR`, etc. | `disaster:resolution_class` (reuse Terradue field) |
-| `charterNumber` | string | If Charter co-activation exists | `disaster:activation_id` |
+| Image `resolutionClass` | string | `VHR1`, `HR`, etc. | `response_detail.resolution_class` |
+| `charterNumber` | string | If Charter co-activation exists | `response_detail.charter_activation_id` |
 | Stats (`affected`, `total` per thematic) | object | Damage/exposure stats by theme | → Impact items, not Response |
+
+> **Note on the rightmost column:** Where a Terradue `disaster:` field is named (e.g., `disaster:resolution_class`, `disaster:activation_id`) it appears in this column as a *semantic reference point* — the existing extension field covering the same concept. CEMS Response items in Monty declare `monty:` + `processing:` (see §3.1) and do **not** declare the `disaster:` extension; the corresponding values are carried in `monty:response_detail.*` as shown above. The `disaster:` field names are kept in the survey only to make the cross-source semantic alignment explicit.
 
 **Gap:** A Monty-aligned STAC extension (or profile) for CEMS Rapid Mapping products is a deliverable of this contract (SW1.1). It should build on the existing CEMS API field semantics while expressing them in STAC.
 
@@ -463,11 +465,11 @@ The `monty:response_detail` field (analogous to `hazard_detail` and `impact_deta
 
 ```
 domain      type
-  eo          cems-ref
-  eo          cems-fep
-  eo          cems-del
-  eo          cems-gra
-  eo          charter-vap
+  eo          ref
+  eo          fep
+  eo          del
+  eo          gra
+  eo          vap
   hum         shelter
   hum         health
   ...
@@ -562,7 +564,76 @@ Humanitarian response types are placeholders for future issues (outside this con
 | `fin-aa` | IFRC Anticipatory Action | IFRC Anticipatory Action allocation (pre-crisis) |
 | `fin-pdna` | PDNA Assessment | Post-Disaster Needs Assessment (WB/EU/UN) |
 
-### 4.4 Sendai Framework Crosswalk
+### 4.4 `response_detail` Field Sketch
+
+> **Status:** First-pass field list to make the `response_detail` object concrete. Field names, types and required/optional flags are proposals for team review and will be formalised in the JSON Schema during D1.2.
+
+`monty:response_detail` is the Monty-specific object attached to a Response item, analogous to `monty:hazard_detail` and `monty:impact_detail`. It carries the **response type code** and the minimal additional metadata needed to describe the response that is *not already covered* by another adopted STAC extension on the same item.
+
+**Extension-layering reminder (see \u00a73.1):** before adding a field to `response_detail`, check whether it is already defined by an extension declared on the item (`disaster:`, `processing:`, `sar:`, `eo:`, `sat:`). If so, use that extension's field rather than duplicating it in `response_detail`.
+
+**Proposed fields:**
+
+| Field | Type | Req. | Allowed values / format | Description | Already covered by |
+| --- | --- | --- | --- | --- | --- |
+| `type` | string | **R** | One of \u00a74.1 / \u00a74.2 / \u00a74.3 codes (`eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon`, `eo-sr`, `eo-vap`, `hum-*`, `fin-*`) | Response type code from this taxonomy | \u2014 |
+| `domain` | string | O | `eo`, `hum`, `fin` | Derivable from `type`; included for filtering convenience | \u2014 |
+| `source_id` | string | **R** | Free string (e.g., `EMSR744`, `ACT-849`, `FL20240926ESP`) | Source-system identifier for the response (CEMS activation code, Charter call ID, UNOSAT product code, DREF operation ID) | partly `disaster:activation_id` for Charter |
+| `source_url` | string (URI) | O | URL | Canonical landing page for the response in the source system | \u2014 |
+| `status` | string | O | `planned`, `in-production`, `published`, `finished`, `no-impact`, `withdrawn` | Lifecycle status; harmonises CEMS `statusCode` (`F`/`N`/`W`/`I`) and Charter `disaster:activation_status` | partly `disaster:activation_status` for Charter |
+| `monitoring` | boolean | O | `true` / `false` (default `false`) | Whether this item is a monitoring update of a previous product | \u2014 |
+| `monitoring_number` | integer | O | \u2265 1 | Iteration number for monitoring updates (CEMS `monitoringNumber`); requires `monitoring = true` | \u2014 |
+| `monitors` | string (item id) | O | STAC item id | Id of the prior Response item this update monitors (also expressible via `derived_from` relation link) | `derived_from` link |
+| `resolution_class` | string | O | `VLR`, `LR`, `MR`, `HR`, `VHR`, `VHR1` | Spatial resolution class of underlying acquisition(s); mirrors Charter `disaster:resolution_class` and CEMS `resolutionClass` | `disaster:resolution_class` (Charter items only) |
+| `charter_activation_id` | integer | O | \u2014 | Co-activation reference when a CEMS or UNOSAT product corresponds to a Charter call (CEMS `charterNumber`) | `disaster:activation_id` (Charter items only) |
+| `producer` | string | O | Free string / org name | Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`) | \u2014 |
+| `sendai_targets` | [string] | O | Subset of `["A","B","C","D","E","F","G"]` | Sendai Framework targets this response contributes to (defaults in \u00a74.5) | \u2014 |
+| `sectors` | [string] | O | IASC cluster / IFRC EPoA sector slugs (e.g., `shelter`, `health`, `wash`) | For humanitarian items, the sectors covered; multi-cluster operations carry several | \u2014 |
+| `amount` | number | O | Decimal \u2265 0 | Financial amount (for `fin-*` types) | \u2014 |
+| `amount_currency` | string | O | ISO 4217 (e.g., `CHF`, `USD`) | Currency for `amount` | \u2014 |
+
+**Conventions:**
+
+- `type` is the only strictly required field. All other fields are optional and added when the source data supports them.
+- Identifiers and links into source systems live in `source_id` / `source_url`; the STAC item `id` should remain stable and Monty-controlled.
+- Fields marked *Already covered by* must not be duplicated when the corresponding extension is declared on the item \u2014 e.g., on a Charter VAP item declaring `disaster:`, omit `response_detail.resolution_class` and rely on `disaster:resolution_class` instead. On CEMS items (which do not declare `disaster:`, see \u00a73.1), `response_detail.resolution_class` is the carrier.
+- Statistical / damage figures contained in EO products (e.g., CEMS `affected` / `total` per thematic) are **not** part of `response_detail` \u2014 they belong to separate Monty Impact items linked via `monty:corr_id`.
+- Underlying source imagery (acquisition items linked through `derived_from`) carries `sar:` / `eo:` / `sat:` / `processing:` fields directly; those are not copied into `response_detail`.
+
+**Minimal example (CEMS Delineation product):**
+
+```json
+{
+  "monty:response_detail": {
+    "type": "eo-del",
+    "source_id": "EMSR744",
+    "source_url": "https://emergency.copernicus.eu/mapping/list-of-components/EMSR744",
+    "status": "published",
+    "monitoring": false,
+    "resolution_class": "HR",
+    "producer": "JRC",
+    "sendai_targets": ["D", "G"]
+  }
+}
+```
+
+**Minimal example (Charter VAP, item also declares `disaster:`):**
+
+```json
+{
+  "monty:response_detail": {
+    "type": "eo-vap",
+    "source_id": "ACT-849",
+    "source_url": "https://disasterscharter.org/web/guest/activations/-/article/...",
+    "producer": "Airbus",
+    "sendai_targets": ["D", "G"]
+  }
+}
+```
+
+(Note the absence of `resolution_class`, `charter_activation_id`, and `status` \u2014 those come from the `disaster:` extension on the same item.)
+
+### 4.5 Sendai Framework Crosswalk
 
 The Sendai Framework 2015–2030 defines 7 global targets (A–G) tracked by 38 indicators. Although Sendai targets are outcome metrics (not a response action taxonomy — see §2.2), they are highly valuable for monitoring and reporting: annotating response items with the targets they contribute to enables policy-level aggregation without encoding Sendai into the taxonomy itself.
 
@@ -640,15 +711,15 @@ The Sendai Framework 2015–2030 defines 7 global targets (A–G) tracked by 38 
 
 **Open:**
 
-1. **Sendai Framework integration** — Sendai target annotations are considered high value for monitoring and reporting. See the design proposal in §4.4 below.
+1. **Sendai Framework integration** — Sendai target annotations are considered high value for monitoring and reporting. See the design proposal in §4.5.
 
 ### 5.2 Next Steps
 
 - [ ] Team review of the source-agnostic EO code set (§4.1) and classification guidance
 - [ ] Charter VAP field mapping — determine which Charter Mapper API fields enable best-effort classification ([developmentseed/esa-montandon#9](https://github.com/developmentseed/esa-montandon/issues/9))
 - [ ] Assess whether `eo-sr` (CEMS Situational Report) should be modelled as a Hazard item — sub-task of [developmentseed/esa-montandon#6](https://github.com/developmentseed/esa-montandon/issues/6)
-- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`; include `monitoring_number`, `status`, and optionally `sendai_targets`
-- [ ] Validate Sendai target crosswalk (§4.4) against the [Sendai Monitor indicator definitions](https://sendaimonitor.undrr.org/) before integrating into the schema
+- [ ] Prototype a `response_detail` object schema analogous to `hazard_detail` and `impact_detail`; include `monitoring_number`, `status`, and optionally `sendai_targets` (§4.4)
+- [ ] Validate Sendai target crosswalk (§4.5) against the [Sendai Monitor indicator definitions](https://sendaimonitor.undrr.org/) before integrating into the schema
 - [ ] Draft example STAC items for a CEMS activation (one per product type: `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-sr`)
 - [ ] Draft example STAC items for a Charter activation (Event item + VAP Response item with `disaster:` + `monty:`)
 - [ ] Integrate response type codes and Sendai crosswalk into the main `taxonomy.md` once finalised
@@ -661,3 +732,4 @@ The Sendai Framework 2015–2030 defines 7 global targets (A–G) tracked by 38 
 *v0.2 — 2026-04-16 — Added STAC extensions survey (§2.9); updated crosswalk and taxonomy recommendation to incorporate `disaster:` extension reuse strategy (Emmanuel Mathot)*
 *v0.3 — 2026-04-16 — Revised §4.1 to source-agnostic EO codes (`eo-del` not `eo-cems-del`); Charter activation mapped to Event not Response; `eo-vap` fallback for unclassifiable Charter VAPs; open questions updated to reflect resolved decisions (Emmanuel Mathot)*
 *v0.4 — 2026-04-16 — Closed open questions 1–6 with explicit decisions and issue cross-references; added §4.4 Sendai Framework crosswalk with default target mappings per response type code (Emmanuel Mathot)*
+*v0.5 — 2026-05-20 — Addressed PR #42 review: removed research prompt; clarified §2.9.2 CEMS mapping (no `disaster:` extension on CEMS items); switched §3.2 example to source-agnostic codes; added §4.4 `response_detail` field sketch (fields, types, required/optional) per @pantierra; renumbered Sendai crosswalk to §4.5 (Emmanuel Mathot)*
