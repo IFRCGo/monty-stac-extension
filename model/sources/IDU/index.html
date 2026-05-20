@@ -1257,8 +1257,8 @@
 </tr>
 <tr>
 <td>properties.roles</td>
-<td>[<code>source</code>, <code>event</code>]</td>
-<td></td>
+<td>[<code>event</code>, <code>source</code>]</td>
+<td>Include both <code>event</code> and <code>source</code> roles (order does not matter)</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
@@ -1277,7 +1277,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
+<h3 id="hazard-type-mapping">Hazard Type Mapping</h3>
 <p>IDU uses EM-DAT classification and must follow the <strong>2025 UNDRR-ISC</strong> code as the <strong>reference classification</strong> for the Monty extension:</p>
 <table>
 <thead>
@@ -1500,44 +1500,186 @@
 <p>This mapping enables standardized hazard categorization while preserving IDU's original classification in the source properties.</p>
 <h3 id="impact-item">Impact Item</h3>
 <p>According to the event type and the fields available in the IDU event, an impact STAC Item can be created.
-Here is the table with the STAC fields that are mapped from IDU event to the STAC.
-| STAC field                                                                                                                        | IDU Field                                     | Remarks                                                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a>                                             | <code>idmc-idu-impact-{id}-{impact_type}</code>          | Prepend text for uniqueness, Note that <code>impact_type</code> is extracted from the <code>description</code> field. If the proper <code>impact_type</code> is not found, the default value <code>displaced</code> is used. |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a>                             | <code>idmc-idu-impacts</code>                            | Collection name for STAC                                                                                                                                                         |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a>                                  | event_name                                    | Name of the event                                                                                                                                                                |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a>                            | standard_popup_text                           |                                                                                                                                                                                  |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a>                        | displacement_date                             | Start date of the event                                                                                                                                                          |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a>                                 | type: "point", coordinates: centroid          | centroid of the event location                                                                                                                                                   |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a>                                         | latitude, longitude                           | Use latitude and longitude                                                                                                                                                       |
-| <a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes[0]</a>                                       | iso3                                          |                                                                                                                                                                                  |
-| monty:event_codes                                                                                                                 | event_codes                                   | Might be empty                                                                                                                                                                   |
-| monty:episode_number                                                                                                              | episode_number                                | This is a fixed value (1)                                                                                                                                                        |
-| <a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty.hazard_codes</a>                                            | Based on category, subcategory, type, subtype | List of hazard codes converted following the Hazard profile mapping                                                                                                              |
-| properties.locations                                                                                                              | locations_name                                |                                                                                                                                                                                  |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">properties.start_datetime</a> | event_start_date                              |                                                                                                                                                                                  |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">properties.end_datetime</a>   | event_end_date                                |                                                                                                                                                                                  |
-| properties.sources                                                                                                                | sources                                       |                                                                                                                                                                                  |
-| properties.roles                                                                                                                  | [<code>source</code>, <code>impact</code>]                          |                                                                                                                                                                                  |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a>                                           | source_url                                    |                                                                                                                                                                                  |
-| <a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]                                 | main source url                               | Link to the main source url                                                                                                                                                      |
-| monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |
-| <a href="https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id">monty:src_event_id</a> | Source event ID | Unique identifier of the event |</p>
+Here is the table with the STAC fields that are mapped from IDU event to the STAC.</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>IDU Field</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td><code>idmc-idu-impact-{id}-{impact_type}</code></td>
+<td>Prepend text for uniqueness, Note that <code>impact_type</code> is extracted from the <code>description</code> field. If the proper <code>impact_type</code> is not found, the default value <code>displaced</code> is used.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>idmc-idu-impacts</code></td>
+<td>Collection name for STAC</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>event_name</td>
+<td>Name of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
+<td>standard_popup_text</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>displacement_date</td>
+<td>Start date of the event</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>type: "point", coordinates: centroid</td>
+<td>centroid of the event location</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td>latitude, longitude</td>
+<td>Use latitude and longitude</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes[0]</a></td>
+<td>iso3</td>
+<td></td>
+</tr>
+<tr>
+<td>monty:event_codes</td>
+<td>event_codes</td>
+<td>Might be empty</td>
+</tr>
+<tr>
+<td>monty:episode_number</td>
+<td>episode_number</td>
+<td>This is a fixed value (1)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty.hazard_codes</a></td>
+<td>Based on category, subcategory, type, subtype</td>
+<td>List of hazard codes converted following the Hazard profile mapping</td>
+</tr>
+<tr>
+<td>properties.locations</td>
+<td>locations_name</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">properties.start_datetime</a></td>
+<td>event_start_date</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">properties.end_datetime</a></td>
+<td>event_end_date</td>
+<td></td>
+</tr>
+<tr>
+<td>properties.sources</td>
+<td>sources</td>
+<td></td>
+</tr>
+<tr>
+<td>properties.roles</td>
+<td>[<code>impact</code>, <code>source</code>]</td>
+<td>Include both <code>impact</code> and <code>source</code> roles (order does not matter)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
+<td>source_url</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]</td>
+<td>main source url</td>
+<td>Link to the main source url</td>
+</tr>
+<tr>
+<td>monty.impact_detail</td>
+<td>impact_detail</td>
+<td>As shown in impact_detail below</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
+<td>Source event ID</td>
+<td>Unique identifier of the event</td>
+</tr>
+</tbody>
+</table>
 <h4 id="impact-detail">Impact Detail</h4>
-<p>The following mappings are used to create ImpactDetail objects.
-| impact_type                     | Monty Impact Exposure Category         | Monty Impact Type                            |
-| ------------------------------- | -------------------------------------- | -------------------------------------------- |
-| evacuated                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EVACUATED                    |
-| displaced                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
-| relocated                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.RELOCATED                    |
-| sheltered                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EMERGENCY_SHELTERED          |
-| homeless                        | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.HOMELESS                     |
-| affected                        | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.TOTAL_AFFECTED               |
-| IDPs                            | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
-| Internal Displacements          | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.INTERNALLY_DISPLACED_PERSONS |
-| Deaths                          | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.DEATH                        |
-| evacuated                       | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EVACUATED                    |
-| People displaced across borders | MontyImpactExposureCategory.ALL_PEOPLE | MontyImpactType.EXTERNALLY_DISPLACED_PERSONS |</p>
+<p>The following mappings are used to create ImpactDetail objects.</p>
+<table>
+<thead>
+<tr>
+<th>impact_type</th>
+<th>Monty Impact Exposure Category</th>
+<th>Monty Impact Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>evacuated</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.EVACUATED</td>
+</tr>
+<tr>
+<td>displaced</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.INTERNALLY_DISPLACED_PERSONS</td>
+</tr>
+<tr>
+<td>relocated</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.RELOCATED</td>
+</tr>
+<tr>
+<td>sheltered</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.EMERGENCY_SHELTERED</td>
+</tr>
+<tr>
+<td>homeless</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.HOMELESS</td>
+</tr>
+<tr>
+<td>affected</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.TOTAL_AFFECTED</td>
+</tr>
+<tr>
+<td>IDPs</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.INTERNALLY_DISPLACED_PERSONS</td>
+</tr>
+<tr>
+<td>Internal Displacements</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.INTERNALLY_DISPLACED_PERSONS</td>
+</tr>
+<tr>
+<td>Deaths</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.DEATH</td>
+</tr>
+<tr>
+<td>evacuated</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.EVACUATED</td>
+</tr>
+<tr>
+<td>People displaced across borders</td>
+<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
+<td>MontyImpactType.EXTERNALLY_DISPLACED_PERSONS</td>
+</tr>
+</tbody>
+</table>
 <p>Below is an example to construct the ImpactDetail object:</p>
 <table>
 <thead>

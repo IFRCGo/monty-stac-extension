@@ -1511,17 +1511,27 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 <tr>
 <td><code>related</code> link in [links]</td>
 <td>properties.source and&lt;br&gt;properties.sourceid</td>
-<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>)</td>
+<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>) with <code>roles: ["event"]</code></td>
 </tr>
 <tr>
 <td><code>related</code> link in [links]</td>
 <td>properties.glide</td>
-<td>If the glide number is present, create a <code>related</code> link to the item in <code>glide-events</code> collection</td>
+<td>If the glide number is present, create a <code>related</code> link to the item in <code>glide-events</code> collection with <code>roles: ["event"]</code></td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
 <td>Source event ID</td>
 <td>Unique identifier of the event</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id">monty:corr_id</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../correlation_identifier/">event correlation</a> convention</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid">monty:guid</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../global_identifier.md">guid string</a> convention</td>
 </tr>
 </tbody>
 </table>
@@ -1839,7 +1849,17 @@ The impact item shall have the following fields from both the GDACS event and th
 <tr>
 <td><code>related</code> link in [links]</td>
 <td>properties.source and&lt;br&gt;properties.sourceid</td>
-<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>)</td>
+<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>) with <code>roles: ["event"]</code></td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id">monty:corr_id</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../correlation_identifier/">event correlation</a> convention</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid">monty:guid</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../global_identifier.md">guid string</a> convention</td>
 </tr>
 </tbody>
 </table>

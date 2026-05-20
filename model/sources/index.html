@@ -1142,6 +1142,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#role-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#source-analysis-process" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1377,6 +1388,18 @@
 <li><strong>Data Format</strong>: Various formats including JSON, CSV, XML, and GeoJSON</li>
 </ul>
 <p>For detailed information about each source, including specific data structures and integration methods, visit the respective source documentation pages linked above.</p>
+<h2 id="role-conventions">Role Conventions</h2>
+<p>Use the following role conventions consistently in source mappings:</p>
+<ul>
+<li>Item <code>properties.roles</code> should include the data type role plus <code>source</code> for source-derived items:<ul>
+<li>event item: include <code>event</code> and <code>source</code></li>
+<li>hazard item: include <code>hazard</code> and <code>source</code></li>
+<li>impact item: include <code>impact</code> and <code>source</code></li>
+</ul>
+</li>
+<li>For cross-item relationships using link <code>rel="related"</code>, link <code>roles</code> should contain exactly one target type value: <code>event</code>, <code>hazard</code>, or <code>impact</code>.</li>
+</ul>
+<p>Role order in arrays is not semantically significant.</p>
 <h2 id="source-analysis-process">Source Analysis Process</h2>
 <p>Each source in the Monty system follows a standard documentation template to ensure consistent analysis and integration. Below is the structure that should be followed when documenting a new source:</p>
 <h3 id="1-source-description">1. Source Description</h3>
