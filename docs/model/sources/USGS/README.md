@@ -203,7 +203,7 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Event item                        | Link to source event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
-| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identifier.md) convention |
 
 #### Impact Detail
 
