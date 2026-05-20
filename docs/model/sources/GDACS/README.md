@@ -64,7 +64,7 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | `related` link in [links]                                                                                              | properties.glide                                      | If the glide number is present, create a `related` link to the item in `glide-events` collection with `roles: ["event"]`                 |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
-| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identififer.md) convention |
+| [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identifier.md) convention |
 
 ### Hazard Item
 
