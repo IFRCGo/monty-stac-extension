@@ -1,0 +1,3376 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Response Taxonomy (Working Document — v0.5) - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#response-taxonomy-working-document-v05" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Response Taxonomy (Working Document — v0.5)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../stac-api/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STAC API
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    STAC API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/correlation_algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/correlation_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/migration_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queryables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../sources/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DesInventar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EM-DAT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GFD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GLIDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBTrACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDMC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IFRC-DREF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    USGS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose and Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-framework-survey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Framework Survey
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Framework Survey">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-ocha-3w-4w-5w" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 OCHA 3W / 4W / 5W
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-sendai-framework-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Sendai Framework Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ifrc-emergency-plan-of-action-epoa-dref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 IFRC Emergency Plan of Action (EPoA) / DREF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-iasc-cluster-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 IASC Cluster System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-international-charter-space-and-major-disasters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 International Charter "Space and Major Disasters"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-copernicus-emergency-management-service-cems-rapid-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Copernicus Emergency Management Service (CEMS) Rapid Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-unosat-rapid-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 UNOSAT Rapid Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-pdna-framework-world-bank-eu-un" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 PDNA Framework (World Bank / EU / UN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-existing-stac-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 Existing STAC Extensions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 Existing STAC Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#291-terradue-disaster-charter-extension-disaster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.1 Terradue Disaster Charter Extension (disaster:)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#292-cems-rapid-mapping-no-stac-extension-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.2 CEMS Rapid Mapping — No STAC Extension Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#293-unosat-no-stac-extension-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.3 UNOSAT — No STAC Extension Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#294-other-relevant-stac-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.4 Other Relevant STAC Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-crosswalk-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 Crosswalk Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-taxonomy-design-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Taxonomy Design Recommendation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Taxonomy Design Recommendation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-relationship-to-existing-stac-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Relationship to Existing STAC Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-hierarchy-two-level-domain-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Hierarchy: Two-level (domain → type)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-code-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Code Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-scope-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Scope Boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-proposed-response-type-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Proposed Response Type Codes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Proposed Response Type Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-eo-response-products" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 EO Response Products
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-humanitarian-response-placeholder-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Humanitarian Response (Placeholder Groups)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-financial-response-placeholder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Financial Response (Placeholder)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-response_detail-field-sketch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 response_detail Field Sketch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-sendai-framework-crosswalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Sendai Framework Crosswalk
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-questions-and-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open Questions and Next Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Open Questions and Next Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-open-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Open Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="response-taxonomy-working-document-v05">Response Taxonomy (Working Document — v0.5)</h1>
+<blockquote>
+<p><strong>Status:</strong> Working document. Framework survey (including existing STAC extensions) and crosswalk are complete; taxonomy structure recommendation and initial code proposals are proposed and pending team review.</p>
+<p><strong>Relates to:</strong> <a href="https://github.com/developmentseed/esa-montandon/issues/12">developmentseed/esa-montandon#12</a> · Contributes to D1.1 (KO+4m)</p>
+</blockquote>
+<hr />
+<h2 id="1-purpose-and-scope">1. Purpose and Scope</h2>
+<p>The Monty STAC extension currently covers Hazard and Impact data constructs. The Response construct is defined in the Montandon base schema but contains only an <code>ID_linkage</code> field — no taxonomy, no detail fields, and no STAC representation.</p>
+<p>This document surveys existing disaster response classification frameworks to inform the design of a Response taxonomy for Monty. The taxonomy will be:</p>
+<ul>
+<li><strong>Action-oriented</strong>: a Response item represents an action taken or a product produced (a CEMS Delineation map, a DREF operation), not an impact estimate</li>
+<li><strong>EO-first</strong>: Earth Observation response products (Charter, CEMS, UNOSAT) are the primary use case for this contract; humanitarian sectors are secondary but the model must not preclude them</li>
+<li><strong>Extensible</strong>: structured to accommodate future response types (anticipatory action, field assessments, PDNA, financial appeals) without breaking existing items</li>
+<li><strong>Separate items</strong>: Response items are separate STAC items linked to their event and impact items via <code>monty:corr_id</code> and explicit STAC relation links</li>
+</ul>
+<p>The scope boundary with Impact is: <strong>Response = action taken / product produced; Impact = estimated effect on people or assets.</strong> A CEMS Grading Product is a Response that <em>informs</em> Impact items; it is not itself an impact.</p>
+<hr />
+<h2 id="2-framework-survey">2. Framework Survey</h2>
+<h3 id="21-ocha-3w-4w-5w">2.1 OCHA 3W / 4W / 5W</h3>
+<p><strong>What it is:</strong> OCHA's <em>Who does What, Where</em> (and optionally <em>When</em> / <em>for Whom</em>) tool collects basic operational presence data from humanitarian actors during emergencies.</p>
+<p><strong>Category structure:</strong></p>
+<ul>
+<li>No fixed activity taxonomy — activities are free text or drawn from the country-level Humanitarian Response Plan (HRP) activity list</li>
+<li>Organized around <strong>IASC cluster/sector names</strong> as the primary axis (see §2.4)</li>
+<li>Activity status: <code>planned</code> / <code>implemented</code> / <code>completed</code></li>
+<li>Supplemented by the <strong>Humanitarian Exchange Language (HXL)</strong> hashtag standard (<code>#sector</code>, <code>#activity</code>, <code>#org+type</code>) for machine-readability, but the sector vocabulary is cluster-name-based, not coded</li>
+</ul>
+<p><strong>Hierarchy depth:</strong> 2 levels (cluster → activity), but activity list varies by country context</p>
+<p><strong>Machine-readable codes:</strong> Partial. OCHA maintains a vocabulary service but sector codes are cluster names, not stable short codes.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Not covered</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>Yes — but only as cluster labels, not an action taxonomy</td>
+</tr>
+<tr>
+<td>Financial response</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>Weak (cluster names, not stable codes)</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Indirect (IFRC GO uses cluster categories)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> Reference only. The cluster structure is the organizing principle for 3W data but delegates the actual activity vocabulary to each HRP/context. The IASC cluster system (§2.4) is the better canonical reference for the sector layer.</p>
+<hr />
+<h3 id="22-sendai-framework-monitoring">2.2 Sendai Framework Monitoring</h3>
+<p><strong>What it is:</strong> The Sendai Framework for Disaster Risk Reduction 2015–2030 defines 7 global targets tracked by 38 indicators via the Sendai Monitor.</p>
+<p><strong>Targets:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Substantially reduce global disaster mortality (by 2030)</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Substantially reduce the number of affected people</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Reduce direct disaster economic loss relative to GDP</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Substantially reduce disaster damage to critical infrastructure and disruption of services</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Substantially increase the number of countries with national and local DRR strategies (by 2020)</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Substantially enhance international cooperation to developing countries</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Substantially increase availability and access to multi-hazard early warning systems</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action/response relevance:</strong> Targets D, E, F, G deal with infrastructure resilience, DRR strategies, cooperation, and early warning — but <strong>all seven targets are outcome metrics</strong>, not action categories. The framework describes <em>what to achieve</em>, not <em>what actions to take</em>. There is no action taxonomy in Sendai.</p>
+<p><strong>Hierarchy depth:</strong> Flat (7 targets × 38 indicators; no action type hierarchy)</p>
+<p><strong>Machine-readable codes:</strong> Yes — indicator codes (e.g., C-2, G-1) are used in the monitor. But these are monitoring KPIs, not response action identifiers.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Not covered</td>
+</tr>
+<tr>
+<td>Humanitarian action taxonomy</td>
+<td>Not applicable (outcome metrics only)</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>Yes, but wrong semantic layer</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> Not suitable as a source taxonomy. Useful for crosswalk annotations (e.g., noting which response types contribute to which Sendai target), but should not drive the taxonomy structure.</p>
+<hr />
+<h3 id="23-ifrc-emergency-plan-of-action-epoa-dref">2.3 IFRC Emergency Plan of Action (EPoA) / DREF</h3>
+<p><strong>What it is:</strong> The IFRC Disaster Response Emergency Fund (DREF) funds National Society responses through Emergency Plans of Action (EPoA). Each EPoA uses a standard sector structure that is the closest thing IFRC has to an operational response taxonomy.</p>
+<p><strong>Response sectors used in DREF/EPoA operations:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sector</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shelter and settlements</td>
+<td>Temporary/transitional shelter, NFI distribution</td>
+</tr>
+<tr>
+<td>Health</td>
+<td>Emergency health services, epidemic response, psychosocial support</td>
+</tr>
+<tr>
+<td>WASH</td>
+<td>Water, sanitation and hygiene</td>
+</tr>
+<tr>
+<td>Livelihoods and basic needs</td>
+<td>Food, cash and voucher assistance (CVA), multipurpose cash</td>
+</tr>
+<tr>
+<td>Protection, Gender and Inclusion (PGI)</td>
+<td>Mainstreamed across sectors; includes GBV, child protection</td>
+</tr>
+<tr>
+<td>Community Engagement and Accountability (CEA)</td>
+<td>Mainstreamed; feedback mechanisms, communication</td>
+</tr>
+<tr>
+<td>Disaster Risk Reduction (DRR)</td>
+<td>Preparedness, risk reduction actions</td>
+</tr>
+<tr>
+<td>Education in Emergencies</td>
+<td>Schools, learning continuity</td>
+</tr>
+<tr>
+<td>Migration</td>
+<td>Cross-border displacement support</td>
+</tr>
+<tr>
+<td>Early Recovery</td>
+<td>Transitional recovery actions</td>
+</tr>
+<tr>
+<td>Anticipatory Action (AA)</td>
+<td>Pre-crisis triggers and early action protocols (separate DREF pillar)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hierarchy depth:</strong> Flat (sector names, no formal codes)</p>
+<p><strong>Machine-readable codes:</strong> None. Sectors are named strings in EPoA documents. IFRC GO (the operational database) uses internal IDs but these are not published as a stable taxonomy.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Not covered</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>Yes — comprehensive and IFRC-native</td>
+</tr>
+<tr>
+<td>Financial response</td>
+<td>Partial (DREF funding is tracked; appeal amounts are in impact data)</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>No stable public codes</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Yes — DREF is a Monty data source</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> High applicability for the humanitarian sector layer. The sector list should map directly to Monty response types for DREF-sourced items. Requires assigning stable codes.</p>
+<hr />
+<h3 id="24-iasc-cluster-system">2.4 IASC Cluster System</h3>
+<p><strong>What it is:</strong> The Inter-Agency Standing Committee (IASC) Cluster Approach organizes humanitarian response into 11 global clusters, each led by a designated UN agency. Used in all major international responses.</p>
+<p><strong>11 Global Clusters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cluster</th>
+<th>Lead Agency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camp Coordination and Camp Management (CCCM)</td>
+<td>UNHCR / IOM</td>
+</tr>
+<tr>
+<td>Early Recovery</td>
+<td>UNDP</td>
+</tr>
+<tr>
+<td>Education</td>
+<td>UNICEF / Save the Children</td>
+</tr>
+<tr>
+<td>Emergency Telecommunications (ETC)</td>
+<td>WFP</td>
+</tr>
+<tr>
+<td>Food Security</td>
+<td>WFP / FAO</td>
+</tr>
+<tr>
+<td>Health</td>
+<td>WHO</td>
+</tr>
+<tr>
+<td>Logistics</td>
+<td>WFP</td>
+</tr>
+<tr>
+<td>Nutrition</td>
+<td>UNICEF</td>
+</tr>
+<tr>
+<td>Protection</td>
+<td>UNHCR</td>
+</tr>
+<tr>
+<td>Shelter / Non-Food Items (NFI)</td>
+<td>UNHCR / IFRC</td>
+</tr>
+<tr>
+<td>Water, Sanitation and Hygiene (WASH)</td>
+<td>UNICEF</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protection Areas of Responsibility (AoRs):</strong></p>
+<table>
+<thead>
+<tr>
+<th>AoR</th>
+<th>Lead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gender-Based Violence (GBV)</td>
+<td>UNFPA</td>
+</tr>
+<tr>
+<td>Child Protection</td>
+<td>UNICEF</td>
+</tr>
+<tr>
+<td>Mine Action</td>
+<td>UNMAS</td>
+</tr>
+<tr>
+<td>Housing, Land and Property (HLP)</td>
+<td>NRC / UN-Habitat</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hierarchy depth:</strong> 2 levels (cluster → AoR, currently only for Protection)</p>
+<p><strong>Machine-readable codes:</strong> No stable short codes. Cluster names are the identifiers used in 3W, HRP, and IATI data.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Not covered</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>Yes — comprehensive, internationally recognised</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>No (cluster names only)</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Indirect (IFRC GO uses cluster-aligned sectors)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> The cluster list is the de facto international standard for humanitarian sector categorization. The IFRC EPoA sectors (§2.3) largely map to clusters. Together they provide the humanitarian response layer. Short codes need to be assigned.</p>
+<hr />
+<h3 id="25-international-charter-space-and-major-disasters">2.5 International Charter "Space and Major Disasters"</h3>
+<p><strong>What it is:</strong> A worldwide collaboration between space agencies providing satellite-derived data and products to support disaster response. Activated within 10 days of fast-onset disasters.</p>
+<p><strong>Activation conditions:</strong> Fast-onset natural or technological disasters (floods, earthquakes, cyclones, wildfires, oil spills, landslides, tsunamis, volcanic eruptions, etc.)</p>
+<p><strong>Activation channels:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Direct (Authorized User)</td>
+<td>National civil protection, UN agencies, authorized organizations call On-Duty Operator</td>
+</tr>
+<tr>
+<td>UN channel</td>
+<td>UN agencies activate via designated UN pathway</td>
+</tr>
+<tr>
+<td>Asia Pacific</td>
+<td>Via Sentinel Asia / Asian Disaster Reduction Centre</td>
+</tr>
+</tbody>
+</table>
+<p><strong>STAC data model: Terradue <code>disaster:</code> extension</strong></p>
+<p>The Charter Mapper system (<a href="https://charter.esa.int/mapper">charter.esa.int/mapper</a>) uses the <strong>Terradue <code>disaster:</code> STAC extension</strong> (<code>https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json</code>) as its data model. This is the authoritative machine-readable schema for Charter items and must be used — not just referenced — in any Monty integration of Charter data.</p>
+<p><strong>Object model</strong> (defined by <code>disaster:class</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Activation  (disaster:class = activation)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └── Call  (collection — resource mobilization request)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        ├── Acquisition  (disaster:class = acquisition)   ← raw satellite data
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        └── VAP          (disaster:class = vap)           ← processed product / map
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  └── Area  (disaster:class = area)                       ← affected geographic zone
+</code></pre></div>
+<p><strong>Fields defined by the <code>disaster:</code> extension:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Controlled vocabulary</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disaster:class</code></td>
+<td>string (REQUIRED)</td>
+<td><code>activation</code>, <code>area</code>, <code>acquisition</code>, <code>vap</code></td>
+<td>Object type in the Charter workflow</td>
+</tr>
+<tr>
+<td><code>disaster:activation_id</code></td>
+<td>integer</td>
+<td>—</td>
+<td>Numeric ID of the activation</td>
+</tr>
+<tr>
+<td><code>disaster:call_ids</code></td>
+<td>[integer]</td>
+<td>—</td>
+<td>IDs of resource mobilization calls within the activation</td>
+</tr>
+<tr>
+<td><code>disaster:types</code></td>
+<td>[string]</td>
+<td><code>fire</code>, <code>earthquake</code>, <code>volcano</code>, <code>storm_hurricane</code>, <code>flood</code>, <code>cyclone</code>, <code>tsunami</code>, <code>snow_hazard</code>, <code>landslide</code>, <code>ice</code>, <code>oil_spill</code>, <code>explosive_event</code>, <code>other</code></td>
+<td>Hazard type — overlaps with <code>monty:hazard_codes</code></td>
+</tr>
+<tr>
+<td><code>disaster:country</code></td>
+<td>string</td>
+<td>ISO 3166-1 alpha-3</td>
+<td>Overlaps with <code>monty:country_codes</code></td>
+</tr>
+<tr>
+<td><code>disaster:regions</code></td>
+<td>[string]</td>
+<td>Free text</td>
+<td>Sub-national regions</td>
+</tr>
+<tr>
+<td><code>disaster:activation_status</code></td>
+<td>string</td>
+<td><code>open</code>, <code>closed</code>, <code>archived</code></td>
+<td>Activation lifecycle state</td>
+</tr>
+<tr>
+<td><code>disaster:resolution_class</code></td>
+<td>string</td>
+<td><code>VLR</code>, <code>LR</code>, <code>MR</code>, <code>HR</code>, <code>VHR</code></td>
+<td>Spatial resolution class of acquisition items</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Product types</strong> (expressed via <code>disaster:class = vap</code>):</p>
+<p>The <code>disaster:</code> extension classifies all processed Charter outputs as <code>vap</code> (Value-Added Product). The specific product type within the VAP (reference map, delineation, grading) is not further differentiated by the extension — this is the gap that Monty response type codes fill.</p>
+<table>
+<thead>
+<tr>
+<th>Monty product concept</th>
+<th><code>disaster:class</code></th>
+<th>Analogous CEMS type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activation record</td>
+<td><code>activation</code></td>
+<td>—</td>
+<td>Event-level record; consider modelling as Monty Event, not Response item</td>
+</tr>
+<tr>
+<td>Satellite acquisition</td>
+<td><code>acquisition</code></td>
+<td>—</td>
+<td>Source imagery; not a Response item; carries <code>sar:</code> / <code>eo:</code> / <code>sat:</code> fields</td>
+</tr>
+<tr>
+<td>Reference map</td>
+<td><code>vap</code></td>
+<td><code>REF</code></td>
+<td>Pre-event basemap</td>
+</tr>
+<tr>
+<td>Delineation map</td>
+<td><code>vap</code></td>
+<td><code>DEL</code></td>
+<td>Affected area extent</td>
+</tr>
+<tr>
+<td>Grading map</td>
+<td><code>vap</code></td>
+<td><code>GRA</code></td>
+<td>Damage intensity</td>
+</tr>
+<tr>
+<td>Value-added analysis</td>
+<td><code>vap</code></td>
+<td>—</td>
+<td>Population exposure, sectoral damage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Imagery types delivered:</strong> Optical (Landsat, SPOT, Pleiades) and SAR (TerraSAR-X, TanDEM-X, RADARSAT)</p>
+<p><strong>Machine-readable codes:</strong> The <code>disaster:</code> extension provides object-type codes (<code>activation</code>, <code>area</code>, <code>acquisition</code>, <code>vap</code>) and hazard-type codes, but <strong>not</strong> product-type codes distinguishing delineation from grading. Monty response type codes (<code>eo-charter-del</code>, <code>eo-charter-gra</code>, etc.) are needed to fill this gap.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Yes — core use case; <code>disaster:</code> extension is the live data model</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>No</td>
+</tr>
+<tr>
+<td>STAC extension exists</td>
+<td>Yes — <code>disaster:</code> (Proposal, owned by @emmanuelmathot)</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>Partial — <code>disaster:class</code> classifies object type; response product type codes still needed</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Target for integration (SW1.2); <code>disaster:</code> must be declared alongside <code>monty:</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> High applicability. Monty Charter Response items (<code>vap</code> objects) must declare both <code>monty:</code> and <code>disaster:</code> extensions. The <code>disaster:</code> extension covers object identity and Charter workflow fields; <code>monty:response_detail</code> adds the response type code and Monty-specific semantics. Fields already in <code>disaster:</code> (<code>activation_id</code>, <code>activation_status</code>, <code>resolution_class</code>) must not be duplicated in <code>response_detail</code>.</p>
+<hr />
+<h3 id="26-copernicus-emergency-management-service-cems-rapid-mapping">2.6 Copernicus Emergency Management Service (CEMS) Rapid Mapping</h3>
+<p><strong>What it is:</strong> EU-funded satellite mapping service for emergency response activated by eligible requestors (civil protection authorities, UN, humanitarian organizations). The most formally specified EO product taxonomy of all frameworks surveyed.</p>
+<p><strong>5 Product Types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Timing</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REF</code></td>
+<td>Reference Product</td>
+<td>Pre-event</td>
+<td>Baseline knowledge of territory and assets prior to the emergency. Only for activations outside Europe.</td>
+</tr>
+<tr>
+<td><code>FEP</code></td>
+<td>First Estimate Product</td>
+<td>Post-event, immediate</td>
+<td>Extremely fast (~hours) rough assessment of most affected locations. Used to orient response or decide on further product requests.</td>
+</tr>
+<tr>
+<td><code>DEL</code></td>
+<td>Delineation Product</td>
+<td>Post-event</td>
+<td>Event impact extent and affected area. Can be updated (Monitoring). Derived from imagery acquired immediately after the emergency.</td>
+</tr>
+<tr>
+<td><code>GRA</code></td>
+<td>Grading Product</td>
+<td>Post-event</td>
+<td>Damage grade, its spatial distribution and extent. Superset of DEL; only available if delineation was previously requested. Can be updated (Monitoring).</td>
+</tr>
+<tr>
+<td><code>SR</code></td>
+<td>Situational Report</td>
+<td>Cross-cutting</td>
+<td>Online report presenting the event and activation in a visual and informative way. Starts within 4 hours of activation; regularly updated.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monitoring updates:</strong> DEL and GRA products can have monitoring iterations (<code>DEL-MON</code>, <code>GRA-MON</code>) to track evolving events.</p>
+<p><strong>Hierarchy depth:</strong> Flat (5 product types + monitoring variants)</p>
+<p><strong>Machine-readable codes:</strong> Yes — 3-letter uppercase codes (REF, FEP, DEL, GRA, SR) are stable, published, and used in CEMS metadata. The most code-ready system of all frameworks surveyed.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Yes — directly applicable, codes ready to use</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>Yes — best code readiness of all frameworks</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Target for integration (SW1.2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> Primary source for EO response product codes. CEMS codes should be the basis for the <code>eo</code> domain of the Monty response taxonomy, extended with Charter and UNOSAT mappings.</p>
+<hr />
+<h3 id="27-unosat-rapid-mapping">2.7 UNOSAT Rapid Mapping</h3>
+<p><strong>What it is:</strong> UNITAR's satellite analysis service producing humanitarian mapping products, primarily for UN agencies and humanitarian organizations. Largest focus: floods (61% of activations).</p>
+<p><strong>Service phases and product types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Timeframe</th>
+<th>Products</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 0 — Pre-Crisis</td>
+<td>Before event</td>
+<td>Baseline / preparedness maps</td>
+</tr>
+<tr>
+<td>Phase 1 — Preliminary Situation Awareness</td>
+<td>~24 hours post-event</td>
+<td>Preliminary flood/damage extent, affected area overview</td>
+</tr>
+<tr>
+<td>Phase 2 — Impact/Damage Assessment</td>
+<td>~72 hours</td>
+<td>Damage density maps, sectoral assessments (shelter, agriculture, health/education), population exposure</td>
+</tr>
+<tr>
+<td>Phase 3 — Ongoing Analysis</td>
+<td>2+ weeks</td>
+<td>Flood monitoring, cumulative flood extent, time-series analysis, AI-assisted mapping</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Product categories (within phases):</strong></p>
+<ul>
+<li>Flood extent (SAR-based, Sentinel-1)</li>
+<li>Damage assessment (shelter, agriculture, infrastructure)</li>
+<li>Population exposure analysis</li>
+<li>Sectoral damage assessment</li>
+<li>Cumulative / monitoring flood extent</li>
+<li>Statistical reports and data downloads (GIS-ready)</li>
+</ul>
+<p><strong>Machine-readable codes:</strong> No. UNOSAT uses descriptive names and no published code vocabulary.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>Yes — core use case</td>
+</tr>
+<tr>
+<td>Humanitarian sectors</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>No — needs code assignment</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>Target for integration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> High applicability. The UNOSAT phase/product structure is more granular than CEMS but lacks formal codes. The product types partially overlap with CEMS (e.g., Phase 1 ≈ FEP, Phase 2 ≈ DEL/GRA). A crosswalk and code assignment is needed.</p>
+<hr />
+<h3 id="28-pdna-framework-world-bank-eu-un">2.8 PDNA Framework (World Bank / EU / UN)</h3>
+<p><strong>What it is:</strong> The Post-Disaster Needs Assessment (PDNA) is a joint WB/EU/UN methodology for assessing disaster impacts and defining recovery strategies, including financial resource requirements.</p>
+<p><strong>Sector groups and sub-sectors:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Sub-sectors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Social Sectors</strong></td>
+<td>Housing and Settlements; Education; Health; Culture; Nutrition</td>
+</tr>
+<tr>
+<td><strong>Productive Sectors</strong></td>
+<td>Agriculture, livestock, fisheries, forestry; Industry, commerce and trade; Tourism</td>
+</tr>
+<tr>
+<td><strong>Infrastructure Sectors</strong></td>
+<td>Water, Sanitation and Hygiene (WASH); Community Infrastructure; Energy and Electricity</td>
+</tr>
+<tr>
+<td><strong>Cross-cutting Themes</strong></td>
+<td>Employment and Livelihoods; Disaster Risk Reduction (DRR); Governance; Environment; Gender; HIV/AIDS and Age</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationship to Response:</strong> PDNA is a <strong>post-disaster assessment methodology</strong> conducted weeks to months after a disaster, focused on recovery planning and financial needs estimation. It is not an operational response taxonomy.</p>
+<p><strong>Machine-readable codes:</strong> None.</p>
+<p><strong>Applicability to Monty:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EO products</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Humanitarian action taxonomy</td>
+<td>No (assessment/planning, not operational action)</td>
+</tr>
+<tr>
+<td>Financial response</td>
+<td>Yes — recovery cost estimation</td>
+</tr>
+<tr>
+<td>Codes available</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adoption in Monty data</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdict:</strong> Out of scope for the initial taxonomy. The PDNA sector list overlaps with IASC clusters but is recovery-planning oriented. It should be documented as a future extension possibility, not a primary source.</p>
+<hr />
+<h3 id="29-existing-stac-extensions">2.9 Existing STAC Extensions</h3>
+<p>Before proposing new fields, we surveyed existing STAC extensions that model disaster response or EO product metadata.</p>
+<h4 id="291-terradue-disaster-charter-extension-disaster">2.9.1 Terradue Disaster Charter Extension (<code>disaster:</code>)</h4>
+<p>The <code>disaster:</code> extension is the live data model powering the Charter Mapper system and is analysed in full as part of §2.5 (International Charter). See §2.5 for the complete field list, object model, and implications for Monty.</p>
+<p><strong>Summary:</strong> Charter VAP items must declare both <code>monty:</code> and <code>disaster:</code> extensions. Fields already defined in <code>disaster:</code> (<code>activation_id</code>, <code>activation_status</code>, <code>resolution_class</code>) must not be duplicated in <code>monty:response_detail</code>.</p>
+<h4 id="292-cems-rapid-mapping-no-stac-extension-exists">2.9.2 CEMS Rapid Mapping — No STAC Extension Exists</h4>
+<p>CEMS provides a proprietary REST API (OpenAPI) rather than a STAC catalog. There is no published STAC extension for CEMS Rapid Mapping products. The Copernicus Data Space Ecosystem (CDSE) has a general STAC catalog for Sentinel satellite imagery but it does not cover CEMS emergency mapping products.</p>
+<p><strong>Key API fields that should inform Monty <code>response_detail</code>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>API field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Monty mapping candidate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td>string</td>
+<td>Activation identifier (EMSR-XXXX)</td>
+<td><code>response_detail.source_id</code></td>
+</tr>
+<tr>
+<td><code>category</code> / <code>subCategory</code></td>
+<td>string</td>
+<td>Hazard event category</td>
+<td>Already in <code>monty:hazard_codes</code></td>
+</tr>
+<tr>
+<td>Product <code>type</code></td>
+<td>string</td>
+<td><code>REF</code>, <code>FEP</code>, <code>DEL</code>, <code>GRA</code>, <code>SR</code></td>
+<td>Response type code</td>
+</tr>
+<tr>
+<td>Product <code>monitoring</code></td>
+<td>boolean</td>
+<td>Whether this is a monitoring update</td>
+<td><code>response_detail.monitoring</code></td>
+</tr>
+<tr>
+<td>Product <code>monitoringNumber</code></td>
+<td>integer</td>
+<td>Monitoring sequence number</td>
+<td><code>response_detail.monitoring_number</code></td>
+</tr>
+<tr>
+<td>Product <code>statusCode</code></td>
+<td>string</td>
+<td><code>F</code>=Finished, <code>N</code>=No impact, <code>W</code>=Waiting, <code>I</code>=In production</td>
+<td><code>response_detail.status</code></td>
+</tr>
+<tr>
+<td>Image <code>sensorType</code></td>
+<td>string</td>
+<td><code>optical</code> or <code>radar</code></td>
+<td><code>response_detail.sensor_type</code> (or via <code>eo:</code>/<code>sar:</code> extensions)</td>
+</tr>
+<tr>
+<td>Image <code>resolutionClass</code></td>
+<td>string</td>
+<td><code>VHR1</code>, <code>HR</code>, etc.</td>
+<td><code>response_detail.resolution_class</code></td>
+</tr>
+<tr>
+<td><code>charterNumber</code></td>
+<td>string</td>
+<td>If Charter co-activation exists</td>
+<td><code>response_detail.charter_activation_id</code></td>
+</tr>
+<tr>
+<td>Stats (<code>affected</code>, <code>total</code> per thematic)</td>
+<td>object</td>
+<td>Damage/exposure stats by theme</td>
+<td>→ Impact items, not Response</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note on the rightmost column:</strong> Where a Terradue <code>disaster:</code> field is named (e.g., <code>disaster:resolution_class</code>, <code>disaster:activation_id</code>) it appears in this column as a <em>semantic reference point</em> — the existing extension field covering the same concept. CEMS Response items in Monty declare <code>monty:</code> + <code>processing:</code> (see §3.1) and do <strong>not</strong> declare the <code>disaster:</code> extension; the corresponding values are carried in <code>monty:response_detail.*</code> as shown above. The <code>disaster:</code> field names are kept in the survey only to make the cross-source semantic alignment explicit.</p>
+</blockquote>
+<p><strong>Gap:</strong> A Monty-aligned STAC extension (or profile) for CEMS Rapid Mapping products is a deliverable of this contract (SW1.1). It should build on the existing CEMS API field semantics while expressing them in STAC.</p>
+<h4 id="293-unosat-no-stac-extension-exists">2.9.3 UNOSAT — No STAC Extension Exists</h4>
+<p>No STAC extension or catalog for UNOSAT rapid mapping products has been found. UNOSAT distributes products via HDX (Humanitarian Data Exchange) in GIS formats with HTML metadata pages. There is no structured machine-readable schema equivalent to the CEMS API or the Charter extension.</p>
+<p><strong>Implication:</strong> UNOSAT product metadata will need to be mapped to Monty Response fields without an existing STAC anchor. The phase-based structure (PSA / Damage Assessment / Population Exposure / Monitoring) and the CEMS crosswalk proposed in §4 are the primary structuring reference.</p>
+<h4 id="294-other-relevant-stac-extensions">2.9.4 Other Relevant STAC Extensions</h4>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>URL</th>
+<th>Relevance to Response items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sar:</code></td>
+<td><a href="https://github.com/stac-extensions/sar">stac-extensions/sar</a></td>
+<td>For SAR-derived flood/damage products (UNOSAT Sentinel-1 based)</td>
+</tr>
+<tr>
+<td><code>eo:</code></td>
+<td><a href="https://github.com/stac-extensions/eo">stac-extensions/eo</a></td>
+<td>For optical imagery products (Charter acquisitions)</td>
+</tr>
+<tr>
+<td><code>sat:</code></td>
+<td><a href="https://github.com/stac-extensions/sat">stac-extensions/sat</a></td>
+<td>Satellite orbit/platform metadata for acquisition items</td>
+</tr>
+<tr>
+<td><code>eq:</code> (earthquake)</td>
+<td><a href="https://github.com/stac-extensions/earthquake">stac-extensions/earthquake</a></td>
+<td>Structural pattern for hazard-type-specific fields; same owners (@emmanuelmathot)</td>
+</tr>
+<tr>
+<td><code>processing:</code></td>
+<td><a href="https://github.com/stac-extensions/processing">stac-extensions/processing</a></td>
+<td>Processing chain metadata — relevant for derived EO products</td>
+</tr>
+</tbody>
+</table>
+<p>These extensions apply to the <strong>acquisition/source imagery layer</strong>, not to the Response product layer. A Monty Response STAC item for a CEMS Grading Product would link to acquisition items (via <code>derived_from</code>) that carry the <code>sar:</code>, <code>eo:</code>, and <code>sat:</code> fields.</p>
+<h3 id="210-crosswalk-summary">2.10 Crosswalk Summary</h3>
+<p>The table below maps response concepts across frameworks and assesses readiness for Monty integration.</p>
+<table>
+<thead>
+<tr>
+<th>Response concept</th>
+<th>OCHA 3W</th>
+<th>Sendai</th>
+<th>IFRC EPoA</th>
+<th>IASC Cluster</th>
+<th>Int'l Charter</th>
+<th>CEMS</th>
+<th>UNOSAT</th>
+<th>PDNA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Satellite imagery / EO product</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>✓</td>
+<td>✓ (codes)</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Pre-event reference mapping</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Reference map</td>
+<td><code>REF</code></td>
+<td>Phase 0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Rapid damage extent mapping</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Delineation map</td>
+<td><code>FEP</code>, <code>DEL</code></td>
+<td>Phase 1, 2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Damage intensity/grading</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Grading map</td>
+<td><code>GRA</code></td>
+<td>Phase 2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Population exposure analysis</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Value-added</td>
+<td>—</td>
+<td>Phase 2</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Shelter response</td>
+<td>Shelter cluster</td>
+<td>—</td>
+<td>Shelter</td>
+<td>Shelter/NFI</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Housing</td>
+</tr>
+<tr>
+<td>Health response</td>
+<td>Health cluster</td>
+<td>—</td>
+<td>Health</td>
+<td>Health (WHO)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Health</td>
+</tr>
+<tr>
+<td>WASH</td>
+<td>WASH cluster</td>
+<td>—</td>
+<td>WASH</td>
+<td>WASH (UNICEF)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>WASH</td>
+</tr>
+<tr>
+<td>Food security / livelihoods</td>
+<td>Food Security</td>
+<td>—</td>
+<td>Livelihoods</td>
+<td>Food Security</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Agriculture</td>
+</tr>
+<tr>
+<td>Protection</td>
+<td>Protection cluster</td>
+<td>—</td>
+<td>PGI</td>
+<td>Protection + AoRs</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Early warning / preparedness</td>
+<td>—</td>
+<td>Target G</td>
+<td>DRR</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Phase 0</td>
+<td>DRR</td>
+</tr>
+<tr>
+<td>Financial / appeal</td>
+<td>—</td>
+<td>—</td>
+<td>DREF/EA</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Recovery planning</td>
+<td>Early Recovery</td>
+<td>—</td>
+<td>Early Recovery</td>
+<td>Early Recovery</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>✓ (all sectors)</td>
+</tr>
+<tr>
+<td>Anticipatory action</td>
+<td>—</td>
+<td>—</td>
+<td>AA Pillar</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Code availability summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Stable machine-readable codes?</th>
+<th>Existing STAC extension?</th>
+<th>Readiness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CEMS Rapid Mapping</td>
+<td>Yes (<code>REF</code>, <code>FEP</code>, <code>DEL</code>, <code>GRA</code>, <code>SR</code>)</td>
+<td>No — REST API only</td>
+<td>Immediate (codes), gap (STAC)</td>
+</tr>
+<tr>
+<td>International Charter</td>
+<td>No</td>
+<td>Yes — <code>disaster:</code> (Terradue)</td>
+<td>Adopt <code>disaster:</code> extension + add Monty response type codes</td>
+</tr>
+<tr>
+<td>UNOSAT</td>
+<td>No</td>
+<td>No</td>
+<td>Crosswalk to CEMS phases; no STAC anchor</td>
+</tr>
+<tr>
+<td>IFRC EPoA</td>
+<td>No (names only)</td>
+<td>No</td>
+<td>Needs code assignment</td>
+</tr>
+<tr>
+<td>IASC Cluster</td>
+<td>No (names only)</td>
+<td>No</td>
+<td>Needs code assignment</td>
+</tr>
+<tr>
+<td>OCHA 3W</td>
+<td>Partial (HXL cluster names)</td>
+<td>No</td>
+<td>Needs code assignment</td>
+</tr>
+<tr>
+<td>Sendai Framework</td>
+<td>Yes (indicator codes)</td>
+<td>No</td>
+<td>Wrong semantic layer</td>
+</tr>
+<tr>
+<td>PDNA</td>
+<td>No</td>
+<td>No</td>
+<td>Out of scope (v1)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-taxonomy-design-recommendation">3. Taxonomy Design Recommendation</h2>
+<blockquote>
+<p><strong>Note:</strong> This section presents a structural recommendation derived from the framework survey. The specific code values in §4 are proposals for team discussion — they are not final.</p>
+</blockquote>
+<h3 id="31-relationship-to-existing-stac-extensions">3.1 Relationship to Existing STAC Extensions</h3>
+<p>The survey (§2.9) revealed one directly relevant existing STAC extension: the Terradue <code>disaster:</code> extension for International Charter items. This changes the design approach: <strong>Monty Response items should declare multiple STAC extensions</strong> rather than trying to replicate all fields under the <code>monty:</code> prefix.</p>
+<p><strong>Extension layering strategy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Item type</th>
+<th>Extensions to declare</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Charter activation / VAP</td>
+<td><code>monty:</code> + <code>disaster:</code></td>
+<td>Reuse <code>disaster:class</code>, <code>disaster:activation_id</code>, <code>disaster:activation_status</code>, <code>disaster:resolution_class</code></td>
+</tr>
+<tr>
+<td>CEMS rapid mapping product</td>
+<td><code>monty:</code> + <code>processing:</code></td>
+<td>No CEMS-specific STAC extension exists; <code>processing:</code> covers provenance chain</td>
+</tr>
+<tr>
+<td>UNOSAT product</td>
+<td><code>monty:</code> + <code>processing:</code></td>
+<td>No UNOSAT STAC extension exists</td>
+</tr>
+<tr>
+<td>Charter / CEMS acquisition (source imagery)</td>
+<td><code>disaster:</code> + <code>sar:</code> / <code>eo:</code> + <code>sat:</code></td>
+<td>These are linked via <code>derived_from</code>, not Monty Response items themselves</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>monty:response_detail</code> field (analogous to <code>hazard_detail</code> and <code>impact_detail</code>) remains the primary place for the <strong>response type code</strong> and Monty-specific metadata. Fields already covered by <code>disaster:</code> or <code>processing:</code> should not be duplicated in <code>response_detail</code>.</p>
+<h3 id="32-hierarchy-two-level-domain-type">3.2 Hierarchy: Two-level (domain → type)</h3>
+<p><strong>Recommendation:</strong> A <strong>two-level hierarchy</strong> — <code>domain → type</code> — is the appropriate structure for the Monty response taxonomy at this stage.</p>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>The hazard taxonomy uses UNDRR's 4-level structure (type → cluster → specific hazard → variant) because there are 281 hazards requiring fine-grained disambiguation. The response space is much smaller and less settled.</li>
+<li>The impact taxonomy uses a flat structure (category × type matrix). Response is closer to impact in complexity but has a domain axis (EO vs. humanitarian vs. financial) that warrants one grouping level.</li>
+<li>A 3-level structure would be premature: the second level can always be split later without breaking existing codes.</li>
+<li>All frameworks surveyed use either flat or 2-level structures; the <code>disaster:class</code> vocabulary (<code>activation</code> / <code>area</code> / <code>acquisition</code> / <code>vap</code>) is itself 1-level flat.</li>
+</ul>
+<p><strong>Structure:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>domain      type
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  eo          ref
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  eo          fep
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  eo          del
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  eo          gra
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  eo          vap
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  hum         shelter
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  hum         health
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  ...
+</code></pre></div>
+<h3 id="33-code-format">3.3 Code Format</h3>
+<p><strong>Recommendation:</strong> Lowercase hyphenated slugs in the format <code>{domain}-{type}</code>.</p>
+<p><strong>Design principles:</strong></p>
+<ul>
+<li>Two segments: <code>{domain}-{type}</code> — e.g., <code>eo-del</code>, <code>hum-shelter</code></li>
+<li>All lowercase, ASCII, hyphen-separated — consistent with EM-DAT codes (<code>nat-hyd-flo-fla</code>) and IFRC GO conventions</li>
+<li><strong>Source-agnostic</strong>: codes classify <em>what kind of product</em> was produced, not <em>who produced it</em>. A delineation map is <code>eo-del</code> whether it comes from CEMS, Charter, or UNOSAT. Source provenance is preserved through <code>monty:source</code>, <code>disaster:activation_id</code>, <code>derived_from</code> links, and the item <code>id</code> — not encoded in the type code.</li>
+<li><strong>Generic fallback for unclassifiable products</strong>: <code>eo-vap</code> serves as the fallback when the specific product type cannot be determined (e.g., Charter VAPs where the source does not distinguish delineation from grading). Best-effort classification to a more specific code is always preferred.</li>
+<li>Avoid redundancy with fields already covered by <code>disaster:</code> — do not encode <code>disaster:activation_status</code> or source identity into the type code</li>
+</ul>
+<p><strong>Domain codes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Prefix</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth Observation</td>
+<td><code>eo</code></td>
+<td>Satellite-derived products (CEMS, Charter, UNOSAT)</td>
+</tr>
+<tr>
+<td>Humanitarian</td>
+<td><code>hum</code></td>
+<td>Cluster-based operational response</td>
+</tr>
+<tr>
+<td>Financial</td>
+<td><code>fin</code></td>
+<td>Appeals, funds, assessment budgets</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-scope-boundary">3.4 Scope Boundary</h3>
+<p>The following rule governs what belongs in Response vs. Impact:</p>
+<table>
+<thead>
+<tr>
+<th>Construct</th>
+<th>Definition</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Response</strong></td>
+<td>An action taken or product produced in response to a disaster</td>
+<td>CEMS Grading map, DREF operation, IFRC shelter distribution</td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td>An estimated effect on people, assets, or the environment</td>
+<td>1000 people displaced, 500 buildings destroyed, CHF 2M economic loss</td>
+</tr>
+</tbody>
+</table>
+<p>A CEMS Grading Product is a <strong>Response</strong> item. The damage statistics it contains may inform <strong>Impact</strong> items, which are separate STAC items linked via <code>monty:corr_id</code>.</p>
+<hr />
+<h2 id="4-proposed-response-type-codes">4. Proposed Response Type Codes</h2>
+<blockquote>
+<p><strong>Status:</strong> Proposals for team review. Not yet final.</p>
+</blockquote>
+<h3 id="41-eo-response-products">4.1 EO Response Products</h3>
+<p>EO response products are the primary use case for this contract. Codes are <strong>source-agnostic</strong>: a delineation product is <code>eo-del</code> regardless of whether it was produced by CEMS, the International Charter, or UNOSAT. Source provenance is preserved through <code>monty:source</code>, <code>disaster:</code> extension fields, and <code>derived_from</code> / <code>source-event</code> relation links — not encoded in the type code.</p>
+<p><strong>Charter activation note:</strong> A Charter activation (<code>disaster:class = activation</code>) is not a Response item — it is more naturally modelled as a Monty <strong>Event</strong> linked to the initiating call, since it bundles multiple subsequent VAP deliveries. Only the VAPs themselves (<code>disaster:class = vap</code>) become Monty Response items.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Description</th>
+<th>CEMS equivalent</th>
+<th>Charter mapping</th>
+<th>UNOSAT mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eo-ref</code></td>
+<td>Reference Product</td>
+<td>Pre-event baseline mapping of territory and assets</td>
+<td><code>REF</code></td>
+<td>Reference map VAP</td>
+<td>Phase 0 basemap</td>
+</tr>
+<tr>
+<td><code>eo-fep</code></td>
+<td>First Estimate Product</td>
+<td>Fast, rough post-event extent assessment (~hours)</td>
+<td><code>FEP</code></td>
+<td>Best-effort from early VAPs</td>
+<td>Phase 1 PSA</td>
+</tr>
+<tr>
+<td><code>eo-del</code></td>
+<td>Delineation Product</td>
+<td>Affected area extent and event impact mapping</td>
+<td><code>DEL</code></td>
+<td>Delineation VAP (best effort)</td>
+<td>Phase 2 flood extent</td>
+</tr>
+<tr>
+<td><code>eo-gra</code></td>
+<td>Grading Product</td>
+<td>Damage grade, intensity and spatial distribution</td>
+<td><code>GRA</code></td>
+<td>Grading VAP (best effort)</td>
+<td>Phase 2 damage assessment</td>
+</tr>
+<tr>
+<td><code>eo-pop</code></td>
+<td>Population Exposure</td>
+<td>Population in affected area analysis</td>
+<td>— (derived)</td>
+<td>Population exposure VAP</td>
+<td>Phase 2 population analysis</td>
+</tr>
+<tr>
+<td><code>eo-mon</code></td>
+<td>Monitoring Update</td>
+<td>Iterative update of a previous delineation or grading product</td>
+<td><code>DEL-MON</code>, <code>GRA-MON</code></td>
+<td>—</td>
+<td>Phase 3 flood monitoring</td>
+</tr>
+<tr>
+<td><code>eo-sr</code></td>
+<td>Situational Report</td>
+<td>Event overview report updated throughout the response</td>
+<td><code>SR</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>eo-vap</code></td>
+<td>Value-Added Product</td>
+<td>Generic EO product — used when specific type cannot be determined</td>
+<td>—</td>
+<td>Charter VAP (fallback)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Classification guidance:</strong></p>
+<ul>
+<li><strong>CEMS products</strong>: always classifiable — use the CEMS product type code directly (<code>REF</code>→<code>eo-ref</code>, <code>FEP</code>→<code>eo-fep</code>, <code>DEL</code>→<code>eo-del</code>, <code>GRA</code>→<code>eo-gra</code>, <code>SR</code>→<code>eo-sr</code>). Monitoring updates use <code>eo-mon</code> with <code>response_detail.monitoring_number</code> to distinguish iterations.</li>
+<li><strong>Charter VAPs</strong>: classify as specifically as the Charter Mapper metadata allows. If delineation/grading intent is discernible from the VAP title or description, use <code>eo-del</code> / <code>eo-gra</code>. If the product type cannot be determined, fall back to <code>eo-vap</code>. Do not force classification where the source does not support it.</li>
+<li><strong>UNOSAT products</strong>: classify by phase and product description. Phase 1 → <code>eo-fep</code>; flood extent → <code>eo-del</code>; damage density → <code>eo-gra</code>; population exposure → <code>eo-pop</code>; monitoring → <code>eo-mon</code>.</li>
+<li><strong>Monitoring variants</strong>: expressed as <code>eo-mon</code> type code with a <code>response_detail.monitoring_number</code> integer, not as separate codes per source (<code>eo-cems-del-mon</code>, etc.). This mirrors the CEMS API model (<code>monitoring: true</code>, <code>monitoringNumber: int</code>).</li>
+</ul>
+<h3 id="42-humanitarian-response-placeholder-groups">4.2 Humanitarian Response (Placeholder Groups)</h3>
+<p>Humanitarian response types are placeholders for future issues (outside this contract scope). Codes follow the <code>hum-{cluster}</code> pattern aligned with IASC cluster names and IFRC EPoA sectors.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>IASC Cluster</th>
+<th>IFRC EPoA Sector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hum-shelter</code></td>
+<td>Shelter and NFI</td>
+<td>Shelter / NFI</td>
+<td>Shelter and settlements</td>
+</tr>
+<tr>
+<td><code>hum-health</code></td>
+<td>Health Response</td>
+<td>Health</td>
+<td>Health</td>
+</tr>
+<tr>
+<td><code>hum-wash</code></td>
+<td>WASH</td>
+<td>WASH</td>
+<td>WASH</td>
+</tr>
+<tr>
+<td><code>hum-food</code></td>
+<td>Food Security and Livelihoods</td>
+<td>Food Security</td>
+<td>Livelihoods and basic needs</td>
+</tr>
+<tr>
+<td><code>hum-nutrition</code></td>
+<td>Nutrition</td>
+<td>Nutrition</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>hum-protection</code></td>
+<td>Protection</td>
+<td>Protection</td>
+<td>PGI</td>
+</tr>
+<tr>
+<td><code>hum-education</code></td>
+<td>Education in Emergencies</td>
+<td>Education</td>
+<td>Education in Emergencies</td>
+</tr>
+<tr>
+<td><code>hum-cccm</code></td>
+<td>Camp Coordination and Management</td>
+<td>CCCM</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>hum-early-recovery</code></td>
+<td>Early Recovery</td>
+<td>Early Recovery</td>
+<td>Early Recovery</td>
+</tr>
+<tr>
+<td><code>hum-logistics</code></td>
+<td>Logistics and Coordination</td>
+<td>Logistics</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>hum-telecom</code></td>
+<td>Emergency Telecommunications</td>
+<td>ETC</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>hum-drr</code></td>
+<td>Disaster Risk Reduction</td>
+<td>—</td>
+<td>DRR</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-financial-response-placeholder">4.3 Financial Response (Placeholder)</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fin-dref</code></td>
+<td>IFRC DREF Operation</td>
+<td>IFRC Disaster Response Emergency Fund allocation</td>
+</tr>
+<tr>
+<td><code>fin-ea</code></td>
+<td>IFRC Emergency Appeal</td>
+<td>IFRC Emergency Appeal operation</td>
+</tr>
+<tr>
+<td><code>fin-aa</code></td>
+<td>IFRC Anticipatory Action</td>
+<td>IFRC Anticipatory Action allocation (pre-crisis)</td>
+</tr>
+<tr>
+<td><code>fin-pdna</code></td>
+<td>PDNA Assessment</td>
+<td>Post-Disaster Needs Assessment (WB/EU/UN)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-response_detail-field-sketch">4.4 <code>response_detail</code> Field Sketch</h3>
+<blockquote>
+<p><strong>Status:</strong> First-pass field list to make the <code>response_detail</code> object concrete. Field names, types and required/optional flags are proposals for team review and will be formalised in the JSON Schema during D1.2.</p>
+</blockquote>
+<p><code>monty:response_detail</code> is the Monty-specific object attached to a Response item, analogous to <code>monty:hazard_detail</code> and <code>monty:impact_detail</code>. It carries the <strong>response type code</strong> and the minimal additional metadata needed to describe the response that is <em>not already covered</em> by another adopted STAC extension on the same item.</p>
+<p><strong>Extension-layering reminder (see \u00a73.1):</strong> before adding a field to <code>response_detail</code>, check whether it is already defined by an extension declared on the item (<code>disaster:</code>, <code>processing:</code>, <code>sar:</code>, <code>eo:</code>, <code>sat:</code>). If so, use that extension's field rather than duplicating it in <code>response_detail</code>.</p>
+<p><strong>Proposed fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req.</th>
+<th>Allowed values / format</th>
+<th>Description</th>
+<th>Already covered by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td><strong>R</strong></td>
+<td>One of \u00a74.1 / \u00a74.2 / \u00a74.3 codes (<code>eo-ref</code>, <code>eo-fep</code>, <code>eo-del</code>, <code>eo-gra</code>, <code>eo-pop</code>, <code>eo-mon</code>, <code>eo-sr</code>, <code>eo-vap</code>, <code>hum-*</code>, <code>fin-*</code>)</td>
+<td>Response type code from this taxonomy</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>O</td>
+<td><code>eo</code>, <code>hum</code>, <code>fin</code></td>
+<td>Derivable from <code>type</code>; included for filtering convenience</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>source_id</code></td>
+<td>string</td>
+<td><strong>R</strong></td>
+<td>Free string (e.g., <code>EMSR744</code>, <code>ACT-849</code>, <code>FL20240926ESP</code>)</td>
+<td>Source-system identifier for the response (CEMS activation code, Charter call ID, UNOSAT product code, DREF operation ID)</td>
+<td>partly <code>disaster:activation_id</code> for Charter</td>
+</tr>
+<tr>
+<td><code>source_url</code></td>
+<td>string (URI)</td>
+<td>O</td>
+<td>URL</td>
+<td>Canonical landing page for the response in the source system</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>O</td>
+<td><code>planned</code>, <code>in-production</code>, <code>published</code>, <code>finished</code>, <code>no-impact</code>, <code>withdrawn</code></td>
+<td>Lifecycle status; harmonises CEMS <code>statusCode</code> (<code>F</code>/<code>N</code>/<code>W</code>/<code>I</code>) and Charter <code>disaster:activation_status</code></td>
+<td>partly <code>disaster:activation_status</code> for Charter</td>
+</tr>
+<tr>
+<td><code>monitoring</code></td>
+<td>boolean</td>
+<td>O</td>
+<td><code>true</code> / <code>false</code> (default <code>false</code>)</td>
+<td>Whether this item is a monitoring update of a previous product</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>monitoring_number</code></td>
+<td>integer</td>
+<td>O</td>
+<td>\u2265 1</td>
+<td>Iteration number for monitoring updates (CEMS <code>monitoringNumber</code>); requires <code>monitoring = true</code></td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>monitors</code></td>
+<td>string (item id)</td>
+<td>O</td>
+<td>STAC item id</td>
+<td>Id of the prior Response item this update monitors (also expressible via <code>derived_from</code> relation link)</td>
+<td><code>derived_from</code> link</td>
+</tr>
+<tr>
+<td><code>resolution_class</code></td>
+<td>string</td>
+<td>O</td>
+<td><code>VLR</code>, <code>LR</code>, <code>MR</code>, <code>HR</code>, <code>VHR</code>, <code>VHR1</code></td>
+<td>Spatial resolution class of underlying acquisition(s); mirrors Charter <code>disaster:resolution_class</code> and CEMS <code>resolutionClass</code></td>
+<td><code>disaster:resolution_class</code> (Charter items only)</td>
+</tr>
+<tr>
+<td><code>charter_activation_id</code></td>
+<td>integer</td>
+<td>O</td>
+<td>\u2014</td>
+<td>Co-activation reference when a CEMS or UNOSAT product corresponds to a Charter call (CEMS <code>charterNumber</code>)</td>
+<td><code>disaster:activation_id</code> (Charter items only)</td>
+</tr>
+<tr>
+<td><code>producer</code></td>
+<td>string</td>
+<td>O</td>
+<td>Free string / org name</td>
+<td>Organisation that produced the response (e.g., <code>JRC</code>, <code>UNOSAT</code>, <code>Airbus</code>, <code>IFRC</code>)</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>sendai_targets</code></td>
+<td>[string]</td>
+<td>O</td>
+<td>Subset of <code>["A","B","C","D","E","F","G"]</code></td>
+<td>Sendai Framework targets this response contributes to (defaults in \u00a74.5)</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>sectors</code></td>
+<td>[string]</td>
+<td>O</td>
+<td>IASC cluster / IFRC EPoA sector slugs (e.g., <code>shelter</code>, <code>health</code>, <code>wash</code>)</td>
+<td>For humanitarian items, the sectors covered; multi-cluster operations carry several</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>number</td>
+<td>O</td>
+<td>Decimal \u2265 0</td>
+<td>Financial amount (for <code>fin-*</code> types)</td>
+<td>\u2014</td>
+</tr>
+<tr>
+<td><code>amount_currency</code></td>
+<td>string</td>
+<td>O</td>
+<td>ISO 4217 (e.g., <code>CHF</code>, <code>USD</code>)</td>
+<td>Currency for <code>amount</code></td>
+<td>\u2014</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conventions:</strong></p>
+<ul>
+<li><code>type</code> is the only strictly required field. All other fields are optional and added when the source data supports them.</li>
+<li>Identifiers and links into source systems live in <code>source_id</code> / <code>source_url</code>; the STAC item <code>id</code> should remain stable and Monty-controlled.</li>
+<li>Fields marked <em>Already covered by</em> must not be duplicated when the corresponding extension is declared on the item \u2014 e.g., on a Charter VAP item declaring <code>disaster:</code>, omit <code>response_detail.resolution_class</code> and rely on <code>disaster:resolution_class</code> instead. On CEMS items (which do not declare <code>disaster:</code>, see \u00a73.1), <code>response_detail.resolution_class</code> is the carrier.</li>
+<li>Statistical / damage figures contained in EO products (e.g., CEMS <code>affected</code> / <code>total</code> per thematic) are <strong>not</strong> part of <code>response_detail</code> \u2014 they belong to separate Monty Impact items linked via <code>monty:corr_id</code>.</li>
+<li>Underlying source imagery (acquisition items linked through <code>derived_from</code>) carries <code>sar:</code> / <code>eo:</code> / <code>sat:</code> / <code>processing:</code> fields directly; those are not copied into <code>response_detail</code>.</li>
+</ul>
+<p><strong>Minimal example (CEMS Delineation product):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;monty:response_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eo-del&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&quot;source_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EMSR744&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;source_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://emergency.copernicus.eu/mapping/list-of-components/EMSR744&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;published&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">&quot;monitoring&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;resolution_class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HR&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">&quot;producer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JRC&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&quot;sendai_targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;G&quot;</span><span class="p">]</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Minimal example (Charter VAP, item also declares <code>disaster:</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;monty:response_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eo-vap&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;source_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ACT-849&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;source_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://disasterscharter.org/web/guest/activations/-/article/...&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">&quot;producer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Airbus&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&quot;sendai_targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;G&quot;</span><span class="p">]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>(Note the absence of <code>resolution_class</code>, <code>charter_activation_id</code>, and <code>status</code> \u2014 those come from the <code>disaster:</code> extension on the same item.)</p>
+<h3 id="45-sendai-framework-crosswalk">4.5 Sendai Framework Crosswalk</h3>
+<p>The Sendai Framework 2015–2030 defines 7 global targets (A–G) tracked by 38 indicators. Although Sendai targets are outcome metrics (not a response action taxonomy — see §2.2), they are highly valuable for monitoring and reporting: annotating response items with the targets they contribute to enables policy-level aggregation without encoding Sendai into the taxonomy itself.</p>
+<p><strong>Proposed integration:</strong> An optional <code>monty:sendai_targets</code> array field on Response items (or inside <code>response_detail</code>) carrying one or more target letter codes. The crosswalk below provides default mappings per response type code; items may override or supplement these defaults.</p>
+<p><strong>Sendai targets:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Substantially reduce global disaster mortality</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Substantially reduce the number of affected people</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Reduce direct disaster economic loss relative to GDP</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Reduce disaster damage to critical infrastructure and services</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Increase countries with national/local DRR strategies</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Enhance international cooperation to developing countries</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Increase availability and access to multi-hazard early warning systems and EO data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default crosswalk — EO response products:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Sendai targets</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eo-ref</code></td>
+<td>G</td>
+<td>Provides pre-event baseline — supports EO/early warning access</td>
+</tr>
+<tr>
+<td><code>eo-fep</code></td>
+<td>D, G</td>
+<td>Rapid post-event extent informs infrastructure damage response and EO data access</td>
+</tr>
+<tr>
+<td><code>eo-del</code></td>
+<td>D, G</td>
+<td>Affected area delineation supports critical infrastructure damage assessment</td>
+</tr>
+<tr>
+<td><code>eo-gra</code></td>
+<td>C, D</td>
+<td>Damage grade products directly inform economic loss (C) and infrastructure damage (D) estimates</td>
+</tr>
+<tr>
+<td><code>eo-pop</code></td>
+<td>B</td>
+<td>Population exposure analysis directly supports reduction of affected people (B)</td>
+</tr>
+<tr>
+<td><code>eo-mon</code></td>
+<td>D, G</td>
+<td>Ongoing monitoring supports infrastructure resilience tracking and EO access</td>
+</tr>
+<tr>
+<td><code>eo-sr</code></td>
+<td>G</td>
+<td>Situational reports support EO data access and dissemination</td>
+</tr>
+<tr>
+<td><code>eo-vap</code></td>
+<td>D, G</td>
+<td>Generic; specific targets depend on product content</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default crosswalk — Humanitarian response (placeholder):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Sendai targets</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hum-shelter</code></td>
+<td>A, B</td>
+<td>Reduces mortality (A) and people affected (B)</td>
+</tr>
+<tr>
+<td><code>hum-health</code></td>
+<td>A, B</td>
+<td>Direct mortality reduction (A)</td>
+</tr>
+<tr>
+<td><code>hum-wash</code></td>
+<td>A, B</td>
+<td>Reduces disease mortality and affected people</td>
+</tr>
+<tr>
+<td><code>hum-food</code></td>
+<td>A, B</td>
+<td>Reduces mortality from starvation and malnutrition</td>
+</tr>
+<tr>
+<td><code>hum-nutrition</code></td>
+<td>A, B</td>
+<td>Direct mortality and affected people</td>
+</tr>
+<tr>
+<td><code>hum-protection</code></td>
+<td>A, B</td>
+<td>Reduces mortality and harm to affected people</td>
+</tr>
+<tr>
+<td><code>hum-education</code></td>
+<td>B</td>
+<td>Supports affected populations</td>
+</tr>
+<tr>
+<td><code>hum-cccm</code></td>
+<td>B</td>
+<td>Supports displaced/affected populations</td>
+</tr>
+<tr>
+<td><code>hum-early-recovery</code></td>
+<td>A, B, C</td>
+<td>Addresses mortality, affected people, and economic recovery</td>
+</tr>
+<tr>
+<td><code>hum-logistics</code></td>
+<td>D</td>
+<td>Supports critical infrastructure and service continuity</td>
+</tr>
+<tr>
+<td><code>hum-telecom</code></td>
+<td>D, G</td>
+<td>Emergency telecom supports infrastructure (D) and early warning (G)</td>
+</tr>
+<tr>
+<td><code>hum-drr</code></td>
+<td>D, E</td>
+<td>Reduces infrastructure damage (D) and contributes to DRR strategies (E)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default crosswalk — Financial response (placeholder):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Sendai targets</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fin-dref</code></td>
+<td>A, B, F</td>
+<td>DREF reduces mortality and affected people; funded via international cooperation (F)</td>
+</tr>
+<tr>
+<td><code>fin-ea</code></td>
+<td>A, B, F</td>
+<td>Emergency Appeals have same profile as DREF</td>
+</tr>
+<tr>
+<td><code>fin-aa</code></td>
+<td>A, B, G</td>
+<td>Anticipatory action reduces mortality and affected people; linked to early warning (G)</td>
+</tr>
+<tr>
+<td><code>fin-pdna</code></td>
+<td>C, D</td>
+<td>PDNA quantifies economic loss (C) and infrastructure damage (D)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> These defaults are a starting point — they capture the primary contribution of each response type and should be reviewed against the Sendai Monitor indicator definitions before integration into the schema.</p>
+</blockquote>
+<hr />
+<h2 id="5-open-questions-and-next-steps">5. Open Questions and Next Steps</h2>
+<h3 id="51-open-questions">5.1 Open Questions</h3>
+<p><strong>Resolved decisions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Charter VAP best-effort classification — how reliably can <code>eo-del</code>/<code>eo-gra</code> be determined from Charter Mapper metadata?</td>
+<td>Tracked in <a href="https://github.com/developmentseed/esa-montandon/issues/9">developmentseed/esa-montandon#9</a> (Charter Data Source Analysis)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>eo-vap</code> fallback scope — Charter-only or also for novel EO product types?</td>
+<td>Same — resolved in <a href="https://github.com/developmentseed/esa-montandon/issues/9">developmentseed/esa-montandon#9</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>eo-sr</code> (Situational Report) — assess whether it should be modelled as a Hazard item rather than a Response item for CEMS</td>
+<td>Needs a sub-task under <a href="https://github.com/developmentseed/esa-montandon/issues/6">developmentseed/esa-montandon#6</a> (Epic: Copernicus EMS)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>disaster:class = vap</code> and <code>monty:response_type = eo-del</code> are complementary, not redundant</td>
+<td><strong>Accepted</strong> — document explicitly in <code>response_detail</code> schema</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Should a separate <code>cems:</code> STAC extension be created?</td>
+<td><strong>No</strong> — CEMS-specific fields go in <code>monty:response_detail</code>; no separate extension</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Protection sub-types (GBV, Child Protection, Mine Action, HLP) as first-class codes?</td>
+<td><strong>Deferred</strong> — coarse <code>hum-protection</code> code sufficient for v1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Open:</strong></p>
+<ol>
+<li><strong>Sendai Framework integration</strong> — Sendai target annotations are considered high value for monitoring and reporting. See the design proposal in §4.5.</li>
+</ol>
+<h3 id="52-next-steps">5.2 Next Steps</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Team review of the source-agnostic EO code set (§4.1) and classification guidance</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Charter VAP field mapping — determine which Charter Mapper API fields enable best-effort classification (<a href="https://github.com/developmentseed/esa-montandon/issues/9">developmentseed/esa-montandon#9</a>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Assess whether <code>eo-sr</code> (CEMS Situational Report) should be modelled as a Hazard item — sub-task of <a href="https://github.com/developmentseed/esa-montandon/issues/6">developmentseed/esa-montandon#6</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Prototype a <code>response_detail</code> object schema analogous to <code>hazard_detail</code> and <code>impact_detail</code>; include <code>monitoring_number</code>, <code>status</code>, and optionally <code>sendai_targets</code> (§4.4)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validate Sendai target crosswalk (§4.5) against the <a href="https://sendaimonitor.undrr.org/">Sendai Monitor indicator definitions</a> before integrating into the schema</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Draft example STAC items for a CEMS activation (one per product type: <code>eo-ref</code>, <code>eo-fep</code>, <code>eo-del</code>, <code>eo-gra</code>, <code>eo-sr</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Draft example STAC items for a Charter activation (Event item + VAP Response item with <code>disaster:</code> + <code>monty:</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Integrate response type codes and Sendai crosswalk into the main <code>taxonomy.md</code> once finalised</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Publish as v1.0 of this document at D1.1 (KO+4m, July 2026)</li>
+</ul>
+<hr />
+<p><em>Document history:</em>
+<em>v0.1 — 2026-04-16 — Initial framework survey and structural proposal (Emmanuel Mathot)</em>
+<em>v0.2 — 2026-04-16 — Added STAC extensions survey (§2.9); updated crosswalk and taxonomy recommendation to incorporate <code>disaster:</code> extension reuse strategy (Emmanuel Mathot)</em>
+<em>v0.3 — 2026-04-16 — Revised §4.1 to source-agnostic EO codes (<code>eo-del</code> not <code>eo-cems-del</code>); Charter activation mapped to Event not Response; <code>eo-vap</code> fallback for unclassifiable Charter VAPs; open questions updated to reflect resolved decisions (Emmanuel Mathot)</em>
+<em>v0.4 — 2026-04-16 — Closed open questions 1–6 with explicit decisions and issue cross-references; added §4.4 Sendai Framework crosswalk with default target mappings per response type code (Emmanuel Mathot)</em>
+<em>v0.5 — 2026-05-20 — Addressed PR #42 review: removed research prompt; clarified §2.9.2 CEMS mapping (no <code>disaster:</code> extension on CEMS items); switched §3.2 example to source-agnostic codes; added §4.4 <code>response_detail</code> field sketch (fields, types, required/optional) per @pantierra; renumbered Sendai crosswalk to §4.5 (Emmanuel Mathot)</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
