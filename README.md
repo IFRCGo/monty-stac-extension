@@ -303,7 +303,7 @@ The taxonomy of response type codes, the framework survey and the Sendai Framewo
 The extension-layering rules per response type are documented in the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md).
 
 - Examples:
-  - [UNOSAT damage assessment example](examples/unosat-responses/FL20240926ESP-DA-01.json) — `eo-gra` response item from UNOSAT rapid mapping
+  - TBD
 
 The Response class represents an **action taken or a product produced in response to a disaster** — e.g., a Copernicus EMS Grading map, an International Charter Value-Added Product, a UNOSAT damage assessment, an IFRC DREF operation, or a humanitarian shelter distribution. The scope boundary with Impact is strict: **Response = action / product; Impact = estimated effect on people or assets**. A CEMS Grading Product is a Response that *informs* Impact items; it is not itself an impact.
 
