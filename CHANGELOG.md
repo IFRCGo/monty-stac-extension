@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `monty:response_detail` object on Response Items with `type` (required, response-taxonomy regex), `source_id`, `status`, `monitoring_number`, `producer`, `methodology`, `sendai_targets`, `sectors`
+- `response` role added to the `roles` `oneOf` branch and to the `typed_related_link.roles` enum (so `rel: related` can target Response items)
+- `related-response` relation type
+- `docs/model/response-best-practices.md` — extension-layering matrix, per-source mapping tables (CEMS, International Charter, UNOSAT), worked snippets, anti-patterns, and linkage summary
+- Response section in `docs/model/README.md` (with updated class diagram) and in `README.md`, including the per-source collection partitioning guidance and the Impact→Response `derived_from` provenance convention
+
 ## [1.2.0] - 2026-05-11
 
 ### Added
@@ -93,6 +103,7 @@ Initial release of the Monty STAC Extension specification.
 - Some features may be subject to change based on community feedback
 - Additional sources may be added in future releases
 
+[Unreleased]: https://github.com/IFRCGo/monty-stac-extension/compare/v1.2.0...HEAD
 [1.2.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.2.0
 [1.1.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.1.0
 [1.0.0]: https://github.com/IFRCGo/monty-stac-extension/releases/tag/v1.0.0

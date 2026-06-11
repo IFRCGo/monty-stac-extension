@@ -165,6 +165,81 @@
           },
           "additionalProperties": true
         },
+        "monty:response_detail": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "$comment": "Response type code from the Monty response taxonomy (see docs/model/response-taxonomy.md). Format: {domain}-{type} with domain in {eo, hum, fin}.",
+              "pattern": "^(eo|hum|fin)-[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "source_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Source-system identifier for the response (e.g., CEMS activation code `EMSR744`, Charter call ID `ACT-849`, UNOSAT product code, DREF operation ID)."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "planned",
+                "in-production",
+                "published",
+                "finished",
+                "no-impact",
+                "withdrawn"
+              ],
+              "description": "Lifecycle status of the response product. Harmonises CEMS `statusCode` and Charter `disaster:activation_status`."
+            },
+            "monitoring_number": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Iteration number for monitoring updates (mirrors CEMS `monitoringNumber`). The presence of this field marks the item as a monitoring update. The prior iteration this update monitors SHOULD be expressed via a `rel=\"prev\"` link to that Response STAC item."
+            },
+            "producer": {
+              "type": "string",
+              "description": "Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`)."
+            },
+            "methodology": {
+              "type": "string",
+              "enum": [
+                "human_interpreted",
+                "semi_automated",
+                "automated",
+                "modelled"
+              ],
+              "description": "Type of analysis used to produce the response."
+            },
+            "sendai_targets": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E",
+                  "F",
+                  "G"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "Sendai Framework 2015\u20132030 targets this response contributes to. Defaults per response type are documented in the response taxonomy."
+            },
+            "sectors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "description": "For humanitarian (`hum-*`) items, the IASC clusters / IFRC EPoA sectors covered (e.g., `shelter`, `health`, `wash`)."
+            }
+          },
+          "additionalProperties": false
+        },
         "monty:impact_detail": {
           "type": "object",
           "properties": {
@@ -339,7 +414,8 @@
                 "enum": [
                   "event",
                   "hazard",
-                  "impact"
+                  "impact",
+                  "response"
                 ]
               }
             }
@@ -385,6 +461,14 @@
           "allOf": [
             {
               "$ref": "#/definitions/is_impact"
+            }
+          ]
+        },
+        {
+          "$comment": "Response",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_response"
             }
           ]
         }
@@ -470,6 +554,20 @@
           "contains": {
             "const": "impact"
           }
+        }
+      }
+    },
+    "is_response": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "response"
+          }
+        },
+        "monty:response_detail": {
+          "$comment": "Response items SHOULD carry monty:response_detail (validated when present via the field definition)."
         }
       }
     }

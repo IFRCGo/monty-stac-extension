@@ -1,8 +1,6 @@
 # Response Taxonomy (Working Document — v0.5)
 
 > **Status:** Working document. Framework survey (including existing STAC extensions) and crosswalk are complete; taxonomy structure recommendation and initial code proposals are proposed and pending team review.
->
-> **Relates to:** [developmentseed/esa-montandon#12](https://github.com/developmentseed/esa-montandon/issues/12) · Contributes to D1.1 (KO+4m)
 
 ---
 

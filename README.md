@@ -43,15 +43,16 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 ### Item Properties
 
-| Field Name           | Type                                        | Description                                                                                                                                                                                                                                                                                                         |
-| -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:src_event_id  | string | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`. |
-| monty:episode_number | integer                                     | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
-| monty:country_codes  | \[string]                                   | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
-| monty:corr_id        | string                                      | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
-| monty:hazard_codes   | \[string]                                   | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)                                                                  |
-| monty:hazard_detail  | [Hazard Detail object](#montyhazard_detail) | The details of the hazard                                                                                                                                                                                                                                                                                           |
-| monty:impact_detail  | [Impact Detail object](#montyimpact_detail) | The details of the impact                                                                                                                                                                                                                                                                                           |
+| Field Name            | Type                                            | Description                                                                                                                                                                                                                                                                                                         |
+| --------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monty:src_event_id    | string                                          | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`.                                                                                                                               |
+| monty:episode_number  | integer                                         | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
+| monty:country_codes   | \[string]                                       | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
+| monty:corr_id         | string                                          | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
+| monty:hazard_codes    | \[string]                                       | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)                                                                  |
+| monty:hazard_detail   | [Hazard Detail object](#montyhazard_detail)     | The details of the hazard                                                                                                                                                                                                                                                                                           |
+| monty:impact_detail   | [Impact Detail object](#montyimpact_detail)     | The details of the impact                                                                                                                                                                                                                                                                                           |
+| monty:response_detail | [Response Detail object](#montyresponse_detail) | The details of the response                                                                                                                                                                                                                                                                                         |
 
 ### Roles
 
@@ -68,16 +69,16 @@ A set of roles are defined to describe the type of the data. The following roles
 
 The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item.
 
-For cross-item relationships represented by `rel="related"` links, the link `roles` field SHOULD include exactly one target type: `event`, `hazard`, or `impact`.
+For cross-item relationships represented by `rel="related"` links, the link `roles` field SHOULD include exactly one target type: `event`, `hazard`, `impact`, or `response`.
 
 ### Link Attributes
 
-| Field Name  | Type      | Description                                                                                                                                          |
-| ----------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| roles       | \[string] | Semantic classification for the linked entity as an array of strings. For `rel="related"` links between Monty items, use `event`, `hazard` or `impact` |
-| occ_type    | string    | The type of the occurrence. It can be one of the following values: `known`, `potential`                                                              |
-| occ_prob    | string    | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`)                                   |
-| occ_probdef | uri       | It is a link to the definition of the probability for the hazard relationship                                                                        |
+| Field Name  | Type      | Description                                                                                                                                                        |
+| ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| roles       | \[string] | Semantic classification for the linked entity as an array of strings. For `rel="related"` links between Monty items, use `event`, `hazard`, `impact` or `response` |
+| occ_type    | string    | The type of the occurrence. It can be one of the following values: `known`, `potential`                                                                            |
+| occ_prob    | string    | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`)                                                 |
+| occ_probdef | uri       | It is a link to the definition of the probability for the hazard relationship                                                                                      |
 
 #### Additional Field Information
 
@@ -98,7 +99,7 @@ It must at least contain the countries intersected by the item's geometry.
 
 It is a list of hazard codes of the hazards concerned by the item. There are multiple various classification systems for hazards so the field is open to any code.
 
-Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) 
+Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)
 and then to include their other system counterparts following the [crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#cross-classification-mapping) to enforce interoperability.
 
 Tables with the possible values are available in the [hazard section of the taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) with:
@@ -148,7 +149,7 @@ The following defined fields are available in the object:
 | estimate_type  | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                      |
 
 Any other field can be added to the object to provide more details about the hazard.
-For instance, `category` and  `pressure` can be added to provide the category and the pressure of a cyclone.
+For instance, `category` and `pressure` can be added to provide the category and the pressure of a cyclone.
 
 ##### monty:impact_detail
 
@@ -163,22 +164,42 @@ It is an object that contains the details of the impact estimate. Preferably use
 | estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                                                       |
 | description   | string | The description of the impact                                                                                                                                                                                                                                 |
 
+##### monty:response_detail
+
+It is an object that contains the details of the response action or product. Preferably used only in a Response item.
+
+The only strictly required field is `type` (the response type code). Other fields are optional and added when the source data supports them. Fields already covered by an STAC extension declared on the same item (e.g., Terradue [`disaster:`](https://github.com/Terradue/stac-extensions-disaster) for International Charter items) **MUST NOT** be duplicated in `monty:response_detail`. See the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md) document for the per-source extension-layering rules.
+
+| Field Name        | Type      | Description                                                                                                                                                                                                                                                  |
+| ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| type              | string    | **REQUIRED** Response type code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md) (`{domain}-{type}`, e.g., `eo-del`, `eo-gra`, `hum-shelter`, `fin-dref`)                                                    |
+| source_id         | string    | Source-system identifier for the response (e.g., CEMS activation code `EMSR744`, Charter call id `ACT-849`, DREF operation id)                                                                                                                               |
+| status            | string    | Lifecycle status. One of `planned`, `in-production`, `published`, `finished`, `no-impact`, `withdrawn`. Use `disaster:activation_status` instead on items declaring the `disaster:` extension                                                                |
+| monitoring_number | integer   | Iteration number for monitoring updates (mirrors CEMS `monitoringNumber`). The presence of this field marks the item as a monitoring update. The prior iteration this update monitors SHOULD be expressed via a `rel="prev"` link to that Response STAC item |
+| producer          | string    | Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`)                                                                                                                                                                            |
+| methodology       | string    | Type of analysis. One of `human_interpreted`, `semi_automated`, `automated`, `modelled`                                                                                                                                                                      |
+| sendai_targets    | \[string] | Subset of `["A","B","C","D","E","F","G"]` indicating the Sendai Framework targets this response contributes to. Defaults per response type are documented in the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md)     |
+| sectors           | \[string] | For humanitarian (`hum-*`) items, the IASC clusters / IFRC EPoA sectors covered (e.g., `shelter`, `health`, `wash`)                                                                                                                                          |
+
+Statistical / damage figures contained in EO products are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`.
+
 ## Relation types
 
 The following types should be used as applicable `rel` types in the
 [Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
 
-| Type                | Description                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| related             | This link points to another related STAC item. Use link `roles` with exactly one target type: `event`, `hazard`, or `impact` |
-| reference-event     | This link points to the reference event                                                                            |
-| source-event        | This link points to the source event                                                                               |
-| related-hazard      | This link points to a related hazard. For example, a flood related to the event                                    |
-| related-impact      | This link points to a related impact. For example, a flood related to the impact                                   |
-| triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide                            |
-| triggered-by-hazard | This link points to the hazard that triggered this hazard. For example, an earthquake that triggered a landslide   |
-| concurrent-hazard   | This link points to a concurrent hazard. For example, thunderstorms can occur together with windstorms or cyclones |
-| complex-hazard      | This link points to a complex hazard when the relationship between the hazards is complex                          |
+| Type                | Description                                                                                                                              |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| related             | This link points to another related STAC item. Use link `roles` with exactly one target type: `event`, `hazard`, `impact`, or `response` |
+| reference-event     | This link points to the reference event                                                                                                  |
+| source-event        | This link points to the source event                                                                                                     |
+| related-hazard      | This link points to a related hazard. For example, a flood related to the event                                                          |
+| related-impact      | This link points to a related impact. For example, a flood related to the impact                                                         |
+| related-response    | This link points to a related response. For example, a CEMS Delineation product produced for the event                                   |
+| triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide                                                  |
+| triggered-by-hazard | This link points to the hazard that triggered this hazard. For example, an earthquake that triggered a landslide                         |
+| concurrent-hazard   | This link points to a concurrent hazard. For example, thunderstorms can occur together with windstorms or cyclones                       |
+| complex-hazard      | This link points to a complex hazard when the relationship between the hazards is complex                                                |
 
 ## Event
 
@@ -276,7 +297,30 @@ An impact object **MUST** have the [`monty:impact_detail`](#montyimpact_detail) 
 
 ### Response
 
-*This section still needs to be defined.*
+This section describes in details the usage of the fields and links for the response object.
+More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#response).
+The taxonomy of response type codes, the framework survey and the Sendai Framework crosswalk are documented in the [Response Taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md).
+The extension-layering rules per response type are documented in the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md).
+
+- Examples:
+  - TBD
+
+The Response class represents an **action taken or a product produced in response to a disaster** — e.g., a Copernicus EMS Grading map, an International Charter Value-Added Product, a UNOSAT damage assessment, an IFRC DREF operation, or a humanitarian shelter distribution. The scope boundary with Impact is strict: **Response = action / product; Impact = estimated effect on people or assets**. A CEMS Grading Product is a Response that *informs* Impact items; it is not itself an impact.
+
+In the Monty model, a Response is **ALWAYS** linked to one or multiple event(s) through `monty:corr_id`. A response item:
+
+- **MUST** include the `response` role in its `roles` field
+- **MUST** include the [`monty:response_detail`](#montyresponse_detail) object with at least the `type` code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md)
+- **SHOULD** include `monty:hazard_codes` indicating which hazard(s) the response addresses
+- **SHOULD** link to the reference event with `reference-event`
+- **SHOULD** link to acquisition / source imagery items via STAC `derived_from` (those acquisition items typically carry `sar:` / `eo:` / `sat:` / `processing:` fields)
+- **SHOULD** link to the source-system product page (e.g., the CEMS activation page, the Charter activation page, the UNOSAT product page) via a STAC `derived_from` link rather than embedding the URL in `monty:response_detail`
+- **MAY** link to Impact items the response informs via `rel: related` with `roles: ["impact"]` (or `related-impact`). The canonical provenance edge is the reverse — each Impact item carries a `rel: derived_from` link back to the Response item it was derived from.
+- **SHOULD** declare any additional STAC extensions whose fields are reused on the item. Fields already covered by an adopted extension **MUST NOT** be duplicated in `monty:response_detail`.
+
+#### Response collection partitioning
+
+Response collections SHOULD be partitioned **per source** (e.g., `cems-responses`, `charter-responses`, `unosat-responses`, `ifrc-dref`) to match upstream catalog boundaries, rather than per response domain (`eo-*`, `hum-*`, `fin-*`). Within a per-source collection, items of multiple response type codes coexist (e.g., a single `cems-responses` collection contains `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-sr` items).
 
 ## Contributing
 
