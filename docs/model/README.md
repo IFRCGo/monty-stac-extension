@@ -298,7 +298,7 @@ The Response class has the following attributes:
   - **monitoring_number**: Iteration number for monitoring updates (mirrors the CEMS API `monitoringNumber`). The presence of this field marks the item as a monitoring update. The prior iteration this update monitors SHOULD be expressed via a STAC `rel="prev"` link to that Response item. **OPTIONAL**
   - **producer**: Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`). **OPTIONAL**
   - **methodology**: Type of analysis — one of `human_interpreted`, `semi_automated`, `automated`, `modelled`. **OPTIONAL**
-  - **sendai_targets**: Subset of `["A","B","C","D","E","F","G"]` indicating the Sendai Framework targets this response contributes to. Default mappings per response type code are documented in the [response taxonomy](response-taxonomy.md#sendai-framework-crosswalk). **OPTIONAL**
+  - **sendai_targets**: Subset of `["A","B","C","D","E","F","G"]` indicating the Sendai Framework targets this response contributes to. See the [response taxonomy](response-taxonomy.md#22-sendai-framework-monitoring) for background on the framework. **OPTIONAL**
   - **sectors**: For humanitarian (`hum-*`) items, the IASC clusters / IFRC EPoA sectors covered (e.g., `shelter`, `health`, `wash`). **OPTIONAL**
 
 Statistical / damage figures contained in EO products (e.g., CEMS `affected` / `total` per thematic) are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`. Likewise, underlying source imagery (acquisition items linked through `derived_from`) carries `sar:` / `eo:` / `sat:` / `processing:` fields directly; those are not copied into `response_detail`.

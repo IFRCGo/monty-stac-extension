@@ -1,6 +1,6 @@
 # Response Best Practices — STAC Extension Combinations
 
-> **Status:** Initial best-practices document accompanying the v1.3 introduction of `monty:response_detail`.
+> **Status:** Initial best-practices document accompanying the v1.2 introduction of `monty:response_detail`.
 
 This document specifies which STAC extensions Monty Response items SHOULD or MUST declare, per response type and per source system. The governing principle is **extension layering over duplication**: where a suitable third-party STAC extension exists, Response items declare it alongside `monty:` rather than copying its fields into `monty:response_detail`.
 
@@ -20,7 +20,7 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 
 | Response type (`monty:response_detail.type`) | Extensions to declare on the Response item | Notes |
 | --- | --- | --- |
-| `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon`, `eo-sr`, `eo-vap` *(CEMS-sourced)* | `monty:` **+** `processing:` *(recommended)* | No CEMS-specific STAC extension exists. CEMS lifecycle fields (`statusCode`, `monitoring`, `monitoringNumber`, `resolutionClass`, `charterNumber`) are carried under `monty:response_detail`. |
+| `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon`, `eo-sr`, `eo-vap` *(CEMS-sourced)* | `monty:` **+** `processing:` *(recommended)* | No CEMS-specific STAC extension exists. CEMS `statusCode` and `monitoringNumber` are carried under `monty:response_detail` (as `status` and `monitoring_number`). `resolutionClass` is carried on the linked acquisition items (not on the Response item). `charterNumber` is modelled as a `rel: related` link (with `roles: ["response"]`) to the corresponding Charter VAP Response item. |
 | `eo-ref`, `eo-del`, `eo-gra`, `eo-pop`, `eo-vap` *(International Charter VAPs)* | `monty:` **+** `disaster:` *(MANDATORY)* **+** `processing:` *(recommended)* | Reuse `disaster:class = vap`, `disaster:activation_id`, `disaster:call_ids`, `disaster:activation_status`, `disaster:resolution_class`, `disaster:types`. Do NOT duplicate these under `monty:response_detail`. |
 | `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon` *(UNOSAT-sourced)* | `monty:` **+** `processing:` *(recommended)* | No UNOSAT STAC extension exists. |
 | `hum-*` *(IFRC / cluster-based humanitarian)* | `monty:` *(only)* | No directly relevant third-party extension. Sectors carried in `monty:response_detail.sectors`. |
@@ -42,14 +42,14 @@ CEMS Response items declare `monty:` (+ optionally `processing:`). They do **not
 | Concept | CEMS API field | Carried on Monty Response item as |
 | --- | --- | --- |
 | Activation code | `code` (e.g., `EMSR744`) | `monty:response_detail.source_id` |
-| Product type | `type` (`REF` / `FEP` / `DEL` / `GRA` / `SR`) | `monty:response_detail.type` (mapped per [taxonomy §4.1](./response-taxonomy.md#eo-response-products)) |
+| Product type | `type` (`REF` / `FEP` / `DEL` / `GRA` / `SR`) | `monty:response_detail.type` (mapped per [taxonomy §4.1](./response-taxonomy.md#41-eo-response-products)) |
 | Monitoring iteration | `monitoring`, `monitoringNumber` | `monty:response_detail.monitoring_number` (set only on monitoring updates; absent on the initial product) |
 | Product status | `statusCode` (`F` / `N` / `W` / `I`) | `monty:response_detail.status` (mapped: `F→finished`, `N→no-impact`, `W→planned`, `I→in-production`) |
 | Resolution class | `resolutionClass` | Carried on the linked acquisition items (via `eo:gsd` / `sat:` / `disaster:resolution_class` where applicable) — not on the Response item itself |
 | Charter co-activation | `charterNumber` | `rel: related` link (with `roles: ["response"]`) to the corresponding Charter VAP Response item; the Charter VAP item itself carries `disaster:activation_id` |
 | Producer | (provider metadata) | `monty:response_detail.producer` (typically `JRC` or contracted VAP provider) |
 | Methodology | (implicit) | `monty:response_detail.methodology` (typically `human_interpreted` or `semi_automated`) |
-| Sendai targets | — | `monty:response_detail.sendai_targets` (defaults per [taxonomy §4.5](./response-taxonomy.md#sendai-framework-crosswalk)) |
+| Sendai targets | — | `monty:response_detail.sendai_targets` (see [taxonomy §2.2](./response-taxonomy.md#22-sendai-framework-monitoring)) |
 | Damage statistics | `affected` / `total` per thematic | **NOT** in `response_detail` — emit as separate Monty Impact items linked via `monty:corr_id` |
 
 ### 3.2 International Charter
@@ -80,7 +80,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
 | Concept | UNOSAT field / convention | Carried on Monty Response item as |
 | --- | --- | --- |
 | Product identifier | UNOSAT product code (e.g., `FL20240926ESP`) | `monty:response_detail.source_id` and item `id` |
-| Phase | Phase 0 / 1 / 2 / 3 | Mapped to `monty:response_detail.type` per [taxonomy §4.1](./response-taxonomy.md#eo-response-products) classification guidance (`Phase 1 → eo-fep`, flood extent `→ eo-del`, damage density `→ eo-gra`, population exposure `→ eo-pop`, monitoring `→ eo-mon`) |
+| Phase | Phase 0 / 1 / 2 / 3 | Mapped to `monty:response_detail.type` per [taxonomy §4.1](./response-taxonomy.md#41-eo-response-products) classification guidance (`Phase 1 → eo-fep`, flood extent `→ eo-del`, damage density `→ eo-gra`, population exposure `→ eo-pop`, monitoring `→ eo-mon`) |
 | Producer | (typically `UNOSAT`) | `monty:response_detail.producer` |
 | Methodology | (varies) | `monty:response_detail.methodology` |
 | Sensor / acquisition | Sentinel-1 / Sentinel-2 / ... | Carried on linked acquisition items via `sar:` / `eo:` / `sat:` — **not** on the Response item itself |
