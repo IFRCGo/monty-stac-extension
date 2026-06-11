@@ -530,6 +530,15 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#response">
+<span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -621,9 +630,23 @@ classDiagram
     Impact "0..*" --&gt; "1..*" Hazard : is the effect of
 
     class Response {
+        +response_detail: ResponseDetail
     }
 
     Response --|&gt; MontyData
+    Response "0..*" --&gt; "0..*" Hazard : addresses
+    Response "0..*" --&gt; "0..*" Impact : informs
+
+    class ResponseDetail {
+        +type: string
+        +source_id: string
+        +status: string
+        +producer: string
+        +monitoring_number: integer
+        +sendai_targets: string[]
+    }
+
+    ResponseDetail --* Response
 
     class HazardDetail {
         +severity_value: number
@@ -782,6 +805,33 @@ A hazard can be observed or forecasted and <strong>MUST</strong> contains detail
 </ul>
 </li>
 </ul>
+<h3 id="response">Response</h3>
+<p>Response data represent an <strong>action taken or a product produced in response to a disaster</strong> — for example, a Copernicus EMS Grading map, an International Charter Value-Added Product, a UNOSAT damage assessment, an IFRC DREF operation, or a humanitarian shelter distribution. The scope boundary with Impact is strict: <strong>Response = action / product; Impact = estimated effect on people or assets</strong>. A CEMS Grading Product is a Response that <em>informs</em> Impact items; it is not itself an impact.</p>
+<p>In the Monty model, a Response is <strong>ALWAYS</strong> linked to one or multiple event(s) through <code>monty:corr_id</code>, and SHOULD reference the hazard(s) it addresses (via <code>monty:hazard_codes</code> and <code>related-hazard</code> links) as well as any acquisition / source imagery items it derives from (via STAC <code>derived_from</code> links). The canonical landing page or product URL in the source system (e.g., CEMS activation page, Charter activation page, UNOSAT product page) SHOULD be expressed as a STAC <code>rel: derived_from</code> link rather than embedded as a property under <code>monty:response_detail</code>. Where the response product informs Impact items, the canonical provenance edge is carried on the <strong>Impact</strong> side: each derived Impact item SHOULD declare a STAC <code>rel: derived_from</code> link pointing back to the Response item. The Response item itself MAY add <code>rel: related</code> links (with <code>roles: ["impact"]</code>) to the Impact items it informs, but those are an optional back-reference — the <code>derived_from</code> edge on the Impact item is the authoritative provenance.</p>
+<p>The full design rationale, framework survey, taxonomy of response type codes, and Sendai Framework crosswalk are documented in <a href="response-taxonomy/">Response Taxonomy</a>. The extension-layering rules and worked-example combinations are in <a href="response-best-practices/">Response Best Practices</a>.</p>
+<p>The Response class has the following attributes:</p>
+<ul>
+<li><strong>id</strong>: A unique identifier for the response. Preferably, the identifier assigned by the issuer (source) of the response (e.g., CEMS activation product code). If not available, an identifier can be generated and should be prefixed with the related event id.</li>
+<li><strong>title</strong>: The name of the response assigned by the issuer (source) of the response.</li>
+<li><strong>geometry</strong> (GeoJSON geometry): The location / area-of-interest of the response in the form of a GeoJSON geometry.</li>
+<li><strong>datetime</strong>: The publication or production date and time of the response.</li>
+<li><strong>start_datetime</strong>: The date and time when the response action / product window started. <strong>OPTIONAL</strong></li>
+<li><strong>end_datetime</strong>: The date and time when the response action / product window ended. <strong>OPTIONAL</strong></li>
+<li><strong>ref_event_id</strong>: The identifier of the reference event to which the response is associated.</li>
+<li><strong>source_event_id</strong>: The identifier of the source event to which the response is associated. <strong>OPTIONAL</strong></li>
+<li><strong>source</strong>: Information about the organization and the database capturing, producing, processing, hosting or publishing this response data.</li>
+<li><strong>response_detail</strong>: A detailed description of the response including:</li>
+<li><strong>type</strong>: <strong>REQUIRED</strong>. The response type code from the <a href="response-taxonomy/">response taxonomy</a> (<code>{domain}-{type}</code>, e.g., <code>eo-del</code>, <code>eo-gra</code>, <code>hum-shelter</code>, <code>fin-dref</code>). The only strictly required field. The domain (<code>eo</code>, <code>hum</code>, <code>fin</code>) is derivable from this prefix.</li>
+<li><strong>source_id</strong>: The native identifier of the response in the source system (CEMS activation code, Charter call id, UNOSAT product code, DREF operation id). <strong>OPTIONAL</strong></li>
+<li><strong>status</strong>: Lifecycle status — one of <code>planned</code>, <code>in-production</code>, <code>published</code>, <code>finished</code>, <code>no-impact</code>, <code>withdrawn</code>. Harmonises CEMS <code>statusCode</code> and Charter <code>disaster:activation_status</code>. <strong>OPTIONAL</strong></li>
+<li><strong>monitoring_number</strong>: Iteration number for monitoring updates (mirrors the CEMS API <code>monitoringNumber</code>). The presence of this field marks the item as a monitoring update. The prior iteration this update monitors SHOULD be expressed via a STAC <code>rel="prev"</code> link to that Response item. <strong>OPTIONAL</strong></li>
+<li><strong>producer</strong>: Organisation that produced the response (e.g., <code>JRC</code>, <code>UNOSAT</code>, <code>Airbus</code>, <code>IFRC</code>). <strong>OPTIONAL</strong></li>
+<li><strong>methodology</strong>: Type of analysis — one of <code>human_interpreted</code>, <code>semi_automated</code>, <code>automated</code>, <code>modelled</code>. <strong>OPTIONAL</strong></li>
+<li><strong>sendai_targets</strong>: Subset of <code>["A","B","C","D","E","F","G"]</code> indicating the Sendai Framework targets this response contributes to. See the <a href="response-taxonomy/#22-sendai-framework-monitoring">response taxonomy</a> for background on the framework. <strong>OPTIONAL</strong></li>
+<li><strong>sectors</strong>: For humanitarian (<code>hum-*</code>) items, the IASC clusters / IFRC EPoA sectors covered (e.g., <code>shelter</code>, <code>health</code>, <code>wash</code>). <strong>OPTIONAL</strong></li>
+</ul>
+<p>Statistical / damage figures contained in EO products (e.g., CEMS <code>affected</code> / <code>total</code> per thematic) are <strong>not</strong> part of <code>response_detail</code> — they belong to separate Monty Impact items linked via <code>monty:corr_id</code>. Likewise, underlying source imagery (acquisition items linked through <code>derived_from</code>) carries <code>sar:</code> / <code>eo:</code> / <code>sat:</code> / <code>processing:</code> fields directly; those are not copied into <code>response_detail</code>.</p>
+<p>Response items SHOULD declare additional STAC extensions where applicable, rather than duplicating their fields under <code>monty:response_detail</code>. The <a href="response-best-practices/">Response Best Practices</a> document specifies the recommended extension layering per response type — notably that International Charter VAP items MUST declare the Terradue <code>disaster:</code> extension alongside <code>monty:</code>.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
