@@ -1,6 +1,6 @@
 # Response Best Practices — STAC Extension Combinations
 
-> **Status:** Initial best-practices document accompanying the v1.2 introduction of `monty:response_detail`.
+> **Status:** Initial best-practices document accompanying the v1.3 introduction of `monty:response_detail`.
 
 This document specifies which STAC extensions Monty Response items SHOULD or MUST declare, per response type and per source system. The governing principle is **extension layering over duplication**: where a suitable third-party STAC extension exists, Response items declare it alongside `monty:` rather than copying its fields into `monty:response_detail`.
 
@@ -27,7 +27,7 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 | `fin-*` *(IFRC DREF / EA / AA / PDNA)* | `monty:` *(only)* | Financial-amount fields are not yet part of `monty:response_detail`; tracked as a proposal in the [response taxonomy](response-taxonomy.md) and out of scope for v1. |
 | *(Acquisition / source imagery — linked via `derived_from`)* | `sat:`, `eo:`, `sar:`, `view:`, `disaster:` *(for Charter acquisitions, with `disaster:class = acquisition`)*, `processing:` | These are **not** Monty Response items themselves; they are upstream items referenced by Response items via `rel: derived_from`. |
 
-> The Response item's `stac_extensions` array MUST contain `https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json` (or newer). The relative ordering of extension URLs is not significant.
+> The Response item's `stac_extensions` array MUST contain `https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json` (or newer). The relative ordering of extension URLs is not significant.
 
 ---
 
@@ -95,7 +95,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
 ```jsonc
 {
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json",
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "properties": {
@@ -126,7 +126,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
 ```jsonc
 {
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json",
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json"
   ],
   "properties": {
@@ -163,7 +163,7 @@ Note the absence of `monty:response_detail.status` — it is carried via `disast
 ```jsonc
 {
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.2.0/schema.json",
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "properties": {
