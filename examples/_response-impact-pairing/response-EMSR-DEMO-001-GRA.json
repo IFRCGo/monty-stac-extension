@@ -1,0 +1,121 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "response-EMSR-DEMO-001-GRA",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -3.8,
+          40.3
+        ],
+        [
+          -3.6,
+          40.3
+        ],
+        [
+          -3.6,
+          40.5
+        ],
+        [
+          -3.8,
+          40.5
+        ],
+        [
+          -3.8,
+          40.3
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -3.8,
+    40.3,
+    -3.6,
+    40.5
+  ],
+  "properties": {
+    "datetime": "2026-06-15T00:00:00Z",
+    "title": "Grading product for synthetic demo flood (EMSR-DEMO-001)",
+    "description": "Synthetic illustrative Response product (eo-gra) anchoring the Response ↔ Impact boundary-rules documentation. The damage statistics this product carries are NOT stored here — they are split into separate Impact items (pattern P4), one per thematic class, linked via monty:corr_id and rel: derived_from.",
+    "roles": [
+      "response"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
+    ],
+    "monty:corr_id": "20260615T000000Z-DEMO-FL-001-DEMO",
+    "monty:response_detail": {
+      "type": "eo-gra",
+      "source_id": "EMSR-DEMO-001",
+      "status": "published",
+      "producer": "DEMO",
+      "methodology": "human_interpreted",
+      "sendai_targets": [
+        "C",
+        "D"
+      ]
+    },
+    "processing:level": "L3",
+    "processing:lineage": "Synthetic VHR optical → building-damage interpretation → per-thematic statistics"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "response-EMSR-DEMO-001-GRA.json"
+    },
+    {
+      "rel": "collection",
+      "href": "responses.json"
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://example.org/demo/activations/EMSR-DEMO-001",
+      "type": "text/html",
+      "title": "Synthetic demo activation EMSR-DEMO-001 (placeholder landing page)"
+    },
+    {
+      "rel": "related",
+      "href": "impact-EMSR-DEMO-001-buildings-destroyed.json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "impact-EMSR-DEMO-001-people-affected.json",
+      "roles": [
+        "impact"
+      ]
+    }
+  ],
+  "assets": {
+    "grading_map": {
+      "href": "https://example.org/demo/products/EMSR-DEMO-001/grading.tif",
+      "type": "image/tiff; application=geotiff",
+      "title": "Synthetic grading product raster (placeholder)",
+      "roles": [
+        "data"
+      ]
+    },
+    "report": {
+      "href": "https://example.org/demo/products/EMSR-DEMO-001/report.pdf",
+      "type": "application/pdf",
+      "title": "Synthetic grading product report (placeholder)",
+      "roles": [
+        "overview"
+      ]
+    }
+  },
+  "collection": "response-impact-pairing-responses"
+}

@@ -1,0 +1,72 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "response-impact-pairing-responses",
+  "title": "Response ↔ Impact Pairing — Responses (synthetic)",
+  "description": "**Synthetic illustrative fixture — not a real source dataset.** This collection holds the Response half of a worked Response ↔ Impact pairing that anchors the [Response ↔ Impact Boundary Rules](https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/response-impact-boundary.md) document. It demonstrates pattern **P4** (multi-thematic split): a single `eo-gra`-shaped Response product from which one Impact item per thematic class is derived. All identifiers (`EMSR-DEMO-001`, …) are obvious placeholders. The paired Impact items live in the sibling `response-impact-pairing-impacts` collection and link back via `rel: derived_from` and a shared `monty:corr_id`.",
+  "license": "Apache-2.0",
+  "roles": [
+    "response"
+  ],
+  "providers": [
+    {
+      "name": "DEMO",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://example.org/demo"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -3.8,
+          40.3,
+          -3.6,
+          40.5
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-06-15T00:00:00Z",
+          "2026-06-15T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "2026-06-15T00:00:00Z",
+      "maximum": "2026-06-15T00:00:00Z"
+    },
+    "roles": [
+      "response"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "responses.json"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/response-impact-boundary.md",
+      "type": "text/html",
+      "title": "Response ↔ Impact Boundary Rules"
+    }
+  ]
+}

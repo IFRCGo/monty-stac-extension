@@ -301,9 +301,10 @@ This section describes in details the usage of the fields and links for the resp
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#response).
 The taxonomy of response type codes, the framework survey and the Sendai Framework crosswalk are documented in the [Response Taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md).
 The extension-layering rules per response type are documented in the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md).
+The rules for deciding whether a given piece of data belongs on a Response item, on a paired Impact item, or on neither — the data-pattern catalogue, decision tree, ETL splitting algorithm, and query patterns — are documented in the [Response ↔ Impact Boundary Rules](https://ifrcgo.org/monty-stac-extension/model/response-impact-boundary.md).
 
 - Examples:
-  - TBD
+  - [Synthetic Response ↔ Impact pairing](examples/_response-impact-pairing/) (illustrative fixture exercising the multi-thematic split, pattern P4)
 
 The Response class represents an **action taken or a product produced in response to a disaster** — e.g., a Copernicus EMS Grading map, an International Charter Value-Added Product, a UNOSAT damage assessment, an IFRC DREF operation, or a humanitarian shelter distribution. The scope boundary with Impact is strict: **Response = action / product; Impact = estimated effect on people or assets**. A CEMS Grading Product is a Response that *informs* Impact items; it is not itself an impact.
 
