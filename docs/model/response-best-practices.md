@@ -42,14 +42,14 @@ CEMS Response items declare `monty:` (+ optionally `processing:`). They do **not
 | Concept | CEMS API field | Carried on Monty Response item as |
 | --- | --- | --- |
 | Activation code | `code` (e.g., `EMSR744`) | `monty:response_detail.source_id` |
-| Product type | `type` (`REF` / `FEP` / `DEL` / `GRA` / `SR`) | `monty:response_detail.type` (mapped per [taxonomy §4.1](./response-taxonomy.md#41-eo-response-products)) |
+| Product type | `type` (`REF` / `FEP` / `DEL` / `GRA` / `SR`) | `monty:response_detail.type` (mapped per [taxonomy §2.1](./response-taxonomy.md#21-eo-response-products)) |
 | Monitoring iteration | `monitoring`, `monitoringNumber` | `monty:response_detail.monitoring_number` (set only on monitoring updates; absent on the initial product) |
 | Product status | `statusCode` (`F` / `N` / `W` / `I`) | `monty:response_detail.status` (mapped: `F→finished`, `N→no-impact`, `W→planned`, `I→in-production`) |
 | Resolution class | `resolutionClass` | Carried on the linked acquisition items (via `eo:gsd` / `sat:` / `disaster:resolution_class` where applicable) — not on the Response item itself |
 | Charter co-activation | `charterNumber` | `rel: related` link (with `roles: ["response"]`) to the corresponding Charter VAP Response item; the Charter VAP item itself carries `disaster:activation_id` |
 | Producer | (provider metadata) | `monty:response_detail.producer` (typically `JRC` or contracted VAP provider) |
 | Methodology | (implicit) | `monty:response_detail.methodology` (typically `human_interpreted` or `semi_automated`) |
-| Sendai targets | — | `monty:response_detail.sendai_targets` (see [taxonomy §2.2](./response-taxonomy.md#22-sendai-framework-monitoring)) |
+| Sendai targets | — | `monty:response_detail.sendai_targets` (see [taxonomy §5](./response-taxonomy.md#5-sendai-framework-crosswalk)) |
 | Damage statistics | `affected` / `total` per thematic | **NOT** in `response_detail` — emit as separate Monty Impact items linked via `monty:corr_id` |
 
 ### 3.2 International Charter
@@ -80,7 +80,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
 | Concept | UNOSAT field / convention | Carried on Monty Response item as |
 | --- | --- | --- |
 | Product identifier | UNOSAT product code (e.g., `FL20240926ESP`) | `monty:response_detail.source_id` and item `id` |
-| Phase | Phase 0 / 1 / 2 / 3 | Mapped to `monty:response_detail.type` per [taxonomy §4.1](./response-taxonomy.md#41-eo-response-products) classification guidance (`Phase 1 → eo-fep`, flood extent `→ eo-del`, damage density `→ eo-gra`, population exposure `→ eo-pop`, monitoring `→ eo-mon`) |
+| Phase | Phase 0 / 1 / 2 / 3 | Mapped to `monty:response_detail.type` per [taxonomy §3.1](./response-taxonomy.md#31-choosing-a-code) classification guidance (`Phase 1 → eo-fep`, flood extent `→ eo-del`, damage density `→ eo-gra`, population exposure `→ eo-pop`, monitoring `→ eo-mon`) |
 | Producer | (typically `UNOSAT`) | `monty:response_detail.producer` |
 | Methodology | (varies) | `monty:response_detail.methodology` |
 | Sensor / acquisition | Sentinel-1 / Sentinel-2 / ... | Carried on linked acquisition items via `sar:` / `eo:` / `sat:` — **not** on the Response item itself |
