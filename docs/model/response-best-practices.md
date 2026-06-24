@@ -9,7 +9,7 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 ## 1. Governing principles
 
 1. **Extension layering over duplication.** When a third-party STAC extension covers a concept (e.g., Terradue `disaster:` for International Charter items, `processing:` for derived EO products, `eo:` / `sar:` / `sat:` for source imagery), Response items SHOULD declare that extension and use its fields directly. Do NOT replicate those fields under `monty:response_detail`.
-2. **Acquisition vs. Response layer separation.** `sat:`, `eo:`, `sar:`, `view:` extensions describe the **acquisition / source imagery** that the Response product is derived from. They apply to the linked acquisition items reached via `derived_from`, **not** to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery.
+2. **Acquisition vs. Response layer separation.** `sat:`, `eo:`, `sar:`, `view:` extensions describe the **acquisition / source imagery** that the Response product is derived from. They apply to the linked acquisition items reached via `derived_from`, **not** to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery. **Exception:** an `eo-dat` Response item *is* the delivered dataset, so it carries the imagery-layer extensions directly (see §2 and §4.4).
 3. **`monty:` is always declared.** Every Response item declares the Monty extension and carries at least `monty:response_detail.type`, `monty:corr_id`, `monty:country_codes`, `monty:hazard_codes`, and the `response` role.
 4. **`monty:response_detail` is the residual carrier.** It carries the response type code and Monty-specific metadata that is not already expressed by another declared extension on the same item.
 5. **Statistical figures go to Impact items.** Damage / exposure statistics that EO products may carry (e.g., CEMS `affected` / `total` per thematic) are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`.
@@ -20,12 +20,13 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 
 | Response type (`monty:response_detail.type`) | Extensions to declare on the Response item | Notes |
 | --- | --- | --- |
+| `eo-dat` *(satellite imagery dataset delivered as the response deliverable)* | `monty:` **+** `eo:` / `sar:` / `sat:` *(the item IS the imagery)* **+** `disaster:` *(MANDATORY for Charter acquisitions, with `disaster:class = acquisition`)* | The most basic EO response, and the one case where the Response item and the acquisition item **coincide**: the deliverable is the dataset itself (e.g., a Charter `acquisition`, a UNOSAT GIS-ready download). Each delivered dataset is an `eo-dat` Response item. For the Charter, an acquisition is recorded at several ETL stages — keep only the **last, calibrated stage** (the dataset responders use to build VAPs); earlier-stage records are intermediate artifacts, not separate Response items. The imagery-layer extensions (`eo:` / `sar:` / `sat:`) are declared **on** the Response item; derived VAP Response items reference it via `derived_from`. See the acquisition row below and [taxonomy §2.1](./response-taxonomy.md#21-eo-response-products). |
 | `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon`, `eo-sr`, `eo-vap` *(CEMS-sourced)* | `monty:` **+** `processing:` *(recommended)* | No CEMS-specific STAC extension exists. CEMS `statusCode` and `monitoringNumber` are carried under `monty:response_detail` (as `status` and `monitoring_number`). `resolutionClass` is carried on the linked acquisition items (not on the Response item). `charterNumber` is modelled as a `rel: related` link (with `roles: ["response"]`) to the corresponding Charter VAP Response item. |
 | `eo-ref`, `eo-del`, `eo-gra`, `eo-pop`, `eo-vap` *(International Charter VAPs)* | `monty:` **+** `disaster:` *(MANDATORY)* **+** `processing:` *(recommended)* | Reuse `disaster:class = vap`, `disaster:activation_id`, `disaster:call_ids`, `disaster:activation_status`, `disaster:resolution_class`, `disaster:types`. Do NOT duplicate these under `monty:response_detail`. |
 | `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon` *(UNOSAT-sourced)* | `monty:` **+** `processing:` *(recommended)* | No UNOSAT STAC extension exists. |
 | `hum-*` *(IFRC / cluster-based humanitarian)* | `monty:` *(only)* | No directly relevant third-party extension. Sectors carried in `monty:response_detail.sectors`. |
 | `fin-*` *(IFRC DREF / EA / AA / PDNA)* | `monty:` *(only)* | Financial-amount fields are not yet part of `monty:response_detail`; tracked as a proposal in the [response taxonomy](response-taxonomy.md) and out of scope for v1. |
-| *(Acquisition / source imagery — linked via `derived_from`)* | `sat:`, `eo:`, `sar:`, `view:`, `disaster:` *(for Charter acquisitions, with `disaster:class = acquisition`)*, `processing:` | These are **not** Monty Response items themselves; they are upstream items referenced by Response items via `rel: derived_from`. |
+| *(Acquisition / source imagery — linked via `derived_from`)* | `sat:`, `eo:`, `sar:`, `view:`, `disaster:` *(for Charter acquisitions, with `disaster:class = acquisition`)*, `processing:` | These are **not** Monty Response items themselves; they are upstream items referenced by Response items via `rel: derived_from`. (Contrast `eo-dat` above: the final calibrated dataset the Charter delivers *is* kept as a Response item; earlier ETL-stage acquisition records and other non-delivered source imagery remain upstream-only and are referenced via `derived_from`.) |
 
 > The Response item's `stac_extensions` array MUST contain `https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json` (or newer). The relative ordering of extension URLs is not significant.
 
@@ -181,6 +182,45 @@ Note the absence of `monty:response_detail.status` — it is carried via `disast
 }
 ```
 
+### 4.4 Charter raw acquisition delivered to responders (`eo-dat`)
+
+Here the response deliverable is the satellite dataset itself, so the Response item and the acquisition item coincide: the imagery-layer extensions (`sat:` / `eo:`) and `disaster:class = acquisition` are carried directly on the Response item. This is the **last, calibrated** ETL stage of the acquisition — the dataset responders use to build VAPs; the derived VAP Response items reference it via `derived_from`.
+
+```jsonc
+{
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
+  ],
+  "properties": {
+    "disaster:class": "acquisition",
+    "disaster:activation_id": 849,
+    "disaster:call_ids": [1421],
+    "disaster:resolution_class": "VHR",
+    "disaster:types": ["flood"],
+    "disaster:country": "ESP",
+    "eo:cloud_cover": 12,
+    "sat:platform_international_designator": "2018-014A",
+    "monty:response_detail": {
+      "type": "eo-dat",
+      "source_id": "ACT-849",
+      "producer": "Airbus",
+      "sendai_targets": ["D", "G"]
+    }
+  },
+  "links": [
+    {
+      "rel": "derived_from",
+      "href": "https://disasterscharter.org/web/guest/activations/-/article/...",
+      "type": "text/html",
+      "title": "International Charter activation ACT-849"
+    }
+  ]
+}
+```
+
 ---
 
 ## 5. Anti-patterns
@@ -188,7 +228,7 @@ Note the absence of `monty:response_detail.status` — it is carried via `disast
 The following patterns SHOULD be avoided:
 
 - **Duplicating `disaster:` fields under `monty:response_detail`** on Charter items — e.g., adding a parallel `monty:response_detail` field for any concept already covered by `disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class`, etc. On Charter items declaring `disaster:`, the `disaster:` field is canonical.
-- **Carrying `sar:` / `eo:` / `sat:` fields on the Response product item.** Those describe the source imagery, which lives in separate acquisition items linked via `derived_from`.
+- **Carrying `sar:` / `eo:` / `sat:` fields on the Response product item.** For *derived* products (`eo-del`, `eo-gra`, `eo-pop`, …) those describe the source imagery, which lives in separate acquisition items linked via `derived_from`. The sole exception is `eo-dat`, where the dataset *is* the deliverable and the Response item and acquisition item coincide (see §4.4).
 - **Stuffing damage statistics into `response_detail`.** Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, `roles: ["impact"]`) linked to the Response via `monty:corr_id` (and optionally `rel: related` with `roles: ["impact"]`). See [Response ↔ Impact Boundary Rules](response-impact-boundary.md) for the data-pattern catalogue and the decision tree that resolves, per attribute, whether something stays on the Response item or becomes a paired Impact item.
 - **Mixing source code into the type code.** Use `eo-del` (source-agnostic) rather than `eo-cems-del` or `eo-charter-del`. Source provenance lives in `monty:response_detail.source_id`, `monty:response_detail.producer`, and `derived_from` links.
 - **Creating multiple `eo-del-mon-N` codes for monitoring iterations.** Use a single `monty:response_detail.monitoring_number = N` field on the monitoring item, mirroring the CEMS API.
