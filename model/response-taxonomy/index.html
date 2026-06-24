@@ -1354,6 +1354,14 @@
 </thead>
 <tbody>
 <tr>
+<td><code>eo-dat</code></td>
+<td>Data Product</td>
+<td>Satellite imagery dataset delivered as the response deliverable itself — typically a calibrated acquisition or a GIS-ready data download</td>
+<td>— (raw imagery, not a CEMS product type)</td>
+<td>Acquisition (<code>disaster:class = acquisition</code>, calibrated stage)</td>
+<td>GIS-ready data download</td>
+</tr>
+<tr>
 <td><code>eo-ref</code></td>
 <td>Reference Product</td>
 <td>Pre-event baseline mapping of territory and assets</td>
@@ -1420,7 +1428,8 @@
 </tbody>
 </table>
 <blockquote>
-<p>A Charter activation (<code>disaster:class = activation</code>) is <strong>not</strong> a Response item — it is modelled as a Monty <strong>Event</strong> because it bundles multiple subsequent VAP deliveries. Only the VAPs themselves (<code>disaster:class = vap</code>) become Monty Response items.</p>
+<p>A Charter activation (<code>disaster:class = activation</code>) is <strong>not</strong> a Response item — it is modelled as a Monty <strong>Event</strong> because it bundles multiple subsequent deliveries.</p>
+<p>Both Charter <strong>VAPs</strong> (<code>disaster:class = vap</code>) and Charter <strong>acquisitions</strong> (<code>disaster:class = acquisition</code>) become Monty Response items: VAPs map to the EO product codes above (<code>eo-del</code>, <code>eo-gra</code>, <code>eo-vap</code>, …), and each delivered acquisition dataset maps to <code>eo-dat</code>. <strong>ETL subtlety:</strong> the Charter records an acquisition at several stages of its own processing pipeline; keep only the <strong>last, calibrated stage</strong> as the <code>eo-dat</code> Response item — that is the dataset responders use to derive value-added products. Earlier-stage records of the same acquisition are intermediate processing artifacts, not separate Response items. Each VAP Response item links to the calibrated acquisition it was produced from via <code>derived_from</code>.</p>
 </blockquote>
 <h3 id="22-humanitarian-response">2.2 Humanitarian Response</h3>
 <p>Humanitarian response codes follow the <code>hum-{cluster}</code> pattern aligned with IASC cluster names and IFRC EPoA sectors. Detailed humanitarian modelling is the subject of future work; these codes are stable for use now.</p>
@@ -1546,6 +1555,7 @@
 <h3 id="31-choosing-a-code">3.1 Choosing a code</h3>
 <p>Classify a response as specifically as the source metadata supports, preferring a specific code over the <code>eo-vap</code> fallback.</p>
 <ul>
+<li><strong>Data products</strong> (<code>eo-dat</code>) are the most basic EO response — the deliverable is the satellite imagery dataset itself, not a derived map. Each delivered dataset is a Response item (e.g., every Charter acquisition, <code>disaster:class = acquisition</code>; a UNOSAT GIS-ready download). For the Charter, mind the ETL subtlety: an acquisition is recorded at several processing stages, and only the <strong>last, calibrated stage</strong> is kept as the <code>eo-dat</code> Response item — that is the dataset responders use to build VAPs; earlier-stage records are intermediate artifacts, not separate Response items. Because the <code>eo-dat</code> item <em>is</em> the dataset, it carries <code>eo:</code> / <code>sar:</code> / <code>sat:</code> (and <code>disaster:class = acquisition</code> for Charter) directly, and derived VAP Response items reference it via <code>derived_from</code>.</li>
 <li><strong>CEMS products</strong> are always classifiable — map the CEMS product type directly: <code>REF</code>→<code>eo-ref</code>, <code>FEP</code>→<code>eo-fep</code>, <code>DEL</code>→<code>eo-del</code>, <code>GRA</code>→<code>eo-gra</code>, <code>SR</code>→<code>eo-sr</code>. Monitoring iterations use the underlying product code with <code>response_detail.monitoring_number</code> set (see §4).</li>
 <li><strong>Charter VAPs</strong>: classify by the VAP title/description where delineation or grading intent is discernible (<code>eo-del</code> / <code>eo-gra</code>); otherwise fall back to <code>eo-vap</code>. Do not force a classification the source does not support.</li>
 <li><strong>UNOSAT products</strong>: classify by phase and product description — Phase 1 → <code>eo-fep</code>; flood extent → <code>eo-del</code>; damage density → <code>eo-gra</code>; population exposure → <code>eo-pop</code>; monitoring → <code>eo-mon</code>.</li>
@@ -1733,6 +1743,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>eo-dat</code></td>
+<td>D, G</td>
+<td>Data products (e.g., raw imagery) support infrastructure assessment and EO access</td>
+</tr>
 <tr>
 <td><code>eo-ref</code></td>
 <td>G</td>
@@ -1967,6 +1982,13 @@
 </thead>
 <tbody>
 <tr>
+<td>Satellite imagery dataset</td>
+<td>Acquisition (calibrated, <code>disaster:class = acquisition</code>)</td>
+<td>—</td>
+<td>GIS-ready data download</td>
+<td><code>eo-dat</code></td>
+</tr>
+<tr>
 <td>Pre-event reference mapping</td>
 <td>Reference map</td>
 <td><code>REF</code></td>
@@ -2043,7 +2065,7 @@
 </tr>
 <tr>
 <td><code>sar:</code> / <code>eo:</code> / <code>sat:</code></td>
-<td>Describe the <strong>acquisition / source imagery</strong> layer reached via <code>derived_from</code>, not the Response product item itself.</td>
+<td>Describe the <strong>acquisition / source imagery</strong> layer reached via <code>derived_from</code>, not the Response product item itself. The sole exception is <code>eo-dat</code>, where the delivered dataset <em>is</em> the Response item and these extensions are declared on it directly.</td>
 </tr>
 </tbody>
 </table>

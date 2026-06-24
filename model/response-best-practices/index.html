@@ -1182,6 +1182,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#44-charter-raw-acquisition-delivered-to-responders-eo-dat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Charter raw acquisition delivered to responders (eo-dat)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1238,7 +1249,7 @@
 <h2 id="1-governing-principles">1. Governing principles</h2>
 <ol>
 <li><strong>Extension layering over duplication.</strong> When a third-party STAC extension covers a concept (e.g., Terradue <code>disaster:</code> for International Charter items, <code>processing:</code> for derived EO products, <code>eo:</code> / <code>sar:</code> / <code>sat:</code> for source imagery), Response items SHOULD declare that extension and use its fields directly. Do NOT replicate those fields under <code>monty:response_detail</code>.</li>
-<li><strong>Acquisition vs. Response layer separation.</strong> <code>sat:</code>, <code>eo:</code>, <code>sar:</code>, <code>view:</code> extensions describe the <strong>acquisition / source imagery</strong> that the Response product is derived from. They apply to the linked acquisition items reached via <code>derived_from</code>, <strong>not</strong> to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery.</li>
+<li><strong>Acquisition vs. Response layer separation.</strong> <code>sat:</code>, <code>eo:</code>, <code>sar:</code>, <code>view:</code> extensions describe the <strong>acquisition / source imagery</strong> that the Response product is derived from. They apply to the linked acquisition items reached via <code>derived_from</code>, <strong>not</strong> to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery. <strong>Exception:</strong> an <code>eo-dat</code> Response item <em>is</em> the delivered dataset, so it carries the imagery-layer extensions directly (see §2 and §4.4).</li>
 <li><strong><code>monty:</code> is always declared.</strong> Every Response item declares the Monty extension and carries at least <code>monty:response_detail.type</code>, <code>monty:corr_id</code>, <code>monty:country_codes</code>, <code>monty:hazard_codes</code>, and the <code>response</code> role.</li>
 <li><strong><code>monty:response_detail</code> is the residual carrier.</strong> It carries the response type code and Monty-specific metadata that is not already expressed by another declared extension on the same item.</li>
 <li><strong>Statistical figures go to Impact items.</strong> Damage / exposure statistics that EO products may carry (e.g., CEMS <code>affected</code> / <code>total</code> per thematic) are <strong>not</strong> part of <code>response_detail</code> — they belong to separate Monty Impact items linked via <code>monty:corr_id</code>.</li>
@@ -1254,6 +1265,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>eo-dat</code> <em>(satellite imagery dataset delivered as the response deliverable)</em></td>
+<td><code>monty:</code> <strong>+</strong> <code>eo:</code> / <code>sar:</code> / <code>sat:</code> <em>(the item IS the imagery)</em> <strong>+</strong> <code>disaster:</code> <em>(MANDATORY for Charter acquisitions, with <code>disaster:class = acquisition</code>)</em></td>
+<td>The most basic EO response, and the one case where the Response item and the acquisition item <strong>coincide</strong>: the deliverable is the dataset itself (e.g., a Charter <code>acquisition</code>, a UNOSAT GIS-ready download). Each delivered dataset is an <code>eo-dat</code> Response item. For the Charter, an acquisition is recorded at several ETL stages — keep only the <strong>last, calibrated stage</strong> (the dataset responders use to build VAPs); earlier-stage records are intermediate artifacts, not separate Response items. The imagery-layer extensions (<code>eo:</code> / <code>sar:</code> / <code>sat:</code>) are declared <strong>on</strong> the Response item; derived VAP Response items reference it via <code>derived_from</code>. See the acquisition row below and <a href="../response-taxonomy/#21-eo-response-products">taxonomy §2.1</a>.</td>
+</tr>
 <tr>
 <td><code>eo-ref</code>, <code>eo-fep</code>, <code>eo-del</code>, <code>eo-gra</code>, <code>eo-pop</code>, <code>eo-mon</code>, <code>eo-sr</code>, <code>eo-vap</code> <em>(CEMS-sourced)</em></td>
 <td><code>monty:</code> <strong>+</strong> <code>processing:</code> <em>(recommended)</em></td>
@@ -1282,7 +1298,7 @@
 <tr>
 <td><em>(Acquisition / source imagery — linked via <code>derived_from</code>)</em></td>
 <td><code>sat:</code>, <code>eo:</code>, <code>sar:</code>, <code>view:</code>, <code>disaster:</code> <em>(for Charter acquisitions, with <code>disaster:class = acquisition</code>)</em>, <code>processing:</code></td>
-<td>These are <strong>not</strong> Monty Response items themselves; they are upstream items referenced by Response items via <code>rel: derived_from</code>.</td>
+<td>These are <strong>not</strong> Monty Response items themselves; they are upstream items referenced by Response items via <code>rel: derived_from</code>. (Contrast <code>eo-dat</code> above: the final calibrated dataset the Charter delivers <em>is</em> kept as a Response item; earlier ETL-stage acquisition records and other non-delivered source imagery remain upstream-only and are referenced via <code>derived_from</code>.)</td>
 </tr>
 </tbody>
 </table>
@@ -1544,12 +1560,47 @@
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>  }
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>}
 </code></pre></div>
+<h3 id="44-charter-raw-acquisition-delivered-to-responders-eo-dat">4.4 Charter raw acquisition delivered to responders (<code>eo-dat</code>)</h3>
+<p>Here the response deliverable is the satellite dataset itself, so the Response item and the acquisition item coincide: the imagery-layer extensions (<code>sat:</code> / <code>eo:</code>) and <code>disaster:class = acquisition</code> are carried directly on the Response item. This is the <strong>last, calibrated</strong> ETL stage of the acquisition — the dataset responders use to build VAPs; the derived VAP Response items reference it via <code>derived_from</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  &quot;stac_extensions&quot;: [
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    &quot;https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json&quot;,
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    &quot;https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json&quot;,
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    &quot;https://stac-extensions.github.io/eo/v1.1.0/schema.json&quot;,
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    &quot;https://stac-extensions.github.io/sat/v1.0.0/schema.json&quot;
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  ],
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  &quot;properties&quot;: {
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    &quot;disaster:class&quot;: &quot;acquisition&quot;,
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    &quot;disaster:activation_id&quot;: 849,
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    &quot;disaster:call_ids&quot;: [1421],
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    &quot;disaster:resolution_class&quot;: &quot;VHR&quot;,
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    &quot;disaster:types&quot;: [&quot;flood&quot;],
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    &quot;disaster:country&quot;: &quot;ESP&quot;,
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    &quot;eo:cloud_cover&quot;: 12,
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    &quot;sat:platform_international_designator&quot;: &quot;2018-014A&quot;,
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    &quot;monty:response_detail&quot;: {
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>      &quot;type&quot;: &quot;eo-dat&quot;,
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>      &quot;source_id&quot;: &quot;ACT-849&quot;,
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>      &quot;producer&quot;: &quot;Airbus&quot;,
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>      &quot;sendai_targets&quot;: [&quot;D&quot;, &quot;G&quot;]
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    }
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>  },
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>  &quot;links&quot;: [
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    {
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>      &quot;rel&quot;: &quot;derived_from&quot;,
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>      &quot;href&quot;: &quot;https://disasterscharter.org/web/guest/activations/-/article/...&quot;,
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>      &quot;type&quot;: &quot;text/html&quot;,
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>      &quot;title&quot;: &quot;International Charter activation ACT-849&quot;
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    }
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>  ]
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>}
+</code></pre></div>
 <hr />
 <h2 id="5-anti-patterns">5. Anti-patterns</h2>
 <p>The following patterns SHOULD be avoided:</p>
 <ul>
 <li><strong>Duplicating <code>disaster:</code> fields under <code>monty:response_detail</code></strong> on Charter items — e.g., adding a parallel <code>monty:response_detail</code> field for any concept already covered by <code>disaster:activation_id</code>, <code>disaster:activation_status</code>, <code>disaster:resolution_class</code>, etc. On Charter items declaring <code>disaster:</code>, the <code>disaster:</code> field is canonical.</li>
-<li><strong>Carrying <code>sar:</code> / <code>eo:</code> / <code>sat:</code> fields on the Response product item.</strong> Those describe the source imagery, which lives in separate acquisition items linked via <code>derived_from</code>.</li>
+<li><strong>Carrying <code>sar:</code> / <code>eo:</code> / <code>sat:</code> fields on the Response product item.</strong> For <em>derived</em> products (<code>eo-del</code>, <code>eo-gra</code>, <code>eo-pop</code>, …) those describe the source imagery, which lives in separate acquisition items linked via <code>derived_from</code>. The sole exception is <code>eo-dat</code>, where the dataset <em>is</em> the deliverable and the Response item and acquisition item coincide (see §4.4).</li>
 <li><strong>Stuffing damage statistics into <code>response_detail</code>.</strong> Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, <code>roles: ["impact"]</code>) linked to the Response via <code>monty:corr_id</code> (and optionally <code>rel: related</code> with <code>roles: ["impact"]</code>). See <a href="../response-impact-boundary/">Response ↔ Impact Boundary Rules</a> for the data-pattern catalogue and the decision tree that resolves, per attribute, whether something stays on the Response item or becomes a paired Impact item.</li>
 <li><strong>Mixing source code into the type code.</strong> Use <code>eo-del</code> (source-agnostic) rather than <code>eo-cems-del</code> or <code>eo-charter-del</code>. Source provenance lives in <code>monty:response_detail.source_id</code>, <code>monty:response_detail.producer</code>, and <code>derived_from</code> links.</li>
 <li><strong>Creating multiple <code>eo-del-mon-N</code> codes for monitoring iterations.</strong> Use a single <code>monty:response_detail.monitoring_number = N</code> field on the monitoring item, mirroring the CEMS API.</li>
