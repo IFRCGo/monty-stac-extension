@@ -1550,12 +1550,15 @@
 <ul>
 <li><strong>Duplicating <code>disaster:</code> fields under <code>monty:response_detail</code></strong> on Charter items — e.g., adding a parallel <code>monty:response_detail</code> field for any concept already covered by <code>disaster:activation_id</code>, <code>disaster:activation_status</code>, <code>disaster:resolution_class</code>, etc. On Charter items declaring <code>disaster:</code>, the <code>disaster:</code> field is canonical.</li>
 <li><strong>Carrying <code>sar:</code> / <code>eo:</code> / <code>sat:</code> fields on the Response product item.</strong> Those describe the source imagery, which lives in separate acquisition items linked via <code>derived_from</code>.</li>
-<li><strong>Stuffing damage statistics into <code>response_detail</code>.</strong> Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, <code>roles: ["impact"]</code>) linked to the Response via <code>monty:corr_id</code> (and optionally <code>rel: related</code> with <code>roles: ["impact"]</code>).</li>
+<li><strong>Stuffing damage statistics into <code>response_detail</code>.</strong> Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, <code>roles: ["impact"]</code>) linked to the Response via <code>monty:corr_id</code> (and optionally <code>rel: related</code> with <code>roles: ["impact"]</code>). See <a href="../response-impact-boundary/">Response ↔ Impact Boundary Rules</a> for the data-pattern catalogue and the decision tree that resolves, per attribute, whether something stays on the Response item or becomes a paired Impact item.</li>
 <li><strong>Mixing source code into the type code.</strong> Use <code>eo-del</code> (source-agnostic) rather than <code>eo-cems-del</code> or <code>eo-charter-del</code>. Source provenance lives in <code>monty:response_detail.source_id</code>, <code>monty:response_detail.producer</code>, and <code>derived_from</code> links.</li>
 <li><strong>Creating multiple <code>eo-del-mon-N</code> codes for monitoring iterations.</strong> Use a single <code>monty:response_detail.monitoring_number = N</code> field on the monitoring item, mirroring the CEMS API.</li>
 </ul>
 <hr />
 <h2 id="6-linkage-summary">6. Linkage summary</h2>
+<blockquote>
+<p>For the algorithm that decides <strong>when</strong> to split a source record into a Response item plus paired Impact items, the exact <code>derived_from</code> link block to emit, the idempotent <code>corr_id</code> / id conventions, and the CQL2 queries that re-pair the two halves, see <a href="../response-impact-boundary/">Response ↔ Impact Boundary Rules</a>.</p>
+</blockquote>
 <p>A Monty Response item typically participates in the following links:</p>
 <table>
 <thead>

@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Response ↔ Impact Boundary Rules - Monty Extension Documentation</title>
+<link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../styles/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="red" data-md-color-primary="red" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#response-impact-boundary-rules">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Monty Extension Documentation" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Response ↔ Impact Boundary Rules
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Monty Extension Documentation" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    Monty Extension Documentation
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../correlation_identifier/">
+<span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../questions/">
+<span class="md-ellipsis">
+    
+  
+    Questions
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../examples/">
+<span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../stac-api/">
+<span class="md-ellipsis">
+    
+  
+    STAC API
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    STAC API
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stac-api/correlation_algorithms/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Algorithms
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stac-api/correlation_examples/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stac-api/migration_guide/">
+<span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stac-api/queryables/">
+<span class="md-ellipsis">
+    
+  
+    Queryables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../sources/">
+<span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Sources
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/DesInventar/">
+<span class="md-ellipsis">
+    
+  
+    DesInventar
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/EM-DAT/">
+<span class="md-ellipsis">
+    
+  
+    EM-DAT
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/GDACS/">
+<span class="md-ellipsis">
+    
+  
+    GDACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/GFD/">
+<span class="md-ellipsis">
+    
+  
+    GFD
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/GLIDE/">
+<span class="md-ellipsis">
+    
+  
+    GLIDE
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/IBTrACS/">
+<span class="md-ellipsis">
+    
+  
+    IBTrACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/IDMC/">
+<span class="md-ellipsis">
+    
+  
+    IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/IFRC-DREF/">
+<span class="md-ellipsis">
+    
+  
+    IFRC-DREF
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/PDC/">
+<span class="md-ellipsis">
+    
+  
+    PDC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/USGS/">
+<span class="md-ellipsis">
+    
+  
+    USGS
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-pattern-catalogue">
+<span class="md-ellipsis">
+      
+        1. Pattern catalogue
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-decision-tree">
+<span class="md-ellipsis">
+      
+        2. Decision tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-etl-splitting-guidance-when-and-how-to-split-a-source-record">
+<span class="md-ellipsis">
+      
+        3. ETL splitting guidance — when and how to split a source record
+      
+    </span>
+</a>
+<nav aria-label="3. ETL splitting guidance — when and how to split a source record" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#31-algorithm">
+<span class="md-ellipsis">
+      
+        3.1 Algorithm
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#32-id-and-corr_id-conventions-idempotent-re-pairing">
+<span class="md-ellipsis">
+      
+        3.2 ID and corr_id conventions (idempotent re-pairing)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#33-exact-link-block-to-emit-on-each-impact-item">
+<span class="md-ellipsis">
+      
+        3.3 Exact link block to emit on each Impact item
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#34-multi-thematic-products-p4">
+<span class="md-ellipsis">
+      
+        3.4 Multi-thematic products (P4)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-query-perspective-re-pairing-the-two-halves">
+<span class="md-ellipsis">
+      
+        4. Query perspective — re-pairing the two halves
+      
+    </span>
+</a>
+<nav aria-label="4. Query perspective — re-pairing the two halves" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#41-return-both-halves-of-a-paired-record">
+<span class="md-ellipsis">
+      
+        4.1 Return both halves of a paired record
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#42-given-a-response-find-its-downstream-impacts">
+<span class="md-ellipsis">
+      
+        4.2 Given a Response, find its downstream Impacts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#43-given-an-impact-find-its-source-response">
+<span class="md-ellipsis">
+      
+        4.3 Given an Impact, find its source Response
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#see-also">
+<span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="response-impact-boundary-rules">Response ↔ Impact Boundary Rules</h1>
+<blockquote>
+<p><strong>Status:</strong> Boundary-rules document accompanying the v1.3 <code>monty:response_detail</code> model. It complements <a href="../response-best-practices/">Response Best Practices</a> by specifying <strong>how to decide, per piece of data, whether something belongs on a Response item, on a paired Impact item, or on neither</strong>.</p>
+</blockquote>
+<p>The overlap between <strong>Response</strong> and <strong>Impact</strong> is the most common source of ETL modelling
+confusion. A CEMS Grading Product that reports "200 buildings destroyed" is unambiguously a
+<strong>Response</strong> product — an action was taken to produce it — but the building-damage count itself is
+<strong>Impact</strong> data. Without explicit rules, two ETL authors will model the same source record
+differently.</p>
+<p>This document publishes a <strong>source-agnostic</strong> decision procedure: a catalogue of recurring data
+patterns, a decision tree an ETL author runs per attribute/layer, the splitting algorithm and exact
+link block to emit, and the queries that re-pair the two halves.</p>
+<ul>
+<li><strong>Response</strong> = an <em>action taken or product produced</em> in response to a disaster (a CEMS map, a Charter VAP, a UNOSAT assessment, an IFRC DREF).</li>
+<li><strong>Impact</strong> = an <em>estimated/realised effect on people or assets</em> (deaths, people affected, buildings destroyed, economic loss).</li>
+</ul>
+<blockquote>
+<p><strong>Scope.</strong> This document is <strong>source-agnostic</strong>. Per-source data-element classification (which
+Charter / CEMS / UNOSAT / IFRC attribute maps to which pattern) belongs to the analysis
+deliverable of each source epic, which applies the pattern catalogue below. The governing
+principle — <em>"statistical figures go to Impact items"</em> — is stated in
+<a href="../response-best-practices/#1-governing-principles">Response Best Practices §1.5</a>; this document
+operationalises it.</p>
+</blockquote>
+<hr/>
+<h2 id="1-pattern-catalogue">1. Pattern catalogue</h2>
+<p>Run this catalogue over <strong>each attribute, layer, or table</strong> carried by an incoming response product.
+For every piece of data, find the matching pattern and apply its modelling outcome. The catalogue is
+non-exhaustive; refine it as new source patterns appear.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Data pattern in a Response product</th>
+<th>Examples (any source)</th>
+<th>Modelling outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P1</strong></td>
+<td><strong>Geometry-only delineation</strong> — a polygon/raster describing event extent, with no per-feature attributes beyond geometry</td>
+<td>Flood-extent polygon, fire perimeter, ash-fall area</td>
+<td><strong>Response only.</strong> Geometry on the Response item; no Impact derived.</td>
+</tr>
+<tr>
+<td><strong>P2</strong></td>
+<td><strong>Categorical classification per feature</strong> — polygons/pixels carry a hazard or damage <em>class</em> but no numeric estimate of effect</td>
+<td>Damage grade per building polygon (<code>none</code> / <code>minor</code> / <code>major</code> / <code>destroyed</code>); <code>flooded</code> / <code>not flooded</code> per pixel</td>
+<td><strong>Response only</strong> when the class is intrinsic to the product. <strong>Both → split</strong> if the ETL aggregates the classification into a per-class <strong>count</strong> (the count becomes the Impact, see P4).</td>
+</tr>
+<tr>
+<td><strong>P3</strong></td>
+<td><strong>Numeric estimate of effect on people/assets</strong> — a quantitative figure in human/asset units, regardless of how it was produced</td>
+<td><code>affected_population: 12300</code>, <code>buildings_destroyed: 87</code>, <code>hectares_flooded: 1450</code>, <code>economic_loss_usd: 2.5e6</code></td>
+<td><strong>Impact.</strong> Always becomes one or more Impact items; <strong>never</strong> carried under <code>monty:response_detail</code>.</td>
+</tr>
+<tr>
+<td><strong>P4</strong></td>
+<td><strong>Multi-thematic statistics table</strong> — one numeric estimate per thematic class</td>
+<td>CEMS GRA <code>affected</code> / <code>total</code> per thematic (population, buildings, roads, …)</td>
+<td><strong>Both → split:</strong> one Response item <strong>+ one Impact item per thematic class.</strong></td>
+</tr>
+<tr>
+<td><strong>P5</strong></td>
+<td><strong>Provenance / methodology metadata</strong> — analyst, method, software, sensor, processing chain</td>
+<td><code>producer</code>, <code>methodology</code>, <code>processing:software</code>, <code>sat:platform</code> on linked acquisitions</td>
+<td><strong>Response only.</strong> Carried under <code>monty:response_detail.producer</code> / <code>methodology</code> (or on the linked acquisition item for sensor metadata).</td>
+</tr>
+<tr>
+<td><strong>P6</strong></td>
+<td><strong>Lifecycle / status flag</strong> — production state of the product itself</td>
+<td>CEMS <code>statusCode</code>, monitoring iteration number</td>
+<td><strong>Response only.</strong> Carried under <code>monty:response_detail.status</code> / <code>monitoring_number</code>.</td>
+</tr>
+<tr>
+<td><strong>P7</strong></td>
+<td><strong>Activation / request record</strong> — an administrative entry that <em>triggers</em> a response but is not itself a product</td>
+<td>Charter activation record, CEMS activation event</td>
+<td><strong>Neither Response nor Impact — it is an Event.</strong> Modelled as a Monty Event item. (See <a href="../response-best-practices/#32-international-charter">Response Best Practices §3.2</a>: Charter activations are Events; only VAPs are Responses.)</td>
+</tr>
+<tr>
+<td><strong>P8</strong></td>
+<td><strong>Free-text narrative / situational summary</strong> with no machine-readable figures</td>
+<td>CEMS Situational Report prose, UNOSAT report PDF</td>
+<td><strong>Response only.</strong> Carries the narrative as an asset. Any figures a human/NLP step extracts from it are then modelled as Impact items in addition (P3).</td>
+</tr>
+<tr>
+<td><strong>P9</strong></td>
+<td><strong>Pre-event baseline</strong> — reference data of assets/exposure <em>before</em> the event</td>
+<td>CEMS Reference Map, pre-event population layer</td>
+<td><strong>Response only.</strong> <code>monty:response_detail.type = eo-ref</code>. Exposure baselines are <strong>not</strong> Impact items — no realised effect has occurred.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key distinction P3 vs. P9:</strong> a numeric figure is Impact (P3) only when it expresses a <em>realised
+effect of the event</em>. A pre-event exposure baseline (P9) is the same kind of number measured <em>before</em>
+the event and stays on the Response item.</p>
+<hr/>
+<h2 id="2-decision-tree">2. Decision tree</h2>
+<p>Apply this per attribute/layer. It resolves every catalogue pattern to one of four outcomes:
+<strong>Event</strong>, <strong>Response only</strong>, <strong>Impact</strong>, or <strong>Both → split</strong>.</p>
+<pre class="mermaid"><code>flowchart TD
+    A([Attribute / layer in a Response product]) --&gt; B{Is it an activation /&lt;br/&gt;request record that triggers&lt;br/&gt;a response?}
+    B -- yes --&gt; EV[/"Event item&lt;br/&gt;(P7) — not Response, not Impact"/]
+    B -- no --&gt; C{Is it a numeric estimate of a&lt;br/&gt;realised effect on people/assets?}
+    C -- "yes, single figure" --&gt; IM[/"Impact item (P3)&lt;br/&gt;one monty:impact_detail"/]
+    C -- "yes, one figure per thematic class" --&gt; SP[/"Both → split (P4)&lt;br/&gt;1 Response + 1 Impact per thematic"/]
+    C -- no --&gt; D{Is it geometry, a per-feature&lt;br/&gt;class, a pre-event baseline,&lt;br/&gt;or narrative?}
+    D -- "geometry / class / baseline / narrative" --&gt; RO[/"Response only&lt;br/&gt;(P1, P2, P8, P9)"/]
+    D -- no --&gt; E{Is it provenance, methodology,&lt;br/&gt;or a lifecycle/status flag?}
+    E -- yes --&gt; RF[/"Response only — carry under&lt;br/&gt;monty:response_detail (P5, P6)"/]
+    E -- no --&gt; RO
+    RO -. "ETL aggregates a per-feature&lt;br/&gt;class into per-class counts" .-&gt; SP</code></pre>
+<p><strong>Prose fallback (run top to bottom, first match wins):</strong></p>
+<ol>
+<li><strong>Activation / request record?</strong> → <strong>Event</strong> item (P7). Stop.</li>
+<li><strong>Numeric estimate of a realised effect</strong> on people/assets?</li>
+<li>Single figure → <strong>Impact</strong> item (P3).</li>
+<li>One figure per thematic class (a statistics table) → <strong>Both → split</strong> (P4): one Response item + one Impact item per thematic.</li>
+<li><strong>Geometry, per-feature class, pre-event baseline, or free-text narrative?</strong> → <strong>Response only</strong> (P1, P2, P8, P9). <em>If the ETL later aggregates a per-feature class into per-class counts, those counts re-enter at step 2 as Impacts.</em></li>
+<li><strong>Provenance, methodology, or a lifecycle/status flag?</strong> → <strong>Response only</strong>, carried under the relevant <code>monty:response_detail</code> field (P5, P6).</li>
+</ol>
+<hr/>
+<h2 id="3-etl-splitting-guidance-when-and-how-to-split-a-source-record">3. ETL splitting guidance — when and how to split a source record</h2>
+<p>When a source product matches <strong>P3</strong> or <strong>P4</strong> (it carries realised-effect figures), the ETL
+transformer splits the incoming record into one Response item plus one or more Impact items.</p>
+<h3 id="31-algorithm">3.1 Algorithm</h3>
+<p>For each incoming source product:</p>
+<ol>
+<li><strong>Emit one Response item.</strong> Carry the product type, lifecycle, provenance, geometry, and assets
+   per <a href="../response-best-practices/">Response Best Practices</a>. Do <strong>not</strong> put any realised-effect
+   figure under <code>monty:response_detail</code>.</li>
+<li><strong>For each numeric thematic</strong> in the source (P4: one per thematic class; P3: the single figure),
+   <strong>emit one Impact item</strong> carrying that single figure in <code>monty:impact_detail</code>.</li>
+<li>On every Impact item, add the <strong><code>derived_from</code> → Response</strong> link block (§3.3).</li>
+<li>Set the <strong>same <code>monty:corr_id</code></strong> on the Response item and on every paired Impact item.</li>
+</ol>
+<h3 id="32-id-and-corr_id-conventions-idempotent-re-pairing">3.2 ID and <code>corr_id</code> conventions (idempotent re-pairing)</h3>
+<p>So that re-running the ETL re-pairs the same items instead of creating duplicates:</p>
+<ul>
+<li><strong>Shared <code>monty:corr_id</code></strong> on the Response and all its Impacts is the durable join key. Reuse the
+  existing Monty <code>corr_id</code> format <code>YYYYMMDDTHHMMSSZ-CCC-HAZ-EPISODE-PROVIDER</code>.</li>
+<li><strong>Deterministic item ids.</strong> Derive Impact ids from the Response <code>source_id</code> + thematic, e.g.
+  <code>&lt;source_id&gt;-&lt;thematic&gt;-&lt;impact_type&gt;</code> (<code>EMSR-DEMO-001-buildings-destroyed</code>). Re-runs produce the
+  same id → the catalog upserts rather than duplicating.</li>
+<li>Keep <code>monty:country_codes</code> and <code>monty:hazard_codes</code> consistent across the paired items.</li>
+</ul>
+<h3 id="33-exact-link-block-to-emit-on-each-impact-item">3.3 Exact link block to emit on each Impact item</h3>
+<p>The canonical provenance edge runs <strong>Impact → Response</strong> (see
+<a href="../response-best-practices/#6-linkage-summary">Response Best Practices §6</a>). On every Impact item:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>{
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>  "rel": "derived_from",
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>  "href": "response-EMSR-DEMO-001-GRA.json",
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>  "type": "application/json",
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>  "roles": ["response"]
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>}
+</code></pre></div>
+<p>The reverse edge (Response → <code>rel: related</code> with <code>roles: ["impact"]</code> to each Impact) is an
+<strong>optional back-reference</strong> only; the <code>derived_from</code> link above plus the shared <code>corr_id</code> are the
+authoritative linkage.</p>
+<h3 id="34-multi-thematic-products-p4">3.4 Multi-thematic products (P4)</h3>
+<p>A CEMS GRA-style statistics table with figures for population, buildings, and roads becomes <strong>one
+Response item and three Impact items</strong> — never a single Impact item bundling all thematics, and never
+the figures stuffed into <code>monty:response_detail</code>. Each Impact item carries exactly one
+<code>monty:impact_detail</code> object. See the worked fixture under
+<a href="../../examples/_response-impact-pairing/"><code>examples/_response-impact-pairing/</code></a>, which exercises this
+pattern (one <code>eo-gra</code> Response → two thematic Impacts).</p>
+<hr/>
+<h2 id="4-query-perspective-re-pairing-the-two-halves">4. Query perspective — re-pairing the two halves</h2>
+<p>A STAC API consumer reconstructs the paired record using the shared <code>monty:corr_id</code> and the
+<code>derived_from</code> link. Examples use <code>cql2-json</code>, consistent with the
+<a href="../stac-api/correlation_examples/">STAC API correlation examples</a>.</p>
+<h3 id="41-return-both-halves-of-a-paired-record">4.1 Return both halves of a paired record</h3>
+<p>All items (Response + Impacts) sharing a <code>monty:corr_id</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="nt">"filter-lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cql2-json"</span><span class="p">,</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">      </span><span class="p">{</span><span class="nt">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monty:corr_id"</span><span class="p">},</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">      </span><span class="s2">"20260615T000000Z-DEMO-FL-001-DEMO"</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="42-given-a-response-find-its-downstream-impacts">4.2 Given a Response, find its downstream Impacts</h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"filter-lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cql2-json"</span><span class="p">,</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"and"</span><span class="p">,</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">      </span><span class="p">{</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">        </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monty:corr_id"</span><span class="p">},</span><span class="w"> </span><span class="s2">"20260615T000000Z-DEMO-FL-001-DEMO"</span><span class="p">]</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">      </span><span class="p">},</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">      </span><span class="p">{</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">        </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">        </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"impact"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nt">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roles"</span><span class="p">}]</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">      </span><span class="p">}</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="43-given-an-impact-find-its-source-response">4.3 Given an Impact, find its source Response</h3>
+<p>Two equivalent strategies:</p>
+<ul>
+<li><strong>Follow the link (authoritative):</strong> read the Impact item's <code>links</code>, take the entry with
+  <code>rel: derived_from</code> and <code>roles: ["response"]</code>, and dereference its <code>href</code>.</li>
+<li><strong>Filter by <code>corr_id</code> + role:</strong> same query as §4.2 with the <code>roles</code> arg set to <code>"response"</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"filter-lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cql2-json"</span><span class="p">,</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"and"</span><span class="p">,</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">      </span><span class="p">{</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">        </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">        </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monty:corr_id"</span><span class="p">},</span><span class="w"> </span><span class="s2">"20260615T000000Z-DEMO-FL-001-DEMO"</span><span class="p">]</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">      </span><span class="p">},</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">      </span><span class="p">{</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">        </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"response"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nt">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"roles"</span><span class="p">}]</span>
+<a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">      </span><span class="p">}</span>
+<a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="p">}</span>
+</code></pre></div>
+<hr/>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../response-best-practices/">Response Best Practices</a> — extension layering, field carriage per source, anti-patterns, and the linkage summary.</li>
+<li><a href="../response-taxonomy/">Response Taxonomy</a> — response type codes and the Sendai crosswalk.</li>
+<li><a href="../stac-api/correlation_examples/">STAC API correlation examples</a> — broader CQL2 correlation patterns.</li>
+<li><a href="../../examples/_response-impact-pairing/"><code>examples/_response-impact-pairing/</code></a> — synthetic Response+Impact fixture exercising pattern P4.</li>
+</ul>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+</body>
+</html>
