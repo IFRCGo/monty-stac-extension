@@ -1,0 +1,94 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "impact-EMSR-DEMO-001-buildings-destroyed",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -3.8,
+          40.3
+        ],
+        [
+          -3.6,
+          40.3
+        ],
+        [
+          -3.6,
+          40.5
+        ],
+        [
+          -3.8,
+          40.5
+        ],
+        [
+          -3.8,
+          40.3
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -3.8,
+    40.3,
+    -3.6,
+    40.5
+  ],
+  "properties": {
+    "datetime": "2026-06-15T00:00:00Z",
+    "title": "Buildings destroyed — synthetic demo flood (EMSR-DEMO-001)",
+    "description": "Buildings-destroyed thematic split out of the paired eo-gra Response item (pattern P4). Derived from the Response via rel: derived_from and the shared monty:corr_id.",
+    "roles": [
+      "impact"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0600"
+    ],
+    "monty:corr_id": "20260615T000000Z-DEMO-FL-001-DEMO",
+    "monty:impact_detail": {
+      "category": "buildings",
+      "type": "destroyed",
+      "value": 87,
+      "unit": "count",
+      "estimate_type": "primary"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "impact-EMSR-DEMO-001-buildings-destroyed.json"
+    },
+    {
+      "rel": "collection",
+      "href": "impacts.json"
+    },
+    {
+      "rel": "derived_from",
+      "href": "response-EMSR-DEMO-001-GRA.json",
+      "type": "application/json",
+      "roles": [
+        "response"
+      ]
+    }
+  ],
+  "assets": {
+    "statistics": {
+      "href": "https://example.org/demo/products/EMSR-DEMO-001/buildings-destroyed.json",
+      "type": "application/json",
+      "title": "Synthetic buildings-destroyed statistic (placeholder)",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "response-impact-pairing-impacts"
+}

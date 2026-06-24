@@ -189,13 +189,15 @@ The following patterns SHOULD be avoided:
 
 - **Duplicating `disaster:` fields under `monty:response_detail`** on Charter items — e.g., adding a parallel `monty:response_detail` field for any concept already covered by `disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class`, etc. On Charter items declaring `disaster:`, the `disaster:` field is canonical.
 - **Carrying `sar:` / `eo:` / `sat:` fields on the Response product item.** Those describe the source imagery, which lives in separate acquisition items linked via `derived_from`.
-- **Stuffing damage statistics into `response_detail`.** Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, `roles: ["impact"]`) linked to the Response via `monty:corr_id` (and optionally `rel: related` with `roles: ["impact"]`).
+- **Stuffing damage statistics into `response_detail`.** Damage counts, affected populations, building destruction counts MUST become Monty Impact items (separate STAC items, `roles: ["impact"]`) linked to the Response via `monty:corr_id` (and optionally `rel: related` with `roles: ["impact"]`). See [Response ↔ Impact Boundary Rules](response-impact-boundary.md) for the data-pattern catalogue and the decision tree that resolves, per attribute, whether something stays on the Response item or becomes a paired Impact item.
 - **Mixing source code into the type code.** Use `eo-del` (source-agnostic) rather than `eo-cems-del` or `eo-charter-del`. Source provenance lives in `monty:response_detail.source_id`, `monty:response_detail.producer`, and `derived_from` links.
 - **Creating multiple `eo-del-mon-N` codes for monitoring iterations.** Use a single `monty:response_detail.monitoring_number = N` field on the monitoring item, mirroring the CEMS API.
 
 ---
 
 ## 6. Linkage summary
+
+> For the algorithm that decides **when** to split a source record into a Response item plus paired Impact items, the exact `derived_from` link block to emit, the idempotent `corr_id` / id conventions, and the CQL2 queries that re-pair the two halves, see [Response ↔ Impact Boundary Rules](response-impact-boundary.md).
 
 A Monty Response item typically participates in the following links:
 
