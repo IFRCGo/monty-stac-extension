@@ -43,6 +43,7 @@ EO response products are the primary use case. Codes are source-agnostic: a deli
 
 | Code | Name | Description | CEMS equivalent | Charter mapping | UNOSAT mapping |
 | --- | --- | --- | --- | --- | --- |
+| `eo-dat` | Data Product | Satellite imagery dataset delivered as the response deliverable itself — typically a calibrated acquisition or a GIS-ready data download | — (raw imagery, not a CEMS product type) | Acquisition (`disaster:class = acquisition`, calibrated stage) | GIS-ready data download |
 | `eo-ref` | Reference Product | Pre-event baseline mapping of territory and assets | `REF` | Reference map VAP | Phase 0 basemap |
 | `eo-fep` | First Estimate Product | Fast, rough post-event extent assessment (~hours) | `FEP` | Best-effort from early VAPs | Phase 1 PSA |
 | `eo-del` | Delineation Product | Affected area extent and event impact mapping | `DEL` | Delineation VAP (best effort) | Phase 2 flood extent |
@@ -52,7 +53,9 @@ EO response products are the primary use case. Codes are source-agnostic: a deli
 | `eo-sr` | Situational Report | Event overview report updated throughout the response | `SR` | — | — |
 | `eo-vap` | Value-Added Product | Generic EO product — used when the specific type cannot be determined | — | Charter VAP (fallback) | — |
 
-> A Charter activation (`disaster:class = activation`) is **not** a Response item — it is modelled as a Monty **Event** because it bundles multiple subsequent VAP deliveries. Only the VAPs themselves (`disaster:class = vap`) become Monty Response items.
+> A Charter activation (`disaster:class = activation`) is **not** a Response item — it is modelled as a Monty **Event** because it bundles multiple subsequent deliveries.
+>
+> Both Charter **VAPs** (`disaster:class = vap`) and Charter **acquisitions** (`disaster:class = acquisition`) become Monty Response items: VAPs map to the EO product codes above (`eo-del`, `eo-gra`, `eo-vap`, …), and each delivered acquisition dataset maps to `eo-dat`. **ETL subtlety:** the Charter records an acquisition at several stages of its own processing pipeline; keep only the **last, calibrated stage** as the `eo-dat` Response item — that is the dataset responders use to derive value-added products. Earlier-stage records of the same acquisition are intermediate processing artifacts, not separate Response items. Each VAP Response item links to the calibrated acquisition it was produced from via `derived_from`.
 
 ### 2.2 Humanitarian Response
 
@@ -92,6 +95,7 @@ For humanitarian items, the specific clusters / sectors covered are carried in `
 
 Classify a response as specifically as the source metadata supports, preferring a specific code over the `eo-vap` fallback.
 
+- **Data products** (`eo-dat`) are the most basic EO response — the deliverable is the satellite imagery dataset itself, not a derived map. Each delivered dataset is a Response item (e.g., every Charter acquisition, `disaster:class = acquisition`; a UNOSAT GIS-ready download). For the Charter, mind the ETL subtlety: an acquisition is recorded at several processing stages, and only the **last, calibrated stage** is kept as the `eo-dat` Response item — that is the dataset responders use to build VAPs; earlier-stage records are intermediate artifacts, not separate Response items. Because the `eo-dat` item *is* the dataset, it carries `eo:` / `sar:` / `sat:` (and `disaster:class = acquisition` for Charter) directly, and derived VAP Response items reference it via `derived_from`.
 - **CEMS products** are always classifiable — map the CEMS product type directly: `REF`→`eo-ref`, `FEP`→`eo-fep`, `DEL`→`eo-del`, `GRA`→`eo-gra`, `SR`→`eo-sr`. Monitoring iterations use the underlying product code with `response_detail.monitoring_number` set (see §4).
 - **Charter VAPs**: classify by the VAP title/description where delineation or grading intent is discernible (`eo-del` / `eo-gra`); otherwise fall back to `eo-vap`. Do not force a classification the source does not support.
 - **UNOSAT products**: classify by phase and product description — Phase 1 → `eo-fep`; flood extent → `eo-del`; damage density → `eo-gra`; population exposure → `eo-pop`; monitoring → `eo-mon`.
@@ -192,6 +196,7 @@ The Sendai Framework for Disaster Risk Reduction 2015–2030 defines 7 global ta
 
 | Code | Sendai targets | Rationale |
 | --- | --- | --- |
+| `eo-dat` | D, G | Data products (e.g., raw imagery) support infrastructure assessment and EO access |
 | `eo-ref` | G | Provides pre-event baseline — supports EO/early warning access |
 | `eo-fep` | D, G | Rapid post-event extent informs infrastructure damage response and EO data access |
 | `eo-del` | D, G | Affected area delineation supports critical infrastructure damage assessment |
@@ -254,6 +259,7 @@ The Sendai Framework defines 7 global targets tracked by the Sendai Monitor. All
 
 | Response concept | International Charter | Copernicus EMS | UNOSAT | Monty code |
 | --- | --- | --- | --- | --- |
+| Satellite imagery dataset | Acquisition (calibrated, `disaster:class = acquisition`) | — | GIS-ready data download | `eo-dat` |
 | Pre-event reference mapping | Reference map | `REF` | Phase 0 | `eo-ref` |
 | Rapid first estimate | Best-effort early VAP | `FEP` | Phase 1 (PSA) | `eo-fep` |
 | Affected-area delineation | Delineation map | `DEL` | Phase 2 flood extent | `eo-del` |
@@ -269,7 +275,7 @@ The Sendai Framework defines 7 global targets tracked by the Sendai Monitor. All
 | --- | --- |
 | `disaster:` ([Terradue](https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json)) | The live data model for International Charter items; Charter VAP Response items MUST declare it alongside `monty:`. Covers `disaster:class`, `disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class`, etc. |
 | `processing:` ([stac-extensions/processing](https://github.com/stac-extensions/processing)) | Processing-chain provenance for derived EO products (CEMS, UNOSAT). |
-| `sar:` / `eo:` / `sat:` | Describe the **acquisition / source imagery** layer reached via `derived_from`, not the Response product item itself. |
+| `sar:` / `eo:` / `sat:` | Describe the **acquisition / source imagery** layer reached via `derived_from`, not the Response product item itself. The sole exception is `eo-dat`, where the delivered dataset *is* the Response item and these extensions are declared on it directly. |
 
 The per-source extension combinations are specified in [Response Best Practices](response-best-practices.md). Neither CEMS nor UNOSAT publishes a STAC extension; their source-specific values are carried under `monty:response_detail` or on linked acquisition items.
 
