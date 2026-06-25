@@ -1,0 +1,81 @@
+{
+  "type": "Collection",
+  "id": "charter-response",
+  "stac_version": "1.1.0",
+  "description": "Value-Added Products (VAPs) from Charter activations mapped to Monty Response items (v1.3.0 monty:response_detail).",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./charter-response-1000-1144-1.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "roles": [
+    "response",
+    "source"
+  ],
+  "keywords": [
+    "AFG",
+    "Earthquake",
+    "Geological",
+    "Seismic",
+    "ValueAddedProduct"
+  ],
+  "title": "International Charter Source Response",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          67.642,
+          36.559,
+          67.799,
+          36.727
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-11T08:00:29Z",
+          "2025-11-11T08:00:29Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "description": "The Charter is an international collaboration through which satellite data is made available for disaster management purposes.",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "GH0101",
+      "nat-geo-ear-gro"
+    ],
+    "datetime": {
+      "minimum": "2025-11-11T08:00:29Z",
+      "maximum": "2025-11-11T08:00:29Z"
+    }
+  }
+}

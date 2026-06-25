@@ -127,7 +127,7 @@ Before adding a field to `response_detail`, check whether it is already defined 
 | Field | Type | Req. | Allowed values / format | Description |
 | --- | --- | --- | --- | --- |
 | `type` | string | **R** | `^(eo\|hum\|fin)-[a-z0-9]+(-[a-z0-9]+)*$` (a code from §2) | Response type code from this taxonomy. The domain is derivable from the prefix. |
-| `source_id` | string | O | Free string, min length 1 (e.g., `EMSR744`, `ACT-849`, `FL20240926ESP`) | Native identifier of the response in the source system (CEMS activation code, Charter call id, UNOSAT product code, DREF operation id). |
+| `source_id` | string | O | Free string, min length 1 (e.g., `EMSR744`, `1144-1`, `FL20240926ESP`) | Native identifier of the response in the source system (CEMS activation code, Charter VAP id `{call_id}-{n}` or dataset id, UNOSAT product code, DREF operation id). |
 | `status` | string | O | `planned`, `in-production`, `published`, `finished`, `no-impact`, `withdrawn` | Lifecycle status. Harmonises CEMS `statusCode` (`F`/`N`/`W`/`I`) and Charter `disaster:activation_status`. |
 | `monitoring_number` | integer | O | ≥ 1 | Iteration number for monitoring updates (mirrors CEMS `monitoringNumber`). Its presence marks the item as a monitoring update; reference the prior iteration via a `rel="prev"` link. |
 | `producer` | string | O | Free string / org name | Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`). |
@@ -140,7 +140,7 @@ The object does not permit additional properties (`additionalProperties: false`)
 **What does NOT belong in `response_detail`:**
 
 - **Source landing page / product URL** — expressed as a STAC `rel: derived_from` link, not a property.
-- **Spatial resolution, sensor, orbit** — carried on the linked acquisition items (`sar:` / `eo:` / `sat:`), reached via `derived_from`.
+- **Spatial resolution, sensor, orbit** — for derived products, carried on linked acquisition items (`sar:` / `eo:` / `sat:`) reached via `derived_from`. Exception: `eo-dat` items carry these extensions directly because the dataset is the deliverable.
 - **Charter activation/call/resolution fields** — carried by the `disaster:` extension on Charter VAP items (`disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class`, …).
 - **Damage / exposure statistics** — emitted as separate Monty Impact items linked via `monty:corr_id` (see §3.3).
 
@@ -165,7 +165,7 @@ The object does not permit additional properties (`additionalProperties: false`)
 {
   "monty:response_detail": {
     "type": "eo-vap",
-    "source_id": "ACT-849",
+    "source_id": "1144-1",
     "producer": "Airbus",
     "sendai_targets": ["D", "G"]
   }

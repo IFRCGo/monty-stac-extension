@@ -1,0 +1,386 @@
+# International Charter on Space and Major Disasters
+
+The International Charter coordinates satellite data delivery for disaster
+response worldwide. Charter activations bundle areas of interest (AoIs),
+satellite acquisitions, and the Value-Added Products (VAPs) produced from them.
+This document maps the Charter object model to Monty STAC items.
+
+## Collections
+
+| Collection | Code | Monty role | Source for |
+|------------|------|------------|------------|
+| International Charter — Events | `charter-events` | `event` | Activation |
+| International Charter — Hazards | `charter-hazards` | `hazard` | Area (AoI) |
+| International Charter — Response | `charter-response` | `response` | Value-Added Product and calibrated acquisition dataset |
+
+- **Source organisation**: International Charter on Space and Major Disasters (`CHARTER`)
+- **Source URL**: <https://disasterscharter.org>
+- **Supervisor API**: <https://supervisor.disasterscharter.org/api/>
+- **License**: public for Events/Hazards; partner access for Response (VAP) data
+- **Temporal coverage**: 2000-11-05 onwards (Charter formation)
+
+## Object model
+
+Charter exposes four object types via the Terradue `disaster:` extension
+(`disaster:class`). They map to Monty as follows:
+
+| Charter object (`disaster:class`) | Monty type | Monty `id` pattern | Collection |
+|-----------------------------------|------------|--------------------|------------|
+| `Activation` | Event | `charter-event-{activation_id}` | `charter-events` |
+| `Area` | Hazard | `charter-hazard-{activation_id}-{area_id}-{type}` | `charter-hazards` |
+| `ValueAddedProduct` | Response | `charter-response-{activation_id}-{call_id}-{vap_number}` | `charter-response` |
+| `Acquisition` / Dataset (calibrated) | Response | `charter-response-{activation_id}-{dataset_id}` | `charter-response` |
+
+> Both **VAPs** and **calibrated acquisition datasets** become Monty Response items
+> in `charter-response`. VAPs map to derived EO product codes (`eo-del`, `eo-gra`,
+> `eo-vap`, …). Each delivered acquisition dataset maps to `eo-dat` — keep only
+> the **last, calibrated stage** (the analysis-ready dataset responders use to
+> build VAPs); earlier ETL-stage records are intermediate artifacts, not separate
+> Response items. VAP Response items reference their calibrated acquisition via
+> `rel: derived_from`.
+
+`{area_id}` is the upstream Area `id`, lowercased (e.g.
+`AOI_1_Epi_0-iNglWjcFF0v3rBHi3s1_fQ__` → `aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__`).
+`{call_id}-{vap_number}` is the VAP identifier from the upstream `<identifier>`
+(e.g. `1144-1`).
+
+## Data access
+
+### Supervisor API — Events and Hazards (public)
+
+```bash
+# Activation (Event source) — use the direct pattern, not the catalog self link
+https://supervisor.disasterscharter.org/api/activations/act-{activation_id}
+
+# Area (Hazard source) — follow the related Area links on the activation
+https://supervisor.disasterscharter.org/api/activations/act-{activation_id}/areas/{area_id}.json
+
+# Calibrated acquisition datasets (Response source, eo-dat) — keyed by call
+https://supervisor.disasterscharter.org/api/calls/{call_id}/acquisitions/calibratedDatasets.json
+```
+
+> [!IMPORTANT]
+> Known API quirks:
+> - Catalog/collection endpoints are slow (dynamically generated).
+> - Activation catalog `self` links carry a `.json` suffix that returns HTTP 500 — omit the suffix.
+> - The direct activation pattern and the Area links from an activation are reliable.
+
+Discover available `properties` keys across an activation range (requires
+[jq](https://jqlang.github.io/jq/)):
+
+```bash
+for i in $(seq 900 1020); do
+  curl -s --max-time 5 "https://supervisor.disasterscharter.org/api/activations/act-$i" \
+    | jq -r '.properties | keys[]?' 2>/dev/null
+done | sort -u
+```
+
+Alternative browsing: [STAC Index](https://stacindex.org/catalogs/disasters-charter-mapper-catalog).
+
+### OBS — Response (VAP) data (partner access)
+
+VAP STAC JSON is **not** on the public API; it lives in the OTC OBS bucket
+`cpe-operations-catalog` (see [Remote Server & Object Storage](../../../../AGENTS.md)).
+Terradue granted Montandon **JSON-only** read access (IP-allowlisted) under:
+
+```text
+cpe-operations-catalog/
+├── activations/act-{activation_id}/
+│   ├── act-{activation_id}.json                          # Activation → Event
+│   ├── areas/…/*.json                                    # Area → Hazard
+│   └── vaps/act-{id}-vap-{call_id}-{n}/…-{n}.json         # VAP → Response ✅
+├── calls/call-{call_id}/acquisitions/{dataset-id}/…json  # Calibrated acquisition → eo-dat Response ✅
+└── vaps/…                                                 # top-level mirror — read denied
+```
+
+> [!IMPORTANT]
+> **Access policy**: `GetObject` works for **JSON** under `activations/…` and
+> `calls/…/acquisitions/…`. It does **not** work for top-level `vaps/…` paths or
+> for non-JSON assets (PDF, quicklook, raw imagery). Activations older than
+> **Act 994 / Call 1136** may be in cold storage until restored.
+>
+> Probe from `montandon-dev`: `uv run test.py` (canonical copy: `scripts/charter-obs-test.py`).
+
+Example readable VAP:
+`activations/act-1000/vaps/act-1000-vap-1144-1/act-1000-vap-1144-1.json`.
+
+## The Terradue `disaster:` extension
+
+Charter is the live data model for the Terradue `disaster:` extension. Upstream
+Charter STAC declares the **legacy** URL
+`https://terradue.github.io/disaster/v1.0.0/schema.json`; Monty Response items
+declare the current URL
+`https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json`. Field
+**semantics** are identical, but field **names and value casing changed**. Apply
+this normalization when mapping:
+
+| Upstream (legacy v1.0.0) | Monty (v1.1.0) | Notes |
+|--------------------------|----------------|-------|
+| `disaster:class: "Activation"` / `"Area"` / `"ValueAddedProduct"` | `disaster:class: "activation"` / `"area"` / `"vap"` | Lowercased |
+| `disaster:type` | `disaster:types` | Renamed (singular → plural) |
+| `disaster:region` | `disaster:regions` | Renamed (singular → plural) |
+| `cpe:activation_status` | `disaster:activation_status` | Lifecycle: `open` / `closed` / `archived` |
+| `disaster:activation_id`, `disaster:call_ids`, `disaster:country` | (unchanged) | Direct copy |
+| *(absent upstream)* | `disaster:resolution_class` | Inferred — see [VAP → Response](#value-added-product--response-v130) |
+
+> Events and Hazards are modelled as **Monty-only** items (they carry the mapped
+> values in `monty:` fields and do **not** declare `disaster:`). Response items
+> (VAPs and calibrated acquisitions) layer the `disaster:` extension — see
+> [VAP → Response](#value-added-product--response-v130) and
+> [Calibrated acquisition → Response](#calibrated-acquisition--response-eo-dat).
+
+## Activation → Event
+
+Maps to a Monty Event item (`charter-events`). Declares the Monty extension only.
+
+| Charter field (activation) | Monty field | Notes |
+|----------------------------|-------------|-------|
+| `id` (`act-1000`) | `id` (`charter-event-1000`) | Prefix `charter-event-` |
+| — | `collection: "charter-events"` | Required |
+| `properties.datetime` | `datetime` | Event onset (see note) |
+| `properties.title` | `title` | Direct copy |
+| `geometry` (Point) | `geometry` | Direct copy |
+| `disaster:type` | `monty:hazard_codes` | Map via [Hazard codes](#hazard-codes) |
+| `disaster:country` | `monty:country_codes[0]` | Already ISO 3166-1 alpha-3 |
+| `links[rel=self]` | `links[rel=via]` | Source reference |
+
+> [!IMPORTANT]
+> **Onset datetime**: use `properties.datetime` — it equals `properties.created`
+> and the embedded `<disasterDate>` in `cpe:cos2_xml`. Do **not** use
+> `properties.updated` (processing close date, often weeks later).
+
+**Multi-hazard**: include every hazard code on the Event. For
+`disaster:type: ["flood", "landslide"]` carry both `MH0600`/`FL`/`nat-hyd-flo-flo`
+and `MH0901`/`LS`/`nat-geo-mmd-lan`.
+
+**Correlation ID** (`monty:corr_id`): generated by the standard Monty algorithm
+from event date, ISO3 country, spatial block, primary hazard, and episode —
+format `{YYYYMMDD}-{ISO3}-{spatial_block}-{UNDRR-ISC}-{episode}-GCDB`, e.g.
+`20251103-AFG-1138838-GH0101-1-GCDB`. The numeric block is a spatial identifier,
+**not** the Charter `activation_id`. All items for the same event share it.
+
+Full example: [`charter-event-1000.json`](../../../../examples/charter-events/charter-event-1000.json).
+
+## Area → Hazard
+
+Maps to a Monty Hazard item (`charter-hazards`). Declares the Monty extension only.
+
+| Charter field (area) | Monty field | Notes |
+|----------------------|-------------|-------|
+| `id` | `id` | `charter-hazard-{activation_id}-{area_id}-{type}` |
+| — | `collection: "charter-hazards"` | Required |
+| `geometry` (Polygon) | `geometry` | Full AoI polygon |
+| `properties.title` | `title` | Area name (e.g. `Juiz de Fora`) |
+| `disaster:type` | `monty:hazard_codes` | **One code set per item** (see below) |
+| `disaster:country` | `monty:country_codes` | Inherited from activation |
+| parent activation `datetime` | `datetime` | Inherited from activation |
+| `properties.description` | `monty:hazard_detail` | Parse severity (see below) |
+| `cpe:status.stage` | `monty:hazard_detail.estimate_type` | See below |
+| parent activation | `links[rel=derived_from]` | `../charter-events/charter-event-{id}.json` |
+
+> [!IMPORTANT]
+> **Multi-hazard strategy**: create **one Hazard item per disaster type**
+> (GDACS precedent), same geometry, different `monty:hazard_codes`. For an Area
+> with `disaster:type: ["flood", "landslide"]`:
+> - `charter-hazard-1019-juiz_de_fora…-flood` → `MH0600`, `FL`, `nat-hyd-flo-flo`
+> - `charter-hazard-1019-juiz_de_fora…-landslide` → `MH0901`, `LS`, `nat-geo-mmd-lan`
+>
+> This satisfies the schema requirement of exactly one UNDRR-ISC 2025 code per item.
+
+**Severity** — the Area `description` is a flat key/value string, e.g.
+`Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:`.
+`monty:hazard_detail` requires `severity_value` + `severity_unit`; derive them as:
+
+| Source key | When | `monty:hazard_detail` |
+|------------|------|-----------------------|
+| `Radius (km)` | present (circular AoIs) | `severity_value`, `severity_unit: "km"`, `severity_label: "Area radius"` |
+| `SurfaceArea` | fallback (polygon AoIs, no radius) | `severity_value`, `severity_unit: "km2"`, `severity_label: "Surface area"` |
+
+`Priority` is operational AoI ordering, not a hazard severity, and is not carried
+in the Monty schema. `Lat`/`Long` describe the AoI centre and are already
+represented by `geometry`.
+
+**Estimate type** — map `cpe:status.stage` to `monty:hazard_detail.estimate_type`
+(enum `primary` / `secondary` / `modelled`). Observed stages (`notificationNew`,
+`notificationImported`) and any unrecognized stage map to `primary`. This is an
+interim mapping pending full CPE stage documentation.
+
+## Value-Added Product → Response (v1.3.0)
+
+Charter VAPs map to Monty Response items via the v1.3.0 `monty:response_detail`
+object and the `response` role. This is the Charter-specific application of the
+cross-source guidance in
+[`response-best-practices.md`](../../response-best-practices.md) (§3.2) and the
+response-type codes in [`response-taxonomy.md`](../../response-taxonomy.md) (§2.1).
+
+### Extension layering (do not duplicate)
+
+VAP Response items declare two extensions:
+
+| Extension | Requirement | Carries |
+|-----------|-------------|---------|
+| `…/monty-stac-extension/v1.3.0/schema.json` | **Required** | `monty:response_detail`, `response` role, correlation, country/hazard codes |
+| `…/stac-extensions-disaster/v1.1.0/schema.json` | **Required** | Charter-native fields (`disaster:class`, `disaster:activation_id`, …) |
+| `…/processing/v1.2.0/schema.json` | Recommended | Processing level / lineage of the derived product |
+
+The governing rule is **extension layering over duplication**: any concept
+already expressed by a `disaster:` field is canonical there and **MUST NOT** be
+copied into `monty:response_detail`.
+
+### Field carriage
+
+Most `disaster:` fields are **not** present on the source VAP JSON (which only
+carries `disaster:class` and `disaster:activation_id`); they are enriched from
+the parent Activation/Area or inferred, then normalized per
+[the `disaster:` extension table](#the-terradue-disaster-extension).
+
+| Concept | Carried as | Source |
+|---------|------------|--------|
+| Charter object type | `disaster:class = "vap"` | VAP `disaster:class` (`ValueAddedProduct`) |
+| Activation id | `disaster:activation_id` | VAP |
+| Call id(s) | `disaster:call_ids` | Activation / Area |
+| Hazard types | `disaster:types` (+ `monty:hazard_codes`) | Activation `disaster:type` |
+| Country | `disaster:country` (+ `monty:country_codes`) | Activation |
+| Activation status | `disaster:activation_status` | Activation `cpe:activation_status` |
+| Resolution class | `disaster:resolution_class` | Inferred from acquisition / VAP copyright |
+| Product type code | `monty:response_detail.type` | Classified — see below |
+| VAP identifier | `monty:response_detail.source_id` (`1144-1`) | VAP `<identifier>` (`{call_id}-{vap_number}`) |
+| Producer | `monty:response_detail.producer` | VAP copyright (e.g. `Airbus`) |
+| Methodology | `monty:response_detail.methodology` | Per product nature (e.g. `human_interpreted`) |
+| Sendai targets | `monty:response_detail.sendai_targets` | Taxonomy default for the type code |
+
+> **Do not** set `monty:response_detail.status` — activation lifecycle is carried
+> on `disaster:activation_status`. **Do not** put damage/exposure statistics in
+> `monty:response_detail`; those become separate Monty **Impact** items
+> (`roles: ["impact"]`) linked via `monty:corr_id`.
+
+**Product type classification** — the `disaster:` extension does not distinguish
+delineation from grading, so classify best-effort from the VAP title/description:
+damage assessment → `eo-gra`, affected-area extent → `eo-del`, population
+exposure → `eo-pop`. Fall back to `eo-vap` when the type cannot be determined.
+Do not encode the source into the code (`eo-gra`, never `eo-charter-gra`).
+
+**Resolution / producer inference** — when `disaster:resolution_class` is absent
+upstream, infer it from the acquisition metadata or VAP copyright. Example:
+copyright `"Includes Pleiades material © CNES (2025), Distribution Airbus DS."`
+→ `disaster:resolution_class: "VHR"`, `producer: "Airbus"`.
+
+### Linkage
+
+| `rel` | Target | Link `roles` | Purpose |
+|-------|--------|--------------|---------|
+| `related` | Event item | `["event"]` | Parent Charter Event |
+| `related` | Hazard item(s) | `["hazard"]` | Hazard(s) the response addresses |
+| `related` | another Response item | `["response"]` | Sibling response cross-reference |
+| `derived_from` | Charter activation page | — | Source product the item is derived from |
+| `derived_from` | Calibrated acquisition Response item(s) | — | Provenance to `eo-dat` source imagery |
+| `derived_from` | Earlier ETL-stage acquisition records | — | Upstream processing artifacts (not separate Response items) |
+
+> Typed `related` links use a single role from `event` / `hazard` / `impact` /
+> `response` (per the Monty schema). The main spec also defines the equivalent
+> shorthand `rel` values `related-hazard` / `related-impact` / `related-response`;
+> Charter items use the `rel: related` + `roles` form throughout.
+
+Correlation back to the Event/Hazard uses the shared `monty:corr_id`.
+
+### Example
+
+[`charter-response-1000-1144-1.json`](../../../../examples/charter-response/charter-response-1000-1144-1.json)
+is the canonical worked example (Act-1000 VAP `1144-1`, an `eo-gra` damage
+assessment). Its `monty:response_detail`:
+
+```json
+{
+  "type": "eo-gra",
+  "source_id": "1144-1",
+  "producer": "Airbus",
+  "methodology": "human_interpreted",
+  "sendai_targets": ["C", "D"]
+}
+```
+
+Note the absence of `status`, `resolution_class`, and `activation_id` — those are
+carried by the `disaster:` extension on the same item.
+
+## Calibrated acquisition → Response (`eo-dat`)
+
+Calibrated acquisition datasets map to Monty Response items with
+`monty:response_detail.type = eo-dat`. Because the deliverable *is* the dataset,
+the Response item and the acquisition item coincide: declare `disaster:class =
+acquisition` plus the imagery-layer extensions (`eo:` / `sar:` / `sat:`) directly
+on the Response item. See [Response Best Practices §4.4](../../response-best-practices.md#44-charter-raw-acquisition-delivered-to-responders-eo-dat).
+
+**Source API:**
+
+```bash
+https://supervisor.disasterscharter.org/api/calls/{call_id}/acquisitions/calibratedDatasets.json
+```
+
+Each entry in the calibrated-datasets collection is a candidate `eo-dat` Response
+item. An acquisition may appear at several ETL stages upstream; keep only the
+**last, calibrated stage** as the Monty Response item. Earlier-stage records stay
+upstream and MAY be referenced via `derived_from`.
+
+| Concept | Carried as | Source |
+|---------|------------|--------|
+| Charter object type | `disaster:class = "acquisition"` | Dataset STAC item |
+| Activation id | `disaster:activation_id` | Dataset / call context |
+| Call id(s) | `disaster:call_ids` | Call |
+| Hazard types | `disaster:types` (+ `monty:hazard_codes`) | Activation |
+| Country | `disaster:country` (+ `monty:country_codes`) | Activation |
+| Resolution class | `disaster:resolution_class` | Dataset metadata |
+| Product type code | `monty:response_detail.type = "eo-dat"` | Fixed |
+| Dataset identifier | `monty:response_detail.source_id` | Upstream dataset id |
+| Producer | `monty:response_detail.producer` | Dataset provider |
+| Sensor / orbit / cloud cover | `eo:` / `sar:` / `sat:` fields | Dataset STAC item |
+
+Derived VAP Response items SHOULD link to the calibrated acquisition they were
+produced from via `rel: derived_from`.
+
+## Hazard codes
+
+`disaster:type` values map to Monty hazard codes. UNDRR-ISC 2025 is required
+(exactly one per Hazard item); GLIDE and EM-DAT are optional but recommended.
+
+| `disaster:type` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes |
+|-----------------|----------------|-------|--------|-------|
+| `flood` | MH0600 | FL | nat-hyd-flo-flo | Refine to MH0603/MH0604 if flash/riverine |
+| `fire` | MH1301 | WF | nat-cli-wil-for | Wildfire / forest fire |
+| `earthquake` | GH0101 | EQ | nat-geo-ear-gro | Ground shaking |
+| `volcano` | GH0201 | VO | nat-geo-vol | Volcanic eruption |
+| `storm_hurricane` | MH0400 | ST | nat-met-sto | Generic storm; refine to MH0403 if tropical |
+| `cyclone` | MH0403 | TC | nat-met-sto-tro | Tropical cyclone |
+| `tsunami` | GH0301 | TS | nat-geo-ear-tsu | |
+| `landslide` | MH0901 | LS | nat-geo-mmd-lan | |
+| `snow_hazard` | MH1202 | SW | nat-met-ext-col | Snow / winter hazard |
+| `ice` | MH0801 | CW | nat-met-ext-col | Ice storm / icing |
+| `oil_spill` | TH0300 | — | tec-ind-che | Chemical spill (technological) |
+| `explosive_event` | TH0600 | — | tec-ind-exp | Explosion (technological) |
+| `other` | — | OT | — | No UNDRR code — manual review required |
+
+Apply `hazard_profiles.get_canonical_hazard_codes()` after mapping for the
+standard code format.
+
+## Examples
+
+| Activation | Type | Country | Files |
+|------------|------|---------|-------|
+| Act-1000 | Earthquake | AFG | [event](../../../../examples/charter-events/charter-event-1000.json), [response](../../../../examples/charter-response/charter-response-1000-1144-1.json) |
+| Act-1019 | Flood + landslide | BRA | [event](../../../../examples/charter-events/charter-event-1019.json) (multi-hazard) |
+
+## Reference files
+
+Actual upstream Charter responses, used as mapping fixtures:
+
+- [`act-1000-activation.json`](./act-1000-activation.json) — single-hazard activation (earthquake)
+- [`act-1000-area-epi.json`](./act-1000-area-epi.json) — polygon AoI (no radius)
+- [`act-1000-vap-1144-1.json`](./act-1000-vap-1144-1.json) — VAP STAC item (damage assessment)
+- [`act-1019-activation.json`](./act-1019-activation.json) — multi-hazard activation (flood + landslide)
+- [`act-1019-area-juiz-de-fora.json`](./act-1019-area-juiz-de-fora.json) — circular AoI (with radius)
+
+## Resources
+
+- [International Charter](https://disasterscharter.org/)
+- [STAC Index — Charter Catalog](https://stacindex.org/catalogs/disasters-charter-mapper-catalog)
+- [Terradue `disaster:` extension](https://github.com/Terradue/stac-extensions-disaster)
+- [Monty STAC Extension specification](../../../../README.md)
