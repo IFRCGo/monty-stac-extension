@@ -21,28 +21,52 @@ This document maps the Charter object model to Monty STAC items.
 
 ## Object model
 
-Charter exposes four object types via the Terradue `disaster:` extension
-(`disaster:class`). They map to Monty as follows:
+**The Activation → Call → Dataset/VAP flow.** A Charter [activation](https://disasterscharter.org/charter-activation-process)
+starts when an Authorized User requests satellite support for a disaster. The
+Charter Manager opens one or more **Calls** — the operational pivot that ties the
+activation to satellite tasking and to a set of **areas of interest (AoIs)**. Each
+Call yields **Acquisitions** (raw satellite passes, progressively processed
+through several ETL stages to a final *calibrated* dataset) and drives the
+production of **Value-Added Products (VAPs)** by the value-adders. Calibrated
+datasets are therefore *keyed by call* (retrieved per call, under
+`calls/{call_id}/…`), whereas **VAPs key back to the activation** (organised under
+`activations/act-{id}/…`); a VAP still records the originating call in its
+identifier, but it is not addressed per call the way datasets are.
+
+Charter exposes **five** object types. Four are emitted as Monty items via the
+Terradue `disaster:` extension (`disaster:class`); the fifth — `Call` — is a
+process pivot Monty does not emit but references through its `call_id`. They map
+to Monty as follows:
 
 | Charter object (`disaster:class`) | Monty type | Monty `id` pattern | Collection |
 |-----------------------------------|------------|--------------------|------------|
 | `Activation` | Event | `charter-event-{activation_id}` | `charter-events` |
 | `Area` | Hazard | `charter-hazard-{activation_id}-{area_id}-{type}` | `charter-hazards` |
+| `Call` | — (process pivot — for reference, not emitted) | — | links Activation → Datasets/VAPs; carried as `call_id` on Response items |
 | `ValueAddedProduct` | Response | `charter-response-{activation_id}-{call_id}-{vap_number}` | `charter-response` |
-| `Acquisition` / Dataset (calibrated) | Response | `charter-response-{activation_id}-{dataset_id}` | `charter-response` |
+| `Acquisition` / Dataset (**calibrated** stage) | Response (`eo-dat`) | `charter-response-{activation_id}-{call_id}-{dataset_id}` | `charter-response` |
 
 > Both **VAPs** and **calibrated acquisition datasets** become Monty Response items
 > in `charter-response`. VAPs map to derived EO product codes (`eo-del`, `eo-gra`,
 > `eo-vap`, …). Each delivered acquisition dataset maps to `eo-dat` — keep only
 > the **last, calibrated stage** (the analysis-ready dataset responders use to
 > build VAPs); earlier ETL-stage records are intermediate artifacts, not separate
-> Response items. VAP Response items reference their calibrated acquisition via
-> `rel: derived_from`.
+> Response items. Because both are Response items, a VAP links to its calibrated
+> acquisition as a **sibling Response** (`rel: related`, `roles: ["response"]`),
+> not via `derived_from`.
 
 `{area_id}` is the upstream Area `id`, lowercased (e.g.
 `AOI_1_Epi_0-iNglWjcFF0v3rBHi3s1_fQ__` → `aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__`).
 `{call_id}-{vap_number}` is the VAP identifier from the upstream `<identifier>`
-(e.g. `1144-1`).
+(e.g. `1144-1`). `{dataset_id}` is a short URL-safe slug for the calibrated
+dataset used inside the Monty item `id`; the full upstream dataset identifier is
+preserved separately in `monty:response_detail.source_id`.
+
+> The `Call` object is never emitted as its own item. Its `call_id` is carried on
+> Response items (via `disaster:call_ids` and the `{call_id}` segment of the item
+> `id`) and surfaced on the Event through the activation title (e.g.
+> `[Act-1000/Call-1144]`) and the linked Response items — Events are Monty-only and
+> do not declare `disaster:call_ids` directly.
 
 ## Data access
 
@@ -271,9 +295,9 @@ copyright `"Includes Pleiades material © CNES (2025), Distribution Airbus DS."`
 |-------|--------|--------------|---------|
 | `related` | Event item | `["event"]` | Parent Charter Event |
 | `related` | Hazard item(s) | `["hazard"]` | Hazard(s) the response addresses |
-| `related` | another Response item | `["response"]` | Sibling response cross-reference |
-| `derived_from` | Charter activation page | — | Source product the item is derived from |
-| `derived_from` | Calibrated acquisition Response item(s) | — | Provenance to `eo-dat` source imagery |
+| `related` | Calibrated acquisition (`eo-dat`) Response item(s) | `["response"]` | The calibrated dataset the VAP was built from — a **sibling Response**, so linked as `related`/`response`, not `derived_from` |
+| `related` | other Response item(s) | `["response"]` | Sibling response cross-reference |
+| `derived_from` | Charter activation page | — | Upstream source page the item is derived from |
 | `derived_from` | Earlier ETL-stage acquisition records | — | Upstream processing artifacts (not separate Response items) |
 
 > Typed `related` links use a single role from `event` / `hazard` / `impact` /
@@ -304,7 +328,8 @@ carried by the `disaster:` extension on the same item.
 
 ## Calibrated acquisition → Response (`eo-dat`)
 
-Calibrated acquisition datasets map to Monty Response items with
+Calibrated acquisition datasets map to Monty Response items
+(`charter-response-{activation_id}-{call_id}-{dataset_id}`) with
 `monty:response_detail.type = eo-dat`. Because the deliverable *is* the dataset,
 the Response item and the acquisition item coincide: declare `disaster:class =
 acquisition` plus the imagery-layer extensions (`eo:` / `sar:` / `sat:`) directly
@@ -330,12 +355,15 @@ upstream and MAY be referenced via `derived_from`.
 | Country | `disaster:country` (+ `monty:country_codes`) | Activation |
 | Resolution class | `disaster:resolution_class` | Dataset metadata |
 | Product type code | `monty:response_detail.type = "eo-dat"` | Fixed |
-| Dataset identifier | `monty:response_detail.source_id` | Upstream dataset id |
+| Dataset identifier | `monty:response_detail.source_id` | Full upstream dataset id (e.g. `act-1000_Pleiades_VHR-calibrated`); the `{dataset_id}` slug in the item `id` is a short URL-safe form of it |
 | Producer | `monty:response_detail.producer` | Dataset provider |
 | Sensor / orbit / cloud cover | `eo:` / `sar:` / `sat:` fields | Dataset STAC item |
 
 Derived VAP Response items SHOULD link to the calibrated acquisition they were
-produced from via `rel: derived_from`.
+built from as a **sibling Response** (`rel: related`, `roles: ["response"]`),
+since the calibrated dataset is itself an `eo-dat` Response item. Reserve
+`derived_from` for the upstream Charter source page and earlier (non-Response)
+ETL-stage acquisition records.
 
 ## Hazard codes
 
