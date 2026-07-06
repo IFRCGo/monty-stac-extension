@@ -136,7 +136,7 @@ mirrors the Charter Area→Hazard mapping.
 |-------------------------------|-------------|-------|
 | `number` | `id` | `cems-hazard-{code}-aoi{n}-{type}` |
 | — | `collection: "cems-hazards"` | Required |
-| DEL product `extent` → else AOI `extent` (WKT) | `geometry` | **Prefer the Delineation polygon** (actual hazard footprint); fall back to the AOI extent |
+| DEL product `extent` → else AOI `extent` (WKT) | `geometry` | **Latest delivered DEL** (highest `monitoringNumber` with `statusCode=F`) — the current hazard footprint; fall back to the AOI extent. Updated in place as monitoring DELs arrive |
 | `name` | `title` | AOI name (e.g. `Kingston`) |
 | activation `category` (+ `subCategory`) | `monty:hazard_codes` | **One code set per item** — split multi-hazard as Charter does; see [Hazard codes](#hazard-codes) |
 | activation `countries` | `monty:country_codes` | Inherited from the activation |
@@ -261,7 +261,7 @@ stats are absent (never in addition, to avoid double counting).
 **The join:** every item across both axes shares `monty:corr_id` — query by it and order by
 `datetime` / `monitoring_number` to reconstruct the timeline.
 
-### Refresh & polling strategy (minimise HTTP calls)
+### Refresh and polling strategy
 
 The **detail** endpoint is expensive (EMSR847 ≈ 413 KB); the **list** endpoint is one cheap
 call that already exposes the change signals. Probed API behaviour:
@@ -309,8 +309,13 @@ link** so the graph is directly navigable (65/224 sampled activations carry a `g
 This is a **reusable pattern**: any cross-reference field that yields a deterministic
 source-item id becomes a typed `related` link, with `monty:corr_id` as the fallback join.
 The edge is reciprocal — the Charter source doc already links VAPs to sibling Responses.
-Open: GDACS episode resolution, and whether to emit links before the target is ingested
-(see [Open decisions](#open-decisions)).
+
+- **Emit unconditionally** from the deterministic id — a `related` link to a not-yet-ingested
+  target is valid STAC and cheaper than gating on presence; it resolves when the sibling source
+  is ingested/back-filled.
+- **GDACS episode**: `gdacsId` gives `{eventtype}{eventid}` but no episode, so link to
+  **episode 1** (`{eventid}-1`) as the deterministic anchor (episodes refine the same event);
+  optionally upgrade to the latest episode when a cheap GDACS lookup is available.
 
 ## Hazard codes
 
@@ -354,29 +359,26 @@ Real upstream CEMS API responses, used as mapping fixtures:
 
 See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes (esa-montandon#20).
 
-## Open decisions
+## Decisions (resolved)
 
-1. **`statusCode` enum** — observed `F` (delivered), `I` (in production), `W` (scheduled),
-   `N` (not produced), mapped to `published`/`in-production`/`planned`/`withdrawn`
-   respectively. Confirm no further codes exist historically and pin the `N`→`withdrawn`
-   vs `no-impact` rule (from `version.reason`).
-2. **Hazard geometry & monitoring** — AOI → Hazard, geometry = DEL delineation when present,
-   else AOI `extent`. Remaining: which DEL supplies the polygon (base vs **latest monitoring**
-   — lean latest), and whether the Hazard geometry is **updated in place** as monitoring DELs
-   arrive or versioned.
-3. **Multi-hazard extent** — a secondary hazard identified from a GRA footprint class
-   (`Landslide` in a `Storm` activation) has no dedicated polygon in the API; decide whether to
-   reuse the AOI/DEL extent or leave geometry coarse.
-4. **Response geometry** — per-AOI vs per-product `extent` for Response items (both present;
-   products carry their own `extent`, generally the AOI extent).
-5. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
-   `sat:`/`eo:`/`sar:`) via `derived_from`, or keep `images[]` as product metadata only.
-6. **Cross-source links** — resolve GDACS episode; emit `related` links unconditionally
-   (deterministic id) or only when the target is present in Montandon.
+All mapping decisions are settled — none block ETL implementation.
 
-*Resolved in [Tracking over time](#tracking-over-time): monitoring lineage (`rel: prev`
-per iteration), revision handling (`version.number` supersede), and Impact granularity
-(per-product GRA series, not the aggregated snapshot).*
+| # | Decision | Resolution |
+|---|----------|------------|
+| 1 | **`statusCode` → `status`** | Enum `F`/`I`/`W`/`N` → `published`/`in-production`/`planned`/`withdrawn` (confirmed stable across ~20 activations spanning the full range). `N`→`no-impact` when `version.reason` states no damage/impact observed, else `withdrawn`. |
+| 2 | **Product type codes** | `REF`/`FEP`/`DEL`/`GRA` → `eo-ref`/`eo-fep`/`eo-del`/`eo-gra`; monitoring/variant codes (`GRM`) → base code + `monitoring_number`. |
+| 3 | **Hazard geometry** | AOI → Hazard; geometry = **latest delivered DEL** (`statusCode=F`, max `monitoringNumber`), fallback AOI `extent`, **updated in place**. |
+| 4 | **Multi-hazard** | Driven by `category`/`subCategory` + GRA footprint classes — **not** DEL count. A secondary hazard with no dedicated polygon uses the AOI extent (coarse) and takes severity from its footprint-class figure. |
+| 5 | **Response geometry** | The product's own `extent` (precise footprint); AOI extent only as fallback. |
+| 6 | **Source imagery** | Emit linked **acquisition items** from `images[]` (carrying `sat:`/`eo:`/`sar:`, `resolutionClass`, `acquisitionTime`) referenced via `derived_from` — per the best-practices layer-separation rule; imagery extensions never on the Response product. |
+| 7 | **Monitoring & revisions** | Monitoring iterations = separate items chained by `rel: prev`; `version.number` corrections supersede in place — see [Tracking over time](#tracking-over-time). |
+| 8 | **Impact granularity** | Per-product GRA `stats` series (each timestamped), one Impact per exposure class per iteration; aggregated activation `stats` is cross-check only. |
+| 9 | **Cross-source links** | Emit `related` **unconditionally** from the deterministic target id; GDACS episode defaults to `-1`. |
+| 10 | **Refresh** | Watermark on the `?closed=false` list; detail only when `(lastUpdate, n_products, n_aois)` advance — see [Refresh & polling strategy](#refresh-and-polling-strategy). |
+
+**Residual verification (non-blocking):** cross-check the `statusCode` enum against the CEMS
+product-lifecycle spec (only `F`/`I`/`W`/`N` observed); confirm whether a cheap GDACS
+episode-resolution lookup is worth adding over the `-1` default.
 
 ## Resources
 
