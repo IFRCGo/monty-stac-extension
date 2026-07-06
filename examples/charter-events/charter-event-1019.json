@@ -69,6 +69,22 @@
       ]
     },
     {
+      "rel": "related",
+      "href": "../charter-response/charter-response-1019-1166-19.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-response/charter-response-1166-phr1a-0907-00777.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
       "rel": "self",
       "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-1019.json",
       "type": "application/json"
