@@ -1,4 +1,4 @@
-# CEMS Rapid Mapping — API & Data Model Familiarisation (esa-montandon #20)
+# CEMS Rapid Mapping — API & Data Model Familiarisation
 
 Hands-on exploration of the live CEMS Rapid Mapping API. Public, no auth. Sample
 activations captured in this folder: **EMSR847** (storm, rich), **EMSR842** (wildfire,

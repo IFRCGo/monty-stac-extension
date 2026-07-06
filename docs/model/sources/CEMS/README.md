@@ -371,7 +371,7 @@ Real upstream CEMS API responses, used as mapping fixtures:
 - [`api-files/rapidmapping-activations-list.json`](./api-files/rapidmapping-activations-list.json) — list endpoint (pagination)
 - [`api-files/unified-activations-list.json`](./api-files/unified-activations-list.json) — unified endpoint (different shape)
 
-See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes (esa-montandon#20).
+See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes.
 
 ## Decisions (resolved)
 
