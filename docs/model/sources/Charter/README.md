@@ -1,9 +1,11 @@
 # International Charter on Space and Major Disasters
 
 The International Charter coordinates satellite data delivery for disaster
-response worldwide. Charter activations bundle areas of interest (AoIs),
-satellite acquisitions, and the Value-Added Products (VAPs) produced from them.
-This document maps the Charter object model to Monty STAC items.
+response worldwide. An **Activation** groups the areas of interest (AoIs) and the
+Value-Added Products (VAPs); the underlying satellite **Acquisitions** are grouped
+under the **Call** that triggered them. This document maps the Charter object
+model — as exposed by the Charter Mapper on **S3** (our ingestion entry point) —
+to Monty STAC items.
 
 ## Collections
 
@@ -15,118 +17,157 @@ This document maps the Charter object model to Monty STAC items.
 
 - **Source organisation**: International Charter on Space and Major Disasters (`CHARTER`)
 - **Source URL**: <https://disasterscharter.org>
-- **Supervisor API**: <https://supervisor.disasterscharter.org/api/>
-- **License**: public for Events/Hazards; partner access for Response (VAP) data
+- **Ingestion entry point (S3)**: `s3://cpe-operations-catalog/` (Charter Mapper catalog, JSON-only partner access)
+- **Discovery API**: <https://supervisor.disasterscharter.org/api/> (browsing only)
+- **License**: partner access (Terradue-granted, IP-allowlisted)
 - **Temporal coverage**: 2000-11-05 onwards (Charter formation)
 
 ## Object model
 
-**The Activation → Call → Dataset/VAP flow.** A Charter [activation](https://disasterscharter.org/charter-activation-process)
-starts when an Authorized User requests satellite support for a disaster. The
-Charter Manager opens one or more **Calls** — the operational pivot that ties the
-activation to satellite tasking and to a set of **areas of interest (AoIs)**. Each
-Call yields **Acquisitions** (raw satellite passes, progressively processed
-through several ETL stages to a final *calibrated* dataset) and drives the
-production of **Value-Added Products (VAPs)** by the value-adders. Calibrated
-datasets are therefore *keyed by call* (retrieved per call, under
-`calls/{call_id}/…`), whereas **VAPs key back to the activation** (organised under
-`activations/act-{id}/…`); a VAP still records the originating call in its
-identifier, but it is not addressed per call the way datasets are.
+### The process flow (Call → Activation → Areas/VAPs, Call → Acquisitions)
+
+The Charter data model is easier to read once the [activation
+process](https://disasterscharter.org/charter-activation-process) is understood.
+The **Call is emitted first**, and the **Activation is the confusing pivot** —
+acquisitions never attach to it directly.
+
+1. An **Authorized User** submits a request → a **Call** is created (`call_id`,
+   e.g. `1166`). This is the first object to exist.
+2. The **on-call Project Manager** reviews and approves the call, which then
+   **creates a new Activation** (`activation_id`, e.g. `1019`) or — more rarely —
+   is **linked to an existing** activation. A Call therefore belongs to exactly
+   one Activation, but an Activation can aggregate several Calls (its
+   `disaster:call_ids` is an array).
+3. **Attached to the Activation**: the **Areas** (AoIs) and the **Value-Added
+   Products (VAPs)** — the human-interpreted map products.
+4. **Attached to the Call**: the **Acquisitions** (satellite tasking) and *all
+   downstream production*, including the progressively processed **calibrated
+   datasets**.
+
+```mermaid
+flowchart TD
+    AU([Authorized User]) -->|"1. submits request"| CALL["<b>Call</b><br/>call_id — e.g. 1166"]
+    CALL -->|"2. reviews & approves"| PM{On-call<br/>Project Manager}
+    PM -->|"creates new (usual)"| ACT["<b>Activation</b><br/>activation_id — e.g. 1019<br/>disaster:call_ids = (1166, …)"]
+    PM -.->|"links to existing (rare)"| ACT
+    ACT -->|"3. scopes"| AREAS["<b>Areas</b> / AoIs<br/>→ Hazard items"]
+    ACT -->|"3. publishes"| VAPS["<b>Value-Added Products</b><br/>→ Response items"]
+    CALL -->|"4. tasks"| ACQ["<b>Acquisitions</b><br/>satellite passes"]
+    ACQ -->|"ETL: raw → calibrated"| CAL["<b>Calibrated Datasets</b><br/>→ eo-dat Response items"]
+    CAL -.->|"analysed into"| VAPS
+```
+
+**The most confusing association**: a calibrated dataset carries **only** its
+`disaster:call_ids` — it has **no `activation_id`**. To reach the Event, resolve
+**call → activation** (the Activation lists the call in `disaster:call_ids`, and
+also links each calibrated dataset via `rel: related`). Never expect the
+activation id on the dataset itself.
+
+### Entities and how they are keyed
+
+```mermaid
+erDiagram
+    ACTIVATION ||--|{ CALL : "aggregates 1..N calls (reuse rare)"
+    ACTIVATION ||--o{ AREA : "scopes"
+    ACTIVATION ||--o{ VAP : "publishes"
+    CALL ||--o{ ACQUISITION : "tasks"
+    ACQUISITION ||--|| CALIBRATED_DATASET : "final calibrated stage"
+    CALIBRATED_DATASET }o..o{ VAP : "analysed into"
+
+    CALL { string call_id }
+    ACTIVATION { int activation_id "has disaster-call_ids array" }
+    AREA { string area_id "carries activationid and callid" }
+    VAP { string id "act-A-vap-CALL-N" }
+    CALIBRATED_DATASET { string id "call_ids only, NO activation_id" }
+```
+
+### Monty mapping
 
 Charter exposes **five** object types. Four are emitted as Monty items via the
 Terradue `disaster:` extension (`disaster:class`); the fifth — `Call` — is a
-process pivot Monty does not emit but references through its `call_id`. They map
-to Monty as follows:
+process pivot Monty does not emit but references through its `call_id`.
 
-| Charter object (`disaster:class`) | Monty type | Monty `id` pattern | Collection |
-|-----------------------------------|------------|--------------------|------------|
-| `Activation` | Event | `charter-event-{activation_id}` | `charter-events` |
-| `Area` | Hazard | `charter-hazard-{activation_id}-{area_id}-{type}` | `charter-hazards` |
-| `Call` | — (process pivot — for reference, not emitted) | — | links Activation → Datasets/VAPs; carried as `call_id` on Response items |
-| `ValueAddedProduct` | Response | `charter-response-{activation_id}-{call_id}-{vap_number}` | `charter-response` |
-| `Acquisition` / Dataset (**calibrated** stage) | Response (`eo-dat`) | `charter-response-{activation_id}-{call_id}-{dataset_id}` | `charter-response` |
+| Charter object (`disaster:class`) | Monty type | Monty `id` pattern | Keyed by | Collection |
+|-----------------------------------|------------|--------------------|----------|------------|
+| `Activation` | Event | `charter-event-{activation_id}` | activation | `charter-events` |
+| `Area` | Hazard | `charter-hazard-{activation_id}-{area_id}-{type}` | activation | `charter-hazards` |
+| `Call` | — (process pivot — for reference, not emitted) | — | — | — |
+| `ValueAddedProduct` | Response | `charter-response-{activation_id}-{call_id}-{vap_number}` | activation (+ call in id) | `charter-response` |
+| `Acquisition` / Dataset (**calibrated** stage) | Response (`eo-dat`) | `charter-response-{call_id}-{dataset_id}` | **call** | `charter-response` |
 
 > Both **VAPs** and **calibrated acquisition datasets** become Monty Response items
 > in `charter-response`. VAPs map to derived EO product codes (`eo-del`, `eo-gra`,
-> `eo-vap`, …). Each delivered acquisition dataset maps to `eo-dat` — keep only
-> the **last, calibrated stage** (the analysis-ready dataset responders use to
-> build VAPs); earlier ETL-stage records are intermediate artifacts, not separate
-> Response items. Because both are Response items, a VAP links to its calibrated
-> acquisition as a **sibling Response** (`rel: related`, `roles: ["response"]`),
-> not via `derived_from`.
+> `eo-vap`, …) and are keyed by activation. Calibrated datasets map to `eo-dat`
+> and are keyed by **call** (they are call-native), matching the source: their
+> Monty id omits the activation, which is surfaced only via `monty:corr_id` and
+> the `related` links. Keep only the **last, calibrated stage** as the Response
+> item; earlier ETL-stage records are intermediate artifacts. **All** entries of
+> the call's `calibratedDatasets` collection are sourced — including the global
+> reference layers published as `{...}_Auxiliary_Dataset_*` (DEM, land cover,
+> surface water, HAND, population, settlement).
+>
+> A VAP links to the calibrated dataset it was analysed from as a **sibling
+> Response** (`rel: related`, `roles: ["response"]`), not via `derived_from` —
+> both are Response items.
 
 `{area_id}` is the upstream Area `id`, lowercased (e.g.
 `AOI_1_Epi_0-iNglWjcFF0v3rBHi3s1_fQ__` → `aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__`).
 `{call_id}-{vap_number}` is the VAP identifier from the upstream `<identifier>`
-(e.g. `1144-1`). `{dataset_id}` is a short URL-safe slug for the calibrated
+(e.g. `1166-19`). `{dataset_id}` is a short URL-safe slug for the calibrated
 dataset used inside the Monty item `id`; the full upstream dataset identifier is
 preserved separately in `monty:response_detail.source_id`.
 
 > The `Call` object is never emitted as its own item. Its `call_id` is carried on
 > Response items (via `disaster:call_ids` and the `{call_id}` segment of the item
 > `id`) and surfaced on the Event through the activation title (e.g.
-> `[Act-1000/Call-1144]`) and the linked Response items — Events are Monty-only and
+> `[Act-1019/Call-1166]`) and the linked Response items — Events are Monty-only and
 > do not declare `disaster:call_ids` directly.
 
 ## Data access
 
-### Supervisor API — Events and Hazards (public)
-
-```bash
-# Activation (Event source) — use the direct pattern, not the catalog self link
-https://supervisor.disasterscharter.org/api/activations/act-{activation_id}
-
-# Area (Hazard source) — follow the related Area links on the activation
-https://supervisor.disasterscharter.org/api/activations/act-{activation_id}/areas/{area_id}.json
-
-# Calibrated acquisition datasets (Response source, eo-dat) — keyed by call
-https://supervisor.disasterscharter.org/api/calls/{call_id}/acquisitions/calibratedDatasets.json
-```
-
-> [!IMPORTANT]
-> Known API quirks:
-> - Catalog/collection endpoints are slow (dynamically generated).
-> - Activation catalog `self` links carry a `.json` suffix that returns HTTP 500 — omit the suffix.
-> - The direct activation pattern and the Area links from an activation are reliable.
-
-Discover available `properties` keys across an activation range (requires
-[jq](https://jqlang.github.io/jq/)):
-
-```bash
-for i in $(seq 900 1020); do
-  curl -s --max-time 5 "https://supervisor.disasterscharter.org/api/activations/act-$i" \
-    | jq -r '.properties | keys[]?' 2>/dev/null
-done | sort -u
-```
-
-Alternative browsing: [STAC Index](https://stacindex.org/catalogs/disasters-charter-mapper-catalog).
-
-### OBS — Response (VAP) data (partner access)
-
-VAP STAC JSON is **not** on the public API; it lives in the OTC OBS bucket
-`cpe-operations-catalog` (see [Remote Server & Object Storage](../../../../AGENTS.md)).
-Terradue granted Montandon **JSON-only** read access (IP-allowlisted) under:
+Montandon ingests the Charter Mapper catalog from the OTC OBS/**S3** bucket
+`cpe-operations-catalog` (see [Remote Server & Object
+Storage](../../../../AGENTS.md)). Terradue granted **JSON-only** read access
+(IP-allowlisted). The S3 layout mirrors the object model — **activation-scoped**
+items under `activations/…`, **call-scoped** items under `calls/…`:
 
 ```text
-cpe-operations-catalog/
+s3://cpe-operations-catalog/
+├── catalog.json
 ├── activations/act-{activation_id}/
-│   ├── act-{activation_id}.json                          # Activation → Event
-│   ├── areas/…/*.json                                    # Area → Hazard
-│   └── vaps/act-{id}-vap-{call_id}-{n}/…-{n}.json         # VAP → Response ✅
-├── calls/call-{call_id}/acquisitions/{dataset-id}/…json  # Calibrated acquisition → eo-dat Response ✅
-└── vaps/…                                                 # top-level mirror — read denied
+│   ├── act-{activation_id}.json                                     # Activation → Event
+│   ├── {hazard}.png                                                 # thumbnail asset
+│   ├── primary-{call_id}.kml                                        # AoI KML asset
+│   ├── areas/{area_id}.json                                         # Area → Hazard
+│   └── vaps/act-{activation_id}-vap-{call_id}-{n}/
+│       └── act-{activation_id}-vap-{call_id}-{n}.json               # VAP → Response ✅
+└── calls/call-{call_id}/
+    └── calibratedDatasets/{dataset_id}-calibrated/
+        └── {dataset_id}-calibrated.json                            # calibrated Acquisition → eo-dat Response ✅
 ```
+
+Note the split: **acquisitions live under `calls/call-{call_id}/…`, never under
+the activation** — the Activation only *links* to them (`rel: related`) and lists
+the call in `disaster:call_ids`. VAPs and Areas live under
+`activations/act-{activation_id}/…`.
 
 > [!IMPORTANT]
 > **Access policy**: `GetObject` works for **JSON** under `activations/…` and
-> `calls/…/acquisitions/…`. It does **not** work for top-level `vaps/…` paths or
-> for non-JSON assets (PDF, quicklook, raw imagery). Activations older than
-> **Act 994 / Call 1136** may be in cold storage until restored.
+> `calls/…`. It does **not** work for non-JSON assets (PDF, quicklook, raw
+> imagery). Activations older than **Act 994 / Call 1136** may be in cold storage
+> until restored.
 >
 > Probe from `montandon-dev`: `uv run test.py` (canonical copy: `scripts/charter-obs-test.py`).
 
-Example readable VAP:
-`activations/act-1000/vaps/act-1000-vap-1144-1/act-1000-vap-1144-1.json`.
+### HTTP API — discovery only
+
+The public Supervisor API (`https://supervisor.disasterscharter.org/api/`) mirrors
+the same STAC but with a slightly different layout (`calls/{call_id}/acquisitions/calibratedDatasets.json`,
+no `call-` prefix) and is only used for browsing/discovery — the sample
+[`api-files/`](./api-files) fixtures were pulled from it. It is slow (catalog
+endpoints are dynamically generated) and some `self` links carry a `.json` suffix
+that returns HTTP 500. Alternative browsing:
+[STAC Index](https://stacindex.org/catalogs/disasters-charter-mapper-catalog).
 
 ## The Terradue `disaster:` extension
 
@@ -262,7 +303,7 @@ the parent Activation/Area or inferred, then normalized per
 |---------|------------|--------|
 | Charter object type | `disaster:class = "vap"` | VAP `disaster:class` (`ValueAddedProduct`) |
 | Activation id | `disaster:activation_id` | VAP |
-| Call id(s) | `disaster:call_ids` | Activation / Area |
+| Call id(s) | `disaster:call_ids` | VAP `id` / `<identifier>` (`{call_id}-{vap_number}`); not on the VAP item as a `disaster:` field |
 | Hazard types | `disaster:types` (+ `monty:hazard_codes`) | Activation `disaster:type` |
 | Country | `disaster:country` (+ `monty:country_codes`) | Activation |
 | Activation status | `disaster:activation_status` | Activation `cpe:activation_status` |
@@ -298,7 +339,6 @@ copyright `"Includes Pleiades material © CNES (2025), Distribution Airbus DS."`
 | `related` | Calibrated acquisition (`eo-dat`) Response item(s) | `["response"]` | The calibrated dataset the VAP was built from — a **sibling Response**, so linked as `related`/`response`, not `derived_from` |
 | `related` | other Response item(s) | `["response"]` | Sibling response cross-reference |
 | `derived_from` | Charter activation page | — | Upstream source page the item is derived from |
-| `derived_from` | Earlier ETL-stage acquisition records | — | Upstream processing artifacts (not separate Response items) |
 
 > Typed `related` links use a single role from `event` / `hazard` / `impact` /
 > `response` (per the Monty schema). The main spec also defines the equivalent
@@ -329,41 +369,45 @@ carried by the `disaster:` extension on the same item.
 ## Calibrated acquisition → Response (`eo-dat`)
 
 Calibrated acquisition datasets map to Monty Response items
-(`charter-response-{activation_id}-{call_id}-{dataset_id}`) with
-`monty:response_detail.type = eo-dat`. Because the deliverable *is* the dataset,
-the Response item and the acquisition item coincide: declare `disaster:class =
-acquisition` plus the imagery-layer extensions (`eo:` / `sar:` / `sat:`) directly
-on the Response item. See [Response Best Practices §4.4](../../response-best-practices.md#44-charter-raw-acquisition-delivered-to-responders-eo-dat).
+(**`charter-response-{call_id}-{dataset_id}`** — call-keyed, since the source is
+call-native) with `monty:response_detail.type = eo-dat`. Because the deliverable
+*is* the dataset, the Response item and the acquisition item coincide: declare
+`disaster:class = acquisition` plus the imagery-layer extensions already present
+upstream (`eo:` / `sar:` / `sat:` / `view:` / `proj:` / `processing:`) directly on
+the Response item. See [Response Best Practices §4.4](../../response-best-practices.md#44-charter-raw-acquisition-delivered-to-responders-eo-dat).
 
-**Source API:**
+**Source (S3):**
 
-```bash
-https://supervisor.disasterscharter.org/api/calls/{call_id}/acquisitions/calibratedDatasets.json
+```text
+s3://cpe-operations-catalog/calls/call-{call_id}/calibratedDatasets/{dataset_id}-calibrated/{dataset_id}-calibrated.json
 ```
 
-Each entry in the calibrated-datasets collection is a candidate `eo-dat` Response
-item. An acquisition may appear at several ETL stages upstream; keep only the
-**last, calibrated stage** as the Monty Response item. Earlier-stage records stay
-upstream and MAY be referenced via `derived_from`.
+The collection is `disaster:class = "Acquisition"`, `cpe:status.stage =
+"calibratedDataset"`. **Every** item in it is sourced as an `eo-dat` Response —
+both the sensor acquisitions (Pléiades, Sentinel, Landsat, TerraSAR-X, …) and the
+global reference layers published as `{...}_Auxiliary_Dataset_*` (Copernicus DEM,
+ESA WorldCover, JRC Global Surface Water, MERIT HAND, WorldPop, DLR WSF). An
+acquisition may appear at several ETL stages upstream; the `calibratedDatasets`
+collection already holds only the **last, calibrated stage**, so no stage
+filtering is needed.
 
 | Concept | Carried as | Source |
 |---------|------------|--------|
-| Charter object type | `disaster:class = "acquisition"` | Dataset STAC item |
-| Activation id | `disaster:activation_id` | Dataset / call context |
-| Call id(s) | `disaster:call_ids` | Call |
-| Hazard types | `disaster:types` (+ `monty:hazard_codes`) | Activation |
-| Country | `disaster:country` (+ `monty:country_codes`) | Activation |
-| Resolution class | `disaster:resolution_class` | Dataset metadata |
+| Charter object type | `disaster:class = "acquisition"` | Dataset STAC item (normalize case) |
+| Call id(s) | `disaster:call_ids` | Dataset item (**native**) |
+| Activation id | *(not on the item)* | **Resolve `call → activation`** — the Activation lists this call in `disaster:call_ids`; used for `monty:corr_id` only, not the item id |
+| Hazard types | `disaster:types` (+ `monty:hazard_codes`) | Dataset `disaster:type` (also present on the item) |
+| Country | `disaster:country` (+ `monty:country_codes`) | Resolved activation |
+| Resolution class | `disaster:resolution_class` | Dataset item (`VHR` / `HR` / `MR` / …) |
 | Product type code | `monty:response_detail.type = "eo-dat"` | Fixed |
-| Dataset identifier | `monty:response_detail.source_id` | Full upstream dataset id (e.g. `act-1000_Pleiades_VHR-calibrated`); the `{dataset_id}` slug in the item `id` is a short URL-safe form of it |
-| Producer | `monty:response_detail.producer` | Dataset provider |
-| Sensor / orbit / cloud cover | `eo:` / `sar:` / `sat:` fields | Dataset STAC item |
+| Dataset identifier | `monty:response_detail.source_id` | Full upstream dataset id (e.g. `DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777`); the `{dataset_id}` slug in the item `id` is a short URL-safe form of it |
+| Producer | `monty:response_detail.producer` | Dataset `providers[].name` (e.g. `Airbus`, `USGS/NASA`, `ESA/EC (Copernicus)`, `DLR`) |
+| Sensor / orbit / cloud cover | `eo:` / `sar:` / `sat:` fields | Dataset item (already present) |
 
-Derived VAP Response items SHOULD link to the calibrated acquisition they were
-built from as a **sibling Response** (`rel: related`, `roles: ["response"]`),
-since the calibrated dataset is itself an `eo-dat` Response item. Reserve
-`derived_from` for the upstream Charter source page and earlier (non-Response)
-ETL-stage acquisition records.
+VAP Response items link to the calibrated datasets they were analysed from as a
+**sibling Response** (`rel: related`, `roles: ["response"]`), since the calibrated
+dataset is itself an `eo-dat` Response item. Reserve `derived_from` for the
+upstream Charter source page.
 
 ## Hazard codes
 
@@ -405,6 +449,15 @@ Actual upstream Charter responses, used as mapping fixtures:
 - [`act-1000-vap-1144-1.json`](./act-1000-vap-1144-1.json) — VAP STAC item (damage assessment)
 - [`act-1019-activation.json`](./act-1019-activation.json) — multi-hazard activation (flood + landslide)
 - [`act-1019-area-juiz-de-fora.json`](./act-1019-area-juiz-de-fora.json) — circular AoI (with radius)
+
+The [`api-files/`](./api-files) folder holds the **S3-model** fixtures backing
+this analysis (Act-1019 / Call-1166, Flood in Brazil):
+
+- [`act-1019.json`](./api-files/act-1019.json) — Activation, with `related` links to Areas **and** to the call's calibrated datasets
+- [`activation-1019-areas.json`](./api-files/activation-1019-areas.json) — the four Areas (each carries both `callid` and `activationid`)
+- [`act-1019-vaps.json`](./api-files/act-1019-vaps.json) — per-activation VAP catalog; [`act-1019-vap-1166-19.json`](./api-files/act-1019-vap-1166-19.json), [`act-1019-vap-1166-22.json`](./api-files/act-1019-vap-1166-22.json) — VAP items (`disaster:activation_id` only; call in the id)
+- [`call-1166-calibratedDatasets.json`](./api-files/call-1166-calibratedDatasets.json) — the call's calibrated-datasets collection (`disaster:call_ids: [1166]`, no activation id)
+- Calibrated dataset items — one per sensor family: [Pléiades (optical VHR)](./api-files/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated.json), [Landsat-8 (optical MR)](./api-files/LC08_L1GT_098169_20260226_20260226_02_RT-calibrated.json), [Sentinel-2 (optical HR)](./api-files/S2B_MSIL2A_20251228T130249_N0511_R095_T23KQS_20251228T162706-calibrated.json), [TerraSAR-X (SAR)](./api-files/TSX1_SAR__EEC_RE___SL_S_SRA_20260228T082140_20260228T082141-calibrated.json)
 
 ## Resources
 
