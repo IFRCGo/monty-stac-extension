@@ -11,30 +11,12 @@
     "type": "Polygon",
     "coordinates": [
       [
-        [
-          67.69,
-          36.559
-        ],
-        [
-          67.799,
-          36.57
-        ],
-        [
-          67.751,
-          36.727
-        ],
-        [
-          67.642,
-          36.718
-        ],
-        [
-          67.69,
-          36.559
-        ],
-        [
-          67.69,
-          36.559
-        ]
+        [67.69, 36.559],
+        [67.799, 36.57],
+        [67.751, 36.727],
+        [67.642, 36.718],
+        [67.69, 36.559],
+        [67.69, 36.559]
       ]
     ]
   },
@@ -64,18 +46,11 @@
     ],
     "version": "2"
   },
-  "bbox": [
-    67.642,
-    36.559,
-    67.799,
-    36.727
-  ],
+  "bbox": [67.642, 36.559, 67.799, 36.727],
   "assets": {
     "overview": {
       "type": "image/jpeg",
-      "roles": [
-        "overview"
-      ],
+      "roles": ["overview"],
       "title": "Value Added Product Overview",
       "href": "s3://cpe-operations-catalog/activations/act-1000/vaps/act-1000-vap-1144-1/vap-1144-1-quicklook.jpg",
       "file:size": 674055
