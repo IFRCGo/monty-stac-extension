@@ -258,11 +258,41 @@ class **per iteration**, chained by `rel: prev`. The aggregated activation `stat
 snapshot with **no history** — use it only as a current-total cross-check or when per-product
 stats are absent (never in addition, to avoid double counting).
 
-**The join & refresh:** every item across both axes shares `monty:corr_id` — query by it and
-order by `datetime` / `monitoring_number` to reconstruct the timeline. Detect change by
-polling the **list endpoint's `lastUpdate`** per activation (the detail payload omits it) and
-refetching detail when it advances; **`closed=true` ⇒ final** (stop polling), `closed=false` ⇒
-live. (WP2 RSS feeds provide the same trigger event-driven.)
+**The join:** every item across both axes shares `monty:corr_id` — query by it and order by
+`datetime` / `monitoring_number` to reconstruct the timeline.
+
+### Refresh & polling strategy (minimise HTTP calls)
+
+The **detail** endpoint is expensive (EMSR847 ≈ 413 KB); the **list** endpoint is one cheap
+call that already exposes the change signals. Probed API behaviour:
+
+- **One list call returns the full corpus**: `?limit=300` → all 224 activations, ~72 KB, ~0.7 s,
+  each item carrying `lastUpdate`, `closed`, `n_products`, `n_aois`.
+- **No HTTP caching** — no `ETag` / `Last-Modified` on either endpoint, so conditional
+  `304` requests are unavailable; change detection must be **application-side**.
+- **No server-side "updated since" filter** — `lastUpdate__gte` / `updated_after` /
+  `activationTime` are **ignored** (still return all 224).
+- **But `?closed=false` works** — returns only the live activations (currently **3**).
+- `ordering` is ignored; default order is **code-descending** (newest activation first).
+
+Given that, only **open** activations change, and each closed activation is immutable once
+closed. The minimal-calls loop:
+
+1. **Backfill once**: page the full list (1 call) → fetch detail for each activation (224
+   one-time). Persist a watermark per `code`: `(lastUpdate, n_products, n_aois, closed)`.
+2. **Steady state — cheap poll**: `GET ?closed=false` (1 tiny call). For each open activation,
+   fetch **detail only if** `lastUpdate` advanced **or** `n_products` / `n_aois` grew vs the
+   watermark. Typically 0–few detail calls per cycle instead of 224.
+3. **Close-out**: when an activation leaves the `closed=false` set (or flips `closed=true`),
+   fetch its detail **one final time**, then never again.
+4. **Reconcile**: run the full `?limit=300` list on a slow cadence (e.g. daily) to catch brand-new
+   codes and any activation that opened *and* closed between polls; diff against watermarks.
+
+This turns a naive per-cycle cost of **224 detail fetches (~tens of MB)** into **one ~72 KB list
+call + a handful of detail fetches**. The composite `(lastUpdate, n_products, n_aois)` is the
+dirty check (there is no per-product timestamp in the list). A legacy RSS feed exists on the
+portal (`emergency.copernicus.eu/mapping/…/feed`, redirected) and is the intended **push**
+trigger under WP2 — it can replace the frequent `?closed=false` poll entirely.
 
 ## Cross-source linkage
 
