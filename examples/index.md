@@ -56,7 +56,7 @@ Collections that document the effects and impacts of disasters:
 
 Collections that document disaster response products (e.g. satellite-derived VAPs):
 
-- **[charter-response/](charter-response/)** - International Charter Value-Added Products (`monty:response_detail`)
+- **[charter-response/](charter-response/)** - International Charter Value-Added Products (`eo-gra`/`eo-del`/…) and calibrated satellite acquisition datasets (`eo-dat`), as Monty Response items (`monty:response_detail`)
 
 ## Usage
 

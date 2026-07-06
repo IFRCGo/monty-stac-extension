@@ -22,6 +22,27 @@ to Monty STAC items.
 - **License**: partner access (Terradue-granted, IP-allowlisted)
 - **Temporal coverage**: 2000-11-05 onwards (Charter formation)
 
+## Conversion principle — copy-as-is + Montandon specifics
+
+> The Charter Mapper already publishes valid STAC, so the conversion is a
+> **pass-through**: each source item is carried over **as-is** — geometry, `bbox`,
+> assets, the imagery extensions (`eo:` / `sar:` / `sat:` / `view:` / `proj:` /
+> `processing:`), `providers`, and the Charter-native `disaster:` fields are all
+> **preserved**. The ETL only does two things on top:
+>
+> 1. **Fix STAC-level consistency issues** — normalise the legacy Terradue
+>    `disaster:` v1.0.0 declaration to
+>    [v1.1.0](#the-terradue-disaster-extension) (lowercase `disaster:class`,
+>    plural `disaster:types` / `disaster:regions`), set `stac_version`, drop
+>    null/internal bookkeeping fields, and repair anything that fails STAC validation.
+> 2. **Add the Montandon specifics** — the `monty` extension plus `monty:corr_id`,
+>    `monty:country_codes`, `monty:hazard_codes`, `monty:response_detail`, the
+>    `event` / `hazard` / `response` `roles`, the Monty `id` and `collection`, and
+>    the typed `related` / `derived_from` links.
+>
+> Everything else in the source item is left untouched. The mapping tables below
+> describe only these two deltas — assume every other field rides along unchanged.
+
 ## Object model
 
 ### The process flow (Call → Activation → Areas/VAPs, Call → Acquisitions)
