@@ -1,0 +1,68 @@
+{
+  "type": "Collection",
+  "id": "cems-events",
+  "stac_version": "1.1.0",
+  "description": "Copernicus EMS Rapid Mapping activations as Monty Event items.",
+  "title": "Copernicus EMS RM Events",
+  "license": "proprietary",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -76.73031441425942,
+          17.98150514565106,
+          -76.73031441425942,
+          17.98150514565106
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-10-26T12:00:00Z",
+          "2025-10-26T12:00:00Z"
+        ]
+      ]
+    }
+  },
+  "providers": [
+    {
+      "name": "Copernicus Emergency Management Service",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://mapping.emergency.copernicus.eu/"
+    }
+  ],
+  "roles": [
+    "source",
+    "event"
+  ],
+  "summaries": {
+    "monty:country_codes": [
+      "HTI",
+      "CUB",
+      "JAM"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ]
+  },
+  "links": [
+    {
+      "rel": "item",
+      "href": "./cems-event-EMSR847.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-events/cems-events.json"
+    }
+  ]
+}

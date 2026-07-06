@@ -1,0 +1,95 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "cems-impact-EMSR847-aoi01-gra-population",
+  "collection": "cems-impacts",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -76.796615,
+          17.962363
+        ],
+        [
+          -76.747653,
+          17.966604
+        ],
+        [
+          -76.748316,
+          17.975553
+        ],
+        [
+          -76.756525,
+          17.983078
+        ],
+        [
+          -76.783782,
+          17.984849
+        ],
+        [
+          -76.800345,
+          17.978717
+        ],
+        [
+          -76.796615,
+          17.962363
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -76.800345,
+    17.962363,
+    -76.747653,
+    17.984849
+  ],
+  "properties": {
+    "title": "Estimated affected population — Kingston (EMSR847 GRA)",
+    "datetime": "2025-11-10T23:16:39Z",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:country_codes": [
+      "JAM"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:corr_id": "20251026-JAM-1553838-MH0403-1-GCDB",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "affected_total",
+      "value": 84000,
+      "unit": "people",
+      "estimate_type": "primary"
+    }
+  },
+  "links": [
+    {
+      "rel": "derived_from",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-impacts/cems-impacts.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {}
+}

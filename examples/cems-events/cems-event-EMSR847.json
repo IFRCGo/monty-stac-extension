@@ -1,0 +1,101 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "cems-event-EMSR847",
+  "collection": "cems-events",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.73031441425942,
+      17.98150514565106
+    ]
+  },
+  "bbox": [
+    -76.73031441425942,
+    17.98150514565106,
+    -76.73031441425942,
+    17.98150514565106
+  ],
+  "properties": {
+    "title": "Tropical Cyclone Melissa in the Caribbean",
+    "description": "On 25 October 2025 at 20:00, Tropical Storm Melissa was forecast to affect Jamaica and the southern peninsula of Haiti. The event was expected to cause damage to housing, infrastructure, and transport networks due to heavy rainfall, strong winds, flooding, and landslides. Hurricane conditions were forecast for Jamaica during the weekend and subsequently for the southern peninsula of Haiti and Cuba. Copernicus EMS Rapid Mapping was requested to provide flood extent and damage assessment emergency mapping.",
+    "datetime": "2025-10-26T12:00:00Z",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "monty:country_codes": [
+      "HTI",
+      "CUB",
+      "JAM"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:corr_id": "20251026-JAM-1553838-MH0403-1-GCDB",
+    "keywords": [
+      "EMSR847",
+      "Storm",
+      "Tropical cyclone",
+      "Melissa"
+    ]
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/gdacs-events/1001230-41.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ],
+      "title": "GDACS TC1001230 (episode 41)"
+    },
+    {
+      "rel": "related",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-996.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ],
+      "title": "Charter activation 996"
+    },
+    {
+      "rel": "via",
+      "href": "https://storymaps.arcgis.com/stories/d885092b8f6642fb8fcf6fa86b050e5c",
+      "type": "text/html",
+      "title": "CEMS situational report (StoryMap)"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-events/cems-event-EMSR847.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-events/cems-events.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {}
+}
