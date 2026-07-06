@@ -177,7 +177,7 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 |----------------------|-------------|-------|
 | `type` | `monty:response_detail.type` | `REF`→`eo-ref`, `FEP`→`eo-fep`, `DEL`→`eo-del`, `GRA`→`eo-gra`. Monitoring/variant type codes (e.g. **`GRM`** grading-monitoring) map to their base product code (`eo-gra`) with `monitoring_number` set |
 | `code` (activation) | `monty:response_detail.source_id` | e.g. `EMSR847` (source-system anchor) |
-| `version.statusCode` | `monty:response_detail.status` | `F` (delivered)→`published`; `I` (in production)→`in-production`; `W` (scheduled, future `expectedDelivery`)→`planned`; `N` (not produced)→`withdrawn`, or `no-impact` when `version.reason` indicates no damage/impact. `feasible=false` → `withdrawn` |
+| `version.statusCode` | `monty:response_detail.status` | Full enum (confirmed across all 224 activations): `F`→`published`, `I`→`in-production`, `W`→`planned`, `N`→ `no-impact` when `version.reason` mentions *no change of impact/damage/situation*, else `withdrawn` (remote-sensing limitations, cancelled) |
 | `monitoring` / `monitoringNumber` | `monty:response_detail.monitoring_number` | Set **only** when `monitoring=true`; iteration links to the prior via `rel: prev` |
 | `extent` (WKT) | `geometry` / `bbox` | Product footprint (AOI extent) |
 | — | `monty:response_detail.producer` | `Copernicus EMS` (mapping provider) |
@@ -302,7 +302,7 @@ link** so the graph is directly navigable (65/224 sampled activations carry a `g
 
 | CEMS field | Example | Target Monty id (derivation) | Link |
 |------------|---------|------------------------------|------|
-| `gdacsId` | `TC1001230` | GDACS `{eventtype}`+`{eventid}`; Monty id `{eventid}-{episodeid}` in `gdacs-events` → `1001230-{episode}` | `rel: related`, `roles: ["event"]` |
+| `gdacsId` | `TC1001230` | GDACS `{eventtype}`+`{eventid}`; Monty id `{eventid}-{episodeid}` in `gdacs-events` → `1001230-41` (current episode via `geteventdata`) | `rel: related`, `roles: ["event"]` |
 | `charterNumber` (+ `charterUrl`) | `996` | Charter Event `charter-event-{activation_id}` → `charter-event-996` (`charter-events`) | `rel: related`, `roles: ["event"]` (+ `["response"]` to Charter VAPs) |
 | `relatedevents` | EMSR codes | `cems-event-{code}` | `rel: related`, `roles: ["event"]` |
 
@@ -313,9 +313,12 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
 - **Emit unconditionally** from the deterministic id — a `related` link to a not-yet-ingested
   target is valid STAC and cheaper than gating on presence; it resolves when the sibling source
   is ingested/back-filled.
-- **GDACS episode**: `gdacsId` gives `{eventtype}{eventid}` but no episode, so link to
-  **episode 1** (`{eventid}-1`) as the deterministic anchor (episodes refine the same event);
-  optionally upgrade to the latest episode when a cheap GDACS lookup is available.
+- **GDACS episode**: `gdacsId` gives `{eventtype}{eventid}` but no episode. Resolve the
+  **current** episode with one cheap call —
+  `gdacsapi/api/events/geteventdata?eventtype={t}&eventid={id}` returns the current
+  `episodeid` (e.g. `TC1001230` → episode **41**, `iscurrent: true`) — and link to
+  `{eventid}-{episodeid}`. (A bare `{eventid}-1` would be stale; only fall back to it if the
+  lookup fails.)
 
 ## Hazard codes
 
@@ -365,20 +368,20 @@ All mapping decisions are settled — none block ETL implementation.
 
 | # | Decision | Resolution |
 |---|----------|------------|
-| 1 | **`statusCode` → `status`** | Enum `F`/`I`/`W`/`N` → `published`/`in-production`/`planned`/`withdrawn` (confirmed stable across ~20 activations spanning the full range). `N`→`no-impact` when `version.reason` states no damage/impact observed, else `withdrawn`. |
-| 2 | **Product type codes** | `REF`/`FEP`/`DEL`/`GRA` → `eo-ref`/`eo-fep`/`eo-del`/`eo-gra`; monitoring/variant codes (`GRM`) → base code + `monitoring_number`. |
+| 1 | **`statusCode` → `status`** | Enum **`F`/`I`/`W`/`N`** (exhaustive — scanned all 224 activations / 2074 products) → `published`/`in-production`/`planned`/`withdrawn`. `N`→`no-impact` when `version.reason` says *no change of impact/damage/situation*, else `withdrawn` (remote-sensing limitations, cancelled). |
+| 2 | **Product type codes** | Types **`REF`/`FEP`/`DEL`/`GRA`/`GRM`** (exhaustive) → `eo-ref`/`eo-fep`/`eo-del`/`eo-gra`; the monitoring variant `GRM` → `eo-gra` + `monitoring_number`. |
 | 3 | **Hazard geometry** | AOI → Hazard; geometry = **latest delivered DEL** (`statusCode=F`, max `monitoringNumber`), fallback AOI `extent`, **updated in place**. |
 | 4 | **Multi-hazard** | Driven by `category`/`subCategory` + GRA footprint classes — **not** DEL count. A secondary hazard with no dedicated polygon uses the AOI extent (coarse) and takes severity from its footprint-class figure. |
 | 5 | **Response geometry** | The product's own `extent` (precise footprint); AOI extent only as fallback. |
 | 6 | **Source imagery** | Emit linked **acquisition items** from `images[]` (carrying `sat:`/`eo:`/`sar:`, `resolutionClass`, `acquisitionTime`) referenced via `derived_from` — per the best-practices layer-separation rule; imagery extensions never on the Response product. |
 | 7 | **Monitoring & revisions** | Monitoring iterations = separate items chained by `rel: prev`; `version.number` corrections supersede in place — see [Tracking over time](#tracking-over-time). |
 | 8 | **Impact granularity** | Per-product GRA `stats` series (each timestamped), one Impact per exposure class per iteration; aggregated activation `stats` is cross-check only. |
-| 9 | **Cross-source links** | Emit `related` **unconditionally** from the deterministic target id; GDACS episode defaults to `-1`. |
+| 9 | **Cross-source links** | Emit `related` **unconditionally** from the deterministic target id; resolve the GDACS **current** episode via one `geteventdata` call (`-1` only if the lookup fails). |
 | 10 | **Refresh** | Watermark on the `?closed=false` list; detail only when `(lastUpdate, n_products, n_aois)` advance — see [Refresh & polling strategy](#refresh-and-polling-strategy). |
 
-**Residual verification (non-blocking):** cross-check the `statusCode` enum against the CEMS
-product-lifecycle spec (only `F`/`I`/`W`/`N` observed); confirm whether a cheap GDACS
-episode-resolution lookup is worth adding over the `-1` default.
+All questions are closed against the live data (enums scanned exhaustively; GDACS episode
+resolution verified). No CEMS OpenAPI/schema endpoint is published, so the enums above are
+grounded empirically in the full 224-activation corpus rather than a spec.
 
 ## Resources
 
