@@ -15,6 +15,7 @@ payload. This document maps the CEMS RM object model to Monty STAC items.
 | Collection | Code | Monty role | Source for |
 |------------|------|------------|------------|
 | Copernicus EMS RM — Events | `cems-events` | `event` | Activation |
+| Copernicus EMS RM — Hazards | `cems-hazards` | `hazard` | Area of Interest (extent refined by the DEL delineation) |
 | Copernicus EMS RM — Response | `cems-response` | `response` | Product (REF / FEP / DEL / GRA) + Situational Report |
 | Copernicus EMS RM — Impacts | `cems-impacts` | `impact` | GRA product damage/exposure statistics |
 
@@ -52,8 +53,10 @@ A **Situational Report (SR)** is an ArcGIS **StoryMap** published at activation 
 flowchart TD
     ACT["<b>Activation</b> (EMSR847)<br/>→ Event (cems-events)"]
     ACT -->|"scoped by"| AOI["<b>AOIs</b><br/>(mapping extents)"]
+    AOI -->|"extent (refined by DEL)"| HAZ["<b>Hazard</b> per AOI<br/>→ (cems-hazards)"]
     AOI -->|"accumulate"| PROD["<b>Products</b> REF/FEP/DEL/GRA<br/>→ Response (cems-response)"]
     PROD -.->|"monitoring n+1"| PROD
+    PROD -.->|"DEL delineates"| HAZ
     ACT -->|"reportLink (StoryMap)"| SR["<b>Situational Report</b><br/>→ Response eo-sr"]
     PROD -->|"GRA stats: per thematic class"| IMP["<b>Impact</b> items<br/>(cems-impacts)"]
     ACT -.->|"gdacsId → related(event)"| GD["GDACS Event"]
@@ -65,20 +68,22 @@ flowchart TD
 | CEMS object | Monty type | Monty `id` pattern | Collection |
 |-------------|------------|--------------------|------------|
 | Activation | Event | `cems-event-{code}` (e.g. `cems-event-EMSR847`) | `cems-events` |
+| Area of Interest (AOI) | Hazard | `cems-hazard-{code}-aoi{n}-{type}` | `cems-hazards` |
 | Product (REF/FEP/DEL/GRA) | Response | `cems-response-{code}-aoi{n}-{type}[-m{k}]` | `cems-response` |
 | Situational Report (`reportLink`) | Response (`eo-sr`) | `cems-response-{code}-sr` | `cems-response` |
 | GRA statistic (per thematic class) | Impact | `cems-impact-{code}-aoi{n}-gra-{thematic}[-m{k}]` | `cems-impacts` |
-| Area of Interest (AOI) | — (geometry carrier, not emitted) | — | — |
 
 - `{code}` is the activation code (`EMSR847`); `{n}` is the AOI `number`; `{type}` ∈
-  `ref`/`fep`/`del`/`gra`; `-m{k}` is appended only for monitoring iterations
-  (`monitoringNumber > 0`).
-- **No `cems-hazards` collection.** The hazard is carried on the Event
-  (`monty:hazard_codes`) and delineated by the `eo-del` Response. Whether a CEMS AOI
-  warrants a standalone Hazard item (as Charter Areas do) is an open decision — see
-  [Open decisions](#open-decisions).
-- **AOIs are not emitted** as items; their `extent` is the geometry for the products
-  they contain (and, if adopted, for any Hazard item).
+  `ref`/`fep`/`del`/`gra` (or the hazard type slug for `cems-hazards`); `-m{k}` is
+  appended only for monitoring iterations (`monitoringNumber > 0`).
+- **The AOI is the hazard-area entity** — the direct analog of a Charter Area — so it
+  maps to a **Hazard** item (one per AOI, split per hazard code for multi-hazard
+  activations, as Charter does). Geometry is the AOI `extent`, **refined to the DEL
+  delineation polygon** when a Delineation product exists for that AOI (the DEL *is* the
+  mapped hazard footprint). Hazard type/codes come from the activation `category`.
+- The DEL product therefore has a **dual role**: it is both the `eo-del` **Response**
+  (the deliverable) and the source of the **Hazard** geometry — the two items share
+  `monty:corr_id` and cross-link (`related`).
 
 ## Data access
 
@@ -122,6 +127,28 @@ Maps to a Monty Event item (`cems-events`); Monty extension only.
 | `gdacsId`, `charterNumber` | `links[rel=related]` | See [Cross-source linkage](#cross-source-linkage) |
 | `reportLink`, source page | `links[rel=via]` | Activation page / StoryMap |
 
+## Area of Interest → Hazard
+
+Each AOI maps to a Monty Hazard item (`cems-hazards`); Monty extension only. This
+mirrors the Charter Area→Hazard mapping.
+
+| CEMS field (AOI / activation) | Monty field | Notes |
+|-------------------------------|-------------|-------|
+| `number` | `id` | `cems-hazard-{code}-aoi{n}-{type}` |
+| — | `collection: "cems-hazards"` | Required |
+| DEL product `extent` → else AOI `extent` (WKT) | `geometry` | **Prefer the Delineation polygon** (actual hazard footprint); fall back to the AOI extent |
+| `name` | `title` | AOI name (e.g. `Kingston`) |
+| activation `category` (+ `subCategory`) | `monty:hazard_codes` | **One code set per item** — split multi-hazard as Charter does; see [Hazard codes](#hazard-codes) |
+| activation `countries` | `monty:country_codes` | Inherited from the activation |
+| activation `eventTime` | `datetime` | Inherited from the activation |
+| activation `max_extent` stat (if present) | `monty:hazard_detail.severity_value` | Optional; `severity_unit` per the stat (e.g. `km2`). CEMS AOIs carry no explicit severity otherwise |
+| parent activation | `links[rel=derived_from]` | `../cems-events/cems-event-{code}.json` |
+| DEL Response for this AOI | `links[rel=related]` (`roles: ["response"]`) | The delineation product the geometry came from |
+
+> One Hazard per AOI **per hazard code** (Charter precedent): for a multi-hazard
+> activation, emit one item per `monty:hazard_codes` set, same geometry. Single-category
+> activations (the common case) yield one Hazard per AOI.
+
 ## Product → Response
 
 Each product maps to a Monty Response item via `monty:response_detail`.
@@ -141,6 +168,10 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
 `reportLink` StoryMap URL (no geospatial payload).
+
+A **DEL** Response additionally carries a `rel: related` (`roles: ["hazard"]`) link to the
+`cems-hazards` item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
+Every Response links to its Event and Hazard(s) via `related`, sharing `monty:corr_id`.
 
 > **Do not** put damage/exposure statistics in `monty:response_detail` — those become
 > separate **Impact** items (below). **Do not** set `status` from anything but
@@ -220,9 +251,11 @@ See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes (esa-montan
 
 1. **`statusCode` enum** — only `F` (final) and `N` (not produced) observed; confirm the
    full set historically and finalise the `monty:response_detail.status` mapping.
-2. **Hazard items** — model the hazard only on the Event (current choice), or also emit a
-   `cems-hazards` item per AOI (Charter-style) / from the DEL delineation?
-3. **AOI geometry** — per-AOI vs per-product `extent` for Response items (both are present).
+2. **Hazard geometry source** — *resolved:* AOI → Hazard, geometry = DEL delineation when
+   present, else AOI `extent`. Remaining detail: which DEL (base vs latest monitoring) supplies
+   the polygon, and whether to update the Hazard geometry as monitoring DELs arrive.
+3. **Response geometry** — per-AOI vs per-product `extent` for Response items (both present;
+   products carry their own `extent`, generally the AOI extent).
 4. **Monitoring lineage** — `rel: prev` between iteration *n* and *n-1* keyed by
    `monitoringNumber` (and/or `version.number`).
 5. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
