@@ -149,15 +149,35 @@ mirrors the Charter Area→Hazard mapping.
 > activation, emit one item per `monty:hazard_codes` set, same geometry. Single-category
 > activations (the common case) yield one Hazard per AOI.
 
+### Identifying multi-hazard
+
+A CEMS activation carries a **single** `category` + `subCategory`, and **DEL products carry
+no hazard-type field** — so *multiple delineation products do **not** signal multiple hazards*
+(several DELs in an AOI are **monitoring iterations** of the same mapping). Multi-hazard is
+identified from two other signals:
+
+1. **`category` + `subCategory`** — the primary hazard (e.g. `Storm` / `Tropical cyclone`).
+2. **GRA/GRM `stats` hazard-footprint classes** — thematic classes that name a *phenomenon*
+   rather than an exposed asset reveal secondary hazards. Observed footprint classes:
+   `Flooded area`, `Flood trace`, `Landslide`, `Burnt area` (e.g. a `Landslide` class inside a
+   `Storm` activation ⇒ a secondary landslide hazard). `Maximum of all extents` and `NA` are
+   aggregates, not hazards.
+
+Emit one Hazard item per distinct hazard code so identified. The primary hazard takes its
+geometry from the DEL delineation (§ above); a secondary hazard surfaced only via a GRA
+footprint class takes its geometry from that class's extent where available, else the AOI
+extent, and its severity from the class figure. Do **not** infer hazard multiplicity from the
+DEL count.
+
 ## Product → Response
 
 Each product maps to a Monty Response item via `monty:response_detail`.
 
 | CEMS field (product) | Monty field | Notes |
 |----------------------|-------------|-------|
-| `type` | `monty:response_detail.type` | `REF`→`eo-ref`, `FEP`→`eo-fep`, `DEL`→`eo-del`, `GRA`→`eo-gra` |
+| `type` | `monty:response_detail.type` | `REF`→`eo-ref`, `FEP`→`eo-fep`, `DEL`→`eo-del`, `GRA`→`eo-gra`. Monitoring/variant type codes (e.g. **`GRM`** grading-monitoring) map to their base product code (`eo-gra`) with `monitoring_number` set |
 | `code` (activation) | `monty:response_detail.source_id` | e.g. `EMSR847` (source-system anchor) |
-| `version.statusCode` | `monty:response_detail.status` | `F`→`finished`/`published`; `N` (not produced)→`withdrawn`. Confirm full enum (see [Open decisions](#open-decisions)) |
+| `version.statusCode` | `monty:response_detail.status` | `F` (delivered)→`published`; `I` (in production)→`in-production`; `W` (scheduled, future `expectedDelivery`)→`planned`; `N` (not produced)→`withdrawn`, or `no-impact` when `version.reason` indicates no damage/impact. `feasible=false` → `withdrawn` |
 | `monitoring` / `monitoringNumber` | `monty:response_detail.monitoring_number` | Set **only** when `monitoring=true`; iteration links to the prior via `rel: prev` |
 | `extent` (WKT) | `geometry` / `bbox` | Product footprint (AOI extent) |
 | — | `monty:response_detail.producer` | `Copernicus EMS` (mapping provider) |
@@ -187,12 +207,20 @@ Only **GRA** products carry `stats`, shaped as
   "Built-up [No.]":       { "None": { "affected": 48253 } } }
 ```
 
-Per the [Response ↔ Impact boundary rules](../../response-impact-boundary.md), emit **one
-Impact item per thematic class**:
+Not every thematic class is an Impact. **Split the classes by kind first:**
 
-- `monty:impact_detail`: `category`/`type` from the thematic class (population, buildings,
-  roads, land use, burnt area, …), `value` = `affected` (fallback `total`), `unit` from the
-  key/`unit` (`[No.]`, `[ha]`, `[km]`), `estimate_type: "primary"`.
+- **Exposure / effect classes → Impact items** (one each): `Estimated population`, `Built-up`,
+  `Transportation`, `Land use`, `Facilities`, `Blocked road / interruption`, `Temporary camp`, …
+- **Hazard-footprint classes → Hazard** (not Impact): `Flooded area`, `Flood trace`,
+  `Landslide`, `Burnt area` — these describe the phenomenon extent; they feed the Hazard
+  geometry/severity (see [Identifying multi-hazard](#identifying-multi-hazard)).
+- **Aggregates → skip**: `Maximum of all extents`, `NA`.
+
+Per the [Response ↔ Impact boundary rules](../../response-impact-boundary.md), for each
+**exposure** class emit **one Impact item**:
+
+- `monty:impact_detail`: `category`/`type` from the thematic class, `value` = `affected`
+  (fallback `total`), `unit` from the key/`unit` (`[No.]`, `[ha]`, `[km]`), `estimate_type: "primary"`.
 - Canonical edge: **`Impact → derived_from → Response`** (the GRA Response), `roles: ["response"]`.
 - Both items share the Event's `monty:corr_id`.
 - Guard the `"NA"` / missing `total` case (skip or emit without a numeric value per boundary rules).
@@ -219,19 +247,31 @@ Open: GDACS episode resolution, and whether to emit links before the target is i
 
 ## Hazard codes
 
-CEMS `category` (refine with `subCategory`) maps to Monty hazard codes. UNDRR-ISC 2025 is
-required (exactly one per item); GLIDE and EM-DAT are recommended.
+CEMS `category` (refined by `subCategory`) maps to Monty hazard codes. UNDRR-ISC 2025 is
+required (exactly one per Hazard item); GLIDE and EM-DAT are recommended. The complete CEMS
+category vocabulary (from the full activation catalogue, all DRM phases; **case-normalise** —
+`Mass Movement`/`Mass movement`, `Industrial Accident`/`Industrial accident` occur in both
+casings):
 
-| CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes |
-|-----------------|----------------|-------|--------|-------|
-| Flood | MH0600 | FL | nat-hyd-flo-flo | Refine to MH0603/MH0604 (flash/riverine) |
-| Wildfire | MH1301 | WF | nat-cli-wil-for | |
-| Storm | MH0400 | ST | nat-met-sto | Refine to MH0403/`TC`/`nat-met-sto-tro` when `subCategory` = tropical cyclone/hurricane/typhoon |
-| Earthquake | GH0101 | EQ | nat-geo-ear-gro | |
-| Mass movement | MH0901 | LS | nat-geo-mmd-lan | Landslide/mass movement |
-| Industrial accident | TH03xx / TH06xx | — | tec-ind | Technological — pick chemical vs explosion from `subCategory` (manual review) |
+| CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes / `subCategory` refinement |
+|-----------------|----------------|-------|--------|----------------------------------|
+| Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0605 |
+| Wildfire | MH1301 | WF | nat-cli-wil-for | `Forest fire`; land/other fire variants |
+| Storm | MH0400 | ST | nat-met-sto | `Tropical cyclone, hurricane, typhoon`→MH0403 / `TC` / `nat-met-sto-tro` |
+| Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→GH0301/`TS` |
+| Mass Movement | MH0901 | LS | nat-geo-mmd-lan | Landslide; avalanche→MH1201, rockfall/subsidence per `subCategory` |
+| Volcanic Activity | GH0201 | VO | nat-geo-vol | Eruption; ashfall/lahar per `subCategory` |
+| Industrial Accident | TH0300 / TH0600 | — | tec-ind | Technological — chemical (TH0300) vs explosion (TH0600) vs oil spill from `subCategory`; manual review |
 | Transport accident | — | — | tec-tra | Technological — no clean UNDRR-ISC; manual review |
-| Other | — | OT | — | No code — manual review |
+| Humanitarian Crisis | — | CE | — | Complex/societal emergency — no UNDRR-ISC natural code; manual review (mostly Risk & Recovery, out of core RM scope) |
+| Environmental Degradation | — | — | — | Environmental hazard — no clean UNDRR-ISC; manual review |
+| Other | — | OT | — | Unclassified — manual review |
+
+> **Completeness**: this table covers the full observed vocabulary (RM currently exercises
+> Flood, Wildfire, Storm, Earthquake, Mass Movement, Industrial/Transport accident, Other;
+> Volcanic Activity, Humanitarian Crisis, Environmental Degradation appear in the broader
+> catalogue). Any **unmapped or new** `category` MUST fall through to manual review rather
+> than be dropped. `subCategory` (detail endpoint only) is the refinement key.
 
 Apply `hazard_profiles.get_canonical_hazard_codes()` after mapping.
 
@@ -249,20 +289,26 @@ See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes (esa-montan
 
 ## Open decisions
 
-1. **`statusCode` enum** — only `F` (final) and `N` (not produced) observed; confirm the
-   full set historically and finalise the `monty:response_detail.status` mapping.
-2. **Hazard geometry source** — *resolved:* AOI → Hazard, geometry = DEL delineation when
-   present, else AOI `extent`. Remaining detail: which DEL (base vs latest monitoring) supplies
-   the polygon, and whether to update the Hazard geometry as monitoring DELs arrive.
-3. **Response geometry** — per-AOI vs per-product `extent` for Response items (both present;
+1. **`statusCode` enum** — observed `F` (delivered), `I` (in production), `W` (scheduled),
+   `N` (not produced), mapped to `published`/`in-production`/`planned`/`withdrawn`
+   respectively. Confirm no further codes exist historically and pin the `N`→`withdrawn`
+   vs `no-impact` rule (from `version.reason`).
+2. **Hazard geometry & monitoring** — AOI → Hazard, geometry = DEL delineation when present,
+   else AOI `extent`. Remaining: which DEL supplies the polygon (base vs **latest monitoring**
+   — lean latest), and whether the Hazard geometry is **updated in place** as monitoring DELs
+   arrive or versioned.
+3. **Multi-hazard extent** — a secondary hazard identified from a GRA footprint class
+   (`Landslide` in a `Storm` activation) has no dedicated polygon in the API; decide whether to
+   reuse the AOI/DEL extent or leave geometry coarse.
+4. **Response geometry** — per-AOI vs per-product `extent` for Response items (both present;
    products carry their own `extent`, generally the AOI extent).
-4. **Monitoring lineage** — `rel: prev` between iteration *n* and *n-1* keyed by
+5. **Monitoring lineage** — `rel: prev` between iteration *n* and *n-1* keyed by
    `monitoringNumber` (and/or `version.number`).
-5. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
+6. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
    `sat:`/`eo:`/`sar:`) via `derived_from`, or keep `images[]` as product metadata only.
-6. **Cross-source links** — resolve GDACS episode; emit `related` links unconditionally
+7. **Cross-source links** — resolve GDACS episode; emit `related` links unconditionally
    (deterministic id) or only when the target is present in Montandon.
-7. **Impact granularity** — per-product GRA `stats` vs aggregated activation `stats`
+8. **Impact granularity** — per-product GRA `stats` vs aggregated activation `stats`
    (avoid double counting).
 
 ## Resources
