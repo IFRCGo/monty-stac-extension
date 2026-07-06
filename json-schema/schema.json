@@ -179,7 +179,7 @@
             "source_id": {
               "type": "string",
               "minLength": 1,
-              "description": "Source-system identifier for the response (e.g., CEMS activation code `EMSR744`, Charter call ID `ACT-849`, UNOSAT product code, DREF operation ID)."
+              "description": "Source-system identifier for the response (e.g., CEMS activation code `EMSR744`, Charter VAP id `1144-1`, UNOSAT product code, DREF operation ID)."
             },
             "status": {
               "type": "string",

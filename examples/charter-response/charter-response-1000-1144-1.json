@@ -1,0 +1,124 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json"
+  ],
+  "id": "charter-response-1000-1144-1",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          67.69,
+          36.559
+        ],
+        [
+          67.799,
+          36.57
+        ],
+        [
+          67.751,
+          36.727
+        ],
+        [
+          67.642,
+          36.718
+        ],
+        [
+          67.69,
+          36.559
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    67.642,
+    36.559,
+    67.799,
+    36.727
+  ],
+  "properties": {
+    "title": "Preliminary satellite-derived damage assessment (2 November 2025, M 6.3), Kholm Town and surrounding in Khulm District, Balkh Province, Afghanistan [11/11/2025 08:00:29]",
+    "description": "Status:\nDamaged buildings observed.\nDamaged structures and buildings, including walls and roofs, were observed in Khulm District, Balkh Province, Afghanistan, as of 5 November 2025.\n\nFurther action(s):\nfull assessment to be conducted",
+    "disaster:class": "vap",
+    "disaster:activation_id": 1000,
+    "disaster:call_ids": [
+      1144
+    ],
+    "disaster:country": "AFG",
+    "disaster:types": [
+      "earthquake"
+    ],
+    "disaster:activation_status": "archived",
+    "disaster:resolution_class": "VHR",
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG"
+    ],
+    "monty:hazard_codes": [
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
+    ],
+    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
+    "monty:response_detail": {
+      "type": "eo-gra",
+      "source_id": "1144-1",
+      "methodology": "human_interpreted",
+      "sendai_targets": [
+        "C",
+        "D"
+      ],
+      "producer": "Airbus"
+    },
+    "keywords": [
+      "AFG",
+      "Earthquake",
+      "Geological",
+      "Seismic",
+      "ValueAddedProduct"
+    ],
+    "datetime": "2025-11-11T08:00:29Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../charter-events/charter-event-1000.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://disasterscharter.org/activations/earthquake-in-afghanistan-activation-1000-",
+      "type": "text/html",
+      "title": "International Charter activation Act-1000"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1000-1144-1.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-response"
+}

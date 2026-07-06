@@ -1,0 +1,142 @@
+{
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/version/v1.0.0/schema.json",
+    "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "charter-response-1019-1166-19",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -43.347,
+          -21.771
+        ],
+        [
+          -43.323,
+          -21.771
+        ],
+        [
+          -43.323,
+          -21.728
+        ],
+        [
+          -43.347,
+          -21.728
+        ],
+        [
+          -43.347,
+          -21.771
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "disaster:class": "vap",
+    "updated": "2026-07-06T07:21:00.1512695Z",
+    "disaster:activation_id": 1019,
+    "datetime": "2026-03-10T19:47:05Z",
+    "created": "2026-03-10T20:08:21Z",
+    "title": "Geological Risk/Landslides Vitorino Braga, São Benedito, Vila Alpina Neighborhoods and Others, Juiz de Fora, Brazil [03/10/2026 19:47:05]",
+    "copyright": "Includes Pleiades material © CNES (2026), Distribution Airbus DS.;INPE",
+    "additional_information": "Map featuring a post-event Pléiades 1A HiRI image, overlaid with geological risk classifications and landslide polygons. The risk assessment was conducted by the National Secretariat for Civil Protection and Defense (SEDEC).",
+    "vap_status": "ACCEPTED",
+    "version": "2",
+    "disaster:call_ids": [
+      1166
+    ],
+    "disaster:country": "BRA",
+    "disaster:types": [
+      "landslide"
+    ],
+    "disaster:activation_status": "archived",
+    "disaster:resolution_class": "VHR",
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:country_codes": [
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "MH0901",
+      "LS",
+      "nat-geo-mmd-lan"
+    ],
+    "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
+    "monty:response_detail": {
+      "type": "eo-gra",
+      "source_id": "1166-19",
+      "producer": "INPE",
+      "methodology": "human_interpreted",
+      "sendai_targets": [
+        "C",
+        "D"
+      ]
+    }
+  },
+  "bbox": [
+    -43.347,
+    -21.771,
+    -43.323,
+    -21.728
+  ],
+  "assets": {
+    "overview": {
+      "type": "image/png",
+      "roles": [
+        "overview"
+      ],
+      "title": "Value Added Product Overview",
+      "href": "https://supervisor.disasterscharter.org/assets/activations/act-1019/vaps/act-1019-vap-1166-19/act-1019-vap-1166-19.json?key=overview",
+      "file:size": 2284641
+    }
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../charter-events/charter-event-1019.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "./charter-response-1166-phr1a-0907-00777.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://disasterscharter.org/activations/flood-in-brazil-activation-1019-",
+      "type": "text/html",
+      "title": "International Charter activation Act-1019"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1019-1166-19.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json"
+    }
+  ],
+  "collection": "charter-response"
+}

@@ -1,0 +1,114 @@
+{
+  "type": "Collection",
+  "id": "charter-response",
+  "stac_version": "1.1.0",
+  "description": "International Charter Value-Added Products (map products) and calibrated satellite acquisition datasets (eo-dat), mapped to Monty Response items.",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./charter-response-1000-1144-1.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-response-1019-1166-19.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-response-1166-phr1a-0907-00777.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "roles": [
+    "response",
+    "source"
+  ],
+  "keywords": [
+    "AFG",
+    "BRA",
+    "Earthquake",
+    "Flood",
+    "Landslide",
+    "Geological",
+    "Seismic",
+    "ValueAddedProduct",
+    "Acquisition"
+  ],
+  "title": "Charter Source Response",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -43.363,
+          -21.906,
+          67.799,
+          36.727
+        ],
+        [
+          67.642,
+          36.559,
+          67.799,
+          36.727
+        ],
+        [
+          -43.363,
+          -21.906,
+          -43.275,
+          -21.728
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-11T08:00:29Z",
+          "2026-03-10T19:47:05Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "International Charter Space and Major Disasters",
+      "description": "The Charter is an international collaboration through which satellite data is made available for disaster management purposes.",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://disasterscharter.org/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:country_codes": [
+      "AFG",
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "GH0101",
+      "nat-geo-ear-gro",
+      "FL",
+      "MH0600",
+      "nat-hyd-flo-flo",
+      "LS",
+      "MH0901",
+      "nat-geo-mmd-lan"
+    ],
+    "datetime": {
+      "minimum": "2025-11-11T08:00:29Z",
+      "maximum": "2026-03-10T19:47:05Z"
+    }
+  }
+}

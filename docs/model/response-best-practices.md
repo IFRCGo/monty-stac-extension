@@ -20,7 +20,7 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 
 | Response type (`monty:response_detail.type`) | Extensions to declare on the Response item | Notes |
 | --- | --- | --- |
-| `eo-dat` *(satellite imagery dataset delivered as the response deliverable)* | `monty:` **+** `eo:` / `sar:` / `sat:` *(the item IS the imagery)* **+** `disaster:` *(MANDATORY for Charter acquisitions, with `disaster:class = acquisition`)* | The most basic EO response, and the one case where the Response item and the acquisition item **coincide**: the deliverable is the dataset itself (e.g., a Charter `acquisition`, a UNOSAT GIS-ready download). Each delivered dataset is an `eo-dat` Response item. For the Charter, an acquisition is recorded at several ETL stages — keep only the **last, calibrated stage** (the dataset responders use to build VAPs); earlier-stage records are intermediate artifacts, not separate Response items. The imagery-layer extensions (`eo:` / `sar:` / `sat:`) are declared **on** the Response item; derived VAP Response items reference it via `derived_from`. See the acquisition row below and [taxonomy §2.1](./response-taxonomy.md#21-eo-response-products). |
+| `eo-dat` *(satellite imagery dataset delivered as the response deliverable)* | `monty:` **+** `eo:` / `sar:` / `sat:` *(the item IS the imagery)* **+** `disaster:` *(MANDATORY for Charter acquisitions, with `disaster:class = acquisition`)* | The most basic EO response, and the one case where the Response item and the acquisition item **coincide**: the deliverable is the dataset itself (e.g., a Charter `acquisition`, a UNOSAT GIS-ready download). Each delivered dataset is an `eo-dat` Response item. For the Charter, an acquisition is recorded at several ETL stages — keep only the **last, calibrated stage** (the dataset responders use to build VAPs); earlier-stage records are intermediate artifacts, not separate Response items. The imagery-layer extensions (`eo:` / `sar:` / `sat:`) are declared **on** the Response item; because the calibrated dataset is itself a Response item, derived VAP Response items reference it as a **sibling Response** (`rel: related`, `roles: ["response"]`), not via `derived_from`. See the acquisition row below and [taxonomy §2.1](./response-taxonomy.md#21-eo-response-products). |
 | `eo-ref`, `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon`, `eo-sr`, `eo-vap` *(CEMS-sourced)* | `monty:` **+** `processing:` *(recommended)* | No CEMS-specific STAC extension exists. CEMS `statusCode` and `monitoringNumber` are carried under `monty:response_detail` (as `status` and `monitoring_number`). `resolutionClass` is carried on the linked acquisition items (not on the Response item). `charterNumber` is modelled as a `rel: related` link (with `roles: ["response"]`) to the corresponding Charter VAP Response item. |
 | `eo-ref`, `eo-del`, `eo-gra`, `eo-pop`, `eo-vap` *(International Charter VAPs)* | `monty:` **+** `disaster:` *(MANDATORY)* **+** `processing:` *(recommended)* | Reuse `disaster:class = vap`, `disaster:activation_id`, `disaster:call_ids`, `disaster:activation_status`, `disaster:resolution_class`, `disaster:types`. Do NOT duplicate these under `monty:response_detail`. |
 | `eo-fep`, `eo-del`, `eo-gra`, `eo-pop`, `eo-mon` *(UNOSAT-sourced)* | `monty:` **+** `processing:` *(recommended)* | No UNOSAT STAC extension exists. |
@@ -67,12 +67,12 @@ Charter VAP Response items declare `monty:` **+** `disaster:` (+ optionally `pro
 | Hazard types | `disaster:types` (and `monty:hazard_codes` for Monty / UNDRR-ISC interoperability) |
 | Country | `disaster:country` (and `monty:country_codes`) |
 | Product type code | `monty:response_detail.type` (best-effort: `eo-del` / `eo-gra` / `eo-pop` / `eo-vap` fallback) |
-| Charter-provided source id | `monty:response_detail.source_id` (e.g., `ACT-849`) |
+| Charter-provided VAP id | `monty:response_detail.source_id` (e.g., `1144-1` — `{call_id}-{vap_number}`; activation id is on `disaster:activation_id`) |
 | Source landing page | STAC `rel: derived_from` link to the source-system product page (`href` = canonical URL) |
 | Producer (VAP provider) | `monty:response_detail.producer` |
 | Methodology | `monty:response_detail.methodology` |
 
-> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. Only Charter VAPs become Monty Response items.
+> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. **VAPs** and **calibrated acquisition datasets** become Monty Response items (`eo-del` / `eo-gra` / … and `eo-dat` respectively). See [Charter source mapping](../sources/Charter/README.md).
 
 ### 3.3 UNOSAT Rapid Mapping
 
@@ -140,7 +140,7 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
     "disaster:country": "ESP",
     "monty:response_detail": {
       "type": "eo-vap",
-      "source_id": "ACT-849",
+      "source_id": "1421-1",
       "producer": "Airbus",
       "methodology": "human_interpreted",
       "sendai_targets": ["D", "G"]
@@ -148,10 +148,16 @@ UNOSAT Response items declare `monty:` (+ optionally `processing:`). No UNOSAT S
   },
   "links": [
     {
+      "rel": "related",
+      "href": "../charter-events/charter-event-849.json",
+      "type": "application/geo+json",
+      "roles": ["event"]
+    },
+    {
       "rel": "derived_from",
       "href": "https://disasterscharter.org/web/guest/activations/-/article/...",
       "type": "text/html",
-      "title": "International Charter activation ACT-849"
+      "title": "International Charter activation Act-849"
     }
   ]
 }
@@ -184,7 +190,7 @@ Note the absence of `monty:response_detail.status` — it is carried via `disast
 
 ### 4.4 Charter raw acquisition delivered to responders (`eo-dat`)
 
-Here the response deliverable is the satellite dataset itself, so the Response item and the acquisition item coincide: the imagery-layer extensions (`sat:` / `eo:`) and `disaster:class = acquisition` are carried directly on the Response item. This is the **last, calibrated** ETL stage of the acquisition — the dataset responders use to build VAPs; the derived VAP Response items reference it via `derived_from`.
+Here the response deliverable is the satellite dataset itself, so the Response item and the acquisition item coincide: the imagery-layer extensions (`sat:` / `eo:`) and `disaster:class = acquisition` are carried directly on the Response item. This is the **last, calibrated** ETL stage of the acquisition — the dataset responders use to build VAPs; because the calibrated dataset is itself an `eo-dat` Response item, the derived VAP Response items reference it as a **sibling Response** (`rel: related`, `roles: ["response"]`), not via `derived_from`.
 
 ```jsonc
 {
@@ -245,8 +251,9 @@ A Monty Response item typically participates in the following links:
 | --- | --- | --- | --- |
 | `self` | this item | — | Standard STAC self link |
 | `collection` | parent collection | — | Standard STAC parent link |
-| `reference-event` | the Monty reference event | — | Ties the response to the canonical Monty event |
-| `source-event` | the source-system event item | — | Ties the response to the source-side event |
+| `reference-event` | the Monty reference event | — | Ties the response to the canonical Monty event (cross-catalog) |
+| `source-event` | the source-system event item | — | Ties the response to the source-side event (cross-catalog) |
+| `related` | Event item | `["event"]` | Within a source collection, ties the response to its parent Event (typed link per Monty schema) |
 | `related` | another Response item | `["response"]` | Cross-reference to a sibling response (e.g., a CEMS Grading product references a prior Delineation product on the same activation) |
 | `related` | Hazard item(s) | `["hazard"]` | Indicates which hazard(s) the response addresses |
 | `related` | Impact item(s) | `["impact"]` | Optional back-reference to Impact items this response informs. The canonical provenance edge runs the **other way**: each derived Impact item carries a `rel: derived_from` link pointing to this Response item. |
