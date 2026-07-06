@@ -227,6 +227,43 @@ Per the [Response ↔ Impact boundary rules](../../response-impact-boundary.md),
 - Aggregated activation-level `stats` are the sum over AOIs — prefer per-product GRA `stats`
   to avoid double counting; if only activation `stats` exist, emit Impacts at Event level.
 
+## Tracking over time
+
+A CEMS activation evolves while it is open (`closed=false`): products are scheduled, then
+delivered, re-mapped as monitoring iterations, and occasionally corrected. Three distinct
+mechanisms carry that evolution into Monty — do not conflate them.
+
+1. **Idempotent upsert — status & geometry maturing (same item).** Item ids are
+   **deterministic** (`cems-response-{code}-aoi{n}-{type}[-m{k}]`, etc.), so re-ingesting an
+   activation **updates the same items in place**. A product moving `W`→`I`→`F` just flips
+   `monty:response_detail.status` (`planned`→`in-production`→`published`); the Hazard geometry
+   firms up when its DEL delineation is delivered. No new item per status change.
+
+2. **Monitoring axis — a time series of items (`rel: prev`).** Each monitoring iteration is a
+   **separate** product (own `id`, own `deliveryTime`, `monitoringNumber` 0,1,2…) → a separate
+   Response item (`monty:response_detail.monitoring_number`) and separate derived Impact items.
+   Chain iteration *n* to *n−1* with **`rel: prev`** within the same `(code, aoiNumber, type)`;
+   set `datetime` from the product `version.deliveryTime` (or `images[].acquisitionTime`). This
+   is the primary "track over time" mechanism — a growing, timestamped chain.
+
+3. **Revision axis — corrections (`version.number`).** A product re-issued as a correction
+   (`version.number` 1→2, e.g. *"Correction of the legend"*) supersedes the prior revision of
+   the *same* monitoring product. The API exposes only the latest revision, so **replace in
+   place** (optionally record the version via the STAC **Versioning** extension:
+   `predecessor-version` / `latest-version`).
+
+**Impact over time** therefore comes from the **per-product GRA** series (each GRA carries its
+own `deliveryTime` + `monitoringNumber`), yielding one timestamped Impact item per exposure
+class **per iteration**, chained by `rel: prev`. The aggregated activation `stats` is a rolling
+snapshot with **no history** — use it only as a current-total cross-check or when per-product
+stats are absent (never in addition, to avoid double counting).
+
+**The join & refresh:** every item across both axes shares `monty:corr_id` — query by it and
+order by `datetime` / `monitoring_number` to reconstruct the timeline. Detect change by
+polling the **list endpoint's `lastUpdate`** per activation (the detail payload omits it) and
+refetching detail when it advances; **`closed=true` ⇒ final** (stop polling), `closed=false` ⇒
+live. (WP2 RSS feeds provide the same trigger event-driven.)
+
 ## Cross-source linkage
 
 CEMS activations carry hard references to sibling sources. Beyond a shared
@@ -302,14 +339,14 @@ See [`FINDINGS.md`](./FINDINGS.md) for the raw familiarisation notes (esa-montan
    reuse the AOI/DEL extent or leave geometry coarse.
 4. **Response geometry** — per-AOI vs per-product `extent` for Response items (both present;
    products carry their own `extent`, generally the AOI extent).
-5. **Monitoring lineage** — `rel: prev` between iteration *n* and *n-1* keyed by
-   `monitoringNumber` (and/or `version.number`).
-6. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
+5. **Source imagery** — emit linked acquisition items (from `images[]`, carrying
    `sat:`/`eo:`/`sar:`) via `derived_from`, or keep `images[]` as product metadata only.
-7. **Cross-source links** — resolve GDACS episode; emit `related` links unconditionally
+6. **Cross-source links** — resolve GDACS episode; emit `related` links unconditionally
    (deterministic id) or only when the target is present in Montandon.
-8. **Impact granularity** — per-product GRA `stats` vs aggregated activation `stats`
-   (avoid double counting).
+
+*Resolved in [Tracking over time](#tracking-over-time): monitoring lineage (`rel: prev`
+per iteration), revision handling (`version.number` supersede), and Impact granularity
+(per-product GRA series, not the aggregated snapshot).*
 
 ## Resources
 
