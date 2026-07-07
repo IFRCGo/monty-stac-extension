@@ -52,11 +52,12 @@
       "earthquake"
     ],
     "disaster:activation_status": "archived",
-    "disaster:resolution_class": "VHR",
     "roles": [
       "response",
       "source"
     ],
+    "disaster:resolution_class": "VHR",
+    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
     "monty:country_codes": [
       "AFG"
     ],
@@ -65,25 +66,24 @@
       "EQ",
       "nat-geo-ear-gro"
     ],
-    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
     "monty:response_detail": {
       "type": "eo-gra",
       "source_id": "1144-1",
+      "producer": "Airbus",
       "methodology": "human_interpreted",
       "sendai_targets": [
         "C",
         "D"
-      ],
-      "producer": "Airbus"
+      ]
     },
+    "datetime": "2025-11-11T08:00:29Z",
     "keywords": [
       "AFG",
       "Earthquake",
       "Geological",
       "Seismic",
       "ValueAddedProduct"
-    ],
-    "datetime": "2025-11-11T08:00:29Z"
+    ]
   },
   "links": [
     {

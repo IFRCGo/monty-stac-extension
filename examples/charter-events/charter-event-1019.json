@@ -54,6 +54,22 @@
     },
     {
       "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
       "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
       "type": "application/geo+json",
       "roles": [
@@ -70,6 +86,46 @@
     },
     {
       "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-response/charter-response-1019-1166-22.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
       "href": "../charter-response/charter-response-1019-1166-19.json",
       "type": "application/geo+json",
       "roles": [
@@ -78,7 +134,31 @@
     },
     {
       "rel": "related",
+      "href": "../charter-response/charter-response-1166-lc08_l1gt_098169_20260226_20260226_02_rt.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
       "href": "../charter-response/charter-response-1166-phr1a-0907-00777.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-response/charter-response-1166-s2b_msil2a_20251228t130249_n0511_r095_t23kqs_20251228t162706.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-response/charter-response-1166-tsx1_sar__eec_re___sl_s_sra_20260228t082140_20260228t082141.json",
       "type": "application/geo+json",
       "roles": [
         "response"

@@ -20,8 +20,39 @@
       "type": "application/json"
     },
     {
+      "rel": "item",
+      "href": "./charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-landslide.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-landslide.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-flood.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-landslide.json",
+      "type": "application/json"
+    },
+    {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json"
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
@@ -48,8 +79,8 @@
     "spatial": {
       "bbox": [
         [
-          -43.4377,
-          -21.831,
+          -43.7376,
+          -21.9574,
           67.51205662570842,
           36.62141771742338
         ]
@@ -94,6 +125,18 @@
       "nat-geo-ear-gro",
       "nat-geo-mmd-lan",
       "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "AFG",
+      "BRA",
+      "Earthquake",
+      "Flooding",
+      "Geological",
+      "Gravitational Mass Movement (Landslide)",
+      "Ground Failure",
+      "Meteorological & Hydrological",
+      "Seismic",
+      "Water-related"
     ],
     "datetime": {
       "minimum": "2025-11-03T12:03:00Z",

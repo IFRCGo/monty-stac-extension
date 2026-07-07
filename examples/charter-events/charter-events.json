@@ -16,7 +16,8 @@
     },
     {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json"
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-events.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
@@ -87,6 +88,16 @@
       "nat-geo-ear-gro",
       "nat-geo-mmd-lan",
       "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "AFG",
+      "BRA",
+      "Earthquake",
+      "Flooding",
+      "Geological",
+      "Meteorological & Hydrological",
+      "Seismic",
+      "Water-related"
     ],
     "datetime": {
       "minimum": "2025-11-03T12:03:00Z",

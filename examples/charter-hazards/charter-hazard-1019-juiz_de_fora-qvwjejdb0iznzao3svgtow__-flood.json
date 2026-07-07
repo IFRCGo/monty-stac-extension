@@ -6,7 +6,6 @@
   ],
   "id": "charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood",
   "geometry": {
-    "type": "Polygon",
     "coordinates": [
       [
         [
@@ -142,7 +141,8 @@
           -21.7591
         ]
       ]
-    ]
+    ],
+    "type": "Polygon"
   },
   "bbox": [
     -43.4377,
@@ -152,7 +152,7 @@
   ],
   "properties": {
     "title": "Juiz de Fora",
-    "description": "Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:",
+    "description": "<p>Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:</p>\n",
     "roles": [
       "hazard",
       "source"

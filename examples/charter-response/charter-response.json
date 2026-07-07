@@ -16,12 +16,33 @@
     },
     {
       "rel": "item",
+      "href": "./charter-response-1019-1166-22.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-response-1166-lc08_l1gt_098169_20260226_20260226_02_rt.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
       "href": "./charter-response-1166-phr1a-0907-00777.json",
       "type": "application/json"
     },
     {
+      "rel": "item",
+      "href": "./charter-response-1166-s2b_msil2a_20251228t130249_n0511_r095_t23kqs_20251228t162706.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./charter-response-1166-tsx1_sar__eec_re___sl_s_sra_20260228t082140_20260228t082141.json",
+      "type": "application/json"
+    },
+    {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json"
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
@@ -33,36 +54,20 @@
   ],
   "keywords": [
     "AFG",
-    "BRA",
     "Earthquake",
-    "Flood",
-    "Landslide",
     "Geological",
     "Seismic",
-    "ValueAddedProduct",
-    "Acquisition"
+    "ValueAddedProduct"
   ],
   "title": "Charter Source Response",
   "extent": {
     "spatial": {
       "bbox": [
         [
-          -43.363,
-          -21.906,
+          -43.366,
+          -22.72319,
           67.799,
           36.727
-        ],
-        [
-          67.642,
-          36.559,
-          67.799,
-          36.727
-        ],
-        [
-          -43.363,
-          -21.906,
-          -43.275,
-          -21.728
         ]
       ]
     },
@@ -70,7 +75,7 @@
       "interval": [
         [
           "2025-11-11T08:00:29Z",
-          "2026-03-10T19:47:05Z"
+          "2026-03-11T19:22:48Z"
         ]
       ]
     }
@@ -97,18 +102,25 @@
     ],
     "monty:hazard_codes": [
       "EQ",
-      "GH0101",
-      "nat-geo-ear-gro",
       "FL",
-      "MH0600",
-      "nat-hyd-flo-flo",
+      "GH0101",
       "LS",
+      "MH0600",
       "MH0901",
-      "nat-geo-mmd-lan"
+      "nat-geo-ear-gro",
+      "nat-geo-mmd-lan",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "AFG",
+      "Earthquake",
+      "Geological",
+      "Seismic",
+      "ValueAddedProduct"
     ],
     "datetime": {
       "minimum": "2025-11-11T08:00:29Z",
-      "maximum": "2026-03-10T19:47:05Z"
+      "maximum": "2026-03-11T19:22:48Z"
     }
   }
 }
