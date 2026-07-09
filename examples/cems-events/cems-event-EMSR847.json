@@ -85,6 +85,14 @@
     },
     {
       "rel": "related",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
       "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
       "type": "application/geo+json",
       "roles": [

@@ -96,6 +96,14 @@
       ]
     },
     {
+      "rel": "related",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
       "rel": "derived_from",
       "href": "https://rapidmapping.emergency.copernicus.eu/EMSR847",
       "type": "text/html",

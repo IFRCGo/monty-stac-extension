@@ -6,6 +6,11 @@
   "links": [
     {
       "rel": "item",
+      "href": "./cems-hazard-EMSR847-aoi01-landslide.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
       "href": "./cems-hazard-EMSR847-aoi01-storm.json",
       "type": "application/json"
     },
@@ -72,8 +77,11 @@
       "JAM"
     ],
     "monty:hazard_codes": [
+      "LS",
       "MH0403",
+      "MH0901",
       "TC",
+      "nat-geo-mmd-lan",
       "nat-met-sto-tro"
     ],
     "datetime": {

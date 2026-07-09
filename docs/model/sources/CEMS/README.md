@@ -359,6 +359,7 @@ Hazard geometry falls back to the AOI extent:
 
 - [`cems-event-EMSR847`](../../../../examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
 - [`cems-hazard-EMSR847-aoi01-storm`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0403`)
+- [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `MH0901`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
 - [`cems-response-EMSR847-aoi01-gra`](../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
 - [`cems-impact-EMSR847-aoi01-gra-population`](../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 
