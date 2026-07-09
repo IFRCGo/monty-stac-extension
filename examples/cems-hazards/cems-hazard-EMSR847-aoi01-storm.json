@@ -5,7 +5,6 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
   ],
   "id": "cems-hazard-EMSR847-aoi01-storm",
-  "collection": "cems-hazards",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -168,34 +167,36 @@
     18.103169
   ],
   "properties": {
-    "title": "Kingston — tropical cyclone hazard area",
-    "datetime": "2025-10-26T12:00:00Z",
+    "title": "Kingston — tropical cyclone, hurricane, typhoon hazard area",
     "roles": [
-      "source",
-      "hazard"
+      "hazard",
+      "source"
     ],
     "monty:country_codes": [
-      "JAM"
+      "JAM",
+      "HTI",
+      "CUB"
     ],
     "monty:hazard_codes": [
       "MH0403",
       "TC",
       "nat-met-sto-tro"
     ],
-    "monty:corr_id": "20251026-JAM-1553838-MH0403-1-GCDB"
+    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": 8552.7,
+      "severity_unit": "km2",
+      "severity_label": "Maximum extent"
+    },
+    "datetime": "2025-10-26T12:00:00Z"
   },
   "links": [
     {
-      "rel": "derived_from",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-events/cems-event-EMSR847.json",
-      "type": "application/geo+json"
-    },
-    {
       "rel": "related",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "href": "../cems-events/cems-event-EMSR847.json",
       "type": "application/geo+json",
       "roles": [
-        "response"
+        "event"
       ]
     },
     {
@@ -209,5 +210,6 @@
       "type": "application/json"
     }
   ],
-  "assets": {}
+  "assets": {},
+  "collection": "cems-hazards"
 }

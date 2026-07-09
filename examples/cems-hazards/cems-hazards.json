@@ -3,11 +3,33 @@
   "id": "cems-hazards",
   "stac_version": "1.1.0",
   "description": "Copernicus EMS Rapid Mapping Areas of Interest as Monty Hazard items.",
-  "title": "Copernicus EMS RM Hazards",
-  "license": "proprietary",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./cems-hazard-EMSR847-aoi01-storm.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazards.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://mapping.emergency.copernicus.eu/terms-and-conditions/",
+      "type": "text/html",
+      "title": "Copernicus EMS On-Demand Mapping Terms and Conditions"
+    }
+  ],
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
   ],
+  "roles": [
+    "hazard",
+    "source"
+  ],
+  "keywords": [],
+  "title": "Copernicus EMS RM Hazards",
   "extent": {
     "spatial": {
       "bbox": [
@@ -28,6 +50,7 @@
       ]
     }
   },
+  "license": "other",
   "providers": [
     {
       "name": "Copernicus Emergency Management Service",
@@ -38,31 +61,24 @@
       "url": "https://mapping.emergency.copernicus.eu/"
     }
   ],
-  "roles": [
-    "source",
-    "hazard"
-  ],
   "summaries": {
+    "roles": [
+      "hazard",
+      "source"
+    ],
     "monty:country_codes": [
-      "HTI",
       "CUB",
+      "HTI",
       "JAM"
     ],
     "monty:hazard_codes": [
       "MH0403",
       "TC",
       "nat-met-sto-tro"
-    ]
-  },
-  "links": [
-    {
-      "rel": "item",
-      "href": "./cems-hazard-EMSR847-aoi01-storm.json",
-      "type": "application/geo+json"
-    },
-    {
-      "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazards.json"
+    ],
+    "datetime": {
+      "minimum": "2025-10-26T12:00:00Z",
+      "maximum": "2025-10-26T12:00:00Z"
     }
-  ]
+  }
 }
