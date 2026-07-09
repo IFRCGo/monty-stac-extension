@@ -7,42 +7,42 @@
     "https://stac-extensions.github.io/version/v1.0.0/schema.json",
     "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json"
   ],
-  "id": "charter-response-1019-1166-19",
+  "id": "charter-response-1019-1166-22",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          -43.347,
-          -21.771
+          -43.366,
+          -21.775
         ],
         [
-          -43.323,
-          -21.771
+          -43.354,
+          -21.775
         ],
         [
-          -43.323,
-          -21.728
+          -43.354,
+          -21.753
         ],
         [
-          -43.347,
-          -21.728
+          -43.366,
+          -21.753
         ],
         [
-          -43.347,
-          -21.771
+          -43.366,
+          -21.775
         ]
       ]
     ]
   },
   "bbox": [
-    -43.347,
-    -21.771,
-    -43.323,
-    -21.728
+    -43.366,
+    -21.775,
+    -43.354,
+    -21.753
   ],
   "properties": {
-    "title": "Geological Risk/Landslides Vitorino Braga, São Benedito, Vila Alpina Neighborhoods and Others, Juiz de Fora, Brazil [03/10/2026 19:47:05]",
+    "title": "Geological Risk/Landslides Jardim Paineiras Neighborhood, Juiz de Fora, Brazil [03/11/2026 19:22:48]",
     "disaster:class": "vap",
     "disaster:activation_id": 1019,
     "disaster:call_ids": [
@@ -57,8 +57,8 @@
       "response",
       "source"
     ],
-    "updated": "2026-07-06T07:21:00.1512695Z",
-    "created": "2026-03-10T20:08:21Z",
+    "updated": "2026-07-06T07:20:20.8452253Z",
+    "created": "2026-03-11T19:32:08Z",
     "copyright": "Includes Pleiades material © CNES (2026), Distribution Airbus DS.;INPE",
     "additional_information": "Map featuring a post-event Pléiades 1A HiRI image, overlaid with geological risk classifications and landslide polygons. The risk assessment was conducted by the National Secretariat for Civil Protection and Defense (SEDEC).",
     "vap_status": "ACCEPTED",
@@ -75,7 +75,7 @@
     ],
     "monty:response_detail": {
       "type": "eo-gra",
-      "source_id": "1166-19",
+      "source_id": "1166-22",
       "producer": "INPE",
       "methodology": "human_interpreted",
       "sendai_targets": [
@@ -83,7 +83,7 @@
         "D"
       ]
     },
-    "datetime": "2026-03-10T19:47:05Z"
+    "datetime": "2026-03-11T19:22:48Z"
   },
   "links": [
     {
@@ -142,7 +142,7 @@
     },
     {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1019-1166-19.json",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1019-1166-22.json",
       "type": "application/json"
     },
     {
@@ -153,10 +153,10 @@
   ],
   "assets": {
     "overview": {
-      "href": "https://supervisor.disasterscharter.org/assets/activations/act-1019/vaps/act-1019-vap-1166-19/act-1019-vap-1166-19.json?key=overview",
+      "href": "https://supervisor.disasterscharter.org/assets/activations/act-1019/vaps/act-1019-vap-1166-22/act-1019-vap-1166-22.json?key=overview",
       "type": "image/png",
       "title": "Value Added Product Overview",
-      "file:size": 2284641,
+      "file:size": 2089702,
       "roles": [
         "overview"
       ]

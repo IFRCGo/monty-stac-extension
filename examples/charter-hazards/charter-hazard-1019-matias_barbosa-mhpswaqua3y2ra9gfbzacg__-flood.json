@@ -1,0 +1,147 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood",
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          -43.2804,
+          -21.8646
+        ],
+        [
+          -43.2833,
+          -21.8783
+        ],
+        [
+          -43.2917,
+          -21.89
+        ],
+        [
+          -43.3043,
+          -21.8978
+        ],
+        [
+          -43.3191,
+          -21.9005
+        ],
+        [
+          -43.3339,
+          -21.8978
+        ],
+        [
+          -43.3465,
+          -21.89
+        ],
+        [
+          -43.3549,
+          -21.8783
+        ],
+        [
+          -43.3578,
+          -21.8646
+        ],
+        [
+          -43.3549,
+          -21.8508
+        ],
+        [
+          -43.3465,
+          -21.8392
+        ],
+        [
+          -43.3339,
+          -21.8314
+        ],
+        [
+          -43.3191,
+          -21.8286
+        ],
+        [
+          -43.3043,
+          -21.8314
+        ],
+        [
+          -43.2917,
+          -21.8392
+        ],
+        [
+          -43.2833,
+          -21.8508
+        ],
+        [
+          -43.2804,
+          -21.8646
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "bbox": [
+    -43.3578,
+    -21.9005,
+    -43.2804,
+    -21.8286
+  ],
+  "properties": {
+    "title": "Matias Barbosa",
+    "description": "Call-1166 AoI ID: 2, Priority: 3, Radius (km): 4.0, Lat: -21.864577, Long: -43.319093, SurfaceArea: 50, Comment:",
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "monty:country_codes": [
+      "BRA"
+    ],
+    "monty:hazard_codes": [
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": 4,
+      "severity_unit": "km",
+      "severity_label": "Area radius",
+      "estimate_type": "primary"
+    },
+    "keywords": [
+      "BRA",
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related"
+    ],
+    "datetime": "2026-02-24T17:09:00Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../charter-events/charter-event-1019.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "../charter-events/charter-event-1019.json",
+      "type": "application/json",
+      "title": "Parent Charter Event"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-hazards/charter-hazards.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "charter-hazards"
+}

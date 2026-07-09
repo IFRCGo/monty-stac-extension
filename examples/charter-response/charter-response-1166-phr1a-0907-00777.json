@@ -1,4 +1,5 @@
 {
+  "type": "Feature",
   "stac_version": "1.1.0",
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
@@ -10,7 +11,6 @@
     "https://stac-extensions.github.io/view/v1.0.0/schema.json",
     "https://terradue.github.io/stac-extensions-disaster/v1.1.0/schema.json"
   ],
-  "type": "Feature",
   "id": "charter-response-1166-phr1a-0907-00777",
   "geometry": {
     "type": "Polygon",
@@ -39,6 +39,12 @@
       ]
     ]
   },
+  "bbox": [
+    -43.36309192493356,
+    -21.9057684748102,
+    -43.27508485213274,
+    -21.82332319528645
+  ],
   "properties": {
     "datetime": "2026-03-02T13:04:35.5Z",
     "created": "2026-03-12T12:24:26.0122329Z",
@@ -100,6 +106,7 @@
       "response",
       "source"
     ],
+    "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
     "monty:country_codes": [
       "BRA"
     ],
@@ -111,7 +118,6 @@
       "LS",
       "nat-geo-mmd-lan"
     ],
-    "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
     "monty:response_detail": {
       "type": "eo-dat",
       "source_id": "DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated",
@@ -122,21 +128,116 @@
       ]
     }
   },
-  "bbox": [
-    -43.36309192493356,
-    -21.9057684748102,
-    -43.27508485213274,
-    -21.82332319528645
+  "links": [
+    {
+      "rel": "related",
+      "href": "../charter-events/charter-event-1019.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://disasterscharter.org/activations/flood-in-brazil-activation-1019-",
+      "type": "text/html",
+      "title": "International Charter activation Act-1019"
+    },
+    {
+      "rel": "related",
+      "href": "./charter-response-1019-1166-22.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "./charter-response-1019-1166-19.json",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1166-phr1a-0907-00777.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
+      "type": "application/json"
+    }
   ],
   "assets": {
     "blue": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "roles": [
-        "data",
-        "reflectance",
-        "visual"
-      ],
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/blue.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "eo:bands": [
         {
           "name": "blue",
@@ -422,16 +523,16 @@
           }
         }
       ],
-      "file:size": 408011241
-    },
-    "green": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 408011241,
       "roles": [
         "data",
         "reflectance",
         "visual"
-      ],
+      ]
+    },
+    "green": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/green.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "eo:bands": [
         {
           "name": "green",
@@ -718,16 +819,16 @@
         }
       ],
       "key": "green",
-      "file:size": 414242493
-    },
-    "red": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 414242493,
       "roles": [
         "data",
         "reflectance",
         "visual"
-      ],
+      ]
+    },
+    "red": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/red.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "eo:bands": [
         {
           "name": "red",
@@ -1014,16 +1115,16 @@
         }
       ],
       "key": "red",
-      "file:size": 402325785
-    },
-    "nir": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 402325785,
       "roles": [
         "data",
         "reflectance",
         "visual"
-      ],
+      ]
+    },
+    "nir": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/nir.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "eo:bands": [
         {
           "name": "nir",
@@ -1310,15 +1411,16 @@
         }
       ],
       "key": "nir",
-      "file:size": 509954937
-    },
-    "ndvi": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 509954937,
       "roles": [
         "data",
+        "reflectance",
         "visual"
-      ],
+      ]
+    },
+    "ndvi": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/ndvi.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "s_expression": " (where (& (> nir 0) (> red 0)) (norm_diff nir red) nil)",
       "raster:bands": [
         {
@@ -1595,15 +1697,15 @@
           }
         }
       ],
-      "file:size": 1095182605
-    },
-    "ndwi": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 1095182605,
       "roles": [
         "data",
         "visual"
-      ],
+      ]
+    },
+    "ndwi": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/ndwi.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "s_expression": " (where (& (> green 0) (> nir 0)) (norm_diff green nir) nil)",
       "raster:bands": [
         {
@@ -1880,15 +1982,15 @@
           }
         }
       ],
-      "file:size": 1091039578
+      "file:size": 1091039578,
+      "roles": [
+        "data",
+        "visual"
+      ]
     },
     "overview-trc": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "roles": [
-        "composite",
-        "visual"
-      ],
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/overview-trc.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "s_expressions": [
         "(interp v1 (asarray 0 10000) (asarray 0 1))",
         "(interp v2 (asarray 0 10000) (asarray 0 1))",
@@ -2989,15 +3091,15 @@
           }
         }
       ],
-      "file:size": 648156760
-    },
-    "overview-civ": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 648156760,
       "roles": [
         "composite",
         "visual"
-      ],
+      ]
+    },
+    "overview-civ": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/overview-civ.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "s_expressions": [
         "(interp v1 (asarray 0 10000) (asarray 0 1))",
         "(interp v2 (asarray 0 10000) (asarray 0 1))",
@@ -4098,15 +4200,15 @@
           }
         }
       ],
-      "file:size": 651591805
-    },
-    "overview-trc-low-res": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "file:size": 651591805,
       "roles": [
         "composite",
-        "overview"
-      ],
+        "visual"
+      ]
+    },
+    "overview-trc-low-res": {
       "href": "https://supervisor.disasterscharter.org/assets/calls/1166/acquisitions/calibratedDatasets/DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated/overview-trc-low-res.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "s_expressions": [
         "(interp v1 (asarray 0 10000) (asarray 0 1))",
         "(interp v2 (asarray 0 10000) (asarray 0 1))",
@@ -5207,50 +5309,12 @@
           }
         }
       ],
-      "file:size": 2907625
+      "file:size": 2907625,
+      "roles": [
+        "composite",
+        "overview"
+      ]
     }
   },
-  "links": [
-    {
-      "rel": "related",
-      "href": "../charter-events/charter-event-1019.json",
-      "type": "application/geo+json",
-      "roles": [
-        "event"
-      ]
-    },
-    {
-      "rel": "related",
-      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
-      "type": "application/geo+json",
-      "roles": [
-        "hazard"
-      ]
-    },
-    {
-      "rel": "related",
-      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
-      "type": "application/geo+json",
-      "roles": [
-        "hazard"
-      ]
-    },
-    {
-      "rel": "derived_from",
-      "href": "https://disasterscharter.org/activations/flood-in-brazil-activation-1019-",
-      "type": "text/html",
-      "title": "International Charter activation Act-1019"
-    },
-    {
-      "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response-1166-phr1a-0907-00777.json",
-      "type": "application/json"
-    },
-    {
-      "rel": "collection",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-response/charter-response.json",
-      "type": "application/json"
-    }
-  ],
   "collection": "charter-response"
 }

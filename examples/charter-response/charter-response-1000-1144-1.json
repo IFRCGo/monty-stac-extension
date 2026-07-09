@@ -41,7 +41,7 @@
   ],
   "properties": {
     "title": "Preliminary satellite-derived damage assessment (2 November 2025, M 6.3), Kholm Town and surrounding in Khulm District, Balkh Province, Afghanistan [11/11/2025 08:00:29]",
-    "description": "Status:\nDamaged buildings observed.\nDamaged structures and buildings, including walls and roofs, were observed in Khulm District, Balkh Province, Afghanistan, as of 5 November 2025.\n\nFurther action(s):\nfull assessment to be conducted",
+    "description": "Status:\nDamaged buildings observed.\nDamaged structures and buildings, including walls and roofs, were observed in Khulm District, Balkh Province, Afghanistan, as of 5 November 2025.\nFurther action(s):\nfull assessment to be conducted",
     "disaster:class": "vap",
     "disaster:activation_id": 1000,
     "disaster:call_ids": [
@@ -52,11 +52,12 @@
       "earthquake"
     ],
     "disaster:activation_status": "archived",
-    "disaster:resolution_class": "VHR",
     "roles": [
       "response",
       "source"
     ],
+    "disaster:resolution_class": "VHR",
+    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
     "monty:country_codes": [
       "AFG"
     ],
@@ -65,25 +66,24 @@
       "EQ",
       "nat-geo-ear-gro"
     ],
-    "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
     "monty:response_detail": {
       "type": "eo-gra",
       "source_id": "1144-1",
+      "producer": "Airbus",
       "methodology": "human_interpreted",
       "sendai_targets": [
         "C",
         "D"
-      ],
-      "producer": "Airbus"
+      ]
     },
+    "datetime": "2025-11-11T08:00:29Z",
     "keywords": [
       "AFG",
       "Earthquake",
       "Geological",
       "Seismic",
       "ValueAddedProduct"
-    ],
-    "datetime": "2025-11-11T08:00:29Z"
+    ]
   },
   "links": [
     {
