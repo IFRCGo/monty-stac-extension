@@ -152,7 +152,7 @@
   ],
   "properties": {
     "title": "Juiz de Fora",
-    "description": "<p>Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:</p>\n",
+    "description": "Call-1166 AoI ID: 1, Priority: 1, Radius (km): 8.0, Lat: -21.759126, Long: -43.360292, SurfaceArea: 201, Comment:",
     "roles": [
       "hazard",
       "source"

@@ -152,7 +152,7 @@
   ],
   "properties": {
     "title": "Uba",
-    "description": "<p>Call-1166 AoI ID: 3, Priority: 2, Radius (km): 7.0, Lat: -21.122187, Long: -42.941896, SurfaceArea: 153, Comment:</p>\n",
+    "description": "Call-1166 AoI ID: 3, Priority: 2, Radius (km): 7.0, Lat: -21.122187, Long: -42.941896, SurfaceArea: 153, Comment:",
     "roles": [
       "hazard",
       "source"

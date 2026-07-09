@@ -152,7 +152,7 @@
   ],
   "properties": {
     "title": "Region",
-    "description": "<p>Call-1166 AoI ID: 4, Priority: 4, Radius (km): 57.0, Lat: -21.445174, Long: -43.187215, SurfaceArea: 10207, Comment: For global coverage of the region</p>\n",
+    "description": "Call-1166 AoI ID: 4, Priority: 4, Radius (km): 57.0, Lat: -21.445174, Long: -43.187215, SurfaceArea: 10207, Comment: For global coverage of the region",
     "roles": [
       "hazard",
       "source"
