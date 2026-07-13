@@ -5,7 +5,6 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
   ],
   "id": "cems-event-EMSR847",
-  "collection": "cems-events",
   "geometry": {
     "type": "Point",
     "coordinates": [
@@ -14,41 +13,71 @@
     ]
   },
   "bbox": [
-    -76.73031441425942,
-    17.98150514565106,
-    -76.73031441425942,
-    17.98150514565106
+    -78.384606,
+    17.836973,
+    -72.256615,
+    20.922965
   ],
   "properties": {
     "title": "Tropical Cyclone Melissa in the Caribbean",
     "description": "On 25 October 2025 at 20:00, Tropical Storm Melissa was forecast to affect Jamaica and the southern peninsula of Haiti. The event was expected to cause damage to housing, infrastructure, and transport networks due to heavy rainfall, strong winds, flooding, and landslides. Hurricane conditions were forecast for Jamaica during the weekend and subsequently for the southern peninsula of Haiti and Cuba. Copernicus EMS Rapid Mapping was requested to provide flood extent and damage assessment emergency mapping.",
-    "datetime": "2025-10-26T12:00:00Z",
     "roles": [
-      "source",
-      "event"
+      "event",
+      "source"
     ],
     "monty:country_codes": [
+      "JAM",
       "HTI",
-      "CUB",
-      "JAM"
+      "CUB"
     ],
+    "monty:episode_number": 1,
     "monty:hazard_codes": [
       "MH0403",
       "TC",
       "nat-met-sto-tro"
     ],
-    "monty:corr_id": "20251026-JAM-1553838-MH0403-1-GCDB",
+    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
     "keywords": [
+      "Blizzard",
+      "Depression or Cyclone",
       "EMSR847",
+      "Meteorological & Hydrological",
+      "Precipitation-related",
       "Storm",
-      "Tropical cyclone",
-      "Melissa"
-    ]
+      "Tropical Cyclone Melissa",
+      "Tropical cyclone, hurricane, typhoon",
+      "Wind & Pressure-related"
+    ],
+    "datetime": "2025-10-26T12:00:00Z"
   },
   "links": [
     {
+      "rel": "via",
+      "href": "https://storymaps.arcgis.com/stories/d885092b8f6642fb8fcf6fa86b050e5c",
+      "type": "text/html",
+      "title": "CEMS situational report (StoryMap)"
+    },
+    {
       "rel": "related",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "href": "../gdacs-events/1001230-41.json",
+      "type": "application/geo+json",
+      "title": "GDACS TC1001230 (episode 41)",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../charter-events/charter-event-996.json",
+      "type": "application/geo+json",
+      "title": "Charter activation 996",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -56,7 +85,15 @@
     },
     {
       "rel": "related",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
       "type": "application/geo+json",
       "roles": [
         "response"
@@ -64,27 +101,11 @@
     },
     {
       "rel": "related",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/gdacs-events/1001230-41.json",
+      "href": "../cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json",
       "type": "application/geo+json",
       "roles": [
-        "event"
-      ],
-      "title": "GDACS TC1001230 (episode 41)"
-    },
-    {
-      "rel": "related",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/charter-events/charter-event-996.json",
-      "type": "application/geo+json",
-      "roles": [
-        "event"
-      ],
-      "title": "Charter activation 996"
-    },
-    {
-      "rel": "via",
-      "href": "https://storymaps.arcgis.com/stories/d885092b8f6642fb8fcf6fa86b050e5c",
-      "type": "text/html",
-      "title": "CEMS situational report (StoryMap)"
+        "impact"
+      ]
     },
     {
       "rel": "self",
@@ -97,5 +118,6 @@
       "type": "application/json"
     }
   ],
-  "assets": {}
+  "assets": {},
+  "collection": "cems-events"
 }

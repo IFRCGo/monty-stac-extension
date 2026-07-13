@@ -4,7 +4,7 @@
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
   ],
-  "id": "cems-hazard-EMSR847-aoi01-storm",
+  "id": "cems-hazard-EMSR847-aoi01-landslide",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -167,7 +167,7 @@
     18.103169
   ],
   "properties": {
-    "title": "Kingston — tropical cyclone, hurricane, typhoon hazard area",
+    "title": "Kingston — landslide hazard area",
     "roles": [
       "hazard",
       "source"
@@ -178,15 +178,16 @@
       "CUB"
     ],
     "monty:hazard_codes": [
-      "MH0403",
-      "TC",
-      "nat-met-sto-tro"
+      "MH0901",
+      "LS",
+      "nat-geo-mmd-lan"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
     "monty:hazard_detail": {
-      "severity_value": 8552.7,
-      "severity_unit": "km2",
-      "severity_label": "Maximum extent"
+      "severity_value": 1,
+      "severity_unit": "count",
+      "severity_label": "Landslide",
+      "estimate_type": "primary"
     },
     "datetime": "2025-10-26T12:00:00Z"
   },
@@ -201,7 +202,7 @@
     },
     {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
       "type": "application/json"
     },
     {

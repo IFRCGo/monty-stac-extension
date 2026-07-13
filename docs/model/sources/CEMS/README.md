@@ -142,7 +142,7 @@ mirrors the Charter Area→Hazard mapping.
 | activation `countries` | `monty:country_codes` | Inherited from the activation |
 | activation `eventTime` | `datetime` | Inherited from the activation |
 | activation `max_extent` stat (if present) | `monty:hazard_detail.severity_value` | Optional; `severity_unit` per the stat (e.g. `km2`). CEMS AOIs carry no explicit severity otherwise |
-| parent activation | `links[rel=derived_from]` | `../cems-events/cems-event-{code}.json` |
+| parent activation | `links[rel=related]` (`roles: ["event"]`) | `../cems-events/cems-event-{code}.json` |
 | DEL Response for this AOI | `links[rel=related]` (`roles: ["response"]`) | The delineation product the geometry came from |
 
 > One Hazard per AOI **per hazard code** (Charter precedent): for a multi-hazard
@@ -185,6 +185,7 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 | — | `monty:response_detail.sendai_targets` | Taxonomy default for the type code |
 | `images[]` | `links[rel=derived_from]` → acquisition item(s) | Source imagery (`sensorType`, `sensorName`, `resolutionClass`, `acquisitionTime`) carries `sat:`/`eo:`/`sar:` on the acquisition, **not** on the Response |
 | `layers[]` (COG), `downloadPath` (ZIP) | `assets` | Web layers + downloadable package |
+| activation page | `links[rel=derived_from]` | Upstream CEMS activation provenance |
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
 `reportLink` StoryMap URL (no geospatial payload).
@@ -358,6 +359,7 @@ Hazard geometry falls back to the AOI extent:
 
 - [`cems-event-EMSR847`](../../../../examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
 - [`cems-hazard-EMSR847-aoi01-storm`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0403`)
+- [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `MH0901`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
 - [`cems-response-EMSR847-aoi01-gra`](../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
 - [`cems-impact-EMSR847-aoi01-gra-population`](../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 
