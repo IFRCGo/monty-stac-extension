@@ -1,0 +1,143 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "cems-response-EMSR847-aoi01-gra",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -76.796615,
+          17.962363
+        ],
+        [
+          -76.747653,
+          17.966604
+        ],
+        [
+          -76.748316,
+          17.975553
+        ],
+        [
+          -76.756525,
+          17.983078
+        ],
+        [
+          -76.783782,
+          17.984849
+        ],
+        [
+          -76.800345,
+          17.978717
+        ],
+        [
+          -76.796615,
+          17.962363
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -76.800345,
+    17.962363,
+    -76.747653,
+    17.984849
+  ],
+  "properties": {
+    "title": "CEMS grading product — Kingston (EMSR847)",
+    "processing:level": "L3",
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
+    "monty:country_codes": [
+      "JAM",
+      "HTI",
+      "CUB"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:response_detail": {
+      "type": "eo-gra",
+      "source_id": "EMSR847",
+      "status": "published",
+      "producer": "Copernicus EMS",
+      "methodology": "human_interpreted",
+      "sendai_targets": [
+        "C",
+        "D"
+      ]
+    },
+    "datetime": "2025-11-10T23:16:39.188570Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../cems-events/cems-event-EMSR847.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "derived_from",
+      "href": "https://rapidmapping.emergency.copernicus.eu/EMSR847",
+      "type": "text/html",
+      "title": "CEMS EMSR847 activation"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "download": {
+      "href": "https://rapidmapping.emergency.copernicus.eu/backend/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_v1.zip",
+      "type": "application/zip",
+      "title": "Product package (vector + raster)",
+      "roles": [
+        "data"
+      ]
+    },
+    "grading_cog": {
+      "href": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO_cog.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Grading product (COG)",
+      "roles": [
+        "data",
+        "visual"
+      ]
+    }
+  },
+  "collection": "cems-response"
+}

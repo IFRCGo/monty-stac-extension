@@ -11,6 +11,7 @@ The examples are organized by data source and collection type:
 Collections that define disaster events from various sources:
 
 - **[charter-events/](charter-events/)** - International Charter activation events
+- **[cems-events/](cems-events/)** - Copernicus EMS Rapid Mapping activations
 - **[desinventar-events/](desinventar-events/)** - DesInventar disaster events
 - **[emdat-events/](emdat-events/)** - EM-DAT disaster events  
 - **[gdacs-events/](gdacs-events/)** - GDACS disaster events
@@ -29,6 +30,7 @@ Collections that define disaster events from various sources:
 Collections that contain hazard-specific data and characteristics:
 
 - **[charter-hazards/](charter-hazards/)** - International Charter areas of interest (hazard extents)
+- **[cems-hazards/](cems-hazards/)** - Copernicus EMS Rapid Mapping areas of interest (hazard extents)
 - **[emdat-hazards/](emdat-hazards/)** - EM-DAT hazard data
 - **[gdacs-hazards/](gdacs-hazards/)** - GDACS hazard information
 - **[gfd-hazards/](gfd-hazards/)** - Global Flood Database hazard data
@@ -51,12 +53,14 @@ Collections that document the effects and impacts of disasters:
 - **[ifrcevent-impacts/](ifrcevent-impacts/)** - IFRC impact data
 - **[pdc-impacts/](pdc-impacts/)** - Pacific Disaster Center impact data
 - **[usgs-impacts/](usgs-impacts/)** - USGS earthquake impact data
+- **[cems-impacts/](cems-impacts/)** - Copernicus EMS grading-product damage/exposure statistics
 
 ### Response Collections
 
 Collections that document disaster response products (e.g. satellite-derived VAPs):
 
 - **[charter-response/](charter-response/)** - International Charter Value-Added Products (`eo-gra`/`eo-del`/…) and calibrated satellite acquisition datasets (`eo-dat`), as Monty Response items (`monty:response_detail`)
+- **[cems-response/](cems-response/)** - Copernicus EMS Rapid Mapping products (REF/FEP/DEL/GRA/SR) as Monty Response items
 
 ## Usage
 

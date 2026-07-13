@@ -1,0 +1,215 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "cems-hazard-EMSR847-aoi01-storm",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -76.827196,
+          17.93691
+        ],
+        [
+          -76.835519,
+          17.93634
+        ],
+        [
+          -76.839586,
+          17.931145
+        ],
+        [
+          -76.848865,
+          17.93244
+        ],
+        [
+          -76.842139,
+          17.943532
+        ],
+        [
+          -76.84112,
+          17.970343
+        ],
+        [
+          -76.847234,
+          17.998802
+        ],
+        [
+          -76.875555,
+          18.027925
+        ],
+        [
+          -76.884749,
+          18.030223
+        ],
+        [
+          -76.892053,
+          18.042319
+        ],
+        [
+          -76.890317,
+          18.052873
+        ],
+        [
+          -76.87462,
+          18.068636
+        ],
+        [
+          -76.869677,
+          18.07398
+        ],
+        [
+          -76.865803,
+          18.079858
+        ],
+        [
+          -76.85752,
+          18.085602
+        ],
+        [
+          -76.842558,
+          18.088942
+        ],
+        [
+          -76.833741,
+          18.085602
+        ],
+        [
+          -76.820115,
+          18.099629
+        ],
+        [
+          -76.813235,
+          18.103169
+        ],
+        [
+          -76.768817,
+          18.079257
+        ],
+        [
+          -76.748511,
+          18.055344
+        ],
+        [
+          -76.733282,
+          18.032634
+        ],
+        [
+          -76.726335,
+          18.014866
+        ],
+        [
+          -76.726068,
+          17.992824
+        ],
+        [
+          -76.732441,
+          17.974275
+        ],
+        [
+          -76.669957,
+          17.946388
+        ],
+        [
+          -76.671553,
+          17.936246
+        ],
+        [
+          -76.738162,
+          17.938369
+        ],
+        [
+          -76.750716,
+          17.941562
+        ],
+        [
+          -76.761797,
+          17.938546
+        ],
+        [
+          -76.770436,
+          17.930597
+        ],
+        [
+          -76.782913,
+          17.925547
+        ],
+        [
+          -76.800163,
+          17.934121
+        ],
+        [
+          -76.805467,
+          17.933193
+        ],
+        [
+          -76.809704,
+          17.936194
+        ],
+        [
+          -76.816632,
+          17.935102
+        ],
+        [
+          -76.827196,
+          17.93691
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -76.892053,
+    17.925547,
+    -76.669957,
+    18.103169
+  ],
+  "properties": {
+    "title": "Kingston — tropical cyclone, hurricane, typhoon hazard area",
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "monty:country_codes": [
+      "JAM",
+      "HTI",
+      "CUB"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": 8552.7,
+      "severity_unit": "km2",
+      "severity_label": "Maximum extent"
+    },
+    "datetime": "2025-10-26T12:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../cems-events/cems-event-EMSR847.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-hazards/cems-hazards.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "cems-hazards"
+}

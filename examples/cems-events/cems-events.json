@@ -1,0 +1,105 @@
+{
+  "type": "Collection",
+  "id": "cems-events",
+  "stac_version": "1.1.0",
+  "description": "Copernicus EMS Rapid Mapping activations as Monty Event items.",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./cems-event-EMSR847.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-events/cems-events.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://mapping.emergency.copernicus.eu/terms-and-conditions/",
+      "type": "text/html",
+      "title": "Copernicus EMS On-Demand Mapping Terms and Conditions"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "roles": [
+    "event",
+    "source"
+  ],
+  "keywords": [
+    "Blizzard",
+    "Depression or Cyclone",
+    "EMSR847",
+    "Meteorological & Hydrological",
+    "Precipitation-related",
+    "Storm",
+    "Tropical Cyclone Melissa",
+    "Tropical cyclone, hurricane, typhoon",
+    "Wind & Pressure-related"
+  ],
+  "title": "Copernicus EMS RM Events",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -78.384606,
+          17.836973,
+          -72.256615,
+          20.922965
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-10-26T12:00:00Z",
+          "2025-10-26T12:00:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "providers": [
+    {
+      "name": "Copernicus Emergency Management Service",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://mapping.emergency.copernicus.eu/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "event",
+      "source"
+    ],
+    "monty:country_codes": [
+      "CUB",
+      "HTI",
+      "JAM"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "keywords": [
+      "Blizzard",
+      "Depression or Cyclone",
+      "EMSR847",
+      "Meteorological & Hydrological",
+      "Precipitation-related",
+      "Storm",
+      "Tropical Cyclone Melissa",
+      "Tropical cyclone, hurricane, typhoon",
+      "Wind & Pressure-related"
+    ],
+    "datetime": {
+      "minimum": "2025-10-26T12:00:00Z",
+      "maximum": "2025-10-26T12:00:00Z"
+    }
+  }
+}

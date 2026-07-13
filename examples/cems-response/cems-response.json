@@ -1,0 +1,84 @@
+{
+  "type": "Collection",
+  "id": "cems-response",
+  "stac_version": "1.1.0",
+  "description": "Copernicus EMS Rapid Mapping products (REF/FEP/DEL/GRA/SR) as Monty Response items.",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./cems-response-EMSR847-aoi01-gra.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://mapping.emergency.copernicus.eu/terms-and-conditions/",
+      "type": "text/html",
+      "title": "Copernicus EMS On-Demand Mapping Terms and Conditions"
+    }
+  ],
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "roles": [
+    "response",
+    "source"
+  ],
+  "keywords": [],
+  "title": "Copernicus EMS RM Response",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -76.800345,
+          17.962363,
+          -76.747653,
+          17.984849
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-10T23:16:39.188570Z",
+          "2025-11-10T23:16:39.188570Z"
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "providers": [
+    {
+      "name": "Copernicus Emergency Management Service",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://mapping.emergency.copernicus.eu/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "response",
+      "source"
+    ],
+    "monty:country_codes": [
+      "CUB",
+      "HTI",
+      "JAM"
+    ],
+    "monty:hazard_codes": [
+      "MH0403",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "datetime": {
+      "minimum": "2025-11-10T23:16:39.188570Z",
+      "maximum": "2025-11-10T23:16:39.188570Z"
+    }
+  }
+}
