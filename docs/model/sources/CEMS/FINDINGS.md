@@ -69,7 +69,7 @@ graph navigable directly (`related`) instead of only query-joinable (`corr_id`).
 | `gdacsId` | `TC1001230` | GDACS uses `{eventtype}` + `{eventid}`; Monty id = `{eventid}-{episodeid}` in collection `gdacs-events` (e.g. `1001230-1`). Split `TC`/`1001230`; resolve/assume episode (default `1`, or link at event level). | `rel: related`, `roles: ["event"]` → GDACS **Event** |
 | `charterNumber` (+ `charterUrl`) | `996` | Charter Monty Event id = `charter-event-{activation_id}` → `charter-event-996` (collection `charter-events`); Charter VAP/eo-dat Responses under `charter-response`. | `rel: related`, `roles: ["event"]` → Charter **Event** (and optionally `roles: ["response"]` to Charter VAP Responses) |
 
-Notes for #21 to resolve:
+Notes (all resolved in the analysis doc — see [`README.md`](./README.md)):
 
 - **Episode ambiguity for GDACS**: `gdacsId` gives eventtype+eventid but not the episode; decide whether to link the latest episode, all episodes, or the event without episode.
 - **Existence**: the target item may not yet be ingested in Montandon; emit the `related`
@@ -87,7 +87,12 @@ Notes for #21 to resolve:
 - Assets: per-product `downloadPath` (ZIP of vector+raster), `layers[]` (COG), `images[].fileName` (source imagery). `aws_bucket` + `productsPath` give S3/backend roots.
 - Cross-source keys on the activation: `gdacsId` (GDACS), `charterNumber`/`charterUrl` (Charter).
 
-## 5. Open items to carry into the analysis (#21)
+## 5. Open items to carry into the analysis (historical — now resolved)
+
+> **Superseded.** These were the open questions at familiarisation time. They are **all
+> resolved** in the analysis doc — see [`README.md` → Decisions (resolved)](./README.md#decisions-resolved).
+> This section is retained only as a record of the original exploration; do **not** treat it
+> as open work.
 
 1. Full **`statusCode` enum** (only `F`,`N` seen) and its `monty:response_detail.status` mapping.
 2. **FEP/REF** field completeness (fewer samples) — confirm images/assets shape.
