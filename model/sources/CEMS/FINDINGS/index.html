@@ -1,0 +1,1386 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CEMS Rapid Mapping — API & Data Model Familiarisation - Monty Extension Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cems-rapid-mapping-api-data-model-familiarisation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Monty Extension Documentation" class="md-header__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CEMS Rapid Mapping — API &amp; Data Model Familiarisation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Monty Extension Documentation" class="md-nav__button md-logo" aria-label="Monty Extension Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Monty Extension Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../taxonomy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../correlation_identifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../stac-api/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STAC API
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    STAC API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stac-api/correlation_algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stac-api/correlation_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stac-api/migration_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../stac-api/queryables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queryables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DesInventar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DesInventar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EM-DAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EM-DAT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GDACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GFD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GLIDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBTrACS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBTrACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IDMC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDMC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IFRC-DREF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IFRC-DREF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../USGS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    USGS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-endpoints-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Endpoints &amp; access
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-activation-payload-detail-endpoint-results0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Activation payload (detail endpoint → results[0])
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Activation payload (detail endpoint → results[0])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aoi-results0aoisi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AOI (results[0].aois[i])
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#product-aoisiproductsj-maps-to-monty-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product (aois[i].products[j]) — maps to Monty Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gra-product-stats-the-impact-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRA product stats — the Impact source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-validation-against-the-merged-taxonomy-response-taxonomymd-response-best-practicesmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Validation against the merged taxonomy (response-taxonomy.md, response-best-practices.md)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Validation against the merged taxonomy (response-taxonomy.md, response-best-practices.md)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3b-cross-source-linkage-derive-related-links-not-just-a-shared-corr_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3b. Cross-source linkage — derive related links, not just a shared corr_id
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-access-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data access patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-open-items-to-carry-into-the-analysis-historical-now-resolved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Open items to carry into the analysis (historical — now resolved)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="cems-rapid-mapping-api-data-model-familiarisation">CEMS Rapid Mapping — API &amp; Data Model Familiarisation</h1>
+<p>Hands-on exploration of the live CEMS Rapid Mapping API. Public, no auth. Sample
+activations captured in this folder: <strong>EMSR847</strong> (storm, rich), <strong>EMSR842</strong> (wildfire,
+minimal), <strong>EMSR871</strong> (flood, has FEP), plus list pages.</p>
+<h2 id="1-endpoints-access">1. Endpoints &amp; access</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/?limit=&amp;offset=</code></td>
+<td>RM activation <strong>list</strong> (224 activations). DRF pagination: <code>{count,next,previous,results}</code>.</td>
+</tr>
+<tr>
+<td><code>GET rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations/?code=EMSR847</code></td>
+<td><strong>Rich activation detail</strong> — AOIs, products, images, stats, cross-refs. <strong>The ETL entry point.</strong> Returns <code>{count,next,previous,results:[{...}]}</code> (single result).</td>
+</tr>
+<tr>
+<td><code>GET mapping.emergency.copernicus.eu/activations/api/activations/?limit=&amp;offset=</code></td>
+<td>Unified list (RM + Risk&amp;Recovery). Different shape (<code>category</code> is an object <code>{slug,name}</code>, has <code>drmPhase</code>, <code>search_snippet</code>). Discovery only.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Pagination: <code>limit</code>/<code>offset</code>; list <code>count=224</code>. No auth, no obvious rate limit hit during exploration.</li>
+<li>Licence: Copernicus — free &amp; open, attribution "© European Union, Copernicus Emergency Management Service".</li>
+</ul>
+<h2 id="2-activation-payload-detail-endpoint-results0">2. Activation payload (detail endpoint → <code>results[0]</code>)</h2>
+<p>Fields: <code>code</code> (EMSR847), <code>name</code>, <code>reason</code> (free-text description), <code>category</code> (Storm),
+<code>subCategory</code> (Tropical cyclone…), <code>sensitive</code> (bool), <strong><code>reportLink</code></strong> (ArcGIS StoryMap URL
+= the <strong>Situational Report</strong>), <code>activator</code>, <code>eventTime</code>, <code>activationTime</code>, <code>closed</code> (bool),
+<strong><code>gdacsId</code></strong> (e.g. <code>TC1001230</code>), <code>continent</code>, <code>countries</code> (<code>[{name}]</code>), <strong><code>aois</code></strong> (list),
+<code>centroid</code> (WKT POINT), <code>infobulletins</code>, <strong><code>stats</code></strong> (aggregated damage figures),
+<strong><code>charterNumber</code></strong> + <strong><code>charterUrl</code></strong> (Charter co-activation), <code>extent</code> (WKT POLYGON),
+<code>aws_bucket</code>, <code>productsPath</code>, <code>relatedevents</code>.</p>
+<p>Activation-level <code>stats</code> = aggregated thematic figures, e.g.
+<code>{"Roads [km]":206.4,"Built-up [ha]":19.5,"Built-up [No.]":48253,"Population [No.]":13030,"max_extent":8552.7}</code>.</p>
+<h3 id="aoi-results0aoisi">AOI (<code>results[0].aois[i]</code>)</h3>
+<p><code>{name, extent (WKT POLYGON), number, activationCode, products:[...], blpPath}</code>.</p>
+<h3 id="product-aoisiproductsj-maps-to-monty-response">Product (<code>aois[i].products[j]</code>) — maps to Monty <strong>Response</strong></h3>
+<p><code>{id, type, monitoring (bool), monitoringNumber (int), feasible (bool), images:[...],
+stats, mapsCount, activationCode, aoiName, aoiNumber, extent (WKT), expectedDelivery,
+layers:[...], downloadPath, version:{...}}</code></p>
+<ul>
+<li><strong><code>type</code></strong> observed: <code>REF</code>, <code>FEP</code>, <code>DEL</code>, <code>GRA</code> (all four RM map products). <strong><code>SR</code> is NOT a product</strong> — it is the activation-level <code>reportLink</code> StoryMap.</li>
+<li><strong><code>version</code></strong> = <code>{uuid, number, reason, deliveryTime, statusCode}</code>. <strong><code>statusCode</code></strong> observed: <code>F</code> (final/produced), <code>N</code> (not produced / not feasible). Status lives on <code>version</code>, not the product root.</li>
+<li><strong><code>monitoring</code>/<code>monitoringNumber</code></strong>: base = 0; monitoring iterations = 1, 2, … (EMSR847: monitoringNumber ∈ {0,1,2}).</li>
+<li><strong><code>images[]</code></strong> (the acquisition): <code>{uuid, new, sensorType (sar/optical), sensorName (ICEYE…), resolutionClass (VHR2…), acquisitionTime, fileName}</code>.</li>
+<li><strong><code>layers[]</code></strong> (web/COG assets): <code>{name, format (cog)}</code> — ArcGIS/COG raster layers.</li>
+<li><strong><code>downloadPath</code></strong>: per-product ZIP, e.g. <code>…/backend/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_v1.zip</code>.</li>
+</ul>
+<h3 id="gra-product-stats-the-impact-source">GRA product <code>stats</code> — the <strong>Impact</strong> source</h3>
+<p>Nested <code>{thematic_class: {sub_class: {unit, total, affected}}}</code>, e.g.
+<code>{"Landslide":{"None":{"unit":"","total":"NA","affected":1}},"Estimated population":{"None":{"total":84000}}}</code>.
+<code>total</code> may be <code>"NA"</code>. Only GRA carries per-product stats (REF/DEL/FEP: <code>stats:null</code>).</p>
+<h2 id="3-validation-against-the-merged-taxonomy-response-taxonomymd-response-best-practicesmd">3. Validation against the merged taxonomy (<code>response-taxonomy.md</code>, <code>response-best-practices.md</code>)</h2>
+<ul>
+<li>✅ Product→type-code crosswalk holds: <code>REF→eo-ref</code>, <code>FEP→eo-fep</code>, <code>DEL→eo-del</code>, <code>GRA→eo-gra</code>, <code>SR→eo-sr</code>.</li>
+<li>✅ <code>monitoring</code>/<code>monitoringNumber</code> → <code>monty:response_detail.monitoring_number</code> (set only when <code>monitoring=true</code>).</li>
+<li>✅ <code>statusCode</code> → <code>monty:response_detail.status</code> (need enum mapping: <code>F</code>→published/finished, <code>N</code>→no-impact/withdrawn; confirm other codes exist historically).</li>
+<li>✅ <code>resolutionClass</code> (on <code>images[]</code>) → carried on the linked acquisition, not the Response root.</li>
+<li>🟢 <code>eventTime</code> vs <code>activationTime</code> — two distinct timestamps (event onset vs Charter/CEMS activation). Onset = <code>eventTime</code>.</li>
+<li>❓ <code>eo-sr</code> is <strong>resolved as Response</strong> in the taxonomy; structurally the SR is a StoryMap URL (<code>reportLink</code>), a produced report — consistent with Response. No geospatial asset; model as a Response item whose asset is the StoryMap link.</li>
+</ul>
+<h3 id="3b-cross-source-linkage-derive-related-links-not-just-a-shared-corr_id">3b. Cross-source linkage — derive <code>related</code> links, not just a shared <code>corr_id</code></h3>
+<p>The activation carries hard cross-references to sibling sources. Beyond co-referencing
+via a shared <code>monty:corr_id</code>, the ETL <strong>SHOULD derive the target source's Monty item id
+and emit an explicit <code>rel: related</code> link</strong> (with the appropriate <code>roles</code>). This makes the
+graph navigable directly (<code>related</code>) instead of only query-joinable (<code>corr_id</code>).</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field</th>
+<th>Example</th>
+<th>Target Monty item id (derivation)</th>
+<th>Link to emit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gdacsId</code></td>
+<td><code>TC1001230</code></td>
+<td>GDACS uses <code>{eventtype}</code> + <code>{eventid}</code>; Monty id = <code>{eventid}-{episodeid}</code> in collection <code>gdacs-events</code> (e.g. <code>1001230-1</code>). Split <code>TC</code>/<code>1001230</code>; resolve/assume episode (default <code>1</code>, or link at event level).</td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code> → GDACS <strong>Event</strong></td>
+</tr>
+<tr>
+<td><code>charterNumber</code> (+ <code>charterUrl</code>)</td>
+<td><code>996</code></td>
+<td>Charter Monty Event id = <code>charter-event-{activation_id}</code> → <code>charter-event-996</code> (collection <code>charter-events</code>); Charter VAP/eo-dat Responses under <code>charter-response</code>.</td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code> → Charter <strong>Event</strong> (and optionally <code>roles: ["response"]</code> to Charter VAP Responses)</td>
+</tr>
+</tbody>
+</table>
+<p>Notes (all resolved in the analysis doc — see <a href="../"><code>README.md</code></a>):</p>
+<ul>
+<li><strong>Episode ambiguity for GDACS</strong>: <code>gdacsId</code> gives eventtype+eventid but not the episode; decide whether to link the latest episode, all episodes, or the event without episode.</li>
+<li><strong>Existence</strong>: the target item may not yet be ingested in Montandon; emit the <code>related</code>
+  link by convention regardless (id is deterministic), or gate on presence — a #21 decision.</li>
+<li><strong>Generalise</strong>: treat this as a reusable pattern — any source cross-ref field that yields a
+  deterministic source-item id (GLIDE, Charter, GDACS, EMSR↔EMSR <code>relatedevents</code>) becomes a
+  typed <code>related</code> link, keeping <code>corr_id</code> as the fallback join.</li>
+<li>Same idea applies <strong>outward</strong>: the Charter source doc already links a VAP to sibling
+  Responses via <code>related</code>/<code>response</code> — the CEMS↔Charter edge should be reciprocal.</li>
+</ul>
+<h2 id="4-data-access-patterns">4. Data access patterns</h2>
+<ul>
+<li><strong>Detail endpoint is the ETL unit</strong>: one call per activation code yields everything (AOIs → products → images/stats/layers/downloads).</li>
+<li>Discover codes via the list endpoint (paginated, 224 RM activations; <code>category</code> values seen: Flood, Wildfire, Storm, Earthquake, Other).</li>
+<li>Assets: per-product <code>downloadPath</code> (ZIP of vector+raster), <code>layers[]</code> (COG), <code>images[].fileName</code> (source imagery). <code>aws_bucket</code> + <code>productsPath</code> give S3/backend roots.</li>
+<li>Cross-source keys on the activation: <code>gdacsId</code> (GDACS), <code>charterNumber</code>/<code>charterUrl</code> (Charter).</li>
+</ul>
+<h2 id="5-open-items-to-carry-into-the-analysis-historical-now-resolved">5. Open items to carry into the analysis (historical — now resolved)</h2>
+<blockquote>
+<p><strong>Superseded.</strong> These were the open questions at familiarisation time. They are <strong>all
+resolved</strong> in the analysis doc — see <a href="../#decisions-resolved"><code>README.md</code> → Decisions (resolved)</a>.
+This section is retained only as a record of the original exploration; do <strong>not</strong> treat it
+as open work.</p>
+</blockquote>
+<ol>
+<li>Full <strong><code>statusCode</code> enum</strong> (only <code>F</code>,<code>N</code> seen) and its <code>monty:response_detail.status</code> mapping.</li>
+<li><strong>FEP/REF</strong> field completeness (fewer samples) — confirm images/assets shape.</li>
+<li><strong>Category → <code>monty:hazard_codes</code></strong> crosswalk (CEMS <code>category</code>/<code>subCategory</code> → UNDRR-ISC) — needs a table like Charter's.</li>
+<li><strong>Monitoring lineage</strong>: how to link monitoring iteration <em>n</em> to <em>n-1</em> (<code>rel: prev</code>?) — <code>version.number</code> vs <code>monitoringNumber</code>.</li>
+<li><strong>AOI → geometry</strong>: model per-AOI (like Charter Area→Hazard) or per-product extent.</li>
+<li><strong>RSS feeds</strong> (WP2 trigger) not yet explored — listed in the epic but out of WP1 ETL scope.</li>
+<li>Reference activations for tests: <strong>EMSR847</strong> (storm, Charter+GDACS cross-refs, monitoring, 67 products), <strong>EMSR871</strong> (flood, has FEP), <strong>EMSR842</strong> (wildfire, minimal, 2 GRA).</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

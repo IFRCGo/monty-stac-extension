@@ -1,0 +1,1405 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Copernicus Emergency Management Service — Rapid Mapping - Monty Extension Documentation</title>
+<link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../styles/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="red" data-md-color-primary="red" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#copernicus-emergency-management-service-rapid-mapping">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Monty Extension Documentation" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Copernicus Emergency Management Service — Rapid Mapping
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Monty Extension Documentation" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    Monty Extension Documentation
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../correlation_identifier/">
+<span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../questions/">
+<span class="md-ellipsis">
+    
+  
+    Questions
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../examples/">
+<span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../stac-api/">
+<span class="md-ellipsis">
+    
+  
+    STAC API
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    STAC API
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/correlation_algorithms/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Algorithms
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/correlation_examples/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/migration_guide/">
+<span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/queryables/">
+<span class="md-ellipsis">
+    
+  
+    Queryables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Sources
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DesInventar/">
+<span class="md-ellipsis">
+    
+  
+    DesInventar
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../EM-DAT/">
+<span class="md-ellipsis">
+    
+  
+    EM-DAT
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GDACS/">
+<span class="md-ellipsis">
+    
+  
+    GDACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GFD/">
+<span class="md-ellipsis">
+    
+  
+    GFD
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GLIDE/">
+<span class="md-ellipsis">
+    
+  
+    GLIDE
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IBTrACS/">
+<span class="md-ellipsis">
+    
+  
+    IBTrACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IDMC/">
+<span class="md-ellipsis">
+    
+  
+    IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IFRC-DREF/">
+<span class="md-ellipsis">
+    
+  
+    IFRC-DREF
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../PDC/">
+<span class="md-ellipsis">
+    
+  
+    PDC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../USGS/">
+<span class="md-ellipsis">
+    
+  
+    USGS
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-model">
+<span class="md-ellipsis">
+      
+        Object model
+      
+    </span>
+</a>
+<nav aria-label="Object model" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-activation-product-flow">
+<span class="md-ellipsis">
+      
+        The activation → product flow
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-mapping">
+<span class="md-ellipsis">
+      
+        Object mapping
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-access">
+<span class="md-ellipsis">
+      
+        Data access
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#activation-event">
+<span class="md-ellipsis">
+      
+        Activation → Event
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#area-of-interest-hazard">
+<span class="md-ellipsis">
+      
+        Area of Interest → Hazard
+      
+    </span>
+</a>
+<nav aria-label="Area of Interest → Hazard" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifying-multi-hazard">
+<span class="md-ellipsis">
+      
+        Identifying multi-hazard
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#product-response">
+<span class="md-ellipsis">
+      
+        Product → Response
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gra-statistics-impact">
+<span class="md-ellipsis">
+      
+        GRA statistics → Impact
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tracking-over-time">
+<span class="md-ellipsis">
+      
+        Tracking over time
+      
+    </span>
+</a>
+<nav aria-label="Tracking over time" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#refresh-and-polling-strategy">
+<span class="md-ellipsis">
+      
+        Refresh and polling strategy
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cross-source-linkage">
+<span class="md-ellipsis">
+      
+        Cross-source linkage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard-codes">
+<span class="md-ellipsis">
+      
+        Hazard codes
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+<span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference-files">
+<span class="md-ellipsis">
+      
+        Reference files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decisions-resolved">
+<span class="md-ellipsis">
+      
+        Decisions (resolved)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resources">
+<span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="copernicus-emergency-management-service-rapid-mapping">Copernicus Emergency Management Service — Rapid Mapping</h1>
+<p>Copernicus EMS <strong>Rapid Mapping (RM)</strong> produces on-demand geospatial crisis
+information — reference maps, delineations, and damage grading — for disasters
+worldwide. Unlike the International Charter, CEMS exposes a <strong>public JSON REST
+API</strong> (no STAC, no auth), so the ETL builds Monty STAC items directly from the API
+payload. This document maps the CEMS RM object model to Monty STAC items.</p>
+<blockquote>
+<p>Scope: <strong>Rapid Mapping only.</strong> Risk &amp; Recovery Mapping and EFFIS are out of scope
+(separate follow-ons). This is the WP1 data-model/ETL mapping; the RSS
+alert/listener (WP2 event-driven orchestration) is out of scope here.</p>
+</blockquote>
+<h2 id="collections">Collections</h2>
+<table>
+<thead>
+<tr>
+<th>Collection</th>
+<th>Code</th>
+<th>Monty role</th>
+<th>Source for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copernicus EMS RM — Events</td>
+<td><code>cems-events</code></td>
+<td><code>event</code></td>
+<td>Activation</td>
+</tr>
+<tr>
+<td>Copernicus EMS RM — Hazards</td>
+<td><code>cems-hazards</code></td>
+<td><code>hazard</code></td>
+<td>Area of Interest (extent refined by the DEL delineation)</td>
+</tr>
+<tr>
+<td>Copernicus EMS RM — Response</td>
+<td><code>cems-response</code></td>
+<td><code>response</code></td>
+<td>Product (REF / FEP / DEL / GRA) + Situational Report</td>
+</tr>
+<tr>
+<td>Copernicus EMS RM — Impacts</td>
+<td><code>cems-impacts</code></td>
+<td><code>impact</code></td>
+<td>GRA product damage/exposure statistics</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Source organisation</strong>: Copernicus Emergency Management Service (<code>CEMS</code>)</li>
+<li><strong>Source URL</strong>: <a href="https://mapping.emergency.copernicus.eu/">https://mapping.emergency.copernicus.eu/</a></li>
+<li><strong>API entry point</strong>: <a href="https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/">https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/</a> (public, no auth)</li>
+<li><strong>License</strong>: Copernicus data policy — free &amp; open; attribution <em>"© European Union, Copernicus Emergency Management Service"</em></li>
+<li><strong>Temporal coverage</strong>: 2012 onwards (EMSR activation series); 224 RM activations as of 2026-07</li>
+</ul>
+<blockquote>
+<p><strong>No CEMS STAC extension exists.</strong> Per the <a href="../../response-taxonomy/">response taxonomy</a>
+and <a href="../../response-best-practices/">best practices</a>, CEMS-specific fields are
+carried under <code>monty:response_detail</code> (there is no <code>cems:</code> extension). Response
+items declare <code>monty</code> (+ <code>processing</code> recommended); source-imagery extensions
+(<code>sat:</code> / <code>eo:</code> / <code>sar:</code>) live on the linked <strong>acquisition</strong> items, not on the
+Response product — except where a raw dataset is the deliverable (not the CEMS case).</p>
+</blockquote>
+<h2 id="object-model">Object model</h2>
+<h3 id="the-activation-product-flow">The activation → product flow</h3>
+<p>A CEMS <strong>Activation</strong> (code <code>EMSR{n}</code>, e.g. <code>EMSR847</code>) is opened for a disaster and
+scoped by one or more <strong>Areas of Interest (AOIs)</strong>. Each AOI accumulates <strong>Products</strong>
+through the Rapid Mapping lifecycle, and each product may be re-issued as timed
+<strong>monitoring</strong> iterations:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>REF (reference) → FEP (first estimate) → DEL (delineation) → GRA (grading)
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>                                            └─ monitoring 1, 2, … (same type, monitoringNumber++)
+</code></pre></div>
+<p>A <strong>Situational Report (SR)</strong> is an ArcGIS <strong>StoryMap</strong> published at activation level
+(<code>reportLink</code>) — a produced report, not a per-AOI geospatial product.</p>
+<pre class="mermaid"><code>flowchart TD
+    ACT["&lt;b&gt;Activation&lt;/b&gt; (EMSR847)&lt;br/&gt;→ Event (cems-events)"]
+    ACT --&gt;|"scoped by"| AOI["&lt;b&gt;AOIs&lt;/b&gt;&lt;br/&gt;(mapping extents)"]
+    AOI --&gt;|"extent (refined by DEL)"| HAZ["&lt;b&gt;Hazard&lt;/b&gt; per AOI&lt;br/&gt;→ (cems-hazards)"]
+    AOI --&gt;|"accumulate"| PROD["&lt;b&gt;Products&lt;/b&gt; REF/FEP/DEL/GRA&lt;br/&gt;→ Response (cems-response)"]
+    PROD -.-&gt;|"monitoring n+1"| PROD
+    PROD -.-&gt;|"DEL delineates"| HAZ
+    ACT --&gt;|"reportLink (StoryMap)"| SR["&lt;b&gt;Situational Report&lt;/b&gt;&lt;br/&gt;→ Response eo-sr"]
+    PROD --&gt;|"GRA stats: per thematic class"| IMP["&lt;b&gt;Impact&lt;/b&gt; items&lt;br/&gt;(cems-impacts)"]
+    ACT -.-&gt;|"gdacsId → related(event)"| GD["GDACS Event"]
+    ACT -.-&gt;|"charterNumber → related(event)"| CH["Charter Event"]</code></pre>
+<h3 id="object-mapping">Object mapping</h3>
+<table>
+<thead>
+<tr>
+<th>CEMS object</th>
+<th>Monty type</th>
+<th>Monty <code>id</code> pattern</th>
+<th>Collection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activation</td>
+<td>Event</td>
+<td><code>cems-event-{code}</code> (e.g. <code>cems-event-EMSR847</code>)</td>
+<td><code>cems-events</code></td>
+</tr>
+<tr>
+<td>Area of Interest (AOI)</td>
+<td>Hazard</td>
+<td><code>cems-hazard-{code}-aoi{n}-{type}</code></td>
+<td><code>cems-hazards</code></td>
+</tr>
+<tr>
+<td>Product (REF/FEP/DEL/GRA)</td>
+<td>Response</td>
+<td><code>cems-response-{code}-aoi{n}-{type}[-m{k}]</code></td>
+<td><code>cems-response</code></td>
+</tr>
+<tr>
+<td>Situational Report (<code>reportLink</code>)</td>
+<td>Response (<code>eo-sr</code>)</td>
+<td><code>cems-response-{code}-sr</code></td>
+<td><code>cems-response</code></td>
+</tr>
+<tr>
+<td>GRA statistic (per thematic class)</td>
+<td>Impact</td>
+<td><code>cems-impact-{code}-aoi{n}-gra-{thematic}[-m{k}]</code></td>
+<td><code>cems-impacts</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>{code}</code> is the activation code (<code>EMSR847</code>); <code>{n}</code> is the AOI <code>number</code>; <code>{type}</code> ∈
+  <code>ref</code>/<code>fep</code>/<code>del</code>/<code>gra</code> (or the hazard type slug for <code>cems-hazards</code>); <code>-m{k}</code> is
+  appended only for monitoring iterations (<code>monitoringNumber &gt; 0</code>).</li>
+<li><strong>The AOI is the hazard-area entity</strong> — the direct analog of a Charter Area — so it
+  maps to a <strong>Hazard</strong> item (one per AOI, split per hazard code for multi-hazard
+  activations, as Charter does). Geometry is the AOI <code>extent</code>, <strong>refined to the DEL
+  delineation polygon</strong> when a Delineation product exists for that AOI (the DEL <em>is</em> the
+  mapped hazard footprint). Hazard type/codes come from the activation <code>category</code>.</li>
+<li>The DEL product therefore has a <strong>dual role</strong>: it is both the <code>eo-del</code> <strong>Response</strong>
+  (the deliverable) and the source of the <strong>Hazard</strong> geometry — the two items share
+  <code>monty:corr_id</code> and cross-link (<code>related</code>).</li>
+</ul>
+<h2 id="data-access">Data access</h2>
+<p>The <strong>detail endpoint is the ETL unit</strong> — one call returns the activation, its AOIs,
+and every product (with images, stats, layers, downloads):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Rich activation detail (ETL entry point) — returns {count,next,previous,results:[{…}]}</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations/?code<span class="o">=</span>EMSR847
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># Activation list (discovery) — DRF pagination: ?limit=&amp;offset= ; 224 RM activations</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/?limit<span class="o">=</span><span class="m">50</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Public, no authentication; no rate limit observed during exploration.</li>
+<li>The unified <code>mapping.emergency.copernicus.eu/activations/api/activations/</code> list has a
+  <strong>different shape</strong> (<code>category</code> is an object <code>{slug,name}</code>, adds <code>drmPhase</code>) and mixes
+  RM + Risk&amp;Recovery — use the <code>rapidmapping</code> dashboard endpoints for RM ETL.</li>
+<li>Assets live under <code>aws_bucket</code> / <code>productsPath</code>; per-product <code>downloadPath</code> (ZIP) and
+  <code>layers[]</code> (COG) give the deliverables; <code>images[].fileName</code> names the source imagery.</li>
+</ul>
+</div>
+<p>Reference fixtures in <a href="./api-files"><code>api-files/</code></a>: <code>EMSR847</code> (storm; cross-source),
+<code>EMSR871</code> (flood; has FEP), <code>EMSR842</code> (wildfire; minimal), and list samples.</p>
+<h2 id="activation-event">Activation → Event</h2>
+<p>Maps to a Monty Event item (<code>cems-events</code>); Monty extension only.</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field (activation)</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code> (<code>EMSR847</code>)</td>
+<td><code>id</code> (<code>cems-event-EMSR847</code>)</td>
+<td>Prefix <code>cems-event-</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>collection: "cems-events"</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>eventTime</code></td>
+<td><code>datetime</code> / <code>start_datetime</code></td>
+<td><strong>Event onset</strong> (not <code>activationTime</code>, which is when CEMS was tasked)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>title</code></td>
+<td>Direct copy</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td><code>description</code></td>
+<td>Free-text situation summary</td>
+</tr>
+<tr>
+<td><code>centroid</code> (WKT POINT)</td>
+<td><code>geometry</code></td>
+<td>Parse WKT → GeoJSON Point; <code>extent</code> (WKT POLYGON) → <code>bbox</code></td>
+</tr>
+<tr>
+<td><code>category</code> (+ <code>subCategory</code>)</td>
+<td><code>monty:hazard_codes</code></td>
+<td>Map via <a href="#hazard-codes">Hazard codes</a></td>
+</tr>
+<tr>
+<td><code>countries[].name</code></td>
+<td><code>monty:country_codes</code></td>
+<td>Map country name → ISO 3166-1 alpha-3</td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>monty:corr_id</code></td>
+<td>Standard Monty algorithm (date/ISO3/spatial block/hazard/episode) — <strong>not</strong> the EMSR code</td>
+</tr>
+<tr>
+<td><code>gdacsId</code>, <code>charterNumber</code></td>
+<td><code>links[rel=related]</code></td>
+<td>See <a href="#cross-source-linkage">Cross-source linkage</a></td>
+</tr>
+<tr>
+<td><code>reportLink</code>, source page</td>
+<td><code>links[rel=via]</code></td>
+<td>Activation page / StoryMap</td>
+</tr>
+</tbody>
+</table>
+<h2 id="area-of-interest-hazard">Area of Interest → Hazard</h2>
+<p>Each AOI maps to a Monty Hazard item (<code>cems-hazards</code>); Monty extension only. This
+mirrors the Charter Area→Hazard mapping.</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field (AOI / activation)</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>number</code></td>
+<td><code>id</code></td>
+<td><code>cems-hazard-{code}-aoi{n}-{type}</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>collection: "cems-hazards"</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td>DEL product <code>extent</code> → else AOI <code>extent</code> (WKT)</td>
+<td><code>geometry</code></td>
+<td><strong>Latest delivered DEL</strong> (highest <code>monitoringNumber</code> with <code>statusCode=F</code>) — the current hazard footprint; fall back to the AOI extent. Updated in place as monitoring DELs arrive</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>title</code></td>
+<td>AOI name (e.g. <code>Kingston</code>)</td>
+</tr>
+<tr>
+<td>activation <code>category</code> (+ <code>subCategory</code>)</td>
+<td><code>monty:hazard_codes</code></td>
+<td><strong>One code set per item</strong> — split multi-hazard as Charter does; see <a href="#hazard-codes">Hazard codes</a></td>
+</tr>
+<tr>
+<td>activation <code>countries</code></td>
+<td><code>monty:country_codes</code></td>
+<td>Inherited from the activation</td>
+</tr>
+<tr>
+<td>activation <code>eventTime</code></td>
+<td><code>datetime</code></td>
+<td>Inherited from the activation</td>
+</tr>
+<tr>
+<td>activation <code>max_extent</code> stat (if present)</td>
+<td><code>monty:hazard_detail.severity_value</code></td>
+<td>Optional; <code>severity_unit</code> per the stat (e.g. <code>km2</code>). CEMS AOIs carry no explicit severity otherwise</td>
+</tr>
+<tr>
+<td>parent activation</td>
+<td><code>links[rel=related]</code> (<code>roles: ["event"]</code>)</td>
+<td><code>../cems-events/cems-event-{code}.json</code></td>
+</tr>
+<tr>
+<td>DEL Response for this AOI</td>
+<td><code>links[rel=related]</code> (<code>roles: ["response"]</code>)</td>
+<td>The delineation product the geometry came from</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>One Hazard per AOI <strong>per hazard code</strong> (Charter precedent): for a multi-hazard
+activation, emit one item per <code>monty:hazard_codes</code> set, same geometry. Single-category
+activations (the common case) yield one Hazard per AOI.</p>
+</blockquote>
+<h3 id="identifying-multi-hazard">Identifying multi-hazard</h3>
+<p>A CEMS activation carries a <strong>single</strong> <code>category</code> + <code>subCategory</code>, and <strong>DEL products carry
+no hazard-type field</strong> — so <em>multiple delineation products do </em><em>not</em><em> signal multiple hazards</em>
+(several DELs in an AOI are <strong>monitoring iterations</strong> of the same mapping). Multi-hazard is
+identified from two other signals:</p>
+<ol>
+<li><strong><code>category</code> + <code>subCategory</code></strong> — the primary hazard (e.g. <code>Storm</code> / <code>Tropical cyclone</code>).</li>
+<li><strong>GRA/GRM <code>stats</code> hazard-footprint classes</strong> — thematic classes that name a <em>phenomenon</em>
+   rather than an exposed asset reveal secondary hazards. Observed footprint classes:
+   <code>Flooded area</code>, <code>Flood trace</code>, <code>Landslide</code>, <code>Burnt area</code> (e.g. a <code>Landslide</code> class inside a
+   <code>Storm</code> activation ⇒ a secondary landslide hazard). <code>Maximum of all extents</code> and <code>NA</code> are
+   aggregates, not hazards.</li>
+</ol>
+<p>Emit one Hazard item per distinct hazard code so identified. The primary hazard takes its
+geometry from the DEL delineation (§ above); a secondary hazard surfaced only via a GRA
+footprint class takes its geometry from that class's extent where available, else the AOI
+extent, and its severity from the class figure. Do <strong>not</strong> infer hazard multiplicity from the
+DEL count.</p>
+<h2 id="product-response">Product → Response</h2>
+<p>Each product maps to a Monty Response item via <code>monty:response_detail</code>.</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field (product)</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>monty:response_detail.type</code></td>
+<td><code>REF</code>→<code>eo-ref</code>, <code>FEP</code>→<code>eo-fep</code>, <code>DEL</code>→<code>eo-del</code>, <code>GRA</code>→<code>eo-gra</code>. Monitoring/variant type codes (e.g. <strong><code>GRM</code></strong> grading-monitoring) map to their base product code (<code>eo-gra</code>) with <code>monitoring_number</code> set</td>
+</tr>
+<tr>
+<td><code>code</code> (activation)</td>
+<td><code>monty:response_detail.source_id</code></td>
+<td>e.g. <code>EMSR847</code> (source-system anchor)</td>
+</tr>
+<tr>
+<td><code>version.statusCode</code></td>
+<td><code>monty:response_detail.status</code></td>
+<td>Full enum (confirmed across all 224 activations): <code>F</code>→<code>published</code>, <code>I</code>→<code>in-production</code>, <code>W</code>→<code>planned</code>, <code>N</code>→ <code>no-impact</code> when <code>version.reason</code> mentions <em>no change of impact/damage/situation</em>, else <code>withdrawn</code> (remote-sensing limitations, cancelled)</td>
+</tr>
+<tr>
+<td><code>monitoring</code> / <code>monitoringNumber</code></td>
+<td><code>monty:response_detail.monitoring_number</code></td>
+<td>Set <strong>only</strong> when <code>monitoring=true</code>; iteration links to the prior via <code>rel: prev</code></td>
+</tr>
+<tr>
+<td><code>extent</code> (WKT)</td>
+<td><code>geometry</code> / <code>bbox</code></td>
+<td>Product footprint (AOI extent)</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.producer</code></td>
+<td><code>Copernicus EMS</code> (mapping provider)</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.methodology</code></td>
+<td><code>human_interpreted</code> (RM is expert-produced)</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.sendai_targets</code></td>
+<td>Taxonomy default for the type code</td>
+</tr>
+<tr>
+<td><code>images[]</code></td>
+<td><code>links[rel=derived_from]</code> → acquisition item(s)</td>
+<td>Source imagery (<code>sensorType</code>, <code>sensorName</code>, <code>resolutionClass</code>, <code>acquisitionTime</code>) carries <code>sat:</code>/<code>eo:</code>/<code>sar:</code> on the acquisition, <strong>not</strong> on the Response</td>
+</tr>
+<tr>
+<td><code>layers[]</code> (COG), <code>downloadPath</code> (ZIP)</td>
+<td><code>assets</code></td>
+<td>Web layers + downloadable package</td>
+</tr>
+<tr>
+<td>activation page</td>
+<td><code>links[rel=derived_from]</code></td>
+<td>Upstream CEMS activation provenance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Situational Report</strong> → one Response per activation, <code>type = eo-sr</code>, whose asset is the
+<code>reportLink</code> StoryMap URL (no geospatial payload).</p>
+<p>A <strong>DEL</strong> Response additionally carries a <code>rel: related</code> (<code>roles: ["hazard"]</code>) link to the
+<code>cems-hazards</code> item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
+Every Response links to its Event and Hazard(s) via <code>related</code>, sharing <code>monty:corr_id</code>.</p>
+<blockquote>
+<p><strong>Do not</strong> put damage/exposure statistics in <code>monty:response_detail</code> — those become
+separate <strong>Impact</strong> items (below). <strong>Do not</strong> set <code>status</code> from anything but
+<code>version.statusCode</code>.</p>
+</blockquote>
+<h2 id="gra-statistics-impact">GRA statistics → Impact</h2>
+<p>Only <strong>GRA</strong> products carry <code>stats</code>, shaped as
+<code>{thematic_class: {sub_class: {unit, total, affected}}}</code>, e.g.:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"Estimated population"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"None"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">84000</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"Built-up [No.]"</span><span class="p">:</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="nt">"None"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"affected"</span><span class="p">:</span><span class="w"> </span><span class="mi">48253</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Not every thematic class is an Impact. <strong>Split the classes by kind first:</strong></p>
+<ul>
+<li><strong>Exposure / effect classes → Impact items</strong> (one each): <code>Estimated population</code>, <code>Built-up</code>,
+  <code>Transportation</code>, <code>Land use</code>, <code>Facilities</code>, <code>Blocked road / interruption</code>, <code>Temporary camp</code>, …</li>
+<li><strong>Hazard-footprint classes → Hazard</strong> (not Impact): <code>Flooded area</code>, <code>Flood trace</code>,
+  <code>Landslide</code>, <code>Burnt area</code> — these describe the phenomenon extent; they feed the Hazard
+  geometry/severity (see <a href="#identifying-multi-hazard">Identifying multi-hazard</a>).</li>
+<li><strong>Aggregates → skip</strong>: <code>Maximum of all extents</code>, <code>NA</code>.</li>
+</ul>
+<p>Per the <a href="../../response-impact-boundary/">Response ↔ Impact boundary rules</a>, for each
+<strong>exposure</strong> class emit <strong>one Impact item</strong>:</p>
+<ul>
+<li><code>monty:impact_detail</code>: <code>category</code>/<code>type</code> from the thematic class, <code>value</code> = <code>affected</code>
+  (fallback <code>total</code>), <code>unit</code> from the key/<code>unit</code> (<code>[No.]</code>, <code>[ha]</code>, <code>[km]</code>), <code>estimate_type: "primary"</code>.</li>
+<li>Canonical edge: <strong><code>Impact → derived_from → Response</code></strong> (the GRA Response), <code>roles: ["response"]</code>.</li>
+<li>Both items share the Event's <code>monty:corr_id</code>.</li>
+<li>Guard the <code>"NA"</code> / missing <code>total</code> case (skip or emit without a numeric value per boundary rules).</li>
+<li>Aggregated activation-level <code>stats</code> are the sum over AOIs — prefer per-product GRA <code>stats</code>
+  to avoid double counting; if only activation <code>stats</code> exist, emit Impacts at Event level.</li>
+</ul>
+<h2 id="tracking-over-time">Tracking over time</h2>
+<p>A CEMS activation evolves while it is open (<code>closed=false</code>): products are scheduled, then
+delivered, re-mapped as monitoring iterations, and occasionally corrected. Three distinct
+mechanisms carry that evolution into Monty — do not conflate them.</p>
+<ol>
+<li>
+<p><strong>Idempotent upsert — status &amp; geometry maturing (same item).</strong> Item ids are
+   <strong>deterministic</strong> (<code>cems-response-{code}-aoi{n}-{type}[-m{k}]</code>, etc.), so re-ingesting an
+   activation <strong>updates the same items in place</strong>. A product moving <code>W</code>→<code>I</code>→<code>F</code> just flips
+   <code>monty:response_detail.status</code> (<code>planned</code>→<code>in-production</code>→<code>published</code>); the Hazard geometry
+   firms up when its DEL delineation is delivered. No new item per status change.</p>
+</li>
+<li>
+<p><strong>Monitoring axis — a time series of items (<code>rel: prev</code>).</strong> Each monitoring iteration is a
+   <strong>separate</strong> product (own <code>id</code>, own <code>deliveryTime</code>, <code>monitoringNumber</code> 0,1,2…) → a separate
+   Response item (<code>monty:response_detail.monitoring_number</code>) and separate derived Impact items.
+   Chain iteration <em>n</em> to <em>n−1</em> with <strong><code>rel: prev</code></strong> within the same <code>(code, aoiNumber, type)</code>;
+   set <code>datetime</code> from the product <code>version.deliveryTime</code> (or <code>images[].acquisitionTime</code>). This
+   is the primary "track over time" mechanism — a growing, timestamped chain.</p>
+</li>
+<li>
+<p><strong>Revision axis — corrections (<code>version.number</code>).</strong> A product re-issued as a correction
+   (<code>version.number</code> 1→2, e.g. <em>"Correction of the legend"</em>) supersedes the prior revision of
+   the <em>same</em> monitoring product. The API exposes only the latest revision, so <strong>replace in
+   place</strong> (optionally record the version via the STAC <strong>Versioning</strong> extension:
+   <code>predecessor-version</code> / <code>latest-version</code>).</p>
+</li>
+</ol>
+<p><strong>Impact over time</strong> therefore comes from the <strong>per-product GRA</strong> series (each GRA carries its
+own <code>deliveryTime</code> + <code>monitoringNumber</code>), yielding one timestamped Impact item per exposure
+class <strong>per iteration</strong>, chained by <code>rel: prev</code>. The aggregated activation <code>stats</code> is a rolling
+snapshot with <strong>no history</strong> — use it only as a current-total cross-check or when per-product
+stats are absent (never in addition, to avoid double counting).</p>
+<p><strong>The join:</strong> every item across both axes shares <code>monty:corr_id</code> — query by it and order by
+<code>datetime</code> / <code>monitoring_number</code> to reconstruct the timeline.</p>
+<h3 id="refresh-and-polling-strategy">Refresh and polling strategy</h3>
+<p>The <strong>detail</strong> endpoint is expensive (EMSR847 ≈ 413 KB); the <strong>list</strong> endpoint is one cheap
+call that already exposes the change signals. Probed API behaviour:</p>
+<ul>
+<li><strong>One list call returns the full corpus</strong>: <code>?limit=300</code> → all 224 activations, ~72 KB, ~0.7 s,
+  each item carrying <code>lastUpdate</code>, <code>closed</code>, <code>n_products</code>, <code>n_aois</code>.</li>
+<li><strong>No HTTP caching</strong> — no <code>ETag</code> / <code>Last-Modified</code> on either endpoint, so conditional
+  <code>304</code> requests are unavailable; change detection must be <strong>application-side</strong>.</li>
+<li><strong>No server-side "updated since" filter</strong> — <code>lastUpdate__gte</code> / <code>updated_after</code> /
+  <code>activationTime</code> are <strong>ignored</strong> (still return all 224).</li>
+<li><strong>But <code>?closed=false</code> works</strong> — returns only the live activations (currently <strong>3</strong>).</li>
+<li><code>ordering</code> is ignored; default order is <strong>code-descending</strong> (newest activation first).</li>
+</ul>
+<p>Given that, only <strong>open</strong> activations change, and each closed activation is immutable once
+closed. The minimal-calls loop:</p>
+<ol>
+<li><strong>Backfill once</strong>: page the full list (1 call) → fetch detail for each activation (224
+   one-time). Persist a watermark per <code>code</code>: <code>(lastUpdate, n_products, n_aois, closed)</code>.</li>
+<li><strong>Steady state — cheap poll</strong>: <code>GET ?closed=false</code> (1 tiny call). For each open activation,
+   fetch <strong>detail only if</strong> <code>lastUpdate</code> advanced <strong>or</strong> <code>n_products</code> / <code>n_aois</code> grew vs the
+   watermark. Typically 0–few detail calls per cycle instead of 224.</li>
+<li><strong>Close-out</strong>: when an activation leaves the <code>closed=false</code> set (or flips <code>closed=true</code>),
+   fetch its detail <strong>one final time</strong>, then never again.</li>
+<li><strong>Reconcile</strong>: run the full <code>?limit=300</code> list on a slow cadence (e.g. daily) to catch brand-new
+   codes and any activation that opened <em>and</em> closed between polls; diff against watermarks.</li>
+</ol>
+<p>This turns a naive per-cycle cost of <strong>224 detail fetches (~tens of MB)</strong> into <strong>one ~72 KB list
+call + a handful of detail fetches</strong>. The composite <code>(lastUpdate, n_products, n_aois)</code> is the
+dirty check (there is no per-product timestamp in the list). A legacy RSS feed exists on the
+portal (<code>emergency.copernicus.eu/mapping/…/feed</code>, redirected) and is the intended <strong>push</strong>
+trigger under WP2 — it can replace the frequent <code>?closed=false</code> poll entirely.</p>
+<h2 id="cross-source-linkage">Cross-source linkage</h2>
+<p>CEMS activations carry hard references to sibling sources. Beyond a shared
+<code>monty:corr_id</code>, <strong>derive the target Monty item id and emit an explicit <code>rel: related</code>
+link</strong> so the graph is directly navigable (65/224 sampled activations carry a <code>gdacsId</code>).</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field</th>
+<th>Example</th>
+<th>Target Monty id (derivation)</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gdacsId</code></td>
+<td><code>TC1001230</code></td>
+<td>GDACS <code>{eventtype}</code>+<code>{eventid}</code>; Monty id <code>{eventid}-{episodeid}</code> in <code>gdacs-events</code> → <code>1001230-41</code> (current episode via <code>geteventdata</code>)</td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code></td>
+</tr>
+<tr>
+<td><code>charterNumber</code> (+ <code>charterUrl</code>)</td>
+<td><code>996</code></td>
+<td>Charter Event <code>charter-event-{activation_id}</code> → <code>charter-event-996</code> (<code>charter-events</code>)</td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code> (+ <code>["response"]</code> to Charter VAPs)</td>
+</tr>
+<tr>
+<td><code>relatedevents</code></td>
+<td>EMSR codes</td>
+<td><code>cems-event-{code}</code></td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code></td>
+</tr>
+</tbody>
+</table>
+<p>This is a <strong>reusable pattern</strong>: any cross-reference field that yields a deterministic
+source-item id becomes a typed <code>related</code> link, with <code>monty:corr_id</code> as the fallback join.
+The edge is reciprocal — the Charter source doc already links VAPs to sibling Responses.</p>
+<ul>
+<li><strong>Emit unconditionally</strong> from the deterministic id — a <code>related</code> link to a not-yet-ingested
+  target is valid STAC and cheaper than gating on presence; it resolves when the sibling source
+  is ingested/back-filled.</li>
+<li><strong>GDACS episode</strong>: <code>gdacsId</code> gives <code>{eventtype}{eventid}</code> but no episode. Resolve the
+  <strong>current</strong> episode with one cheap call —
+  <code>gdacsapi/api/events/geteventdata?eventtype={t}&amp;eventid={id}</code> returns the current
+  <code>episodeid</code> (e.g. <code>TC1001230</code> → episode <strong>41</strong>, <code>iscurrent: true</code>) — and link to
+  <code>{eventid}-{episodeid}</code>. (A bare <code>{eventid}-1</code> would be stale; only fall back to it if the
+  lookup fails.)</li>
+</ul>
+<h2 id="hazard-codes">Hazard codes</h2>
+<p>CEMS <code>category</code> (refined by <code>subCategory</code>) maps to Monty hazard codes. UNDRR-ISC 2025 is
+required (exactly one per Hazard item); GLIDE and EM-DAT are recommended. The complete CEMS
+category vocabulary (from the full activation catalogue, all DRM phases; <strong>case-normalise</strong> —
+<code>Mass Movement</code>/<code>Mass movement</code>, <code>Industrial Accident</code>/<code>Industrial accident</code> occur in both
+casings):</p>
+<table>
+<thead>
+<tr>
+<th>CEMS <code>category</code></th>
+<th>UNDRR-ISC 2025</th>
+<th>GLIDE</th>
+<th>EM-DAT</th>
+<th>Notes / <code>subCategory</code> refinement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flood</td>
+<td>MH0600</td>
+<td>FL</td>
+<td>nat-hyd-flo-flo</td>
+<td><code>Riverine flood</code>→MH0604, flash→MH0603, coastal/surge→MH0605</td>
+</tr>
+<tr>
+<td>Wildfire</td>
+<td>MH1301</td>
+<td>WF</td>
+<td>nat-cli-wil-for</td>
+<td><code>Forest fire</code>; land/other fire variants</td>
+</tr>
+<tr>
+<td>Storm</td>
+<td>MH0400</td>
+<td>ST</td>
+<td>nat-met-sto</td>
+<td><code>Tropical cyclone, hurricane, typhoon</code>→MH0403 / <code>TC</code> / <code>nat-met-sto-tro</code></td>
+</tr>
+<tr>
+<td>Earthquake</td>
+<td>GH0101</td>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td><code>Ground shaking</code>; tsunami subCat→GH0301/<code>TS</code></td>
+</tr>
+<tr>
+<td>Mass Movement</td>
+<td>MH0901</td>
+<td>LS</td>
+<td>nat-geo-mmd-lan</td>
+<td>Landslide; avalanche→MH1201, rockfall/subsidence per <code>subCategory</code></td>
+</tr>
+<tr>
+<td>Volcanic Activity</td>
+<td>GH0201</td>
+<td>VO</td>
+<td>nat-geo-vol</td>
+<td>Eruption; ashfall/lahar per <code>subCategory</code></td>
+</tr>
+<tr>
+<td>Industrial Accident</td>
+<td>TH0300 / TH0600</td>
+<td>—</td>
+<td>tec-ind</td>
+<td>Technological — chemical (TH0300) vs explosion (TH0600) vs oil spill from <code>subCategory</code>; manual review</td>
+</tr>
+<tr>
+<td>Transport accident</td>
+<td>—</td>
+<td>—</td>
+<td>tec-tra</td>
+<td>Technological — no clean UNDRR-ISC; manual review</td>
+</tr>
+<tr>
+<td>Humanitarian Crisis</td>
+<td>—</td>
+<td>CE</td>
+<td>—</td>
+<td>Complex/societal emergency — no UNDRR-ISC natural code; manual review (mostly Risk &amp; Recovery, out of core RM scope)</td>
+</tr>
+<tr>
+<td>Environmental Degradation</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Environmental hazard — no clean UNDRR-ISC; manual review</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>—</td>
+<td>OT</td>
+<td>—</td>
+<td>Unclassified — manual review</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Completeness</strong>: this table covers the full observed vocabulary (RM currently exercises
+Flood, Wildfire, Storm, Earthquake, Mass Movement, Industrial/Transport accident, Other;
+Volcanic Activity, Humanitarian Crisis, Environmental Degradation appear in the broader
+catalogue). Any <strong>unmapped or new</strong> <code>category</code> MUST fall through to manual review rather
+than be dropped. <code>subCategory</code> (detail endpoint only) is the refinement key.</p>
+</blockquote>
+<p>Apply <code>hazard_profiles.get_canonical_hazard_codes()</code> after mapping.</p>
+<h2 id="examples">Examples</h2>
+<p>Worked Monty items derived from <strong>EMSR847</strong> (Tropical Cyclone Melissa) AOI 1 (Kingston),
+demonstrating the full chain — note AOI 1's DEL is <code>statusCode=N</code> (not produced), so the
+Hazard geometry falls back to the AOI extent:</p>
+<ul>
+<li><a href="../../../../examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
+<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0403</code>)</li>
+<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>MH0901</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
+<li><a href="../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
+<li><a href="../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json"><code>cems-impact-EMSR847-aoi01-gra-population</code></a> — Impact (84 000 people, <code>derived_from</code> the GRA Response)</li>
+</ul>
+<h2 id="reference-files">Reference files</h2>
+<p>Real upstream CEMS API responses, used as mapping fixtures:</p>
+<ul>
+<li><a href="api-files/EMSR847-storm-detail.json"><code>api-files/EMSR847-storm-detail.json</code></a> — Tropical Cyclone Melissa; 39 AOIs, 67 products, monitoring, carries <code>gdacsId</code> <strong>and</strong> <code>charterNumber</code>/<code>charterUrl</code></li>
+<li><a href="api-files/EMSR871-flood-detail.json"><code>api-files/EMSR871-flood-detail.json</code></a> — flood; contains FEP + DEL + GRA</li>
+<li><a href="api-files/EMSR842-wildfire-detail.json"><code>api-files/EMSR842-wildfire-detail.json</code></a> — wildfire; minimal (2 GRA)</li>
+<li><a href="api-files/rapidmapping-activations-list.json"><code>api-files/rapidmapping-activations-list.json</code></a> — list endpoint (pagination)</li>
+<li><a href="api-files/unified-activations-list.json"><code>api-files/unified-activations-list.json</code></a> — unified endpoint (different shape)</li>
+</ul>
+<p>See <a href="FINDINGS/"><code>FINDINGS.md</code></a> for the raw familiarisation notes.</p>
+<h2 id="decisions-resolved">Decisions (resolved)</h2>
+<p>All mapping decisions are settled — none block ETL implementation.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Decision</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong><code>statusCode</code> → <code>status</code></strong></td>
+<td>Enum <strong><code>F</code>/<code>I</code>/<code>W</code>/<code>N</code></strong> (exhaustive — scanned all 224 activations / 2074 products) → <code>published</code>/<code>in-production</code>/<code>planned</code>/<code>withdrawn</code>. <code>N</code>→<code>no-impact</code> when <code>version.reason</code> says <em>no change of impact/damage/situation</em>, else <code>withdrawn</code> (remote-sensing limitations, cancelled).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Product type codes</strong></td>
+<td>Types <strong><code>REF</code>/<code>FEP</code>/<code>DEL</code>/<code>GRA</code>/<code>GRM</code></strong> (exhaustive) → <code>eo-ref</code>/<code>eo-fep</code>/<code>eo-del</code>/<code>eo-gra</code>; the monitoring variant <code>GRM</code> → <code>eo-gra</code> + <code>monitoring_number</code>.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Hazard geometry</strong></td>
+<td>AOI → Hazard; geometry = <strong>latest delivered DEL</strong> (<code>statusCode=F</code>, max <code>monitoringNumber</code>), fallback AOI <code>extent</code>, <strong>updated in place</strong>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Multi-hazard</strong></td>
+<td>Driven by <code>category</code>/<code>subCategory</code> + GRA footprint classes — <strong>not</strong> DEL count. A secondary hazard with no dedicated polygon uses the AOI extent (coarse) and takes severity from its footprint-class figure.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Response geometry</strong></td>
+<td>The product's own <code>extent</code> (precise footprint); AOI extent only as fallback.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Source imagery</strong></td>
+<td>Emit linked <strong>acquisition items</strong> from <code>images[]</code> (carrying <code>sat:</code>/<code>eo:</code>/<code>sar:</code>, <code>resolutionClass</code>, <code>acquisitionTime</code>) referenced via <code>derived_from</code> — per the best-practices layer-separation rule; imagery extensions never on the Response product.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Monitoring &amp; revisions</strong></td>
+<td>Monitoring iterations = separate items chained by <code>rel: prev</code>; <code>version.number</code> corrections supersede in place — see <a href="#tracking-over-time">Tracking over time</a>.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Impact granularity</strong></td>
+<td>Per-product GRA <code>stats</code> series (each timestamped), one Impact per exposure class per iteration; aggregated activation <code>stats</code> is cross-check only.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Cross-source links</strong></td>
+<td>Emit <code>related</code> <strong>unconditionally</strong> from the deterministic target id; resolve the GDACS <strong>current</strong> episode via one <code>geteventdata</code> call (<code>-1</code> only if the lookup fails).</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Refresh</strong></td>
+<td>Watermark on the <code>?closed=false</code> list; detail only when <code>(lastUpdate, n_products, n_aois)</code> advance — see <a href="#refresh-and-polling-strategy">Refresh &amp; polling strategy</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>All questions are closed against the live data (enums scanned exhaustively; GDACS episode
+resolution verified). No CEMS OpenAPI/schema endpoint is published, so the enums above are
+grounded empirically in the full 224-activation corpus rather than a spec.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://rapidmapping.emergency.copernicus.eu/">CEMS Rapid Mapping portal</a></li>
+<li><a href="https://mapping.emergency.copernicus.eu/about/rapid-mapping-portfolio/">Rapid Mapping product portfolio</a></li>
+<li><a href="https://mapping.emergency.copernicus.eu/about/how-to-harvest-cems-mapping-data/">How to harvest CEMS Mapping data</a></li>
+<li><a href="../../response-taxonomy/">Response taxonomy</a> · <a href="../../response-best-practices/">Response best practices</a> · <a href="../../response-impact-boundary/">Response ↔ Impact boundary</a></li>
+<li><a href="../../../../README.md">Monty STAC Extension specification</a></li>
+</ul>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+</body>
+</html>
