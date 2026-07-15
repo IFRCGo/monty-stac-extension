@@ -9,6 +9,13 @@
 
 ---
 
+> [!WARNING]
+> The correlation identifier is **deterministic and per-source**. It is suitable for intra-source
+> pairing and exact lookups, but it is **not** a cross-source join key: two sources describing the
+> same real-world event can produce **different** IDs (because their country resolution, hazard
+> normalization, `block_id`, or episode number differ). To correlate across sources, use the
+> [dynamic STAC correlation algorithms](./stac-api/correlation_algorithms.md#overview).
+
 This page describes the **legacy algorithm** used to generate the static correlation identifier for items in the Monty system.
 
 ## Context
@@ -50,7 +57,7 @@ The event pairing algorithm is a function that takes the following parameters:
 The algorithm returns a string with the event id. The event id is a string with the following format:
 
 ```console
-{datetime}-{country_code}-{block_id}-{hazard_code}-{episode_number}-GDBC
+{datetime}-{country_code}-{block_id}-{hazard_code}-{episode_number}-GCDB
 ```
 
 Where:

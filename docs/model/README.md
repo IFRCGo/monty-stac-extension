@@ -2,7 +2,7 @@
 
 # Monty Model
 
-The [Monty model](./Montandon_Schema_V1-00.json) is maintained in the [GDBC repository](https://github.com/IFRCGo/GCDB)
+The [Monty model](./Montandon_Schema_V1-00.json) is maintained in the [GCDB repository](https://github.com/IFRCGo/GCDB)
 and is used to generate the Monty model documentation. 
 This JSON schema is the authoritative source for the Monty model and is used to build the STAC model.
 

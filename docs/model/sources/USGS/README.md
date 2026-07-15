@@ -99,6 +99,13 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
 | [monty:guid](https://ifrcgo.org/monty-stac-extension/v1.1.1/schema.json#monty:guid) | Generated | Generated following the [guid string](../../global_identifier.md) convention |
 
+> [!NOTE]
+> `monty:corr_id` is generated **deterministically from this event's own fields** and is intended for
+> intra-source pairing / exact lookups. It is **not** a reliable cross-source join key — to find the
+> same event in GLIDE, GDACS, EM-DAT, etc., use the
+> [dynamic STAC correlation algorithms](../../stac-api/correlation_algorithms.md#overview) rather than
+> matching on `corr_id`.
+
 #### Hazard Type Mapping
 
 USGS (United States Geological Survey) exclusively tracks seismic events. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
@@ -199,7 +206,7 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)      | `usgs-impacts`                    | Fixed value for all USGS impact items                                                            |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                   | Found in event's properties.time, convert from Unix timestamp to ISO 8601                        |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates          | Use reverse geocoding on event's geometry.coordinates[0,1] to get ISO3 country code              |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | [`GEO-SEIS`]                      | Always `GEO-SEIS` for all earthquake impacts                                                     |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake               | Always `GEO-SEIS` for cluster and `GH0101` for code — same trio as the event (inherited)         |
 | [roles](https://github.com/IFRCGo/monty-stac-extension#roles)                                                                          | ["impact", "source"]              | Always `["impact", "source"]` for USGS impact items                                             |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | Derived                           | "Estimated Fatalities" or "Estimated Economic Losses" based on impact type                       |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | Derived                           | Combine event location and impact type, e.g. "Estimated fatalities for {event.properties.place}" |
