@@ -190,6 +190,82 @@ endpoints are dynamically generated) and some `self` links carry a `.json` suffi
 that returns HTTP 500. Alternative browsing:
 [STAC Index](https://stacindex.org/catalogs/disasters-charter-mapper-catalog).
 
+## Update & polling strategy (ETL)
+
+Charter objects are revised **independently** — there is no "the activation
+changes first" rule at *update* time. The only ordering constraint is at
+*creation* (Call → Activation → Areas/VAPs, and Call → Acquisitions; see [the
+process
+flow](#the-process-flow-call--activation--areasvaps-call--acquisitions)). So all
+of the following happen and the ETL must poll each entity on its own:
+
+- a VAP is added (or, rarely, revised) while its Activation is untouched;
+- an Area is added/refined while the Activation is untouched;
+- a calibrated dataset changes (recalibration / new pass) with nothing else moving;
+- any combination of the above.
+
+### Where each entity is polled
+
+Because **Areas and VAPs are activation-scoped but Acquisitions/datasets are
+call-scoped**, a single crawl of the activation prefix does **not** surface
+dataset changes. Poll two prefixes per event:
+
+| Entity | Monty item | Poll scope (S3) | Update behaviour | Primary change signal |
+|--------|-----------|-----------------|------------------|-----------------------|
+| Activation | Event | `activations/act-{activation_id}/act-{activation_id}.json` | Rarely mutated after onset; `cpe:activation_status` moves `open → closed → archived` | `cpe:activation_status` transition + object `ETag` |
+| Area | Hazard | `activations/act-{activation_id}/areas/` | May be added/refined independently; carries no `created` field | new object appears; object `ETag` |
+| VAP | Response (`eo-*`) | `activations/act-{activation_id}/vaps/` | Almost always **create-only**; revision is rare | new object appears |
+| Calibrated dataset | Response (`eo-dat`) | `calls/call-{call_id}/calibratedDatasets/` — one prefix **per call** in `disaster:call_ids` | **Most volatile** — datasets appear and are re-processed throughout ingestion/calibration | new object; object `ETag`; `cpe:status.stage` |
+
+> The call list comes from the Activation's `disaster:call_ids`. Resolve
+> **call → activation** once, then poll each `calls/call-{call_id}/…` prefix on
+> its own cadence — never assume a dataset change is reflected in the Activation's
+> own object (it is not: acquisitions never attach to the activation).
+
+### Detecting a real change
+
+> [!IMPORTANT]
+> **`properties.updated` is not a reliable content-change signal.** The Charter
+> Mapper periodically **republishes the whole catalog**, stamping every item in an
+> activation/call with a near-identical `updated` even when the payload is
+> unchanged — e.g. all four Act-1019 Areas share `2026-06-10T07:56:21Z`, and every
+> Act-1019 calibrated dataset shows `2026-07-06T06:4x`. A naive `created ≠ updated`
+> test therefore yields **false positives**.
+
+Use, in order of reliability:
+
+1. **S3 object `ETag` / `LastModified`** (from `ListObjectsV2` on the prefix) — the
+   authoritative "did this JSON change" signal, immune to the republish caveat.
+   Store the last-seen `ETag` per object key and re-ingest only when it changes;
+   the listing is metadata-only and cheap. (Note S3 `ETag` is a content hash only
+   for non-multipart objects — these small JSONs qualify; otherwise hash the
+   normalised body yourself.)
+2. **`properties.created`** — the true production timestamp, stable across
+   republishes and the best signal for "is this object **new** since the last poll".
+3. **`cpe:status.stage`** (acquisitions only) — lifecycle marker. The
+   `calibratedDatasets` collection already holds only the `calibratedDataset`
+   stage, but a dataset can be re-emitted at that stage after re-processing, so
+   combine it with the `ETag`.
+
+### Cadence
+
+Drive polling frequency from the activation lifecycle (`cpe:activation_status`):
+
+| Status | Meaning | Suggested cadence |
+|--------|---------|-------------------|
+| `open` (or activation only days old) | Active response — calibration and VAP production ongoing | frequent (e.g. hourly) |
+| `closed` | Response wound down; late VAPs still possible | daily |
+| `archived` | Cold; objects may be in **cold storage** (Act < 994 / Call < 1136) and unreadable until restored | rare / on-demand only |
+
+### Re-emission (idempotency)
+
+The Monty `id` and `monty:corr_id` are **stable** across updates: on a detected
+change, recompute the item and **overwrite** the existing Monty item at the same
+id. A dataset re-processed under the same `{dataset_id}` is a content update on the
+same Response id (not a new item); a new sensor pass is a new id. Withdrawal or
+deletion of an upstream object is rare and is handled by removing the corresponding
+Monty item.
+
 ## The Terradue `disaster:` extension
 
 Charter is the live data model for the Terradue `disaster:` extension. Upstream
