@@ -194,10 +194,8 @@ that returns HTTP 500. Alternative browsing:
 
 Charter objects are revised **independently** — there is no "the activation
 changes first" rule at *update* time. The only ordering constraint is at
-*creation* (Call → Activation → Areas/VAPs, and Call → Acquisitions; see [the
-process
-flow](#the-process-flow-call--activation--areasvaps-call--acquisitions)). So all
-of the following happen and the ETL must poll each entity on its own:
+*creation* (Call → Activation → Areas/VAPs, and Call → Acquisitions; see [the process flow](#the-process-flow-call--activation--areasvaps-call--acquisitions)).
+So all of the following happen and the ETL must poll each entity on its own:
 
 - a VAP is added (or, rarely, revised) while its Activation is untouched;
 - an Area is added/refined while the Activation is untouched;
