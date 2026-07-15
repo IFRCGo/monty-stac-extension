@@ -53,6 +53,12 @@
   "links": [
     {
       "rel": "via",
+      "href": "https://rapidmapping.emergency.copernicus.eu/EMSR847",
+      "type": "text/html",
+      "title": "CEMS EMSR847 activation"
+    },
+    {
+      "rel": "via",
       "href": "https://storymaps.arcgis.com/stories/d885092b8f6642fb8fcf6fa86b050e5c",
       "type": "text/html",
       "title": "CEMS situational report (StoryMap)"
