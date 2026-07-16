@@ -1,0 +1,115 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "1001230-41",
+  "collection": "gdacs-events",
+  "bbox": [
+    -60.5,
+    39,
+    -60.5,
+    39
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -60.5,
+      39
+    ]
+  },
+  "properties": {
+    "title": "Tropical Cyclone MELISSA-25",
+    "description": "Red Tropical Cyclone MELISSA-25 in Jamaica, Cuba, Bahamas, Bermuda, Haiti, Canada from: 21 Oct 2025  to: 31 Oct 2025 .",
+    "datetime": "2025-10-21T15:00:00Z",
+    "start_datetime": "2025-10-21T15:00:00Z",
+    "end_datetime": "2025-10-31T15:00:00Z",
+    "modified": "2026-02-11T15:18:59Z",
+    "monty:src_event_id": "1001230",
+    "monty:episode_number": 41,
+    "monty:country_codes": [
+      "JAM",
+      "CUB",
+      "BMU",
+      "HTI",
+      "CAN"
+    ],
+    "monty:hazard_codes": [
+      "MH0306",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:corr_id": "20251021-JAM-1159798-MH0306-41-GCDB",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "keywords": [
+      "tropical cyclone",
+      "hurricane",
+      "melissa",
+      "jamaica",
+      "cuba",
+      "bermuda",
+      "haiti",
+      "canada"
+    ]
+  },
+  "assets": {
+    "icon": {
+      "href": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+      "title": "Icon",
+      "type": "image/png",
+      "roles": [
+        "icon"
+      ]
+    },
+    "report": {
+      "href": "https://www.gdacs.org/report.aspx?eventid=1001230&episodeid=41&eventtype=TC",
+      "title": "GDACS Report",
+      "type": "text/html",
+      "roles": [
+        "report"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "1001230-41.json",
+      "rel": "self"
+    },
+    {
+      "href": "gdacs-events.json",
+      "rel": "collection"
+    },
+    {
+      "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001230&episodeid=41",
+      "rel": "via"
+    },
+    {
+      "href": "../gdacs-hazards/1001230-41.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../cems-events/cems-event-EMSR847.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../glide-events/TC-2025-000196-HTI.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    }
+  ]
+}

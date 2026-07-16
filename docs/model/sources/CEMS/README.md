@@ -321,6 +321,19 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   `{eventid}-{episodeid}`. (A bare `{eventid}-1` would be stale; only fall back to it if the
   lookup fails.)
 
+**Worked, fixture-verified example**: [`gdacs-events/1001230-41`](../../../../examples/gdacs-events/1001230-41.json)
+and [`gdacs-hazards/1001230-41`](../../../../examples/gdacs-hazards/1001230-41.json) are built from the
+real GDACS `geteventdata`/`getgeometry` API responses for the same Tropical Cyclone Melissa activation
+(`iso3: JAM`, `MH0306`, 21–31 Oct 2025), completing the `related` link this CEMS example already declares
+(#61). Their `monty:corr_id` (`20251021-JAM-1159798-MH0306-41-GCDB`, computed with the real
+`geo_blocks-0.2.parquet` lookup) **does not match** CEMS's (`20251026-JAM-983324-MH0306-1-GCDB`) — different
+date, different `block_id`, since GDACS's own centroid for this episode sits mid-Atlantic (`-60.5, 39.0`,
+the storm's track position at that point), while CEMS's AOI is Kingston. This is a live, real illustration
+of the caveat in #57: `corr_id` is per-source deterministic and not a cross-source join key. The two items
+still correlate correctly under the dynamic Event-to-Event algorithm — shared `MH0306`/`TC`/`nat-met-sto-tro`
+(`a_overlaps`), shared `JAM` (`a_contains`), and CEMS's `2025-10-26` falling inside GDACS's `2025-10-21`–`2025-10-31`
+window (`t_intersects`).
+
 ## Hazard codes
 
 CEMS `category` (refined by `subCategory`) maps to Monty hazard codes. UNDRR-ISC 2025 is
@@ -372,6 +385,11 @@ Hazard geometry falls back to the AOI extent:
 - [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
 - [`cems-response-EMSR847-aoi01-gra`](../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
 - [`cems-impact-EMSR847-aoi01-gra-population`](../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
+
+The GDACS side of the cross-source link is also a real worked example, not a placeholder:
+
+- [`gdacs-events/1001230-41`](../../../../examples/gdacs-events/1001230-41.json) — GDACS Event for the same storm (`TC1001230`, episode 41), built from the real `geteventdata` response
+- [`gdacs-hazards/1001230-41`](../../../../examples/gdacs-hazards/1001230-41.json) — GDACS Hazard, geometry unioned from the real `getgeometry` `Poly_Red` footprint features
 
 ## Reference files
 
