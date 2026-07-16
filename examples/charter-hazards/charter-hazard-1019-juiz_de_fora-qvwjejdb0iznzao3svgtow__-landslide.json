@@ -192,7 +192,7 @@
     {
       "rel": "derived_from",
       "href": "../charter-events/charter-event-1019.json",
-      "type": "application/json",
+      "type": "application/geo+json",
       "title": "Parent Charter Event"
     },
     {

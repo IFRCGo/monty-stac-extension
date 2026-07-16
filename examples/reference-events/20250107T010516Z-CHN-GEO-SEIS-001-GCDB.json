@@ -55,7 +55,7 @@
       "roles": [
         "hazard"
       ],
-      "type": "application/json"
+      "type": "application/geo+json"
     },
     {
       "href": "reference-events.json",
