@@ -2,41 +2,54 @@
 
 This documentation identifies the sources of data used for Monty. This has been initiated from the [GCDB excel source sheet](https://github.com/IFRCGo/GCDB/blob/main/Taxonomies/Monty_DataSources.xlsx).
 
+Sources are declared in [`sources.yml`](./sources.yml), the single source of
+truth this section and [`docs/sources.json`](../../sources.json) are generated
+from — see [`scripts/gen_sources_index.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/gen_sources_index.py).
+Run it after editing `sources.yml`; CI runs it with `--check` and fails on drift.
+
+<!-- gen_sources_index.py: BEGIN available-sources -->
 ## Available Sources
 
-### Global Disaster Databases
+| Source | Organisation | Status |
+|---|---|---|
+| AlertHub | — | undocumented |
+| [Copernicus Emergency Management Service — Rapid Mapping](./CEMS/README.md) | Copernicus Emergency Management Service (CEMS) | etl |
+| [International Charter on Space and Major Disasters](./Charter/README.md) | International Charter on Space and Major Disasters | etl |
+| [DesInventar](./DesInventar/README.md) | United Nations Office for Disaster Risk Reduction (UNDRR) | production |
+| [EM-DAT](./EM-DAT/README.md) | Centre for Research on the Epidemiology of Disasters (CRED) | production |
+| [GDACS](./GDACS/README.md) | European Commission - Joint Research Centre (JRC) | production |
+| [Global Flood Database (GFD)](./GFD/README.md) | Cloud to Street | production |
+| [GLIDE](./GLIDE/README.md) | Asian Disaster Reduction Center (ADRC) | production |
+| [IBTrACS](./IBTrACS/README.md) | National Oceanic and Atmospheric Administration (NOAA) | production |
+| [IDMC — Global Internal Displacement Database (GIDD)](./IDMC/README.md) | Internal Displacement Monitoring Centre (IDMC) | production |
+| [IDMC — Internal Displacement Updates (IDU)](./IDU/README.md) | Internal Displacement Monitoring Centre (IDMC) | production |
+| [IFRC DREF](./IFRC-DREF/README.md) | International Federation of Red Cross and Red Crescent Societies (IFRC) | production |
+| [Pacific Disaster Center (PDC)](./PDC/README.md) | Pacific Disaster Center | production |
+| Reference Events | — | undocumented |
+| [USGS Earthquake Catalog](./USGS/README.md) | United States Geological Survey (USGS) | production |
+<!-- gen_sources_index.py: END available-sources -->
 
-- [DesInventar](./DesInventar/README.md) - National disaster loss database system collecting detailed disaster-related damage and loss data.
-- [EM-DAT](./EM-DAT/README.md) - The Emergency Events Database, containing worldwide data on the occurrence and effects of disasters.
-- [GDACS](./GDACS/README.md) - Global Disaster Alert and Coordination System, providing near real-time alerts about natural disasters.
-- [GLIDE](./GLIDE/README.md) - GLobal IDEntifier number, assigning unique identifiers to disasters worldwide.
-
-### Specialized Systems
-
-- [GFD](./GFD/README.md) - Global Flood Database, providing information about flood events and their impacts.
-- [IBTrACS](./IBTrACS/README.md) - International Best Track Archive for Climate Stewardship, tracking tropical cyclone data.
-- [IDMC](./IDMC/README.md) - Internal Displacement Monitoring Centre, focusing on internal displacement data.
-- [PDC](./PDC/README.md) - Pacific Disaster Center, offering disaster monitoring and early warning capabilities.
-- [USGS](./USGS/README.md) - United States Geological Survey, providing earthquake and other geological hazard data.
-
-### IFRC Sources
-
-- [IFRC-DREF](./IFRC-DREF/README.md) - Disaster Relief Emergency Fund operations data from the International Federation of Red Cross and Red Crescent Societies.
-
+<!-- gen_sources_index.py: BEGIN data-types-by-source -->
 ## Data Types by Source
 
-| Source | Events | Hazards | Impacts |
-|--------|---------|----------|----------|
-| DesInventar | ✓ | - | ✓ |
-| EM-DAT | ✓ | ✓ | ✓ |
-| GDACS | ✓ | ✓ | ✓ |
-| GFD | ✓ | ✓ | ✓ |
-| GLIDE | ✓ | ✓ | - |
-| IBTrACS | ✓ | ✓ | - |
-| IDMC | ✓ | - | ✓ |
-| IFRC-DREF | ✓ | - | ✓ |
-| PDC | ✓ | ✓ | ✓ |
-| USGS | ✓ | ✓ | ✓ |
+| Source | Events | Hazards | Impacts | Response |
+|---|---|---|---|---|
+| AlertHub | ✓ | ✓ | - | - |
+| [Copernicus Emergency Management Service — Rapid Mapping](./CEMS/README.md) | ✓ | ✓ | ✓ | ✓ |
+| [International Charter on Space and Major Disasters](./Charter/README.md) | ✓ | ✓ | - | ✓ |
+| [DesInventar](./DesInventar/README.md) | ✓ | - | ✓ | - |
+| [EM-DAT](./EM-DAT/README.md) | ✓ | ✓ | ✓ | - |
+| [GDACS](./GDACS/README.md) | ✓ | ✓ | ✓ | - |
+| [Global Flood Database (GFD)](./GFD/README.md) | ✓ | ✓ | ✓ | - |
+| [GLIDE](./GLIDE/README.md) | ✓ | ✓ | - | - |
+| [IBTrACS](./IBTrACS/README.md) | ✓ | ✓ | - | - |
+| [IDMC — Global Internal Displacement Database (GIDD)](./IDMC/README.md) | ✓ | - | ✓ | - |
+| [IDMC — Internal Displacement Updates (IDU)](./IDU/README.md) | ✓ | - | ✓ | - |
+| [IFRC DREF](./IFRC-DREF/README.md) | ✓ | ✓ | ✓ | - |
+| [Pacific Disaster Center (PDC)](./PDC/README.md) | ✓ | ✓ | ✓ | - |
+| Reference Events | ✓ | - | - | - |
+| [USGS Earthquake Catalog](./USGS/README.md) | ✓ | ✓ | ✓ | - |
+<!-- gen_sources_index.py: END data-types-by-source -->
 
 ## Source Characteristics
 
