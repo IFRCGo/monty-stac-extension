@@ -1,0 +1,329 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "1001230-41",
+  "collection": "gdacs-hazards",
+  "bbox": [
+    -78.9222,
+    15.8853,
+    -40.2601,
+    54.109
+  ],
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -77.5454,
+          15.8853
+        ],
+        [
+          -78.4303,
+          16.0464
+        ],
+        [
+          -78.852,
+          16.3549
+        ],
+        [
+          -78.9222,
+          16.7009
+        ],
+        [
+          -78.7047,
+          17.3562
+        ],
+        [
+          -78.3053,
+          18.0635
+        ],
+        [
+          -78.0729,
+          18.721
+        ],
+        [
+          -76.9544,
+          19.5686
+        ],
+        [
+          -76.5195,
+          20.4429
+        ],
+        [
+          -75.136,
+          24.6392
+        ],
+        [
+          -74.2022,
+          26.217
+        ],
+        [
+          -72.7159,
+          28.4062
+        ],
+        [
+          -70.8194,
+          30.8526
+        ],
+        [
+          -68.5635,
+          33.5501
+        ],
+        [
+          -65.1082,
+          36.6472
+        ],
+        [
+          -61.9353,
+          40.0044
+        ],
+        [
+          -56.3865,
+          44.2881
+        ],
+        [
+          -49.1431,
+          50.0698
+        ],
+        [
+          -42.6616,
+          53.9652
+        ],
+        [
+          -42.0676,
+          54.109
+        ],
+        [
+          -41.4796,
+          54.1028
+        ],
+        [
+          -40.9384,
+          53.9652
+        ],
+        [
+          -40.4933,
+          53.6891
+        ],
+        [
+          -40.3188,
+          53.4544
+        ],
+        [
+          -40.2601,
+          53.1678
+        ],
+        [
+          -40.3521,
+          52.8843
+        ],
+        [
+          -40.5534,
+          52.6575
+        ],
+        [
+          -46.8543,
+          48.7279
+        ],
+        [
+          -53.9534,
+          42.7618
+        ],
+        [
+          -59.0647,
+          37.9956
+        ],
+        [
+          -62.9824,
+          35.0727
+        ],
+        [
+          -66.4308,
+          32.0511
+        ],
+        [
+          -70.7613,
+          27.1032
+        ],
+        [
+          -72.6444,
+          25.3058
+        ],
+        [
+          -73.458,
+          23.9647
+        ],
+        [
+          -74.0159,
+          22.483
+        ],
+        [
+          -75.0756,
+          21.0808
+        ],
+        [
+          -75.7077,
+          20.1025
+        ],
+        [
+          -76.2426,
+          19.0549
+        ],
+        [
+          -77.3229,
+          18.2487
+        ],
+        [
+          -77.4997,
+          17.7304
+        ],
+        [
+          -77.9673,
+          16.8254
+        ],
+        [
+          -77.5,
+          16.7414
+        ],
+        [
+          -77.1546,
+          16.8147
+        ],
+        [
+          -76.2856,
+          16.6477
+        ],
+        [
+          -75.4637,
+          16.8476
+        ],
+        [
+          -75.2617,
+          16.7017
+        ],
+        [
+          -75.2837,
+          16.4602
+        ],
+        [
+          -75.816,
+          16.0769
+        ],
+        [
+          -76.2879,
+          15.9672
+        ],
+        [
+          -76.6335,
+          16.0587
+        ],
+        [
+          -77.5454,
+          15.8853
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "title": "Tropical Cyclone MELISSA-25",
+    "description": "Red Tropical Cyclone MELISSA-25 in Jamaica, Cuba, Bahamas, Bermuda, Haiti, Canada from: 21 Oct 2025  to: 31 Oct 2025 .",
+    "datetime": "2025-10-21T15:00:00Z",
+    "start_datetime": "2025-10-21T15:00:00Z",
+    "end_datetime": "2025-10-31T15:00:00Z",
+    "modified": "2026-02-11T15:18:59Z",
+    "monty:src_event_id": "1001230",
+    "monty:episode_number": 41,
+    "monty:country_codes": [
+      "JAM",
+      "CUB",
+      "BMU",
+      "HTI",
+      "CAN"
+    ],
+    "monty:hazard_codes": [
+      "MH0306",
+      "TC",
+      "nat-met-sto-tro"
+    ],
+    "monty:corr_id": "20251021-JAM-1159798-MH0306-41-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": 296.29,
+      "severity_unit": "km/h",
+      "estimate_type": "primary",
+      "category": 5
+    },
+    "roles": [
+      "hazard",
+      "source"
+    ],
+    "keywords": [
+      "tropical cyclone",
+      "hurricane",
+      "melissa",
+      "jamaica",
+      "cuba",
+      "bermuda",
+      "haiti",
+      "canada"
+    ]
+  },
+  "assets": {
+    "icon": {
+      "href": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+      "title": "Icon",
+      "type": "image/png",
+      "roles": [
+        "icon"
+      ]
+    },
+    "report": {
+      "href": "https://www.gdacs.org/report.aspx?eventid=1001230&episodeid=41&eventtype=TC",
+      "title": "GDACS Report",
+      "type": "text/html",
+      "roles": [
+        "report"
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "1001230-41.json",
+      "rel": "self"
+    },
+    {
+      "href": "gdacs-hazards.json",
+      "rel": "collection"
+    },
+    {
+      "href": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001230&episodeid=41",
+      "rel": "via"
+    },
+    {
+      "href": "../gdacs-events/1001230-41.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../cems-events/cems-event-EMSR847.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../glide-events/TC-2025-000196-HTI.json",
+      "rel": "related",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    }
+  ]
+}

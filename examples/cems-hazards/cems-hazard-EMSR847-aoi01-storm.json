@@ -178,11 +178,11 @@
       "CUB"
     ],
     "monty:hazard_codes": [
-      "MH0403",
+      "MH0306",
       "TC",
       "nat-met-sto-tro"
     ],
-    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
+    "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
     "monty:hazard_detail": {
       "severity_value": 8552.7,
       "severity_unit": "km2",

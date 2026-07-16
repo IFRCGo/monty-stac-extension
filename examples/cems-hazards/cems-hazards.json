@@ -78,8 +78,8 @@
     ],
     "monty:hazard_codes": [
       "LS",
-      "MH0403",
-      "MH0901",
+      "MH0306",
+      "GH0300",
       "TC",
       "nat-geo-mmd-lan",
       "nat-met-sto-tro"
