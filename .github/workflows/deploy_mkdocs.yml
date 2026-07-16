@@ -4,11 +4,13 @@ on:
     branches:
       - main
     paths:
-      # Only rebuild website when docs have changed
-      - 'README.md'
-      - 'CHANGES.md'
+      # Only rebuild website when docs have changed. README.md is
+      # deliberately not listed: mkdocs.yml never includes it in nav, so
+      # editing it can't change the built site.
+      - 'CHANGELOG.md'
       - 'CONTRIBUTING.md'
       - 'docs/**'
+      - 'mkdocs.yml'
       - '.github/workflows/deploy_mkdocs.yml'
 
 permissions:

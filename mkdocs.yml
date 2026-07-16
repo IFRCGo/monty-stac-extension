@@ -54,6 +54,14 @@ markdown_extensions:
 docs_dir: docs
 site_dir: site
 
+# Fail `mkdocs build --strict` (see .github/workflows/test.yaml) when a doc
+# under docs/ isn't reachable from nav — the nav-coverage guardrail from
+# https://github.com/IFRCGo/monty-stac-extension/issues/64. Use `not_in_nav`
+# below for pages that are deliberately excluded.
+validation:
+  nav:
+    omitted_files: warn
+
 plugins:
   - search
   - mermaid2
@@ -63,6 +71,9 @@ nav:
   - Model:
     - Overview: model/README.md
     - Taxonomy: model/taxonomy.md
+    - Response Taxonomy: model/response-taxonomy.md
+    - Response Best Practices: model/response-best-practices.md
+    - Response ↔ Impact Boundary: model/response-impact-boundary.md
     - Event Correlation: model/correlation_identifier.md
     - Questions: model/questions.md
   - Examples: examples/index.md
@@ -74,6 +85,8 @@ nav:
     - Queryables: model/stac-api/queryables.md
   - Sources:
     - Overview: model/sources/README.md
+    - CEMS: model/sources/CEMS/README.md
+    - Charter: model/sources/Charter/README.md
     - DesInventar: model/sources/DesInventar/README.md
     - EM-DAT: model/sources/EM-DAT/README.md
     - GDACS: model/sources/GDACS/README.md
@@ -81,9 +94,15 @@ nav:
     - GLIDE: model/sources/GLIDE/README.md
     - IBTrACS: model/sources/IBTrACS/README.md
     - IDMC: model/sources/IDMC/README.md
+    - IDU: model/sources/IDU/README.md
     - IFRC-DREF: model/sources/IFRC-DREF/README.md
     - PDC: model/sources/PDC/README.md
     - USGS: model/sources/USGS/README.md
+
+# Docs deliberately excluded from the nav (not a coverage gap):
+# working notes, not meant to be published as a site page.
+not_in_nav: |
+  model/sources/CEMS/FINDINGS.md
 
 extra_css:
   - styles/extra.css

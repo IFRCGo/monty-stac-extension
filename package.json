@@ -2,11 +2,12 @@
   "name": "monty-stac-extension",
   "version": "1.3.0",
   "scripts": {
-    "test": "npm run check-markdown && npm run check-docs && npm run check-examples && npm run check-link-types",
+    "test": "npm run check-markdown && npm run check-docs && npm run check-examples && npm run check-link-types && npm run check-hazard-codes",
     "check-markdown": "remark . -f -r .github/remark.yaml --silently-ignore",
     "check-docs": "remark docs -f -r .github/remark-docs.yaml --ignore-path .remarkignore.docs",
     "check-examples": "stac-node-validator . --lint --verbose --schemaMap https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json=./json-schema/schema.json",
     "check-link-types": "node scripts/check-link-types.mjs",
+    "check-hazard-codes": "python3 scripts/check_hazard_codes.py",
     "format-examples": "stac-node-validator . --format --schemaMap https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json=./json-schema/schema.json"
   },
   "dependencies": {

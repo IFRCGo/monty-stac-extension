@@ -281,4 +281,4 @@ The per-source extension combinations are specified in [Response Best Practices]
 
 ---
 
-*This page was promoted from a working document to the canonical Monty Response taxonomy reference with the v1.3.0 extension release. The `monty:response_detail` object is defined in [`json-schema/schema.json`](../../json-schema/schema.json).*
+*This page was promoted from a working document to the canonical Monty Response taxonomy reference with the v1.3.0 extension release. The `monty:response_detail` object is defined in [`json-schema/schema.json`](https://github.com/IFRCGo/monty-stac-extension/blob/main/json-schema/schema.json).*
