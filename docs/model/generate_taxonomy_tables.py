@@ -1,3 +1,15 @@
+"""Manual, one-off script — not wired into any CI workflow or npm/pip script.
+
+Regenerates `taxonomy.md` from the legacy `Montandon_Schema_V1-00.json` +
+`ImpactInformationProfiles.csv` snapshot in this directory. That snapshot
+predates the hand-maintained GLIDE, EM-DAT, and UNDRR-ISC 2025 Hazard List
+tables `taxonomy.md` has since grown (see
+https://github.com/IFRCGo/monty-stac-extension/issues/64) — running this
+script today would overwrite those tables with stale, incomplete output.
+Do not run it, or wire it into CI, without first reconciling it against the
+current taxonomy.md structure.
+"""
+
 import json
 import pandas as df
 

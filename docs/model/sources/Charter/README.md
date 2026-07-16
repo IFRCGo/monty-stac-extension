@@ -148,7 +148,7 @@ preserved separately in `monty:response_detail.source_id`.
 
 Montandon ingests the Charter Mapper catalog from the OTC OBS/**S3** bucket
 `cpe-operations-catalog` (see [Remote Server & Object
-Storage](../../../../AGENTS.md)). Terradue granted **JSON-only** read access
+Storage](https://github.com/IFRCGo/monty-stac-extension/blob/main/AGENTS.md)).
 (IP-allowlisted). The S3 layout mirrors the object model — **activation-scoped**
 items under `activations/…`, **call-scoped** items under `calls/…`:
 
@@ -319,7 +319,7 @@ format `{YYYYMMDD}-{ISO3}-{spatial_block}-{UNDRR-ISC}-{episode}-GCDB`, e.g.
 `20251103-AFG-1138838-GH0101-1-GCDB`. The numeric block is a spatial identifier,
 **not** the Charter `activation_id`. All items for the same event share it.
 
-Full example: [`charter-event-1000.json`](../../../../examples/charter-events/charter-event-1000.json).
+Full example: [`charter-event-1000.json`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1000.json).
 
 ## Area → Hazard
 
@@ -444,7 +444,7 @@ Correlation back to the Event/Hazard uses the shared `monty:corr_id`.
 
 ### Example
 
-[`charter-response-1000-1144-1.json`](../../../../examples/charter-response/charter-response-1000-1144-1.json)
+[`charter-response-1000-1144-1.json`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response/charter-response-1000-1144-1.json)
 is the canonical worked example (Act-1000 VAP `1144-1`, an `eo-gra` damage
 assessment). Its `monty:response_detail`:
 
@@ -543,8 +543,8 @@ upstream Charter source page.
 
 | Activation | Type | Country | Files |
 |------------|------|---------|-------|
-| Act-1000 | Earthquake | AFG | [event](../../../../examples/charter-events/charter-event-1000.json), [response](../../../../examples/charter-response/charter-response-1000-1144-1.json) |
-| Act-1019 | Flood + landslide | BRA | [event](../../../../examples/charter-events/charter-event-1019.json) (multi-hazard) |
+| Act-1000 | Earthquake | AFG | [event](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1000.json), [response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response/charter-response-1000-1144-1.json) |
+| Act-1019 | Flood + landslide | BRA | [event](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1019.json) (multi-hazard) |
 
 ## Reference files
 
@@ -570,4 +570,4 @@ this analysis (Act-1019 / Call-1166, Flood in Brazil):
 - [International Charter](https://disasterscharter.org/)
 - [STAC Index — Charter Catalog](https://stacindex.org/catalogs/disasters-charter-mapper-catalog)
 - [Terradue `disaster:` extension](https://github.com/Terradue/stac-extensions-disaster)
-- [Monty STAC Extension specification](../../../../README.md)
+- [Monty STAC Extension specification](https://github.com/IFRCGo/monty-stac-extension/blob/main/README.md)

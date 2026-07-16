@@ -321,8 +321,8 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   `{eventid}-{episodeid}`. (A bare `{eventid}-1` would be stale; only fall back to it if the
   lookup fails.)
 
-**Worked, fixture-verified example**: [`gdacs-events/1001230-41`](../../../../examples/gdacs-events/1001230-41.json)
-and [`gdacs-hazards/1001230-41`](../../../../examples/gdacs-hazards/1001230-41.json) are built from the
+**Worked, fixture-verified example**: [`gdacs-events/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json)
+and [`gdacs-hazards/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json) are built from the
 real GDACS `geteventdata`/`getgeometry` API responses for the same Tropical Cyclone Melissa activation
 (`iso3: JAM`, `MH0306`, 21–31 Oct 2025), completing the `related` link this CEMS example already declares
 (#61). Their `monty:corr_id` (`20251021-JAM-1159798-MH0306-41-GCDB`, computed with the real
@@ -380,16 +380,16 @@ Worked Monty items derived from **EMSR847** (Tropical Cyclone Melissa) AOI 1 (Ki
 demonstrating the full chain — note AOI 1's DEL is `statusCode=N` (not produced), so the
 Hazard geometry falls back to the AOI extent:
 
-- [`cems-event-EMSR847`](../../../../examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
-- [`cems-hazard-EMSR847-aoi01-storm`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0306`)
-- [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
-- [`cems-response-EMSR847-aoi01-gra`](../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
-- [`cems-impact-EMSR847-aoi01-gra-population`](../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
+- [`cems-event-EMSR847`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
+- [`cems-hazard-EMSR847-aoi01-storm`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0306`)
+- [`cems-hazard-EMSR847-aoi01-landslide`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
+- [`cems-response-EMSR847-aoi01-gra`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
+- [`cems-impact-EMSR847-aoi01-gra-population`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 
 The GDACS side of the cross-source link is also a real worked example, not a placeholder:
 
-- [`gdacs-events/1001230-41`](../../../../examples/gdacs-events/1001230-41.json) — GDACS Event for the same storm (`TC1001230`, episode 41), built from the real `geteventdata` response
-- [`gdacs-hazards/1001230-41`](../../../../examples/gdacs-hazards/1001230-41.json) — GDACS Hazard, geometry unioned from the real `getgeometry` `Poly_Red` footprint features
+- [`gdacs-events/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json) — GDACS Event for the same storm (`TC1001230`, episode 41), built from the real `geteventdata` response
+- [`gdacs-hazards/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json) — GDACS Hazard, geometry unioned from the real `getgeometry` `Poly_Red` footprint features
 
 ## Reference files
 
@@ -430,4 +430,4 @@ grounded empirically in the full 224-activation corpus rather than a spec.
 - [Rapid Mapping product portfolio](https://mapping.emergency.copernicus.eu/about/rapid-mapping-portfolio/)
 - [How to harvest CEMS Mapping data](https://mapping.emergency.copernicus.eu/about/how-to-harvest-cems-mapping-data/)
 - [Response taxonomy](../../response-taxonomy.md) · [Response best practices](../../response-best-practices.md) · [Response ↔ Impact boundary](../../response-impact-boundary.md)
-- [Monty STAC Extension specification](../../../../README.md)
+- [Monty STAC Extension specification](https://github.com/IFRCGo/monty-stac-extension/blob/main/README.md)
