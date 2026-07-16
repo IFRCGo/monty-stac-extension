@@ -331,17 +331,23 @@ casings):
 
 | CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes / `subCategory` refinement |
 |-----------------|----------------|-------|--------|----------------------------------|
-| Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0605 |
-| Wildfire | MH1301 | WF | nat-cli-wil-for | `Forest fire`; land/other fire variants |
-| Storm | MH0400 | ST | nat-met-sto | `Tropical cyclone, hurricane, typhoon`→MH0403 / `TC` / `nat-met-sto-tro` |
-| Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→GH0301/`TS` |
-| Mass Movement | MH0901 | LS | nat-geo-mmd-lan | Landslide; avalanche→MH1201, rockfall/subsidence per `subCategory` |
-| Volcanic Activity | GH0201 | VO | nat-geo-vol | Eruption; ashfall/lahar per `subCategory` |
-| Industrial Accident | TH0300 / TH0600 | — | tec-ind | Technological — chemical (TH0300) vs explosion (TH0600) vs oil spill from `subCategory`; manual review |
-| Transport accident | — | — | tec-tra | Technological — no clean UNDRR-ISC; manual review |
-| Humanitarian Crisis | — | CE | — | Complex/societal emergency — no UNDRR-ISC natural code; manual review (mostly Risk & Recovery, out of core RM scope) |
-| Environmental Degradation | — | — | — | Environmental hazard — no clean UNDRR-ISC; manual review |
+| Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0601 |
+| Wildfire | EN0205 | WF | nat-cli-wil-for | `Forest fire`; land/other fire variants |
+| Storm | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine by `subCategory` — `Tropical cyclone, hurricane, typhoon`→**MH0306** / `TC` / `nat-met-sto-tro` (matches the GDACS TC convention, keeping the EMSR847↔GDACS `1001230-41` cross-link discoverable via `a_overlaps`) |
+| Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→**MH0705**/`TS` |
+| Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); avalanche→**MH0801**, rockfall→GH0301 (Falls), subsidence→GH0309, per `subCategory` |
+| Volcanic Activity | GH0201 | VO | nat-geo-vol | Eruption (chapeau); ashfall→GH0202, lahar→GH0204 per `subCategory` |
+| Industrial Accident | — | — | tec-ind | Technological — no single chapeau; refine by `subCategory` — chemical/gas leak→**TL0301**, explosion→**TL0304**, general→TL0309 |
+| Transport accident | — | — | tec-tra | Technological — no single chapeau; refine by `subCategory` — air→**TL0401**, rail→**TL0404**, road→**TL0405**, water→**TL0403** |
+| Humanitarian Crisis | — | CE | — | Complex/societal emergency — Societal cluster (`SO01xx`/`SO02xx`, e.g. SO0103 civil unrest) has codes but none fits as a chapeau; manual review (mostly Risk & Recovery, out of core RM scope) |
+| Environmental Degradation | — | — | — | Environmental cluster (`EN01xx`–`EN05xx`) has codes but none fits as a chapeau; manual review |
 | Other | — | OT | — | Unclassified — manual review |
+
+> **Corrected 2026-07-16**: this table previously used `MH0403` (which is *Blizzard*, not Tropical
+> Cyclone) for storms, `MH1301`/`MH0901`/`MH1201`/`TH0300`/`TH0600` (none of which exist in the
+> UNDRR-ISC 2025 list), and `GH0301` (*Falls*, not Tsunami). All values above are verified against
+> [`docs/model/taxonomy.md`](../../taxonomy.md#complete-2025-hazard-list) and its Cross-Classification
+> Mapping table. See IFRCGo/monty-stac-extension#61.
 
 > **Completeness**: this table covers the full observed vocabulary (RM currently exercises
 > Flood, Wildfire, Storm, Earthquake, Mass Movement, Industrial/Transport accident, Other;
@@ -349,7 +355,11 @@ casings):
 > catalogue). Any **unmapped or new** `category` MUST fall through to manual review rather
 > than be dropped. `subCategory` (detail endpoint only) is the refinement key.
 
-Apply `hazard_profiles.get_canonical_hazard_codes()` after mapping.
+> **`get_canonical_hazard_codes()` does not validate this table.** That function preserves any
+> code that is already a syntactically valid UNDRR-ISC 2025 code — it does not check that the code
+> is the *correct* one for the mapped category (see IFRCGo/pystac-monty#168, where USGS shipped the
+> valid-but-wrong `GH0311` for years undetected). The mapping above must be correct at the source;
+> canonicalisation is formatting, not verification.
 
 ## Examples
 
@@ -358,8 +368,8 @@ demonstrating the full chain — note AOI 1's DEL is `statusCode=N` (not produce
 Hazard geometry falls back to the AOI extent:
 
 - [`cems-event-EMSR847`](../../../../examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
-- [`cems-hazard-EMSR847-aoi01-storm`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0403`)
-- [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `MH0901`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
+- [`cems-hazard-EMSR847-aoi01-storm`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0306`)
+- [`cems-hazard-EMSR847-aoi01-landslide`](../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
 - [`cems-response-EMSR847-aoi01-gra`](../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
 - [`cems-impact-EMSR847-aoi01-gra-population`](../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 

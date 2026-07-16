@@ -178,11 +178,11 @@
       "CUB"
     ],
     "monty:hazard_codes": [
-      "MH0901",
+      "GH0300",
       "LS",
       "nat-geo-mmd-lan"
     ],
-    "monty:corr_id": "20251026-JAM-983324-MH0403-1-GCDB",
+    "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
     "monty:hazard_detail": {
       "severity_value": 1,
       "severity_unit": "count",

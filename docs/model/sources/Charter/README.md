@@ -438,21 +438,32 @@ upstream Charter source page.
 | `disaster:type` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes |
 |-----------------|----------------|-------|--------|-------|
 | `flood` | MH0600 | FL | nat-hyd-flo-flo | Refine to MH0603/MH0604 if flash/riverine |
-| `fire` | MH1301 | WF | nat-cli-wil-for | Wildfire / forest fire |
+| `fire` | EN0205 | WF | nat-cli-wil-for | Wildfire / forest fire |
 | `earthquake` | GH0101 | EQ | nat-geo-ear-gro | Ground shaking |
-| `volcano` | GH0201 | VO | nat-geo-vol | Volcanic eruption |
-| `storm_hurricane` | MH0400 | ST | nat-met-sto | Generic storm; refine to MH0403 if tropical |
-| `cyclone` | MH0403 | TC | nat-met-sto-tro | Tropical cyclone |
-| `tsunami` | GH0301 | TS | nat-geo-ear-tsu | |
-| `landslide` | MH0901 | LS | nat-geo-mmd-lan | |
-| `snow_hazard` | MH1202 | SW | nat-met-ext-col | Snow / winter hazard |
-| `ice` | MH0801 | CW | nat-met-ext-col | Ice storm / icing |
-| `oil_spill` | TH0300 | — | tec-ind-che | Chemical spill (technological) |
-| `explosive_event` | TH0600 | — | tec-ind-exp | Explosion (technological) |
+| `volcano` | GH0201 | VO | nat-geo-vol | Volcanic eruption (chapeau) |
+| `storm_hurricane` | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine to **MH0306** if tropical (see `cyclone`) |
+| `cyclone` | MH0306 | TC | nat-met-sto-tro | Tropical cyclone (matches the GDACS TC convention) |
+| `tsunami` | MH0705 | TS | nat-geo-ear-tsu | |
+| `landslide` | GH0300 | LS | nat-geo-mmd-lan | Chapeau, matching GDACS/EM-DAT/GLIDE convention |
+| `snow_hazard` | — | OT | — | No single UNDRR-ISC/GLIDE code fits; candidates are MH0403 (Blizzard) or MH0503–MH0509 (severe winter conditions) depending on the actual event — manual review against real Charter payloads |
+| `ice` | MH0502 | CW | nat-met-ext-col | Cold wave (chapeau); refine to MH0509 (Icing) or MH0506 (Freezing rain) per event detail |
+| `oil_spill` | CH0203 | — | tec-ind-oil-oil | Oil spill — canonically classified under the Chemical/Carcinogens cluster in `taxonomy.md`, not Technological; EM-DAT key corrected from `tec-ind-che` (Chemical Spill) |
+| `explosive_event` | TL0304 | — | tec-ind-exp | Explosion (technological) |
 | `other` | — | OT | — | No UNDRR code — manual review required |
 
-Apply `hazard_profiles.get_canonical_hazard_codes()` after mapping for the
-standard code format.
+> **Corrected 2026-07-16**: this table previously used `MH0403` (*Blizzard*, not Tropical Cyclone)
+> for `cyclone`, `MH1301` for `fire` and `MH0901` for `landslide` (neither exists in the UNDRR-ISC
+> 2025 list), `GH0301` (*Falls*, not Tsunami) for `tsunami`, `MH0801` (*Avalanche*, not ice/cold) for
+> `ice`, `MH1202` and a fabricated GLIDE code `SW` for `snow_hazard`, and the wrong prefix
+> `TH0300`/`TH0600` for `oil_spill`/`explosive_event`. All values above are verified against
+> [`docs/model/taxonomy.md`](../../taxonomy.md#complete-2025-hazard-list) and its Cross-Classification
+> Mapping table. See IFRCGo/monty-stac-extension#61.
+
+> **`get_canonical_hazard_codes()` does not validate this table.** That function preserves any code
+> that is already a syntactically valid UNDRR-ISC 2025 code — it does not check that the code is the
+> *correct* one for the mapped `disaster:type` (see IFRCGo/pystac-monty#168, where USGS shipped the
+> valid-but-wrong `GH0311` for years undetected). The mapping above must be correct at the source;
+> canonicalisation is formatting, not verification.
 
 ## Examples
 
