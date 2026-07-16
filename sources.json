@@ -1,0 +1,290 @@
+{
+  "sources": [
+    {
+      "id": "alerthub",
+      "name": "AlertHub",
+      "org": null,
+      "url": null,
+      "license": null,
+      "status": "undocumented",
+      "types": [
+        "event",
+        "hazard"
+      ],
+      "collections": [
+        "alerthub-events",
+        "alerthub-hazards"
+      ],
+      "doc": null,
+      "etl": null
+    },
+    {
+      "id": "cems",
+      "name": "Copernicus Emergency Management Service — Rapid Mapping",
+      "org": "Copernicus Emergency Management Service (CEMS)",
+      "url": "https://mapping.emergency.copernicus.eu/",
+      "license": "Copernicus data policy — free & open (attribution required)",
+      "status": "etl",
+      "types": [
+        "event",
+        "hazard",
+        "impact",
+        "response"
+      ],
+      "collections": [
+        "cems-events",
+        "cems-hazards",
+        "cems-impacts",
+        "cems-response"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/CEMS/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/cems.py"
+    },
+    {
+      "id": "charter",
+      "name": "International Charter on Space and Major Disasters",
+      "org": "International Charter on Space and Major Disasters",
+      "url": "https://disasterscharter.org",
+      "license": "Undefined — data use governed by Charter membership and activation agreements",
+      "status": "etl",
+      "types": [
+        "event",
+        "hazard",
+        "response"
+      ],
+      "collections": [
+        "charter-events",
+        "charter-hazards",
+        "charter-response"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/Charter/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/charter.py"
+    },
+    {
+      "id": "desinventar",
+      "name": "DesInventar",
+      "org": "United Nations Office for Disaster Risk Reduction (UNDRR)",
+      "url": "https://www.desinventar.net",
+      "license": "https://www.desinventar.net/terms_of_use.html",
+      "status": "production",
+      "types": [
+        "event",
+        "impact"
+      ],
+      "collections": [
+        "desinventar-events",
+        "desinventar-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/DesInventar/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/desinventar.py"
+    },
+    {
+      "id": "emdat",
+      "name": "EM-DAT",
+      "org": "Centre for Research on the Epidemiology of Disasters (CRED)",
+      "url": "https://www.emdat.be/",
+      "license": "https://doc.emdat.be/docs/legal/terms-of-use/",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "emdat-events",
+        "emdat-hazards",
+        "emdat-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/EM-DAT/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/emdat.py"
+    },
+    {
+      "id": "gdacs",
+      "name": "GDACS",
+      "org": "European Commission - Joint Research Centre (JRC)",
+      "url": "https://www.gdacs.org",
+      "license": "MIT License",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "gdacs-events",
+        "gdacs-hazards",
+        "gdacs-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/GDACS/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/gdacs.py"
+    },
+    {
+      "id": "gfd",
+      "name": "Global Flood Database (GFD)",
+      "org": "Cloud to Street",
+      "url": "https://global-flood-database.cloudtostreet.ai/",
+      "license": "CC BY-NC-ND 4.0",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "gfd-events",
+        "gfd-hazards",
+        "gfd-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/GFD/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/gfd.py"
+    },
+    {
+      "id": "glide",
+      "name": "GLIDE",
+      "org": "Asian Disaster Reduction Center (ADRC)",
+      "url": "https://glidenumber.net",
+      "license": null,
+      "status": "production",
+      "types": [
+        "event",
+        "hazard"
+      ],
+      "collections": [
+        "glide-events",
+        "glide-hazards"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/GLIDE/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/glide.py"
+    },
+    {
+      "id": "ibtracs",
+      "name": "IBTrACS",
+      "org": "National Oceanic and Atmospheric Administration (NOAA)",
+      "url": "https://www.ncei.noaa.gov/products/international-best-track-archive",
+      "license": "Public Domain",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard"
+      ],
+      "collections": [
+        "ibtracs-events",
+        "ibtracs-hazards"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/IBTrACS/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/ibtracs.py"
+    },
+    {
+      "id": "idmc-gidd",
+      "name": "IDMC — Global Internal Displacement Database (GIDD)",
+      "org": "Internal Displacement Monitoring Centre (IDMC)",
+      "url": "https://www.internal-displacement.org/database",
+      "license": null,
+      "status": "production",
+      "types": [
+        "event",
+        "impact"
+      ],
+      "collections": [
+        "idmc-gidd-events",
+        "idmc-gidd-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/IDMC/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/gidd.py"
+    },
+    {
+      "id": "idmc-idu",
+      "name": "IDMC — Internal Displacement Updates (IDU)",
+      "org": "Internal Displacement Monitoring Centre (IDMC)",
+      "url": "https://www.internal-displacement.org/internal-displacement-updates/",
+      "license": null,
+      "status": "production",
+      "types": [
+        "event",
+        "impact"
+      ],
+      "collections": [
+        "idmc-idu-events",
+        "idmc-idu-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/IDU/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/idu.py"
+    },
+    {
+      "id": "ifrcevent",
+      "name": "IFRC DREF",
+      "org": "International Federation of Red Cross and Red Crescent Societies (IFRC)",
+      "url": "https://www.ifrc.org",
+      "license": null,
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "ifrcevent-events",
+        "ifrcevent-hazards",
+        "ifrcevent-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/IFRC-DREF/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/ifrc_events.py"
+    },
+    {
+      "id": "pdc",
+      "name": "Pacific Disaster Center (PDC)",
+      "org": "Pacific Disaster Center",
+      "url": "https://www.pdc.org/",
+      "license": "Restricted — disaster/emergency management use only, no redistribution without authorization (PDC Terms & Conditions)",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "pdc-events",
+        "pdc-hazards",
+        "pdc-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/PDC/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/pdc.py"
+    },
+    {
+      "id": "reference",
+      "name": "Reference Events",
+      "org": null,
+      "url": null,
+      "license": null,
+      "status": "undocumented",
+      "types": [
+        "event"
+      ],
+      "collections": [
+        "reference-events"
+      ],
+      "doc": null,
+      "etl": null
+    },
+    {
+      "id": "usgs",
+      "name": "USGS Earthquake Catalog",
+      "org": "United States Geological Survey (USGS)",
+      "url": "https://earthquake.usgs.gov",
+      "license": "Public Domain",
+      "status": "production",
+      "types": [
+        "event",
+        "hazard",
+        "impact"
+      ],
+      "collections": [
+        "usgs-events",
+        "usgs-hazards",
+        "usgs-impacts"
+      ],
+      "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/USGS/",
+      "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/usgs.py"
+    }
+  ]
+}

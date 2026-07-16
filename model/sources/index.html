@@ -1258,45 +1258,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Available Sources">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#global-disaster-databases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Global Disaster Databases
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#specialized-systems" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Specialized Systems
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ifrc-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        IFRC Sources
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1465,26 +1426,101 @@
 
 <h1 id="data-sources">Data Sources</h1>
 <p>This documentation identifies the sources of data used for Monty. This has been initiated from the <a href="https://github.com/IFRCGo/GCDB/blob/main/Taxonomies/Monty_DataSources.xlsx">GCDB excel source sheet</a>.</p>
+<p>Sources are declared in <a href="sources.yml"><code>sources.yml</code></a>, the single source of
+truth this section and <a href="../../sources.json"><code>docs/sources.json</code></a> are generated
+from — see <a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/gen_sources_index.py"><code>scripts/gen_sources_index.py</code></a>.
+Run it after editing <code>sources.yml</code>; CI runs it with <code>--check</code> and fails on drift.</p>
+<!-- gen_sources_index.py: BEGIN available-sources -->
 <h2 id="available-sources">Available Sources</h2>
-<h3 id="global-disaster-databases">Global Disaster Databases</h3>
-<ul>
-<li><a href="DesInventar/">DesInventar</a> - National disaster loss database system collecting detailed disaster-related damage and loss data.</li>
-<li><a href="EM-DAT/">EM-DAT</a> - The Emergency Events Database, containing worldwide data on the occurrence and effects of disasters.</li>
-<li><a href="GDACS/">GDACS</a> - Global Disaster Alert and Coordination System, providing near real-time alerts about natural disasters.</li>
-<li><a href="GLIDE/">GLIDE</a> - GLobal IDEntifier number, assigning unique identifiers to disasters worldwide.</li>
-</ul>
-<h3 id="specialized-systems">Specialized Systems</h3>
-<ul>
-<li><a href="GFD/">GFD</a> - Global Flood Database, providing information about flood events and their impacts.</li>
-<li><a href="IBTrACS/">IBTrACS</a> - International Best Track Archive for Climate Stewardship, tracking tropical cyclone data.</li>
-<li><a href="IDMC/">IDMC</a> - Internal Displacement Monitoring Centre, focusing on internal displacement data.</li>
-<li><a href="PDC/">PDC</a> - Pacific Disaster Center, offering disaster monitoring and early warning capabilities.</li>
-<li><a href="USGS/">USGS</a> - United States Geological Survey, providing earthquake and other geological hazard data.</li>
-</ul>
-<h3 id="ifrc-sources">IFRC Sources</h3>
-<ul>
-<li><a href="IFRC-DREF/">IFRC-DREF</a> - Disaster Relief Emergency Fund operations data from the International Federation of Red Cross and Red Crescent Societies.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Organisation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AlertHub</td>
+<td>—</td>
+<td>undocumented</td>
+</tr>
+<tr>
+<td><a href="CEMS/">Copernicus Emergency Management Service — Rapid Mapping</a></td>
+<td>Copernicus Emergency Management Service (CEMS)</td>
+<td>etl</td>
+</tr>
+<tr>
+<td><a href="Charter/">International Charter on Space and Major Disasters</a></td>
+<td>International Charter on Space and Major Disasters</td>
+<td>etl</td>
+</tr>
+<tr>
+<td><a href="DesInventar/">DesInventar</a></td>
+<td>United Nations Office for Disaster Risk Reduction (UNDRR)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="EM-DAT/">EM-DAT</a></td>
+<td>Centre for Research on the Epidemiology of Disasters (CRED)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="GDACS/">GDACS</a></td>
+<td>European Commission - Joint Research Centre (JRC)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="GFD/">Global Flood Database (GFD)</a></td>
+<td>Cloud to Street</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="GLIDE/">GLIDE</a></td>
+<td>Asian Disaster Reduction Center (ADRC)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="IBTrACS/">IBTrACS</a></td>
+<td>National Oceanic and Atmospheric Administration (NOAA)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="IDMC/">IDMC — Global Internal Displacement Database (GIDD)</a></td>
+<td>Internal Displacement Monitoring Centre (IDMC)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="IDU/">IDMC — Internal Displacement Updates (IDU)</a></td>
+<td>Internal Displacement Monitoring Centre (IDMC)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="IFRC-DREF/">IFRC DREF</a></td>
+<td>International Federation of Red Cross and Red Crescent Societies (IFRC)</td>
+<td>production</td>
+</tr>
+<tr>
+<td><a href="PDC/">Pacific Disaster Center (PDC)</a></td>
+<td>Pacific Disaster Center</td>
+<td>production</td>
+</tr>
+<tr>
+<td>Reference Events</td>
+<td>—</td>
+<td>undocumented</td>
+</tr>
+<tr>
+<td><a href="USGS/">USGS Earthquake Catalog</a></td>
+<td>United States Geological Survey (USGS)</td>
+<td>production</td>
+</tr>
+</tbody>
+</table>
+<!-- gen_sources_index.py: END available-sources -->
+
+<!-- gen_sources_index.py: BEGIN data-types-by-source -->
 <h2 id="data-types-by-source">Data Types by Source</h2>
 <table>
 <thead>
@@ -1493,71 +1529,119 @@
 <th>Events</th>
 <th>Hazards</th>
 <th>Impacts</th>
+<th>Response</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>DesInventar</td>
+<td>AlertHub</td>
+<td>✓</td>
+<td>✓</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><a href="CEMS/">Copernicus Emergency Management Service — Rapid Mapping</a></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="Charter/">International Charter on Space and Major Disasters</a></td>
+<td>✓</td>
 <td>✓</td>
 <td>-</td>
 <td>✓</td>
 </tr>
 <tr>
-<td>EM-DAT</td>
+<td><a href="DesInventar/">DesInventar</a></td>
 <td>✓</td>
+<td>-</td>
 <td>✓</td>
-<td>✓</td>
+<td>-</td>
 </tr>
 <tr>
-<td>GDACS</td>
+<td><a href="EM-DAT/">EM-DAT</a></td>
 <td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr>
-<td>GFD</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-</tr>
-<tr>
-<td>GLIDE</td>
 <td>✓</td>
 <td>✓</td>
 <td>-</td>
 </tr>
 <tr>
-<td>IBTrACS</td>
+<td><a href="GDACS/">GDACS</a></td>
+<td>✓</td>
 <td>✓</td>
 <td>✓</td>
 <td>-</td>
 </tr>
 <tr>
-<td>IDMC</td>
+<td><a href="GFD/">Global Flood Database (GFD)</a></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>-</td>
+</tr>
+<tr>
+<td><a href="GLIDE/">GLIDE</a></td>
+<td>✓</td>
+<td>✓</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><a href="IBTrACS/">IBTrACS</a></td>
+<td>✓</td>
+<td>✓</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><a href="IDMC/">IDMC — Global Internal Displacement Database (GIDD)</a></td>
 <td>✓</td>
 <td>-</td>
 <td>✓</td>
+<td>-</td>
 </tr>
 <tr>
-<td>IFRC-DREF</td>
+<td><a href="IDU/">IDMC — Internal Displacement Updates (IDU)</a></td>
 <td>✓</td>
 <td>-</td>
 <td>✓</td>
+<td>-</td>
 </tr>
 <tr>
-<td>PDC</td>
+<td><a href="IFRC-DREF/">IFRC DREF</a></td>
 <td>✓</td>
 <td>✓</td>
 <td>✓</td>
+<td>-</td>
 </tr>
 <tr>
-<td>USGS</td>
+<td><a href="PDC/">Pacific Disaster Center (PDC)</a></td>
 <td>✓</td>
 <td>✓</td>
 <td>✓</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Reference Events</td>
+<td>✓</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><a href="USGS/">USGS Earthquake Catalog</a></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
+<!-- gen_sources_index.py: END data-types-by-source -->
+
 <h2 id="source-characteristics">Source Characteristics</h2>
 <p>Each source has specific characteristics that determine how their data is used in Monty:</p>
 <ul>
