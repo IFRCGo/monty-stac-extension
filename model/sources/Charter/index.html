@@ -541,6 +541,55 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#update-polling-strategy-etl">
+<span class="md-ellipsis">
+      
+        Update &amp; polling strategy (ETL)
+      
+    </span>
+</a>
+<nav aria-label="Update &amp; polling strategy (ETL)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#where-each-entity-is-polled">
+<span class="md-ellipsis">
+      
+        Where each entity is polled
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#detecting-a-real-change">
+<span class="md-ellipsis">
+      
+        Detecting a real change
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cadence">
+<span class="md-ellipsis">
+      
+        Cadence
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#re-emission-idempotency">
+<span class="md-ellipsis">
+      
+        Re-emission (idempotency)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#the-terradue-disaster-extension">
 <span class="md-ellipsis">
       
@@ -903,6 +952,128 @@ no <code>call-</code> prefix) and is only used for browsing/discovery — the sa
 endpoints are dynamically generated) and some <code>self</code> links carry a <code>.json</code> suffix
 that returns HTTP 500. Alternative browsing:
 <a href="https://stacindex.org/catalogs/disasters-charter-mapper-catalog">STAC Index</a>.</p>
+<h2 id="update-polling-strategy-etl">Update &amp; polling strategy (ETL)</h2>
+<p>Charter objects are revised <strong>independently</strong> — there is no "the activation
+changes first" rule at <em>update</em> time. The only ordering constraint is at
+<em>creation</em> (Call → Activation → Areas/VAPs, and Call → Acquisitions; see <a href="#the-process-flow-call--activation--areasvaps-call--acquisitions">the process flow</a>).
+So all of the following happen and the ETL must poll each entity on its own:</p>
+<ul>
+<li>a VAP is added (or, rarely, revised) while its Activation is untouched;</li>
+<li>an Area is added/refined while the Activation is untouched;</li>
+<li>a calibrated dataset changes (recalibration / new pass) with nothing else moving;</li>
+<li>any combination of the above.</li>
+</ul>
+<h3 id="where-each-entity-is-polled">Where each entity is polled</h3>
+<p>Because <strong>Areas and VAPs are activation-scoped but Acquisitions/datasets are
+call-scoped</strong>, a single crawl of the activation prefix does <strong>not</strong> surface
+dataset changes. Poll two prefixes per event:</p>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Monty item</th>
+<th>Poll scope (S3)</th>
+<th>Update behaviour</th>
+<th>Primary change signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activation</td>
+<td>Event</td>
+<td><code>activations/act-{activation_id}/act-{activation_id}.json</code></td>
+<td>Rarely mutated after onset; <code>cpe:activation_status</code> moves <code>open → closed → archived</code></td>
+<td><code>cpe:activation_status</code> transition + object <code>ETag</code></td>
+</tr>
+<tr>
+<td>Area</td>
+<td>Hazard</td>
+<td><code>activations/act-{activation_id}/areas/</code></td>
+<td>May be added/refined independently; carries no <code>created</code> field</td>
+<td>new object appears; object <code>ETag</code></td>
+</tr>
+<tr>
+<td>VAP</td>
+<td>Response (<code>eo-*</code>)</td>
+<td><code>activations/act-{activation_id}/vaps/</code></td>
+<td>Almost always <strong>create-only</strong>; revision is rare</td>
+<td>new object appears</td>
+</tr>
+<tr>
+<td>Calibrated dataset</td>
+<td>Response (<code>eo-dat</code>)</td>
+<td><code>calls/call-{call_id}/calibratedDatasets/</code> — one prefix <strong>per call</strong> in <code>disaster:call_ids</code></td>
+<td><strong>Most volatile</strong> — datasets appear and are re-processed throughout ingestion/calibration</td>
+<td>new object; object <code>ETag</code>; <code>cpe:status.stage</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The call list comes from the Activation's <code>disaster:call_ids</code>. Resolve
+<strong>call → activation</strong> once, then poll each <code>calls/call-{call_id}/…</code> prefix on
+its own cadence — never assume a dataset change is reflected in the Activation's
+own object (it is not: acquisitions never attach to the activation).</p>
+</blockquote>
+<h3 id="detecting-a-real-change">Detecting a real change</h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong><code>properties.updated</code> is not a reliable content-change signal.</strong> The Charter
+Mapper periodically <strong>republishes the whole catalog</strong>, stamping every item in an
+activation/call with a near-identical <code>updated</code> even when the payload is
+unchanged — e.g. all four Act-1019 Areas share <code>2026-06-10T07:56:21Z</code>, and every
+Act-1019 calibrated dataset shows <code>2026-07-06T06:4x</code>. A naive <code>created ≠ updated</code>
+test therefore yields <strong>false positives</strong>.</p>
+</div>
+<p>Use, in order of reliability:</p>
+<ol>
+<li><strong>S3 object <code>ETag</code> / <code>LastModified</code></strong> (from <code>ListObjectsV2</code> on the prefix) — the
+   authoritative "did this JSON change" signal, immune to the republish caveat.
+   Store the last-seen <code>ETag</code> per object key and re-ingest only when it changes;
+   the listing is metadata-only and cheap. (Note S3 <code>ETag</code> is a content hash only
+   for non-multipart objects — these small JSONs qualify; otherwise hash the
+   normalised body yourself.)</li>
+<li><strong><code>properties.created</code></strong> — the true production timestamp, stable across
+   republishes and the best signal for "is this object <strong>new</strong> since the last poll".</li>
+<li><strong><code>cpe:status.stage</code></strong> (acquisitions only) — lifecycle marker. The
+   <code>calibratedDatasets</code> collection already holds only the <code>calibratedDataset</code>
+   stage, but a dataset can be re-emitted at that stage after re-processing, so
+   combine it with the <code>ETag</code>.</li>
+</ol>
+<h3 id="cadence">Cadence</h3>
+<p>Drive polling frequency from the activation lifecycle (<code>cpe:activation_status</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Suggested cadence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>open</code> (or activation only days old)</td>
+<td>Active response — calibration and VAP production ongoing</td>
+<td>frequent (e.g. hourly)</td>
+</tr>
+<tr>
+<td><code>closed</code></td>
+<td>Response wound down; late VAPs still possible</td>
+<td>daily</td>
+</tr>
+<tr>
+<td><code>archived</code></td>
+<td>Cold; objects may be in <strong>cold storage</strong> (Act &lt; 994 / Call &lt; 1136) and unreadable until restored</td>
+<td>rare / on-demand only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="re-emission-idempotency">Re-emission (idempotency)</h3>
+<p>The Monty <code>id</code> and <code>monty:corr_id</code> are <strong>stable</strong> across updates: on a detected
+change, recompute the item and <strong>overwrite</strong> the existing Monty item at the same
+id. A dataset re-processed under the same <code>{dataset_id}</code> is a content update on the
+same Response id (not a new item); a new sensor pass is a new id. Withdrawal or
+deletion of an upstream object is rare and is handled by removing the corresponding
+Monty item.</p>
 <h2 id="the-terradue-disaster-extension">The Terradue <code>disaster:</code> extension</h2>
 <p>Charter is the live data model for the Terradue <code>disaster:</code> extension. Upstream
 Charter STAC declares the <strong>legacy</strong> URL
