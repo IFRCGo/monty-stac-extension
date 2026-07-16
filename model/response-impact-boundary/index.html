@@ -5,9 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../response-best-practices/" rel="prev"/>
+<link href="../correlation_identifier/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Response ↔ Impact Boundary Rules - Monty Extension Documentation</title>
+<title>Response ↔ Impact Boundary - Monty Extension Documentation</title>
 <link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -45,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Response ↔ Impact Boundary Rules
+              Response ↔ Impact Boundary
             
           </span>
 </div>
@@ -140,8 +142,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -157,7 +159,7 @@
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
             
@@ -178,6 +180,178 @@
     
   </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../response-taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Response Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../response-best-practices/">
+<span class="md-ellipsis">
+    
+  
+    Response Best Practices
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Response ↔ Impact Boundary
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Response ↔ Impact Boundary
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-pattern-catalogue">
+<span class="md-ellipsis">
+      
+        1. Pattern catalogue
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-decision-tree">
+<span class="md-ellipsis">
+      
+        2. Decision tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-etl-splitting-guidance-when-and-how-to-split-a-source-record">
+<span class="md-ellipsis">
+      
+        3. ETL splitting guidance — when and how to split a source record
+      
+    </span>
+</a>
+<nav aria-label="3. ETL splitting guidance — when and how to split a source record" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#31-algorithm">
+<span class="md-ellipsis">
+      
+        3.1 Algorithm
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#32-id-and-corr_id-conventions-idempotent-re-pairing">
+<span class="md-ellipsis">
+      
+        3.2 ID and corr_id conventions (idempotent re-pairing)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#33-exact-link-block-to-emit-on-each-impact-item">
+<span class="md-ellipsis">
+      
+        3.3 Exact link block to emit on each Impact item
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#34-multi-thematic-products-p4">
+<span class="md-ellipsis">
+      
+        3.4 Multi-thematic products (P4)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-query-perspective-re-pairing-the-two-halves">
+<span class="md-ellipsis">
+      
+        4. Query perspective — re-pairing the two halves
+      
+    </span>
+</a>
+<nav aria-label="4. Query perspective — re-pairing the two halves" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#41-return-both-halves-of-a-paired-record">
+<span class="md-ellipsis">
+      
+        4.1 Return both halves of a paired record
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#42-given-a-response-find-its-downstream-impacts">
+<span class="md-ellipsis">
+      
+        4.2 Given a Response, find its downstream Impacts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#43-given-an-impact-find-its-source-response">
+<span class="md-ellipsis">
+      
+        4.3 Given an Impact, find its source Response
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#see-also">
+<span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../correlation_identifier/">
@@ -324,6 +498,30 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../sources/CEMS/">
+<span class="md-ellipsis">
+    
+  
+    CEMS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/Charter/">
+<span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../sources/DesInventar/">
 <span class="md-ellipsis">
     
@@ -401,6 +599,18 @@
     
   
     IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../sources/IDU/">
+<span class="md-ellipsis">
+    
+  
+    IDU
   
 
     

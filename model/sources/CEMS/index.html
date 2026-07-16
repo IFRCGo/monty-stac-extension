@@ -5,9 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../" rel="prev"/>
+<link href="../Charter/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Copernicus Emergency Management Service — Rapid Mapping - Monty Extension Documentation</title>
+<title>CEMS - Monty Extension Documentation</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -45,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Copernicus Emergency Management Service — Rapid Mapping
+              CEMS
             
           </span>
 </div>
@@ -180,6 +182,42 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../response-taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Response Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-best-practices/">
+<span class="md-ellipsis">
+    
+  
+    Response Best Practices
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-impact-boundary/">
+<span class="md-ellipsis">
+    
+  
+    Response ↔ Impact Boundary
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../correlation_identifier/">
 <span class="md-ellipsis">
     
@@ -296,8 +334,8 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -313,7 +351,7 @@
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_5">
 <span class="md-nav__icon md-icon"></span>
             
@@ -323,6 +361,224 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    CEMS
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    CEMS
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-model">
+<span class="md-ellipsis">
+      
+        Object model
+      
+    </span>
+</a>
+<nav aria-label="Object model" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-activation-product-flow">
+<span class="md-ellipsis">
+      
+        The activation → product flow
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-mapping">
+<span class="md-ellipsis">
+      
+        Object mapping
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-access">
+<span class="md-ellipsis">
+      
+        Data access
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#activation-event">
+<span class="md-ellipsis">
+      
+        Activation → Event
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#area-of-interest-hazard">
+<span class="md-ellipsis">
+      
+        Area of Interest → Hazard
+      
+    </span>
+</a>
+<nav aria-label="Area of Interest → Hazard" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifying-multi-hazard">
+<span class="md-ellipsis">
+      
+        Identifying multi-hazard
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#product-response">
+<span class="md-ellipsis">
+      
+        Product → Response
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gra-statistics-impact">
+<span class="md-ellipsis">
+      
+        GRA statistics → Impact
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tracking-over-time">
+<span class="md-ellipsis">
+      
+        Tracking over time
+      
+    </span>
+</a>
+<nav aria-label="Tracking over time" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#refresh-and-polling-strategy">
+<span class="md-ellipsis">
+      
+        Refresh and polling strategy
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cross-source-linkage">
+<span class="md-ellipsis">
+      
+        Cross-source linkage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard-codes">
+<span class="md-ellipsis">
+      
+        Hazard codes
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+<span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference-files">
+<span class="md-ellipsis">
+      
+        Reference files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decisions-resolved">
+<span class="md-ellipsis">
+      
+        Decisions (resolved)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resources">
+<span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Charter/">
+<span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../DesInventar/">
 <span class="md-ellipsis">
@@ -401,6 +657,18 @@
     
   
     IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IDU/">
+<span class="md-ellipsis">
+    
+  
+    IDU
   
 
     
@@ -1177,8 +1445,8 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   <code>{eventid}-{episodeid}</code>. (A bare <code>{eventid}-1</code> would be stale; only fall back to it if the
   lookup fails.)</li>
 </ul>
-<p><strong>Worked, fixture-verified example</strong>: <a href="../../../../examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a>
-and <a href="../../../../examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> are built from the
+<p><strong>Worked, fixture-verified example</strong>: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a>
+and <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> are built from the
 real GDACS <code>geteventdata</code>/<code>getgeometry</code> API responses for the same Tropical Cyclone Melissa activation
 (<code>iso3: JAM</code>, <code>MH0306</code>, 21–31 Oct 2025), completing the <code>related</code> link this CEMS example already declares
 (#61). Their <code>monty:corr_id</code> (<code>20251021-JAM-1159798-MH0306-41-GCDB</code>, computed with the real
@@ -1307,16 +1575,16 @@ canonicalisation is formatting, not verification.</p>
 demonstrating the full chain — note AOI 1's DEL is <code>statusCode=N</code> (not produced), so the
 Hazard geometry falls back to the AOI extent:</p>
 <ul>
-<li><a href="../../../../examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
-<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0306</code>)</li>
-<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>GH0300</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
-<li><a href="../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
-<li><a href="../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json"><code>cems-impact-EMSR847-aoi01-gra-population</code></a> — Impact (84 000 people, <code>derived_from</code> the GRA Response)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0306</code>)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>GH0300</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json"><code>cems-impact-EMSR847-aoi01-gra-population</code></a> — Impact (84 000 people, <code>derived_from</code> the GRA Response)</li>
 </ul>
 <p>The GDACS side of the cross-source link is also a real worked example, not a placeholder:</p>
 <ul>
-<li><a href="../../../../examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a> — GDACS Event for the same storm (<code>TC1001230</code>, episode 41), built from the real <code>geteventdata</code> response</li>
-<li><a href="../../../../examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> — GDACS Hazard, geometry unioned from the real <code>getgeometry</code> <code>Poly_Red</code> footprint features</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a> — GDACS Event for the same storm (<code>TC1001230</code>, episode 41), built from the real <code>geteventdata</code> response</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> — GDACS Hazard, geometry unioned from the real <code>getgeometry</code> <code>Poly_Red</code> footprint features</li>
 </ul>
 <h2 id="reference-files">Reference files</h2>
 <p>Real upstream CEMS API responses, used as mapping fixtures:</p>
@@ -1400,7 +1668,7 @@ grounded empirically in the full 224-activation corpus rather than a spec.</p>
 <li><a href="https://mapping.emergency.copernicus.eu/about/rapid-mapping-portfolio/">Rapid Mapping product portfolio</a></li>
 <li><a href="https://mapping.emergency.copernicus.eu/about/how-to-harvest-cems-mapping-data/">How to harvest CEMS Mapping data</a></li>
 <li><a href="../../response-taxonomy/">Response taxonomy</a> · <a href="../../response-best-practices/">Response best practices</a> · <a href="../../response-impact-boundary/">Response ↔ Impact boundary</a></li>
-<li><a href="../../../../README.md">Monty STAC Extension specification</a></li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/README.md">Monty STAC Extension specification</a></li>
 </ul>
 </article>
 </div>

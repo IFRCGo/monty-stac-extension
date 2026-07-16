@@ -5,9 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../CEMS/" rel="prev"/>
+<link href="../DesInventar/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>International Charter on Space and Major Disasters - Monty Extension Documentation</title>
+<title>Charter - Monty Extension Documentation</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -45,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              International Charter on Space and Major Disasters
+              Charter
             
           </span>
 </div>
@@ -180,6 +182,42 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../response-taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Response Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-best-practices/">
+<span class="md-ellipsis">
+    
+  
+    Response Best Practices
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-impact-boundary/">
+<span class="md-ellipsis">
+    
+  
+    Response ↔ Impact Boundary
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../correlation_identifier/">
 <span class="md-ellipsis">
     
@@ -296,8 +334,8 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -313,7 +351,7 @@
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_5">
 <span class="md-nav__icon md-icon"></span>
             
@@ -323,6 +361,300 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../CEMS/">
+<span class="md-ellipsis">
+    
+  
+    CEMS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#conversion-principle-copy-as-is-montandon-specifics">
+<span class="md-ellipsis">
+      
+        Conversion principle — copy-as-is + Montandon specifics
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-model">
+<span class="md-ellipsis">
+      
+        Object model
+      
+    </span>
+</a>
+<nav aria-label="Object model" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-process-flow-call-activation-areasvaps-call-acquisitions">
+<span class="md-ellipsis">
+      
+        The process flow (Call → Activation → Areas/VAPs, Call → Acquisitions)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#entities-and-how-they-are-keyed">
+<span class="md-ellipsis">
+      
+        Entities and how they are keyed
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monty-mapping">
+<span class="md-ellipsis">
+      
+        Monty mapping
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-access">
+<span class="md-ellipsis">
+      
+        Data access
+      
+    </span>
+</a>
+<nav aria-label="Data access" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#http-api-discovery-only">
+<span class="md-ellipsis">
+      
+        HTTP API — discovery only
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-polling-strategy-etl">
+<span class="md-ellipsis">
+      
+        Update &amp; polling strategy (ETL)
+      
+    </span>
+</a>
+<nav aria-label="Update &amp; polling strategy (ETL)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#where-each-entity-is-polled">
+<span class="md-ellipsis">
+      
+        Where each entity is polled
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#detecting-a-real-change">
+<span class="md-ellipsis">
+      
+        Detecting a real change
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cadence">
+<span class="md-ellipsis">
+      
+        Cadence
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#re-emission-idempotency">
+<span class="md-ellipsis">
+      
+        Re-emission (idempotency)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-terradue-disaster-extension">
+<span class="md-ellipsis">
+      
+        The Terradue disaster: extension
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#activation-event">
+<span class="md-ellipsis">
+      
+        Activation → Event
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#area-hazard">
+<span class="md-ellipsis">
+      
+        Area → Hazard
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#value-added-product-response-v130">
+<span class="md-ellipsis">
+      
+        Value-Added Product → Response (v1.3.0)
+      
+    </span>
+</a>
+<nav aria-label="Value-Added Product → Response (v1.3.0)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#extension-layering-do-not-duplicate">
+<span class="md-ellipsis">
+      
+        Extension layering (do not duplicate)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#field-carriage">
+<span class="md-ellipsis">
+      
+        Field carriage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linkage">
+<span class="md-ellipsis">
+      
+        Linkage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example">
+<span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#calibrated-acquisition-response-eo-dat">
+<span class="md-ellipsis">
+      
+        Calibrated acquisition → Response (eo-dat)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard-codes">
+<span class="md-ellipsis">
+      
+        Hazard codes
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+<span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference-files">
+<span class="md-ellipsis">
+      
+        Reference files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resources">
+<span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../DesInventar/">
 <span class="md-ellipsis">
@@ -401,6 +733,18 @@
     
   
     IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IDU/">
+<span class="md-ellipsis">
+    
+  
+    IDU
   
 
     
@@ -915,8 +1259,8 @@ do not declare <code>disaster:call_ids</code> directly.</p>
 </blockquote>
 <h2 id="data-access">Data access</h2>
 <p>Montandon ingests the Charter Mapper catalog from the OTC OBS/<strong>S3</strong> bucket
-<code>cpe-operations-catalog</code> (see <a href="../../../../AGENTS.md">Remote Server &amp; Object
-Storage</a>). Terradue granted <strong>JSON-only</strong> read access
+<code>cpe-operations-catalog</code> (see <a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/AGENTS.md">Remote Server &amp; Object
+Storage</a>).
 (IP-allowlisted). The S3 layout mirrors the object model — <strong>activation-scoped</strong>
 items under <code>activations/…</code>, <strong>call-scoped</strong> items under <code>calls/…</code>:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>s3://cpe-operations-catalog/
@@ -1197,7 +1541,7 @@ from event date, ISO3 country, spatial block, primary hazard, and episode —
 format <code>{YYYYMMDD}-{ISO3}-{spatial_block}-{UNDRR-ISC}-{episode}-GCDB</code>, e.g.
 <code>20251103-AFG-1138838-GH0101-1-GCDB</code>. The numeric block is a spatial identifier,
 <strong>not</strong> the Charter <code>activation_id</code>. All items for the same event share it.</p>
-<p>Full example: <a href="../../../../examples/charter-events/charter-event-1000.json"><code>charter-event-1000.json</code></a>.</p>
+<p>Full example: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1000.json"><code>charter-event-1000.json</code></a>.</p>
 <h2 id="area-hazard">Area → Hazard</h2>
 <p>Maps to a Monty Hazard item (<code>charter-hazards</code>). Declares the Monty extension only.</p>
 <table>
@@ -1480,7 +1824,7 @@ Charter items use the <code>rel: related</code> + <code>roles</code> form throug
 </blockquote>
 <p>Correlation back to the Event/Hazard uses the shared <code>monty:corr_id</code>.</p>
 <h3 id="example">Example</h3>
-<p><a href="../../../../examples/charter-response/charter-response-1000-1144-1.json"><code>charter-response-1000-1144-1.json</code></a>
+<p><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response/charter-response-1000-1144-1.json"><code>charter-response-1000-1144-1.json</code></a>
 is the canonical worked example (Act-1000 VAP <code>1144-1</code>, an <code>eo-gra</code> damage
 assessment). Its <code>monty:response_detail</code>:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
@@ -1713,13 +2057,13 @@ canonicalisation is formatting, not verification.</p>
 <td>Act-1000</td>
 <td>Earthquake</td>
 <td>AFG</td>
-<td><a href="../../../../examples/charter-events/charter-event-1000.json">event</a>, <a href="../../../../examples/charter-response/charter-response-1000-1144-1.json">response</a></td>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1000.json">event</a>, <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response/charter-response-1000-1144-1.json">response</a></td>
 </tr>
 <tr>
 <td>Act-1019</td>
 <td>Flood + landslide</td>
 <td>BRA</td>
-<td><a href="../../../../examples/charter-events/charter-event-1019.json">event</a> (multi-hazard)</td>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events/charter-event-1019.json">event</a> (multi-hazard)</td>
 </tr>
 </tbody>
 </table>
@@ -1746,7 +2090,7 @@ this analysis (Act-1019 / Call-1166, Flood in Brazil):</p>
 <li><a href="https://disasterscharter.org/">International Charter</a></li>
 <li><a href="https://stacindex.org/catalogs/disasters-charter-mapper-catalog">STAC Index — Charter Catalog</a></li>
 <li><a href="https://github.com/Terradue/stac-extensions-disaster">Terradue <code>disaster:</code> extension</a></li>
-<li><a href="../../../../README.md">Monty STAC Extension specification</a></li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/README.md">Monty STAC Extension specification</a></li>
 </ul>
 </article>
 </div>
