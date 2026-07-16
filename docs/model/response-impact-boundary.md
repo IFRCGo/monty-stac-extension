@@ -116,7 +116,7 @@ The canonical provenance edge runs **Impact → Response** (see
 {
   "rel": "derived_from",
   "href": "response-EMSR-DEMO-001-GRA.json",
-  "type": "application/json",
+  "type": "application/geo+json",
   "roles": ["response"]
 }
 ```

@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Hazard code crosswalks in `docs/model/sources/CEMS/README.md` and `docs/model/sources/Charter/README.md` corrected against `docs/model/taxonomy.md` — several codes were either nonexistent (`MH0901`, `MH1301`, `MH1201`, `MH1202`, `TH0300`, `TH0600`, `MH0400`) or wrong (`MH0403` is *Blizzard*, not Tropical Cyclone; `GH0301` is *Falls*, not Tsunami; `MH0801` is *Avalanche*, not ice/cold). Corrected values now match the convention already used by GDACS, EM-DAT, GLIDE and GFD (`MH0306` tropical cyclone, `GH0300` landslide chapeau, `EN0205` wildfire, `MH0705` tsunami). Propagated into affected `examples/cems-*` and `examples/charter-*` items, including `monty:corr_id` where the wrong code was embedded [#61](https://github.com/IFRCGo/monty-stac-extension/issues/61)
+- `related` / `derived_from` links whose target is a STAC Item now use `application/geo+json` instead of `application/json`, across `examples/_response-impact-pairing`, `charter-hazards`, `gdacs-events`, `gdacs-hazards`, `glide-events`, `ibtracs-hazards` and `reference-events`, plus the matching `derived_from` link block documented in `docs/model/response-impact-boundary.md`. Added `scripts/check-link-types.mjs` (wired into `npm test`) to catch regressions, since the JSON Schema and `stac-node-validator` don't constrain link `type` [#55](https://github.com/IFRCGo/monty-stac-extension/issues/55)
 
 ## [1.3.0] - 2026-06-11
 

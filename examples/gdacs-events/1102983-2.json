@@ -91,7 +91,7 @@
       "roles": [
         "event"
       ],
-      "type": "application/json"
+      "type": "application/geo+json"
     },
     {
       "href": "../glide-events/FL-2024-000199-ESP.json",
@@ -99,7 +99,7 @@
       "roles": [
         "event"
       ],
-      "type": "application/json"
+      "type": "application/geo+json"
     }
   ]
 }

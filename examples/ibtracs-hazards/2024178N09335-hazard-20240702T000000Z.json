@@ -300,7 +300,7 @@
       "roles": [
         "event"
       ],
-      "type": "application/json"
+      "type": "application/geo+json"
     }
   ]
 }
