@@ -41,7 +41,7 @@ scoped by one or more **Areas of Interest (AOIs)**. Each AOI accumulates **Produ
 through the Rapid Mapping lifecycle, and each product may be re-issued as timed
 **monitoring** iterations:
 
-```
+```text
 REF (reference) → FEP (first estimate) → DEL (delineation) → GRA (grading)
                                             └─ monitoring 1, 2, … (same type, monitoringNumber++)
 ```

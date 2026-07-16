@@ -188,43 +188,43 @@ Here are some examples of CQL2 filter expressions using the Monty STAC Extension
 
 **Find all items related to a specific event**
 
-```
+```sql
 monty:corr_id = '20241027-ESP-FL-2-GCDB'
 ```
 
 **Find all items related to events in a specific country (using array operator)**
 
-```
+```sql
 a_contains(monty:country_codes, 'ESP')
 ```
 
 **Find all items with a specific hazard code (using array operator)**
 
-```
+```sql
 a_contains(monty:hazard_codes, 'MH0600')
 ```
 
 **Find all reference events**
 
-```
+```sql
 'event' IN roles AND 'reference' IN roles
 ```
 
 **Find all hazard items with high severity**
 
-```
+```sql
 'hazard' IN roles AND monty:hazard_detail.severity_value > 5
 ```
 
 **Find all impact items with deaths**
 
-```
+```sql
 'impact' IN roles AND monty:impact_detail.type = 'death'
 ```
 
 **Find all impact items with a specific category and above a certain value**
 
-```
+```sql
 'impact' IN roles AND monty:impact_detail.category = 'people' AND monty:impact_detail.value > 100
 ```
 

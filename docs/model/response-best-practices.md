@@ -72,7 +72,7 @@ Charter VAP Response items declare `monty:` **+** `disaster:` (+ optionally `pro
 | Producer (VAP provider) | `monty:response_detail.producer` |
 | Methodology | `monty:response_detail.methodology` |
 
-> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. **VAPs** and **calibrated acquisition datasets** become Monty Response items (`eo-del` / `eo-gra` / … and `eo-dat` respectively). See [Charter source mapping](../sources/Charter/README.md).
+> **Charter activations themselves** (`disaster:class = activation`) are modelled as Monty **Event** items, not Response items. **VAPs** and **calibrated acquisition datasets** become Monty Response items (`eo-del` / `eo-gra` / … and `eo-dat` respectively). See [Charter source mapping](sources/Charter/README.md).
 
 ### 3.3 UNOSAT Rapid Mapping
 

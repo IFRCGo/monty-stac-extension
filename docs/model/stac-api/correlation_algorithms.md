@@ -82,7 +82,7 @@ Items in the Monty system can be correlated using the following attributes:
 
 **CQL2-Text Example**:
 
-```
+```sql
 roles IN ('event') AND 
 a_overlaps(monty:hazard_codes, ARRAY['MH0600', 'nat-hyd-flo-flo', 'FL']) AND 
 a_contains(monty:country_codes, 'ESP') AND 
@@ -499,7 +499,7 @@ The `monty:corr_id` field remains available for:
 ### API Usage
 
 The Montandon STAC API endpoint:
-```
+```text
 https://montandon-eoapi-stage.ifrc.org/stac
 ```
 

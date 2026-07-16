@@ -356,3 +356,11 @@ If the tests reveal formatting problems with the examples, you can fix them with
 ```bash
 npm run format-examples
 ```
+
+`docs/` is linted separately (`npm run check-docs`) under a relaxed profile
+(`.github/remark-docs.yaml`) that keeps link validation and code-fence checks
+but disables cosmetic rules (`table-cell-padding`, `list-item-content-indent`,
+`maximum-heading-length`, `no-heading-punctuation`, `heading-increment`) that
+would otherwise fire across most of `docs/`. Those rules are auto-fixable —
+run `npx remark docs -r .github/remark-docs.yaml -o` to bulk-fix them, which
+is the cheap way to re-enable one and tighten the profile later.
