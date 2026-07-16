@@ -1177,6 +1177,18 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   <code>{eventid}-{episodeid}</code>. (A bare <code>{eventid}-1</code> would be stale; only fall back to it if the
   lookup fails.)</li>
 </ul>
+<p><strong>Worked, fixture-verified example</strong>: <a href="../../../../examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a>
+and <a href="../../../../examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> are built from the
+real GDACS <code>geteventdata</code>/<code>getgeometry</code> API responses for the same Tropical Cyclone Melissa activation
+(<code>iso3: JAM</code>, <code>MH0306</code>, 21–31 Oct 2025), completing the <code>related</code> link this CEMS example already declares
+(#61). Their <code>monty:corr_id</code> (<code>20251021-JAM-1159798-MH0306-41-GCDB</code>, computed with the real
+<code>geo_blocks-0.2.parquet</code> lookup) <strong>does not match</strong> CEMS's (<code>20251026-JAM-983324-MH0306-1-GCDB</code>) — different
+date, different <code>block_id</code>, since GDACS's own centroid for this episode sits mid-Atlantic (<code>-60.5, 39.0</code>,
+the storm's track position at that point), while CEMS's AOI is Kingston. This is a live, real illustration
+of the caveat in #57: <code>corr_id</code> is per-source deterministic and not a cross-source join key. The two items
+still correlate correctly under the dynamic Event-to-Event algorithm — shared <code>MH0306</code>/<code>TC</code>/<code>nat-met-sto-tro</code>
+(<code>a_overlaps</code>), shared <code>JAM</code> (<code>a_contains</code>), and CEMS's <code>2025-10-26</code> falling inside GDACS's <code>2025-10-21</code>–<code>2025-10-31</code>
+window (<code>t_intersects</code>).</p>
 <h2 id="hazard-codes">Hazard codes</h2>
 <p>CEMS <code>category</code> (refined by <code>subCategory</code>) maps to Monty hazard codes. UNDRR-ISC 2025 is
 required (exactly one per Hazard item); GLIDE and EM-DAT are recommended. The complete CEMS
@@ -1199,70 +1211,70 @@ casings):</p>
 <td>MH0600</td>
 <td>FL</td>
 <td>nat-hyd-flo-flo</td>
-<td><code>Riverine flood</code>→MH0604, flash→MH0603, coastal/surge→MH0605</td>
+<td><code>Riverine flood</code>→MH0604, flash→MH0603, coastal/surge→MH0601</td>
 </tr>
 <tr>
 <td>Wildfire</td>
-<td>MH1301</td>
+<td>EN0205</td>
 <td>WF</td>
 <td>nat-cli-wil-for</td>
 <td><code>Forest fire</code>; land/other fire variants</td>
 </tr>
 <tr>
 <td>Storm</td>
-<td>MH0400</td>
+<td>—</td>
 <td>ST</td>
 <td>nat-met-sto</td>
-<td><code>Tropical cyclone, hurricane, typhoon</code>→MH0403 / <code>TC</code> / <code>nat-met-sto-tro</code></td>
+<td>No single UNDRR-ISC chapeau; refine by <code>subCategory</code> — <code>Tropical cyclone, hurricane, typhoon</code>→<strong>MH0306</strong> / <code>TC</code> / <code>nat-met-sto-tro</code> (matches the GDACS TC convention, keeping the EMSR847↔GDACS <code>1001230-41</code> cross-link discoverable via <code>a_overlaps</code>)</td>
 </tr>
 <tr>
 <td>Earthquake</td>
 <td>GH0101</td>
 <td>EQ</td>
 <td>nat-geo-ear-gro</td>
-<td><code>Ground shaking</code>; tsunami subCat→GH0301/<code>TS</code></td>
+<td><code>Ground shaking</code>; tsunami subCat→<strong>MH0705</strong>/<code>TS</code></td>
 </tr>
 <tr>
 <td>Mass Movement</td>
-<td>MH0901</td>
+<td>GH0300</td>
 <td>LS</td>
 <td>nat-geo-mmd-lan</td>
-<td>Landslide; avalanche→MH1201, rockfall/subsidence per <code>subCategory</code></td>
+<td>Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); avalanche→<strong>MH0801</strong>, rockfall→GH0301 (Falls), subsidence→GH0309, per <code>subCategory</code></td>
 </tr>
 <tr>
 <td>Volcanic Activity</td>
 <td>GH0201</td>
 <td>VO</td>
 <td>nat-geo-vol</td>
-<td>Eruption; ashfall/lahar per <code>subCategory</code></td>
+<td>Eruption (chapeau); ashfall→GH0202, lahar→GH0204 per <code>subCategory</code></td>
 </tr>
 <tr>
 <td>Industrial Accident</td>
-<td>TH0300 / TH0600</td>
+<td>—</td>
 <td>—</td>
 <td>tec-ind</td>
-<td>Technological — chemical (TH0300) vs explosion (TH0600) vs oil spill from <code>subCategory</code>; manual review</td>
+<td>Technological — no single chapeau; refine by <code>subCategory</code> — chemical/gas leak→<strong>TL0301</strong>, explosion→<strong>TL0304</strong>, general→TL0309</td>
 </tr>
 <tr>
 <td>Transport accident</td>
 <td>—</td>
 <td>—</td>
 <td>tec-tra</td>
-<td>Technological — no clean UNDRR-ISC; manual review</td>
+<td>Technological — no single chapeau; refine by <code>subCategory</code> — air→<strong>TL0401</strong>, rail→<strong>TL0404</strong>, road→<strong>TL0405</strong>, water→<strong>TL0403</strong></td>
 </tr>
 <tr>
 <td>Humanitarian Crisis</td>
 <td>—</td>
 <td>CE</td>
 <td>—</td>
-<td>Complex/societal emergency — no UNDRR-ISC natural code; manual review (mostly Risk &amp; Recovery, out of core RM scope)</td>
+<td>Complex/societal emergency — Societal cluster (<code>SO01xx</code>/<code>SO02xx</code>, e.g. SO0103 civil unrest) has codes but none fits as a chapeau; manual review (mostly Risk &amp; Recovery, out of core RM scope)</td>
 </tr>
 <tr>
 <td>Environmental Degradation</td>
 <td>—</td>
 <td>—</td>
 <td>—</td>
-<td>Environmental hazard — no clean UNDRR-ISC; manual review</td>
+<td>Environmental cluster (<code>EN01xx</code>–<code>EN05xx</code>) has codes but none fits as a chapeau; manual review</td>
 </tr>
 <tr>
 <td>Other</td>
@@ -1274,23 +1286,37 @@ casings):</p>
 </tbody>
 </table>
 <blockquote>
+<p><strong>Corrected 2026-07-16</strong>: this table previously used <code>MH0403</code> (which is <em>Blizzard</em>, not Tropical
+Cyclone) for storms, <code>MH1301</code>/<code>MH0901</code>/<code>MH1201</code>/<code>TH0300</code>/<code>TH0600</code> (none of which exist in the
+UNDRR-ISC 2025 list), and <code>GH0301</code> (<em>Falls</em>, not Tsunami). All values above are verified against
+<a href="../../taxonomy/#complete-2025-hazard-list"><code>docs/model/taxonomy.md</code></a> and its Cross-Classification
+Mapping table. See IFRCGo/monty-stac-extension#61.</p>
 <p><strong>Completeness</strong>: this table covers the full observed vocabulary (RM currently exercises
 Flood, Wildfire, Storm, Earthquake, Mass Movement, Industrial/Transport accident, Other;
 Volcanic Activity, Humanitarian Crisis, Environmental Degradation appear in the broader
 catalogue). Any <strong>unmapped or new</strong> <code>category</code> MUST fall through to manual review rather
 than be dropped. <code>subCategory</code> (detail endpoint only) is the refinement key.</p>
+<p><strong><code>get_canonical_hazard_codes()</code> does not validate this table.</strong> That function preserves any
+code that is already a syntactically valid UNDRR-ISC 2025 code — it does not check that the code
+is the <em>correct</em> one for the mapped category (see IFRCGo/pystac-monty#168, where USGS shipped the
+valid-but-wrong <code>GH0311</code> for years undetected). The mapping above must be correct at the source;
+canonicalisation is formatting, not verification.</p>
 </blockquote>
-<p>Apply <code>hazard_profiles.get_canonical_hazard_codes()</code> after mapping.</p>
 <h2 id="examples">Examples</h2>
 <p>Worked Monty items derived from <strong>EMSR847</strong> (Tropical Cyclone Melissa) AOI 1 (Kingston),
 demonstrating the full chain — note AOI 1's DEL is <code>statusCode=N</code> (not produced), so the
 Hazard geometry falls back to the AOI extent:</p>
 <ul>
 <li><a href="../../../../examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
-<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0403</code>)</li>
-<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>MH0901</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
+<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0306</code>)</li>
+<li><a href="../../../../examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>GH0300</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
 <li><a href="../../../../examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
 <li><a href="../../../../examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json"><code>cems-impact-EMSR847-aoi01-gra-population</code></a> — Impact (84 000 people, <code>derived_from</code> the GRA Response)</li>
+</ul>
+<p>The GDACS side of the cross-source link is also a real worked example, not a placeholder:</p>
+<ul>
+<li><a href="../../../../examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a> — GDACS Event for the same storm (<code>TC1001230</code>, episode 41), built from the real <code>geteventdata</code> response</li>
+<li><a href="../../../../examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> — GDACS Hazard, geometry unioned from the real <code>getgeometry</code> <code>Poly_Red</code> footprint features</li>
 </ul>
 <h2 id="reference-files">Reference files</h2>
 <p>Real upstream CEMS API responses, used as mapping fixtures:</p>
