@@ -1,0 +1,61 @@
+plugins:
+# GitHub Flavored Markdown
+  - remark-gfm
+# Check links
+  - validate-links
+  - remark-ignore
+# Apply some recommended defaults for consistency
+  - remark-preset-lint-consistent
+  - remark-preset-lint-recommended
+# General formatting
+  - - remark-lint-emphasis-marker
+    - '*'
+  - - remark-lint-no-undefined-references
+    - allow: ['!NOTE', '!TIP', '!WARNING', '!IMPORTANT', '!CAUTION', '!TODO']
+  - remark-lint-hard-break-spaces
+  - remark-lint-blockquote-indentation
+  - remark-lint-no-consecutive-blank-lines
+# Code
+  - remark-lint-fenced-code-flag
+  - remark-lint-fenced-code-marker
+  - remark-lint-no-shell-dollars
+  - - remark-lint-code-block-style
+    - 'fenced'
+# Headings
+  - remark-lint-heading-increment
+  - remark-lint-no-multiple-toplevel-headings
+  - remark-lint-no-heading-punctuation
+  - - remark-lint-maximum-heading-length
+    - 70
+  - - remark-lint-heading-style
+    - atx
+  - - remark-lint-no-shortcut-reference-link
+    - false
+# Lists
+  - remark-lint-list-item-bullet-indent
+  - remark-lint-ordered-list-marker-style
+  - remark-lint-ordered-list-marker-value
+  - remark-lint-checkbox-character-style
+  - - remark-lint-unordered-list-marker-style
+    - '-'
+  - - remark-lint-list-item-indent
+    - space
+
+# Tables
+  - remark-lint-table-pipes
+
+# --- docs/ relaxations: cosmetic-only rules above, turned off ---
+  - - remark-lint-table-cell-padding
+    - false
+  - - remark-lint-list-item-content-indent
+    - false
+  - - remark-lint-heading-increment
+    - false
+  - - remark-lint-no-heading-punctuation
+    - false
+  - - remark-lint-maximum-heading-length
+    - false
+
+# missing-heading-in-file false-positives on MkDocs attr_list heading ids
+# (see .github/remark-plugins/mute-heading-in-file.mjs); missing-file stays on.
+  - ./remark-plugins/mute-heading-in-file.mjs

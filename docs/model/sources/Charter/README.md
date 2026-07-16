@@ -178,7 +178,7 @@ the call in `disaster:call_ids`. VAPs and Areas live under
 > imagery). Activations older than **Act 994 / Call 1136** may be in cold storage
 > until restored.
 >
-> Probe from `montandon-dev`: `uv run test.py` (canonical copy: `scripts/charter-obs-test.py`).
+> Probe from `montandon-dev`: `uv run test.py`.
 
 ### HTTP API — discovery only
 
