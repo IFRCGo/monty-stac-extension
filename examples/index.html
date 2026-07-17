@@ -274,6 +274,65 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+<nav aria-label="Collections" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#events">
+<span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazards">
+<span class="md-ellipsis">
+      
+        Hazards
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#impacts">
+<span class="md-ellipsis">
+      
+        Impacts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#response">
+<span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-examples-are-used">
+<span class="md-ellipsis">
+      
+        How the examples are used
+      
+    </span>
+</a>
+<nav aria-label="How the examples are used" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
 <a class="md-nav__link" href="#reference-collections-for-monty-api">
 <span class="md-ellipsis">
       
@@ -281,19 +340,6 @@
       
     </span>
 </a>
-<nav aria-label="Reference Collections for Monty API" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#collection-types">
-<span class="md-ellipsis">
-      
-        Collection Types
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#collection-documentation-validation">
@@ -313,6 +359,9 @@
       
     </span>
 </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -599,6 +648,65 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+<nav aria-label="Collections" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#events">
+<span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazards">
+<span class="md-ellipsis">
+      
+        Hazards
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#impacts">
+<span class="md-ellipsis">
+      
+        Impacts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#response">
+<span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-examples-are-used">
+<span class="md-ellipsis">
+      
+        How the examples are used
+      
+    </span>
+</a>
+<nav aria-label="How the examples are used" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
 <a class="md-nav__link" href="#reference-collections-for-monty-api">
 <span class="md-ellipsis">
       
@@ -606,19 +714,6 @@
       
     </span>
 </a>
-<nav aria-label="Reference Collections for Monty API" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#collection-types">
-<span class="md-ellipsis">
-      
-        Collection Types
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#collection-documentation-validation">
@@ -644,18 +739,82 @@
 </li>
 </ul>
 </nav>
+</li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="example-collections">Example Collections</h1>
-<p>The examples in this repository serve two important purposes:</p>
+<p>The examples in this repository are reference STAC collections for the
+<a href="https://github.com/IFRCGo/monty-eoapi">Monty API</a> and the fixtures the CI
+pipeline validates documentation against.</p>
+<h2 id="collections">Collections</h2>
+<p>Grouped by Monty type; each links to its example directory on GitHub. This
+listing is generated from <code>sources.yml</code> — the single source of truth described
+on the <a href="../model/sources/">Data Sources</a> page — and included here
+verbatim, so adding a collection there surfaces it on this page automatically.</p>
+<!-- gen_sources_index.py: BEGIN examples-collections -->
+<h3 id="events">Events</h3>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/alerthub-events">alerthub-events</a> — AlertHub</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events">cems-events</a> — Copernicus Emergency Management Service — Rapid Mapping</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events">charter-events</a> — International Charter on Space and Major Disasters</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events">desinventar-events</a> — DesInventar</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-events">emdat-events</a> — EM-DAT</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events">gdacs-events</a> — GDACS</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-events">gfd-events</a> — Global Flood Database (GFD)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-events">glide-events</a> — GLIDE</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-events">ibtracs-events</a> — IBTrACS</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events">idmc-gidd-events</a> — IDMC — Global Internal Displacement Database (GIDD)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-idu-events">idmc-idu-events</a> — IDMC — Internal Displacement Updates (IDU)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-events">ifrcevent-events</a> — IFRC DREF</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events">pdc-events</a> — Pacific Disaster Center (PDC)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/reference-events">reference-events</a> — Reference Events</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-events">usgs-events</a> — USGS Earthquake Catalog</li>
+</ul>
+<h3 id="hazards">Hazards</h3>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/alerthub-hazards">alerthub-hazards</a> — AlertHub</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards">cems-hazards</a> — Copernicus Emergency Management Service — Rapid Mapping</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-hazards">charter-hazards</a> — International Charter on Space and Major Disasters</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-hazards">emdat-hazards</a> — EM-DAT</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards">gdacs-hazards</a> — GDACS</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-hazards">gfd-hazards</a> — Global Flood Database (GFD)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-hazards">glide-hazards</a> — GLIDE</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards">ibtracs-hazards</a> — IBTrACS</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-hazards">ifrcevent-hazards</a> — IFRC DREF</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards">pdc-hazards</a> — Pacific Disaster Center (PDC)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-hazards">usgs-hazards</a> — USGS Earthquake Catalog</li>
+</ul>
+<h3 id="impacts">Impacts</h3>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts">cems-impacts</a> — Copernicus Emergency Management Service — Rapid Mapping</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-impacts">desinventar-impacts</a> — DesInventar</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-impacts">emdat-impacts</a> — EM-DAT</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-impacts">gdacs-impacts</a> — GDACS</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts">gfd-impacts</a> — Global Flood Database (GFD)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts">idmc-gidd-impacts</a> — IDMC — Global Internal Displacement Database (GIDD)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-idu-impacts">idmc-idu-impacts</a> — IDMC — Internal Displacement Updates (IDU)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-impacts">ifrcevent-impacts</a> — IFRC DREF</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts">pdc-impacts</a> — Pacific Disaster Center (PDC)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts">usgs-impacts</a> — USGS Earthquake Catalog</li>
+</ul>
+<h3 id="response">Response</h3>
+<ul>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response">cems-response</a> — Copernicus Emergency Management Service — Rapid Mapping</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response">charter-response</a> — International Charter on Space and Major Disasters</li>
+</ul>
+<!-- gen_sources_index.py: END examples-collections -->
+<h2 id="how-the-examples-are-used">How the examples are used</h2>
+<p>The example collections serve two important purposes:</p>
 <ol>
 <li><strong>Reference Collections for Monty API</strong></li>
 <li><strong>Collection Documentation Validation</strong></li>
 </ol>
-<h2 id="reference-collections-for-monty-api">Reference Collections for Monty API</h2>
+<h3 id="reference-collections-for-monty-api">Reference Collections for Monty API</h3>
 <p>The example collections in this repository serve as reference implementations for the <a href="https://github.com/IFRCGo/monty-eoapi">Monty API</a>. They demonstrate:</p>
 <ul>
 <li>Proper STAC collection structure for various data sources</li>
@@ -663,7 +822,6 @@
 <li>Valid use of field values and data types</li>
 <li>Relationships between different types of data (events, hazards, impacts)</li>
 </ul>
-<h3 id="collection-types">Collection Types</h3>
 <p>Each data source has its own set of collections:</p>
 <ol>
 <li>
@@ -691,7 +849,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="collection-documentation-validation">Collection Documentation Validation</h2>
+<h3 id="collection-documentation-validation">Collection Documentation Validation</h3>
 <p>The example collections play a crucial role in the CI/CD workflow:</p>
 <ol>
 <li>
@@ -722,7 +880,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="cicd-process">CI/CD Process</h3>
+<h4 id="cicd-process">CI/CD Process</h4>
 <p>The validation process in the CI/CD workflow:</p>
 <pre class="mermaid"><code>graph TD
     A[Push to Repository] --&gt; B[Validate JSON Schema]
