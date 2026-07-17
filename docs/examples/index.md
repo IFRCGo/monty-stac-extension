@@ -1,11 +1,26 @@
 # Example Collections
 
-The examples in this repository serve two important purposes:
+The examples in this repository are reference STAC collections for the
+[Monty API](https://github.com/IFRCGo/monty-eoapi) and the fixtures the CI
+pipeline validates documentation against.
+
+## Collections
+
+Grouped by Monty type; each links to its example directory on GitHub. This
+listing is generated from `sources.yml` — the single source of truth described
+on the [Data Sources](../model/sources/README.md) page — and included here
+verbatim, so adding a collection there surfaces it on this page automatically.
+
+--8<-- "examples/index.md:collections"
+
+## How the examples are used
+
+The example collections serve two important purposes:
 
 1. **Reference Collections for Monty API**
 2. **Collection Documentation Validation**
 
-## Reference Collections for Monty API
+### Reference Collections for Monty API
 
 The example collections in this repository serve as reference implementations for the [Monty API](https://github.com/IFRCGo/monty-eoapi). They demonstrate:
 
@@ -13,8 +28,6 @@ The example collections in this repository serve as reference implementations fo
 - Correct implementation of the Monty extension
 - Valid use of field values and data types
 - Relationships between different types of data (events, hazards, impacts)
-
-### Collection Types
 
 Each data source has its own set of collections:
 
@@ -33,7 +46,7 @@ Each data source has its own set of collections:
     - Example: [IDMC GIDD Impacts Collection](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impacts.json)
     - Track casualties, displacement, and other impact metrics
 
-## Collection Documentation Validation
+### Collection Documentation Validation
 
 The example collections play a crucial role in the CI/CD workflow:
 
@@ -53,7 +66,7 @@ The example collections play a crucial role in the CI/CD workflow:
         - Handle various data structures
         - Maintain relationships between items
 
-### CI/CD Process
+#### CI/CD Process
 
 The validation process in the CI/CD workflow:
 
@@ -64,7 +77,7 @@ graph TD
     C --> D[Check Documentation]
     D --> E[Generate API Documentation]
     E --> F[Deploy if All Tests Pass]
-    
+
     B -- Fail --> G[Report Schema Errors]
     C -- Fail --> H[Report Collection Errors]
     D -- Fail --> I[Report Doc Inconsistencies]

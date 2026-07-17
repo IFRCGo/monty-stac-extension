@@ -2,65 +2,68 @@
 
 This directory contains example STAC collections and items that demonstrate the implementation of the Monty STAC extension. These examples serve as reference implementations for various disaster data sources and showcase the proper structure and usage of the extension.
 
-## Directory Structure
+## Collections
 
-The examples are organized by data source and collection type:
+The collections below are grouped by Monty type and link to their example
+directory. This listing is generated from
+[`docs/model/sources/sources.yml`](../docs/model/sources/sources.yml) by
+[`scripts/gen_sources_index.py`](../scripts/gen_sources_index.py), and the
+published [Examples page](../docs/examples/index.md) includes it verbatim — so a
+new collection appears in both places from a single edit to `sources.yml`.
 
-### Event Collections
+<!-- --8<-- [start:collections] -->
+<!-- gen_sources_index.py: BEGIN examples-collections -->
+### Events
 
-Collections that define disaster events from various sources:
+- [alerthub-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/alerthub-events) — AlertHub
+- [cems-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events) — Copernicus Emergency Management Service — Rapid Mapping
+- [charter-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-events) — International Charter on Space and Major Disasters
+- [desinventar-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-events) — DesInventar
+- [emdat-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-events) — EM-DAT
+- [gdacs-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events) — GDACS
+- [gfd-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-events) — Global Flood Database (GFD)
+- [glide-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-events) — GLIDE
+- [ibtracs-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-events) — IBTrACS
+- [idmc-gidd-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events) — IDMC — Global Internal Displacement Database (GIDD)
+- [idmc-idu-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-idu-events) — IDMC — Internal Displacement Updates (IDU)
+- [ifrcevent-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-events) — IFRC DREF
+- [pdc-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events) — Pacific Disaster Center (PDC)
+- [reference-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/reference-events) — Reference Events
+- [usgs-events](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-events) — USGS Earthquake Catalog
 
-- **[charter-events/](charter-events/)** - International Charter activation events
-- **[cems-events/](cems-events/)** - Copernicus EMS Rapid Mapping activations
-- **[desinventar-events/](desinventar-events/)** - DesInventar disaster events
-- **[emdat-events/](emdat-events/)** - EM-DAT disaster events  
-- **[gdacs-events/](gdacs-events/)** - GDACS disaster events
-- **[gfd-events/](gfd-events/)** - Global Flood Database events
-- **[glide-events/](glide-events/)** - GLIDE disaster events
-- **[ibtracs-events/](ibtracs-events/)** - IBTrACS tropical cyclone events
-- **[idmc-gidd-events/](idmc-gidd-events/)** - IDMC GIDD displacement events
-- **[idmc-idu-events/](idmc-idu-events/)** - IDMC IDU displacement events
-- **[ifrcevent-events/](ifrcevent-events/)** - IFRC event data
-- **[pdc-events/](pdc-events/)** - Pacific Disaster Center events
-- **[reference-events/](reference-events/)** - Reference canonical events
-- **[usgs-events/](usgs-events/)** - USGS earthquake events
+### Hazards
 
-### Hazard Collections
+- [alerthub-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/alerthub-hazards) — AlertHub
+- [cems-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards) — Copernicus Emergency Management Service — Rapid Mapping
+- [charter-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-hazards) — International Charter on Space and Major Disasters
+- [emdat-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-hazards) — EM-DAT
+- [gdacs-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards) — GDACS
+- [gfd-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-hazards) — Global Flood Database (GFD)
+- [glide-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-hazards) — GLIDE
+- [ibtracs-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards) — IBTrACS
+- [ifrcevent-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-hazards) — IFRC DREF
+- [pdc-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards) — Pacific Disaster Center (PDC)
+- [usgs-hazards](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-hazards) — USGS Earthquake Catalog
 
-Collections that contain hazard-specific data and characteristics:
+### Impacts
 
-- **[charter-hazards/](charter-hazards/)** - International Charter areas of interest (hazard extents)
-- **[cems-hazards/](cems-hazards/)** - Copernicus EMS Rapid Mapping areas of interest (hazard extents)
-- **[emdat-hazards/](emdat-hazards/)** - EM-DAT hazard data
-- **[gdacs-hazards/](gdacs-hazards/)** - GDACS hazard information
-- **[gfd-hazards/](gfd-hazards/)** - Global Flood Database hazard data
-- **[glide-hazards/](glide-hazards/)** - GLIDE hazard classifications
-- **[ibtracs-hazards/](ibtracs-hazards/)** - IBTrACS tropical cyclone hazard data
-- **[ifrcevent-hazards/](ifrcevent-hazards/)** - IFRC hazard data
-- **[pdc-hazards/](pdc-hazards/)** - Pacific Disaster Center hazard data
-- **[usgs-hazards/](usgs-hazards/)** - USGS earthquake hazard data
+- [cems-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts) — Copernicus Emergency Management Service — Rapid Mapping
+- [desinventar-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/desinventar-impacts) — DesInventar
+- [emdat-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-impacts) — EM-DAT
+- [gdacs-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-impacts) — GDACS
+- [gfd-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts) — Global Flood Database (GFD)
+- [idmc-gidd-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts) — IDMC — Global Internal Displacement Database (GIDD)
+- [idmc-idu-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-idu-impacts) — IDMC — Internal Displacement Updates (IDU)
+- [ifrcevent-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ifrcevent-impacts) — IFRC DREF
+- [pdc-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts) — Pacific Disaster Center (PDC)
+- [usgs-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts) — USGS Earthquake Catalog
 
-### Impact Collections
+### Response
 
-Collections that document the effects and impacts of disasters:
-
-- **[desinventar-impacts/](desinventar-impacts/)** - DesInventar impact data
-- **[emdat-impacts/](emdat-impacts/)** - EM-DAT impact statistics
-- **[gdacs-impacts/](gdacs-impacts/)** - GDACS impact assessments
-- **[gfd-impacts/](gfd-impacts/)** - Global Flood Database impact data
-- **[idmc-gidd-impacts/](idmc-gidd-impacts/)** - IDMC GIDD displacement impacts
-- **[idmc-idu-impacts/](idmc-idu-impacts/)** - IDMC IDU displacement impacts
-- **[ifrcevent-impacts/](ifrcevent-impacts/)** - IFRC impact data
-- **[pdc-impacts/](pdc-impacts/)** - Pacific Disaster Center impact data
-- **[usgs-impacts/](usgs-impacts/)** - USGS earthquake impact data
-- **[cems-impacts/](cems-impacts/)** - Copernicus EMS grading-product damage/exposure statistics
-
-### Response Collections
-
-Collections that document disaster response products (e.g. satellite-derived VAPs):
-
-- **[charter-response/](charter-response/)** - International Charter Value-Added Products (`eo-gra`/`eo-del`/…) and calibrated satellite acquisition datasets (`eo-dat`), as Monty Response items (`monty:response_detail`)
-- **[cems-response/](cems-response/)** - Copernicus EMS Rapid Mapping products (REF/FEP/DEL/GRA/SR) as Monty Response items
+- [cems-response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response) — Copernicus Emergency Management Service — Rapid Mapping
+- [charter-response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response) — International Charter on Space and Major Disasters
+<!-- gen_sources_index.py: END examples-collections -->
+<!-- --8<-- [end:collections] -->
 
 ## Usage
 
@@ -116,7 +119,7 @@ When adding new examples:
 1. Follow the existing directory structure
 2. Ensure compliance with the Monty extension schema
 3. Include both collection and item examples where applicable
-4. Update this index file to reference new examples
+4. Declare the collection in [`sources.yml`](../docs/model/sources/sources.yml) and run `python scripts/gen_sources_index.py` to refresh the listing above
 5. Validate examples using the provided schema
 
 For more information about the Monty extension and its usage, see the [documentation](../docs/).
