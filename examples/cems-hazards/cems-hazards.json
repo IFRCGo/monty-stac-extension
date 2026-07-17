@@ -77,9 +77,9 @@
       "JAM"
     ],
     "monty:hazard_codes": [
+      "GH0300",
       "LS",
       "MH0306",
-      "GH0300",
       "TC",
       "nat-geo-mmd-lan",
       "nat-met-sto-tro"
