@@ -15,6 +15,48 @@ By combining lots of different sources of information, Monty aims to fill-in-the
 and provide a more complete picture of disaster risk for the National Societies.
 For more information about the Montandon project, please check out [this 5-minute video](https://www.youtube.com/watch?v=BEWxqYfrQek).
 
+## The Three Pillars
+
+This repository is more than the field spec below. It is organized around three pieces that build on each other:
+
+1. **[Extension Spec](#fields)** (this document) — the normative STAC fields, roles and relation types that carry Monty data in a STAC Item or Collection.
+2. **[Model](https://ifrcgo.org/monty-stac-extension/model/)** (`docs/model/`) — the data model behind the spec: the [hazard/impact taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md) (the canonical UNDRR-ISC reference), the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md), and the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) algorithm.
+3. **[Sources](https://ifrcgo.org/monty-stac-extension/model/sources/)** (`docs/model/sources/`) — per-source analyses mapping real-world disaster data feeds onto the model, <!-- gen_sources_index.py: BEGIN readme-source-count -->13<!-- gen_sources_index.py: END readme-source-count --> of them documented so far (CEMS, Charter, EM-DAT, GDACS, USGS, and more), each with a field mapping, license and integration status.
+
+Start with whichever pillar matches what you're doing: implement against the spec, understand *why* a field means what it means, or add/update a data source.
+
+## Quick Start
+
+- **Validate an example against the spec** — clone the repo, run `npm install` then `npm test`. This checks every file under [`examples/`](examples/) against [`json-schema/schema.json`](json-schema/schema.json) and lints the markdown; see [Running tests locally](CONTRIBUTING.md#running-tests-locally) in `CONTRIBUTING.md`.
+- **Find a field** — the [Fields](#fields) table below lists every `monty:*` property; each links to an [Additional Field Information](#additional-field-information) subsection with the full rules. For the values a field can take (hazard codes, impact types, response codes), see the [taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md) and [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md) in the model.
+- **See a worked example** — the [Event](#event), [Hazard](#hazard), [Impact](#impact) and [Response](#response) sections below each link example STAC Items from a real source.
+
+## Repository Map
+
+```text
+.
+├── README.md                # This document — the normative extension spec
+├── CONTRIBUTING.md          # How to contribute to the spec, model or a source
+├── CHANGELOG.md             # Release history
+├── json-schema/schema.json  # Machine-checkable version of this spec
+├── examples/                # STAC Items/Collections exercising every source and object type
+├── scripts/                 # gen_sources_index.py + the CI checks that keep the docs honest
+├── mkdocs.yml                # Site navigation and build config
+└── docs/                     # Published at https://ifrcgo.org/monty-stac-extension/
+    └── model/                # The Monty model: taxonomy, response docs, correlation
+        └── sources/          # Per-source analyses + sources.yml, the source manifest
+```
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to build the documentation site locally.
+
+## Also See
+
+- [Contributing](CONTRIBUTING.md) — code of conduct, running the test suite, and how to propose a change to the spec, model or a source
+- [Changelog](./CHANGELOG.md) — release history
+- [Published documentation site](https://ifrcgo.org/monty-stac-extension/) — the rendered model, sources and STAC API docs
+
+## Specification Overview
+
 This document explains the Montandon Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 It provides a way to include Montandon data from [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model/) in a STAC Item or Collection.
 The specification is organized as follows
@@ -325,42 +367,6 @@ Response collections SHOULD be partitioned **per source** (e.g., `cems-responses
 
 ## Contributing
 
-All contributions are subject to the
-[STAC Specification Code of Conduct](https://github.com/radiantearth/stac-spec/blob/master/CODE_OF_CONDUCT.md).
-For contributions, please follow the
-[STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md) Instructions
-for running tests are copied here for convenience.
-
-### Running tests
-
-The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid.
-To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
-
-First you'll need to install everything with npm once. Just navigate to the root of this repository and on
-your command line run:
-
-```bash
-npm install
-```
-
-Then to check markdown formatting and test the examples against the JSON schema, you can run:
-
-```bash
-npm test
-```
-
-This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
-
-If the tests reveal formatting problems with the examples, you can fix them with:
-
-```bash
-npm run format-examples
-```
-
-`docs/` is linted separately (`npm run check-docs`) under a relaxed profile
-(`.github/remark-docs.yaml`) that keeps link validation and code-fence checks
-but disables cosmetic rules (`table-cell-padding`, `list-item-content-indent`,
-`maximum-heading-length`, `no-heading-punctuation`, `heading-increment`) that
-would otherwise fire across most of `docs/`. Those rules are auto-fixable —
-run `npx remark docs -r .github/remark-docs.yaml -o` to bulk-fix them, which
-is the cheap way to re-enable one and tighten the profile later.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the code of conduct, how to run
+the test suite and build the documentation site locally, and how to propose
+a change to the spec, the model, or a source.

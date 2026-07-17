@@ -10,6 +10,9 @@ Without arguments, writes:
     example index; docs/examples/index.md (the published page) pulls the same
     listing in via a pymdownx.snippets include, so a new collection surfaces on
     the site with no second edit. See https://github.com/IFRCGo/monty-stac-extension/issues/66.
+  - README.md — the documented-source count in the "Three Pillars" section,
+    replaced between the gen_sources_index.py BEGIN/END markers. See
+    https://github.com/IFRCGo/monty-stac-extension/issues/67.
   - docs/sources.json — machine-readable index, published by MkDocs
     (consumed by https://github.com/developmentseed/montandon-website)
 
@@ -43,6 +46,7 @@ MKDOCS_YML = ROOT / "mkdocs.yml"
 EXAMPLES_DIR = ROOT / "examples"
 EXAMPLES_INDEX = EXAMPLES_DIR / "index.md"
 SOURCES_JSON = ROOT / "docs" / "sources.json"
+ROOT_README = ROOT / "README.md"
 
 SITE_BASE_URL = "https://ifrcgo.org/monty-stac-extension/"
 EXAMPLES_TREE_URL = "https://github.com/IFRCGo/monty-stac-extension/tree/main/examples"
@@ -225,6 +229,15 @@ def _replace_section(text: str, key: str, body: str) -> str:
     return text[: start_idx + len(begin)] + "\n" + body + text[end_idx:]
 
 
+def _replace_inline(text: str, key: str, body: str) -> str:
+    """Like _replace_section, but for a marker pair embedded inline in a
+    sentence (e.g. README.md's source count) — no surrounding newlines."""
+    begin, end = BEGIN.format(key), END.format(key)
+    start_idx = text.index(begin)
+    end_idx = text.index(end)
+    return text[: start_idx + len(begin)] + body + text[end_idx:]
+
+
 def render_readme(current: str, sources: list[dict[str, Any]]) -> str:
     sections = {
         "available-sources": render_available_sources(sources),
@@ -234,6 +247,10 @@ def render_readme(current: str, sources: list[dict[str, Any]]) -> str:
     for key, body in sections.items():
         text = _replace_section(text, key, body)
     return text
+
+
+def render_root_readme_source_count(sources: list[dict[str, Any]]) -> str:
+    return str(len([src for src in sources if src["status"] != "undocumented"]))
 
 
 def render_sources_json(sources: list[dict[str, Any]]) -> str:
@@ -275,11 +292,16 @@ def main() -> int:
     new_readme = render_readme(current_readme, sources)
     current_examples = EXAMPLES_INDEX.read_text(encoding="utf-8")
     new_examples = _replace_section(current_examples, "examples-collections", render_examples_collections(sources))
+    current_root_readme = ROOT_README.read_text(encoding="utf-8")
+    new_root_readme = _replace_inline(
+        current_root_readme, "readme-source-count", render_root_readme_source_count(sources)
+    )
     new_sources_json = render_sources_json(sources)
 
     outputs = [
         (SOURCES_README, current_readme, new_readme),
         (EXAMPLES_INDEX, current_examples, new_examples),
+        (ROOT_README, current_root_readme, new_root_readme),
         (SOURCES_JSON, SOURCES_JSON.read_text(encoding="utf-8") if SOURCES_JSON.exists() else None, new_sources_json),
     ]
 
