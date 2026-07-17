@@ -16,6 +16,19 @@ The shift from static [correlation identifiers](../correlation_identifier.md) to
 4. **Transparency**: Users can see and customize the correlation logic
 5. **Standards-based**: Uses STAC API specifications and conventions
 
+> [!WARNING]
+> **`monty:corr_id` is not a cross-source join key.** It is a *deterministic, per-source* identifier
+> (`{date}-{country}-{block_id}-{hazard}-{episode}-GCDB`) computed independently for each item from
+> that item's own fields. Two sources describing the **same** real-world event can legitimately
+> produce **different** `corr_id`s whenever their country resolution, hazard normalization,
+> bbox-centroid `block_id`, or episode number differ. **Do not rely on exact `corr_id` equality to
+> correlate across sources** — use the dynamic
+> [Event-to-Event](#algorithm-1-event-to-event-correlation) query instead (hazard `a_overlaps` +
+> country `a_contains` + time `t_intersects`, optionally spatial `s_intersects`). Reserve `corr_id`
+> for intra-source pairing and exact/deterministic lookups. See
+> [When `monty:corr_id` is not enough](#when-montycorr_id-is-not-enough-a-cross-source-example) for a
+> worked example.
+
 ### Correlation Criteria
 
 Items in the Monty system can be correlated using the following attributes:
@@ -484,6 +497,44 @@ The `monty:corr_id` field remains available for:
 2. Populate this ID on all related items
 3. Support dynamic queries for flexible correlation
 4. Allow users to choose their preferred correlation method
+
+> [!NOTE]
+> "Populate this ID on all related items" applies **within** a single reference-event grouping. It
+> does **not** make `corr_id` a cross-source join key — see the caveat in the [Overview](#overview)
+> and the example below.
+
+### When `monty:corr_id` is not enough: a cross-source example
+
+A GLIDE record and a USGS record for the **same** 24 June 2026 Venezuela earthquake can legitimately
+carry different correlation IDs:
+
+| Source | `monty:corr_id`                       |
+| ------ | ------------------------------------- |
+| GLIDE  | `20260624-VEN-904158-GH0101-1-GCDB`   |
+| USGS   | `20260624-UNK-…-GH0311-1-GCDB`        |
+
+An exact `corr_id` query therefore returns only the GLIDE chain. To retrieve **both**, correlate on
+the underlying fields with [Algorithm 1](#algorithm-1-event-to-event-correlation):
+
+```json
+{
+  "filter-lang": "cql2-json",
+  "filter": {
+    "op": "and",
+    "args": [
+      {"op": "a_overlaps", "args": [{"property": "monty:hazard_codes"}, ["GH0101", "nat-geo-ear-gro", "EQ"]]},
+      {"op": "a_contains", "args": [{"property": "monty:country_codes"}, "VEN"]},
+      {"op": "t_intersects", "args": [{"property": "datetime"}, {"interval": ["2026-06-23T00:00:00Z", "2026-06-25T00:00:00Z"]}]}
+    ]
+  }
+}
+```
+
+> [!NOTE]
+> In this specific case the USGS divergence was amplified by upstream normalization bugs (country
+> resolved to `UNK`, hazard tagged `GH0311` instead of `GH0101`). But even once those are fixed, the
+> `block_id` component can still differ between a point epicenter (USGS) and a country/region bbox
+> (GLIDE) — so dynamic correlation remains the robust cross-source method.
 
 ---
 
