@@ -1403,6 +1403,14 @@
 <p>The static correlation identifier described below is still generated and remains available for backward compatibility, but the new dynamic approach offers greater flexibility and better support for multi-hazard events.</p>
 </blockquote>
 <hr />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The correlation identifier is <strong>deterministic and per-source</strong>. It is suitable for intra-source
+pairing and exact lookups, but it is <strong>not</strong> a cross-source join key: two sources describing the
+same real-world event can produce <strong>different</strong> IDs (because their country resolution, hazard
+normalization, <code>block_id</code>, or episode number differ). To correlate across sources, use the
+<a href="../stac-api/correlation_algorithms/#overview">dynamic STAC correlation algorithms</a>.</p>
+</div>
 <p>This page describes the <strong>legacy algorithm</strong> used to generate the static correlation identifier for items in the Monty system.</p>
 <h2 id="context">Context</h2>
 <p>*The elements of context below are based on the article <a href="https://www.preventionweb.net/news/connecting-dots-importance-recognising-multi-hazard-events-disaster-reporting">Connecting the dots: the importance of recognising multi-hazard events in disaster reporting</a>.</p>
@@ -1432,7 +1440,7 @@
 <li>Date and Time: The date and time of the related event.</li>
 </ul>
 <p>The algorithm returns a string with the event id. The event id is a string with the following format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">{datetime}-{country_code}-{block_id}-{hazard_code}-{episode_number}-GDBC</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">{datetime}-{country_code}-{block_id}-{hazard_code}-{episode_number}-GCDB</span>
 </code></pre></div>
 <p>Where:</p>
 <ul>
