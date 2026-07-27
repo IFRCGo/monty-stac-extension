@@ -7,15 +7,23 @@ map real-world disaster data sources onto it — see the README's
 [three pillars](README.md#the-three-pillars) section for how they fit
 together.
 
-All contributions are subject to the
-[STAC Specification Code of Conduct](https://github.com/radiantearth/stac-spec/blob/master/CODE_OF_CONDUCT.md).
+All contributions are subject to our [Code of Conduct](CODE_OF_CONDUCT.md).
 General contribution etiquette follows the
 [STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md).
 
-> A dedicated `CODE_OF_CONDUCT.md`, issue/PR templates and a documented
-> release procedure are tracked in
-> [#68](https://github.com/IFRCGo/monty-stac-extension/issues/68); this file
-> will grow to cover them.
+## Opening an issue or pull request
+
+Issues use structured forms — pick **New source**, **Model / schema change**,
+or **Bug report** when you
+[open one](https://github.com/IFRCGo/monty-stac-extension/issues/new/choose).
+Pull requests are pre-filled from
+[`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md); fill in
+the checklist that matches your change.
+
+Every PR is reviewed by a maintainer before merge. There is no `CODEOWNERS`
+file, so review is not auto-assigned — tag a member of the
+[Montandon Core Team](https://github.com/orgs/IFRCGo/teams/montandon-core-team)
+if a PR goes quiet.
 
 ## Ways to contribute
 
@@ -36,6 +44,60 @@ Markdown style nits across the repository are auto-fixable — run
 `npx remark . -r .github/remark.yaml -o` for the root files linted by
 `check-markdown`, or `npx remark docs -r .github/remark-docs.yaml -o` for
 `docs/`.
+
+## Cutting a release
+
+> **Interim.** Adopting [`release-please`](https://github.com/googleapis/release-please)
+> to automate the version bump is tracked in
+> [#72](https://github.com/IFRCGo/monty-stac-extension/issues/72); until then,
+> the bump is manual and is documented here so it isn't tribal knowledge.
+
+The published schema is versioned per release at
+`https://ifrcgo.org/monty-stac-extension/v<X.Y.Z>/schema.json`. Publishing a new
+version has two halves: a **version bump** (a PR) and a **GitHub Release** (which
+triggers the deploy).
+
+Pick the version with [SemVer](https://semver.org/): a backward-compatible,
+additive schema change (a new optional field, a new enum value) is a **minor**
+bump; a breaking change (a required field, a removed/renamed field) is a
+**major** bump.
+
+### 1. Version bump (in a PR)
+
+The version string lives in **four canonical files** — keep them identical:
+
+1. [`package.json`](package.json) — the `version` field **and** the pinned
+   schema URL in the `check-examples` / `format-examples` `schemaMap` args.
+2. [`pyproject.toml`](pyproject.toml) — the `version` field.
+3. [`json-schema/schema.json`](json-schema/schema.json) — the `$id` **and** the
+   `const` schema URL that examples pin to.
+4. [`README.md`](README.md) — the `Identifier:` URL.
+
+The same pinned URL (`v<old>/schema.json`) is then propagated across every
+example and source doc that references it. From a clean tree, bumping `1.3.0` to
+`1.4.0` is:
+
+```bash
+git grep -l 'v1.3.0/schema.json' -- '*.json' '*.md' '*.toml' \
+  | xargs sed -i'' -e 's#v1.3.0/schema.json#v1.4.0/schema.json#g'
+# then bump the bare `version` in package.json and pyproject.toml by hand
+npm test   # every example must still validate against the bumped URL
+```
+
+### 2. Changelog
+
+In [`CHANGELOG.md`](CHANGELOG.md), rename the `[Unreleased]` section to
+`[<X.Y.Z>] - <YYYY-MM-DD>`, add a fresh empty `[Unreleased]` section above it,
+and add the version's link definition at the bottom.
+
+### 3. Release
+
+Once the bump PR is merged to `main`, create the GitHub Release (tag
+`v<X.Y.Z>`). That publishes the JSON Schema:
+[`publish.yaml`](.github/workflows/publish.yaml) copies `json-schema/` to the
+`v<X.Y.Z>/` directory on the `gh-pages` branch, making
+`https://ifrcgo.org/monty-stac-extension/v<X.Y.Z>/schema.json` resolve. Earlier
+`v*.*.*/` directories are preserved, so historical items keep validating.
 
 ## Running tests locally
 

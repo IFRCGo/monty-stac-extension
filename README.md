@@ -5,7 +5,7 @@
 - **Field Name Prefix:** monty
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @emmanuelmathot
+- **Owner**: [Montandon Core Team](https://github.com/orgs/IFRCGo/teams/montandon-core-team) (lead: @emmanuelmathot)
 
 ## About Monty
 

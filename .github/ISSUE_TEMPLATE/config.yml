@@ -1,0 +1,2 @@
+# Keep the "Open a blank issue" escape hatch for anything the forms don't cover.
+blank_issues_enabled: true

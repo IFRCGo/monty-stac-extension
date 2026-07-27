@@ -1,0 +1,32 @@
+name: Bug report
+description: Report something wrong — an invalid example, a broken link, a doc error, or a schema defect.
+title: "bug: <summary>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. If it's a data-correctness issue (a wrong hazard
+        code, a mismapped field), please point at the specific file and value —
+        that's what lets a maintainer reproduce and add a guardrail.
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong
+      description: Describe the defect.
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: File path(s), example id, schema field, or doc URL affected.
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs. actual
+      description: What you expected, and what you got instead. Include the output of `npm test` if a check fails.
+    validations:
+      required: false
