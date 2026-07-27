@@ -1,0 +1,59 @@
+name: Model / schema change
+description: Propose a change to the Monty model, taxonomy, or the JSON Schema.
+title: "model: <summary>"
+labels: ["model"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for changes to the [Monty model](https://ifrcgo.org/monty-stac-extension/model/)
+        (`docs/model/`, including `taxonomy.md`) or the
+        [JSON Schema](https://github.com/IFRCGo/monty-stac-extension/blob/main/json-schema/schema.json).
+
+        > Reminder: `json-schema/schema.json` and the field descriptions in
+        > `README.md` must stay verbatim-identical, so a schema field change
+        > means editing both.
+  - type: dropdown
+    id: area
+    attributes:
+      label: What does this change touch?
+      multiple: true
+      options:
+        - JSON Schema (json-schema/schema.json + README field descriptions)
+        - Taxonomy (docs/model/taxonomy.md — hazard/impact codes)
+        - Model docs (other pages under docs/model/)
+        - Response taxonomy / best practices
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What should change, and what it looks like now.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why — the problem this solves, or the data pattern it enables.
+    validations:
+      required: true
+  - type: dropdown
+    id: compat
+    attributes:
+      label: Backward compatibility
+      description: For a schema change, does this break existing valid items? (Drives the SemVer bump — see CONTRIBUTING "Cutting a release".)
+      options:
+        - "Additive / backward-compatible (minor)"
+        - "Breaking (major)"
+        - "Not a schema change / N/A"
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Downstream impact
+      description: Examples that would need updating, affected sources, or `pystac-monty` transformers touched.
+    validations:
+      required: false

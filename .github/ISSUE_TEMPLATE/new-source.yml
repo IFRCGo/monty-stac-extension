@@ -1,0 +1,101 @@
+name: New source
+description: Propose adding a new disaster data source to Monty (or advancing an existing one).
+title: "source: <name>"
+labels: ["source"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a source. A source is tracked in
+        [`docs/model/sources/sources.yml`](https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/sources/sources.yml),
+        the single source of truth, and moves through a lifecycle (see the
+        `status` field below). Fill in what you know — early proposals won't
+        have all of it, and that's expected.
+
+        The full analysis structure is the
+        [Source Analysis Process](https://ifrcgo.org/monty-stac-extension/model/sources/#source-analysis-process);
+        the detailed methodology and doc template are being written in
+        [#69](https://github.com/IFRCGo/monty-stac-extension/issues/69).
+  - type: input
+    id: name
+    attributes:
+      label: Source name
+      description: Human-readable name, e.g. "Copernicus Emergency Management Service — Rapid Mapping".
+    validations:
+      required: true
+  - type: input
+    id: org
+    attributes:
+      label: Organisation
+      description: Who publishes / maintains the source.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Source URL
+      description: Homepage or primary data endpoint.
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: Data license
+      description: License or terms of use, if known (a URL is fine). Leave blank if the source publishes none.
+    validations:
+      required: false
+  - type: dropdown
+    id: types
+    attributes:
+      label: Monty types contributed
+      description: Which Monty roles this source produces. Select all that apply.
+      multiple: true
+      options:
+        - event
+        - hazard
+        - impact
+        - response
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Proposed status
+      description: |
+        Lifecycle stage (matches the `status` field in `sources.yml`):
+        `analysis` — source & data model researched, no STAC mapping yet ·
+        `templates` — STAC item/collection mapping fully specified ·
+        `etl` — a transformer exists in pystac-monty, not confirmed running live ·
+        `production` — a proven pipeline is behind shipped examples.
+      options:
+        - analysis
+        - templates
+        - etl
+        - production
+    validations:
+      required: true
+  - type: textarea
+    id: sourcing
+    attributes:
+      label: Data sourcing
+      description: How the data is obtained — API endpoints, downloads, auth/rate limits, update frequency.
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Data model & mapping notes
+      description: Key fields, known caveats, and how they'd map onto Monty event/hazard/impact/response items.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Integration checklist
+      description: Tracks the work to land the source. Leave unchecked on a fresh proposal.
+      options:
+        - label: Registered in `docs/model/sources/sources.yml`
+        - label: Source doc added under `docs/model/sources/<ID>/README.md` and wired into `mkdocs.yml` nav
+        - label: Example collections added under `examples/<source>-<type>/`
+        - label: "`python scripts/gen_sources_index.py` re-run and generated indexes committed"
+        - label: Transformer linked from the `etl` field (pystac-monty)
