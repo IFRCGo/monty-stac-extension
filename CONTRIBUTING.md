@@ -78,7 +78,7 @@ example and source doc that references it. From a clean tree, bumping `1.3.0` to
 
 ```bash
 git grep -l 'v1.3.0/schema.json' -- '*.json' '*.md' '*.toml' \
-  | xargs sed -i 's#v1.3.0/schema.json#v1.4.0/schema.json#g'
+  | xargs sed -i'' -e 's#v1.3.0/schema.json#v1.4.0/schema.json#g'
 # then bump the bare `version` in package.json and pyproject.toml by hand
 npm test   # every example must still validate against the bumped URL
 ```
