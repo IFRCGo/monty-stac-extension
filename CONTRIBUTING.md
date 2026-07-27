@@ -21,8 +21,9 @@ Pull requests are pre-filled from
 the checklist that matches your change.
 
 Every PR is reviewed by a maintainer before merge. There is no `CODEOWNERS`
-file, so review is not auto-assigned — tag a maintainer (see the repository's
-[People page](https://github.com/IFRCGo/monty-stac-extension/people)) if a PR goes quiet.
+file, so review is not auto-assigned — tag a member of the
+[Montandon Core Team](https://github.com/orgs/IFRCGo/teams/montandon-core-team)
+if a PR goes quiet.
 
 ## Ways to contribute
 

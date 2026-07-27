@@ -63,8 +63,9 @@ reported to the community leaders responsible for enforcement:
 
 - privately, using GitHub's **["Report content"](https://docs.github.com/en/communities/maintaining-your-safety-on-github/reporting-abuse-or-spam)**
   flow on the offending comment, issue, or pull request; or
-- by contacting a repository maintainer directly (see the repository's
-  [People page](https://github.com/IFRCGo/monty-stac-extension/people)).
+- by contacting a member of the
+  [Montandon Core Team](https://github.com/orgs/IFRCGo/teams/montandon-core-team)
+  directly.
 
 All complaints will be reviewed and investigated promptly and fairly.
 
