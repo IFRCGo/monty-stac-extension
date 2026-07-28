@@ -1,10 +1,18 @@
 # Source Analysis Methodology
 
 How a disaster data source goes from a raw upstream feed to a running Monty
-pipeline. This is the process behind every source doc in this folder; the
-[Charter](./Charter/README.md) and [CEMS](./CEMS/README.md) analyses are its
-reference implementations, and [`SOURCE_TEMPLATE.md`](./SOURCE_TEMPLATE.md) is
-the skeleton stage 2 produces.
+pipeline. This is the process behind every source doc in this folder, and
+[`SOURCE_TEMPLATE.md`](./SOURCE_TEMPLATE.md) is the skeleton stage 2 produces.
+
+[Charter](./Charter/README.md) and [CEMS](./CEMS/README.md) are its fullest
+reference implementations — the most recent, and the closest to the template
+below — so read them for the **shape** of a source doc. But every documented
+source in the [source index](./README.md) is worth reading: the earlier
+analyses (for example [GDACS](./GDACS/README.md), [IDMC](./IDMC/README.md),
+[PDC](./PDC/README.md), [USGS](./USGS/README.md)) predate this template and use a
+lighter structure, yet they carry source-specific **substance** — API quirks,
+hazard-code crosswalks, field mappings — that a template can't. Read the source
+closest to the one you're adding alongside CEMS/Charter.
 
 The five stages below are reverse-engineered from the Charter and CEMS
 integrations, which are identical in shape. Each stage has a concrete **output**,
