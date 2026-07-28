@@ -204,9 +204,9 @@ TODO, or delete.
 ## Hazard codes
 
 <!--
-  The crosswalk from the source's own classification to Monty hazard codes. This
-  is the step whose absence caused the #61 data bug — VERIFY every code against
-  taxonomy.md before writing the row (METHODOLOGY.md rule 5). UNDRR-ISC 2025 is
+  The crosswalk from the source's own classification to Monty hazard codes.
+  VERIFY every code against taxonomy.md before writing the row — a valid code can
+  still be the wrong one for the class (METHODOLOGY.md rule 5). UNDRR-ISC 2025 is
   required (exactly one per Hazard item); GLIDE and EM-DAT are recommended.
 -->
 
@@ -220,9 +220,8 @@ TODO, or delete.
 
 > **`get_canonical_hazard_codes()` does not validate this table.** It preserves any
 > syntactically valid UNDRR-ISC 2025 code — it does not check the code is the
-> *correct* one for the mapped class (see IFRCGo/pystac-monty#168). The mapping
-> above must be correct at the source; canonicalisation is formatting, not
-> verification.
+> *correct* one for the mapped class. The mapping above must be correct at the
+> source; canonicalisation is formatting, not verification.
 
 ## Examples
 

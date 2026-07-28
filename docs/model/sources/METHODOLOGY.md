@@ -104,17 +104,14 @@ made explicit so the next one doesn't have to rediscover them.
    field description in the root `README.md` in the same PR.
 
 5. **Verify every hazard code against [`taxonomy.md`](../taxonomy.md) before
-   writing the crosswalk.** This is the step whose absence caused
-   [#61](https://github.com/IFRCGo/monty-stac-extension/issues/61) (a tropical
-   cyclone tagged `MH0403`, *Blizzard*; the non-existent `MH0901` shipped 16×).
-   Note explicitly that `get_canonical_hazard_codes()` does **not** correct a
-   wrong-but-valid code — it preserves any syntactically valid UNDRR-ISC 2025
-   code without checking it is the *right* one for the mapped class (see
-   IFRCGo/pystac-monty#168, where USGS shipped the valid-but-wrong `GH0311` for
-   years). The mapping must be right **at the source**. The
+   writing the crosswalk.** A syntactically valid UNDRR-ISC 2025 code can still
+   be the *wrong* code for the mapped class, and `get_canonical_hazard_codes()`
+   does **not** catch that — it preserves any valid code without checking it is
+   the right one for the class. The mapping must therefore be correct **at the
+   source**. The
    [`scripts/check_hazard_codes.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_hazard_codes.py)
-   checker (from [#64](https://github.com/IFRCGo/monty-stac-extension/issues/64),
-   wired into `npm test`) automates the verification against `taxonomy.md`.
+   checker (wired into `npm test`) verifies every code in `examples/` against
+   `taxonomy.md`.
 
 ## Fixture policy
 
