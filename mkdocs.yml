@@ -85,6 +85,8 @@ nav:
     - Queryables: model/stac-api/queryables.md
   - Sources:
     - Overview: model/sources/README.md
+    - Methodology: model/sources/METHODOLOGY.md
+    - Source Template: model/sources/SOURCE_TEMPLATE.md
     - CEMS: model/sources/CEMS/README.md
     - Charter: model/sources/Charter/README.md
     - DesInventar: model/sources/DesInventar/README.md

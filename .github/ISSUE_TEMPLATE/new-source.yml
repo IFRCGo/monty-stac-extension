@@ -12,10 +12,11 @@ body:
         `status` field below). Fill in what you know — early proposals won't
         have all of it, and that's expected.
 
-        The full analysis structure is the
-        [Source Analysis Process](https://ifrcgo.org/monty-stac-extension/model/sources/#source-analysis-process);
-        the detailed methodology and doc template are being written in
-        [#69](https://github.com/IFRCGo/monty-stac-extension/issues/69).
+        The process is the five-stage
+        [methodology](https://ifrcgo.org/monty-stac-extension/model/sources/METHODOLOGY/),
+        and each source README follows the
+        [source template](https://ifrcgo.org/monty-stac-extension/model/sources/SOURCE_TEMPLATE/)
+        (CEMS and Charter are the worked references).
   - type: input
     id: name
     attributes:
