@@ -1,0 +1,1317 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../METHODOLOGY/" rel="prev"/>
+<link href="../CEMS/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Source Template - Monty Extension Documentation</title>
+<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../styles/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="red" data-md-color-primary="red" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#source-name">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Monty Extension Documentation" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Monty Extension Documentation
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Source Template
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Monty Extension Documentation" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Monty Extension Documentation">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    Monty Extension Documentation
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/IFRCGo/monty-stac-extension" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    IFRCGo/monty-stac-extension
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-taxonomy/">
+<span class="md-ellipsis">
+    
+  
+    Response Taxonomy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-best-practices/">
+<span class="md-ellipsis">
+    
+  
+    Response Best Practices
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../response-impact-boundary/">
+<span class="md-ellipsis">
+    
+  
+    Response ↔ Impact Boundary
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../correlation_identifier/">
+<span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../questions/">
+<span class="md-ellipsis">
+    
+  
+    Questions
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../examples/">
+<span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../stac-api/">
+<span class="md-ellipsis">
+    
+  
+    STAC API
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    STAC API
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/correlation_algorithms/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Algorithms
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/correlation_examples/">
+<span class="md-ellipsis">
+    
+  
+    Correlation Examples
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/migration_guide/">
+<span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stac-api/queryables/">
+<span class="md-ellipsis">
+    
+  
+    Queryables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    
+  
+    Sources
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Sources
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../METHODOLOGY/">
+<span class="md-ellipsis">
+    
+  
+    Methodology
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Source Template
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Source Template
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-model">
+<span class="md-ellipsis">
+      
+        Object model
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-access">
+<span class="md-ellipsis">
+      
+        Data access
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-event">
+<span class="md-ellipsis">
+      
+        Object → Event
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-hazard">
+<span class="md-ellipsis">
+      
+        Object → Hazard
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-response">
+<span class="md-ellipsis">
+      
+        Object → Response
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-impact">
+<span class="md-ellipsis">
+      
+        Object → Impact
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tracking-over-time">
+<span class="md-ellipsis">
+      
+        Tracking over time
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cross-source-linkage">
+<span class="md-ellipsis">
+      
+        Cross-source linkage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard-codes">
+<span class="md-ellipsis">
+      
+        Hazard codes
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+<span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference-files">
+<span class="md-ellipsis">
+      
+        Reference files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decisions-resolved">
+<span class="md-ellipsis">
+      
+        Decisions (resolved)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resources">
+<span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../CEMS/">
+<span class="md-ellipsis">
+    
+  
+    CEMS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Charter/">
+<span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DesInventar/">
+<span class="md-ellipsis">
+    
+  
+    DesInventar
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../EM-DAT/">
+<span class="md-ellipsis">
+    
+  
+    EM-DAT
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GDACS/">
+<span class="md-ellipsis">
+    
+  
+    GDACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GFD/">
+<span class="md-ellipsis">
+    
+  
+    GFD
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GLIDE/">
+<span class="md-ellipsis">
+    
+  
+    GLIDE
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IBTrACS/">
+<span class="md-ellipsis">
+    
+  
+    IBTrACS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IDMC/">
+<span class="md-ellipsis">
+    
+  
+    IDMC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IDU/">
+<span class="md-ellipsis">
+    
+  
+    IDU
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../IFRC-DREF/">
+<span class="md-ellipsis">
+    
+  
+    IFRC-DREF
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../PDC/">
+<span class="md-ellipsis">
+    
+  
+    PDC
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../USGS/">
+<span class="md-ellipsis">
+    
+  
+    USGS
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collections">
+<span class="md-ellipsis">
+      
+        Collections
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-model">
+<span class="md-ellipsis">
+      
+        Object model
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-access">
+<span class="md-ellipsis">
+      
+        Data access
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-event">
+<span class="md-ellipsis">
+      
+        Object → Event
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-hazard">
+<span class="md-ellipsis">
+      
+        Object → Hazard
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-response">
+<span class="md-ellipsis">
+      
+        Object → Response
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#object-impact">
+<span class="md-ellipsis">
+      
+        Object → Impact
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tracking-over-time">
+<span class="md-ellipsis">
+      
+        Tracking over time
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cross-source-linkage">
+<span class="md-ellipsis">
+      
+        Cross-source linkage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hazard-codes">
+<span class="md-ellipsis">
+      
+        Hazard codes
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+<span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference-files">
+<span class="md-ellipsis">
+      
+        Reference files
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decisions-resolved">
+<span class="md-ellipsis">
+      
+        Decisions (resolved)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resources">
+<span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  SOURCE ANALYSIS TEMPLATE
+  ========================
+  Copy this file to docs/model/sources/<SOURCE>/README.md and fill it in.
+  It captures the structure the two most complete source docs — CEMS and
+  Charter — converged on. See ./METHODOLOGY.md for the process this document
+  is stage 2 of, and the rules every source doc must follow.
+
+  How to use it:
+  - Replace every {placeholder} and each "TODO:" prose block.
+  - LINK DEPTH: the cross-reference links below (`../taxonomy.md`, …) are correct
+    for this file's location (docs/model/sources/). When you copy it into
+    docs/model/sources/<SOURCE>/README.md — one directory deeper — add one more
+    `../` to each (`../taxonomy.md` → `../../taxonomy.md`), matching CEMS/Charter.
+    `npm run check-docs` validates the links, so a missed `../` fails CI.
+  - Keep a section only if it applies. A source with no Response items drops
+    the "→ Response" section; a file-drop source with no live API trims
+    "Data access" accordingly. Do not keep empty headings.
+  - Every mapping claim must be grounded in a committed fixture under
+    `api-files/` (rule 2 in METHODOLOGY.md). Cite the fixture.
+  - Leave the HTML comments out of the finished doc (or keep short ones as
+    editorial notes — CEMS/Charter keep a few).
+-->
+<h1 id="source-name">{Source name}</h1>
+<!--
+  One paragraph: what the source is, how Montandon accesses it (public REST API /
+  partner S3 / file download / …), and what this document maps. State the scope
+  boundary up front if the source is larger than what Monty ingests (CEMS maps
+  Rapid Mapping only; be explicit about what is out of scope).
+-->
+<p>TODO: one-paragraph description.</p>
+<!--
+  Pick ONE framing note as a blockquote and delete the other:
+  - Build-from-payload (CEMS): the ETL constructs Monty items from a non-STAC
+    payload. Note which extensions the items declare.
+  - Pass-through (Charter): the source already publishes STAC; the conversion is
+    copy-as-is + Monty specifics. List exactly what the ETL adds/normalises.
+-->
+<blockquote>
+<p><strong>Scope / conversion principle:</strong> TODO.</p>
+</blockquote>
+<h2 id="collections">Collections</h2>
+<!--
+  One row per Monty collection this source produces. `Code` is the collection id
+  (`{source}-events`, …); `Monty role` is event | hazard | impact | response;
+  `Source for` names the upstream object the collection is built from.
+  These rows MUST match the source's entry in ./sources.yml (`collections`,
+  `types`), which is what gen_sources_index.py checks.
+-->
+<table>
+<thead>
+<tr>
+<th>Collection</th>
+<th>Code</th>
+<th>Monty role</th>
+<th>Source for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{Source} — Events</td>
+<td><code>{source}-events</code></td>
+<td><code>event</code></td>
+<td>{upstream object}</td>
+</tr>
+<tr>
+<td>{Source} — Hazards</td>
+<td><code>{source}-hazards</code></td>
+<td><code>hazard</code></td>
+<td>{upstream object}</td>
+</tr>
+<tr>
+<td>{Source} — Impacts</td>
+<td><code>{source}-impacts</code></td>
+<td><code>impact</code></td>
+<td>{upstream object}</td>
+</tr>
+<tr>
+<td>{Source} — Response</td>
+<td><code>{source}-response</code></td>
+<td><code>response</code></td>
+<td>{upstream object}</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Source organisation</strong>: {org} (<code>{CODE}</code>)</li>
+<li><strong>Source URL</strong>: <a href="https://example.org">https://example.org</a></li>
+<li><strong>API / ingestion entry point</strong>: {endpoint or bucket} ({auth: public / partner / key})</li>
+<li><strong>License</strong>: {license or terms}</li>
+<li><strong>Temporal coverage</strong>: {from – to}</li>
+</ul>
+<!--
+  If the source has a native STAC/domain extension (e.g. Charter's Terradue
+  `disaster:`), add a short note here on which extensions the Monty items declare
+  and the layering-over-duplication rule. Otherwise state "no `{source}:`
+  extension exists; source-specific fields are carried under monty: fields".
+-->
+<h2 id="object-model">Object model</h2>
+<!--
+  Describe the upstream entities and how they relate — the reader must be able to
+  follow the graph before the field tables make sense. Prefer a Mermaid diagram
+  (flowchart for the process, or an erDiagram for the keying) plus a short prose
+  walk-through of any non-obvious association (Charter's call→activation pivot,
+  CEMS's activation→AOI→product flow).
+-->
+<pre class="mermaid"><code>flowchart TD
+    A["&lt;b&gt;{Upstream object}&lt;/b&gt;&lt;br/&gt;→ Event ({source}-events)"]
+    A --&gt;|"scopes"| B["&lt;b&gt;{Sub-object}&lt;/b&gt;&lt;br/&gt;→ Hazard ({source}-hazards)"]
+    A --&gt;|"produces"| C["&lt;b&gt;{Product}&lt;/b&gt;&lt;br/&gt;→ Response ({source}-response)"]
+    C --&gt;|"statistics"| D["&lt;b&gt;{Figures}&lt;/b&gt;&lt;br/&gt;→ Impact ({source}-impacts)"]</code></pre>
+<!--
+  Then the object → Monty-item mapping, with the deterministic id pattern for each.
+  The id pattern is load-bearing: it is what makes re-ingestion idempotent
+  (same id ⇒ overwrite in place). Keep every id lowercase and stable.
+-->
+<table>
+<thead>
+<tr>
+<th>{Source} object</th>
+<th>Monty type</th>
+<th>Monty <code>id</code> pattern</th>
+<th>Collection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{Object}</td>
+<td>Event</td>
+<td><code>{source}-event-{key}</code></td>
+<td><code>{source}-events</code></td>
+</tr>
+<tr>
+<td>{Sub-object}</td>
+<td>Hazard</td>
+<td><code>{source}-hazard-{key}-{type}</code></td>
+<td><code>{source}-hazards</code></td>
+</tr>
+<tr>
+<td>{Product}</td>
+<td>Response</td>
+<td><code>{source}-response-{key}</code></td>
+<td><code>{source}-response</code></td>
+</tr>
+<tr>
+<td>{Figure}</td>
+<td>Impact</td>
+<td><code>{source}-impact-{key}-{thematic}</code></td>
+<td><code>{source}-impacts</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-access">Data access</h2>
+<!--
+  The concrete "how to get the bytes": endpoints (with the ETL entry point called
+  out), bucket layout, auth, pagination, rate limits, and which single call is the
+  "ETL unit". Point at the fixtures in api-files/ that back this section.
+-->
+<p>TODO: endpoints / layout, auth, pagination, the ETL unit.</p>
+<p>Reference fixtures in <code>api-files/</code>: TODO (name them and say what each exercises).</p>
+<h2 id="object-event">Object → Event</h2>
+<!--
+  One field-carriage table per Monty type the source produces (drop the types it
+  doesn't). Two table shapes are in use — pick the one that fits:
+    - "source field | Monty field | Notes"  (CEMS: building from a raw payload)
+    - "Concept | Carried as | Source"        (Charter: enrich/normalise on STAC)
+  Call out the onset-vs-processing datetime trap, and how monty:corr_id is derived
+  (always the standard algorithm — never a source primary key).
+-->
+<table>
+<thead>
+<tr>
+<th>{Source} field</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{code}</code></td>
+<td><code>id</code> (<code>{source}-event-{code}</code>)</td>
+<td>Prefix <code>{source}-event-</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>collection: "{source}-events"</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>{onset}</code></td>
+<td><code>datetime</code> / <code>start_datetime</code></td>
+<td><strong>Event onset</strong>, not the processing/tasking time</td>
+</tr>
+<tr>
+<td><code>{title}</code></td>
+<td><code>title</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>{geometry}</code></td>
+<td><code>geometry</code> / <code>bbox</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>{category}</code></td>
+<td><code>monty:hazard_codes</code></td>
+<td>Map via <a href="#hazard-codes">Hazard codes</a></td>
+</tr>
+<tr>
+<td><code>{country}</code></td>
+<td><code>monty:country_codes</code></td>
+<td>ISO 3166-1 alpha-3</td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>monty:corr_id</code></td>
+<td>Standard Monty algorithm — <strong>not</strong> the source key</td>
+</tr>
+</tbody>
+</table>
+<h2 id="object-hazard">Object → Hazard</h2>
+<!-- Drop if the source produces no hazard items. -->
+<table>
+<thead>
+<tr>
+<th>{Source} field</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{id}</code></td>
+<td><code>id</code></td>
+<td><code>{source}-hazard-{key}-{type}</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>collection: "{source}-hazards"</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>{geometry}</code></td>
+<td><code>geometry</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>{type}</code></td>
+<td><code>monty:hazard_codes</code></td>
+<td><strong>One UNDRR-ISC 2025 code set per item</strong> — split multi-hazard into one item per code</td>
+</tr>
+<tr>
+<td><code>{severity}</code></td>
+<td><code>monty:hazard_detail</code></td>
+<td><code>severity_value</code> + <code>severity_unit</code> where available</td>
+</tr>
+<tr>
+<td>parent event</td>
+<td><code>links[rel=related]</code> (<code>roles: ["event"]</code>)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="object-response">Object → Response</h2>
+<!-- Drop if the source produces no response items. -->
+<table>
+<thead>
+<tr>
+<th>{Source} field</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{product_type}</code></td>
+<td><code>monty:response_detail.type</code></td>
+<td>A <a href="../../response-taxonomy/">response taxonomy</a> code (<code>eo-*</code>, <code>hum-*</code>, …); never encode the source into the code</td>
+</tr>
+<tr>
+<td><code>{source_key}</code></td>
+<td><code>monty:response_detail.source_id</code></td>
+<td>Source-system anchor</td>
+</tr>
+<tr>
+<td><code>{status}</code></td>
+<td><code>monty:response_detail.status</code></td>
+<td>Only from an explicit source status field</td>
+</tr>
+<tr>
+<td><code>{geometry}</code></td>
+<td><code>geometry</code> / <code>bbox</code></td>
+<td>Product footprint</td>
+</tr>
+<tr>
+<td>source imagery</td>
+<td><code>links[rel=derived_from]</code> → acquisition item(s)</td>
+<td>Sensor extensions (<code>sat:</code>/<code>eo:</code>/<code>sar:</code>) live on the linked acquisition, <strong>not</strong> on the Response</td>
+</tr>
+<tr>
+<td>upstream page</td>
+<td><code>links[rel=derived_from]</code></td>
+<td>Provenance</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Follow the <a href="../../response-best-practices/">Response best practices</a> for
+extension layering, and the <a href="../../response-impact-boundary/">Response ↔ Impact boundary rules</a>
+for what belongs on a Response vs. a paired Impact. <strong>Do not</strong> put
+damage/exposure statistics in <code>monty:response_detail</code> — those become Impact items.</p>
+</blockquote>
+<h2 id="object-impact">Object → Impact</h2>
+<!-- Drop if the source produces no impact items. -->
+<table>
+<thead>
+<tr>
+<th>{Source} field</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{figure}</code></td>
+<td><code>monty:impact_detail.value</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>{category}</code>/<code>{type}</code></td>
+<td><code>monty:impact_detail.category</code> / <code>.type</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>{unit}</code></td>
+<td><code>monty:impact_detail.unit</code></td>
+<td></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:impact_detail.estimate_type</code></td>
+<td><code>primary</code> unless the source marks otherwise</td>
+</tr>
+<tr>
+<td>parent product</td>
+<td><code>links[rel=derived_from]</code> (<code>roles: ["response"]</code>)</td>
+<td>Canonical edge: <strong>Impact → derived_from → Response</strong> where the impact is read off a response product</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tracking-over-time">Tracking over time</h2>
+<!--
+  How the source evolves and how that evolution reaches Monty. Cover: idempotent
+  upsert on stable ids; whether there is a time series (monitoring iterations
+  chained by `rel: prev`) vs. in-place revision; and the refresh/polling strategy
+  (change signals, what a cheap poll looks like, cadence by lifecycle status).
+  Ground any "the API ignores X" claim in a probe. Drop the poll detail for a
+  static file-drop source, but still state the refresh cadence.
+-->
+<p>TODO: update mechanics, idempotency, refresh/polling strategy.</p>
+<h2 id="cross-source-linkage">Cross-source linkage</h2>
+<!--
+  If the source carries hard references to sibling sources (GDACS id, GLIDE
+  number, Charter number, …), show how to derive the target Monty item id and
+  emit a typed `rel: related` link — with monty:corr_id as the fallback join.
+  Note that corr_id is per-source deterministic and NOT a cross-source join key
+  (see the caveat in the correlation docs). Drop this section if there are none.
+-->
+<p>TODO, or delete.</p>
+<h2 id="hazard-codes">Hazard codes</h2>
+<!--
+  The crosswalk from the source's own classification to Monty hazard codes.
+  VERIFY every code against taxonomy.md before writing the row — a valid code can
+  still be the wrong one for the class (METHODOLOGY.md rule 5). UNDRR-ISC 2025 is
+  required (exactly one per Hazard item); GLIDE and EM-DAT are recommended.
+-->
+<table>
+<thead>
+<tr>
+<th>{Source} class</th>
+<th>UNDRR-ISC 2025</th>
+<th>GLIDE</th>
+<th>EM-DAT</th>
+<th>Notes / refinement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{value}</td>
+<td>{GH0000}</td>
+<td>{XX}</td>
+<td>{nat-xxx-xxx-xxx}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Every code above is verified against <a href="../../taxonomy/#complete-2025-hazard-list"><code>taxonomy.md</code></a></strong>
+and its Cross-Classification Mapping table. Any unmapped or new source class
+MUST fall through to manual review rather than be dropped.</p>
+<p><strong><code>get_canonical_hazard_codes()</code> does not validate this table.</strong> It preserves any
+syntactically valid UNDRR-ISC 2025 code — it does not check the code is the
+<em>correct</em> one for the mapped class. The mapping above must be correct at the
+source; canonicalisation is formatting, not verification.</p>
+</blockquote>
+<h2 id="examples">Examples</h2>
+<!--
+  Link the worked, fixture-backed Monty items under examples/<source>-<type>/.
+  Every example must be reproducible from a committed fixture; hand-written
+  examples are provisional until regenerated from the transformer
+  (METHODOLOGY.md rule 3).
+-->
+<p>TODO: link one worked item per collection, e.g. <code>examples/{source}-events/…</code>.</p>
+<h2 id="reference-files">Reference files</h2>
+<!--
+  The upstream fixtures backing this analysis. Placement rule: fixtures go in
+  `api-files/` only (METHODOLOGY.md fixture policy), trimmed to the minimum that
+  grounds the claims (~1 MB cap for new files).
+-->
+<ul>
+<li><code>api-files/{…}.json</code> — TODO: what it exercises.</li>
+</ul>
+<p>See <code>FINDINGS.md</code> for the raw stage-1 familiarisation notes (optional but recommended).</p>
+<h2 id="decisions-resolved">Decisions (resolved)</h2>
+<!--
+  Optional but recommended: a table of the mapping questions that were settled,
+  with the resolution. Turns "why is it done this way" into a durable record and
+  signals the analysis is ETL-ready. See CEMS for the fullest example.
+-->
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Decision</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TODO</td>
+<td>TODO</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>{Source} portal / docs — TODO</li>
+<li><a href="../../response-taxonomy/">Response taxonomy</a> · <a href="../../response-best-practices/">Response best practices</a> · <a href="../../response-impact-boundary/">Response ↔ Impact boundary</a></li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/README.md">Monty STAC Extension specification</a></li>
+</ul>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+</body>
+</html>

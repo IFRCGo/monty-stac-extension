@@ -12,7 +12,7 @@
         <link rel="prev" href="../stac-api/queryables/">
       
       
-        <link rel="next" href="CEMS/">
+        <link rel="next" href="METHODOLOGY/">
       
       
         
@@ -798,6 +798,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -850,6 +854,62 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="METHODOLOGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methodology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SOURCE_TEMPLATE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1302,106 +1362,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Source Analysis Process">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-source-description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Source Description
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-collection-metadata" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Collection Metadata
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-data-sourcing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Data Sourcing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-data-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Data Structure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-item-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Item Mapping
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Item Mapping">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event-items" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event Items
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hazard-items-if-applicable" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hazard Items (if applicable)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#impact-items-if-applicable" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Impact Items (if applicable)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1665,80 +1625,17 @@ Run it after editing <code>sources.yml</code>; CI runs it with <code>--check</co
 </ul>
 <p>Role order in arrays is not semantically significant.</p>
 <h2 id="source-analysis-process">Source Analysis Process</h2>
-<p>Each source in the Monty system follows a standard documentation template to ensure consistent analysis and integration. Below is the structure that should be followed when documenting a new source:</p>
-<h3 id="1-source-description">1. Source Description</h3>
-<ul>
-<li>Brief overview of the source</li>
-<li>Type of organization (e.g., International Organization, Government Agency)</li>
-<li>Primary focus and expertise</li>
-<li>Data coverage (temporal and geographical)</li>
-</ul>
-<h3 id="2-collection-metadata">2. Collection Metadata</h3>
-<ul>
-<li>Name of the collection</li>
-<li>Collection code/identifier</li>
-<li>Source organization details<ul>
-<li>Organization name</li>
-<li>Contact information</li>
-<li>Website/URL</li>
-</ul>
-</li>
-<li>License information</li>
-<li>Source category (event, hazard, impact)</li>
-<li>API or documentation links</li>
-</ul>
-<h3 id="3-data-sourcing">3. Data Sourcing</h3>
-<ul>
-<li>API endpoints (if available)<ul>
-<li>Base URL</li>
-<li>Authentication requirements</li>
-<li>Rate limits</li>
-</ul>
-</li>
-<li>Data download options<ul>
-<li>File formats</li>
-<li>Update frequency</li>
-<li>Access restrictions</li>
-</ul>
-</li>
-<li>Data retrieval process<ul>
-<li>Methods (API calls, file downloads, etc.)</li>
-<li>Required preprocessing steps</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-data-structure">4. Data Structure</h3>
-<ul>
-<li>Data model description</li>
-<li>Key fields and their definitions</li>
-<li>Data format specifications</li>
-<li>Quality control measures</li>
-<li>Known limitations or caveats</li>
-</ul>
-<h3 id="5-item-mapping">5. Item Mapping</h3>
-<p>Detailed mapping of source fields to STAC items for:</p>
-<h4 id="event-items">Event Items</h4>
-<ul>
-<li>Required fields mapping</li>
-<li>Optional fields mapping</li>
-<li>Special handling requirements</li>
-<li>Examples</li>
-</ul>
-<h4 id="hazard-items-if-applicable">Hazard Items (if applicable)</h4>
-<ul>
-<li>Hazard classification mapping</li>
-<li>Required fields mapping</li>
-<li>Optional fields mapping</li>
-<li>Examples</li>
-</ul>
-<h4 id="impact-items-if-applicable">Impact Items (if applicable)</h4>
-<ul>
-<li>Impact classification mapping</li>
-<li>Required fields mapping</li>
-<li>Optional fields mapping</li>
-<li>Examples</li>
-</ul>
-<p>See <a href="IDMC/">IDMC documentation</a> for a comprehensive example of this documentation structure.</p>
+<p>Adding a source follows a five-stage pipeline — from hands-on API familiarisation
+through the Monty mapping, worked examples, and the ETL transformer — documented
+in <strong><a href="METHODOLOGY/"><code>METHODOLOGY.md</code></a></strong>, along with the rules every source doc
+must follow (the taxonomy-first gate, fixture grounding, hazard-code verification)
+and the fixture size/placement policy.</p>
+<p>Each source README follows the structure in
+<strong><a href="SOURCE_TEMPLATE/"><code>SOURCE_TEMPLATE.md</code></a></strong>: Collections → Object model
+(+ Mermaid) → per-type field-carriage tables → Tracking over time → Cross-source
+linkage → Hazard codes → Examples → Reference files → Decisions → Resources.</p>
+<p>The <a href="CEMS/">CEMS</a> and <a href="Charter/">Charter</a> analyses are the
+worked reference implementations to read alongside the template.</p>
 
 
 
