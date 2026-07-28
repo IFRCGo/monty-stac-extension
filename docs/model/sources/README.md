@@ -77,69 +77,16 @@ Role order in arrays is not semantically significant.
 
 ## Source Analysis Process
 
-Each source in the Monty system follows a standard documentation template to ensure consistent analysis and integration. Below is the structure that should be followed when documenting a new source:
+Adding a source follows a five-stage pipeline — from hands-on API familiarisation
+through the Monty mapping, worked examples, and the ETL transformer — documented
+in **[`METHODOLOGY.md`](./METHODOLOGY.md)**, along with the rules every source doc
+must follow (the taxonomy-first gate, fixture grounding, hazard-code verification)
+and the fixture size/placement policy.
 
-### 1. Source Description
+Each source README follows the structure in
+**[`SOURCE_TEMPLATE.md`](./SOURCE_TEMPLATE.md)**: Collections → Object model
+(+ Mermaid) → per-type field-carriage tables → Tracking over time → Cross-source
+linkage → Hazard codes → Examples → Reference files → Decisions → Resources.
 
-- Brief overview of the source
-- Type of organization (e.g., International Organization, Government Agency)
-- Primary focus and expertise
-- Data coverage (temporal and geographical)
-
-### 2. Collection Metadata
-
-- Name of the collection
-- Collection code/identifier
-- Source organization details
-    - Organization name
-    - Contact information
-    - Website/URL
-- License information
-- Source category (event, hazard, impact)
-- API or documentation links
-
-### 3. Data Sourcing
-
-- API endpoints (if available)
-    - Base URL
-    - Authentication requirements
-    - Rate limits
-- Data download options
-    - File formats
-    - Update frequency
-    - Access restrictions
-- Data retrieval process
-    - Methods (API calls, file downloads, etc.)
-    - Required preprocessing steps
-
-### 4. Data Structure
-
-- Data model description
-- Key fields and their definitions
-- Data format specifications
-- Quality control measures
-- Known limitations or caveats
-
-### 5. Item Mapping
-
-Detailed mapping of source fields to STAC items for:
-
-#### Event Items
-- Required fields mapping
-- Optional fields mapping
-- Special handling requirements
-- Examples
-
-#### Hazard Items (if applicable)
-- Hazard classification mapping
-- Required fields mapping
-- Optional fields mapping
-- Examples
-
-#### Impact Items (if applicable)
-- Impact classification mapping
-- Required fields mapping
-- Optional fields mapping
-- Examples
-
-See [IDMC documentation](./IDMC/README.md) for a comprehensive example of this documentation structure.
+The [CEMS](./CEMS/README.md) and [Charter](./Charter/README.md) analyses are the
+worked reference implementations to read alongside the template.

@@ -27,9 +27,12 @@ if a PR goes quiet.
 
 ## Ways to contribute
 
-- **Add or update a source analysis** — follow the
-  [Source Analysis Process](https://ifrcgo.org/monty-stac-extension/model/sources/#source-analysis-process)
-  and register the source in
+- **Add or update a source analysis** — follow the five-stage
+  [methodology](docs/model/sources/METHODOLOGY.md), write the source README from
+  the [source template](docs/model/sources/SOURCE_TEMPLATE.md)
+  ([CEMS](docs/model/sources/CEMS/README.md) and
+  [Charter](docs/model/sources/Charter/README.md) are the worked references),
+  register the source in
   [`docs/model/sources/sources.yml`](docs/model/sources/sources.yml), then run
   `python scripts/gen_sources_index.py` to regenerate the derived indexes
   (`docs/model/sources/README.md`, `examples/index.md`, `docs/sources.json`).
