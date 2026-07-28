@@ -22,7 +22,7 @@ a **home**, and a **gate** that must hold before the next stage starts.
 
 | Stage | Output | Where |
 |-------|--------|-------|
-| 1. Access & data-model familiarisation | `FINDINGS.md` + real fixtures | `docs/model/sources/<SOURCE>/api-files/` |
+| 1. Access & data-model familiarisation | `FINDINGS.md` + real fixtures | `docs/model/sources/<SOURCE>/FINDINGS.md` + `docs/model/sources/<SOURCE>/api-files/` |
 | 2. Analysis & Monty mapping | source analysis README | `docs/model/sources/<SOURCE>/README.md` |
 | 3. Collection templates + worked examples | collections + ≥1 item each | `examples/<source>-{events,hazards,impacts,response}/` |
 | 4. ETL transformer spec | spec issue | [`IFRCGo/pystac-monty`](https://github.com/IFRCGo/pystac-monty) |
