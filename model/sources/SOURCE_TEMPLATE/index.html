@@ -922,11 +922,21 @@
 </tr>
 </tbody>
 </table>
+<!--
+  `Source organisation`, `Organisation type`, `Source URL`, `Contact` and
+  `License` restate the source's entry in ./sources.yml, which is authoritative
+  for all five — sources.json is generated from it and montandon-website renders
+  that. Copy the values across verbatim; if the two disagree, sources.yml wins
+  and this doc is the one to fix. `Organisation type` must be one of the closed
+  vocabulary listed in that file's field reference.
+-->
 <ul>
 <li><strong>Source organisation</strong>: {org} (<code>{CODE}</code>)</li>
+<li><strong>Organisation type</strong>: {one of the sources.yml org_type vocabulary}</li>
 <li><strong>Source URL</strong>: <a href="https://example.org">https://example.org</a></li>
+<li><strong>Contact</strong>: <a href="mailto:contact@example.org">contact@example.org</a> (or a contact-form URL; omit if the source publishes neither)</li>
 <li><strong>API / ingestion entry point</strong>: {endpoint or bucket} ({auth: public / partner / key})</li>
-<li><strong>License</strong>: {license or terms}</li>
+<li><strong>License</strong>: {license or terms; "None stated by the source" if it publishes none}</li>
 <li><strong>Temporal coverage</strong>: {from – to}</li>
 </ul>
 <!--
