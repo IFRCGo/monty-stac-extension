@@ -10,10 +10,10 @@ A STAC collection hold all the GLIDE events. An example of the GLIDE collection 
 - Code: GLIDE
 - Source organisation: Asian Disaster Reduction Center (ADRC)
 - Source code: ADRC
-- Source Type: Regional Intergovernmental Organisation
+- Source Type: Regional Intergovernmental Organization
 - Source organization email: <gliderep@adrc.asia>
 - Source URL: <https://glidenumber.net>
-- Source Data license: ?
+- Source Data license: None stated by the source (checked 2026-07)
 - Source for: event, hazard
 
 - previous implementation (R): <https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGLIDEnumber.R>

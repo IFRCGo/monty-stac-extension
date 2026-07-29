@@ -11,6 +11,7 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
     - Website: <https://www.ifrc.org>
     - Contact: <https://www.ifrc.org/contact-us>
 - **Source Type**: International Organization
+- **Source Data license**: None stated by the source (checked 2026-07)
 - **Source Category**: Event, Impact
 - **API Documentation**: <https://goadmin-stage.ifrc.org/api/v2/>
 

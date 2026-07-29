@@ -10,7 +10,7 @@ A STAC collection hold all the GDACS events. An example of the GDACS collection 
 - Code: `GDACS`
 - Source organisation: European Commission - Joint Research Centre (JRC)
 - Source code: EC-JRC
-- Source Type: Regional Intergovernmental Organisation
+- Source Type: Regional Intergovernmental Organization
 - Source organization email: <coordination@gdacs.org>
 - Source URL: <https://www.gdacs.org>
 - Source Data license: MIT License

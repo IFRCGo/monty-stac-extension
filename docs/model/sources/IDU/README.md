@@ -24,13 +24,15 @@ Code: IDU
 
 Source organization: Internal Displacement Monitoring Center (IDMC)
 
-Source organization type: Regional Intergovernmental Organization
+Source organization type: International NGO
 
 Source organization email: <info@idmc.ch>
 
 Source code: IDMC
 
 Source URL: <https://helix-tools-api.idmcdb.org/external-api/>
+
+Source Data license: None stated by the source (checked 2026-07)
 
 Source for: event, impact
 

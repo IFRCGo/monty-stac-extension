@@ -10,7 +10,7 @@ A STAC collection hold all the EM-DAT events. An example of the EM-DAT collectio
 - Code: `EM-DAT`
 - Source organisation: Centre for Research on the Epidemiology of Disasters (CRED)
 - Source code: CRED
-- Source Type: Regional Intergovernmental Organisation
+- Source Type: Academic / Research
 - Source organization email: <contact@cred.be>
 - Source URL: <https://www.emdat.be/>
 - Source Data license: [proprietary license](https://doc.emdat.be/docs/legal/terms-of-use/)

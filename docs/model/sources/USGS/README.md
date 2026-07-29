@@ -10,7 +10,7 @@ A STAC collection holds all the USGS earthquake events. An example of the USGS c
 - Code: `USGS`
 - Source organisation: United States Geological Survey
 - Source code: USGS
-- Source Type: National Government Organization
+- Source Type: National Government
 - Source organization email: <earthquakeinfo@usgs.gov>
 - Source URL: <https://earthquake.usgs.gov>
 - Source Data license: [Public Domain](https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits)

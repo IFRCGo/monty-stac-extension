@@ -36,6 +36,11 @@ if a PR goes quiet.
   [`docs/model/sources/sources.yml`](docs/model/sources/sources.yml), then run
   `python scripts/gen_sources_index.py` to regenerate the derived indexes
   (`docs/model/sources/README.md`, `examples/index.md`, `docs/sources.json`).
+  Every entry carries every field — use `null` where one doesn't apply — and
+  `org_type` comes from a closed vocabulary documented in that file's field
+  reference. `sources.yml` is authoritative for the organisation, contact,
+  URL and license a source README also restates: fix the README, not the
+  manifest, if they disagree.
 - **Change the model** — edit the relevant page under
   [`docs/model/`](docs/model/), most often
   [`taxonomy.md`](docs/model/taxonomy.md) for hazard/impact codes.

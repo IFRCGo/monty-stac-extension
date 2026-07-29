@@ -10,7 +10,7 @@ A STAC collection holds all the IBTrACS events. An example of the IBTrACS collec
 - Code: `IBTrACS`
 - Source organisation: National Oceanic and Atmospheric Administration (NOAA)
 - Source code: NOAA
-- Source Type: National Government Organization
+- Source Type: National Government
 - Source organization email: <IBTrACS.Team@noaa.gov>
 - Source URL: <https://www.ncei.noaa.gov/products/international-best-track-archive>
 - Source Data license: [Public Domain](https://www.noaa.gov/information-technology/open-data-dissemination)

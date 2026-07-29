@@ -10,10 +10,10 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Code: `IDMC`
 - Source organisation: Internal Displacement Monitoring Centre (IDMC)
 - Source code: IDMC
-- Source Type: International Non-Governmental Organization
+- Source Type: International NGO
 - Source organization email: <info@idmc.ch>
 - Source URL: <https://www.internal-displacement.org/database>
-- Source Data license: \[TBD]
+- Source Data license: None stated by the source (checked 2026-07)
 - Source for: event
 - API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
