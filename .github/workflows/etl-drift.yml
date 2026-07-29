@@ -1,0 +1,84 @@
+name: Source doc drift
+
+# Source docs describe a mapping implemented in IFRCGo/pystac-monty, which a
+# different team edits on a different cadence. Nothing links the two, so this
+# job does: it watches the transformers and raises an issue here, assigned to
+# whoever made the change, when a source doc is likely to have gone stale.
+#
+# Two checks, weakest first:
+#   check_etl_drift.py     - classifies the upstream diff. Covers every source,
+#                            needs nothing installed, names the author.
+#   check_example_drift.py - re-runs the real transformers over the fixtures
+#                            committed here and compares the output with
+#                            examples/. Covers only sources with a `regenerate`
+#                            recipe, but reports facts rather than signals.
+
+on:
+  schedule:
+    # 06:00 UTC daily — early enough that a drift issue is waiting when the
+    # IFRC/Toggle working day starts.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print what would be filed instead of filing it"
+        type: boolean
+        default: false
+      since:
+        description: "Override the reviewed baseline (sha or YYYY-MM-DD) for a backlog sweep"
+        type: string
+      source:
+        description: "Limit to one source id (e.g. ifrcevent)"
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: etl-drift
+  cancel-in-progress: false
+
+jobs:
+  drift:
+    name: Detect drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: python -m pip install --upgrade pip pyyaml
+
+      - name: Validate the watch list
+        run: python scripts/check_etl_drift.py --check-config
+
+      - name: Classify upstream transformer changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/check_etl_drift.py \
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
+            ${{ inputs.since && format('--since {0}', inputs.since) || '' }} \
+            ${{ inputs.source && format('--source {0}', inputs.source) || '' }}
+
+      # The example check needs the upstream code itself. It is installed from
+      # main (not PyPI) so it matches the HEAD the step above reports against,
+      # and editable because a plain wheel build drops pystac_monty's bundled
+      # HazardProfiles.csv. fiona is imported by pystac_monty.geocoding but not
+      # declared as a dependency upstream.
+      - name: Install pystac-monty from main
+        run: |
+          git clone --depth 1 https://github.com/IFRCGo/pystac-monty.git "$RUNNER_TEMP/pystac-monty"
+          pip install fiona
+          pip install -e "$RUNNER_TEMP/pystac-monty"
+
+      - name: Regenerate examples and compare
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/check_example_drift.py \
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
+            ${{ inputs.source && format('--source {0}', inputs.source) || '' }}

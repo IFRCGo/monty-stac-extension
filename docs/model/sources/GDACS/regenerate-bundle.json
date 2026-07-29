@@ -1,0 +1,45 @@
+{
+  "_comment": "Input recipe for `pystac-monty gdacs -i …`, used by scripts/check_example_drift.py to regenerate examples/gdacs-* from the fixtures in this directory. GDACS is the one source whose transformer takes several payloads per event (the event, then one geteventdata + getgeometry pair per episode), so it needs this bundle rather than a single file. Paths are relative to this file.",
+  "source_url": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983",
+  "event_data": { "path": "1102983-1-geteventdata-source.json" },
+  "episodes": [
+    [
+      {
+        "type": "event",
+        "hazard_type": "FL",
+        "data": {
+          "source_url": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=1",
+          "input_data": { "path": "1102983-1-geteventdata-source.json" }
+        }
+      },
+      {
+        "type": "geometry",
+        "hazard_type": "FL",
+        "data": {
+          "source_url": "https://www.gdacs.org/gdacsapi/api/events/getgeometry?eventtype=FL&eventid=1102983&episodeid=1",
+          "input_data": { "path": "1102983-1-getgeometry-source.json" }
+        }
+      },
+      null
+    ],
+    [
+      {
+        "type": "event",
+        "hazard_type": "FL",
+        "data": {
+          "source_url": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2",
+          "input_data": { "path": "1102983-2-geteventdata-source.json" }
+        }
+      },
+      {
+        "type": "geometry",
+        "hazard_type": "FL",
+        "data": {
+          "source_url": "https://www.gdacs.org/gdacsapi/api/events/getgeometry?eventtype=FL&eventid=1102983&episodeid=2",
+          "input_data": { "path": "1102983-2-getgeometry-source.json" }
+        }
+      },
+      null
+    ]
+  ]
+}
