@@ -1,0 +1,101 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "id": "gdacs-event-1102983-2",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -2.6232332,
+      39.4177902
+    ]
+  },
+  "bbox": [
+    -2.6232332,
+    39.4177902,
+    -2.6232332,
+    39.4177902
+  ],
+  "properties": {
+    "title": "Flood in Spain",
+    "description": "Orange Flood in Spain from: 27 Oct 2024 15 to: 04 Nov 2024 11.",
+    "start_datetime": "2024-10-27T15:00:00+00:00",
+    "end_datetime": "2024-11-04T11:00:00+00:00",
+    "severitydata": {
+      "severity": 0,
+      "severitytext": "Magnitude 0 ",
+      "severityunit": ""
+    },
+    "monty:src_event_id": "1102983",
+    "monty:episode_number": 2,
+    "monty:hazard_codes": [
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "keywords": [
+      "Water-related",
+      "ESP",
+      "Flooding",
+      "Meteorological & Hydrological"
+    ],
+    "monty:corr_id": "20241027-ESP-1163688-MH0600-2-GCDB",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "datetime": "2024-10-27T15:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&eventid=1102983&episodeid=2",
+      "type": "application/json",
+      "title": "GDACS Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../glide-events/FL-2024-000199-ESP.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/gdacs-events/gdacs-event-1102983-2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/gdacs-events/gdacs-events.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "icon": {
+      "href": "https://www.gdacs.org/images/gdacs_icons/maps/Green/FL.png",
+      "type": "image/png",
+      "title": "Icon"
+    },
+    "report": {
+      "href": "https://www.gdacs.org/report.aspx?eventid=1102983&episodeid=2&eventtype=FL",
+      "type": "text/html",
+      "title": "Report"
+    }
+  },
+  "collection": "gdacs-events"
+}
