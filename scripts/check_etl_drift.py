@@ -294,9 +294,11 @@ def _split_hunks(patch: str) -> list[list[tuple[str, int | None, str]]]:
             lineno += 1
         elif raw.startswith("-"):
             current.append(("-", None, raw[1:]))
+        elif raw.startswith("\\"):
+            # Patch metadata (e.g. "\\ No newline at end of file") is not a source line.
+            continue
         else:
             lineno += 1
-    if current:
         hunks.append(current)
     return hunks
 
