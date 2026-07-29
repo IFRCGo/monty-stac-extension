@@ -126,13 +126,16 @@ def regenerate(batch: str, input_path: Path, output_dir: Path) -> None:
         )
 
     MontyDataTransformer.base_collection_url = str(EXAMPLES)
+    original_use_local = getattr(batch_export, "use_local_collection_examples", None)
     batch_export.use_local_collection_examples = lambda: None  # keep the line above
 
     try:
         batch_export.run_batch(batch, input_path, output_dir)
     except Exception as error:  # noqa: BLE001 - upstream raises anything
         raise FixtureRejected(f"{type(error).__name__}: {error}")
-
+    finally:
+        if original_use_local is not None:
+            batch_export.use_local_collection_examples = original_use_local
 
 def upstream_provenance() -> str:
     """Which pystac-monty actually produced the items, as precisely as it can
