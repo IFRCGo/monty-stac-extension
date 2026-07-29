@@ -238,6 +238,10 @@ class Drift:
     @property
     def authors(self) -> list[str]:
         seen = {c["login"] for c in self.commits if c["login"]}
+        # The PR author wrote the change; the commit author of a merge commit
+        # only pressed the button. Both are included so the issue reaches
+        # whoever can actually answer for it.
+        seen |= {c["pull"]["login"] for c in self.commits if (c.get("pull") or {}).get("login")}
         seen |= {p["login"] for p in self.prs if p["login"]}
         return sorted(seen)
 
@@ -538,6 +542,27 @@ def check_config(sources: list[dict[str, Any]], watch: dict[str, Any]) -> int:
 # --------------------------------------------------------------------------- #
 
 
+def pull_for_commit(repo: str, sha: str) -> dict[str, Any] | None:
+    """The PR a merged commit came from, if any.
+
+    A commit on its own is a poor landing page: the merge commit's title is
+    boilerplate ("Merge pull request #179 from …"), and the discussion that
+    explains *why* the transformer changed lives on the PR. It also gives a
+    better assignee than the commit author, who on a merge commit is whoever
+    pressed the button rather than whoever wrote the change."""
+    pulls = api(f"/repos/{repo}/commits/{sha}/pulls")
+    if not pulls:
+        return None
+    merged = [pull for pull in pulls if pull.get("merged_at")]
+    pull = (merged or pulls)[0]
+    return {
+        "number": pull["number"],
+        "title": pull["title"],
+        "url": pull["html_url"],
+        "login": (pull.get("user") or {}).get("login"),
+    }
+
+
 def collect_merged(repo: str, drift: Drift) -> None:
     """Everything merged into the default branch between the reviewed commit
     and HEAD, restricted to the watched paths."""
@@ -583,6 +608,7 @@ def collect_merged(repo: str, drift: Drift) -> None:
                 "sha": commit["sha"],
                 "short": commit["sha"][:8],
                 "title": commit["commit"]["message"].splitlines()[0],
+                "pull": pull_for_commit(repo, commit["sha"]),
                 "login": (commit.get("author") or {}).get("login"),
                 "url": commit["html_url"],
                 "date": commit["commit"]["author"]["date"][:10],
@@ -645,16 +671,38 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
         ),
         "",
         f"- **Source doc:** `{doc}`",
-        f"- **Watched upstream files:** {', '.join(f'`{p}`' for p in drift.paths)}",
+        # Pinned to the analysed commit, not to main: the lines quoted below
+        # are from that state, and a link to a moving branch would stop
+        # matching them the moment upstream pushes again.
+        "- **Watched upstream files:** "
+        + ", ".join(
+            f"[`{path}`](https://github.com/{repo}/blob/{drift.head}/{path})" for path in drift.paths
+        ),
         f"- **Reviewed through:** [`{drift.base[:8]}`](https://github.com/{repo}/commit/{drift.base})",
         "",
     ]
 
     if drift.commits:
         lines += ["## Merged upstream changes", ""]
-        for commit in drift.commits:
-            who = f"@{commit['login']}" if commit["login"] else "unknown author"
-            lines.append(f"- [`{commit['short']}`]({commit['url']}) {commit['title']} — {who}, {commit['date']}")
+        for pull, commits in _group_by_pull(drift.commits):
+            shas = ", ".join(f"[`{c['short']}`]({c['url']})" for c in commits)
+            # Lead with the PR when there is one — its title says what changed,
+            # where a merge commit's says only that something was merged, and
+            # one PR reaching main as a branch commit plus a merge commit would
+            # otherwise be listed twice.
+            if pull:
+                who = f"@{pull['login']}" if pull["login"] else "unknown author"
+                label = "commit" if len(commits) == 1 else "commits"
+                lines.append(
+                    f"- [#{pull['number']}]({pull['url']}) {pull['title']} — {who}, "
+                    f"merged {commits[-1]['date']} ({label} {shas})"
+                )
+            else:
+                commit = commits[0]
+                who = f"@{commit['login']}" if commit["login"] else "unknown author"
+                lines.append(
+                    f"- {shas} {commit['title']} — {who}, {commit['date']} (pushed directly, no PR)"
+                )
         lines.append("")
 
     if drift.prs:
@@ -753,6 +801,23 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
         REPORTED_MARKER.format(drift.head),
     ]
     return "\n".join(lines)
+
+
+def _group_by_pull(commits: list[dict[str, Any]]) -> list[tuple[dict[str, Any] | None, list[dict[str, Any]]]]:
+    """Commits grouped by the PR they came from, in the order they landed.
+    Commits pushed straight to the branch stay on their own."""
+    grouped: list[tuple[dict[str, Any] | None, list[dict[str, Any]]]] = []
+    by_number: dict[int, list[dict[str, Any]]] = {}
+    for commit in commits:
+        pull = commit.get("pull")
+        if not pull:
+            grouped.append((None, [commit]))
+            continue
+        if pull["number"] not in by_number:
+            by_number[pull["number"]] = []
+            grouped.append((pull, by_number[pull["number"]]))
+        by_number[pull["number"]].append(commit)
+    return grouped
 
 
 def _group_by_rule(findings: list[Finding]) -> list[tuple[Rule, list[Finding]]]:
