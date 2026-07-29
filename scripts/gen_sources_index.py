@@ -141,13 +141,15 @@ def load_sources() -> list[dict[str, Any]]:
 
 def _check_org_type(src: dict[str, Any]) -> list[str]:
     """`org_type` is required for anything the website will render, and must
-    come from the closed vocabulary. Only `undocumented` sources — which have no
-    `org` either — may leave it null."""
+    come from the closed vocabulary. Only `undocumented` sources may leave it
+    null."""
     sid, org_type = src["id"], src.get("org_type")
     if org_type is None:
         if src.get("status") != "undocumented":
             return [f"{sid}: 'org_type' is null but status is {src.get('status')!r} — only undocumented sources may omit it"]
         return []
+    if not isinstance(org_type, str):
+        return [f"{sid}: org_type must be a string from the closed vocabulary or null (got {type(org_type).__name__})"]
     if org_type not in VALID_ORG_TYPES:
         return [f"{sid}: unknown org_type {org_type!r} (expected one of {sorted(VALID_ORG_TYPES)})"]
     return []
