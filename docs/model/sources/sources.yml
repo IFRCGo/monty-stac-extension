@@ -17,8 +17,28 @@
 #                 collections in examples/
 #   name        - human-readable source name
 #   org         - organisation that publishes/maintains the source
+#   org_type    - what kind of body that organisation is. A closed vocabulary
+#                 (see VALID_ORG_TYPES in scripts/gen_sources_index.py):
+#                 International Organization | Regional Intergovernmental
+#                 Organization | National Government | International NGO |
+#                 Academic / Research | Private Sector | Interagency Consortium.
+#                 Values are display-ready: consumers print them verbatim rather
+#                 than maintaining their own label map. null only if
+#                 status is undocumented.
 #   url         - source's homepage or primary data URL
-#   license     - data license, or null if not published by the source
+#   contact     - public contact point for the source: an email address, or an
+#                 http(s) URL where the source only offers a contact form.
+#                 null if the source publishes neither.
+#   license     - data license, or null.
+#
+#                 null is a positive statement, not a gap: it means the source
+#                 publishes no explicit license or reuse terms. Consumers should
+#                 render it as "not stated by the source" — NOT as "Unknown",
+#                 which wrongly implies we simply haven't looked. Verified as of
+#                 2026-07: GLIDE publishes no terms at all; IDMC (GIDD and IDU)
+#                 and IFRC DREF have terms-of-use pages that grant no
+#                 identifiable reuse license. Those three are worth asking
+#                 directly via `contact` — if an answer lands, record it here.
 #   status      - undocumented | analysis | templates | etl | production
 #                   undocumented - example collections exist, no source doc yet
 #                   analysis     - source and data model researched, no STAC
@@ -41,7 +61,9 @@ sources:
   - id: cems
     name: Copernicus Emergency Management Service — Rapid Mapping
     org: Copernicus Emergency Management Service (CEMS)
+    org_type: Regional Intergovernmental Organization
     url: https://mapping.emergency.copernicus.eu/
+    contact: null
     license: Copernicus data policy — free & open (attribution required)
     status: etl
     types: [event, hazard, impact, response]
@@ -52,7 +74,9 @@ sources:
   - id: charter
     name: International Charter on Space and Major Disasters
     org: International Charter on Space and Major Disasters
+    org_type: Interagency Consortium
     url: https://disasterscharter.org
+    contact: null
     license: Undefined — data use governed by Charter membership and activation agreements
     status: etl
     types: [event, hazard, response]
@@ -63,7 +87,9 @@ sources:
   - id: desinventar
     name: DesInventar
     org: United Nations Office for Disaster Risk Reduction (UNDRR)
+    org_type: International Organization
     url: https://www.desinventar.net
+    contact: desinventar@un.org
     license: https://www.desinventar.net/terms_of_use.html
     status: production
     types: [event, impact]
@@ -74,7 +100,9 @@ sources:
   - id: emdat
     name: EM-DAT
     org: Centre for Research on the Epidemiology of Disasters (CRED)
+    org_type: Academic / Research
     url: https://www.emdat.be/
+    contact: contact@cred.be
     license: https://doc.emdat.be/docs/legal/terms-of-use/
     status: production
     types: [event, hazard, impact]
@@ -85,7 +113,9 @@ sources:
   - id: gdacs
     name: GDACS
     org: European Commission - Joint Research Centre (JRC)
+    org_type: Regional Intergovernmental Organization
     url: https://www.gdacs.org
+    contact: coordination@gdacs.org
     license: MIT License
     status: production
     types: [event, hazard, impact]
@@ -96,7 +126,9 @@ sources:
   - id: gfd
     name: Global Flood Database (GFD)
     org: Cloud to Street
+    org_type: Private Sector
     url: https://global-flood-database.cloudtostreet.ai/
+    contact: support@floodbase.com
     license: CC BY-NC-ND 4.0
     status: production
     types: [event, hazard, impact]
@@ -107,7 +139,9 @@ sources:
   - id: glide
     name: GLIDE
     org: Asian Disaster Reduction Center (ADRC)
+    org_type: Regional Intergovernmental Organization
     url: https://glidenumber.net
+    contact: gliderep@adrc.asia
     license: null
     status: production
     types: [event, hazard]
@@ -118,7 +152,9 @@ sources:
   - id: ibtracs
     name: IBTrACS
     org: National Oceanic and Atmospheric Administration (NOAA)
+    org_type: National Government
     url: https://www.ncei.noaa.gov/products/international-best-track-archive
+    contact: IBTrACS.Team@noaa.gov
     license: Public Domain
     status: production
     types: [event, hazard]
@@ -129,7 +165,9 @@ sources:
   - id: idmc-gidd
     name: IDMC — Global Internal Displacement Database (GIDD)
     org: Internal Displacement Monitoring Centre (IDMC)
+    org_type: International NGO
     url: https://www.internal-displacement.org/database
+    contact: info@idmc.ch
     license: null
     status: production
     types: [event, impact]
@@ -140,7 +178,9 @@ sources:
   - id: idmc-idu
     name: IDMC — Internal Displacement Updates (IDU)
     org: Internal Displacement Monitoring Centre (IDMC)
+    org_type: International NGO
     url: https://www.internal-displacement.org/internal-displacement-updates/
+    contact: info@idmc.ch
     license: null
     status: production
     types: [event, impact]
@@ -151,7 +191,9 @@ sources:
   - id: ifrcevent
     name: IFRC DREF
     org: International Federation of Red Cross and Red Crescent Societies (IFRC)
+    org_type: International Organization
     url: https://www.ifrc.org
+    contact: https://www.ifrc.org/contact-us
     license: null
     status: production
     types: [event, hazard, impact]
@@ -162,7 +204,9 @@ sources:
   - id: pdc
     name: Pacific Disaster Center (PDC)
     org: Pacific Disaster Center
+    org_type: International Organization
     url: https://www.pdc.org/
+    contact: info@pdc.org
     license: Restricted — disaster/emergency management use only, no redistribution without authorization (PDC Terms & Conditions)
     status: production
     types: [event, hazard, impact]
@@ -173,7 +217,9 @@ sources:
   - id: usgs
     name: USGS Earthquake Catalog
     org: United States Geological Survey (USGS)
+    org_type: National Government
     url: https://earthquake.usgs.gov
+    contact: earthquakeinfo@usgs.gov
     license: Public Domain
     status: production
     types: [event, hazard, impact]
@@ -184,7 +230,9 @@ sources:
   - id: alerthub
     name: AlertHub
     org: null
+    org_type: null
     url: null
+    contact: null
     license: null
     status: undocumented
     types: [event, hazard]
@@ -195,7 +243,9 @@ sources:
   - id: reference
     name: Reference Events
     org: null
+    org_type: null
     url: null
+    contact: null
     license: null
     status: undocumented
     types: [event]

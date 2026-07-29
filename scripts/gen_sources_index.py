@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -53,6 +54,21 @@ EXAMPLES_TREE_URL = "https://github.com/IFRCGo/monty-stac-extension/tree/main/ex
 
 VALID_STATUSES = {"undocumented", "analysis", "templates", "etl", "production"}
 VALID_TYPES = {"event", "hazard", "impact", "response"}
+
+# Closed vocabulary for `org_type`. Values are display-ready on purpose:
+# montandon-website prints them verbatim in its source table rather than
+# maintaining a parallel slug->label map, which is the duplication this
+# manifest exists to remove. Adding a value here is a deliberate act — prefer
+# reusing an existing one over minting a near-synonym.
+VALID_ORG_TYPES = {
+    "International Organization",
+    "Regional Intergovernmental Organization",
+    "National Government",
+    "International NGO",
+    "Academic / Research",
+    "Private Sector",
+    "Interagency Consortium",
+}
 TYPE_COLUMNS = [("event", "Events"), ("hazard", "Hazards"), ("impact", "Impacts"), ("response", "Response")]
 
 # Maps a Monty type to the suffix its example collections use (e.g. cems-events),
@@ -62,6 +78,12 @@ COLLECTION_SUFFIX = {"event": "-events", "hazard": "-hazards", "impact": "-impac
 # Collection directories under examples/ that aren't a source's collection
 # and are deliberately excluded from the reconciliation check.
 NON_SOURCE_EXAMPLE_DIRS = {"_response-impact-pairing"}
+
+# Every source entry must carry every key, using null for "not applicable".
+# Checked up front so a field omitted from sources.yml fails with a clear
+# message here rather than a KeyError deep in a renderer.
+REQUIRED_KEYS = ("id", "name", "org", "org_type", "url", "contact", "license",
+                 "status", "types", "collections", "doc", "etl")
 
 BEGIN = "<!-- gen_sources_index.py: BEGIN {} -->"
 END = "<!-- gen_sources_index.py: END {} -->"
@@ -92,6 +114,11 @@ def load_sources() -> list[dict[str, Any]]:
             errors.append(f"duplicate source id: {sid!r}")
         seen_ids.add(sid)
 
+        missing = [key for key in REQUIRED_KEYS if key not in src]
+        if missing:
+            errors.append(f"{sid}: missing required field(s) {missing} — use null where a field doesn't apply")
+            continue
+
         if src.get("status") not in VALID_STATUSES:
             errors.append(f"{sid}: invalid status {src.get('status')!r} (expected one of {sorted(VALID_STATUSES)})")
         if src.get("status") == "undocumented" and src.get("doc") is not None:
@@ -103,10 +130,43 @@ def load_sources() -> list[dict[str, Any]]:
         if bad_types:
             errors.append(f"{sid}: unknown type(s) {sorted(bad_types)} (expected one of {sorted(VALID_TYPES)})")
 
+        errors.extend(_check_org_type(src))
+        errors.extend(_check_contact(src))
+
     if errors:
         _fail("sources.yml is malformed:", errors)
 
     return sorted(sources, key=lambda s: s["id"])
+
+
+def _check_org_type(src: dict[str, Any]) -> list[str]:
+    """`org_type` is required for anything the website will render, and must
+    come from the closed vocabulary. Only `undocumented` sources may leave it
+    null."""
+    sid, org_type = src["id"], src.get("org_type")
+    if org_type is None:
+        if src.get("status") != "undocumented":
+            return [f"{sid}: 'org_type' is null but status is {src.get('status')!r} — only undocumented sources may omit it"]
+        return []
+    if not isinstance(org_type, str):
+        return [f"{sid}: org_type must be a string from the closed vocabulary or null (got {type(org_type).__name__})"]
+    if org_type not in VALID_ORG_TYPES:
+        return [f"{sid}: unknown org_type {org_type!r} (expected one of {sorted(VALID_ORG_TYPES)})"]
+    return []
+
+
+def _check_contact(src: dict[str, Any]) -> list[str]:
+    """`contact` is optional — some sources publish no contact point at all —
+    but when present it must be usable as-is: a bare email address, or an
+    http(s) URL for sources that only offer a contact form (e.g. IFRC DREF)."""
+    sid, contact = src["id"], src.get("contact")
+    if contact is None:
+        return []
+    if contact.startswith(("http://", "https://")):
+        return []
+    if re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", contact):
+        return []
+    return [f"{sid}: contact {contact!r} is neither an email address nor an http(s) URL"]
 
 
 def _fail(header: str, errors: list[str]) -> None:
@@ -265,7 +325,9 @@ def render_sources_json(sources: list[dict[str, Any]]) -> str:
                 "id": src["id"],
                 "name": src["name"],
                 "org": src["org"],
+                "org_type": src["org_type"],
                 "url": src["url"],
+                "contact": src["contact"],
                 "license": src["license"],
                 "status": src["status"],
                 "types": src["types"],

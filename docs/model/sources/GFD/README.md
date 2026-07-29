@@ -8,12 +8,12 @@ A STAC collection hold all the GFD events.
 
 - Name: Global Flood Database (GFD)
 - Code: GFD
-- Source organization:
+- Source organization: Cloud to Street
 - Source code:
-- Source Type:
+- Source Type: Private Sector
 - Source organization email: <support@floodbase.com>
 - Source URL: <https://global-flood-database.cloudtostreet.ai/>
-- Source Data License: UNKNOWN
+- Source Data License: CC BY-NC-ND 4.0
 - Source for: event, hazard, impact
 
 - previous implementation (R): <https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGFD.R>

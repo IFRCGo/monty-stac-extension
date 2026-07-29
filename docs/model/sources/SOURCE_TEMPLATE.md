@@ -58,10 +58,20 @@ TODO: one-paragraph description.
 | {Source} — Impacts | `{source}-impacts` | `impact` | {upstream object} |
 | {Source} — Response | `{source}-response` | `response` | {upstream object} |
 
+<!--
+  `Source organisation`, `Organisation type`, `Source URL`, `Contact` and
+  `License` restate the source's entry in ./sources.yml, which is authoritative
+  for all five — sources.json is generated from it and montandon-website renders
+  that. Copy the values across verbatim; if the two disagree, sources.yml wins
+  and this doc is the one to fix. `Organisation type` must be one of the closed
+  vocabulary listed in that file's field reference.
+-->
 - **Source organisation**: {org} (`{CODE}`)
+- **Organisation type**: {one of the sources.yml org_type vocabulary}
 - **Source URL**: <https://example.org>
+- **Contact**: <contact@example.org> (or a contact-form URL; omit if the source publishes neither)
 - **API / ingestion entry point**: {endpoint or bucket} ({auth: public / partner / key})
-- **License**: {license or terms}
+- **License**: {license or terms; "None stated by the source" if it publishes none}
 - **Temporal coverage**: {from – to}
 
 <!--

@@ -31,6 +31,24 @@ body:
       description: Who publishes / maintains the source.
     validations:
       required: true
+  - type: dropdown
+    id: org_type
+    attributes:
+      label: Organisation type
+      description: |
+        What kind of body publishes the source. This is a closed vocabulary —
+        it is printed verbatim on <https://montandon.ifrc.org>, so pick the
+        closest existing value rather than proposing a new one.
+      options:
+        - International Organization
+        - Regional Intergovernmental Organization
+        - National Government
+        - International NGO
+        - Academic / Research
+        - Private Sector
+        - Interagency Consortium
+    validations:
+      required: true
   - type: input
     id: url
     attributes:
@@ -39,10 +57,20 @@ body:
     validations:
       required: true
   - type: input
+    id: contact
+    attributes:
+      label: Contact
+      description: Public contact point — an email address, or a URL if the source only offers a contact form. Leave blank if it publishes neither.
+    validations:
+      required: false
+  - type: input
     id: license
     attributes:
       label: Data license
-      description: License or terms of use, if known (a URL is fine). Leave blank if the source publishes none.
+      description: |
+        License or terms of use, if known (a URL is fine). Leave blank only if
+        you have checked and the source publishes no explicit reuse terms —
+        blank is recorded as "not stated by the source", not as "unknown".
     validations:
       required: false
   - type: dropdown

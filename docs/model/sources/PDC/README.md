@@ -8,12 +8,12 @@ A STAC collection hold all the PDC events.
 
 - Name: Pacific Disaster Center
 - Code: PDC
-- Source organization:
+- Source organization: Pacific Disaster Center
 - Source code:
-- Source type:
+- Source type: International Organization
 - Source organization email: <info@pdc.org>
 - Source URL: <https://www.pdc.org/>
-- Source Data License: UNKNOWN
+- Source Data License: Restricted — disaster/emergency management use only, no redistribution without authorization (PDC Terms & Conditions)
 - Source for: event, hazard, impact
 
 ## Endpoints for Extraction
