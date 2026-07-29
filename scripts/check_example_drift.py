@@ -50,6 +50,7 @@ import json
 import subprocess
 import sys
 import tempfile
+from collections import Counter
 from fnmatch import fnmatch
 from pathlib import Path
 from typing import Any
@@ -74,6 +75,14 @@ EXAMPLES = ROOT / "examples"
 #   created/updated - stamped at generation time
 IGNORED_ITEM_KEYS = ("links",)
 IGNORED_PROPERTIES = ("created", "updated")
+
+# Lists whose order carries no meaning, compared as multisets.
+#   keywords - the transformer builds these with `list(set(...))`, so their
+#              order changes between processes with Python's hash seed. Compared
+#              by index, a source would report drift on roughly every other run.
+#   roles    - "Role order in arrays is not semantically significant"
+#              (docs/model/sources/README.md).
+UNORDERED_LISTS = ("properties.keywords", "properties.roles")
 
 MAX_DIFFS_PER_ITEM = 12
 MAX_ITEMS_REPORTED = 8
@@ -225,12 +234,22 @@ def _walk(path: str, left: Any, right: Any) -> list[str]:
                 diffs.extend(_walk(here, left[key], right[key]))
         return diffs
     if isinstance(left, list) and isinstance(right, list):
+        if path in UNORDERED_LISTS:
+            missing = sorted(_multiset(left) - _multiset(right))
+            extra = sorted(_multiset(right) - _multiset(left))
+            if missing or extra:
+                return [f"{path}: {_short(sorted(left))} → {_short(sorted(right))}"]
+            return []
         if len(left) != len(right):
             return [f"{path}: {len(left)} entr(ies) → {len(right)}: {_short(left)} → {_short(right)}"]
         return [d for i, (a, b) in enumerate(zip(left, right)) for d in _walk(f"{path}[{i}]", a, b)]
     if left != right:
         return [f"{path}: {_short(left)} → {_short(right)}"]
     return []
+
+
+def _multiset(values: list[Any]) -> Counter[str]:
+    return Counter(json.dumps(value, sort_keys=True) for value in values)
 
 
 def _short(value: Any, limit: int = 90) -> str:
