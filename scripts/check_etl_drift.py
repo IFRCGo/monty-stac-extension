@@ -299,8 +299,78 @@ def _split_hunks(patch: str) -> list[list[tuple[str, int | None, str]]]:
             continue
         else:
             lineno += 1
+    # Closed once, at the end — appending inside the loop re-appends the hunk
+    # in progress for every line it contains, multiplying every finding by the
+    # hunk's length. See _self_test().
+    if current:
         hunks.append(current)
     return hunks
+
+
+# A patch exercising everything the parser has to get right: two hunks, a block
+# wrapped in a new loop (so most lines move rather than change), a logging line
+# that must not count, an uncommented validator field, and a "\ No newline"
+# metadata line. Kept next to the code it guards so a change to either is
+# visible in the same diff.
+_SELF_TEST_PATCH = '''@@ -10,4 +10,6 @@ def make_impact_items(self):
+-        for impact_field in fields:
+-            item.id = f"{PREFIX}-{data.id}"
++        for field_report in data.field_reports:
++            for impact_field in fields:
++                item.id = f"{PREFIX}{data.id}-{field_report.id}"
++        logger.info("done")
+@@ -30,2 +32,2 @@ class FieldReport(BaseModel):
+-    # id: int
++    id: int
+\\ No newline at end of file
+'''
+
+
+def _self_test() -> int:
+    """Regression guard for the patch parser and the rules.
+
+    The parser has already shipped two bugs that a live run reported as
+    plausible-looking drift rather than as an error: hunks that were never
+    opened (nothing detected) and a hunk closed on every line (every finding
+    multiplied by the hunk length). Both are invisible without an expected
+    answer to compare against, which is what this provides."""
+    failures = []
+
+    hunks = _split_hunks(_SELF_TEST_PATCH)
+    if len(hunks) != 2:
+        failures.append(f"expected 2 hunks, got {len(hunks)}")
+
+    changed = net_changed_lines(_SELF_TEST_PATCH)
+    texts = sorted(text for _, _, text in changed)
+    expected = sorted(
+        [
+            "for field_report in data.field_reports:",
+            'item.id = f"{PREFIX}{data.id}-{field_report.id}"',
+            'logger.info("done")',
+            'item.id = f"{PREFIX}-{data.id}"',
+            "id: int",
+            "# id: int",
+        ]
+    )
+    if texts != expected:
+        failures.append(f"net changed lines:\n  expected {expected}\n  got      {texts}")
+
+    # `for impact_field in fields:` only moved, so it must not appear above.
+    in_sources = sorted(f.rule.id for f in classify("pystac_monty/sources/ifrc_events.py", _SELF_TEST_PATCH))
+    if in_sources != ["cardinality", "item-id", "item-id"]:
+        failures.append(f"sources classification: expected ['cardinality', 'item-id', 'item-id'], got {in_sources}")
+
+    in_validators = [f.rule.id for f in classify("pystac_monty/validators/ifrc.py", _SELF_TEST_PATCH)]
+    if "source-model" not in in_validators:
+        failures.append(f"validator field declaration not classified as source-model: {in_validators}")
+
+    if failures:
+        print("check_etl_drift self-test FAILED:", file=sys.stderr)
+        for failure in failures:
+            print(f"  - {failure}", file=sys.stderr)
+        return 1
+    print("check_etl_drift self-test passed (patch parser and rules behave as expected).")
+    return 0
 
 
 def classify(path: str, patch: str) -> list[Finding]:
@@ -797,12 +867,16 @@ def publish(drift: Drift, repo: str, watch: dict[str, Any]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--check-config", action="store_true", help="validate etl-watch.yml offline and exit")
+    parser.add_argument("--self-test", action="store_true", help="check the patch parser and rules against a fixture")
     parser.add_argument("--dry-run", action="store_true", help="print the issues instead of creating them")
     parser.add_argument("--json", action="store_true", help="emit findings as JSON (implies --dry-run)")
     parser.add_argument("--source", action="append", help="only this source id (repeatable)")
     parser.add_argument("--since", help="override the reviewed baseline with a sha, tag or YYYY-MM-DD")
     parser.add_argument("--no-open-prs", action="store_true", help="only look at merged commits")
     args = parser.parse_args()
+
+    if args.self_test:
+        return _self_test()
 
     sources = load_sources()
     watch = load_watch()
