@@ -689,11 +689,20 @@ def _group_by_rule(findings: list[Finding]) -> list[tuple[Rule, list[Finding]]]:
 
 
 def existing_issue(labels: list[str], marker_text: str) -> dict[str, Any] | None:
-    query = urllib.parse.urlencode({"state": "open", "labels": ",".join(labels), "per_page": 100})
-    for issue in api(f"/repos/{THIS_REPO}/issues?{query}"):
-        if marker_text in (issue.get("body") or ""):
-            return issue
-    return None
+    page = 1
+    while True:
+        query = urllib.parse.urlencode(
+            {"state": "open", "labels": ",".join(labels), "per_page": 100, "page": page}
+        )
+        issues = api(f"/repos/{THIS_REPO}/issues?{query}")
+        if not issues:
+            return None
+        for issue in issues:
+            if marker_text in (issue.get("body") or ""):
+                return issue
+        if len(issues) < 100:
+            return None
+        page += 1
 
 
 def ensure_labels(labels: list[str]) -> None:
