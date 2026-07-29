@@ -7,7 +7,10 @@ name: Source doc drift
 #
 # Two checks, weakest first:
 #   check_etl_drift.py     - classifies the upstream diff. Covers every source,
-#                            needs nothing installed, names the author.
+#                            needs nothing installed, names the author. Reports
+#                            only what is merged on the upstream default branch;
+#                            open PRs are a manual opt-in (include_open_prs),
+#                            since a doc can't be stale about unmerged code.
 #   check_example_drift.py - re-runs the real transformers over the fixtures
 #                            committed here and compares the output with
 #                            examples/. Covers only sources with a `regenerate`
@@ -30,6 +33,10 @@ on:
       source:
         description: "Limit to one source id (e.g. ifrcevent)"
         type: string
+      include_open_prs:
+        description: "Also report drift from open upstream PRs (scheduled runs never do)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -62,7 +69,8 @@ jobs:
           python scripts/check_etl_drift.py \
             ${{ inputs.dry_run && '--dry-run' || '' }} \
             ${{ inputs.since && format('--since {0}', inputs.since) || '' }} \
-            ${{ inputs.source && format('--source {0}', inputs.source) || '' }}
+            ${{ inputs.source && format('--source {0}', inputs.source) || '' }} \
+            ${{ inputs.include_open_prs && '--include-open-prs' || '' }}
 
       # The example check needs the upstream code itself. It is installed from
       # main (not PyPI) so it matches the HEAD the step above reports against,

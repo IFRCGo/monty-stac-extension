@@ -16,8 +16,12 @@ What it does
 1. Resolves what to watch: the transformer path from each source's `etl` URL in
    docs/model/sources/sources.yml, plus the `extra_paths` (validators) in
    .github/etl-watch.yml.
-2. Diffs upstream `reviewed`..HEAD (and, unless --no-open-prs, reads open PRs)
-   for changes to those paths.
+2. Diffs upstream `reviewed`..HEAD — i.e. what is merged on the default branch —
+   for changes to those paths. Open PRs are examined only with
+   --include-open-prs: a doc can't be wrong about code that hasn't landed, and
+   an in-progress branch changes shape until it merges, so reporting it is a
+   heads-up rather than drift. Opt in when a large transformer PR is in flight
+   and you want the doc update to land alongside it.
 3. Classifies the *net* changed lines — lines that a pure reindent or move
    leaves unchanged are dropped first, so a refactor doesn't page anyone.
    A change is reported only if at least one line matches a SIGNAL_RULE, i.e.
@@ -33,11 +37,12 @@ close, a missed one ships a wrong mapping to every Monty consumer.
 
 Usage
 -----
-    python scripts/check_etl_drift.py --dry-run          # print, touch nothing
-    python scripts/check_etl_drift.py --source ifrcevent # one source
-    python scripts/check_etl_drift.py --since 2026-01-01 # sweep a backlog
-    python scripts/check_etl_drift.py --check-config     # offline, CI runs this
-    python scripts/check_etl_drift.py                    # create/update issues
+    python scripts/check_etl_drift.py --dry-run           # print, touch nothing
+    python scripts/check_etl_drift.py --source ifrcevent  # one source
+    python scripts/check_etl_drift.py --since 2026-01-01  # sweep a backlog
+    python scripts/check_etl_drift.py --include-open-prs  # add in-flight PRs
+    python scripts/check_etl_drift.py --check-config      # offline, CI runs this
+    python scripts/check_etl_drift.py                     # create/update issues
 
 Needs a GitHub token in GH_TOKEN/GITHUB_TOKEN, or a logged-in `gh` CLI.
 Reading pystac-monty needs no special scope (it is public); writing issues here
@@ -586,9 +591,12 @@ def collect_merged(repo: str, drift: Drift) -> None:
 
 
 def collect_open_prs(repo: str, drifts: dict[str, Drift]) -> None:
-    """Open PRs are reported as a heads-up in the same issue: catching drift
-    while the transformer PR is still open is what lets the doc update land in
-    the same week rather than months later."""
+    """Opt-in (--include-open-prs), because an unmerged PR is not yet drift: the
+    doc still describes what Monty publishes, and a branch that is still moving
+    would have the issue rewritten under the assignee every time it changes.
+
+    Worth turning on when a large transformer PR is in flight and the doc update
+    should land with it, which is what the section title in the issue says."""
     by_path: dict[str, list[Drift]] = {}
     for drift in drifts.values():
         for path in drift.paths:
@@ -872,7 +880,11 @@ def main() -> int:
     parser.add_argument("--json", action="store_true", help="emit findings as JSON (implies --dry-run)")
     parser.add_argument("--source", action="append", help="only this source id (repeatable)")
     parser.add_argument("--since", help="override the reviewed baseline with a sha, tag or YYYY-MM-DD")
-    parser.add_argument("--no-open-prs", action="store_true", help="only look at merged commits")
+    parser.add_argument(
+        "--include-open-prs",
+        action="store_true",
+        help="also report drift from open (including draft) upstream PRs; off by default",
+    )
     args = parser.parse_args()
 
     if args.self_test:
@@ -905,7 +917,7 @@ def main() -> int:
 
     for drift in drifts.values():
         collect_merged(repo, drift)
-    if not args.no_open_prs:
+    if args.include_open_prs:
         collect_open_prs(repo, drifts)
 
     drifted = [d for d in drifts.values() if d.drifted]

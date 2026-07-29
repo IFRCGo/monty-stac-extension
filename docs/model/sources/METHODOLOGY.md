@@ -149,7 +149,7 @@ both is [`.github/etl-watch.yml`](https://github.com/IFRCGo/monty-stac-extension
 
 | | [`check_etl_drift.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_etl_drift.py) | [`check_example_drift.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_example_drift.py) |
 |---|---|---|
-| Reads | the upstream diff since `reviewed`, plus open PRs | the transformer's actual output |
+| Reads | the upstream diff since `reviewed`, merged on the default branch | the transformer's actual output |
 | Method | classifies changed lines against rules for what a doc claims (`item-id`, `hazard-mapping`, `cardinality`, …) | re-runs the transformer over the fixtures committed here and compares with `examples/` |
 | Covers | every source with an `etl` URL | sources with a `regenerate:` recipe |
 | Says | "these lines suggest section X is stale", and who wrote them | "this example item is no longer produced / now differs in these fields" |
@@ -169,6 +169,12 @@ python scripts/check_etl_drift.py --dry-run --source <id>       # what changed u
 python scripts/check_example_drift.py --source <id> --diff      # what that did to the examples
 python scripts/check_example_drift.py --source <id> --write     # regenerate them (rule 3)
 ```
+
+Only what is **merged** upstream counts as drift — a doc can't be wrong about
+code that hasn't landed. When a large transformer PR is in flight and you want
+the doc update to land alongside it, ask for it explicitly with
+`--include-open-prs` locally, or the `include_open_prs` input when dispatching
+the workflow by hand. Scheduled runs never look at open PRs.
 
 > [!IMPORTANT]
 > `check_example_drift.py` reports on whichever `pystac-monty` is importable, so
