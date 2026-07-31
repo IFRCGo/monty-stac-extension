@@ -79,8 +79,9 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
 
 ### Accepted Disaster Types
 
-Monty ingests the 13 GO disaster types below, matched on the exact `dtype.name`
-string (including the `Pluvial/` prefix, which is part of the GO vocabulary):
+GO exposes 24 disaster types (`dtype.name`); Monty ingests the 15 below, matched
+on the exact string (including the `Pluvial/` prefix, which is part of the GO
+vocabulary):
 
 - Earthquake
 - Cyclone
@@ -95,16 +96,29 @@ string (including the `Pluvial/` prefix, which is part of the GO vocabulary):
 - Landslide
 - Pluvial/Flash Flood
 - Epidemic
+- Civil Unrest
+- Insect Infestation
 
-The other 11 GO types — `Other`, `Population Movement`, `Civil Unrest`,
-`Food Insecurity`, `Complex Emergency`, `Transport Accident`,
-`Insect Infestation`, `Chemical Emergency`, `Biological Emergency`,
-`Radiological Emergency`, `Transport Emergency` — are **out of scope**, either
-because the GO category is not a hazard (population movement and food
-insecurity are impacts) or because it is too coarse to resolve to a single
-hazard code. This is a deliberate exclusion, not an accident: it drops roughly
-1300 DREF and Emergency Appeal operations, and widening it is tracked in
-[#96](https://github.com/IFRCGo/monty-stac-extension/issues/96).
+The other 9 are **out of scope**, each for a reason checked against GO's own
+appeal counts and event names rather than assumed — full analysis in
+[#96](https://github.com/IFRCGo/monty-stac-extension/issues/96):
+
+| GO disaster type       | DREF + EA appeals | Why it's excluded |
+| ----------------------- | ---: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Other                  | 542  | Not a hazard by definition — there is nothing to resolve |
+| Population Movement    | 404  | An impact (displacement), not a hazard |
+| Food Insecurity        | 128  | An impact, usually of drought (MH0401) |
+| Complex Emergency      | 37   | Not one hazard: sampled events mix heat waves, missile strikes, armed conflict and displacement under the same `dtype` |
+| Transport Accident     | 10   | Mode-ambiguous: sampled events are road, rail, air and water accidents with no dominant mode to default to |
+| Chemical Emergency     | 2    | Category-ambiguous: sampled events are spills, explosions, fires and poisonings, not predominantly one HIP |
+| Biological Emergency   | 1    | Category-ambiguous: sampled events include measles and FMD outbreaks alongside water contamination and a poison-gas incident — overlaps `Epidemic` without being a subset of it |
+| Radiological Emergency | 0    | No DREF/EA appeals to date; would map to TL0601 if populated |
+| Transport Emergency    | 0    | No DREF/EA appeals to date; a duplicate of Transport Accident's ambiguity |
+
+Counts are DREF + Emergency Appeal operations, checked 2026-07-31. This list is
+a decision, not a filter of convenience — a type only stays excluded because
+either it isn't a hazard or its `dtype` genuinely spans more than one HIP with
+no defensible default, not because mapping it was inconvenient.
 
 ## Item Mapping
 
@@ -177,6 +191,8 @@ and are never chosen independently of it.
 | Landslide           | LS    | nat-geo-mmd-lan | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement (chapeau), matching the GDACS/EM-DAT/GLIDE convention |
 | Pluvial/Flash Flood | FF    | nat-hyd-flo-fla | **MH0603**                     | MH-WATER   | Flash Flooding |
 | Epidemic            | EP    | nat-bio-epi-dis | **BI0101**                     | BIO-INFECT | General infectious disease. BIO-INFECT has no chapeau either, so BI0101 carries the unspecified case per the `EP` / `nat-bio-epi-dis` crosswalk row, despite its "Airborne Diseases" label. Refine when the operation names the pathogen: cholera → BI0110, viral haemorrhagic fevers → BI0109, parasitic → BI0105 |
+| Civil Unrest        | —     | —               | **SO0103**                     | SOC-CONF   | The [cross-classification mapping](../../taxonomy.md#cross-classification-mapping) has no GLIDE or EM-DAT row for the Societal hazard type, so this triplet is UNDRR-only — a single code is a valid `monty:hazard_codes` value |
+| Insect Infestation  | IN    | nat-bio-inf-inf | **BI0401**                     | BIO-INSECT | General infestation. `nat-bio-inf-inf` is used rather than `nat-bio-inf-loc`, whose crosswalk row is inconsistent (it appears twice, once labelled "Insect pest infestation"→BI0401 and once "Locust infestation"→BI0402); refine to BI0402 only when the operation names locusts specifically |
 
 ##### The fire rule
 
