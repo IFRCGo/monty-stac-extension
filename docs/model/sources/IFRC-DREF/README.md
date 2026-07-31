@@ -23,13 +23,14 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
 - **Events Endpoint**: `/event/`
 - **Parameters**:
     - `dtype`: Disaster type filter
-    - `appeal_type`: Appeal type filter (0, 1 for DREF)
+    - `appeal_type`: Appeal type filter — GO's `atype` is `0` (DREF) or `1` (Emergency Appeal)
     - `id`: Specific event ID
 
 ### Data Retrieval Process
 
 1. Events are filtered based on:
-   - Appeal type (DREF operations)
+   - Appeal type — an event is kept when *every* one of its appeals is `atype` 0 or 1, so
+     the collection covers DREF **and** Emergency Appeal operations despite its name
    - Valid disaster type
    - Presence of field reports
 
@@ -59,7 +60,7 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
     "disaster_start_date": datetime,
     "appeals": [
         {
-            "atype": int  # Appeal type (0, 1 for DREF)
+            "atype": int  # Appeal type: 0 = DREF, 1 = Emergency Appeal
         }
     ],
     "field_reports": [
@@ -78,6 +79,9 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
 
 ### Accepted Disaster Types
 
+Monty ingests the 13 GO disaster types below, matched on the exact `dtype.name`
+string (including the `Pluvial/` prefix, which is part of the GO vocabulary):
+
 - Earthquake
 - Cyclone
 - Volcanic Eruption
@@ -89,8 +93,18 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
 - Drought
 - Storm Surge
 - Landslide
-- Flash Flood
+- Pluvial/Flash Flood
 - Epidemic
+
+The other 11 GO types — `Other`, `Population Movement`, `Civil Unrest`,
+`Food Insecurity`, `Complex Emergency`, `Transport Accident`,
+`Insect Infestation`, `Chemical Emergency`, `Biological Emergency`,
+`Radiological Emergency`, `Transport Emergency` — are **out of scope**, either
+because the GO category is not a hazard (population movement and food
+insecurity are impacts) or because it is too coarse to resolve to a single
+hazard code. This is a deliberate exclusion, not an accident: it drops roughly
+1300 DREF and Emergency Appeal operations, and widening it is tracked in
+[#96](https://github.com/IFRCGo/monty-stac-extension/issues/96).
 
 ## Item Mapping
 
@@ -141,32 +155,56 @@ Each impact type gets its own item with:
 
 #### Hazard Type Mapping
 
-IFRC DREF uses disaster type names and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension:
+GO carries a disaster type name (`dtype.name`) and nothing more granular, so the
+mapping below is keyed on that exact string. The **2025 UNDRR-ISC** code is the
+**reference classification** for the Monty extension; the GLIDE and EM-DAT codes
+are its counterparts from the same row of the
+[cross-classification mapping](../../taxonomy.md#cross-classification-mapping)
+and are never chosen independently of it.
 
-| IFRC Disaster Type     | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
-| ---------------------- | ----- | ------------------- | ------------------------------ | ---------- | ------------------------------- |
-| Earthquake             | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
-| Cyclone                | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
-| Volcanic Eruption      | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC   | Lava Flows                      |
-| Tsunami                | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                         |
-| Flood                  | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
-| Cold Wave              | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                       |
-| Fire                   | FR    | tec-ind-fir-fir     | **TL0305**                     | TECH-INDFAIL | Fire (Industrial)             |
-| Heat Wave              | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                        |
-| Drought                | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                         |
-| Storm Surge            | SS    | nat-met-sto-sur     | **MH0703**                     | MH-MARINE  | Storm Surge                     |
-| Landslide              | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement     |
-| Flash Flood            | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
-| Epidemic               | EP    | nat-bio-epi-dis     | **BI0101**                     | BIO-INFECT | Infectious Diseases             |
+| IFRC `dtype.name`   | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster    | Notes |
+| ------------------- | ----- | --------------- | ------------------------------ | ---------- | ----- |
+| Earthquake          | EQ    | nat-geo-ear-gro | **GH0101**                     | GEO-SEIS   | All earthquake phenomena were consolidated into GH0101 in 2025 |
+| Cyclone             | TC    | nat-met-sto-tro | **MH0306**                     | MH-WIND    | Depression or Cyclone. GO's `Cyclone` is a mixed container — extratropical and high-latitude systems are filed under it alongside tropical ones — so the broader code is used rather than MH0309 (Tropical Cyclone). The repo-wide convention is being settled in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94) |
+| Volcanic Eruption   | VO    | nat-geo-vol-vol | **GH0201**                     | GEO-VOLC   | Eruption, phenomenon unspecified. HIP 2025 has no volcanic chapeau (GH0201–GH0205 only), so GH0201 carries the general case, per the `VO` / `nat-geo-vol-vol` crosswalk row — *not* because the event is a lava flow. Refine to GH0202 (ash/tephra fall) or GH0204 (lahars) only when the operation names that phenomenon |
+| Tsunami             | TS    | nat-geo-ear-tsu | **MH0705**                     | MH-MARINE  | Reclassified from Geological to Meteorological & Hydrological in 2025 |
+| Flood               | FL    | nat-hyd-flo-flo | **MH0600**                     | MH-WATER   | Flooding (chapeau) |
+| Cold Wave           | CW    | nat-met-ext-col | **MH0502**                     | MH-TEMP    | |
+| Fire                | WF    | nat-cli-wil-wil | **EN0205**                     | ENV-FOREST | Wildfires — the **default**, see the fire rule below |
+| Heat Wave           | HT    | nat-met-ext-hea | **MH0501**                     | MH-TEMP    | |
+| Drought             | DR    | nat-cli-dro-dro | **MH0401**                     | MH-PRECIP  | |
+| Storm Surge         | SS    | nat-met-sto-sur | **MH0703**                     | MH-MARINE  | |
+| Landslide           | LS    | nat-geo-mmd-lan | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement (chapeau), matching the GDACS/EM-DAT/GLIDE convention |
+| Pluvial/Flash Flood | FF    | nat-hyd-flo-fla | **MH0603**                     | MH-WATER   | Flash Flooding |
+| Epidemic            | EP    | nat-bio-epi-dis | **BI0101**                     | BIO-INFECT | General infectious disease. BIO-INFECT has no chapeau either, so BI0101 carries the unspecified case per the `EP` / `nat-bio-epi-dis` crosswalk row, despite its "Airborne Diseases" label. Refine when the operation names the pathogen: cholera → BI0110, viral haemorrhagic fevers → BI0109, parasitic → BI0105 |
+
+##### The fire rule
+
+GO has a single `Fire` type covering both vegetation and structural fires, and
+wildfires dominate it — of the 25 most recent, the Greek, French, Spanish,
+Algerian, Moroccan, Tunisian, Portuguese, Chilean, Bolivian, Patagonian and
+Victorian operations are all wild or forest fires, against four structural ones.
+Mapping the whole type to the industrial-fire code would file most DREF fire
+operations under the *Technological* family and stop them correlating with the
+`EN0205` / `WF` that EM-DAT, CEMS, IDMC, IDU, GLIDE, DesInventar and PDC use for
+the same fires.
+
+So: **default to `EN0205` / `WF` / `nat-cli-wil-wil`**, and use
+`TL0305` / `FR` / `tec-ind-fir-fir` (Fire, Industrial Failure) instead when
+`name` or `summary` identifies a structural or industrial fire — match on
+`factory`, `industrial`, `plant`, `refinery`, `warehouse`, `landfill`, `market`,
+`building`, `structural`, `residential`, `apartment`, `camp`, `slum`, `urban`.
+The rule is a heuristic because the source category is genuinely ambiguous; it is
+documented here so the ambiguity is visible rather than hidden in a lookup table.
 
 > [!NOTE]
-> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event. The 2025 update consolidated multiple earthquake-related HIPs into a single Earthquake HIP (GH0101), and reclassified Tsunami from Geological to Meteorological & Hydrological hazards.
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, and all three must come from the same crosswalk row — a triplet assembled from different rows resolves inconsistently downstream. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be used following the characteristics of the event, as the volcanic, epidemic and fire rows above describe.
 
 This mapping enables standardized hazard categorization while preserving IFRC's original disaster type classification in the source properties.
 
 ## Quality Control Notes
 
-1. Events are filtered to include only DREF operations
-2. Only events with valid disaster types are processed
+1. Events are filtered to DREF and Emergency Appeal operations (`atype` 0 and 1)
+2. Only the 13 [accepted disaster types](#accepted-disaster-types) are processed
 3. Impact values are cross-referenced between sources (government, other)
 4. Geometry is generated from country codes for consistent spatial representation
