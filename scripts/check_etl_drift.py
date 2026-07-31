@@ -633,14 +633,31 @@ def collect_open_prs(repo: str, drifts: dict[str, Drift]) -> None:
     # skipping them would miss the window this heads-up exists for.
     pulls = api(f"/repos/{repo}/pulls?state=open&sort=updated&direction=desc&per_page={MAX_OPEN_PRS}")
     for pull in pulls:
-        files = api(f"/repos/{repo}/pulls/{pull['number']}/files?per_page=100")
-        for file in files:
-            for drift in by_path.get(file["filename"], []):
-                patch = file.get("patch")
-                findings = classify(file["filename"], patch) if patch else []
-                if not findings:
-                    continue
-                drift.findings.extend(findings)
+        page = 1
+        while True:
+            files = api(f"/repos/{repo}/pulls/{pull['number']}/files?per_page=100&page={page}")
+            if not files:
+                break
+            for file in files:
+                for drift in by_path.get(file["filename"], []):
+                    patch = file.get("patch")
+                    findings = classify(file["filename"], patch) if patch else []
+                    if not findings:
+                        continue
+                    drift.findings.extend(findings)
+                    if not any(p["number"] == pull["number"] for p in drift.prs):
+                        drift.prs.append(
+                            {
+                                "number": pull["number"],
+                                "title": pull["title"],
+                                "login": (pull.get("user") or {}).get("login"),
+                                "url": pull["html_url"],
+                                "draft": bool(pull.get("draft")),
+                            }
+                        )
+            if len(files) < 100:
+                break
+            page += 1
                 if not any(p["number"] == pull["number"] for p in drift.prs):
                     drift.prs.append(
                         {
