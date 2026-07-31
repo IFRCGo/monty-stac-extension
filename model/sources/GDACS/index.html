@@ -1659,8 +1659,8 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 <li>Episode #1 in the file <a href="1102983-1-geteventdata-source.json">1102983-1-geteventdata-source.json</a> and is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983&amp;episodeid=1"><code>geteventdata</code></a> API endpoint.</li>
 <li>Episode #2 in the file <a href="1102983-2-geteventdata-source.json">1102983-2-geteventdata-source.json</a> and is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983&amp;episodeid=2"><code>geteventdata</code></a> API endpoint.</li>
 <li>The produced event STAC items are</li>
-<li>Episode #1 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-1.json">gdacs-events/1102983-1.json</a>.</li>
-<li>Episode #2 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1102983-2.json">gdacs-events/1102983-2.json</a>.</li>
+<li>Episode #1 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1102983-1.json">gdacs-events/gdacs-event-1102983-1.json</a>.</li>
+<li>Episode #2 in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1102983-2.json">gdacs-events/gdacs-event-1102983-2.json</a>.</li>
 </ul>
 <p>The event URL of the <code>geteventdata</code> API endpoint is stored in the <code>links</code> field of the STAC item with the <code>via</code> relation.</p>
 <p>Here is a table with the fields that are mapped from the GDACS event to the STAC event:</p>
@@ -1776,7 +1776,7 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 <li>There are 2 sources for the hazards:</li>
 <li>The general event <a href="1102983-1-geteventdata-source.json">1102983-1-geteventdata-source.json</a> that is the output of the <a href="https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=FL&amp;eventid=1102983"><code>geteventdata</code></a> API endpoint.</li>
 <li>the detailed geometries <a href="1102983-1-getgeometry-source.json">1102983-1-getgeometry-source.json</a> that is the output of the <a href="https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=FL&amp;eventid=1102983&amp;episodeid=2"><code>getgeometry</code></a> API endpoint. This output is a feature collection and can be pretty big as it contains multiple geojson features representing multiple levels of the hazard. The STAC item is created by finding the feature that represent the <strong>affected</strong> areas. It has a property <code>properties.Class</code> set to <code>Poly_Affected</code>.</li>
-<li>The produced hazard STAC item is in the examples <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1102983-1.json">gdacs-hazards/1102983-1.json</a>.</li>
+<li>The produced hazard STAC item is in the examples <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/gdacs-hazard-1102983-1.json">gdacs-hazards/gdacs-hazard-1102983-1.json</a>.</li>
 </ul>
 <p>Here is a table with the STAC fields that are mapped from the GDACS event to the STAC hazard:</p>
 <table>

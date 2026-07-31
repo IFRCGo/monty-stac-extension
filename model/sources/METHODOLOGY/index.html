@@ -1017,6 +1017,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#keeping-a-doc-alive-after-stage-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keeping a doc alive after stage 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-document-template" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1556,6 +1567,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#keeping-a-doc-alive-after-stage-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keeping a doc alive after stage 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-document-template" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1731,6 +1753,81 @@ analysis. To keep the repo clonable:</p>
   commit hash and breaking existing clones and forks — which is not worth it for
   a repo this size. The cap applies going forward.</li>
 </ul>
+<h2 id="keeping-a-doc-alive-after-stage-5">Keeping a doc alive after stage 5</h2>
+<p>Stage 5 hands the mapping to <a href="https://github.com/IFRCGo/pystac-monty"><code>pystac-monty</code></a>,
+and from then on the transformer, not this repo, decides what Monty actually
+publishes. The doc keeps asserting item id formats, field carriages, hazard-code
+crosswalks and item counts that a transformer PR can invalidate without anyone
+here noticing —
+<a href="https://github.com/IFRCGo/pystac-monty/pull/181">pystac-monty#181</a> changes IFRC
+DREF impact items from one-per-impact-type to one-per-field-report and rewrites
+their id format, both of which <a href="../IFRC-DREF/">IFRC-DREF/README.md</a>
+states verbatim.</p>
+<p>Two automated checks close that loop, run daily by
+<a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/.github/workflows/etl-drift.yml"><code>.github/workflows/etl-drift.yml</code></a>.
+Both raise (and keep updating) one issue per affected source; the watch list for
+both is <a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/.github/etl-watch.yml"><code>.github/etl-watch.yml</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_etl_drift.py"><code>check_etl_drift.py</code></a></th>
+<th><a href="https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_example_drift.py"><code>check_example_drift.py</code></a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reads</td>
+<td>the upstream diff since <code>reviewed</code>, merged on the default branch</td>
+<td>the transformer's actual output</td>
+</tr>
+<tr>
+<td>Method</td>
+<td>classifies changed lines against rules for what a doc claims (<code>item-id</code>, <code>hazard-mapping</code>, <code>cardinality</code>, …)</td>
+<td>re-runs the transformer over the fixtures committed here and compares with <code>examples/</code></td>
+</tr>
+<tr>
+<td>Covers</td>
+<td>every source with an <code>etl</code> URL</td>
+<td>sources with a <code>regenerate:</code> recipe</td>
+</tr>
+<tr>
+<td>Says</td>
+<td>"these lines suggest section X is stale", and who wrote them</td>
+<td>"this example item is no longer produced / now differs in these fields"</td>
+</tr>
+</tbody>
+</table>
+<p>They are deliberately kept together: the first is a tripwire that always fires
+and names an author to assign; the second is the evidence, and only exists where
+a machine-readable fixture and a registered upstream batch exporter both exist.
+Widening the second is the cheapest way to make the loop stronger — recapture a
+fixture that was saved from a browser (those start with a <code>// timestamp</code>
+preamble and are not valid JSON), or ask upstream to register a batch exporter
+for the source.</p>
+<p>Working on a drift issue:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>scripts/check_etl_drift.py<span class="w"> </span>--dry-run<span class="w"> </span>--source<span class="w"> </span>&lt;id&gt;<span class="w">       </span><span class="c1"># what changed upstream</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python<span class="w"> </span>scripts/check_example_drift.py<span class="w"> </span>--source<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--diff<span class="w">      </span><span class="c1"># what that did to the examples</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>python<span class="w"> </span>scripts/check_example_drift.py<span class="w"> </span>--source<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--write<span class="w">     </span><span class="c1"># regenerate them (rule 3)</span>
+</code></pre></div>
+<p>Only what is <strong>merged</strong> upstream counts as drift — a doc can't be wrong about
+code that hasn't landed. When a large transformer PR is in flight and you want
+the doc update to land alongside it, ask for it explicitly with
+<code>--include-open-prs</code> locally, or the <code>include_open_prs</code> input when dispatching
+the workflow by hand. Scheduled runs never look at open PRs.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>check_example_drift.py</code> reports on whichever <code>pystac-monty</code> is importable, so
+install it from <strong><code>main</code></strong> — a stale local checkout replays drift that upstream
+has already fixed, which is how the first run of this tool re-reported the
+hazard-code bug <a href="https://github.com/IFRCGo/monty-stac-extension/pull/74">#74</a>
+had fixed weeks earlier. Every run prints the commit it used; check it before
+acting on a result.</p>
+</div>
+<p>Then fix the doc, bump that source's <code>reviewed</code> in <code>.github/etl-watch.yml</code> to
+the sha named in the issue, and close the issue in the same PR. Bump <code>reviewed</code>
+even when the doc turned out to be fine — that records the review and stops the
+change being re-reported.</p>
 <h2 id="the-document-template">The document template</h2>
 <p><a href="../SOURCE_TEMPLATE/"><code>SOURCE_TEMPLATE.md</code></a> is the skeleton for a source README,
 capturing the structure <a href="../CEMS/">CEMS</a> and <a href="../Charter/">Charter</a>
