@@ -41,6 +41,16 @@ if a PR goes quiet.
   reference. `sources.yml` is authoritative for the organisation, contact,
   URL and license a source README also restates: fix the README, not the
   manifest, if they disagree.
+- **Resolve a source-doc drift issue** — issues labelled `etl-drift` are opened
+  automatically when a transformer in
+  [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) changes something a
+  source doc claims, or when the committed `examples/` items stop being
+  reproducible from it. The issue names the sections to re-check and the
+  upstream commits behind them; fixing it means updating the doc and its
+  examples, bumping that source's `reviewed` sha in
+  [`.github/etl-watch.yml`](.github/etl-watch.yml), and closing the issue in the
+  same PR. See
+  [METHODOLOGY.md](docs/model/sources/METHODOLOGY.md#keeping-a-doc-alive-after-stage-5).
 - **Change the model** — edit the relevant page under
   [`docs/model/`](docs/model/), most often
   [`taxonomy.md`](docs/model/taxonomy.md) for hazard/impact codes.

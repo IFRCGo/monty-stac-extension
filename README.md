@@ -252,7 +252,7 @@ More detail on the fields is available in the [Montandon model analysis](https:/
   - [Reference Events Collection example](examples/reference-events/reference-events.json): Shows usage of the extension in a STAC Collection of reference events
   - [Reference Event example](examples/reference-events/20241027T150000-ESP-HM-FLOOD-001-GCDB.json): Shows usage of the extension for a reference event
   - [Source Collection example](examples/gdacs-events/gdacs-events.json): Shows the usage of the extension in a STAC Collection for source events
-  - [Source Event example](examples/gdacs-events/1102983-1.json): Shows usage of the extension for a source event
+  - [Source Event example](examples/gdacs-events/gdacs-event-1102983-1.json): Shows usage of the extension for a source event
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -300,7 +300,7 @@ This section describes in details the usage of the fields and links for the haza
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#hazard).
 
 - Examples:
-  - [Flood Hazard example](examples/gdacs-hazards/1102983-1.json): Shows usage of the extension for a flood hazard
+  - [Flood Hazard example](examples/gdacs-hazards/gdacs-hazard-1102983-1.json): Shows usage of the extension for a flood hazard
 
 The hazard class represents a process, phenomenon or human activity that may cause loss of life, injury or other health impacts,
 property damage, social and economic disruption or environmental degradation. UNDRR - <https://www.undrr.org/terminology/hazard>.
@@ -329,7 +329,7 @@ This section describes in details the usage of the fields and links for the impa
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#impact).
 
 - Examples:
-  - [Impact for flood in Spain example](examples/gdacs-impacts/gdacs-impact-1102983-2-A-death-Spain-Andalusia.json): Shows usage of the extension for a flood impact
+  - [Impact for flood in Spain example](examples/gdacs-impacts/gdacs-impact-1102983-2-a-death-spain-andalusia-11.json): Shows usage of the extension for a flood impact
 
 The impact class represents the consequences of a hazard on the affected assets or population.
 

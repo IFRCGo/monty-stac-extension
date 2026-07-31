@@ -23,4 +23,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .[docs]
       - run: python scripts/gen_sources_index.py --check
+      - run: python scripts/check_etl_drift.py --check-config
+      - run: python scripts/check_etl_drift.py --self-test
       - run: mkdocs build --strict

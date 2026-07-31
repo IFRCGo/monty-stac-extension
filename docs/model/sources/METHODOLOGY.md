@@ -130,6 +130,65 @@ analysis. To keep the repo clonable:
   commit hash and breaking existing clones and forks — which is not worth it for
   a repo this size. The cap applies going forward.
 
+## Keeping a doc alive after stage 5
+
+Stage 5 hands the mapping to [`pystac-monty`](https://github.com/IFRCGo/pystac-monty),
+and from then on the transformer, not this repo, decides what Monty actually
+publishes. The doc keeps asserting item id formats, field carriages, hazard-code
+crosswalks and item counts that a transformer PR can invalidate without anyone
+here noticing —
+[pystac-monty#181](https://github.com/IFRCGo/pystac-monty/pull/181) changes IFRC
+DREF impact items from one-per-impact-type to one-per-field-report and rewrites
+their id format, both of which [IFRC-DREF/README.md](./IFRC-DREF/README.md)
+states verbatim.
+
+Two automated checks close that loop, run daily by
+[`.github/workflows/etl-drift.yml`](https://github.com/IFRCGo/monty-stac-extension/blob/main/.github/workflows/etl-drift.yml).
+Both raise (and keep updating) one issue per affected source; the watch list for
+both is [`.github/etl-watch.yml`](https://github.com/IFRCGo/monty-stac-extension/blob/main/.github/etl-watch.yml).
+
+| | [`check_etl_drift.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_etl_drift.py) | [`check_example_drift.py`](https://github.com/IFRCGo/monty-stac-extension/blob/main/scripts/check_example_drift.py) |
+|---|---|---|
+| Reads | the upstream diff since `reviewed`, merged on the default branch | the transformer's actual output |
+| Method | classifies changed lines against rules for what a doc claims (`item-id`, `hazard-mapping`, `cardinality`, …) | re-runs the transformer over the fixtures committed here and compares with `examples/` |
+| Covers | every source with an `etl` URL | sources with a `regenerate:` recipe |
+| Says | "these lines suggest section X is stale", and who wrote them | "this example item is no longer produced / now differs in these fields" |
+
+They are deliberately kept together: the first is a tripwire that always fires
+and names an author to assign; the second is the evidence, and only exists where
+a machine-readable fixture and a registered upstream batch exporter both exist.
+Widening the second is the cheapest way to make the loop stronger — recapture a
+fixture that was saved from a browser (those start with a `// timestamp`
+preamble and are not valid JSON), or ask upstream to register a batch exporter
+for the source.
+
+Working on a drift issue:
+
+```sh
+python scripts/check_etl_drift.py --dry-run --source <id>       # what changed upstream
+python scripts/check_example_drift.py --source <id> --diff      # what that did to the examples
+python scripts/check_example_drift.py --source <id> --write     # regenerate them (rule 3)
+```
+
+Only what is **merged** upstream counts as drift — a doc can't be wrong about
+code that hasn't landed. When a large transformer PR is in flight and you want
+the doc update to land alongside it, ask for it explicitly with
+`--include-open-prs` locally, or the `include_open_prs` input when dispatching
+the workflow by hand. Scheduled runs never look at open PRs.
+
+> [!IMPORTANT]
+> `check_example_drift.py` reports on whichever `pystac-monty` is importable, so
+> install it from **`main`** — a stale local checkout replays drift that upstream
+> has already fixed, which is how the first run of this tool re-reported the
+> hazard-code bug [#74](https://github.com/IFRCGo/monty-stac-extension/pull/74)
+> had fixed weeks earlier. Every run prints the commit it used; check it before
+> acting on a result.
+
+Then fix the doc, bump that source's `reviewed` in `.github/etl-watch.yml` to
+the sha named in the issue, and close the issue in the same PR. Bump `reviewed`
+even when the doc turned out to be fine — that records the review and stops the
+change being re-reported.
+
 ## The document template
 
 [`SOURCE_TEMPLATE.md`](./SOURCE_TEMPLATE.md) is the skeleton for a source README,
