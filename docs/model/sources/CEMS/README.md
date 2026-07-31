@@ -345,7 +345,7 @@ casings):
 | CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes / `subCategory` refinement |
 |-----------------|----------------|-------|--------|----------------------------------|
 | Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0601 |
-| Wildfire | EN0205 | WF | nat-cli-wil-for | `Forest fire`; land/other fire variants |
+| Wildfire | EN0205 | WF | nat-cli-wil-wil | Category default; refine by `subCategory` — `Forest fire`→`nat-cli-wil-for`, land fire→`nat-cli-wil-lan` |
 | Storm | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine by `subCategory` — `Tropical cyclone, hurricane, typhoon`→**MH0306** / `TC` / `nat-met-sto-tro` (matches the GDACS TC convention, keeping the EMSR847↔GDACS `1001230-41` cross-link discoverable via `a_overlaps`) |
 | Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→**MH0705**/`TS` |
 | Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); avalanche→**MH0801**, rockfall→GH0301 (Falls), subsidence→GH0309, per `subCategory` |

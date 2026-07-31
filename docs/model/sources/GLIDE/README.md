@@ -101,12 +101,13 @@ setting the clusters field as the following:
 | **EQ** (Earthquake)            | `GEO-SEIS`                    | `GH0101` (Earthquake)       |
 | **EP** (Epidemic)              | `BIO-INFDIS`                  | Multiple codes              |
 | **EC** (Extratropical Cyclone) | `MH-WIND`                     | `MH0307` (Extra-tropical Cyclone) |
-| **FR** (Fire)                  | `ENV-DEG`                     | `EN0205` (Wildfires)        |
+| **FR** (Fire)                  | `TECH-INDFAIL`                | `TL0305` (Fire)             |
 | **FF** (Flash Flood)           | `MH-WATER`                    | `MH0603` (Flash Flooding)   |
 | **FL** (Flood)                 | `MH-WATER`                    | `MH0600` (Flooding chapeau) |
 | **HT** (Heat Wave)             | `MH-TEMP`                     | `MH0501` (Heatwave)         |
 | **IN** (Insect Infestation)    | `BIO-INSECT`                  | `BI0401` (Insect Pest Infestations) |
 | **LS** (Land Slide)            | `GEO-GROUND`                  | `GH0300` (Gravitational Mass Movement) |
+| **WF** (Wild Fire)             | `ENV-FOREST`                  | `EN0205` (Wildfires)        |
 
 More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added to the `codes` field following the characteristics of the event.
 

@@ -129,7 +129,7 @@ IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-d
 | Storm               | Tornado                     | TO    | nat-met-sto-tor                    | **MH0305**                     | MH-WIND    | Tornado                         |
 | Storm               | Typhoon/Hurricane/Cyclone   | TC    | nat-met-sto-tro                    | **MH0306**                     | MH-WIND    | Cyclone or Depressions          |
 | Volcanic Activity   | Volcanic activity           | VO    | nat-geo-vol-vol                    | **GH0201**                     | GEO-VOLC   | Volcanic Activity               |
-| Wildfire            | Wildfire                    | WF    | nat-cli-wil-for                    | **EN0205**                     | ENV-FOREST | Wildfire                        |
+| Wildfire            | Wildfire                    | WF    | nat-cli-wil-wil                    | **EN0205**                     | ENV-FOREST | Wildfire                        |
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.

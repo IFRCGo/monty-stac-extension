@@ -176,7 +176,9 @@ The EM-DAT Classification Key (e.g., `nat-hyd-flo-flo`) should be used along wit
 | nat-cli-dro-dro           | DR    | **MH0401**                     | MH-PRECIP  | Drought                 |
 | nat-geo-vol-vol           | VO    | **GH0201**                     | GEO-VOLC   | Lava Flows              |
 | nat-geo-ear-tsu           | TS    | **MH0705**                     | MH-MARINE  | Tsunami                 |
-| nat-cli-wil-for           | WF    | **EN0205**                     | ENV-FOREST | Wildfires               |
+| nat-cli-wil-wil           | WF    | **EN0205**                     | ENV-FOREST | Wildfires (general)     |
+| nat-cli-wil-for           | WF    | **EN0205**                     | ENV-FOREST | Wildfires (forest fire) |
+| nat-cli-wil-lan           | WF    | **EN0205**                     | ENV-FOREST | Wildfires (land fire)   |
 | nat-met-ext-hea           | HT    | **MH0501**                     | MH-TEMP    | Heatwave                |
 | nat-met-ext-col           | CW    | **MH0502**                     | MH-TEMP    | Cold Wave               |
 | nat-geo-mmd-lan           | LS    | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement (chapeau) |

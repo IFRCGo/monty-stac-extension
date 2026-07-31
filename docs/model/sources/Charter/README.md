@@ -512,7 +512,7 @@ upstream Charter source page.
 | `disaster:type` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes |
 |-----------------|----------------|-------|--------|-------|
 | `flood` | MH0600 | FL | nat-hyd-flo-flo | Refine to MH0603/MH0604 if flash/riverine |
-| `fire` | EN0205 | WF | nat-cli-wil-for | Wildfire / forest fire |
+| `fire` | EN0205 | WF | nat-cli-wil-wil | Wildfire; `disaster:type` does not distinguish forest from land fire, so the general key is used |
 | `earthquake` | GH0101 | EQ | nat-geo-ear-gro | Ground shaking |
 | `volcano` | GH0201 | VO | nat-geo-vol | Volcanic eruption (chapeau) |
 | `storm_hurricane` | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine to **MH0306** if tropical (see `cyclone`) |

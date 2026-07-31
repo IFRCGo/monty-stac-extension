@@ -816,6 +816,17 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 - Landslides reorganized in GH03XX series (Ground Failure cluster)
 - Tropical storms merged into MH0309 (Tropical Cyclone)
 
+> [!IMPORTANT]
+> **Pick the row at the granularity the source actually states.** Several GLIDE
+> codes map to more than one EM-DAT key — `WF` covers `nat-cli-wil-wil`
+> (general), `nat-cli-wil-for` (forest fire) and `nat-cli-wil-lan` (land fire);
+> `FL` and `EP` fan out the same way. A source whose category is a general
+> wildfire takes the general key; only a source that says *forest fire* takes
+> `nat-cli-wil-for`. Promoting a general category to a specific key invents
+> precision the source never claimed, and makes two sources describing the same
+> event disagree. All three codes in a `monty:hazard_codes` triplet must come
+> from the **same row**.
+
 | GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC 2025 Code |
 | ---------- | ------------------------- | --------------------------------------- | ------------------- |
 | CW         | nat-met-ext-col           | Cold wave                               | MH0502              |
