@@ -125,8 +125,12 @@ def regenerate(batch: str, input_path: Path, output_dir: Path) -> None:
             f"(available: {', '.join(sorted(batch_export.BATCH_EXPORTS))})"
         )
 
-    MontyDataTransformer.base_collection_url = str(EXAMPLES)
+    # Both of these reach into imported upstream state, so both are put back:
+    # this function runs once per source in the same process, and a leaked
+    # override would silently decide what the *next* source is compared against.
+    original_base_url = MontyDataTransformer.base_collection_url
     original_use_local = getattr(batch_export, "use_local_collection_examples", None)
+    MontyDataTransformer.base_collection_url = str(EXAMPLES)
     batch_export.use_local_collection_examples = lambda: None  # keep the line above
 
     try:
@@ -134,6 +138,7 @@ def regenerate(batch: str, input_path: Path, output_dir: Path) -> None:
     except Exception as error:  # noqa: BLE001 - upstream raises anything
         raise FixtureRejected(f"{type(error).__name__}: {error}")
     finally:
+        MontyDataTransformer.base_collection_url = original_base_url
         if original_use_local is not None:
             batch_export.use_local_collection_examples = original_use_local
 

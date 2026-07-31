@@ -658,16 +658,6 @@ def collect_open_prs(repo: str, drifts: dict[str, Drift]) -> None:
             if len(files) < 100:
                 break
             page += 1
-                if not any(p["number"] == pull["number"] for p in drift.prs):
-                    drift.prs.append(
-                        {
-                            "number": pull["number"],
-                            "title": pull["title"],
-                            "login": (pull.get("user") or {}).get("login"),
-                            "url": pull["html_url"],
-                            "draft": bool(pull.get("draft")),
-                        }
-                    )
 
 
 # --------------------------------------------------------------------------- #
