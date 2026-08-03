@@ -1510,7 +1510,7 @@ casings):</p>
 <td>EN0205</td>
 <td>WF</td>
 <td>nat-cli-wil-wil</td>
-<td>Category default; refine by <code>subCategory</code> — <code>Forest fire</code>→<code>nat-cli-wil-for</code>, land fire→<code>nat-cli-wil-lan</code></td>
+<td>Category default, always <code>nat-cli-wil-wil</code>. <code>subCategory: Forest fire</code> maps to the same general key — no distinct forest/land refinement is implemented</td>
 </tr>
 <tr>
 <td>Storm</td>
@@ -1531,42 +1531,49 @@ casings):</p>
 <td>GH0300</td>
 <td>LS</td>
 <td>nat-geo-mmd-lan</td>
-<td>Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); avalanche→<strong>MH0801</strong>, rockfall→GH0301 (Falls), subsidence→GH0309, per <code>subCategory</code></td>
+<td>Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); <code>subCategory: Avalanche</code>→<strong>MH0801</strong>. Rockfall (GH0301) and subsidence (GH0309) are not currently distinguished by <code>subCategory</code> — both fall through to the GH0300 chapeau</td>
 </tr>
 <tr>
 <td>Volcanic Activity</td>
 <td>GH0201</td>
 <td>VO</td>
-<td>nat-geo-vol</td>
-<td>Eruption (chapeau); ashfall→GH0202, lahar→GH0204 per <code>subCategory</code></td>
+<td>nat-geo-vol-vol</td>
+<td>Eruption (chapeau), always <code>GH0201</code> — refining by <code>subCategory</code> to ashfall (GH0202) or lahar (GH0204) is not currently implemented</td>
 </tr>
 <tr>
 <td>Industrial Accident</td>
 <td>—</td>
 <td>—</td>
 <td>tec-ind</td>
-<td>Technological — no single chapeau; refine by <code>subCategory</code> — chemical/gas leak→<strong>TL0301</strong>, explosion→<strong>TL0304</strong>, general→TL0309</td>
+<td>Technological — no single chapeau; <code>subCategory: Chemical</code>→<strong>TL0301</strong>, <code>Explosion</code>→<strong>TL0304</strong>. Anything else — including <code>gas leak</code>, which is not a distinct key — falls through to the category default, <strong>TL0301</strong>, not TL0309</td>
 </tr>
 <tr>
 <td>Transport accident</td>
 <td>—</td>
 <td>—</td>
-<td>tec-tra</td>
-<td>Technological — no single chapeau; refine by <code>subCategory</code> — air→<strong>TL0401</strong>, rail→<strong>TL0404</strong>, road→<strong>TL0405</strong>, water→<strong>TL0403</strong></td>
+<td>—</td>
+<td>Technological, no single chapeau, and <strong>no automatic refinement is implemented</strong>: <code>transport accident</code> is in the manual-review set and produces no hazard code at all until reviewed — not even the bare <code>tec-tra</code> this row used to show. TL0401/TL0403/TL0404/TL0405 exist in the taxonomy for air/water/rail/road respectively, but nothing in the transformer currently assigns them</td>
 </tr>
 <tr>
 <td>Humanitarian Crisis</td>
 <td>—</td>
-<td>CE</td>
 <td>—</td>
-<td>Complex/societal emergency — Societal cluster (<code>SO01xx</code>/<code>SO02xx</code>, e.g. SO0103 civil unrest) has codes but none fits as a chapeau; manual review (mostly Risk &amp; Recovery, out of core RM scope)</td>
+<td>—</td>
+<td>Complex/societal emergency — <code>humanitarian crisis</code> is in the manual-review set, so no code is produced at all, not even the bare <code>CE</code> this row used to show (a <code>humanitarian_crisis: ["CE"]</code> entry exists in the code but is unreachable — the manual-review check short-circuits before it's ever consulted). Societal cluster (<code>SO01xx</code>/<code>SO02xx</code>, e.g. SO0103 civil unrest) has codes but none fits as a chapeau (mostly Risk &amp; Recovery, out of core RM scope)</td>
 </tr>
 <tr>
 <td>Environmental Degradation</td>
 <td>—</td>
 <td>—</td>
 <td>—</td>
-<td>Environmental cluster (<code>EN01xx</code>–<code>EN05xx</code>) has codes but none fits as a chapeau; manual review</td>
+<td>Environmental cluster (<code>EN01xx</code>–<code>EN05xx</code>) has codes but none fits as a chapeau; in the manual-review set, no code produced</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Unclassified — in the manual-review set, no code produced at all, not even the bare <code>OT</code> this row used to show (same unreachable-dict-entry pattern as Humanitarian Crisis above)</td>
 </tr>
 <tr>
 <td>Other</td>

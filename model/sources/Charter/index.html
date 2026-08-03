@@ -1984,15 +1984,15 @@ upstream Charter source page.</p>
 <td><code>volcano</code></td>
 <td>GH0201</td>
 <td>VO</td>
-<td>nat-geo-vol</td>
+<td>nat-geo-vol-vol</td>
 <td>Volcanic eruption (chapeau)</td>
 </tr>
 <tr>
 <td><code>storm_hurricane</code></td>
 <td>—</td>
-<td>ST</td>
-<td>nat-met-sto</td>
-<td>No single UNDRR-ISC chapeau; refine to <strong>MH0306</strong> if tropical (see <code>cyclone</code>)</td>
+<td>—</td>
+<td>—</td>
+<td><code>storm_hurricane</code> (and its <code>_rural</code>/<code>_urban</code> variants) are in the manual-review set and produce <strong>no hazard code at all</strong> until reviewed — not even the bare <code>ST</code>/<code>nat-met-sto</code> this row used to show. <code>cyclone</code> is a separate, distinct <code>disaster:type</code> value that Charter assigns directly when the source uses it</td>
 </tr>
 <tr>
 <td><code>cyclone</code></td>
@@ -2027,7 +2027,7 @@ upstream Charter source page.</p>
 <td>MH0502</td>
 <td>CW</td>
 <td>nat-met-ext-col</td>
-<td>Cold wave (chapeau); refine to MH0509 (Icing) or MH0506 (Freezing rain) per event detail</td>
+<td>Cold wave (chapeau) — always <code>MH0502</code>; refining to MH0509 (Icing) or MH0506 (Freezing rain) per event detail is not currently implemented</td>
 </tr>
 <tr>
 <td><code>oil_spill</code></td>
