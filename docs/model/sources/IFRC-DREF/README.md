@@ -179,7 +179,7 @@ and are never chosen independently of it.
 | IFRC `dtype.name`   | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster    | Notes |
 | ------------------- | ----- | --------------- | ------------------------------ | ---------- | ----- |
 | Earthquake          | EQ    | nat-geo-ear-gro | **GH0101**                     | GEO-SEIS   | All earthquake phenomena were consolidated into GH0101 in 2025 |
-| Cyclone             | TC    | nat-met-sto-tro | **MH0306**                     | MH-WIND    | Depression or Cyclone. GO's `Cyclone` is a mixed container — extratropical and high-latitude systems are filed under it alongside tropical ones — so the broader code is used rather than MH0309 (Tropical Cyclone). The repo-wide convention is being settled in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94) |
+| Cyclone             | TC    | nat-met-sto-tro | **MH0306**                     | MH-WIND    | Depression or Cyclone — the **default**, see the cyclone rule below |
 | Volcanic Eruption   | VO    | nat-geo-vol-vol | **GH0201**                     | GEO-VOLC   | Eruption, phenomenon unspecified. HIP 2025 has no volcanic chapeau (GH0201–GH0205 only), so GH0201 carries the general case, per the `VO` / `nat-geo-vol-vol` crosswalk row — *not* because the event is a lava flow. Refine to GH0202 (ash/tephra fall) or GH0204 (lahars) only when the operation names that phenomenon |
 | Tsunami             | TS    | nat-geo-ear-tsu | **MH0705**                     | MH-MARINE  | Reclassified from Geological to Meteorological & Hydrological in 2025 |
 | Flood               | FL    | nat-hyd-flo-flo | **MH0600**                     | MH-WATER   | Flooding (chapeau) |
@@ -194,6 +194,41 @@ and are never chosen independently of it.
 | Civil Unrest        | —     | —               | **SO0103**                     | SOC-CONF   | The [cross-classification mapping](../../taxonomy.md#cross-classification-mapping) has no GLIDE or EM-DAT row for the Societal hazard type, so this triplet is UNDRR-only — a single code is a valid `monty:hazard_codes` value |
 | Insect Infestation  | IN    | nat-bio-inf-inf | **BI0401**                     | BIO-INSECT | General infestation. `nat-bio-inf-inf` is used rather than `nat-bio-inf-loc`, whose crosswalk row is inconsistent (it appears twice, once labelled "Insect pest infestation"→BI0401 and once "Locust infestation"→BI0402); refine to BI0402 only when the operation names locusts specifically |
 
+##### The cyclone rule
+
+GO's `Cyclone` type is not exclusively tropical: sampling 200 of the 476
+Cyclone operations on GO (2026-07), 1 is explicitly extratropical (`ARG:
+Extratropical Cyclone - Misiones`) and 137 explicitly name a tropical system
+(`hurricane`, `typhoon`, `tropical cyclone/storm`, or the `TC`/`TCs`
+abbreviation, e.g. `TC Alfred`, `TCs Nika (Toraji) and Ofel`) in the event
+**`name`**. The remaining 62 are ambiguous from the name alone — often a bare
+storm name (`Cyclone Beryl`, `Cyclone Gamane`) that is almost certainly
+tropical but isn't textually marked as such.
+
+So: **default to `MH0306` / `TC` / `nat-met-sto-tro`** (the crosswalk's
+"Depression or Cyclone" row), and refine using the event **`name`** only:
+
+- `extratropical` / `extra-tropical` → `MH0307` / `EC` / `nat-met-sto-ext`
+- `hurricane`, `typhoon`, `tropical`, or `\bTCs?\b` → `MH0309` / `TC` /
+  `nat-met-sto-tro`
+
+Both refinements keep `TC` / `nat-met-sto-tro` as the GLIDE/EM-DAT companions
+where the crosswalk pairs them with MH0306 or MH0309 — that pair is not
+tropical-specific; the same `TC` / `nat-met-sto-tro` row resolves to MH0306,
+MH0308 or MH0309 depending on the UNDRR name, so keeping it on the default row
+does not overclaim precision the way the UNDRR code would. Only the
+extratropical branch changes the GLIDE/EM-DAT pair, because that's a genuinely
+different crosswalk row (`EC` / `nat-met-sto-ext`).
+
+This under-covers the ambiguous 62 — a bare storm name is not detectable
+without cross-referencing IBTrACS or another tropical-cyclone track database,
+which is out of scope for a string match on `name` — but it never makes an
+outcome worse than today's blanket `MH0306`: every event either gains a more
+specific code or keeps the default it already had. The repo-wide `MH0306` vs
+`MH0309` convention for sources that don't disambiguate at all is still being
+settled in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94);
+this rule only changes what IFRC DREF does with information GO already gives it.
+
 ##### The fire rule
 
 GO has a single `Fire` type covering both vegetation and structural fires, and
@@ -205,13 +240,32 @@ operations under the *Technological* family and stop them correlating with the
 `EN0205` / `WF` that EM-DAT, CEMS, IDMC, IDU, GLIDE, DesInventar and PDC use for
 the same fires.
 
-So: **default to `EN0205` / `WF` / `nat-cli-wil-wil`**, and use
-`TL0305` / `FR` / `tec-ind-fir-fir` (Fire, Industrial Failure) instead when
-`name` or `summary` identifies a structural or industrial fire — match on
-`factory`, `industrial`, `plant`, `refinery`, `warehouse`, `landfill`, `market`,
-`building`, `structural`, `residential`, `apartment`, `camp`, `slum`, `urban`.
-The rule is a heuristic because the source category is genuinely ambiguous; it is
-documented here so the ambiguity is visible rather than hidden in a lookup table.
+So: **default to `EN0205` / `WF` / `nat-cli-wil-wil`**, and use `TL0305` / `FR`
+instead when the **event `name`** — not `summary` — identifies a structural or
+industrial fire:
+
+- `factory`, `industrial`, `plant`, `refinery`, `warehouse` → `TL0305` / `FR` /
+  `tec-ind-fir-fir` (Fire, Industrial Failure)
+- `landfill`, `market`, `building`, `structural`, `residential`, `apartment`,
+  `camp`, `slum` → `TL0305` / `FR` / `tec-mis-fir-fir` (Fire, Miscellaneous
+  Failure) — matching the crosswalk's own split between the two EM-DAT fire keys
+
+`summary` is deliberately excluded. GO's `summary` is narrative impact prose,
+and it uses exactly these words to describe what a wildfire *destroyed* —
+"threatening residential areas" (Greece, Turkey wildfires), "urban-forest
+interface" (Patagonia), damage tallies that count "buildings" (a Korean
+wildfire that damaged over 200 of them) — not what kind of fire it was.
+Checked against every DREF `Fire` operation on GO (225, 2026-07): matching
+`name` **and** `summary` produces 15 false positives, all of them genuine
+wildfires reclassified as structural because their damage narrative mentions a
+building or a neighbourhood; restricting the match to `name` alone produces
+**zero** false positives against the same set, because operations that are
+actually structural or industrial say so in the title (`Factory Fire in
+Daejeon`, `Nairobi Residential Fire`, `AMSA Landfill Fire`, `Hargeisa Market
+Fire`) rather than only in the body text. The rule is still a heuristic — GO
+gives no field beyond free text to key on — but it is now the version that
+survived being checked against the real data, not the first list that seemed
+reasonable.
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, and all three must come from the same crosswalk row — a triplet assembled from different rows resolves inconsistently downstream. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be used following the characteristics of the event, as the volcanic, epidemic and fire rows above describe.
@@ -221,6 +275,6 @@ This mapping enables standardized hazard categorization while preserving IFRC's 
 ## Quality Control Notes
 
 1. Events are filtered to DREF and Emergency Appeal operations (`atype` 0 and 1)
-2. Only the 13 [accepted disaster types](#accepted-disaster-types) are processed
+2. Only the 15 [accepted disaster types](#accepted-disaster-types) are processed
 3. Impact values are cross-referenced between sources (government, other)
 4. Geometry is generated from country codes for consistent spatial representation
