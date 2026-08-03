@@ -1408,6 +1408,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Hazard Type Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-cyclone-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The cyclone rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fire-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The fire rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1679,6 +1707,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Hazard Type Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-cyclone-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The cyclone rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fire-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The fire rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1746,7 +1802,7 @@
 <li><strong>Events Endpoint</strong>: <code>/event/</code></li>
 <li><strong>Parameters</strong>:<ul>
 <li><code>dtype</code>: Disaster type filter</li>
-<li><code>appeal_type</code>: Appeal type filter (0, 1 for DREF)</li>
+<li><code>appeal_type</code>: Appeal type filter — GO's <code>atype</code> is <code>0</code> (DREF) or <code>1</code> (Emergency Appeal)</li>
 <li><code>id</code>: Specific event ID</li>
 </ul>
 </li>
@@ -1754,7 +1810,8 @@
 <h3 id="data-retrieval-process">Data Retrieval Process</h3>
 <ol>
 <li>Events are filtered based on:</li>
-<li>Appeal type (DREF operations)</li>
+<li>Appeal type — an event is kept when <em>every</em> one of its appeals is <code>atype</code> 0 or 1, so
+     the collection covers DREF <strong>and</strong> Emergency Appeal operations despite its name</li>
 <li>Valid disaster type</li>
 <li>
 <p>Presence of field reports</p>
@@ -1784,7 +1841,7 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="s2">&quot;disaster_start_date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="s2">&quot;appeals&quot;</span><span class="p">:</span> <span class="p">[</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="p">{</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="s2">&quot;atype&quot;</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1"># Appeal type (0, 1 for DREF)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="s2">&quot;atype&quot;</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1"># Appeal type: 0 = DREF, 1 = Emergency Appeal</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="p">}</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="p">],</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="s2">&quot;field_reports&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -1801,6 +1858,9 @@
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="accepted-disaster-types">Accepted Disaster Types</h3>
+<p>GO exposes 24 disaster types (<code>dtype.name</code>); Monty ingests the 15 below, matched
+on the exact string (including the <code>Pluvial/</code> prefix, which is part of the GO
+vocabulary):</p>
 <ul>
 <li>Earthquake</li>
 <li>Cyclone</li>
@@ -1813,9 +1873,74 @@
 <li>Drought</li>
 <li>Storm Surge</li>
 <li>Landslide</li>
-<li>Flash Flood</li>
+<li>Pluvial/Flash Flood</li>
 <li>Epidemic</li>
+<li>Civil Unrest</li>
+<li>Insect Infestation</li>
 </ul>
+<p>The other 9 are <strong>out of scope</strong>, each for a reason checked against GO's own
+appeal counts and event names rather than assumed — full analysis in
+<a href="https://github.com/IFRCGo/monty-stac-extension/issues/96">#96</a>:</p>
+<table>
+<thead>
+<tr>
+<th>GO disaster type</th>
+<th style="text-align: right;">DREF + EA appeals</th>
+<th>Why it's excluded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Other</td>
+<td style="text-align: right;">542</td>
+<td>Not a hazard by definition — there is nothing to resolve</td>
+</tr>
+<tr>
+<td>Population Movement</td>
+<td style="text-align: right;">404</td>
+<td>An impact (displacement), not a hazard</td>
+</tr>
+<tr>
+<td>Food Insecurity</td>
+<td style="text-align: right;">128</td>
+<td>An impact, usually of drought (MH0401)</td>
+</tr>
+<tr>
+<td>Complex Emergency</td>
+<td style="text-align: right;">37</td>
+<td>Not one hazard: sampled events mix heat waves, missile strikes, armed conflict and displacement under the same <code>dtype</code></td>
+</tr>
+<tr>
+<td>Transport Accident</td>
+<td style="text-align: right;">10</td>
+<td>Mode-ambiguous: sampled events are road, rail, air and water accidents with no dominant mode to default to</td>
+</tr>
+<tr>
+<td>Chemical Emergency</td>
+<td style="text-align: right;">2</td>
+<td>Category-ambiguous: sampled events are spills, explosions, fires and poisonings, not predominantly one HIP</td>
+</tr>
+<tr>
+<td>Biological Emergency</td>
+<td style="text-align: right;">1</td>
+<td>Category-ambiguous: sampled events include measles and FMD outbreaks alongside water contamination and a poison-gas incident — overlaps <code>Epidemic</code> without being a subset of it</td>
+</tr>
+<tr>
+<td>Radiological Emergency</td>
+<td style="text-align: right;">0</td>
+<td>No DREF/EA appeals to date; would map to TL0601 if populated</td>
+</tr>
+<tr>
+<td>Transport Emergency</td>
+<td style="text-align: right;">0</td>
+<td>No DREF/EA appeals to date; a duplicate of Transport Accident's ambiguity</td>
+</tr>
+</tbody>
+</table>
+<p>Counts are DREF + Emergency Appeal operations, checked 2026-07-31. This list is
+a decision, not a filter of convenience — a type only stays excluded because
+either it isn't a hazard or its <code>dtype</code> genuinely spans more than one HIP with
+no defensible default, not because mapping it was inconvenient.</p>
 <h2 id="item-mapping">Item Mapping</h2>
 <h3 id="event-items">Event Items</h3>
 <table>
@@ -1966,16 +2091,21 @@
     - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">value</a> (first non-null value from the three source fields)
     - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">estimate_type</a> (PRIMARY)</p>
 <h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
-<p>IFRC DREF uses disaster type names and must follow the <strong>2025 UNDRR-ISC</strong> code as the <strong>reference classification</strong> for the Monty extension:</p>
+<p>GO carries a disaster type name (<code>dtype.name</code>) and nothing more granular, so the
+mapping below is keyed on that exact string. The <strong>2025 UNDRR-ISC</strong> code is the
+<strong>reference classification</strong> for the Monty extension; the GLIDE and EM-DAT codes
+are its counterparts from the same row of the
+<a href="../../taxonomy/#cross-classification-mapping">cross-classification mapping</a>
+and are never chosen independently of it.</p>
 <table>
 <thead>
 <tr>
-<th>IFRC Disaster Type</th>
+<th>IFRC <code>dtype.name</code></th>
 <th>GLIDE</th>
 <th>EM-DAT</th>
 <th><strong>UNDRR-ISC 2025</strong> (Reference)</th>
 <th>Cluster</th>
-<th>Description</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
@@ -1985,7 +2115,7 @@
 <td>nat-geo-ear-gro</td>
 <td><strong>GH0101</strong></td>
 <td>GEO-SEIS</td>
-<td>Earthquake</td>
+<td>All earthquake phenomena were consolidated into GH0101 in 2025</td>
 </tr>
 <tr>
 <td>Cyclone</td>
@@ -1993,7 +2123,7 @@
 <td>nat-met-sto-tro</td>
 <td><strong>MH0306</strong></td>
 <td>MH-WIND</td>
-<td>Cyclone or Depression</td>
+<td>Depression or Cyclone — the <strong>default</strong>, see the cyclone rule below</td>
 </tr>
 <tr>
 <td>Volcanic Eruption</td>
@@ -2001,7 +2131,7 @@
 <td>nat-geo-vol-vol</td>
 <td><strong>GH0201</strong></td>
 <td>GEO-VOLC</td>
-<td>Lava Flows</td>
+<td>Eruption, phenomenon unspecified. HIP 2025 has no volcanic chapeau (GH0201–GH0205 only), so GH0201 carries the general case, per the <code>VO</code> / <code>nat-geo-vol-vol</code> crosswalk row — <em>not</em> because the event is a lava flow. Refine to GH0202 (ash/tephra fall) or GH0204 (lahars) only when the operation names that phenomenon</td>
 </tr>
 <tr>
 <td>Tsunami</td>
@@ -2009,7 +2139,7 @@
 <td>nat-geo-ear-tsu</td>
 <td><strong>MH0705</strong></td>
 <td>MH-MARINE</td>
-<td>Tsunami</td>
+<td>Reclassified from Geological to Meteorological &amp; Hydrological in 2025</td>
 </tr>
 <tr>
 <td>Flood</td>
@@ -2025,15 +2155,15 @@
 <td>nat-met-ext-col</td>
 <td><strong>MH0502</strong></td>
 <td>MH-TEMP</td>
-<td>Cold Wave</td>
+<td></td>
 </tr>
 <tr>
 <td>Fire</td>
-<td>FR</td>
-<td>tec-ind-fir-fir</td>
-<td><strong>TL0305</strong></td>
-<td>TECH-INDFAIL</td>
-<td>Fire (Industrial)</td>
+<td>WF</td>
+<td>nat-cli-wil-wil</td>
+<td><strong>EN0205</strong></td>
+<td>ENV-FOREST</td>
+<td>Wildfires — the <strong>default</strong>, see the fire rule below</td>
 </tr>
 <tr>
 <td>Heat Wave</td>
@@ -2041,7 +2171,7 @@
 <td>nat-met-ext-hea</td>
 <td><strong>MH0501</strong></td>
 <td>MH-TEMP</td>
-<td>Heatwave</td>
+<td></td>
 </tr>
 <tr>
 <td>Drought</td>
@@ -2049,7 +2179,7 @@
 <td>nat-cli-dro-dro</td>
 <td><strong>MH0401</strong></td>
 <td>MH-PRECIP</td>
-<td>Drought</td>
+<td></td>
 </tr>
 <tr>
 <td>Storm Surge</td>
@@ -2057,7 +2187,7 @@
 <td>nat-met-sto-sur</td>
 <td><strong>MH0703</strong></td>
 <td>MH-MARINE</td>
-<td>Storm Surge</td>
+<td></td>
 </tr>
 <tr>
 <td>Landslide</td>
@@ -2065,10 +2195,10 @@
 <td>nat-geo-mmd-lan</td>
 <td><strong>GH0300</strong></td>
 <td>GEO-GFAIL</td>
-<td>Gravitational Mass Movement</td>
+<td>Gravitational Mass Movement (chapeau), matching the GDACS/EM-DAT/GLIDE convention</td>
 </tr>
 <tr>
-<td>Flash Flood</td>
+<td>Pluvial/Flash Flood</td>
 <td>FF</td>
 <td>nat-hyd-flo-fla</td>
 <td><strong>MH0603</strong></td>
@@ -2081,19 +2211,101 @@
 <td>nat-bio-epi-dis</td>
 <td><strong>BI0101</strong></td>
 <td>BIO-INFECT</td>
-<td>Infectious Diseases</td>
+<td>General infectious disease. BIO-INFECT has no chapeau either, so BI0101 carries the unspecified case per the <code>EP</code> / <code>nat-bio-epi-dis</code> crosswalk row, despite its "Airborne Diseases" label. Refine when the operation names the pathogen: cholera → BI0110, viral haemorrhagic fevers → BI0109, parasitic → BI0105</td>
+</tr>
+<tr>
+<td>Civil Unrest</td>
+<td>—</td>
+<td>—</td>
+<td><strong>SO0103</strong></td>
+<td>SOC-CONF</td>
+<td>The <a href="../../taxonomy/#cross-classification-mapping">cross-classification mapping</a> has no GLIDE or EM-DAT row for the Societal hazard type, so this triplet is UNDRR-only — a single code is a valid <code>monty:hazard_codes</code> value</td>
+</tr>
+<tr>
+<td>Insect Infestation</td>
+<td>IN</td>
+<td>nat-bio-inf-inf</td>
+<td><strong>BI0401</strong></td>
+<td>BIO-INSECT</td>
+<td>General infestation. <code>nat-bio-inf-inf</code> is used rather than <code>nat-bio-inf-loc</code>, whose crosswalk row is inconsistent (it appears twice, once labelled "Insect pest infestation"→BI0401 and once "Locust infestation"→BI0402); refine to BI0402 only when the operation names locusts specifically</td>
 </tr>
 </tbody>
 </table>
+<h5 id="the-cyclone-rule">The cyclone rule</h5>
+<p>GO's <code>Cyclone</code> type is not exclusively tropical: sampling 200 of the 476
+Cyclone operations on GO (2026-07), 1 is explicitly extratropical (<code>ARG:
+Extratropical Cyclone - Misiones</code>) and 137 explicitly name a tropical system
+(<code>hurricane</code>, <code>typhoon</code>, <code>tropical cyclone/storm</code>, or the <code>TC</code>/<code>TCs</code>
+abbreviation, e.g. <code>TC Alfred</code>, <code>TCs Nika (Toraji) and Ofel</code>) in the event
+<strong><code>name</code></strong>. The remaining 62 are ambiguous from the name alone — often a bare
+storm name (<code>Cyclone Beryl</code>, <code>Cyclone Gamane</code>) that is almost certainly
+tropical but isn't textually marked as such.</p>
+<p>So: <strong>default to <code>MH0306</code> / <code>TC</code> / <code>nat-met-sto-tro</code></strong> (the crosswalk's
+"Depression or Cyclone" row), and refine using the event <strong><code>name</code></strong> only:</p>
+<ul>
+<li><code>extratropical</code> / <code>extra-tropical</code> → <code>MH0307</code> / <code>EC</code> / <code>nat-met-sto-ext</code></li>
+<li><code>hurricane</code>, <code>typhoon</code>, <code>tropical</code>, or <code>\bTCs?\b</code> → <code>MH0309</code> / <code>TC</code> /
+  <code>nat-met-sto-tro</code></li>
+</ul>
+<p>Both refinements keep <code>TC</code> / <code>nat-met-sto-tro</code> as the GLIDE/EM-DAT companions
+where the crosswalk pairs them with MH0306 or MH0309 — that pair is not
+tropical-specific; the same <code>TC</code> / <code>nat-met-sto-tro</code> row resolves to MH0306,
+MH0308 or MH0309 depending on the UNDRR name, so keeping it on the default row
+does not overclaim precision the way the UNDRR code would. Only the
+extratropical branch changes the GLIDE/EM-DAT pair, because that's a genuinely
+different crosswalk row (<code>EC</code> / <code>nat-met-sto-ext</code>).</p>
+<p>This under-covers the ambiguous 62 — a bare storm name is not detectable
+without cross-referencing IBTrACS or another tropical-cyclone track database,
+which is out of scope for a string match on <code>name</code> — but it never makes an
+outcome worse than today's blanket <code>MH0306</code>: every event either gains a more
+specific code or keeps the default it already had. The repo-wide <code>MH0306</code> vs
+<code>MH0309</code> convention for sources that don't disambiguate at all is still being
+settled in <a href="https://github.com/IFRCGo/monty-stac-extension/issues/94">#94</a>;
+this rule only changes what IFRC DREF does with information GO already gives it.</p>
+<h5 id="the-fire-rule">The fire rule</h5>
+<p>GO has a single <code>Fire</code> type covering both vegetation and structural fires, and
+wildfires dominate it — of the 25 most recent, the Greek, French, Spanish,
+Algerian, Moroccan, Tunisian, Portuguese, Chilean, Bolivian, Patagonian and
+Victorian operations are all wild or forest fires, against four structural ones.
+Mapping the whole type to the industrial-fire code would file most DREF fire
+operations under the <em>Technological</em> family and stop them correlating with the
+<code>EN0205</code> / <code>WF</code> that EM-DAT, CEMS, IDMC, IDU, GLIDE, DesInventar and PDC use for
+the same fires.</p>
+<p>So: <strong>default to <code>EN0205</code> / <code>WF</code> / <code>nat-cli-wil-wil</code></strong>, and use <code>TL0305</code> / <code>FR</code>
+instead when the <strong>event <code>name</code></strong> — not <code>summary</code> — identifies a structural or
+industrial fire:</p>
+<ul>
+<li><code>factory</code>, <code>industrial</code>, <code>plant</code>, <code>refinery</code>, <code>warehouse</code> → <code>TL0305</code> / <code>FR</code> /
+  <code>tec-ind-fir-fir</code> (Fire, Industrial Failure)</li>
+<li><code>landfill</code>, <code>market</code>, <code>building</code>, <code>structural</code>, <code>residential</code>, <code>apartment</code>,
+  <code>camp</code>, <code>slum</code> → <code>TL0305</code> / <code>FR</code> / <code>tec-mis-fir-fir</code> (Fire, Miscellaneous
+  Failure) — matching the crosswalk's own split between the two EM-DAT fire keys</li>
+</ul>
+<p><code>summary</code> is deliberately excluded. GO's <code>summary</code> is narrative impact prose,
+and it uses exactly these words to describe what a wildfire <em>destroyed</em> —
+"threatening residential areas" (Greece, Turkey wildfires), "urban-forest
+interface" (Patagonia), damage tallies that count "buildings" (a Korean
+wildfire that damaged over 200 of them) — not what kind of fire it was.
+Checked against every DREF <code>Fire</code> operation on GO (225, 2026-07): matching
+<code>name</code> <strong>and</strong> <code>summary</code> produces 15 false positives, all of them genuine
+wildfires reclassified as structural because their damage narrative mentions a
+building or a neighbourhood; restricting the match to <code>name</code> alone produces
+<strong>zero</strong> false positives against the same set, because operations that are
+actually structural or industrial say so in the title (<code>Factory Fire in
+Daejeon</code>, <code>Nairobi Residential Fire</code>, <code>AMSA Landfill Fire</code>, <code>Hargeisa Market
+Fire</code>) rather than only in the body text. The rule is still a heuristic — GO
+gives no field beyond free text to key on — but it is now the version that
+survived being checked against the real data, not the first list that seemed
+reasonable.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event. The 2025 update consolidated multiple earthquake-related HIPs into a single Earthquake HIP (GH0101), and reclassified Tsunami from Geological to Meteorological &amp; Hydrological hazards.</p>
+<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability, and all three must come from the same crosswalk row — a triplet assembled from different rows resolves inconsistently downstream. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be used following the characteristics of the event, as the volcanic, epidemic and fire rows above describe.</p>
 </div>
 <p>This mapping enables standardized hazard categorization while preserving IFRC's original disaster type classification in the source properties.</p>
 <h2 id="quality-control-notes">Quality Control Notes</h2>
 <ol>
-<li>Events are filtered to include only DREF operations</li>
-<li>Only events with valid disaster types are processed</li>
+<li>Events are filtered to DREF and Emergency Appeal operations (<code>atype</code> 0 and 1)</li>
+<li>Only the 15 <a href="#accepted-disaster-types">accepted disaster types</a> are processed</li>
 <li>Impact values are cross-referenced between sources (government, other)</li>
 <li>Geometry is generated from country codes for consistent spatial representation</li>
 </ol>
