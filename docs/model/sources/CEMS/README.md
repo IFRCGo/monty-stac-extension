@@ -345,15 +345,16 @@ casings):
 | CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes / `subCategory` refinement |
 |-----------------|----------------|-------|--------|----------------------------------|
 | Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0601 |
-| Wildfire | EN0205 | WF | nat-cli-wil-wil | Category default; refine by `subCategory` — `Forest fire`→`nat-cli-wil-for`, land fire→`nat-cli-wil-lan` |
+| Wildfire | EN0205 | WF | nat-cli-wil-wil | Category default, always `nat-cli-wil-wil`. `subCategory: Forest fire` maps to the same general key — no distinct forest/land refinement is implemented |
 | Storm | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine by `subCategory` — `Tropical cyclone, hurricane, typhoon`→**MH0306** / `TC` / `nat-met-sto-tro` (matches the GDACS TC convention, keeping the EMSR847↔GDACS `1001230-41` cross-link discoverable via `a_overlaps`) |
 | Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→**MH0705**/`TS` |
-| Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); avalanche→**MH0801**, rockfall→GH0301 (Falls), subsidence→GH0309, per `subCategory` |
-| Volcanic Activity | GH0201 | VO | nat-geo-vol | Eruption (chapeau); ashfall→GH0202, lahar→GH0204 per `subCategory` |
-| Industrial Accident | — | — | tec-ind | Technological — no single chapeau; refine by `subCategory` — chemical/gas leak→**TL0301**, explosion→**TL0304**, general→TL0309 |
-| Transport accident | — | — | tec-tra | Technological — no single chapeau; refine by `subCategory` — air→**TL0401**, rail→**TL0404**, road→**TL0405**, water→**TL0403** |
-| Humanitarian Crisis | — | CE | — | Complex/societal emergency — Societal cluster (`SO01xx`/`SO02xx`, e.g. SO0103 civil unrest) has codes but none fits as a chapeau; manual review (mostly Risk & Recovery, out of core RM scope) |
-| Environmental Degradation | — | — | — | Environmental cluster (`EN01xx`–`EN05xx`) has codes but none fits as a chapeau; manual review |
+| Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); `subCategory: Avalanche`→**MH0801**. Rockfall (GH0301) and subsidence (GH0309) are not currently distinguished by `subCategory` — both fall through to the GH0300 chapeau |
+| Volcanic Activity | GH0201 | VO | nat-geo-vol-vol | Eruption (chapeau), always `GH0201` — refining by `subCategory` to ashfall (GH0202) or lahar (GH0204) is not currently implemented |
+| Industrial Accident | — | — | tec-ind | Technological — no single chapeau; `subCategory: Chemical`→**TL0301**, `Explosion`→**TL0304**. Anything else — including `gas leak`, which is not a distinct key — falls through to the category default, **TL0301**, not TL0309 |
+| Transport accident | — | — | — | Technological, no single chapeau, and **no automatic refinement is implemented**: `transport accident` is in the manual-review set and produces no hazard code at all until reviewed — not even the bare `tec-tra` this row used to show. TL0401/TL0403/TL0404/TL0405 exist in the taxonomy for air/water/rail/road respectively, but nothing in the transformer currently assigns them |
+| Humanitarian Crisis | — | — | — | Complex/societal emergency — `humanitarian crisis` is in the manual-review set, so no code is produced at all, not even the bare `CE` this row used to show (a `humanitarian_crisis: ["CE"]` entry exists in the code but is unreachable — the manual-review check short-circuits before it's ever consulted). Societal cluster (`SO01xx`/`SO02xx`, e.g. SO0103 civil unrest) has codes but none fits as a chapeau (mostly Risk & Recovery, out of core RM scope) |
+| Environmental Degradation | — | — | — | Environmental cluster (`EN01xx`–`EN05xx`) has codes but none fits as a chapeau; in the manual-review set, no code produced |
+| Other | — | — | — | Unclassified — in the manual-review set, no code produced at all, not even the bare `OT` this row used to show (same unreachable-dict-entry pattern as Humanitarian Crisis above) |
 | Other | — | OT | — | Unclassified — manual review |
 
 > **Corrected 2026-07-16**: this table previously used `MH0403` (which is *Blizzard*, not Tropical

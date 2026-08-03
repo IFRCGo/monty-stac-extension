@@ -99,7 +99,7 @@ setting the clusters field as the following:
 | **CE** (Complex Emergency)     | `SO-CONFLICT`                 | `SO0102` (NIAC)             |
 | **DR** (Drought)               | `MH-PRECIP`                   | `MH0401` (Drought)          |
 | **EQ** (Earthquake)            | `GEO-SEIS`                    | `GH0101` (Earthquake)       |
-| **EP** (Epidemic)              | `BIO-INFDIS`                  | Multiple codes              |
+| **EP** (Epidemic)              | `BIO-INFECT`                  | `BI0101` (Infectious Diseases, general) |
 | **EC** (Extratropical Cyclone) | `MH-WIND`                     | `MH0307` (Extra-tropical Cyclone) |
 | **FR** (Fire)                  | `TECH-INDFAIL`                | `TL0305` (Fire)             |
 | **FF** (Flash Flood)           | `MH-WATER`                    | `MH0603` (Flash Flooding)   |
@@ -107,6 +107,7 @@ setting the clusters field as the following:
 | **HT** (Heat Wave)             | `MH-TEMP`                     | `MH0501` (Heatwave)         |
 | **IN** (Insect Infestation)    | `BIO-INSECT`                  | `BI0401` (Insect Pest Infestations) |
 | **LS** (Land Slide)            | `GEO-GROUND`                  | `GH0300` (Gravitational Mass Movement) |
+| **VO** (Volcano)               | `GEO-VOLC`                    | `GH0201` (Lava Flows — the general/unspecified-eruption stand-in, see the [volcanic note](../IFRC-DREF/README.md#hazard-type-mapping) on why HIP 2025 has no volcanic chapeau) |
 | **WF** (Wild Fire)             | `ENV-FOREST`                  | `EN0205` (Wildfires)        |
 
 More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added to the `codes` field following the characteristics of the event.

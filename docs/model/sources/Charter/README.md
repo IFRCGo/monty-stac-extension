@@ -514,13 +514,13 @@ upstream Charter source page.
 | `flood` | MH0600 | FL | nat-hyd-flo-flo | Refine to MH0603/MH0604 if flash/riverine |
 | `fire` | EN0205 | WF | nat-cli-wil-wil | Wildfire; `disaster:type` does not distinguish forest from land fire, so the general key is used |
 | `earthquake` | GH0101 | EQ | nat-geo-ear-gro | Ground shaking |
-| `volcano` | GH0201 | VO | nat-geo-vol | Volcanic eruption (chapeau) |
-| `storm_hurricane` | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine to **MH0306** if tropical (see `cyclone`) |
+| `volcano` | GH0201 | VO | nat-geo-vol-vol | Volcanic eruption (chapeau) |
+| `storm_hurricane` | — | — | — | `storm_hurricane` (and its `_rural`/`_urban` variants) are in the manual-review set and produce **no hazard code at all** until reviewed — not even the bare `ST`/`nat-met-sto` this row used to show. `cyclone` is a separate, distinct `disaster:type` value that Charter assigns directly when the source uses it |
 | `cyclone` | MH0306 | TC | nat-met-sto-tro | Tropical cyclone (matches the GDACS TC convention) |
 | `tsunami` | MH0705 | TS | nat-geo-ear-tsu | |
 | `landslide` | GH0300 | LS | nat-geo-mmd-lan | Chapeau, matching GDACS/EM-DAT/GLIDE convention |
 | `snow_hazard` | — | OT | — | No single UNDRR-ISC/GLIDE code fits; candidates are MH0403 (Blizzard) or MH0503–MH0509 (severe winter conditions) depending on the actual event — manual review against real Charter payloads |
-| `ice` | MH0502 | CW | nat-met-ext-col | Cold wave (chapeau); refine to MH0509 (Icing) or MH0506 (Freezing rain) per event detail |
+| `ice` | MH0502 | CW | nat-met-ext-col | Cold wave (chapeau) — always `MH0502`; refining to MH0509 (Icing) or MH0506 (Freezing rain) per event detail is not currently implemented |
 | `oil_spill` | CH0203 | — | tec-ind-oil-oil | Oil spill — canonically classified under the Chemical/Carcinogens cluster in `taxonomy.md`, not Technological; EM-DAT key corrected from `tec-ind-che` (Chemical Spill) |
 | `explosive_event` | TL0304 | — | tec-ind-exp | Explosion (technological) |
 | `other` | — | OT | — | No UNDRR code — manual review required |

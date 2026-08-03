@@ -59,18 +59,18 @@ defaults:
 sources:
   cems:
     extra_paths: [pystac_monty/validators/cems.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
     regenerate:
       batch: cems
       input: docs/model/sources/CEMS/api-files
 
   charter:
     extra_paths: [pystac_monty/validators/charter.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
@@ -96,7 +96,7 @@ sources:
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
 
   ibtracs:
     extra_paths: [pystac_monty/validators/ibtracs.py]
@@ -116,7 +116,7 @@ sources:
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
 
   usgs:
     extra_paths: [pystac_monty/validators/usgs.py]
