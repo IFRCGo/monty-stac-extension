@@ -35,10 +35,10 @@
     ],
     "monty:hazard_codes": [
       "WF",
-      "nat-cli-wil-for",
+      "nat-cli-wil-wil",
       "EN0205"
     ],
-    "monty:corr_id": "20241111-ESP-nat-cli-wil-for-1-GDBC",
+    "monty:corr_id": "20241111-ESP-nat-cli-wil-wil-1-GCDB",
     "monty:impact_detail": {
       "category": "people",
       "type": "displaced_internal",

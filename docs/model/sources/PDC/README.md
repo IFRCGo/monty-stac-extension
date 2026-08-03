@@ -79,7 +79,7 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 | Tropical Cyclone    | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND      | Tropical Cyclone                 |
 | Tsunami             | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE    | Tsunami                          |
 | Volcano             | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC     | Lava Flows                       |
-| Wildfire            | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
+| Wildfire            | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
 | Winter Storm        | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP    | Blizzard                         |
 
 **Geopolitical & Technological Hazards:**

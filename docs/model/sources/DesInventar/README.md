@@ -169,7 +169,7 @@ DesInventar uses its own hazard classification and must follow the **2025 UNDRR-
 | FLASH FLOOD       | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
 | FLOOD             | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
 | FOG               | OT    | nat-met-fog-fog     | **MH0202**                     | MH-PART    | Fog                             |
-| FOREST FIRE       | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST | Wildfires                       |
+| FOREST FIRE       | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST | Wildfires (forest fire — the source says so) |
 | FROST             | OT    | nat-met-ext-sev     | **MH0505**                     | MH-TEMP    | Frost (Hoar Frost)              |
 | HAIL STORM        | ST    | nat-met-sto-hai     | **MH0404**                     | MH-PRECIP  | Hail                            |
 | HEAT WAVE         | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                        |

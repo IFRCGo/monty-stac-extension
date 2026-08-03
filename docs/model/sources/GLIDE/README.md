@@ -101,14 +101,32 @@ setting the clusters field as the following:
 | **EQ** (Earthquake)            | `GEO-SEIS`                    | `GH0101` (Earthquake)       |
 | **EP** (Epidemic)              | `BIO-INFDIS`                  | Multiple codes              |
 | **EC** (Extratropical Cyclone) | `MH-WIND`                     | `MH0307` (Extra-tropical Cyclone) |
-| **FR** (Fire)                  | `ENV-DEG`                     | `EN0205` (Wildfires)        |
+| **FR** (Fire)                  | `TECH-INDFAIL`                | `TL0305` (Fire)             |
 | **FF** (Flash Flood)           | `MH-WATER`                    | `MH0603` (Flash Flooding)   |
 | **FL** (Flood)                 | `MH-WATER`                    | `MH0600` (Flooding chapeau) |
 | **HT** (Heat Wave)             | `MH-TEMP`                     | `MH0501` (Heatwave)         |
 | **IN** (Insect Infestation)    | `BIO-INSECT`                  | `BI0401` (Insect Pest Infestations) |
 | **LS** (Land Slide)            | `GEO-GROUND`                  | `GH0300` (Gravitational Mass Movement) |
+| **WF** (Wild Fire)             | `ENV-FOREST`                  | `EN0205` (Wildfires)        |
 
 More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added to the `codes` field following the characteristics of the event.
+
+> [!NOTE]
+> **`FR` is not the wildfire code — `WF` is.** GLIDE's vocabulary carries both
+> (`FR - Fire`, `WF - Wild fire`), and it flags its deprecated types explicitly
+> (`FA - Famine(use other HAZARD instead)`, `SL - SLIDE (use LS/AV/MS instead)`,
+> `WV - Wave/Surge(use TS/SS instead)`); `FR` carries no such flag, so both are
+> live. GLIDE publishes no definition beyond those labels, but its records show
+> what `FR` is used for: settlement, structural and camp fires — the Kočani
+> nightclub (`FR-2025-000034-MKD`), the Cox's Bazar refugee camp
+> (`FR-2023-000031-BGD`), Hargeisa's main market (`FR-2022-000191-SOM`),
+> Sandakan (`FR-2026-000064-MYS`) — against `WF` records that are consistently
+> vegetation fires, many of them GDACS-fed. That is EM-DAT's `tec-mis-fir-fir`
+> (Fire, Miscellaneous) as much as `tec-ind-fir-fir` (Fire, Industrial), and
+> [both resolve to `TL0305`](../../taxonomy.md#cross-classification-mapping)
+> despite the cluster's *Industrial Failure* name. A few `FR` records are
+> vegetation fires that should have been coded `WF` at the source; the mapping
+> follows the vocabulary, not the miscodings.
 
 ##### Hazard Magnitude and Units
 
