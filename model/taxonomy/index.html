@@ -6735,6 +6735,18 @@
 <li>Landslides reorganized in GH03XX series (Ground Failure cluster)</li>
 <li>Tropical storms merged into MH0309 (Tropical Cyclone)</li>
 </ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Pick the row at the granularity the source actually states.</strong> Several GLIDE
+codes map to more than one EM-DAT key — <code>WF</code> covers <code>nat-cli-wil-wil</code>
+(general), <code>nat-cli-wil-for</code> (forest fire) and <code>nat-cli-wil-lan</code> (land fire);
+<code>FL</code> and <code>EP</code> fan out the same way. A source whose category is a general
+wildfire takes the general key; only a source that says <em>forest fire</em> takes
+<code>nat-cli-wil-for</code>. Promoting a general category to a specific key invents
+precision the source never claimed, and makes two sources describing the same
+event disagree. All three codes in a <code>monty:hazard_codes</code> triplet must come
+from the <strong>same row</strong>.</p>
+</div>
 <table>
 <thead>
 <tr>

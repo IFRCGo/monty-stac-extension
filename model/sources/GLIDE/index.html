@@ -1829,8 +1829,8 @@ setting the clusters field as the following:</p>
 </tr>
 <tr>
 <td><strong>FR</strong> (Fire)</td>
-<td><code>ENV-DEG</code></td>
-<td><code>EN0205</code> (Wildfires)</td>
+<td><code>TECH-INDFAIL</code></td>
+<td><code>TL0305</code> (Fire)</td>
 </tr>
 <tr>
 <td><strong>FF</strong> (Flash Flood)</td>
@@ -1857,9 +1857,32 @@ setting the clusters field as the following:</p>
 <td><code>GEO-GROUND</code></td>
 <td><code>GH0300</code> (Gravitational Mass Movement)</td>
 </tr>
+<tr>
+<td><strong>WF</strong> (Wild Fire)</td>
+<td><code>ENV-FOREST</code></td>
+<td><code>EN0205</code> (Wildfires)</td>
+</tr>
 </tbody>
 </table>
 <p>More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added to the <code>codes</code> field following the characteristics of the event.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong><code>FR</code> is not the wildfire code — <code>WF</code> is.</strong> GLIDE's vocabulary carries both
+(<code>FR - Fire</code>, <code>WF - Wild fire</code>), and it flags its deprecated types explicitly
+(<code>FA - Famine(use other HAZARD instead)</code>, <code>SL - SLIDE (use LS/AV/MS instead)</code>,
+<code>WV - Wave/Surge(use TS/SS instead)</code>); <code>FR</code> carries no such flag, so both are
+live. GLIDE publishes no definition beyond those labels, but its records show
+what <code>FR</code> is used for: settlement, structural and camp fires — the Kočani
+nightclub (<code>FR-2025-000034-MKD</code>), the Cox's Bazar refugee camp
+(<code>FR-2023-000031-BGD</code>), Hargeisa's main market (<code>FR-2022-000191-SOM</code>),
+Sandakan (<code>FR-2026-000064-MYS</code>) — against <code>WF</code> records that are consistently
+vegetation fires, many of them GDACS-fed. That is EM-DAT's <code>tec-mis-fir-fir</code>
+(Fire, Miscellaneous) as much as <code>tec-ind-fir-fir</code> (Fire, Industrial), and
+<a href="../../taxonomy/#cross-classification-mapping">both resolve to <code>TL0305</code></a>
+despite the cluster's <em>Industrial Failure</em> name. A few <code>FR</code> records are
+vegetation fires that should have been coded <code>WF</code> at the source; the mapping
+follows the vocabulary, not the miscodings.</p>
+</div>
 <h5 id="hazard-magnitude-and-units">Hazard Magnitude and Units</h5>
 <p>?</p>
 
