@@ -166,6 +166,7 @@ DesInventar uses its own hazard classification and must follow the **2025 UNDRR-
 | EARTHQUAKE        | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
 | ELECTRIC STORM    | ST    | nat-met-sto-lig     | **MH0102**                     | MH-CONV    | Lightning (electrical storm)    |
 | EROSION           | OT    | nat-geo-env-soi     | **GH0403**                     | GEO-OTHER  | Soil Erosion                    |
+| FIRE              | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST | Wildfires (general — source doesn't distinguish forest/land) |
 | FLASH FLOOD       | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
 | FLOOD             | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
 | FOG               | OT    | nat-met-fog-fog     | **MH0202**                     | MH-PART    | Fog                             |
