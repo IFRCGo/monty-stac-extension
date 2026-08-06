@@ -895,6 +895,7 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | WF         | nat-cli-wil-for           | Forest fire                             | EN0205              |
 | WF         | nat-cli-wil-lan           | Land fire                               | EN0205              |
 | WF         | nat-cli-wil-wil           | Wildfire (general)                      | EN0205              |
+| AC         | tec-mis-col-col           | Building collapse                       | TL0201              |
 | AC         | tec-ind-rad-rad           | Radiation                               | TL0601              |
 | AC         | tec-ind-che-che           | Chemical spill                          | TL0301              |
 | AC         | tec-ind-exp-exp           | Industrial explosion                    | TL0304              |
