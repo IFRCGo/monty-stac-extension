@@ -1203,6 +1203,100 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#the-impacts-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The impacts field
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tropical-cyclone-advisory-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tropical cyclone advisory timeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tropical cyclone advisory timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-properties-of-the-timeline-that-control-the-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three properties of the timeline that control the mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildfire-population-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wildfire population exposure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-types-without-an-impact-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event types without an impact mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-exposure-is-not-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision: exposure is not impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-questions-raised-by-this-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open questions raised by this mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1586,6 +1680,100 @@
     <span class="md-ellipsis">
       
         Sendai indicators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-impacts-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The impacts field
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tropical-cyclone-advisory-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tropical cyclone advisory timeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tropical cyclone advisory timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-properties-of-the-timeline-that-control-the-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three properties of the timeline that control the mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildfire-population-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wildfire population exposure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-types-without-an-impact-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event types without an impact mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decision-exposure-is-not-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision: exposure is not impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-questions-raised-by-this-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open questions raised by this mapping
       
     </span>
   </a>
@@ -1988,6 +2176,46 @@ The following table shows the magnitude scale and unit to be used for each event
 <h3 id="impact-item">Impact Item</h3>
 <p>According to the event type and the fields available in the GDACS event, one or more <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>impact STAC items</strong></a> can be created.
 The following sections describe the mapping of specific GDACS event information to the STAC impact item.</p>
+<p>GDACS carries impact data in two different places. The mapping to use depends on the event type:</p>
+<table>
+<thead>
+<tr>
+<th>GDACS event type</th>
+<th>Source field</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FL</td>
+<td><code>properties.sendai</code></td>
+<td><a href="#sendai-indicators">Sendai indicators</a></td>
+</tr>
+<tr>
+<td>TC</td>
+<td><code>properties.impacts[].resource.timeline</code></td>
+<td><a href="#tropical-cyclone-advisory-timeline">Tropical cyclone advisory timeline</a></td>
+</tr>
+<tr>
+<td>WF</td>
+<td><code>properties.impacts[].resource.impact</code></td>
+<td><a href="#wildfire-population-exposure">Wildfire population exposure</a></td>
+</tr>
+<tr>
+<td>EQ, DR, TS, VO</td>
+<td>none</td>
+<td>No impact item is produced. See <a href="#event-types-without-an-impact-mapping">Event types without an impact mapping</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code>impacts[]</code> figures are <strong>exposure estimates</strong>, not observed losses. GDACS
+computes them with a model. It counts the population inside a hazard footprint.
+It does not count the persons that the hazard harmed. All impact items built from
+<code>impacts[]</code> therefore use <code>type: potentially_affected</code> and
+<code>estimate_type: modelled</code>. See <a href="#decision-exposure-is-not-impact">Decision: exposure is not impact</a>.</p>
+</div>
 <h4 id="sendai-indicators">Sendai indicators</h4>
 <p>When the <code>sendai</code> field is present in the GDACS <a href="#event-item">event</a>, it contains an array of Sendai indicators.
 Each Sendai indicator is a JSON object that shall produce an <a href="https://github.com/IFRCGo/monty-stac-extension#impact">impact item</a>.
@@ -2093,6 +2321,570 @@ The impact item shall have the following fields from both the GDACS event and th
 </tr>
 </tbody>
 </table>
+<h4 id="the-impacts-field">The <code>impacts</code> field</h4>
+<p>For tropical cyclones and wildfires, GDACS does not put the impact figures in the
+episode payload. It puts links to them in <code>properties.impacts[]</code>. Each entry has a
+<code>source</code> field that names the advisory agency, and a <code>resource</code> object of URLs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&quot;impacts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JTWC&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;buffer39&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.gdacs.org/gdacsapi/api/export/getimpact?id=769814&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;buffer74&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.gdacs.org/gdacsapi/api/export/getimpact?id=769813&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;timeline&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.gdacs.org/gdacsapi/api/export/gettimeline?id=769812&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">&quot;locations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.gdacs.org/gdacsapi/api/export/getlocations?id=769738&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">]</span>
+</code></pre></div>
+<p>The set of resource keys depends on the event type:</p>
+<table>
+<thead>
+<tr>
+<th>Resource key</th>
+<th>Endpoint</th>
+<th>Event type</th>
+<th>Content</th>
+<th>Mapped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timeline</code></td>
+<td><code>gettimeline</code></td>
+<td>TC</td>
+<td>One entry for each advisory point. Track position, wind speed and population exposure.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>buffer39</code></td>
+<td><code>getimpact</code></td>
+<td>TC</td>
+<td>Total exposure in the 39 kt wind buffer, with exposed countries and infrastructure.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>buffer74</code></td>
+<td><code>getimpact</code></td>
+<td>TC</td>
+<td>The same for the 74 kt wind buffer.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>locations</code></td>
+<td><code>getlocations</code></td>
+<td>TC</td>
+<td>Named places along the track.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>impact</code></td>
+<td><code>getimpact</code></td>
+<td>WF</td>
+<td>Population exposure for the burnt area.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Read the <code>impacts[]</code> field from <code>getepisodedata</code>, not from <code>geteventdata</code>.
+<code>geteventdata</code> ignores the <code>episodeid</code> parameter and always returns the current
+episode. GDACS publishes the correct per-episode URL in
+<code>properties.episodes[].details</code>.</p>
+</div>
+<h4 id="tropical-cyclone-advisory-timeline">Tropical cyclone advisory timeline</h4>
+<p>The <code>timeline</code> resource returns <code>channel.item[]</code>. Each entry describes one point on
+the storm track, as issued by the advisory agency (for example JTWC).</p>
+<table>
+<thead>
+<tr>
+<th>GDACS field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Identifier of the timeline entry. It is unique, and stable across episodes.</td>
+</tr>
+<tr>
+<td><code>advisory_number</code></td>
+<td>string</td>
+<td>Advisory sequence number from the advisory agency.</td>
+</tr>
+<tr>
+<td><code>actual</code></td>
+<td>string</td>
+<td><code>"True"</code> for an observed position. <code>"False"</code> for a forecast position.</td>
+</tr>
+<tr>
+<td><code>current</code></td>
+<td>string</td>
+<td><code>"true"</code> on the entry that the current advisory observed.</td>
+</tr>
+<tr>
+<td><code>advisory_datetime</code></td>
+<td>string</td>
+<td>Validity time of the entry, in UTC, format <code>%d %b %Y %H:%M</code>.</td>
+</tr>
+<tr>
+<td><code>coordinates</code></td>
+<td>string</td>
+<td><code>"&lt;longitude&gt; , &lt;latitude&gt;"</code> of the track point.</td>
+</tr>
+<tr>
+<td><code>wind_speed</code></td>
+<td>string</td>
+<td>Maximum sustained wind, in m/s.</td>
+</tr>
+<tr>
+<td><code>pop39</code></td>
+<td>string</td>
+<td>Population in the wind field of 39 kt or more.</td>
+</tr>
+<tr>
+<td><code>pop74</code></td>
+<td>string</td>
+<td>Population in the wind field of 74 kt or more.</td>
+</tr>
+<tr>
+<td><code>popstormsurge</code></td>
+<td>string</td>
+<td>Population in the storm surge zone.</td>
+</tr>
+<tr>
+<td><code>pop</code></td>
+<td>string</td>
+<td>Meaning not confirmed. <strong>Do not map this field.</strong> See rule 3 below.</td>
+</tr>
+<tr>
+<td><code>alertscore</code></td>
+<td>string</td>
+<td>GDACS alert score at this track point.</td>
+</tr>
+</tbody>
+</table>
+<p>Reference files, trimmed to the mapped fields:</p>
+<ul>
+<li><a href="api-files/1001294-9-gettimeline-source.json"><code>api-files/1001294-9-gettimeline-source.json</code></a> — cyclone NOUL-26, episode 9.</li>
+<li><a href="api-files/1001294-13-gettimeline-source.json"><code>api-files/1001294-13-gettimeline-source.json</code></a> — the same cyclone, episode 13.</li>
+</ul>
+<h5 id="three-properties-of-the-timeline-that-control-the-mapping">Three properties of the timeline that control the mapping</h5>
+<p><strong>1. The timeline is cumulative, and it repeats.</strong> Each episode returns every earlier
+advisory entry again, unchanged. The 9 observed entries of episode 9 are identical to
+the same 9 entries of episode 13, and they keep the same <code>id</code>. A transformer that keys
+the impact item on the episode therefore creates one duplicate for each later episode.</p>
+<p><strong>2. <code>advisory_number</code> is not unique.</strong> The current advisory appears once as an
+observed position, then once more for each forecast lead time. In episode 13 below,
+advisory 13 appears 4 times. Advisory 12 is absent. <code>advisory_number</code> is therefore
+neither unique nor dense. Only <code>id</code> is a safe key.</p>
+<p><strong>3. <code>pop</code> is not a total.</strong> The table below is the timeline of episode 13. In advisory
+9, <code>pop</code> is 0 while <code>pop39</code> counts 75 million people. In the last forecast entry, <code>pop</code>
+counts 19 million while <code>pop39</code> is 0. <code>pop</code> is therefore not the sum of the wind bands,
+and it is not a headline figure. Its definition is not published. Until JRC confirms
+it, use <code>pop39</code> and <code>pop74</code>, which the GDACS
+<a href="https://www.gdacs.org/Knowledge/models_tc.aspx">tropical cyclone model</a> defines.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">advisory</th>
+<th style="text-align: left;"><code>actual</code></th>
+<th style="text-align: left;"><code>current</code></th>
+<th style="text-align: left;"><code>advisory_datetime</code></th>
+<th style="text-align: right;"><code>wind_speed</code></th>
+<th style="text-align: right;"><code>pop</code></th>
+<th style="text-align: right;"><code>pop39</code></th>
+<th style="text-align: right;"><code>pop74</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">25 Jul 2026 00:00</td>
+<td style="text-align: right;">36.008</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">18,897,670</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">25 Jul 2026 06:00</td>
+<td style="text-align: right;">38.58</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">75,490,475</td>
+<td style="text-align: right;">614,941</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">25 Jul 2026 12:00</td>
+<td style="text-align: right;">41.152</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">94,850,067</td>
+<td style="text-align: right;">6,094,547</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">25 Jul 2026 18:00</td>
+<td style="text-align: right;">43.724</td>
+<td style="text-align: right;">12,226,693</td>
+<td style="text-align: right;">103,014,755</td>
+<td style="text-align: right;">11,167,854</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;"><strong>true</strong></td>
+<td style="text-align: left;">26 Jul 2026 00:00</td>
+<td style="text-align: right;">38.58</td>
+<td style="text-align: right;">38,543,219</td>
+<td style="text-align: right;">80,042,232</td>
+<td style="text-align: right;">10,640,921</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">26 Jul 2026 12:00</td>
+<td style="text-align: right;">23.148</td>
+<td style="text-align: right;">7,488,955</td>
+<td style="text-align: right;">14,518,892</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">27 Jul 2026 00:00</td>
+<td style="text-align: right;">15.432</td>
+<td style="text-align: right;">8,596,681</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">27 Jul 2026 12:00</td>
+<td style="text-align: right;">10.288</td>
+<td style="text-align: right;">19,811,513</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h5 id="mapping">Mapping</h5>
+<p>Each timeline entry shall produce <strong>one impact item for each non-zero exposure band</strong>.
+An entry with <code>pop39</code> and <code>pop74</code> both above zero therefore produces 2 items. An entry
+with every band at zero produces none.</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
+<td><code>gdacs-impact-</code> + properties.eventid + <code>-</code> + item.id + <code>-</code> + band</td>
+<td>Band is <code>pop39</code>, <code>pop74</code> or <code>surge</code>. <strong>The episode is not part of the id.</strong> See rule 1</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
+<td>Point built from item.coordinates</td>
+<td>Position of the track point</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
+<td><code>gdacs-impacts</code></td>
+<td>The collection for GDACS impacts</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td>item.advisory_datetime</td>
+<td>Validity time of the advisory point, converted to UTC ISO 8601</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">start_datetime</a></td>
+<td>item.advisory_datetime</td>
+<td>The same value. The entry describes an instant, not a period</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">end_datetime</a></td>
+<td>item.advisory_datetime</td>
+<td>The same value</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
+<td>item.name + advisory number + band</td>
+<td>For example <code>NOUL-26 advisory 13, population in 39 kt wind field</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
+<td>properties.iso3 and properties.affectedcountries.iso3</td>
+<td>Taken from the episode. The timeline entry has no reliable country field</td>
+</tr>
+<tr>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
+<td><a href="#mapping-from-gdacs-event-type-to-hazard-profile">mappings from properties.eventtype</a></td>
+<td><code>TC</code> maps to <code>MH0306</code></td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:episode_number">monty:episode_number</a></td>
+<td>properties.episodeid</td>
+<td>The episode being processed. See rule 5</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
+<td>properties.eventid</td>
+<td>Unique identifier of the event</td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id">monty:corr_id</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../correlation_identifier/">event correlation</a> convention</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a> in [links]</td>
+<td>the <code>timeline</code> URL of the episode</td>
+<td>The URL changes with each episode. Consumers shall not use it as identity</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>monty:impact_detail</code> object:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>people</code></td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>potentially_affected</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>pop39</code>, <code>pop74</code> or <code>popstormsurge</code>, as an integer, for the band of the item</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td><code>count</code></td>
+</tr>
+<tr>
+<td><code>estimate_type</code></td>
+<td><code>modelled</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>The band, in words. For example <code>Population in the wind field of 39 kt or more</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ol>
+<li><strong>Key the item on <code>item.id</code>, not on the episode.</strong> The identifier is stable across
+   episodes. Re-ingestion of a later episode then updates the same item, instead of
+   creating a duplicate.</li>
+<li><strong>Ingest every entry, of every episode.</strong> Forecast entries of an earlier episode
+   carry their own <code>id</code>, so they stay as a record of what GDACS forecast at the time.
+   Observed entries collapse onto the item that an earlier episode already created.</li>
+<li><strong><code>estimate_type</code> is always <code>modelled</code>.</strong> The <code>actual</code> field describes the track
+   position, not the exposure figure. GDACS models the exposure for observed positions
+   in the same way as for forecast positions.</li>
+<li><strong><code>type</code> is always <code>potentially_affected</code>.</strong> See
+   <a href="#decision-exposure-is-not-impact">Decision: exposure is not impact</a>.</li>
+<li><strong><code>monty:episode_number</code> is the episode being processed.</strong> Because observed entries
+   repeat, this field can change on re-ingestion. It carries the last episode that
+   published the entry, not the first.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Monty has no field that marks an estimate as a forecast. <code>estimate_type</code> describes
+where a figure comes from. It does not say whether the figure is about the future. A
+cyclone forecast and a post-event model run both map to <code>modelled</code>. A consumer can
+therefore tell a forecast entry from an observed entry only by its datetime. See
+<a href="#open-questions-raised-by-this-mapping">Open questions</a>.</p>
+</div>
+<h4 id="wildfire-population-exposure">Wildfire population exposure</h4>
+<p>For wildfires, <code>properties.impacts[].resource.impact</code> returns a <code>getimpact</code> document.
+The <code>source</code> is <code>GWIS</code>. The document has this shape:</p>
+<table>
+<thead>
+<tr>
+<th>GDACS field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>modelname</code></td>
+<td><code>WF</code></td>
+</tr>
+<tr>
+<td><code>modelrun</code></td>
+<td>Timestamp of the model run</td>
+</tr>
+<tr>
+<td><code>modelstatus</code></td>
+<td>Status of the model run, for example <code>info: processing ok</code></td>
+</tr>
+<tr>
+<td><code>datums[].datum[]</code> with <code>datasource: "POP"</code></td>
+<td>The population scalars</td>
+</tr>
+<tr>
+<td><code>datums[].datum[]</code> with <code>datasource: "country"</code></td>
+<td>Exposed countries, with <code>ISO_3DIGIT</code></td>
+</tr>
+<tr>
+<td><code>datums[].datum[]</code> with <code>datasource: "INPUT PARAMETERS"</code></td>
+<td>The burnt area, as a WKT <code>MULTIPOLYGON</code> in <code>Shape</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>POP</code> datum carries a series of scalars:</p>
+<table>
+<thead>
+<tr>
+<th>Scalar</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POPAFFECTED</code></td>
+<td>Population in the burnt area. Equal to <code>SUMPOP0.0</code></td>
+</tr>
+<tr>
+<td><code>SUMPOP1.0</code></td>
+<td>Population within 1 km of the burnt area</td>
+</tr>
+<tr>
+<td><code>SUMPOP2.0</code></td>
+<td>Population within 2 km</td>
+</tr>
+<tr>
+<td><code>SUMPOP5.0</code></td>
+<td>Population within 5 km</td>
+</tr>
+<tr>
+<td><code>SUMPOP10.0</code></td>
+<td>Population within 10 km</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>getimpact</code> document shall produce <strong>one impact item</strong> from <code>POPAFFECTED</code>.</p>
+<table>
+<thead>
+<tr>
+<th>STAC field</th>
+<th>GDACS field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td><code>gdacs-impact-</code> + properties.eventid + <code>-</code> + properties.episodeid + <code>-popaffected</code></td>
+<td>The impact document has no identifier of its own</td>
+</tr>
+<tr>
+<td>geometry</td>
+<td>the <code>Shape</code> WKT of the <code>INPUT PARAMETERS</code> datum</td>
+<td>The burnt area. Fall back to the event geometry if <code>Shape</code> is absent</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>properties.fromdate of the episode</td>
+<td>The document has no observation time, only a model run time</td>
+</tr>
+<tr>
+<td>collection</td>
+<td><code>gdacs-impacts</code></td>
+<td>The collection for GDACS impacts</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>monty:impact_detail</code> object:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>people</code></td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>potentially_affected</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>POPAFFECTED</code>, as an integer</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td><code>count</code></td>
+</tr>
+<tr>
+<td><code>estimate_type</code></td>
+<td><code>modelled</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>Population in the burnt area</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>modelname</code>, <code>modelrun</code> and <code>modelstatus</code> fields show that GDACS derived this
+figure from a model. <code>estimate_type</code> is therefore <code>modelled</code>, and never <code>primary</code>.</p>
+<h4 id="event-types-without-an-impact-mapping">Event types without an impact mapping</h4>
+<p>GDACS publishes no usable impact figures for EQ, DR, TS and VO. These event types
+produce an <a href="#event-item">event item</a> and a <a href="#hazard-item">hazard item</a> only. For EQ,
+the alert score and the population exposure appear in the event description text, not
+in a structured field. A mapping from free text is not reliable enough to specify here.</p>
+<h4 id="decision-exposure-is-not-impact">Decision: exposure is not impact</h4>
+<p><code>pop39</code>, <code>pop74</code> and <code>POPAFFECTED</code> count the persons inside a hazard footprint. They do
+not count the persons that the hazard harmed. UNDRR keeps these two concepts apart:
+<em>exposure</em> is the presence of persons or assets in hazard-prone areas, and <em>impact</em> is
+the effect of the hazard on them.</p>
+<p>Monty has no exposure class. The nearest impact type is <code>potentially_affected</code>, and
+this document uses it for every figure that comes from <code>impacts[]</code>. The choice is
+deliberate, and it is a compromise. A consumer that sums <code>affected_total</code> across
+sources does not pick up these figures, which is the intended behaviour. A consumer
+that wants the exposure figures shall filter on <code>type = potentially_affected</code>.</p>
+<h4 id="open-questions-raised-by-this-mapping">Open questions raised by this mapping</h4>
+<p>Two questions in this mapping belong to the Monty model, not to GDACS. They are open
+for the Montandon Technical Working Group:</p>
+<ol>
+<li><strong>Should Monty mark an estimate as a forecast?</strong> <code>estimate_type</code> describes
+   provenance. It cannot say whether an estimate is about the future.</li>
+<li><strong>Should exposure be a class of its own?</strong> <code>potentially_affected</code> carries the
+   exposure figures today, and it also carries other meanings for other sources.</li>
+</ol>
+<p>Until the group settles these questions, the rules above hold.</p>
 
 
 
