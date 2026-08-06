@@ -91,12 +91,17 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | properties.title           | Title of the event                                   |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place           | Description of the event location                    |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time            | Time of the event in UTC ISO 8601 format             |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates   | ISO3 code of the country where the event occurred    |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates, with a losses-based fallback   | ISO3 code of the country where the event occurred (see note below)    |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0101` for code (see [Hazard Type Mapping](#hazard-type-mapping))  |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url             | Link to the USGS event details page                  |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Reference event item       | Link to reference event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+
+> [!NOTE]
+> `monty:country_codes` first tries to find the country from the epicenter coordinates. If that lookup
+> fails, the transformer picks the country with the highest total fatalities in the PAGER losses data.
+> If both methods fail, the code is `UNK`.
 
 > [!NOTE]
 > `monty:corr_id` is generated **deterministically from this event's own fields** and is intended for
@@ -140,8 +145,8 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | properties.title                    | Title of the hazard                                 |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.place                    | Description of the hazard location                  |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                     | Time of the hazard in UTC ISO 8601 format           |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates            | ISO3 code of the country where the hazard occurred  |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake                 | Always `GEO-SEIS` for cluster and `GH0101` for code (2025: Earthquake) |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Inherited from the event            | Same country code as the event — the hazard item is a clone of the event item |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Inherited from the event            | Always `GEO-SEIS` for cluster and `GH0101` for code — same trio as the event (inherited) |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url                      | Link to the USGS hazard details page                |
 | `related` link in [links]                                                                                    | Event item                           | Link to source event item with `roles: ["event"]` |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
