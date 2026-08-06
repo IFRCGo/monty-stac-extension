@@ -928,6 +928,13 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | OT         | nat-ext-spa-rad           | Radio disturbance                       | ET0103              |
 | OT         | nat-ext-spa-sho           | Shockwave                               | ET0204              |
 | OT         | nat-ext-imp-col           | Space object collision                  | ET0203              |
+| OT         | nat-hyd-wav-rog           | Rogue wave                              | MH0701              |
+| OT         | nat-hyd-wav-sei           | Seiche                                  | MH0702              |
+| OT         | nat-geo-mmd-sub           | Sinkhole                                | GH0308              |
+| OT         | nat-geo-env-soi           | Soil erosion                            | GH0403              |
+| OT         | nat-geo-env-sed           | Coastal erosion & accretion             | GH0405              |
+| OT         | nat-geo-env-des           | Desertification                         | EN0206              |
+| OT         | nat-geo-env-slr           | Salinity & sodicity                     | EN0303              |
 
 ## Impact
 
