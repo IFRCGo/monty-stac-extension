@@ -1813,15 +1813,15 @@
 <li>Appeal type — an event is kept when <em>every</em> one of its appeals is <code>atype</code> 0 or 1, so
      the collection covers DREF <strong>and</strong> Emergency Appeal operations despite its name</li>
 <li>Valid disaster type</li>
-<li>
-<p>Presence of field reports</p>
-</li>
-<li>
-<p>For each event:</p>
-</li>
+</ol>
+<p>An event with no field reports (<code>"field_reports": []</code>) still passes this filter and
+   still produces an event item — it just produces no impact items (see below).</p>
+<ol>
+<li>For each event:</li>
 <li>Basic event information is extracted</li>
-<li>Impact data is collected from field reports</li>
-<li>Country information is used for geometry generation</li>
+<li>Field reports are used to generate impact items</li>
+<li>Country information is used for geometry generation, unioning polygons
+     across all listed countries when there is more than one</li>
 </ol>
 <h2 id="data-structure">Data Structure</h2>
 <h3 id="event-data-model">Event Data Model</h3>
@@ -1846,16 +1846,23 @@
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="p">],</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="s2">&quot;field_reports&quot;</span><span class="p">:</span> <span class="p">[</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="p">{</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="s2">&quot;num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="s2">&quot;gov_num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>            <span class="s2">&quot;other_num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>            <span class="s2">&quot;num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="s2">&quot;gov_num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            <span class="s2">&quot;other_num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="c1"># ... similar pattern for other impact metrics</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="p">}</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="p">]</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="p">}</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>  <span class="c1"># disambiguates impact item IDs across reports</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="s2">&quot;countries&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                <span class="p">{</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>                    <span class="s2">&quot;iso3&quot;</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>                <span class="p">}</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="p">],</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="s2">&quot;num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="s2">&quot;gov_num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>            <span class="s2">&quot;other_num_dead&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            <span class="s2">&quot;num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>            <span class="s2">&quot;gov_num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="s2">&quot;other_num_injured&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>            <span class="c1"># ... similar pattern for other impact metrics</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="p">}</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="p">]</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="accepted-disaster-types">Accepted Disaster Types</h3>
 <p>GO exposes 24 disaster types (<code>dtype.name</code>); Monty ingests the 15 below, matched
@@ -1963,7 +1970,7 @@ no defensible default, not because mapping it was inconvenient.</p>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
 <td>Generated</td>
 <td>Yes</td>
-<td>From country ISO3</td>
+<td>From country ISO3, unioned across all of the event's countries when there is more than one</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time">datetime</a></td>
@@ -2030,7 +2037,8 @@ no defensible default, not because mapping it was inconvenient.</p>
 </tbody>
 </table>
 <h3 id="impact-items">Impact Items</h3>
-<p>Impact items are generated from field reports data, with multiple impact types:</p>
+<p>Impact items are generated from <strong>every</strong> field report on the event (not just
+the first), with multiple impact types per report:</p>
 <table>
 <thead>
 <tr>
@@ -2082,13 +2090,21 @@ no defensible default, not because mapping it was inconvenient.</p>
 </tr>
 </tbody>
 </table>
-<p>Each impact type gets its own item with:
-- ID format: <code>ifrcevent-impact-{event_id}-{impact_type}</code>
-- Same geometry as parent event
+<p>Each field report yields one item per impact type that has at least one
+truthy (non-zero, non-empty) source field — a field report where all three
+source fields for a type are explicit zeros (e.g. <code>num_dead: 0</code>) produces no
+item for that type, with:
+- ID format: <code>ifrcevent-impact-{event_id}-{impact_type}-{field_report_id}</code> —
+  the field report ID disambiguates items when more than one report on the
+  same event carries a value for the same impact type.
+- Geometry generated from the field report's own <code>countries</code> (unioned when
+  there is more than one), falling back to the parent event's geometry when
+  the field report lists no usable country.
+- <a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a> taken from the field report's own <code>countries[].iso3</code>, falling back to the parent event's country codes when the field report lists none
 - Impact details including:
     - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">category</a> (<a href="../../taxonomy/#exposure-category">ALL_PEOPLE</a>)
     - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">type</a> (specific <a href="../../taxonomy/#impact-type">impact type</a>)
-    - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">value</a> (first non-null value from the three source fields)
+    - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">value</a> (first truthy value from the three source fields, in the order shown in the Source Fields column above — the other two are discarded, not cross-checked)
     - <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">estimate_type</a> (PRIMARY)</p>
 <h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
 <p>GO carries a disaster type name (<code>dtype.name</code>) and nothing more granular, so the
@@ -2304,10 +2320,21 @@ reasonable.</p>
 <p>This mapping enables standardized hazard categorization while preserving IFRC's original disaster type classification in the source properties.</p>
 <h2 id="quality-control-notes">Quality Control Notes</h2>
 <ol>
-<li>Events are filtered to DREF and Emergency Appeal operations (<code>atype</code> 0 and 1)</li>
-<li>Only the 15 <a href="#accepted-disaster-types">accepted disaster types</a> are processed</li>
-<li>Impact values are cross-referenced between sources (government, other)</li>
-<li>Geometry is generated from country codes for consistent spatial representation</li>
+<li>Events are filtered to DREF and Emergency Appeal operations (<code>atype</code> 0 and 1).</li>
+<li>Only the 15 <a href="#accepted-disaster-types">accepted disaster types</a> are processed.</li>
+<li>Impact values are <strong>not</strong> cross-referenced between sources: for each type,
+   the first truthy value among the primary/government/other source fields
+   (in that order) is taken as-is, and the other two are silently discarded —
+   there is no reconciliation or consistency check between them.</li>
+<li>Geometry is generated from country codes, unioning polygons across all
+   listed countries when there is more than one; impact items fall back to
+   the parent event's geometry whenever none of their own field report's
+   countries resolves to a geometry (an empty list, or a list where every
+   entry fails geocoding).</li>
+<li>Every field report on an event is processed independently — an event with
+   <em>N</em> field reports and <em>M</em> impact types with a truthy value can produce up
+   to <em>N</em> × <em>M</em> impact items, distinguished by the field report ID in each
+   item's ID.</li>
 </ol>
 
 
