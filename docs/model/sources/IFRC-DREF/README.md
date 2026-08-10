@@ -32,12 +32,15 @@ The IFRC Disaster Relief Emergency Fund (DREF) provides immediate financial supp
    - Appeal type — an event is kept when *every* one of its appeals is `atype` 0 or 1, so
      the collection covers DREF **and** Emergency Appeal operations despite its name
    - Valid disaster type
-   - Presence of field reports
+
+   An event with no field reports (`"field_reports": []`) still passes this filter and
+   still produces an event item — it just produces no impact items (see below).
 
 2. For each event:
    - Basic event information is extracted
+   - Field reports are used to generate impact items
    - Country information is used for geometry generation, unioning polygons
-     when a country list has more than one entry
+     across all listed countries when there is more than one
 
 ## Data Structure
 
@@ -167,7 +170,9 @@ the first), with multiple impact types per report:
 | [Highest Risk](../../../model/taxonomy.md#impact-type) | num_highest_risk, gov_num_highest_risk, other_num_highest_risk | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
 
 Each field report yields one item per impact type that has at least one
-non-null source field, with:
+truthy (non-zero, non-empty) source field — a field report where all three
+source fields for a type are explicit zeros (e.g. `num_dead: 0`) produces no
+item for that type, with:
 - ID format: `ifrcevent-impact-{event_id}-{impact_type}-{field_report_id}` —
   the field report ID disambiguates items when more than one report on the
   same event carries a value for the same impact type.
@@ -178,7 +183,7 @@ non-null source field, with:
 - Impact details including:
     - [category](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) ([ALL_PEOPLE](../../../model/taxonomy.md#exposure-category))
     - [type](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (specific [impact type](../../../model/taxonomy.md#impact-type))
-    - [value](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (first non-null value from the three source fields)
+    - [value](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (first truthy value from the three source fields, in the order shown in the Source Fields column above — the other two are discarded, not cross-checked)
     - [estimate_type](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) (PRIMARY)
 
 #### Hazard Type Mapping
@@ -290,11 +295,16 @@ This mapping enables standardized hazard categorization while preserving IFRC's 
 
 1. Events are filtered to DREF and Emergency Appeal operations (`atype` 0 and 1).
 2. Only the 15 [accepted disaster types](#accepted-disaster-types) are processed.
-3. Impact values are cross-referenced between sources (government, other).
-4. Geometry is generated from country codes, unioning polygons when an event
-   or field report lists multiple countries; impact items fall back to the
-   parent event's geometry when their own field report has none.
+3. Impact values are **not** cross-referenced between sources: for each type,
+   the first truthy value among the primary/government/other source fields
+   (in that order) is taken as-is, and the other two are silently discarded —
+   there is no reconciliation or consistency check between them.
+4. Geometry is generated from country codes, unioning polygons across all
+   listed countries when there is more than one; impact items fall back to
+   the parent event's geometry whenever none of their own field report's
+   countries resolves to a geometry (an empty list, or a list where every
+   entry fails geocoding).
 5. Every field report on an event is processed independently — an event with
-   *N* field reports and *M* impact types with non-null values can produce up
+   *N* field reports and *M* impact types with a truthy value can produce up
    to *N* × *M* impact items, distinguished by the field report ID in each
    item's ID.
