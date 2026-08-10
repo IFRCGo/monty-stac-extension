@@ -1213,6 +1213,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Mapping from GLIDE event type to Hazard profile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ac-accident-sub-classified-from-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AC (Accident): sub-classified from comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#et-extreme-temperature-sub-classified-from-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ET (Extreme Temperature): sub-classified from comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-failure-and-item-cardinality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification failure and item cardinality
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1518,6 +1557,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Mapping from GLIDE event type to Hazard profile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ac-accident-sub-classified-from-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AC (Accident): sub-classified from comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#et-extreme-temperature-sub-classified-from-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ET (Extreme Temperature): sub-classified from comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-failure-and-item-cardinality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification failure and item cardinality
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1596,7 +1674,7 @@
 <p>Despite what's described in the documentation, the API endpoint <code>https://www.glidenumber.net/glide/jsonglideset.jsp</code> cannot retrieve individual events. It is necessary to add other filter to narrow down the search (e.g. h<code>ttps://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199</code>)</p>
 </div>
 <h3 id="event-item">Event Item</h3>
-<p>A GLIDE event and episode will <strong>ALWAYS</strong> produce an <a href="https://github.com/IFRCGo/monty-stac-extension#event"><strong>event STAC item</strong></a> as in the example for the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199">flood in Spain</a>.</p>
+<p>A GLIDE event and episode will <strong>ALWAYS</strong> produce an <a href="https://github.com/IFRCGo/monty-stac-extension#event"><strong>event STAC item</strong></a> as in the example for the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199">flood in Spain</a> — provided its <code>event</code> type resolves to at least one hazard code (see the <a href="#classification-failure-and-item-cardinality">classification-failure caveat</a> below).</p>
 <ul>
 <li>The source events is in the file <a href="FL-2024-000199-ESP.json">FL-2024-000199-ESP.json</a> and is the output of the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199"><code>jsonglideset</code></a> API endpoint.</li>
 <li>The produced event STAC items is in the file <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-events/FL-2024-000199-ESP.json">glide-events/FL-2024-000199-ESP.json</a>.</li>
@@ -1644,8 +1722,8 @@
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
-<td>geocode</td>
-<td>ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name</td>
+<td>geocode (fallback: reverse-geocoded point)</td>
+<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
@@ -1675,7 +1753,7 @@
 </tbody>
 </table>
 <h3 id="hazard-item">Hazard Item</h3>
-<p>A GLIDE event and episode will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a> as in the example for the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199">flood in Spain</a>.</p>
+<p>A GLIDE event and episode will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a> as in the example for the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199">flood in Spain</a> — subject to the same classification-failure caveat as the event item.</p>
 <ul>
 <li>The source events is in the file <a href="FL-2024-000199-ESP.json">FL-2024-000199-ESP.json</a> and is the output of the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=ESP&amp;fromyear=2024&amp;toyear=2024&amp;events=FL&amp;number=2024-000199"><code>jsonglideset</code></a> API endpoint.</li>
 <li>The produced hazard STAC item is in the examples <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-hazards/FL-2024-000199-ESP.json">glide-hazards/FL-2024-000199-ESP.json</a>.</li>
@@ -1722,8 +1800,8 @@
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
-<td>geocode</td>
-<td>ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name</td>
+<td>geocode (fallback: reverse-geocoded point)</td>
+<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
@@ -1786,8 +1864,7 @@
 </tbody>
 </table>
 <h5 id="mapping-from-glide-event-type-to-hazard-profile">Mapping from GLIDE event type to Hazard profile</h5>
-<p>There is not straightforward mapping from the GLIDE event type to the <a href="../../taxonomy/#2025-update">hazard profile</a>. The current mapping only considers
-setting the clusters field as the following:</p>
+<p>There is not straightforward mapping from the GLIDE event type to the <a href="../../taxonomy/#2025-update">hazard profile</a>. Most GLIDE <code>event</code> types resolve to a fixed UNDRR-ISC 2025 / EM-DAT / GLIDE triple in <code>GlideTransformer.get_hazard_codes</code>:</p>
 <table>
 <thead>
 <tr>
@@ -1801,11 +1878,6 @@ setting the clusters field as the following:</p>
 <td><strong>CW</strong> (Cold Wave)</td>
 <td><code>MH-TEMP</code></td>
 <td><code>MH0502</code> (Cold Wave)</td>
-</tr>
-<tr>
-<td><strong>CE</strong> (Complex Emergency)</td>
-<td><code>SO-CONFLICT</code></td>
-<td><code>SO0102</code> (NIAC)</td>
 </tr>
 <tr>
 <td><strong>DR</strong> (Drought)</td>
@@ -1848,14 +1920,49 @@ setting the clusters field as the following:</p>
 <td><code>MH0501</code> (Heatwave)</td>
 </tr>
 <tr>
-<td><strong>IN</strong> (Insect Infestation)</td>
-<td><code>BIO-INSECT</code></td>
-<td><code>BI0401</code> (Insect Pest Infestations)</td>
+<td><strong>LS</strong> (Land Slide)</td>
+<td><code>GEO-GFAIL</code></td>
+<td><code>GH0300</code> (Gravitational Mass Movement)</td>
 </tr>
 <tr>
-<td><strong>LS</strong> (Land Slide)</td>
-<td><code>GEO-GROUND</code></td>
-<td><code>GH0300</code> (Gravitational Mass Movement)</td>
+<td><strong>MS</strong> (Mud Slide)</td>
+<td><code>GEO-GFAIL</code></td>
+<td><code>GH0303</code> (Flows)</td>
+</tr>
+<tr>
+<td><strong>ST</strong> (Storm)</td>
+<td><code>MH-CONV</code></td>
+<td><code>MH0102</code> (Lightning (electrical storm))</td>
+</tr>
+<tr>
+<td><strong>TC</strong> (Tropical Cyclone)</td>
+<td><code>MH-WIND</code></td>
+<td><code>MH0309</code> (Tropical Cyclone)</td>
+</tr>
+<tr>
+<td><strong>TS</strong> (Tsunami)</td>
+<td><code>MH-MARINE</code></td>
+<td><code>MH0705</code> (Tsunami)</td>
+</tr>
+<tr>
+<td><strong>TO</strong> (Tornado)</td>
+<td><code>MH-WIND</code></td>
+<td><code>MH0305</code> (Tornado)</td>
+</tr>
+<tr>
+<td><strong>AV</strong> (Avalanche)</td>
+<td><code>MH-TERR</code></td>
+<td><code>MH0801</code> (Avalanche)</td>
+</tr>
+<tr>
+<td><strong>SS</strong> (Storm Surge)</td>
+<td><code>MH-MARINE</code></td>
+<td><code>MH0703</code> (Storm Surge)</td>
+</tr>
+<tr>
+<td><strong>VW</strong> (Violent Wind)</td>
+<td><code>MH-WIND</code></td>
+<td><code>MH0301</code> (Wind)</td>
 </tr>
 <tr>
 <td><strong>VO</strong> (Volcano)</td>
@@ -1869,7 +1976,77 @@ setting the clusters field as the following:</p>
 </tr>
 </tbody>
 </table>
+<p><code>SL</code> (Slide) and <code>WV</code> (Wave/Surge) are not looked up directly: <code>get_hazard_codes</code> remaps <code>SL</code> to <code>LS</code> and <code>WV</code> to <code>SS</code> before the table lookup above, so both resolve to the same codes as their target row.</p>
 <p>More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added to the <code>codes</code> field following the characteristics of the event.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong><code>IN</code> (Insect Infestation) has no mapping.</strong> It is a valid GLIDE <code>event</code> value (the source validator accepts it), but it is not a key in <code>get_hazard_codes</code>'s mapping table, so it falls through to an empty <code>hazard_codes</code> list — which is the classification-failure case described <a href="#classification-failure-and-item-cardinality">below</a>. No <code>IN</code> event has ever produced a STAC item.</p>
+</div>
+<h6 id="ac-accident-sub-classified-from-comments"><code>AC</code> (Accident): sub-classified from <code>comments</code></h6>
+<p>GLIDE's <code>AC</code> type covers several distinct technological hazards (transport accidents, industrial fires, explosions, structural collapses, etc.), so <code>get_hazard_codes</code> routes it to <code>get_ac_hazard_codes(comments)</code> instead of a static row. That method tries two strategies, in order:</p>
+<ol>
+<li><strong>Structured tag.</strong> If <code>comments</code> ends with a parenthesised tag such as <code>(Road)</code> or <code>(Ind: Gas leak)</code>, the category (and optional <code>Category: Subcategory</code>) is looked up in a fixed table:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Tag key</th>
+<th>Hazard Profile codes (2025)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>road</code></td>
+<td><code>TL0405</code> (Road Traffic Accident)</td>
+</tr>
+<tr>
+<td><code>rail</code></td>
+<td><code>TL0404</code> (Rail Accident)</td>
+</tr>
+<tr>
+<td><code>water</code></td>
+<td><code>TL0402</code> (Inland Water Way Accidents)</td>
+</tr>
+<tr>
+<td><code>air</code></td>
+<td><code>TL0401</code> (Air Transportation Accident)</td>
+</tr>
+<tr>
+<td><code>misc:fire</code>, <code>ind:fire</code></td>
+<td><code>TL0305</code> (Fire)</td>
+</tr>
+<tr>
+<td><code>misc:explosion</code>, <code>ind:explosion</code></td>
+<td><code>TL0304</code> (Explosion)</td>
+</tr>
+<tr>
+<td><code>misc:collapse</code>, <code>ind:collapse</code></td>
+<td><code>TL0201</code> (Building Collapse)</td>
+</tr>
+<tr>
+<td><code>ind:gas leak</code>, <code>ind:chemical spill</code></td>
+<td><code>TL0301</code> (Leaks and Spills)</td>
+</tr>
+<tr>
+<td><code>ind:other</code></td>
+<td><code>TL0207</code> (Critical Infrastructure Failure)</td>
+</tr>
+</tbody>
+</table>
+<p><code>misc:other</code> is deliberately absent — it covers cases like stampedes and poisonings that have no clear technological hazard code.</p>
+<ol>
+<li><strong>Free-text fallback.</strong> If there is no recognised tag (or its key isn't in the table above), <code>comments</code> is matched against a series of keyword regexes for aircraft/ship/train/road-vehicle accidents, structural collapse, explosion, and fire, in that order, each mapping to the same codes as the table above.</li>
+</ol>
+<p>If neither strategy matches, <code>get_ac_hazard_codes</code> returns an empty list — see the <a href="#classification-failure-and-item-cardinality">classification-failure caveat</a> below.</p>
+<h6 id="et-extreme-temperature-sub-classified-from-comments"><code>ET</code> (Extreme Temperature): sub-classified from <code>comments</code></h6>
+<p><code>ET</code> has no row of its own in <code>HazardProfiles.csv</code> — GLIDE conflates what UNDRR-ISC 2025 splits into Heatwave (<code>MH0501</code>/<code>HT</code>) and Cold Wave (<code>MH0502</code>/<code>CW</code>) — so <code>get_hazard_codes</code> routes it to <code>get_et_hazard_codes(comments)</code>, which uses the same two-strategy approach as <code>AC</code>: a trailing tag (<code>(cold wave)</code> or <code>(heat wave)</code>) looked up first, then a free-text <code>heat wave</code> / <code>cold wave</code> regex fallback. If neither matches, it also returns an empty list.</p>
+<h6 id="classification-failure-and-item-cardinality">Classification failure and item cardinality</h6>
+<p><code>make_source_event_items</code> calls <code>get_hazard_codes</code> and then immediately overwrites the result with <code>hazard_profiles.get_canonical_hazard_codes(item)</code>, which raises <code>ValueError</code> if the item carries no hazard codes at all. Both <code>get_stac_items_from_file</code> and <code>get_stac_items_from_memory</code> catch that exception per-row, log a warning, and increment the failed-row counter — they do <strong>not</strong> yield an event or hazard item for that row. In practice this means:</p>
+<ul>
+<li>Every <code>IN</code> record is dropped (no mapping exists at all).</li>
+<li>An <code>AC</code> or <code>ET</code> record is dropped if its <code>comments</code> field carries neither a recognisable tag nor a matching free-text keyword.</li>
+<li>Every other GLIDE <code>event</code> type always produces its event/hazard item pair, since its codes are a fixed, non-empty triple.</li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong><code>FR</code> is not the wildfire code — <code>WF</code> is.</strong> GLIDE's vocabulary carries both
