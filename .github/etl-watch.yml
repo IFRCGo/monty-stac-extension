@@ -112,7 +112,7 @@ sources:
 
   ifrcevent:
     extra_paths: [pystac_monty/validators/ifrc.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
