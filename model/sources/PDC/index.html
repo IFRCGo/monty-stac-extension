@@ -1754,6 +1754,14 @@
 <td>Wave Action</td>
 </tr>
 <tr>
+<td>High Wind</td>
+<td>VW</td>
+<td>nat-met-sto-sto</td>
+<td><strong>MH0301</strong></td>
+<td>MH-WIND</td>
+<td>Wind (general)</td>
+</tr>
+<tr>
 <td>Landslide</td>
 <td>LS</td>
 <td>nat-geo-mmd-lan</td>
@@ -1933,6 +1941,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event. For "Extreme Temperature", use MH0501 for heat-related events and MH0502 for cold-related events.</p>
+<p><strong>Scope decision — <code>HIGHWIND</code> (<a href="https://github.com/IFRCGo/pystac-monty/issues/196">pystac-monty#196</a>):</strong> PDC issues <code>HighWind</code> from NWS High Wind Warnings/Advisories — sustained wind of 40 mph (35 kt) or more for 1 hour or more, or gusts of 58 mph (50 kt) or more, when no tropical cyclone or thunderstorm is present. This is a general wind event, not a Beaufort-scale term. So it maps to <strong>MH0301 (Wind)</strong>, not <strong>MH0303 (Gale)</strong>. This choice follows the existing GLIDE↔EM-DAT↔UNDRR crosswalk in <a href="../../taxonomy/#complete-2025-hazard-list">taxonomy.md</a> (<code>VW</code> → <code>nat-met-sto-sto</code> → <code>MH0301</code>).</p>
 </div>
 <p>This comprehensive mapping ensures standardized hazard categorization for all PDC tracked hazards, including both natural and geopolitical/technological events.</p>
 <h2 id="hazard-item">Hazard Item</h2>
