@@ -71,6 +71,7 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 | Extreme Temperature | HT/CW | nat-met-ext-hea     | **MH0501**                     | MH-TEMP      | Heatwave (or MH0502 for Cold)    |
 | Flood               | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER     | Flooding (chapeau)               |
 | High Surf           | OT    | nat-hyd-wav-wav     | **MH0702**                     | MH-MARINE    | Wave Action                      |
+| High Wind           | VW    | nat-met-sto-sto     | **MH0301**                     | MH-WIND      | Wind (general)                   |
 | Landslide           | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL    | Gravitational Mass Movement      |
 | Marine              | OT    | nat-hyd-wav-wav     | **MH0700**                     | MH-MARINE    | Marine-related (chapeau)         |
 | Severe Weather      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
@@ -99,6 +100,8 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event. For "Extreme Temperature", use MH0501 for heat-related events and MH0502 for cold-related events.
+>
+> **Scope decision — `HIGHWIND` ([pystac-monty#196](https://github.com/IFRCGo/pystac-monty/issues/196)):** PDC issues `HighWind` from NWS High Wind Warnings/Advisories — sustained wind of 40 mph (35 kt) or more for 1 hour or more, or gusts of 58 mph (50 kt) or more, when no tropical cyclone or thunderstorm is present. This is a general wind event, not a Beaufort-scale term. So it maps to **MH0301 (Wind)**, not **MH0303 (Gale)**. This choice follows the existing GLIDE↔EM-DAT↔UNDRR crosswalk in [taxonomy.md](../../taxonomy.md#complete-2025-hazard-list) (`VW` → `nat-met-sto-sto` → `MH0301`).
 
 This comprehensive mapping ensures standardized hazard categorization for all PDC tracked hazards, including both natural and geopolitical/technological events.
 
