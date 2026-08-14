@@ -1,0 +1,88 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+  ],
+  "id": "us6000tjl2-economic-alert-COL-02",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.2422,
+      4.8436
+    ]
+  },
+  "bbox": [
+    -76.2422,
+    4.8436,
+    -76.2422,
+    4.8436
+  ],
+  "properties": {
+    "datetime": "2026-08-10T12:34:28Z",
+    "title": "PAGER Alert: $1.0M-$10.0M Economic Loss (yellow) for M 7.4 earthquake, San José del Palmar, Colombia",
+    "description": "USGS PAGER economic-loss alert bin: probability 0.0046 that losses fall in [$1.0M, $10.0M] for 5 km S of San José del Palmar, Colombia",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:src_event_id": "us6000tjl2",
+    "monty:country_codes": [
+      "COL"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
+    ],
+    "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
+    "monty:impact_detail": {
+      "category": "global_currency",
+      "type": "cost",
+      "value": 5.5,
+      "value_min": 1,
+      "value_max": 10,
+      "probability": 0.004581619654561863,
+      "unit": "usd_millions",
+      "estimate_type": "modelled",
+      "description": "PAGER alert-level color: yellow"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000tjl2-economic-alert-COL-02.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-impacts.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000tjl2.json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "pager_onepager": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/onepager.pdf",
+      "type": "application/pdf",
+      "title": "PAGER One-Pager Report",
+      "roles": [
+        "data"
+      ]
+    },
+    "pager_alert": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/alertecon.pdf",
+      "type": "application/pdf",
+      "title": "PAGER Economic Alert",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "usgs-impacts"
+}

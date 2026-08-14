@@ -285,14 +285,64 @@ while `alerts.json` gives the spread of possible outcomes around it.
 
 That unit correction holds whatever shape the items eventually take.
 
+##### Mapping: one impact item per bin
+
+Emit **one impact item per bin**, not one collapsed value per type. Collapsing the
+histogram to a single number discards the information that makes it useful:
+anticipatory-action triggers (IFRC DREF) need the spread so they can evaluate their own
+threshold, for example *P(economic loss > \$1B)*.
+
+Each bin item reuses the same `category`/`type`/`unit` as the `losses.json` point
+estimate above, and adds the range and its probability:
+
+```json
+{
+  "category": "people",
+  "type": "death",
+  "value": 550,
+  "value_min": 100,
+  "value_max": 1000,
+  "probability": 0.32364736950411177,
+  "unit": "people",
+  "estimate_type": "modelled",
+  "description": "PAGER alert-level color: orange"
+}
+```
+
+| Field                     | Fatality bin      | Economic bin                       |
+| ------------------------- | ----------------- | ---------------------------------- |
+| `category`                | `people`          | `global_currency`                  |
+| `type`                    | `death`           | `cost`                             |
+| `unit`                    | `people`          | `usd_millions` (see warning above) |
+| `value`                   | bin midpoint      | bin midpoint                       |
+| `value_min` / `value_max` | bin `min` / `max` | bin `min` / `max`                  |
+| `probability`             | bin `probability` | bin `probability`                  |
+| `estimate_type`           | `modelled`        | `modelled`                         |
+
+Item `id` is `{event_id}-{fatality|economic}-alert-{iso3}-{bin}`, where `{bin}` is a
+2-digit 1-based index in the order `alerts.json` lists its bins. `alerts.json` carries no
+country breakdown of its own, so `{iso3}` is the event's resolved country.
+
+Worked examples for `us6000tjl2`:
+[fatality bins 01–07](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-fatality-alert-COL-01.json)
+and [economic bins 01–07](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-economic-alert-COL-01.json).
+
+Three rules follow from this shape:
+
+- **`value` is a representative point, not a claim of precision.** A consumer that needs
+  the real interval, or an exceedance probability, must read `value_min`/`value_max`/`probability`
+  — never `value` alone.
+- **`type` is not `potentially_affected`.** A bin is still fundamentally a death or cost
+  estimate; the uncertainty is carried by the added fields, not by a different `type`.
+  `potentially_affected` describes population exposure and already carries other meanings
+  elsewhere in Monty (see [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)).
+- **`estimate_type` stays `modelled`,** as for the point estimates. This is still a PAGER
+  model output, expressed as a distribution rather than a single value.
+
 > [!NOTE]
-> How Monty should represent this histogram is **under review** and is deliberately not
-> specified here. A probability distribution is not a single value, so it does not fit
-> `monty:impact_detail` as it stands, and collapsing it to one number discards the
-> information that makes it useful (anticipatory-action triggers need the spread, not a
-> midpoint). It is tracked in
-> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125), alongside the wider
-> model questions in [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
-> Until that is settled, do not map `alerts.json` values onto
-> `monty:impact_detail.type: potentially_affected` — that value describes population
-> exposure, not an uncertain death or cost estimate.
+> `value_min`, `value_max` and `probability` are provisional additions to
+> `monty:impact_detail`, under review in
+> [#127](https://github.com/IFRCGo/monty-stac-extension/issues/127). The wider question of
+> whether a probability distribution — and exposure data generally — belongs in the Impact
+> class at all is open in
+> [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
