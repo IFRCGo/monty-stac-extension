@@ -38,7 +38,7 @@
       "interval": [
         [
           "2025-01-07T01:05:16Z",
-          "2025-01-07T01:05:16Z"
+          "2026-08-10T12:34:28Z"
         ]
       ]
     }
@@ -46,14 +46,15 @@
   "summaries": {
     "datetime": {
       "minimum": "2025-01-07T01:05:16Z",
-      "maximum": "2025-01-07T01:05:16Z"
+      "maximum": "2026-08-10T12:34:28Z"
     },
     "roles": [
       "impact",
       "source"
     ],
     "monty:country_codes": [
-      "CHN"
+      "CHN",
+      "COL"
     ],
     "monty:hazard_codes": [
       "EQ",

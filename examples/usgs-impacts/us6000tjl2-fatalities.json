@@ -1,0 +1,84 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+  ],
+  "id": "us6000tjl2-fatalities",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.2422,
+      4.8436
+    ]
+  },
+  "bbox": [
+    -76.2422,
+    4.8436,
+    -76.2422,
+    4.8436
+  ],
+  "properties": {
+    "datetime": "2026-08-10T12:34:28Z",
+    "title": "Estimated Fatalities for M 7.4 earthquake, San José del Palmar, Colombia",
+    "description": "PAGER estimated fatalities for 5 km S of San José del Palmar, Colombia",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:src_event_id": "us6000tjl2",
+    "monty:country_codes": [
+      "COL"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
+    ],
+    "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "death",
+      "value": 961,
+      "unit": "people",
+      "estimate_type": "modelled"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000tjl2-fatalities.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-impacts.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000tjl2.json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "pager_onepager": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/onepager.pdf",
+      "type": "application/pdf",
+      "title": "PAGER One-Pager Report",
+      "roles": [
+        "data"
+      ]
+    },
+    "pager_exposure": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/json/exposures.json",
+      "type": "application/json",
+      "title": "PAGER Exposure Data",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "usgs-impacts"
+}

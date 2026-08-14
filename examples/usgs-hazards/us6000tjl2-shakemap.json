@@ -1,0 +1,150 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+  ],
+  "id": "us6000tjl2-shakemap",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.2422,
+      4.8436
+    ]
+  },
+  "bbox": [
+    -76.2422,
+    4.8436,
+    -76.2422,
+    4.8436
+  ],
+  "properties": {
+    "datetime": "2026-08-10T12:34:28Z",
+    "title": "ShakeMap for M 7.4 earthquake, San José del Palmar, Colombia",
+    "description": "Ground motion and intensity map for M7.4 earthquake, 5 km S of San José del Palmar, Colombia",
+    "monty:src_event_id": "us6000tjl2",
+    "roles": [
+      "source",
+      "hazard"
+    ],
+    "monty:country_codes": [
+      "COL"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
+    ],
+    "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
+    "monty:hazard_detail": {
+      "cluster": "GEO-SEIS",
+      "severity_value": 7.4,
+      "severity_unit": "mww"
+    },
+    "eq:magnitude": 7.4,
+    "eq:magnitude_type": "mww",
+    "eq:depth": 110.285,
+    "eq:status": "reviewed",
+    "eq:tsunami": false,
+    "eq:sources": [
+      {
+        "name": "us",
+        "code": "6000tjl2",
+        "catalog": "USGS-NEIC"
+      }
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000tjl2-shakemap.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-hazards.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000tjl2.json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "intensity_map": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/intensity.jpg",
+      "type": "image/jpeg",
+      "title": "Intensity Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "intensity_overlay": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/intensity_overlay.png",
+      "type": "image/png",
+      "title": "Intensity Overlay",
+      "roles": [
+        "visual"
+      ]
+    },
+    "pga_map": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/pga.jpg",
+      "type": "image/jpeg",
+      "title": "Peak Ground Acceleration Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "pgv_map": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/pgv.jpg",
+      "type": "image/jpeg",
+      "title": "Peak Ground Velocity Map",
+      "roles": [
+        "overview"
+      ]
+    },
+    "mmi_contours": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/cont_mi.json",
+      "type": "application/json",
+      "title": "MMI Contours",
+      "roles": [
+        "data"
+      ]
+    },
+    "grid": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/grid.xml",
+      "type": "application/xml",
+      "title": "Ground Motion Grid",
+      "roles": [
+        "data"
+      ]
+    },
+    "uncertainty": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/uncertainty.xml",
+      "type": "application/xml",
+      "title": "Uncertainty Grid",
+      "roles": [
+        "data"
+      ]
+    },
+    "stations": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/stationlist.json",
+      "type": "application/json",
+      "title": "Station List",
+      "roles": [
+        "data"
+      ]
+    },
+    "rupture": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/rupture.json",
+      "type": "application/json",
+      "title": "Fault Rupture",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "usgs-hazards"
+}
