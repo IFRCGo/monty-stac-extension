@@ -1,7 +1,8 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "type": "Feature",
   "id": "2024178N09335-hazard-20240708T000000Z",
@@ -439,6 +440,10 @@
       "severity_unit": "knots"
     },
     "monty:corr_id": "20240626T000000-XYZ-NAT-MET-STO-TRO-001-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "roles": [
       "hazard",
       "source"

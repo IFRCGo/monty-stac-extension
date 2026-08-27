@@ -52,6 +52,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Hazard Item
 
@@ -77,6 +79,8 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                    | `https://www.glidenumber.net/glide/public/search/details.jsp?glide=` + docid | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]           | source url                                                                   | Link to the GDACS event details page                                                                                                        |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | ?                                                                            | Detailed description of the hazard (more details in next section)                                                                           |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Hazard Detail
 

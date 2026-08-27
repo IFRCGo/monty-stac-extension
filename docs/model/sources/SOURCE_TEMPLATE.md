@@ -144,6 +144,8 @@ Reference fixtures in `api-files/`: TODO (name them and say what each exercises)
 | `{category}` | `monty:hazard_codes` | Map via [Hazard codes](#hazard-codes) |
 | `{country}` | `monty:country_codes` | ISO 3166-1 alpha-3 |
 | derived | `monty:corr_id` | Standard Monty algorithm — **not** the source key |
+| derived | `processing:version` (`processing:` extension) | Semantic version of the transformer that generated the item — see the [extension layering principle](../response-best-practices.md#1-governing-principles) |
+| derived | `processing:software` (`processing:` extension) | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ## Object → Hazard
 

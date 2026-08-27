@@ -55,6 +55,10 @@
       "MH0600"
     ],
     "monty:corr_id": "20260615T000000Z-DEMO-FL-001-DEMO",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:response_detail": {
       "type": "eo-gra",
       "source_id": "EMSR-DEMO-001",

@@ -55,6 +55,10 @@
       "source"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:country_codes": [
       "JAM",
       "HTI",

@@ -64,6 +64,8 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | `related` link in [links]                                                                                              | properties.glide                                      | If the glide number is present, create a `related` link to the item in `glide-events` collection with `roles: ["event"]`                 |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Hazard Item
 
@@ -95,6 +97,8 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | properties.url.details                                                                 | Link to the GDACS hazard details page                                                                                   |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                               | properties.hazard_detail                                                               | Detailed description of the hazard (more details in next section)                                                       |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Hazard Detail
 
@@ -177,6 +181,8 @@ The impact item shall have the following fields from both the GDACS event and th
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                                                                                                                         | Link to the GDACS event details page                                                                                          |
 | `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid                                                                                                                  | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`) with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### The `impacts` field
 
@@ -289,6 +295,8 @@ with every band at zero produces none.
 | [monty:episode_number](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:episode_number)                | properties.episodeid                                               | The episode being processed. See rule 5                                        |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id)                    | properties.eventid                                                 | Unique identifier of the event                                                 |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                              | Generated                                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | the `timeline` URL of the episode                                  | The URL changes with each episode. Consumers shall not use it as identity      |
 
 The `monty:impact_detail` object:

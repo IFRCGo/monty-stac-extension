@@ -39,6 +39,8 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source (see [Hazard Type Mapping](#hazard-type-mapping)). |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Hazard Type Mapping
 
@@ -70,6 +72,8 @@ A GFD event and episode will **ALWAYS** produce one [**hazard STAC item**](https
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) | Hazard detail based on dfo_severity | Detailed description of the hazard |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Hazard Detail
 The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) is constructed using the following fields.
@@ -97,6 +101,8 @@ The following sections describe the mapping of specific GFD event information to
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source. |
 | monty:impact_detail | Impact items using *dfo_dead*, *dfo_displaced fields* | Several impact items are created based on *dfo_dead*, *dfo_displaced* fields |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Impact Details
 The following fields are used to create several **Impact Detail** items.

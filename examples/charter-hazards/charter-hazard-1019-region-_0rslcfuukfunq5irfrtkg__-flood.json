@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood",
   "geometry": {
@@ -166,6 +167,10 @@
       "nat-hyd-flo-flo"
     ],
     "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:hazard_detail": {
       "severity_value": 57,
       "severity_unit": "km",
