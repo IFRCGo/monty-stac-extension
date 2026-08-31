@@ -359,8 +359,8 @@ casings):
 ##### The storm rule
 
 CEMS's `Storm` `subCategory` is not reliable on its own. Of the 18 activations
-labelled `Extra-tropical storm` in the full 260-activation catalogue (read
-2026-08-31), **12 are tropical cyclones**: 11 carry a GDACS `TC…` `gdacsId`,
+labelled `Extra-tropical storm` in the full 224-activation catalogue,
+**12 are tropical cyclones**: 11 carry a GDACS `TC…` `gdacsId`,
 and the twelfth, EMSR714 ("Tropical Cyclone BELAL-24 in Réunion"), carries no
 `gdacsId` at all and is identifiable only by name. Mapping the `subCategory`
 label straight to MH0307 would file 12 tropical cyclones as extra-tropical
@@ -374,7 +374,7 @@ label, checked in this order:
 | ---: | --- | --- | --- | --- |
 | 1 | `subCategory` = `Tropical cyclone, hurricane, typhoon` | **MH0306** | TC | nat-met-sto-tro |
 | 2 | `gdacsId` starts with `TC` | **MH0306** | TC | nat-met-sto-tro |
-| 3 | `name`/`reason` matches `hurricane\|typhoon\|tropical\|\bTCs?\b` and not `extra-?tropical` | **MH0306** | TC | nat-met-sto-tro |
+| 3 | `name`/`reason` matches (case-insensitive) `hurricane|typhoon|tropical|\bTCs?\b` and not `extra-?tropical` | **MH0306** | TC | nat-met-sto-tro |
 | 4 | `subCategory` = `Convective storm` | **MH0103** | ST | nat-met-sto-sev |
 | 5 | `subCategory` = `Extra-tropical storm` | **MH0307** | EC | nat-met-sto-ext |
 
@@ -433,8 +433,9 @@ cut villages off from essential services — sustained snow, not a blizzard. It
 resolves to **MH0405** (Snow), which carries no GLIDE or EM-DAT companion in
 the crosswalk; a single UNDRR-ISC code is a valid `monty:hazard_codes` value,
 the same pattern as IFRC-DREF's `Civil Unrest` → `SO0103`. MH0403 (Blizzard)
-is rejected explicitly: promoting sustained snowfall to a blizzard would
-invent precision the source never claimed.
+and MH0406 (Snow Storm) are both rejected explicitly: promoting sustained
+snowfall to a blizzard or a storm would invent precision the source never
+claimed.
 
 > **Corrected 2026-07-16**: this table previously used `MH0403` (which is *Blizzard*, not Tropical
 > Cyclone) for storms, `MH1301`/`MH0901`/`MH1201`/`TH0300`/`TH0600` (none of which exist in the
