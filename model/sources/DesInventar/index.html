@@ -1112,6 +1112,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Hazard Code Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unmapped-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unmapped events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1546,6 +1563,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Hazard Code Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unmapped-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unmapped events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1743,7 +1777,7 @@
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
 <td>Based on shapefile data using level2/level1/level0</td>
-<td>Geometry derived from administrative boundaries</td>
+<td>Geometry derived from administrative boundaries (when admin level info is missing, get the geometry from iso3 using Geocoding service)</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
@@ -1798,7 +1832,16 @@
 </tbody>
 </table>
 <h4 id="hazard-code-mapping">Hazard Code Mapping</h4>
-<p>DesInventar uses its own hazard classification and must follow the <strong>2025 UNDRR-ISC</strong> code as the <strong>reference classification</strong> for the Monty extension. The following table provides cross-classification across multiple systems:</p>
+<p>DesInventar uses its own hazard classification and must follow the <strong>2025 UNDRR-ISC</strong> code as the <strong>reference classification</strong> for the Monty extension. Raw <code>evento</code> values from the source are messy — typos, translations, capitalization variants, legacy codes — so the transformer resolves them in two steps (see <a href="https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/desinventar.py"><code>desinventar.py</code></a>):</p>
+<ol>
+<li><strong>Normalization</strong> — the raw <code>evento</code> value is looked up in a large alias table (<code>hazard_name_mappings</code>, 300+ entries) that collapses raw variants (e.g. <code>"HURRICANE"</code>, <code>"Typhoon"</code>, <code>"TC - Tropical Cyclone"</code>) down to one canonical event name (e.g. <code>CYCLONE</code>). If no alias matches, the raw value is used as-is.</li>
+<li><strong>Code lookup</strong> — the canonical event name is looked up in the <code>hazard_mapping</code> table below to get its <code>[UNDRR-ISC 2025, EM-DAT, GLIDE]</code> triplet.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the canonical event name has no entry in <code>hazard_mapping</code>, or maps to <code>None</code>, the record is dropped — <strong>no event item is produced</strong> for it. See <a href="#unmapped-events">Unmapped events</a> below.</p>
+</div>
+<p>The following table provides cross-classification across multiple systems, per <a href="../../taxonomy/">taxonomy.md</a> and <a href="https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/HazardProfiles.csv">HazardProfiles.csv</a>:</p>
 <table>
 <thead>
 <tr>
@@ -1812,12 +1855,76 @@
 </thead>
 <tbody>
 <tr>
+<td>ACCIDENT</td>
+<td>AC</td>
+<td>tec-mis-col-col</td>
+<td><strong>TL0007</strong> †</td>
+<td>TECH-STRFAIL</td>
+<td>Structural Failure</td>
+</tr>
+<tr>
+<td>Acid rain</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0105</strong></td>
+<td>ENV-AIR</td>
+<td>Acid Rain</td>
+</tr>
+<tr>
+<td>AFLATOXIN</td>
+<td>OT</td>
+<td></td>
+<td><strong>CH0201</strong></td>
+<td>CHEM-CARC</td>
+<td>Aflatoxins</td>
+</tr>
+<tr>
+<td>Air pollution</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0102</strong></td>
+<td>ENV-AIR</td>
+<td>Air Pollution (Point Source)</td>
+</tr>
+<tr>
+<td>AIRCRAFT CRASH</td>
+<td>AC</td>
+<td>tec-tra-air-air</td>
+<td><strong>TL0401</strong></td>
+<td>TECH-TRANSP</td>
+<td>Air Transportation Accident</td>
+</tr>
+<tr>
 <td>ALLUVION</td>
 <td>MS</td>
 <td>nat-hyd-mmw-mud</td>
 <td><strong>GH0303</strong></td>
 <td>GEO-GFAIL</td>
-<td>Flows (includes mudflow)</td>
+<td>Flows</td>
+</tr>
+<tr>
+<td>ANIMAL ATTACK</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0604</strong></td>
+<td>BIO-OTHER</td>
+<td>Human-Wildlife Conflict</td>
+</tr>
+<tr>
+<td>ANIMAL DISEASE</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0301</strong></td>
+<td>BIO-ANIMAL</td>
+<td>Animal Diseases (Not Zoonoses)</td>
+</tr>
+<tr>
+<td>ASPHYXIA</td>
+<td>OT</td>
+<td></td>
+<td><strong>CH0400</strong></td>
+<td>CHEM-AGAS</td>
+<td>Asphyxiant Gases</td>
 </tr>
 <tr>
 <td>AVALANCHE</td>
@@ -1828,12 +1935,52 @@
 <td>Avalanche</td>
 </tr>
 <tr>
+<td>BOAT CAPSIZE</td>
+<td>AC</td>
+<td>tec-tra-wat-wat</td>
+<td><strong>TL0050</strong> †</td>
+<td>TECH-TRANSP</td>
+<td>Marine Accident</td>
+</tr>
+<tr>
+<td>BREACH</td>
+<td>FL</td>
+<td>tec-mis-col-col</td>
+<td><strong>TL0205</strong></td>
+<td>TECH-STRFAIL</td>
+<td>Dam Failure</td>
+</tr>
+<tr>
+<td>CHEMICAL SUBSTANCE</td>
+<td>OT</td>
+<td></td>
+<td><strong>CH0903</strong></td>
+<td>CHEM-OTHER</td>
+<td>Chemical Warfare Agents</td>
+</tr>
+<tr>
+<td>Cholera</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0204</strong></td>
+<td>BIO-SPEC</td>
+<td>Cholera (Human)</td>
+</tr>
+<tr>
 <td>COASTAL EROSION</td>
 <td>OT</td>
-<td>nat-geo-env-coa</td>
+<td>nat-geo-env-sed</td>
 <td><strong>GH0405</strong></td>
 <td>GEO-OTHER</td>
 <td>Coastal Erosion &amp; Accretion</td>
+</tr>
+<tr>
+<td>COASTAL FLOOD</td>
+<td>FL</td>
+<td>nat-hyd-flo-coa</td>
+<td><strong>MH0601</strong></td>
+<td>MH-WATER</td>
+<td>Coastal Flooding</td>
 </tr>
 <tr>
 <td>COLD WAVE</td>
@@ -1844,12 +1991,44 @@
 <td>Cold Wave</td>
 </tr>
 <tr>
+<td>CONFLICT</td>
+<td>CE</td>
+<td></td>
+<td><strong>SO0103</strong></td>
+<td>SOC-CONF</td>
+<td>Civil Unrest</td>
+</tr>
+<tr>
+<td>CONTAMINATION</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0103</strong></td>
+<td>ENV-AIR</td>
+<td>Ambient (Outdoor) Air Pollution</td>
+</tr>
+<tr>
 <td>CYCLONE</td>
 <td>TC</td>
 <td>nat-met-sto-tro</td>
-<td><strong>MH0306</strong></td>
+<td><strong>MH0309</strong></td>
 <td>MH-WIND</td>
-<td>Cyclone or Depression</td>
+<td>Tropical Cyclone</td>
+</tr>
+<tr>
+<td>Deforestación</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0201</strong></td>
+<td>ENV-FOREST</td>
+<td>Deforestation</td>
+</tr>
+<tr>
+<td>DOMESTIC FIRE</td>
+<td>FR</td>
+<td>tec-ind-fir-fir</td>
+<td><strong>TL0305</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Fire</td>
 </tr>
 <tr>
 <td>DROUGHT</td>
@@ -1860,6 +2039,22 @@
 <td>Drought</td>
 </tr>
 <tr>
+<td>DROWNING</td>
+<td>AC</td>
+<td>tec-tra-wat-wat</td>
+<td><strong>TL0403</strong></td>
+<td>TECH-TRANSP</td>
+<td>Maritime Accident</td>
+</tr>
+<tr>
+<td>DZUD</td>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td><strong>MH0503</strong></td>
+<td>MH-TEMP</td>
+<td>Dzud</td>
+</tr>
+<tr>
 <td>EARTHQUAKE</td>
 <td>EQ</td>
 <td>nat-geo-ear-gro</td>
@@ -1868,20 +2063,28 @@
 <td>Earthquake</td>
 </tr>
 <tr>
-<td>ELECTRIC STORM</td>
-<td>ST</td>
-<td>nat-met-sto-lig</td>
-<td><strong>MH0102</strong></td>
-<td>MH-CONV</td>
-<td>Lightning (electrical storm)</td>
+<td>ELECTROCUTION</td>
+<td>OT</td>
+<td></td>
+<td><strong>TL0209</strong></td>
+<td>TECH-STRFAIL</td>
+<td>Power Outage / Blackout</td>
 </tr>
 <tr>
 <td>EPIDEMIC</td>
-<td>EP</td>
+<td>EP ‡</td>
 <td>nat-bio-epi-dis</td>
 <td><strong>BI0101</strong></td>
 <td>BIO-INFECT</td>
-<td>Infectious disease (general — source doesn't distinguish the pathogen)</td>
+<td>Airborne Diseases (human and Animal)</td>
+</tr>
+<tr>
+<td>EPIZOOTIC</td>
+<td></td>
+<td>nat-bio-ani-ani</td>
+<td><strong>BI0027</strong> †</td>
+<td>BIO_INFDISANIHUM</td>
+<td>Zoonotic Diseases</td>
 </tr>
 <tr>
 <td>EROSION</td>
@@ -1892,12 +2095,36 @@
 <td>Soil Erosion</td>
 </tr>
 <tr>
+<td>EXPLOSION</td>
+<td>AC</td>
+<td>tec-ind-exp-exp</td>
+<td><strong>TL0029</strong> †</td>
+<td>TECH-INDFAIL</td>
+<td>Explosion</td>
+</tr>
+<tr>
+<td>EXPLOSIONS</td>
+<td>AC</td>
+<td>tec-ind-exp-exp</td>
+<td><strong>TL0304</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Explosion</td>
+</tr>
+<tr>
 <td>FIRE</td>
 <td>WF</td>
 <td>nat-cli-wil-wil</td>
 <td><strong>EN0205</strong></td>
 <td>ENV-FOREST</td>
-<td>Wildfires (general — source doesn't distinguish forest/land)</td>
+<td>Wildfires</td>
+</tr>
+<tr>
+<td>FISSURES</td>
+<td>EQ</td>
+<td>nat-geo-ear-gro</td>
+<td><strong>GH0311</strong></td>
+<td>GEO-GFAIL</td>
+<td>Surface Rupture &amp; Fissure</td>
 </tr>
 <tr>
 <td>FLASH FLOOD</td>
@@ -1913,7 +2140,7 @@
 <td>nat-hyd-flo-flo</td>
 <td><strong>MH0600</strong></td>
 <td>MH-WATER</td>
-<td>Flooding (chapeau)</td>
+<td>Flooding</td>
 </tr>
 <tr>
 <td>FOG</td>
@@ -1929,7 +2156,15 @@
 <td>nat-cli-wil-for</td>
 <td><strong>EN0205</strong></td>
 <td>ENV-FOREST</td>
-<td>Wildfires (forest fire — the source says so)</td>
+<td>Wildfires</td>
+</tr>
+<tr>
+<td>Freezing Rain</td>
+<td>OT</td>
+<td>nat-met-ext-sev</td>
+<td><strong>MH0506</strong></td>
+<td>MH-TEMP</td>
+<td>Freezing Rain (Supercooled Rain)</td>
 </tr>
 <tr>
 <td>FROST</td>
@@ -1938,6 +2173,38 @@
 <td><strong>MH0505</strong></td>
 <td>MH-TEMP</td>
 <td>Frost (Hoar Frost)</td>
+</tr>
+<tr>
+<td>GALE</td>
+<td>OT</td>
+<td></td>
+<td><strong>MH0303</strong></td>
+<td>MH-WIND</td>
+<td>Gale</td>
+</tr>
+<tr>
+<td>GAS SPILLS</td>
+<td>AC</td>
+<td>tec-ind-gas-gas</td>
+<td><strong>TL0301</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Leaks and Spills</td>
+</tr>
+<tr>
+<td>GLACIAL LAKE OUTBURST FLOOD</td>
+<td>FL</td>
+<td>nat-cli-glo-glo</td>
+<td><strong>MH0607</strong></td>
+<td>MH-WATER</td>
+<td>Glacial Lake Outburst Flooding</td>
+</tr>
+<tr>
+<td>GUNSHOT</td>
+<td>OT</td>
+<td></td>
+<td><strong>SO0301</strong></td>
+<td>SOC-BEH</td>
+<td>Violence</td>
 </tr>
 <tr>
 <td>HAIL STORM</td>
@@ -1956,6 +2223,30 @@
 <td>Heatwave</td>
 </tr>
 <tr>
+<td>HEAVY RAINS</td>
+<td>OT</td>
+<td></td>
+<td><strong>MH0402</strong></td>
+<td>MH-PRECIP</td>
+<td>Rain</td>
+</tr>
+<tr>
+<td>Hundimiento</td>
+<td>OT</td>
+<td>nat-geo-mmd-sub</td>
+<td><strong>GH0308</strong></td>
+<td>GEO-GFAIL</td>
+<td>Sinkhole</td>
+</tr>
+<tr>
+<td>INTOXICACION</td>
+<td>OT</td>
+<td></td>
+<td><strong>CH0601</strong></td>
+<td>CHEM-FOOD</td>
+<td>Levels of Contaminants in Food &amp; Feed</td>
+</tr>
+<tr>
 <td>LAHAR</td>
 <td>VO</td>
 <td>nat-geo-vol-lah</td>
@@ -1964,12 +2255,44 @@
 <td>Lahars</td>
 </tr>
 <tr>
+<td>LAND DEGRADATION</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0301</strong></td>
+<td>ENV-LAND</td>
+<td>Land Degradation</td>
+</tr>
+<tr>
 <td>LANDSLIDE</td>
 <td>LS</td>
 <td>nat-geo-mmd-lan</td>
 <td><strong>GH0300</strong></td>
 <td>GEO-GFAIL</td>
-<td>Gravitational Mass Movement</td>
+<td>Gravitational Mass Movement (Landslide)</td>
+</tr>
+<tr>
+<td>LEAK</td>
+<td>AC</td>
+<td>tec-ind-che-che</td>
+<td><strong>TL0030</strong> †</td>
+<td>TECH-INDFAIL</td>
+<td>Leaks and Spills</td>
+</tr>
+<tr>
+<td>LEAK OR SPILL</td>
+<td>AC</td>
+<td>tec-ind-che-che</td>
+<td><strong>TL0301</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Leaks and Spills</td>
+</tr>
+<tr>
+<td>LIGHTNING</td>
+<td>ST</td>
+<td>nat-met-sto-lig</td>
+<td><strong>MH0102</strong></td>
+<td>MH-CONV</td>
+<td>Lightning (electrical storm)</td>
 </tr>
 <tr>
 <td>LIQUEFACTION</td>
@@ -1980,6 +2303,134 @@
 <td>Liquefaction</td>
 </tr>
 <tr>
+<td>LOCUST CRISIS</td>
+<td>IN</td>
+<td>nat-bio-inf-loc</td>
+<td><strong>BI0402</strong></td>
+<td>BIO-INSECT</td>
+<td>Locust</td>
+</tr>
+<tr>
+<td>MALARIA</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0219</strong></td>
+<td>BIO-SPEC</td>
+<td>Malaria (Human)</td>
+</tr>
+<tr>
+<td>MEASLE</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0221</strong></td>
+<td>BIO-SPEC</td>
+<td>Measles (Human)</td>
+</tr>
+<tr>
+<td>MENINGITIS</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0222</strong></td>
+<td>BIO-SPEC</td>
+<td>Meningococcal Meningitis (Human)</td>
+</tr>
+<tr>
+<td>MINING HAZARD</td>
+<td>OT</td>
+<td></td>
+<td><strong>TL0307</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Mining Hazards</td>
+</tr>
+<tr>
+<td>Mpox</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0224</strong></td>
+<td>BIO-SPEC</td>
+<td>Mpox (Human)</td>
+</tr>
+<tr>
+<td>Nuclear accidents</td>
+<td>OT</td>
+<td></td>
+<td><strong>TL0208</strong></td>
+<td>TECH-STRFAIL</td>
+<td>Nuclear Plant Failure</td>
+</tr>
+<tr>
+<td>PEST</td>
+<td>IN</td>
+<td>nat-bio-inf-loc</td>
+<td><strong>BI0401</strong></td>
+<td>BIO-INSECT</td>
+<td>Insect Pest Infestations</td>
+</tr>
+<tr>
+<td>PLAGUE</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0228</strong></td>
+<td>BIO-SPEC</td>
+<td>Plague (Human)</td>
+</tr>
+<tr>
+<td>POLLUTION</td>
+<td>OT</td>
+<td></td>
+<td><strong>TL0302</strong></td>
+<td>TECH-INDFAIL</td>
+<td>Pollution</td>
+</tr>
+<tr>
+<td>Racionamiento</td>
+<td>OT</td>
+<td></td>
+<td><strong>TL0210</strong></td>
+<td>TECH-STRFAIL</td>
+<td>Water Supply Failure</td>
+</tr>
+<tr>
+<td>RAIN</td>
+<td>OT</td>
+<td></td>
+<td><strong>MH0402</strong></td>
+<td>MH-PRECIP</td>
+<td>Rain</td>
+</tr>
+<tr>
+<td>RIVER FLOOD</td>
+<td>FL</td>
+<td>nat-hyd-flo-riv</td>
+<td><strong>MH0604</strong></td>
+<td>MH-WATER</td>
+<td>Fluvial (Riverine) Flooding</td>
+</tr>
+<tr>
+<td>RIVERBANK EROSION</td>
+<td>OT</td>
+<td></td>
+<td><strong>GH0404</strong></td>
+<td>GEO-OTHER</td>
+<td>River Erosion &amp; Accretion</td>
+</tr>
+<tr>
+<td>ROAD ACCIDENT</td>
+<td>AC</td>
+<td>tec-tra-roa-roa</td>
+<td><strong>TL0405</strong></td>
+<td>TECH-TRANSP</td>
+<td>Road Traffic Accident</td>
+</tr>
+<tr>
+<td>ROCK FALL</td>
+<td>OT</td>
+<td></td>
+<td><strong>GH0301</strong></td>
+<td>GEO-GFAIL</td>
+<td>Falls</td>
+</tr>
+<tr>
 <td>SANDSTORM</td>
 <td>VW</td>
 <td>nat-met-sto-san</td>
@@ -1988,20 +2439,116 @@
 <td>Dust Storm or Sandstorm</td>
 </tr>
 <tr>
+<td>SEA LEVEL RISE</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0402</strong></td>
+<td>ENV-WATER</td>
+<td>Sea Level Rise</td>
+</tr>
+<tr>
+<td>SNAKE BITE</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0605</strong></td>
+<td>BIO-OTHER</td>
+<td>Snakebite Envenoming</td>
+</tr>
+<tr>
 <td>SNOW STORM</td>
 <td>OT</td>
-<td>nat-met-sto-bli</td>
+<td></td>
 <td><strong>MH0406</strong></td>
 <td>MH-PRECIP</td>
 <td>Snow Storm</td>
 </tr>
 <tr>
-<td>STORM SURGE</td>
+<td>Snowfall</td>
+<td>OT</td>
+<td></td>
+<td><strong>MH0405</strong></td>
+<td>MH-PRECIP</td>
+<td>Snow</td>
+</tr>
+<tr>
+<td>STORM</td>
+<td>ST</td>
+<td>nat-met-sto-sto</td>
+<td><strong>MH0103</strong></td>
+<td>MH-CONV</td>
+<td>Thunderstorm</td>
+</tr>
+<tr>
+<td>STRONG WIND</td>
+<td>VW</td>
+<td>nat-met-sto-sto</td>
+<td><strong>MH0301</strong></td>
+<td>MH-WIND</td>
+<td>Wind</td>
+</tr>
+<tr>
+<td>STRUCT.COLLAPSE</td>
+<td>AC</td>
+<td>tec-mis-col-col</td>
+<td><strong>TL0005</strong> †</td>
+<td>TECH-STRFAIL</td>
+<td>Building Collapse</td>
+</tr>
+<tr>
+<td>STRUCTURE</td>
+<td>AC</td>
+<td>tec-mis-col-col</td>
+<td><strong>TL0201</strong></td>
+<td>TECH-STRFAIL</td>
+<td>Building Collapse</td>
+</tr>
+<tr>
+<td>SUBSIDENCE</td>
+<td></td>
+<td>nat-geo-ear-gro</td>
+<td><strong>GH0309</strong></td>
+<td>GEO-GFAIL</td>
+<td>Subsidence and Uplift</td>
+</tr>
+<tr>
+<td>SURGE</td>
 <td>SS</td>
 <td>nat-met-sto-sur</td>
 <td><strong>MH0703</strong></td>
 <td>MH-MARINE</td>
 <td>Storm Surge</td>
+</tr>
+<tr>
+<td>THUNDERSTORM</td>
+<td>ST</td>
+<td>nat-met-sto-sto</td>
+<td><strong>MH0103</strong></td>
+<td>MH-CONV</td>
+<td>Thunderstorm</td>
+</tr>
+<tr>
+<td>TIDAL WAVES</td>
+<td>OT</td>
+<td>nat-hyd-wav-rog</td>
+<td><strong>MH0701</strong></td>
+<td>MH-MARINE</td>
+<td>Rogue Wave</td>
+</tr>
+<tr>
+<td>TORNADO</td>
+<td>TO</td>
+<td>nat-met-sto-tor</td>
+<td><strong>MH0305</strong></td>
+<td>MH-WIND</td>
+<td>Tornado</td>
+</tr>
+<tr>
+<td>TRAIN CRASH</td>
+<td>AC</td>
+<td>tec-tra-rai-rai</td>
+<td><strong>TL0404</strong></td>
+<td>TECH-TRANSP</td>
+<td>Rail Accident</td>
 </tr>
 <tr>
 <td>TSUNAMI</td>
@@ -2012,20 +2559,51 @@
 <td>Tsunami</td>
 </tr>
 <tr>
-<td>TORNADO</td>
-<td>TO</td>
-<td>nat-met-sto-tor</td>
-<td><strong>MH0305</strong></td>
-<td>MH-WIND</td>
-<td>Tornado</td>
+<td>URBAN FLOOD</td>
+<td>OT</td>
+<td></td>
+<td><strong>MH0606</strong></td>
+<td>MH-WATER</td>
+<td>Surface water Flooding</td>
+</tr>
+<tr>
+<td>VOLCANO</td>
+<td>VO</td>
+<td>nat-geo-vol-vol</td>
+<td><strong>GH0205</strong></td>
+<td>GEO-VOLC</td>
+<td>Volcanic Gases and Aerosols</td>
+</tr>
+<tr>
+<td>WETLAND LOSS/DEGRADATION</td>
+<td>OT</td>
+<td></td>
+<td><strong>EN0304</strong></td>
+<td>ENV-LAND</td>
+<td>Wetland Loss/Degradation</td>
+</tr>
+<tr>
+<td>YELLOW FEVER</td>
+<td>OT</td>
+<td></td>
+<td><strong>BI0241</strong></td>
+<td>BIO-SPEC</td>
+<td>Yellow Fever (Human)</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>† These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in <a href="../../taxonomy/">taxonomy.md</a>) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: <code>ACCIDENT</code> (<code>TL0007</code>) → <code>TL0201</code> (see <code>STRUCTURE</code>), <code>BOAT CAPSIZE</code> (<code>TL0050</code>) → <code>TL0403</code> (see <code>DROWNING</code>), <code>EPIZOOTIC</code> (<code>BI0027</code>) → <code>BI0301</code> (see <code>ANIMAL DISEASE</code>), <code>EXPLOSION</code> (<code>TL0029</code>) → <code>TL0304</code> (see <code>EXPLOSIONS</code>), <code>LEAK</code> (<code>TL0030</code>) → <code>TL0301</code> (see <code>LEAK OR SPILL</code>), <code>STRUCT.COLLAPSE</code> (<code>TL0005</code>) → <code>TL0201</code> (see <code>STRUCTURE</code>).</p>
+<p>‡ <code>EPIDEMIC</code>'s GLIDE code is corrected to <code>EP</code> here. The upstream <code>hazard_mapping</code> dict currently has <code>OT</code>, which conflicts with the Cross-Classification Mapping table in <a href="../../taxonomy/">taxonomy.md</a>, where <code>BI0101</code> + <code>nat-bio-epi-dis</code> maps to GLIDE <code>EP</code>. See <a href="https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864">IFRCGo/pystac-monty#201</a> for the upstream fix.</p>
+</blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event.</p>
+<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability, when all three are available for that row. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event.</p>
 </div>
 <p>This mapping enables standardized hazard categorization while preserving DesInventar's original classification in the source properties.</p>
+<h5 id="unmapped-events">Unmapped events</h5>
+<p>The following canonical DesInventar events have no hazard code mapping (<code>hazard_mapping</code> returns <code>None</code>, including <code>OTHER</code>/<code>OT - Other</code>-style catch-alls). Records with these event types — plus any raw <code>evento</code> value with neither an alias nor a direct mapping — are dropped entirely: no event, hazard, or impact item is produced for them.</p>
+<p><code>ANIN BOT</code>, <code>ARBOL CAIDO</code>, <code>AUTHER</code>, <code>BÚSQUEDA</code>, <code>Búsqueda</code>, <code>CAÍDA DE ARBOL</code>, <code>Caída de Arbol</code>, <code>CLIMATE CHANGE</code>, <code>Desaparecido (S)</code>, <code>DROPP OFF</code>, <code>EXTREME TEMPERATURE</code>, <code>FAILEN TREES</code>, <code>FALL INTO A WELL</code>, <code>FAMINE</code>, <code>Famine</code>, <code>Food Insecurity</code>, <code>Geomedical</code>, <code>Hambruna</code>, <code>HAILSTONE</code>, <code>HIGH TIDE</code>, <code>HUNGER/FAMINE</code>, <code>INDUSTRIAL DISASTER</code>, <code>LAINNYA</code>, <code>LALORAN BOOT</code>, <code>Livestock</code>, <code>Mal uvuljuulekh</code>, <code>MALNUTRITION</code>, <code>Malnutrition</code>, <code>Napolo</code>, <code>Nawaa</code>, <code>OT - Other</code>, <code>OTHER</code>, <code>OTHER_AC</code>, <code>Other</code>, <code>PANIC</code>, <code>PEAT</code>, <code>PORT AREA HAZARD</code>, <code>PROJECTILE</code>, <code>Rescate</code>, <code>RESCATE</code>, <code>Riverinflood</code>, <code>Road</code>, <code>Stormy</code>, <code>Stuck</code>, <code>TD - Technical Disaster</code>, <code>Traslados</code>, <code>TREE FALLEN</code>, <code>W</code>, <code>birds</code>, <code>incursion</code></p>
 <h3 id="hazard-item">Hazard Item</h3>
 <p>No hazard items are generated from Desinventar data as the hazard information is almost never available (<code>magnitud2</code> field is empty) and when available, it is hardly standardized.</p>
 <h3 id="impact-item">Impact Item</h3>
