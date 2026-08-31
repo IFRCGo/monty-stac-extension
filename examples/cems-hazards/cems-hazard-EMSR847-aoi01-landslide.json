@@ -194,7 +194,7 @@
   "links": [
     {
       "rel": "related",
-      "href": "../cems-events/cems-event-EMSR847.json",
+      "href": "../collections/cems-events/items/cems-event-EMSR847",
       "type": "application/geo+json",
       "roles": [
         "event"

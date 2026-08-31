@@ -75,7 +75,7 @@
   "links": [
     {
       "rel": "derived_from",
-      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
       "type": "application/geo+json",
       "roles": [
         "response"
