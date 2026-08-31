@@ -346,16 +346,95 @@ casings):
 |-----------------|----------------|-------|--------|----------------------------------|
 | Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0601 |
 | Wildfire | EN0205 | WF | nat-cli-wil-wil | Category default, always `nat-cli-wil-wil`. `subCategory: Forest fire` maps to the same general key — no distinct forest/land refinement is implemented |
-| Storm | — | ST | nat-met-sto | No single UNDRR-ISC chapeau; refine by `subCategory` — `Tropical cyclone, hurricane, typhoon`→**MH0306** / `TC` / `nat-met-sto-tro` (matches the GDACS TC convention, keeping the EMSR847↔GDACS `1001230-41` cross-link discoverable via `a_overlaps`) |
+| Storm | — | — | — | No single UNDRR-ISC chapeau, and `subCategory` alone is not trusted — resolved by a tropical-signal order across `subCategory`, `gdacsId`, and `name`/`reason`; see [the storm rule](#the-storm-rule) below |
 | Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→**MH0705**/`TS` |
 | Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); `subCategory: Avalanche`→**MH0801**. Rockfall (GH0301) and subsidence (GH0309) are not currently distinguished by `subCategory` — both fall through to the GH0300 chapeau |
 | Volcanic Activity | GH0201 | VO | nat-geo-vol-vol | Eruption (chapeau), always `GH0201` — refining by `subCategory` to ashfall (GH0202) or lahar (GH0204) is not currently implemented |
 | Industrial Accident | — | — | tec-ind | Technological — no single chapeau; `subCategory: Chemical`→**TL0301**, `Explosion`→**TL0304**. Anything else — including `gas leak`, which is not a distinct key — falls through to the category default, **TL0301**, not TL0309 |
-| Transport accident | — | — | — | Technological, no single chapeau, and **no automatic refinement is implemented**: `transport accident` is in the manual-review set and produces no hazard code at all until reviewed — not even the bare `tec-tra` this row used to show. TL0401/TL0403/TL0404/TL0405 exist in the taxonomy for air/water/rail/road respectively, but nothing in the transformer currently assigns them |
+| Transport accident | — | — | — | Technological, no single chapeau; refined by mode from `subCategory` — `Air`→**TL0401**, `Water`→**TL0403**, `Rail`→**TL0404**, `Road`→**TL0405** (all `AC` / `tec-tra-*-*`) — overridden to **CH0203** / `AC` / `tec-ind-oil-oil` when `name`/`reason` names an oil or fuel spill regardless of the labelled mode. n=1 in the catalogue (EMSR716, labelled `Air` but "Cargo Ship Oil Spill in Aruba"), so the override is provisional |
 | Humanitarian Crisis | — | — | — | Complex/societal emergency — `humanitarian crisis` is in the manual-review set, so no code is produced at all, not even the bare `CE` this row used to show (a `humanitarian_crisis: ["CE"]` entry exists in the code but is unreachable — the manual-review check short-circuits before it's ever consulted). Societal cluster (`SO01xx`/`SO02xx`, e.g. SO0103 civil unrest) has codes but none fits as a chapeau (mostly Risk & Recovery, out of core RM scope) |
 | Environmental Degradation | — | — | — | Environmental cluster (`EN01xx`–`EN05xx`) has codes but none fits as a chapeau; in the manual-review set, no code produced |
-| Other | — | — | — | Unclassified — in the manual-review set, no code produced at all, not even the bare `OT` this row used to show (same unreachable-dict-entry pattern as Humanitarian Crisis above) |
-| Other | — | OT | — | Unclassified — manual review |
+| Other | — | — | — | Unclassified in general, but not automatically manual-review — refined by `name`/`reason`: a planned mass gathering is excluded as out of scope, an oil or fuel spill resolves to **CH0203**, and a snow-related impact resolves to **MH0405**. Anything else still falls through to manual review; see [the Other rule](#the-other-rule) below |
+
+##### The storm rule
+
+CEMS's `Storm` `subCategory` is not reliable on its own. Of the 18 activations
+labelled `Extra-tropical storm` in the full 260-activation catalogue (read
+2026-08-31), **12 are tropical cyclones**: 11 carry a GDACS `TC…` `gdacsId`,
+and the twelfth, EMSR714 ("Tropical Cyclone BELAL-24 in Réunion"), carries no
+`gdacsId` at all and is identifiable only by name. Mapping the `subCategory`
+label straight to MH0307 would file 12 tropical cyclones as extra-tropical
+cyclones — a valid-but-wrong code of exactly the kind that broke cross-source
+correlation in [#61](https://github.com/IFRCGo/monty-stac-extension/issues/61).
+
+So a tropical signal from any of three sources overrides the `subCategory`
+label, checked in this order:
+
+| Order | Signal | UNDRR-ISC 2025 | GLIDE | EM-DAT |
+| ---: | --- | --- | --- | --- |
+| 1 | `subCategory` = `Tropical cyclone, hurricane, typhoon` | **MH0306** | TC | nat-met-sto-tro |
+| 2 | `gdacsId` starts with `TC` | **MH0306** | TC | nat-met-sto-tro |
+| 3 | `name`/`reason` matches `hurricane\|typhoon\|tropical\|\bTCs?\b` and not `extra-?tropical` | **MH0306** | TC | nat-met-sto-tro |
+| 4 | `subCategory` = `Convective storm` | **MH0103** | ST | nat-met-sto-sev |
+| 5 | `subCategory` = `Extra-tropical storm` | **MH0307** | EC | nat-met-sto-ext |
+
+MH0306 / `TC` / `nat-met-sto-tro` is kept for the tropical case rather than a
+more specific UNDRR code: it is the row this doc and the `examples/cems-*`
+items already use, and it keeps the EMSR847 ↔ GDACS `1001230-41` cross-link
+discoverable via `a_overlaps`. The repo-wide MH0306 vs MH0309 question stays
+with [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+
+Checked against all 23 `Storm` activations in the catalogue: the rule
+resolves **16 as tropical** (4 by `subCategory`, 11 by `gdacsId`, 1 by name),
+**6 as extra-tropical**, and **1 as convective**, with **zero false
+positives**. The six extra-tropical activations — Windstorm in Lorraine,
+Storm in Latvia, Storm in Ireland, Storm in United Kingdom, Storm in Gironde
+Coast, and Storm Claudia in Ireland — carry no `TC` `gdacsId` and name no
+tropical system.
+
+> [!NOTE]
+> **The `Convective storm` row rests on a single activation, and that
+> activation contradicts its own label.** EMSR860 ("Storm in Leinster
+> Province, Ireland") carries `subCategory: Convective storm`, but its own
+> `reason` names it Storm Chandra, a named Atlantic extra-tropical windstorm
+> mapped for flood extent. The rule keeps MH0103 because that is what
+> `subCategory` states and the crosswalk row (`ST` / `nat-met-sto-sev` →
+> MH0103) supports it — the contradiction is recorded here as a provisional,
+> n=1 case. Folding non-tropical storms into MH0307 instead would code
+> EMSR860 correctly but would mis-code a genuine convective event later.
+
+##### The Other rule
+
+Five of the seven `Other` activations in the catalogue are **planned mass
+gatherings** — pre-event reference mapping for crowd and event security, not
+disasters:
+
+| Activation | Outcome |
+| --- | --- |
+| EMSR707 Cologne Festival, Germany | excluded — planned public event |
+| EMSR803 Public event in Austria (Nova Rock) | excluded — planned public event |
+| EMSR827 Public Event in Bavaria (Summer Breeze) | excluded — planned public event |
+| EMSR862 Olympic Winter Games in Italy | excluded — planned public event |
+| EMSR877 Public Event in Burgenland, Austria | excluded — planned public event |
+| EMSR741 Oil Spill in Manila Bay, Philippines | **CH0203** / `AC` / `tec-ind-oil-oil` |
+| EMSR791 Snowfall impact in Guria, Georgia | **MH0405** (UNDRR-only) |
+
+A planned event has no hazard to resolve, so these five are a **deliberate
+scope exclusion** — reported, not dropped silently, and not a transformation
+failure — the same kind of decision as
+[IFRC-DREF's exclusion table](../IFRC-DREF/README.md#accepted-disaster-types).
+
+EMSR741's `reason` names an oil-tanker spill ("the MT Terra Nova, capsized in
+Manila Bay, possibly spilling fuel oil"), resolved to the same **CH0203** /
+`AC` / `tec-ind-oil-oil` override used for Transport accident above.
+
+EMSR791's `reason` describes heavy snowfall that has paralysed movement and
+cut villages off from essential services — sustained snow, not a blizzard. It
+resolves to **MH0405** (Snow), which carries no GLIDE or EM-DAT companion in
+the crosswalk; a single UNDRR-ISC code is a valid `monty:hazard_codes` value,
+the same pattern as IFRC-DREF's `Civil Unrest` → `SO0103`. MH0403 (Blizzard)
+is rejected explicitly: promoting sustained snowfall to a blizzard would
+invent precision the source never claimed.
 
 > **Corrected 2026-07-16**: this table previously used `MH0403` (which is *Blizzard*, not Tropical
 > Cyclone) for storms, `MH1301`/`MH0901`/`MH1201`/`TH0300`/`TH0600` (none of which exist in the
@@ -364,10 +443,12 @@ casings):
 > Mapping table. See IFRCGo/monty-stac-extension#61.
 
 > **Completeness**: this table covers the full observed vocabulary (RM currently exercises
-> Flood, Wildfire, Storm, Earthquake, Mass Movement, Industrial/Transport accident, Other;
-> Volcanic Activity, Humanitarian Crisis, Environmental Degradation appear in the broader
-> catalogue). Any **unmapped or new** `category` MUST fall through to manual review rather
-> than be dropped. `subCategory` (detail endpoint only) is the refinement key.
+> Flood, Wildfire, Storm, Earthquake, Mass Movement, Volcanic Activity, Industrial/Transport
+> accident, and Other — Volcanic Activity is now confirmed in the corpus by EMSR912's
+> `Pyroclastic flow`; Humanitarian Crisis and Environmental Degradation still appear only in the
+> broader catalogue). Any **unmapped or new** `category`, and any activation whose hazard cannot
+> be resolved by the rules above, is **skipped and reported for manual review — never a hard
+> failure**. `subCategory` (detail endpoint only) is the refinement key.
 
 > **`get_canonical_hazard_codes()` does not validate this table.** That function preserves any
 > code that is already a syntactically valid UNDRR-ISC 2025 code — it does not check that the code
