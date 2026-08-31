@@ -53,9 +53,11 @@
       "GRD"
     ],
     "monty:hazard_codes": [
-      "BH0001"
+      "EP",
+      "nat-bio-epi-dis",
+      "BI0101"
     ],
-    "monty:corr_id": "18540701T000000Z-GRD-BH-EPID-001-GCDB",
+    "monty:corr_id": "18540701T000000Z-GRD-BI0101-001-GCDB",
     "roles": [
       "impact",
       "source"

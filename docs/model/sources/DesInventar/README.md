@@ -139,7 +139,7 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | STAC field                                                                                                         | Desinventar field                                  | Description                                                                             |
 | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                              | level0 (lower case) + '-' + serial                 | Unique identifier combining country code and event serial                               |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries(when admin level info is missing, get the geometry from iso3 using Geocoding service) |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries (when admin level info is missing, get the geometry from iso3 using Geocoding service) |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                          | Calculated from geometry                           | Bounding box of the event area                                                          |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#datetime)                  | fechano, fechames, fechadia                        | Date of the event                                                                       |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time) | fechano, fechames, fechadia                        | Start date of the event                                                                 |
@@ -192,7 +192,7 @@ The following table provides cross-classification across multiple systems, per [
 | DZUD | OT | nat-met-ext-sev | **MH0503** | MH-TEMP | Dzud |
 | EARTHQUAKE | EQ | nat-geo-ear-gro | **GH0101** | GEO-SEIS | Earthquake |
 | ELECTROCUTION | OT |  | **TL0209** | TECH-STRFAIL | Power Outage / Blackout |
-| EPIDEMIC | OT | nat-bio-epi-dis | **BI0101** | BIO-INFECT | Airborne Diseases (human and Animal) |
+| EPIDEMIC | EP ‡ | nat-bio-epi-dis | **BI0101** | BIO-INFECT | Airborne Diseases (human and Animal) |
 | EPIZOOTIC |  | nat-bio-ani-ani | **BI0027** † | BIO_INFDISANIHUM | Zoonotic Diseases |
 | EROSION | OT | nat-geo-env-soi | **GH0403** | GEO-OTHER | Soil Erosion |
 | EXPLOSION | AC | tec-ind-exp-exp | **TL0029** † | TECH-INDFAIL | Explosion |
@@ -259,6 +259,8 @@ The following table provides cross-classification across multiple systems, per [
 | YELLOW FEVER | OT |  | **BI0241** | BIO-SPEC | Yellow Fever (Human) |
 
 > † These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in [taxonomy.md](../../taxonomy.md)) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: `ACCIDENT` (`TL0007`) → `TL0201` (see `STRUCTURE`), `BOAT CAPSIZE` (`TL0050`) → `TL0403` (see `DROWNING`), `EPIZOOTIC` (`BI0027`) → `BI0301` (see `ANIMAL DISEASE`), `EXPLOSION` (`TL0029`) → `TL0304` (see `EXPLOSIONS`), `LEAK` (`TL0030`) → `TL0301` (see `LEAK OR SPILL`), `STRUCT.COLLAPSE` (`TL0005`) → `TL0201` (see `STRUCTURE`).
+>
+> ‡ `EPIDEMIC`'s GLIDE code is corrected to `EP` here. The upstream `hazard_mapping` dict currently has `OT`, which conflicts with the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. See [IFRCGo/pystac-monty#201](https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864) for the upstream fix.
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, when all three are available for that row. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.

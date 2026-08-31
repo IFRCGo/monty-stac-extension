@@ -22,14 +22,7 @@ EXAMPLES_DIR = ROOT / "examples"
 # Codes that are known not to resolve against taxonomy.md but are shipped
 # deliberately. Each entry must document *why*, and point at the issue
 # tracking its resolution, so the list doesn't silently grow.
-WAIVED_CODES: dict[str, str] = {
-    "BH0001": (
-        "DesInventar-only code, absent from taxonomy.md under any prefix; "
-        "out of scope for #61, tracked separately "
-        "(examples/desinventar-events/grd-200.json, "
-        "examples/desinventar-impacts/grd-200-deaths.json)."
-    ),
-}
+WAIVED_CODES: dict[str, str] = {}
 
 TABLE_ROW_RE = re.compile(r"^\|(.+)\|\s*$")
 

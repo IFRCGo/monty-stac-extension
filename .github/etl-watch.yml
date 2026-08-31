@@ -70,7 +70,7 @@ sources:
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
-    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
+    reviewed: e465c7098716692935bc2d768066cc78de794f62
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
@@ -96,7 +96,7 @@ sources:
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
+    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
 
   ibtracs:
     extra_paths: [pystac_monty/validators/ibtracs.py]
@@ -112,7 +112,7 @@ sources:
 
   ifrcevent:
     extra_paths: [pystac_monty/validators/ifrc.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
