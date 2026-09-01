@@ -1475,6 +1475,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#alert-data-alertsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert data (alerts.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1684,6 +1695,17 @@
     <span class="md-ellipsis">
       
         Impact Detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert-data-alertsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert data (alerts.json)
       
     </span>
   </a>
@@ -2132,10 +2154,32 @@ matching on <code>corr_id</code>.</p>
 </tbody>
 </table>
 <h3 id="impact-items-from-pager">Impact Items (from PAGER)</h3>
-<p>The <a href="https://earthquake.usgs.gov/data/pager/">PAGER product</a> (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event will produce two <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>impact STAC items</strong></a>:</p>
+<p>The <a href="https://earthquake.usgs.gov/data/pager/">PAGER product</a> (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event carries two content files that hold loss estimates. They are different kinds of estimate and are mapped differently:</p>
+<table>
+<thead>
+<tr>
+<th>PAGER content file</th>
+<th>What it holds</th>
+<th>Monty mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>json/losses.json</code></td>
+<td>One deterministic modelled total per type, plus a per-country breakdown</td>
+<td>Mapped below — the Estimated Fatalities and Estimated Economic Losses items</td>
+</tr>
+<tr>
+<td><code>json/alerts.json</code></td>
+<td>A probability histogram (a set of alert bins) per type</td>
+<td>See <a href="#alert-data-alertsjson">Alert data</a> — representation under review</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>losses.json</code> mapping produces two <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>impact STAC items</strong></a> per country:</p>
 <ol>
-<li>Estimated Fatalities Impact. Example of generated STAC item: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-fatalities.json">examples/usgs-impacts/us6000pi9w-fatalities.json</a></li>
-<li>Estimated Economic Losses Impact. Example of generated STAC item: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-economic.json">examples/usgs-impacts/us6000pi9w-economic.json</a></li>
+<li>Estimated Fatalities Impact. Examples: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-fatalities.json">us6000pi9w-fatalities.json</a>, <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-fatalities.json">us6000tjl2-fatalities.json</a></li>
+<li>Estimated Economic Losses Impact. Examples: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-economic.json">us6000pi9w-economic.json</a>, <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-economic.json">us6000tjl2-economic.json</a></li>
 </ol>
 <p>The PAGER data is found in the <code>losspager</code> product within the USGS event data. Here is a detailed mapping of fields from the USGS PAGER data to the STAC impacts:</p>
 <table>
@@ -2215,13 +2259,13 @@ matching on <code>corr_id</code>.</p>
 </tbody>
 </table>
 <h4 id="impact-detail">Impact Detail</h4>
-<p>The <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">monty:impact_detail</a> field contains specific information about each type of impact. 
+<p>The <a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">monty:impact_detail</a> field contains specific information about each type of impact.
 The values are extracted from the PAGER product data in the USGS event and requires to get an additional content file from the USGS event data
 under <code>json/losses.json</code>.</p>
 <p>For Estimated Fatalities:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expspec_allpeop"</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"imptypdeat"</span><span class="p">,</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"people"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"death"</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;from products.losspager.contents['json/losses.json'].empirical_fatality.total_fatalities&gt;"</span><span class="p">,</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"people"</span><span class="p">,</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">"estimate_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modelled"</span>
@@ -2229,13 +2273,52 @@ under <code>json/losses.json</code>.</p>
 </code></pre></div>
 <p>For Estimated Economic Losses:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expspec_build"</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"imptypcost"</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buildings"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cost"</span><span class="p">,</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;from products.losspager.contents['json/losses.json'].empirical_economic.total_dollars&gt;"</span><span class="p">,</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"estimate_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modelled"</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
 </code></pre></div>
+<p><code>category</code> and <code>type</code> <strong>MUST</strong> be values from the Monty taxonomy — the
+<a href="../../taxonomy/#exposure-category">exposure category</a> and
+<a href="../../taxonomy/#impact-type">impact type</a> tables — not PAGER's own internal codes.</p>
+<h4 id="alert-data-alertsjson">Alert data (<code>alerts.json</code>)</h4>
+<p>Besides the deterministic totals in <code>losses.json</code>, the <code>losspager</code> product carries
+<code>json/alerts.json</code>. For each type (<code>fatality</code>, <code>economic</code>) it holds a <strong>probability
+histogram</strong>: an ordered set of bins, each <code>{color, min, max, probability}</code>, whose
+probabilities sum to 1.0. It is the source behind PAGER's headline alert level.</p>
+<p>Reference fixtures for the 2026-08-10 M7.4 Colombia earthquake (<code>us6000tjl2</code>):
+<a href="us6000tjl2-alerts.json">us6000tjl2-alerts.json</a> and <a href="us6000tjl2-losses.json">us6000tjl2-losses.json</a>.
+The two files describe the same event and do not agree on a single number, because they
+do not answer the same question: <code>losses.json</code> gives one modelled total (961 fatalities),
+while <code>alerts.json</code> gives the spread of possible outcomes around it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For the <strong>economic</strong> type, the bin values are denominated in <strong>millions of USD</strong>,
+even though <code>alerts.json</code> labels the field <code>"units": "USD"</code>. This is verified against
+PAGER's own published alert thresholds — yellow ≥ \$1M, orange ≥ \$100M, red ≥ \$1B
+(<a href="https://earthquake.usgs.gov/data/pager/background.php">PAGER Scientific Background</a>):
+the <code>100</code>–<code>1000</code> bin is colored <code>orange</code> in the reference fixture, which only agrees
+with that threshold table if the bin is read as \$100M–\$1B. A transformer that copies
+the source <code>"units"</code> string through to <code>monty:impact_detail.unit</code> therefore understates
+the value by a factor of one million. The <strong>fatality</strong> type has no such ambiguity: its
+bins and its <code>"units": "fatalities"</code> label are both plain counts of people.</p>
+</div>
+<p>That unit correction holds whatever shape the items eventually take.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How Monty should represent this histogram is <strong>under review</strong> and is deliberately not
+specified here. A probability distribution is not a single value, so it does not fit
+<code>monty:impact_detail</code> as it stands, and collapsing it to one number discards the
+information that makes it useful (anticipatory-action triggers need the spread, not a
+midpoint). It is tracked in
+<a href="https://github.com/IFRCGo/monty-stac-extension/issues/125">#125</a>, alongside the wider
+model questions in <a href="https://github.com/IFRCGo/monty-stac-extension/discussions/110">Discussion #110</a>.
+Until that is settled, do not map <code>alerts.json</code> values onto
+<code>monty:impact_detail.type: potentially_affected</code> — that value describes population
+exposure, not an uncertain death or cost estimate.</p>
+</div>
 
 
 
