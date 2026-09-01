@@ -1139,23 +1139,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Event Item">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hazard-type-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hazard Type Mapping
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -1534,23 +1517,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Event Item">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hazard-type-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hazard Type Mapping
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -1784,9 +1750,23 @@ Include historical events in the results (they are by default excluded unless th
 <td>Source event ID</td>
 <td>Unique identifier of the event</td>
 </tr>
+<tr>
+<td><a href="https://github.com/stac-extensions/processing">processing:version</a></td>
+<td>Generated</td>
+<td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
+</tr>
+<tr>
+<td><a href="https://github.com/stac-extensions/processing">processing:software</a></td>
+<td>Generated</td>
+<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
+</tr>
+<tr>
+<td>#### Hazard Type Mapping</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
 <p>EM-DAT uses the <a href="../../taxonomy/#em-dat-cred-classification-tree">EM-DAT CRED Classification Tree</a> and must be mapped to the <strong>2025 UNDRR-ISC</strong> code as the <strong>reference classification</strong> for the Monty extension. The full cross-classification mapping is available in the <a href="../../taxonomy/#cross-classification-mapping">taxonomy documentation</a>.</p>
 <p>The EM-DAT Classification Key (e.g., <code>nat-hyd-flo-flo</code>) should be used along with the corresponding 2025 UNDRR-ISC code (e.g., <code>MH0600</code>) for maximum interoperability.</p>
 <p><strong>Example mappings:</strong></p>

@@ -1065,6 +1065,16 @@
 <td><code>monty:corr_id</code></td>
 <td>Standard Monty algorithm — <strong>not</strong> the source key</td>
 </tr>
+<tr>
+<td>derived</td>
+<td><code>processing:version</code> (<code>processing:</code> extension)</td>
+<td>Semantic version of the transformer that generated the item — see the <a href="../../response-best-practices/#1-governing-principles">extension layering principle</a></td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>processing:software</code> (<code>processing:</code> extension)</td>
+<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
+</tr>
 </tbody>
 </table>
 <h2 id="object-hazard">Object → Hazard</h2>

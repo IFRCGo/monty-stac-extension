@@ -1549,6 +1549,16 @@ values in <code>monty:</code> fields and do <strong>not</strong> declare <code>d
 <td><code>links[rel=via]</code></td>
 <td>Source reference</td>
 </tr>
+<tr>
+<td>derived</td>
+<td><code>processing:version</code></td>
+<td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>processing:software</code></td>
+<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
+</tr>
 </tbody>
 </table>
 <div class="admonition important">
@@ -1626,6 +1636,16 @@ format <code>{YYYYMMDD}-{ISO3}-{spatial_block}-{UNDRR-ISC}-{episode}-GCDB</code>
 <td>parent activation</td>
 <td><code>links[rel=derived_from]</code></td>
 <td><code>../charter-events/charter-event-{id}.json</code></td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>processing:version</code></td>
+<td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
+</tr>
+<tr>
+<td>derived</td>
+<td><code>processing:software</code></td>
+<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
 </tr>
 </tbody>
 </table>
