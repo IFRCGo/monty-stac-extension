@@ -29,7 +29,7 @@ The following properties from the Monty STAC Extension can be used as queryables
 | roles                | array[string] | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, response)                                                                                                                                                    |
 
 > [!TIP]
-> Items may also be filtered by transformer revision via `processing:version` from the [`processing:` extension](https://github.com/stac-extensions/processing) — see [Usage Examples](#usage-examples) below.
+> Items may also be filtered by [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) transformer revision via `processing:version` from the [`processing:` extension](https://github.com/stac-extensions/processing) — see [Usage Examples](#usage-examples) below. This always identifies the `pystac-monty` transformer, not any processing chain the source data itself went through; see [response best practices, governing principle 2](../response-best-practices.md#1-governing-principles).
 
 ### Hazard Detail Queryables
 

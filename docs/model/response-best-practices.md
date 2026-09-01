@@ -9,10 +9,11 @@ This document specifies which STAC extensions Monty Response items SHOULD or MUS
 ## 1. Governing principles
 
 1. **Extension layering over duplication.** When a third-party STAC extension covers a concept (e.g., Terradue `disaster:` for International Charter items, `processing:` for derived EO products, `eo:` / `sar:` / `sat:` for source imagery), Response items SHOULD declare that extension and use its fields directly. Do NOT replicate those fields under `monty:response_detail`.
-2. **Acquisition vs. Response layer separation.** `sat:`, `eo:`, `sar:`, `view:` extensions describe the **acquisition / source imagery** that the Response product is derived from. They apply to the linked acquisition items reached via `derived_from`, **not** to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery. **Exception:** an `eo-dat` Response item *is* the delivered dataset, so it carries the imagery-layer extensions directly (see §2 and §4.4).
-3. **`monty:` is always declared.** Every Response item declares the Monty extension and carries at least `monty:response_detail.type`, `monty:corr_id`, `monty:country_codes`, `monty:hazard_codes`, and the `response` role.
-4. **`monty:response_detail` is the residual carrier.** It carries the response type code and Monty-specific metadata that is not already expressed by another declared extension on the same item.
-5. **Statistical figures go to Impact items.** Damage / exposure statistics that EO products may carry (e.g., CEMS `affected` / `total` per thematic) are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`.
+2. **`processing:version` and `processing:software` always identify the Monty transformer, not the source data.** Monty is a **cataloger**: it re-publishes third-party disaster data as STAC. The Montandon pipeline that does this has two parts — [`montandon-etl`](https://github.com/IFRCGo/montandon-etl) (orchestration/pipeline) and [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) (the transformer library that maps source data to Monty STAC items; see [`docs/model/sources/METHODOLOGY.md`](./sources/METHODOLOGY.md)). `processing:version` and the `pystac-monty` entry in `processing:software` record which release of the **`pystac-monty` transformer** generated *this STAC item* — never the processing applied to the underlying asset before Monty ever saw it. A satellite image or EO product may separately carry its own processing provenance through the same `processing:` extension — `processing:level` (e.g. `L3`), `processing:lineage` (free text describing the source pipeline), or other entries in `processing:software` keyed by the tool that produced the asset (e.g. `"MIPF R24": "R24"`). Both can legitimately sit on the same item — a Charter VAP's `processing:software` map, for instance, holds both `"MIPF R24": "R24"` (the imagery orthorectification baseline) and `"pystac-monty": "1.0.0"` (the Monty transformer) side by side — but only the `pystac-monty` entry, and the top-level `processing:version`, describe the transformation step itself. See [§4.3](#43-unosat-damage-assessment-eo-gra) for a worked example combining both.
+3. **Acquisition vs. Response layer separation.** `sat:`, `eo:`, `sar:`, `view:` extensions describe the **acquisition / source imagery** that the Response product is derived from. They apply to the linked acquisition items reached via `derived_from`, **not** to the Response product item itself. A Monty Response item for a CEMS Grading Product is a derived product — its STAC extensions describe its provenance and classification, not the raw imagery. **Exception:** an `eo-dat` Response item *is* the delivered dataset, so it carries the imagery-layer extensions directly (see §2 and §4.4).
+4. **`monty:` is always declared.** Every Response item declares the Monty extension and carries at least `monty:response_detail.type`, `monty:corr_id`, `monty:country_codes`, `monty:hazard_codes`, and the `response` role.
+5. **`monty:response_detail` is the residual carrier.** It carries the response type code and Monty-specific metadata that is not already expressed by another declared extension on the same item.
+6. **Statistical figures go to Impact items.** Damage / exposure statistics that EO products may carry (e.g., CEMS `affected` / `total` per thematic) are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`.
 
 ---
 
@@ -183,10 +184,16 @@ Note the absence of `monty:response_detail.status` — it is carried via `disast
       "sendai_targets": ["C", "D"]
     },
     "processing:level": "L3",
-    "processing:lineage": "Pleiades VHR optical → manual building damage interpretation"
+    "processing:lineage": "Pleiades VHR optical → manual building damage interpretation",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    }
   }
 }
 ```
+
+`processing:level` and `processing:lineage` describe how UNOSAT produced the *source* damage assessment (Pleiades imagery, L3, human-interpreted). `processing:version` and the `pystac-monty` entry in `processing:software` describe an unrelated thing: which release of the `pystac-monty` transformer turned that UNOSAT product into *this STAC item*. Neither pair says anything about the other — see principle 2 above.
 
 ### 4.4 Charter raw acquisition delivered to responders (`eo-dat`)
 
