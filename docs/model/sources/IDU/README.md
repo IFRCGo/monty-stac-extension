@@ -59,6 +59,8 @@ previous implementation (R): none
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                           | source_url                                    |                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                         |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Hazard Type Mapping
 
@@ -124,6 +126,8 @@ Here is the table with the STAC fields that are mapped from IDU event to the STA
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                                 | main source url                               | Link to the main source url                                                                                                                                                      |
 | monty.impact_detail                                                                                                               | impact_detail                                 | As shown in impact_detail below                                                                                                                                                  |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Impact Detail
 

@@ -55,6 +55,8 @@ A PDC event will always produce an Event STAC Item. Here is a table with the fie
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the [Hazard Type Mapping](#hazard-type-mapping) |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Hazard Type Mapping
 
@@ -124,6 +126,8 @@ A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) |      |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ## Impact item
 
@@ -146,6 +150,8 @@ The following table shows the mapping of PDC impact fields to STAC items.
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
 | [monty:impact_detail] | Impact items using different fields | Several impact items are created based on several fields available from the exposure endpoint |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ### Impact Details
 The following fields are used to create several **Impact Details** items.

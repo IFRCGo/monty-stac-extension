@@ -3,59 +3,54 @@
   "stac_version": "1.0.0",
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
-    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
   ],
-  "id": "us6000pi9w-shakemap",
+  "id": "us6000tjl2-shakemap",
   "geometry": {
     "type": "Point",
     "coordinates": [
-      87.3608,
-      28.639
+      -76.2422,
+      4.8436
     ]
   },
   "bbox": [
-    87.3608,
-    28.639,
-    87.3608,
-    28.639
+    -76.2422,
+    4.8436,
+    -76.2422,
+    4.8436
   ],
   "properties": {
-    "datetime": "2025-01-07T01:05:16Z",
-    "title": "ShakeMap for 2025 Southern Tibetan Plateau Earthquake",
-    "description": "Ground motion and intensity map for M7.1 earthquake in Southern Tibetan Plateau",
-    "monty:src_event_id": "us6000pi9w",
+    "datetime": "2026-08-10T12:34:28Z",
+    "title": "ShakeMap for M 7.4 earthquake, San José del Palmar, Colombia",
+    "description": "Ground motion and intensity map for M7.4 earthquake, 5 km S of San José del Palmar, Colombia",
+    "monty:src_event_id": "us6000tjl2",
     "roles": [
       "source",
       "hazard"
     ],
     "monty:country_codes": [
-      "CHN"
+      "COL"
     ],
     "monty:hazard_codes": [
       "EQ",
       "nat-geo-ear-gro",
       "GH0101"
     ],
-    "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
+    "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
     "monty:hazard_detail": {
       "cluster": "GEO-SEIS",
-      "severity_value": 7.1,
+      "severity_value": 7.4,
       "severity_unit": "mww"
     },
-    "eq:magnitude": 7.1,
+    "eq:magnitude": 7.4,
     "eq:magnitude_type": "mww",
-    "eq:depth": 10,
+    "eq:depth": 110.285,
     "eq:status": "reviewed",
     "eq:tsunami": false,
     "eq:sources": [
       {
         "name": "us",
-        "code": "6000pi9w",
+        "code": "6000tjl2",
         "catalog": "USGS-NEIC"
       }
     ]
@@ -63,7 +58,7 @@
   "links": [
     {
       "rel": "self",
-      "href": "us6000pi9w-shakemap.json"
+      "href": "us6000tjl2-shakemap.json"
     },
     {
       "rel": "collection",
@@ -71,7 +66,7 @@
     },
     {
       "rel": "related",
-      "href": "../usgs-events/us6000pi9w.json",
+      "href": "../usgs-events/us6000tjl2.json",
       "roles": [
         "event"
       ]
@@ -79,7 +74,7 @@
   ],
   "assets": {
     "intensity_map": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity.jpg",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/intensity.jpg",
       "type": "image/jpeg",
       "title": "Intensity Map",
       "roles": [
@@ -87,7 +82,7 @@
       ]
     },
     "intensity_overlay": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/intensity_overlay.png",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/intensity_overlay.png",
       "type": "image/png",
       "title": "Intensity Overlay",
       "roles": [
@@ -95,7 +90,7 @@
       ]
     },
     "pga_map": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pga.jpg",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/pga.jpg",
       "type": "image/jpeg",
       "title": "Peak Ground Acceleration Map",
       "roles": [
@@ -103,7 +98,7 @@
       ]
     },
     "pgv_map": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/pgv.jpg",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/pgv.jpg",
       "type": "image/jpeg",
       "title": "Peak Ground Velocity Map",
       "roles": [
@@ -111,7 +106,7 @@
       ]
     },
     "mmi_contours": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/cont_mi.json",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/cont_mi.json",
       "type": "application/json",
       "title": "MMI Contours",
       "roles": [
@@ -119,7 +114,7 @@
       ]
     },
     "grid": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/grid.xml",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/grid.xml",
       "type": "application/xml",
       "title": "Ground Motion Grid",
       "roles": [
@@ -127,7 +122,7 @@
       ]
     },
     "uncertainty": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/uncertainty.xml",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/uncertainty.xml",
       "type": "application/xml",
       "title": "Uncertainty Grid",
       "roles": [
@@ -135,7 +130,7 @@
       ]
     },
     "stations": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/stationlist.json",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/stationlist.json",
       "type": "application/json",
       "title": "Station List",
       "roles": [
@@ -143,7 +138,7 @@
       ]
     },
     "rupture": {
-      "href": "https://earthquake.usgs.gov/realtime/product/shakemap/us6000pi9w/us/1736298441909/download/rupture.json",
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:shakemap:us6000tjl2:1786452072000/contents/download/rupture.json",
       "type": "application/json",
       "title": "Fault Rupture",
       "roles": [

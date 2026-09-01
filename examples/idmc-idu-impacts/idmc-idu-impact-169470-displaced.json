@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "idmc-idu-impact-169470-displaced",
   "geometry": {
@@ -39,6 +40,10 @@
       "EN0205"
     ],
     "monty:corr_id": "20241111-ESP-nat-cli-wil-wil-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:impact_detail": {
       "category": "people",
       "type": "displaced_internal",

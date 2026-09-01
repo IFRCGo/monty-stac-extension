@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "cems-impact-EMSR847-aoi01-gra-population",
   "geometry": {
@@ -63,6 +64,10 @@
       "nat-met-sto-tro"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:impact_detail": {
       "category": "people",
       "type": "affected_total",
@@ -75,7 +80,7 @@
   "links": [
     {
       "rel": "derived_from",
-      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
       "type": "application/geo+json",
       "roles": [
         "response"

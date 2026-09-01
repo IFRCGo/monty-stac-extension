@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "grd-200",
   "geometry": {
@@ -48,9 +49,15 @@
       "GRD"
     ],
     "monty:hazard_codes": [
-      "BH0001"
+      "EP",
+      "nat-bio-epi-dis",
+      "BI0101"
     ],
-    "monty:corr_id": "18540701T000000Z-GRD-BH-EPID-001-GCDB",
+    "monty:corr_id": "18540701T000000Z-GRD-BI0101-001-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "roles": [
       "event",
       "source"

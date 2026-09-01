@@ -1,7 +1,8 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "type": "Feature",
   "id": "1001230-41",
@@ -249,6 +250,10 @@
       "nat-met-sto-tro"
     ],
     "monty:corr_id": "20251021-JAM-1159798-MH0306-41-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:hazard_detail": {
       "severity_value": 296.29,
       "severity_unit": "km/h",

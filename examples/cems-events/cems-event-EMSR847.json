@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "cems-event-EMSR847",
   "geometry": {
@@ -37,6 +38,10 @@
       "nat-met-sto-tro"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "keywords": [
       "Depression or Cyclone",
       "EMSR847",
@@ -63,7 +68,7 @@
     },
     {
       "rel": "related",
-      "href": "../gdacs-events/1001230-41.json",
+      "href": "../collections/gdacs-events/items/1001230-41",
       "type": "application/geo+json",
       "title": "GDACS TC1001230 (episode 41)",
       "roles": [
@@ -72,7 +77,7 @@
     },
     {
       "rel": "related",
-      "href": "../charter-events/charter-event-996.json",
+      "href": "../collections/charter-events/items/charter-event-996",
       "type": "application/geo+json",
       "title": "Charter activation 996",
       "roles": [
@@ -81,7 +86,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-storm",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -89,7 +94,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-landslide",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -97,7 +102,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
+      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
       "type": "application/geo+json",
       "roles": [
         "response"
@@ -105,7 +110,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json",
+      "href": "../collections/cems-impacts/items/cems-impact-EMSR847-aoi01-gra-population",
       "type": "application/geo+json",
       "roles": [
         "impact"

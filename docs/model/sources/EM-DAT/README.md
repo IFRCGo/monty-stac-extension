@@ -159,7 +159,8 @@ Here is a table with the fields that are mapped from the EM-DAT event to the STA
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Classification Key                                                                                           | List of hazard codes converted following the [Hazard Type Mapping](#hazard-type-mapping)                                                                                                                                                                   |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | graphql request                                                                                              | Link to the EM-DAT event details page                                                                                                                                                                                                                      |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
-
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 #### Hazard Type Mapping
 
 EM-DAT uses the [EM-DAT CRED Classification Tree](../../taxonomy.md#em-dat-cred-classification-tree) and must be mapped to the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension. The full cross-classification mapping is available in the [taxonomy documentation](../../taxonomy.md#cross-classification-mapping).

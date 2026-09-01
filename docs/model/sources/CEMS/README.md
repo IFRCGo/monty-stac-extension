@@ -124,6 +124,8 @@ Maps to a Monty Event item (`cems-events`); Monty extension only.
 | `category` (+ `subCategory`) | `monty:hazard_codes` | Map via [Hazard codes](#hazard-codes) |
 | `countries[].name` | `monty:country_codes` | Map country name → ISO 3166-1 alpha-3 |
 | derived | `monty:corr_id` | Standard Monty algorithm (date/ISO3/spatial block/hazard/episode) — **not** the EMSR code |
+| derived | `processing:version` | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| derived | `processing:software` | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | `gdacsId`, `charterNumber` | `links[rel=related]` | See [Cross-source linkage](#cross-source-linkage) |
 | `reportLink`, source page | `links[rel=via]` | Activation page / StoryMap |
 

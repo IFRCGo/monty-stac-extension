@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "emdat-event-2024-0796-ESP",
   "geometry": {
@@ -54,6 +55,10 @@
       "ESP"
     ],
     "monty:corr_id": "20241027-ESP-FL-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "roles": [
       "source",
       "event"

@@ -139,7 +139,7 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | STAC field                                                                                                         | Desinventar field                                  | Description                                                                             |
 | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                              | level0 (lower case) + '-' + serial                 | Unique identifier combining country code and event serial                               |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries                                         |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                  | Based on shapefile data using level2/level1/level0 | Geometry derived from administrative boundaries (when admin level info is missing, get the geometry from iso3 using Geocoding service) |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                          | Calculated from geometry                           | Bounding box of the event area                                                          |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#datetime)                  | fechano, fechames, fechadia                        | Date of the event                                                                       |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time) | fechano, fechames, fechadia                        | Start date of the event                                                                 |
@@ -149,44 +149,131 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | [monty:country_codes](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                          |
 | [monty:hazard_codes](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)                    |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated                                          | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated                                          | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | |
 
 #### Hazard Code Mapping
 
-DesInventar uses its own hazard classification and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension. The following table provides cross-classification across multiple systems:
+DesInventar uses its own hazard classification and must follow the **2025 UNDRR-ISC** code as the **reference classification** for the Monty extension. Raw `evento` values from the source are messy — typos, translations, capitalization variants, legacy codes — so the transformer resolves them in two steps (see [`desinventar.py`](https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/desinventar.py)):
 
-| DesInventar Event | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
-| ----------------- | ----- | ------------------- | ------------------------------ | ---------- | ------------------------------- |
-| ALLUVION          | MS    | nat-hyd-mmw-mud     | **GH0303**                     | GEO-GFAIL  | Flows (includes mudflow)        |
-| AVALANCHE         | AV    | nat-geo-mmd-ava     | **MH0801**                     | MH-TERR    | Avalanche                       |
-| COASTAL EROSION   | OT    | nat-geo-env-coa     | **GH0405**                     | GEO-OTHER  | Coastal Erosion & Accretion     |
-| COLD WAVE         | CW    | nat-met-ext-col     | **MH0502**                     | MH-TEMP    | Cold Wave                       |
-| CYCLONE           | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND    | Cyclone or Depression           |
-| DROUGHT           | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP  | Drought                         |
-| EARTHQUAKE        | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS   | Earthquake                      |
-| ELECTRIC STORM    | ST    | nat-met-sto-lig     | **MH0102**                     | MH-CONV    | Lightning (electrical storm)    |
-| EROSION           | OT    | nat-geo-env-soi     | **GH0403**                     | GEO-OTHER  | Soil Erosion                    |
-| FIRE              | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST | Wildfires (general — source doesn't distinguish forest/land) |
-| FLASH FLOOD       | FF    | nat-hyd-flo-fla     | **MH0603**                     | MH-WATER   | Flash Flooding                  |
-| FLOOD             | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER   | Flooding (chapeau)              |
-| FOG               | OT    | nat-met-fog-fog     | **MH0202**                     | MH-PART    | Fog                             |
-| FOREST FIRE       | WF    | nat-cli-wil-for     | **EN0205**                     | ENV-FOREST | Wildfires (forest fire — the source says so) |
-| FROST             | OT    | nat-met-ext-sev     | **MH0505**                     | MH-TEMP    | Frost (Hoar Frost)              |
-| HAIL STORM        | ST    | nat-met-sto-hai     | **MH0404**                     | MH-PRECIP  | Hail                            |
-| HEAT WAVE         | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP    | Heatwave                        |
-| LAHAR             | VO    | nat-geo-vol-lah     | **GH0204**                     | GEO-VOLC   | Lahars                          |
-| LANDSLIDE         | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL  | Gravitational Mass Movement     |
-| LIQUEFACTION      | EQ    | nat-geo-ear-gro     | **GH0307**                     | GEO-GFAIL  | Liquefaction                    |
-| SANDSTORM         | VW    | nat-met-sto-san     | **MH0201**                     | MH-PART    | Dust Storm or Sandstorm         |
-| SNOW STORM        | OT    | nat-met-sto-bli     | **MH0406**                     | MH-PRECIP  | Snow Storm                      |
-| STORM SURGE       | SS    | nat-met-sto-sur     | **MH0703**                     | MH-MARINE  | Storm Surge                     |
-| TSUNAMI           | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE  | Tsunami                         |
-| TORNADO           | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND    | Tornado                         |
+1. **Normalization** — the raw `evento` value is looked up in a large alias table (`hazard_name_mappings`, 300+ entries) that collapses raw variants (e.g. `"HURRICANE"`, `"Typhoon"`, `"TC - Tropical Cyclone"`) down to one canonical event name (e.g. `CYCLONE`). If no alias matches, the raw value is used as-is.
+2. **Code lookup** — the canonical event name is looked up in the `hazard_mapping` table below to get its `[UNDRR-ISC 2025, EM-DAT, GLIDE]` triplet.
 
 > [!NOTE]
-> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+> If the canonical event name has no entry in `hazard_mapping`, or maps to `None`, the record is dropped — **no event item is produced** for it. See [Unmapped events](#unmapped-events) below.
+
+The following table provides cross-classification across multiple systems, per [taxonomy.md](../../taxonomy.md) and [HazardProfiles.csv](https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/HazardProfiles.csv):
+
+| DesInventar Event | GLIDE | EM-DAT | **UNDRR-ISC 2025** (Reference) | Cluster | Description |
+| ------------------ | ----- | ------------------- | ------------------------------- | ---------- | ------------------------------- |
+| ACCIDENT | AC | tec-mis-col-col | **TL0007** † | TECH-STRFAIL | Structural Failure |
+| Acid rain | OT |  | **EN0105** | ENV-AIR | Acid Rain |
+| AFLATOXIN | OT |  | **CH0201** | CHEM-CARC | Aflatoxins |
+| Air pollution | OT |  | **EN0102** | ENV-AIR | Air Pollution (Point Source) |
+| AIRCRAFT CRASH | AC | tec-tra-air-air | **TL0401** | TECH-TRANSP | Air Transportation Accident |
+| ALLUVION | MS | nat-hyd-mmw-mud | **GH0303** | GEO-GFAIL | Flows |
+| ANIMAL ATTACK | OT |  | **BI0604** | BIO-OTHER | Human-Wildlife Conflict |
+| ANIMAL DISEASE | OT |  | **BI0301** | BIO-ANIMAL | Animal Diseases (Not Zoonoses) |
+| ASPHYXIA | OT |  | **CH0400** | CHEM-AGAS | Asphyxiant Gases |
+| AVALANCHE | AV | nat-geo-mmd-ava | **MH0801** | MH-TERR | Avalanche |
+| BOAT CAPSIZE | AC | tec-tra-wat-wat | **TL0050** † | TECH-TRANSP | Marine Accident |
+| BREACH | FL | tec-mis-col-col | **TL0205** | TECH-STRFAIL | Dam Failure |
+| CHEMICAL SUBSTANCE | OT |  | **CH0903** | CHEM-OTHER | Chemical Warfare Agents |
+| Cholera | OT |  | **BI0204** | BIO-SPEC | Cholera (Human) |
+| COASTAL EROSION | OT | nat-geo-env-sed | **GH0405** | GEO-OTHER | Coastal Erosion & Accretion |
+| COASTAL FLOOD | FL | nat-hyd-flo-coa | **MH0601** | MH-WATER | Coastal Flooding |
+| COLD WAVE | CW | nat-met-ext-col | **MH0502** | MH-TEMP | Cold Wave |
+| CONFLICT | CE |  | **SO0103** | SOC-CONF | Civil Unrest |
+| CONTAMINATION | OT |  | **EN0103** | ENV-AIR | Ambient (Outdoor) Air Pollution |
+| CYCLONE | TC | nat-met-sto-tro | **MH0309** | MH-WIND | Tropical Cyclone |
+| Deforestación | OT |  | **EN0201** | ENV-FOREST | Deforestation |
+| DOMESTIC FIRE | FR | tec-ind-fir-fir | **TL0305** | TECH-INDFAIL | Fire |
+| DROUGHT | DR | nat-cli-dro-dro | **MH0401** | MH-PRECIP | Drought |
+| DROWNING | AC | tec-tra-wat-wat | **TL0403** | TECH-TRANSP | Maritime Accident |
+| DZUD | OT | nat-met-ext-sev | **MH0503** | MH-TEMP | Dzud |
+| EARTHQUAKE | EQ | nat-geo-ear-gro | **GH0101** | GEO-SEIS | Earthquake |
+| ELECTROCUTION | OT |  | **TL0209** | TECH-STRFAIL | Power Outage / Blackout |
+| EPIDEMIC | EP ‡ | nat-bio-epi-dis | **BI0101** | BIO-INFECT | Airborne Diseases (human and Animal) |
+| EPIZOOTIC |  | nat-bio-ani-ani | **BI0027** † | BIO_INFDISANIHUM | Zoonotic Diseases |
+| EROSION | OT | nat-geo-env-soi | **GH0403** | GEO-OTHER | Soil Erosion |
+| EXPLOSION | AC | tec-ind-exp-exp | **TL0029** † | TECH-INDFAIL | Explosion |
+| EXPLOSIONS | AC | tec-ind-exp-exp | **TL0304** | TECH-INDFAIL | Explosion |
+| FIRE | WF | nat-cli-wil-wil | **EN0205** | ENV-FOREST | Wildfires |
+| FISSURES | EQ | nat-geo-ear-gro | **GH0311** | GEO-GFAIL | Surface Rupture & Fissure |
+| FLASH FLOOD | FF | nat-hyd-flo-fla | **MH0603** | MH-WATER | Flash Flooding |
+| FLOOD | FL | nat-hyd-flo-flo | **MH0600** | MH-WATER | Flooding |
+| FOG | OT | nat-met-fog-fog | **MH0202** | MH-PART | Fog |
+| FOREST FIRE | WF | nat-cli-wil-for | **EN0205** | ENV-FOREST | Wildfires |
+| Freezing Rain | OT | nat-met-ext-sev | **MH0506** | MH-TEMP | Freezing Rain (Supercooled Rain) |
+| FROST | OT | nat-met-ext-sev | **MH0505** | MH-TEMP | Frost (Hoar Frost) |
+| GALE | OT |  | **MH0303** | MH-WIND | Gale |
+| GAS SPILLS | AC | tec-ind-gas-gas | **TL0301** | TECH-INDFAIL | Leaks and Spills |
+| GLACIAL LAKE OUTBURST FLOOD | FL | nat-cli-glo-glo | **MH0607** | MH-WATER | Glacial Lake Outburst Flooding |
+| GUNSHOT | OT |  | **SO0301** | SOC-BEH | Violence |
+| HAIL STORM | ST | nat-met-sto-hai | **MH0404** | MH-PRECIP | Hail |
+| HEAT WAVE | HT | nat-met-ext-hea | **MH0501** | MH-TEMP | Heatwave |
+| HEAVY RAINS | OT |  | **MH0402** | MH-PRECIP | Rain |
+| Hundimiento | OT | nat-geo-mmd-sub | **GH0308** | GEO-GFAIL | Sinkhole |
+| INTOXICACION | OT |  | **CH0601** | CHEM-FOOD | Levels of Contaminants in Food & Feed |
+| LAHAR | VO | nat-geo-vol-lah | **GH0204** | GEO-VOLC | Lahars |
+| LAND DEGRADATION | OT |  | **EN0301** | ENV-LAND | Land Degradation |
+| LANDSLIDE | LS | nat-geo-mmd-lan | **GH0300** | GEO-GFAIL | Gravitational Mass Movement (Landslide) |
+| LEAK | AC | tec-ind-che-che | **TL0030** † | TECH-INDFAIL | Leaks and Spills |
+| LEAK OR SPILL | AC | tec-ind-che-che | **TL0301** | TECH-INDFAIL | Leaks and Spills |
+| LIGHTNING | ST | nat-met-sto-lig | **MH0102** | MH-CONV | Lightning (electrical storm) |
+| LIQUEFACTION | EQ | nat-geo-ear-gro | **GH0307** | GEO-GFAIL | Liquefaction |
+| LOCUST CRISIS | IN | nat-bio-inf-loc | **BI0402** | BIO-INSECT | Locust |
+| MALARIA | OT |  | **BI0219** | BIO-SPEC | Malaria (Human) |
+| MEASLE | OT |  | **BI0221** | BIO-SPEC | Measles (Human) |
+| MENINGITIS | OT |  | **BI0222** | BIO-SPEC | Meningococcal Meningitis (Human) |
+| MINING HAZARD | OT |  | **TL0307** | TECH-INDFAIL | Mining Hazards |
+| Mpox | OT |  | **BI0224** | BIO-SPEC | Mpox (Human) |
+| Nuclear accidents | OT |  | **TL0208** | TECH-STRFAIL | Nuclear Plant Failure |
+| PEST | IN | nat-bio-inf-loc | **BI0401** | BIO-INSECT | Insect Pest Infestations |
+| PLAGUE | OT |  | **BI0228** | BIO-SPEC | Plague (Human) |
+| POLLUTION | OT |  | **TL0302** | TECH-INDFAIL | Pollution |
+| Racionamiento | OT |  | **TL0210** | TECH-STRFAIL | Water Supply Failure |
+| RAIN | OT |  | **MH0402** | MH-PRECIP | Rain |
+| RIVER FLOOD | FL | nat-hyd-flo-riv | **MH0604** | MH-WATER | Fluvial (Riverine) Flooding |
+| RIVERBANK EROSION | OT |  | **GH0404** | GEO-OTHER | River Erosion & Accretion |
+| ROAD ACCIDENT | AC | tec-tra-roa-roa | **TL0405** | TECH-TRANSP | Road Traffic Accident |
+| ROCK FALL | OT |  | **GH0301** | GEO-GFAIL | Falls |
+| SANDSTORM | VW | nat-met-sto-san | **MH0201** | MH-PART | Dust Storm or Sandstorm |
+| SEA LEVEL RISE | OT |  | **EN0402** | ENV-WATER | Sea Level Rise |
+| SNAKE BITE | OT |  | **BI0605** | BIO-OTHER | Snakebite Envenoming |
+| SNOW STORM | OT |  | **MH0406** | MH-PRECIP | Snow Storm |
+| Snowfall | OT |  | **MH0405** | MH-PRECIP | Snow |
+| STORM | ST | nat-met-sto-sto | **MH0103** | MH-CONV | Thunderstorm |
+| STRONG WIND | VW | nat-met-sto-sto | **MH0301** | MH-WIND | Wind |
+| STRUCT.COLLAPSE | AC | tec-mis-col-col | **TL0005** † | TECH-STRFAIL | Building Collapse |
+| STRUCTURE | AC | tec-mis-col-col | **TL0201** | TECH-STRFAIL | Building Collapse |
+| SUBSIDENCE |  | nat-geo-ear-gro | **GH0309** | GEO-GFAIL | Subsidence and Uplift |
+| SURGE | SS | nat-met-sto-sur | **MH0703** | MH-MARINE | Storm Surge |
+| THUNDERSTORM | ST | nat-met-sto-sto | **MH0103** | MH-CONV | Thunderstorm |
+| TIDAL WAVES | OT | nat-hyd-wav-rog | **MH0701** | MH-MARINE | Rogue Wave |
+| TORNADO | TO | nat-met-sto-tor | **MH0305** | MH-WIND | Tornado |
+| TRAIN CRASH | AC | tec-tra-rai-rai | **TL0404** | TECH-TRANSP | Rail Accident |
+| TSUNAMI | TS | nat-geo-ear-tsu | **MH0705** | MH-MARINE | Tsunami |
+| URBAN FLOOD | OT |  | **MH0606** | MH-WATER | Surface water Flooding |
+| VOLCANO | VO | nat-geo-vol-vol | **GH0205** | GEO-VOLC | Volcanic Gases and Aerosols |
+| WETLAND LOSS/DEGRADATION | OT |  | **EN0304** | ENV-LAND | Wetland Loss/Degradation |
+| YELLOW FEVER | OT |  | **BI0241** | BIO-SPEC | Yellow Fever (Human) |
+
+> † These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in [taxonomy.md](../../taxonomy.md)) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: `ACCIDENT` (`TL0007`) → `TL0201` (see `STRUCTURE`), `BOAT CAPSIZE` (`TL0050`) → `TL0403` (see `DROWNING`), `EPIZOOTIC` (`BI0027`) → `BI0301` (see `ANIMAL DISEASE`), `EXPLOSION` (`TL0029`) → `TL0304` (see `EXPLOSIONS`), `LEAK` (`TL0030`) → `TL0301` (see `LEAK OR SPILL`), `STRUCT.COLLAPSE` (`TL0005`) → `TL0201` (see `STRUCTURE`).
+>
+> ‡ `EPIDEMIC`'s GLIDE code is corrected to `EP` here. The upstream `hazard_mapping` dict currently has `OT`, which conflicts with the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. See [IFRCGo/pystac-monty#201](https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864) for the upstream fix.
+
+> [!NOTE]
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, when all three are available for that row. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
 
 This mapping enables standardized hazard categorization while preserving DesInventar's original classification in the source properties.
+
+##### Unmapped events
+
+The following canonical DesInventar events have no hazard code mapping (`hazard_mapping` returns `None`, including `OTHER`/`OT - Other`-style catch-alls). Records with these event types — plus any raw `evento` value with neither an alias nor a direct mapping — are dropped entirely: no event, hazard, or impact item is produced for them.
+
+`ANIN BOT`, `ARBOL CAIDO`, `AUTHER`, `BÚSQUEDA`, `Búsqueda`, `CAÍDA DE ARBOL`, `Caída de Arbol`, `CLIMATE CHANGE`, `Desaparecido (S)`, `DROPP OFF`, `EXTREME TEMPERATURE`, `FAILEN TREES`, `FALL INTO A WELL`, `FAMINE`, `Famine`, `Food Insecurity`, `Geomedical`, `Hambruna`, `HAILSTONE`, `HIGH TIDE`, `HUNGER/FAMINE`, `INDUSTRIAL DISASTER`, `LAINNYA`, `LALORAN BOOT`, `Livestock`, `Mal uvuljuulekh`, `MALNUTRITION`, `Malnutrition`, `Napolo`, `Nawaa`, `OT - Other`, `OTHER`, `OTHER_AC`, `Other`, `PANIC`, `PEAT`, `PORT AREA HAZARD`, `PROJECTILE`, `Rescate`, `RESCATE`, `Riverinflood`, `Road`, `Stormy`, `Stuck`, `TD - Technical Disaster`, `Traslados`, `TREE FALLEN`, `W`, `birds`, `incursion`
 
 ### Hazard Item
 

@@ -1,0 +1,78 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+  ],
+  "id": "us6000tjl2",
+  "collection": "usgs-events",
+  "bbox": [
+    -76.2422,
+    4.8436,
+    -76.2422,
+    4.8436
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.2422,
+      4.8436
+    ]
+  },
+  "properties": {
+    "datetime": "2026-08-10T12:34:28Z",
+    "title": "M 7.4 earthquake, San José del Palmar, Colombia",
+    "description": "5 km S of San José del Palmar, Colombia",
+    "monty:src_event_id": "us6000tjl2",
+    "monty:country_codes": [
+      "COL"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
+    ],
+    "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
+    "roles": [
+      "event",
+      "source"
+    ],
+    "keywords": [
+      "earthquake",
+      "colombia",
+      "Ground Shaking (Earthquake)",
+      "San José del Palmar"
+    ],
+    "eq:magnitude": 7.4,
+    "eq:magnitude_type": "mww",
+    "eq:status": "reviewed",
+    "eq:tsunami": false,
+    "eq:felt": 1138,
+    "eq:depth": 110.285
+  },
+  "links": [
+    {
+      "href": "us6000tjl2.json",
+      "rel": "self"
+    },
+    {
+      "href": "usgs-events.json",
+      "rel": "collection"
+    },
+    {
+      "href": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
+      "rel": "via"
+    }
+  ],
+  "assets": {
+    "source": {
+      "href": "../../model/sources/USGS/us6000tjl2.geojson",
+      "type": "application/geo+json",
+      "title": "USGS GeoJSON Source",
+      "roles": [
+        "source"
+      ]
+    }
+  }
+}

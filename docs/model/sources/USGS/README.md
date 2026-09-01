@@ -97,6 +97,8 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Reference event item       | Link to reference event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 > [!NOTE]
 > `monty:country_codes` first tries to find the country from the epicenter coordinates. If that lookup
@@ -152,6 +154,8 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
 | [`assets`](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                        | [ShakeMap assets](#shakemap-assets) | Assets from the USGS ShakeMap product               |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### ShakeMap Assets
 
@@ -195,10 +199,17 @@ The [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyha
 
 ### Impact Items (from PAGER)
 
-The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event will produce two [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact):
+The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment of Global Earthquakes for Response) of a USGS earthquake event carries two content files that hold loss estimates. They are different kinds of estimate and are mapped differently:
 
-1. Estimated Fatalities Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-fatalities.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-fatalities.json)
-2. Estimated Economic Losses Impact. Example of generated STAC item: [examples/usgs-impacts/us6000pi9w-economic.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-economic.json)
+| PAGER content file | What it holds                                                           | Monty mapping                                                               |
+| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `json/losses.json` | One deterministic modelled total per type, plus a per-country breakdown | Mapped below — the Estimated Fatalities and Estimated Economic Losses items |
+| `json/alerts.json` | A probability histogram (a set of alert bins) per type                  | See [Alert data](#alert-data-alertsjson) — representation under review      |
+
+The `losses.json` mapping produces two [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) per country:
+
+1. Estimated Fatalities Impact. Examples: [us6000pi9w-fatalities.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-fatalities.json), [us6000tjl2-fatalities.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-fatalities.json)
+2. Estimated Economic Losses Impact. Examples: [us6000pi9w-economic.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000pi9w-economic.json), [us6000tjl2-economic.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts/us6000tjl2-economic.json)
 
 The PAGER data is found in the `losspager` product within the USGS event data. Here is a detailed mapping of fields from the USGS PAGER data to the STAC impacts:
 
@@ -217,10 +228,12 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Event item                        | Link to source event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Impact Detail
 
-The [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) field contains specific information about each type of impact. 
+The [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) field contains specific information about each type of impact.
 The values are extracted from the PAGER product data in the USGS event and requires to get an additional content file from the USGS event data
 under `json/losses.json`.
 
@@ -228,8 +241,8 @@ For Estimated Fatalities:
 
 ```json
 {
-  "category": "expspec_allpeop",
-  "type": "imptypdeat",
+  "category": "people",
+  "type": "death",
   "value": "<from products.losspager.contents['json/losses.json'].empirical_fatality.total_fatalities>",
   "unit": "people",
   "estimate_type": "modelled"
@@ -240,10 +253,52 @@ For Estimated Economic Losses:
 
 ```json
 {
-  "category": "expspec_build",
-  "type": "imptypcost", 
+  "category": "buildings",
+  "type": "cost",
   "value": "<from products.losspager.contents['json/losses.json'].empirical_economic.total_dollars>",
   "unit": "usd",
   "estimate_type": "modelled"
 }
 ```
+
+`category` and `type` **MUST** be values from the Monty taxonomy — the
+[exposure category](../../taxonomy.md#exposure-category) and
+[impact type](../../taxonomy.md#impact-type) tables — not PAGER's own internal codes.
+
+#### Alert data (`alerts.json`)
+
+Besides the deterministic totals in `losses.json`, the `losspager` product carries
+`json/alerts.json`. For each type (`fatality`, `economic`) it holds a **probability
+histogram**: an ordered set of bins, each `{color, min, max, probability}`, whose
+probabilities sum to 1.0. It is the source behind PAGER's headline alert level.
+
+Reference fixtures for the 2026-08-10 M7.4 Colombia earthquake (`us6000tjl2`):
+[us6000tjl2-alerts.json](us6000tjl2-alerts.json) and [us6000tjl2-losses.json](us6000tjl2-losses.json).
+The two files describe the same event and do not agree on a single number, because they
+do not answer the same question: `losses.json` gives one modelled total (961 fatalities),
+while `alerts.json` gives the spread of possible outcomes around it.
+
+> [!WARNING]
+> For the **economic** type, the bin values are denominated in **millions of USD**,
+> even though `alerts.json` labels the field `"units": "USD"`. This is verified against
+> PAGER's own published alert thresholds — yellow ≥ \$1M, orange ≥ \$100M, red ≥ \$1B
+> ([PAGER Scientific Background](https://earthquake.usgs.gov/data/pager/background.php)):
+> the `100`–`1000` bin is colored `orange` in the reference fixture, which only agrees
+> with that threshold table if the bin is read as \$100M–\$1B. A transformer that copies
+> the source `"units"` string through to `monty:impact_detail.unit` therefore understates
+> the value by a factor of one million. The **fatality** type has no such ambiguity: its
+> bins and its `"units": "fatalities"` label are both plain counts of people.
+
+That unit correction holds whatever shape the items eventually take.
+
+> [!NOTE]
+> How Monty should represent this histogram is **under review** and is deliberately not
+> specified here. A probability distribution is not a single value, so it does not fit
+> `monty:impact_detail` as it stands, and collapsing it to one number discards the
+> information that makes it useful (anticipatory-action triggers need the spread, not a
+> midpoint). It is tracked in
+> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125), alongside the wider
+> model questions in [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
+> Until that is settled, do not map `alerts.json` values onto
+> `monty:impact_detail.type: potentially_affected` — that value describes population
+> exposure, not an uncertain death or cost estimate.

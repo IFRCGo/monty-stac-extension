@@ -55,6 +55,10 @@
       "source"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:country_codes": [
       "JAM",
       "HTI",
@@ -81,7 +85,7 @@
   "links": [
     {
       "rel": "related",
-      "href": "../cems-events/cems-event-EMSR847.json",
+      "href": "../collections/cems-events/items/cems-event-EMSR847",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -89,7 +93,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
+      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-storm",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -97,7 +101,7 @@
     },
     {
       "rel": "related",
-      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
+      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-landslide",
       "type": "application/geo+json",
       "roles": [
         "hazard"

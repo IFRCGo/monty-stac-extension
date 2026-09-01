@@ -3,7 +3,8 @@
   "stac_version": "1.0.0",
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
-    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "us6000pi9w-fatalities",
   "geometry": {
@@ -37,6 +38,10 @@
       "GH0101"
     ],
     "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:impact_detail": {
       "category": "people",
       "type": "death",
