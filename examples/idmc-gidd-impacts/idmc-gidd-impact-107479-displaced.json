@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "idmc-gidd-impact-107479-displaced",
   "collection": "idmc-gidd-impacts",
@@ -47,6 +48,10 @@
       "impact"
     ],
     "monty:corr_id": "20230206-SYR-nat-geo-ear-gro-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "keywords": [
       "Syria",
       "Middle East and North Africa",

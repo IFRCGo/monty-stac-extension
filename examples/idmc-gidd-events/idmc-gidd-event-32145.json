@@ -1,7 +1,8 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "type": "Feature",
   "id": "idmc-gidd-event-32145",
@@ -36,6 +37,10 @@
     ],
     "monty:episode_number": 1,
     "monty:corr_id": "20210404T000000-IDN-MH-CYCLN-001-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "roles": [
       "event",
       "source"

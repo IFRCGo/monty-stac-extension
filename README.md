@@ -96,6 +96,9 @@ The fields in the sections below can be used in these parts of STAC documents:
 | monty:impact_detail   | [Impact Detail object](#montyimpact_detail)     | The details of the impact                                                                                                                                                                                                                                                                                           |
 | monty:response_detail | [Response Detail object](#montyresponse_detail) | The details of the response                                                                                                                                                                                                                                                                                         |
 
+> [!TIP]
+> To track which revision of the [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) transformer produced a given item, declare the [`processing:` extension](https://github.com/stac-extensions/processing) and populate `processing:version` (the transformer's [Semantic Versioning](https://semver.org/) string) and `processing:software` (e.g. `{"pystac-monty": "1.0.0"}`), rather than adding a Monty-specific field — per the [extension layering principle](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md#1-governing-principles). These fields always mean *the `pystac-monty` transformer*, even on items that also carry `processing:level` / `processing:lineage` for the source data's own processing chain — see [governing principle 2](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md#1-governing-principles).
+
 ### Roles
 
 A set of roles are defined to describe the type of the data. The following roles are defined:

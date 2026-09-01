@@ -97,6 +97,8 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Reference event item       | Link to reference event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 > [!NOTE]
 > `monty:country_codes` first tries to find the country from the epicenter coordinates. If that lookup
@@ -152,6 +154,8 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
 | [`assets`](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                        | [ShakeMap assets](#shakemap-assets) | Assets from the USGS ShakeMap product               |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### ShakeMap Assets
 
@@ -224,6 +228,8 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Event item                        | Link to source event item with `roles: ["event"]` |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Impact Detail
 

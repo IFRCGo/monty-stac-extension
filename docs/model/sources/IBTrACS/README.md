@@ -95,6 +95,8 @@ Here is a table with the fields that are mapped from the IBTrACS data to the STA
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                                                                                                                                               |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                                                                                                                                        |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 ## Collection: `ibtracs-hazards`
 
@@ -135,6 +137,8 @@ Here is a table with the STAC fields that are mapped from the IBTrACS data to ea
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL                        | Link to the IBTrACS data source                                                  |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                                           | USA_WIND, WMO_WIND, USA_PRES, WMO_PRES | Detailed description of the hazard at the current position                       |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 #### Hazard Detail
 

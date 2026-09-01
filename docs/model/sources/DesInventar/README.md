@@ -149,6 +149,8 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | [monty:country_codes](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:country_codes)                       | level0                                             | ISO3 code of the event country                                                          |
 | [monty:hazard_codes](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:hazard_codes)                         | [mapped from evento](#hazard-code-mapping)         | Hazard codes mapped from Desinventar event types (see mapping below)                    |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
+| [processing:version](https://github.com/stac-extensions/processing) | Generated                                          | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing) | Generated                                          | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | |
 
 #### Hazard Code Mapping

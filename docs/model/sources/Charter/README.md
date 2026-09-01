@@ -303,6 +303,8 @@ Maps to a Monty Event item (`charter-events`). Declares the Monty extension only
 | `disaster:type` | `monty:hazard_codes` | Map via [Hazard codes](#hazard-codes) |
 | `disaster:country` | `monty:country_codes[0]` | Already ISO 3166-1 alpha-3 |
 | `links[rel=self]` | `links[rel=via]` | Source reference |
+| derived | `processing:version` | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| derived | `processing:software` | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 > [!IMPORTANT]
 > **Onset datetime**: use `properties.datetime` — it equals `properties.created`
@@ -337,6 +339,8 @@ Maps to a Monty Hazard item (`charter-hazards`). Declares the Monty extension on
 | `properties.description` | `monty:hazard_detail` | Parse severity (see below) |
 | `cpe:status.stage` | `monty:hazard_detail.estimate_type` | See below |
 | parent activation | `links[rel=derived_from]` | `../charter-events/charter-event-{id}.json` |
+| derived | `processing:version` | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| derived | `processing:software` | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
 > [!IMPORTANT]
 > **Multi-hazard strategy**: create **one Hazard item per disaster type**

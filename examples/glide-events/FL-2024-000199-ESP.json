@@ -2,7 +2,8 @@
   "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "id": "glide-event-FL-2024-000199-ESP",
   "geometry": {
@@ -40,6 +41,10 @@
       "ESP"
     ],
     "monty:corr_id": "20241027-ESP-FL-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "datetime": "2024-10-27T00:00:00Z"
   },
   "links": [
