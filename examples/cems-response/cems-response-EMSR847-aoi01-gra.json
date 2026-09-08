@@ -55,10 +55,6 @@
       "source"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "monty:country_codes": [
       "JAM",
       "HTI",
@@ -79,6 +75,10 @@
         "C",
         "D"
       ]
+    },
+    "processing:version": "0.2.1",
+    "processing:software": {
+      "pystac-monty": "0.2.1"
     },
     "datetime": "2025-11-10T23:16:39.188570Z"
   },
@@ -112,6 +112,14 @@
       "href": "https://rapidmapping.emergency.copernicus.eu/EMSR847",
       "type": "text/html",
       "title": "CEMS EMSR847 activation"
+    },
+    {
+      "rel": "derived_from",
+      "href": "../collections/cems-acquisitions/items/cems-acquisition-EMSR847-aoi01-gra-0",
+      "type": "application/geo+json",
+      "roles": [
+        "acquisition"
+      ]
     },
     {
       "rel": "self",

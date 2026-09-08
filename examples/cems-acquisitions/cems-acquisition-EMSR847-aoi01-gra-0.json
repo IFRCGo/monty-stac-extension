@@ -1,0 +1,77 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "cems-acquisition-EMSR847-aoi01-gra-0",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -76.796615,
+          17.962363
+        ],
+        [
+          -76.747653,
+          17.966604
+        ],
+        [
+          -76.748316,
+          17.975553
+        ],
+        [
+          -76.756525,
+          17.983078
+        ],
+        [
+          -76.783782,
+          17.984849
+        ],
+        [
+          -76.800345,
+          17.978717
+        ],
+        [
+          -76.796615,
+          17.962363
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -76.800345,
+    17.962363,
+    -76.747653,
+    17.984849
+  ],
+  "properties": {
+    "title": "CEMS optical acquisition — Legion",
+    "roles": [
+      "source",
+      "acquisition"
+    ],
+    "description": "Resolution class: VHR1. Source file: EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO.tif.",
+    "platform": "Legion",
+    "processing:version": "0.2.1",
+    "processing:software": {
+      "pystac-monty": "0.2.1"
+    },
+    "datetime": "2025-11-07T15:55:00Z"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-acquisitions/cems-acquisition-EMSR847-aoi01-gra-0.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-acquisitions/cems-acquisitions.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "cems-acquisitions"
+}

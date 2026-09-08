@@ -1,0 +1,68 @@
+{
+  "type": "Collection",
+  "id": "cems-acquisitions",
+  "stac_version": "1.1.0",
+  "description": "Source imagery (sat:/eo:/sar:) from product images[], referenced by Response items via derived_from.",
+  "links": [
+    {
+      "rel": "item",
+      "href": "./cems-acquisition-EMSR847-aoi01-gra-0.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-acquisitions/cems-acquisitions.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://mapping.emergency.copernicus.eu/terms-and-conditions/",
+      "type": "text/html",
+      "title": "Copernicus EMS On-Demand Mapping Terms and Conditions"
+    }
+  ],
+  "roles": [
+    "acquisition",
+    "source"
+  ],
+  "keywords": [],
+  "title": "Copernicus EMS RM Acquisitions",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -76.800345,
+          17.962363,
+          -76.747653,
+          17.984849
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2025-11-07T15:55:00Z",
+          "2025-11-07T15:55:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "providers": [
+    {
+      "name": "Copernicus Emergency Management Service",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://mapping.emergency.copernicus.eu/"
+    }
+  ],
+  "summaries": {
+    "roles": [
+      "acquisition",
+      "source"
+    ]
+  },
+  "stac_extensions": []
+}
