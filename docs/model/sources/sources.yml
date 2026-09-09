@@ -67,7 +67,7 @@ sources:
     license: Copernicus data policy — free & open (attribution required)
     status: etl
     types: [event, hazard, impact, response]
-    collections: [cems-events, cems-hazards, cems-impacts, cems-response]
+    collections: [cems-events, cems-hazards, cems-impacts, cems-response, cems-acquisitions]
     doc: CEMS/README.md
     etl: https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/cems.py
 

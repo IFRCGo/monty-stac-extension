@@ -38,10 +38,6 @@
       "nat-met-sto-tro"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "keywords": [
       "Depression or Cyclone",
       "EMSR847",
@@ -51,6 +47,10 @@
       "Tropical cyclone, hurricane, typhoon",
       "Wind & Pressure-related"
     ],
+    "processing:version": "0.2.1",
+    "processing:software": {
+      "pystac-monty": "0.2.1"
+    },
     "datetime": "2025-10-26T12:00:00Z"
   },
   "links": [

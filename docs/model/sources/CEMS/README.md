@@ -18,6 +18,7 @@ payload. This document maps the CEMS RM object model to Monty STAC items.
 | Copernicus EMS RM — Hazards | `cems-hazards` | `hazard` | Area of Interest (extent refined by the DEL delineation) |
 | Copernicus EMS RM — Response | `cems-response` | `response` | Product (REF / FEP / DEL / GRA) + Situational Report |
 | Copernicus EMS RM — Impacts | `cems-impacts` | `impact` | GRA product damage/exposure statistics |
+| Copernicus EMS RM — Acquisitions | `cems-acquisitions` | *(none — not a Monty domain object)* | Product `images[]`; source imagery referenced from Response items via `derived_from` |
 
 - **Source organisation**: Copernicus Emergency Management Service (`CEMS`)
 - **Source URL**: <https://mapping.emergency.copernicus.eu/>
@@ -188,6 +189,8 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 | `images[]` | `links[rel=derived_from]` → acquisition item(s) | Source imagery (`sensorType`, `sensorName`, `resolutionClass`, `acquisitionTime`) carries `sat:`/`eo:`/`sar:` on the acquisition, **not** on the Response |
 | `layers[]` (COG), `downloadPath` (ZIP) | `assets` | Web layers + downloadable package |
 | activation page | `links[rel=derived_from]` | Upstream CEMS activation provenance |
+
+> **Acquisition item field coverage (implemented, partial).** `images[]` only carries `sensorType`/`sensorName`/`resolutionClass`/`acquisitionTime`/`fileName` — none of these back a typed `sat:`/`eo:`/`sar:` field with real data today, so the shipped acquisition items declare no such extension; `sensorName` maps to the STAC common-metadata `platform` field, and `resolutionClass`/`fileName` are kept as descriptive text (`title`/`description`) pending a schema decision on where they belong. See [pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166).
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
 `reportLink` StoryMap URL (no geospatial payload).

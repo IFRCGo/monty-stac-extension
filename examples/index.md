@@ -62,6 +62,10 @@ new collection appears in both places from a single edit to `sources.yml`.
 
 - [cems-response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response) — Copernicus Emergency Management Service — Rapid Mapping
 - [charter-response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response) — International Charter on Space and Major Disasters
+
+### Other
+
+- [cems-acquisitions](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-acquisitions) — Copernicus Emergency Management Service — Rapid Mapping
 <!-- gen_sources_index.py: END examples-collections -->
 <!-- --8<-- [end:collections] -->
 
