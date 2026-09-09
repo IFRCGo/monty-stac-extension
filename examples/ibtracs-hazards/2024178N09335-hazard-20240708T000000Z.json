@@ -463,7 +463,7 @@
   "assets": {
     "data": {
       "href": "https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/csv/ibtracs.NA.list.v04r00.csv",
-      "title": "IBTrACS North Atlantic Basin Data",
+      "title": "IBTrACS Best Track Data",
       "type": "text/csv",
       "roles": [
         "data"
