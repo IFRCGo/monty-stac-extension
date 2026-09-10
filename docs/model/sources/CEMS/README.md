@@ -190,7 +190,9 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 | activation page | `links[rel=derived_from]` | Upstream CEMS activation provenance |
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
-`reportLink` StoryMap URL (no geospatial payload).
+`reportLink` StoryMap URL. It has no product `extent` of its own, so `geometry`/`bbox`
+fall back to the activation extent, or the Event's geometry/bbox if the activation has
+none — `null` geometry is not emitted, since it is not recommended by the STAC specification.
 
 A **DEL** Response additionally carries a `rel: related` (`roles: ["hazard"]`) link to the
 `cems-hazards` item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
