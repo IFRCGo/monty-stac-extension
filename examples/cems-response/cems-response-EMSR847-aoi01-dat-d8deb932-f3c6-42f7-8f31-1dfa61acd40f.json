@@ -5,7 +5,7 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "cems-impact-EMSR847-aoi01-gra-population",
+  "id": "cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -48,11 +48,14 @@
     17.984849
   ],
   "properties": {
-    "title": "Estimated affected population — Kingston (EMSR847 GRA)",
+    "title": "CEMS optical acquisition — Legion",
     "roles": [
-      "impact",
-      "source"
+      "source",
+      "acquisition",
+      "response"
     ],
+    "description": "Resolution class: VHR1. Source file: EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO.tif.",
+    "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
     "monty:country_codes": [
       "JAM",
       "HTI",
@@ -63,23 +66,25 @@
       "TC",
       "nat-met-sto-tro"
     ],
-    "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
-    "monty:impact_detail": {
-      "category": "people",
-      "type": "affected_total",
-      "value": 84000,
-      "unit": "people",
-      "estimate_type": "primary"
+    "monty:response_detail": {
+      "type": "eo-dat",
+      "source_id": "EMSR847",
+      "producer": "Copernicus EMS",
+      "sendai_targets": [
+        "D",
+        "G"
+      ]
     },
+    "platform": "Legion",
     "processing:version": "0.2.1",
     "processing:software": {
       "pystac-monty": "0.2.1"
     },
-    "datetime": "2025-11-10T23:16:39.188570Z"
+    "datetime": "2025-11-07T15:55:00Z"
   },
   "links": [
     {
-      "rel": "derived_from",
+      "rel": "related",
       "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
       "type": "application/geo+json",
       "roles": [
@@ -88,15 +93,25 @@
     },
     {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json",
       "type": "application/json"
     },
     {
       "rel": "collection",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-impacts/cems-impacts.json",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response.json",
       "type": "application/json"
     }
   ],
-  "assets": {},
-  "collection": "cems-impacts"
+  "assets": {
+    "data": {
+      "href": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO_cog.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "CEMS optical acquisition — Legion",
+      "roles": [
+        "data",
+        "visual"
+      ]
+    }
+  },
+  "collection": "cems-response"
 }

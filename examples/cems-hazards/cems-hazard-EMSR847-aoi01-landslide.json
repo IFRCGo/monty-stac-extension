@@ -184,15 +184,15 @@
       "nat-geo-mmd-lan"
     ],
     "monty:corr_id": "20251026-JAM-983324-MH0306-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "monty:hazard_detail": {
       "severity_value": 1,
       "severity_unit": "count",
       "severity_label": "Landslide",
       "estimate_type": "primary"
+    },
+    "processing:version": "0.2.1",
+    "processing:software": {
+      "pystac-monty": "0.2.1"
     },
     "datetime": "2025-10-26T12:00:00Z"
   },
