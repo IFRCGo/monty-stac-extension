@@ -173,6 +173,17 @@ footprint class takes its geometry from that class's extent where available, els
 extent, and its severity from the class figure. Do **not** infer hazard multiplicity from the
 DEL count.
 
+> **Same-slug collision:** `category`+`subCategory` and a GRA/GRM footprint class can each
+> resolve to a different hazard key that still maps to the *same* id slug (e.g. `subCategory:
+> "Riverine flood"` → `flood_riverine`, footprint class `Flooded area` → `flood`, both slug
+> `flood`) — that is one physical hazard detected two ways, not two hazards, so it collapses
+> to a **single** Hazard item. When keys collide on a slug, the `category`+`subCategory` key
+> always wins for geometry, `title`, and `monty:hazard_codes` (it is the more specific,
+> authoritative signal); the footprint-derived `monty:hazard_detail` is kept only if the
+> `category` key didn't already supply one. Keys that resolve to *different* slugs (e.g. a
+> `Storm` activation with a `Landslide` footprint class) still emit separate Hazard items as
+> above.
+
 ## Product → Response
 
 Each product maps to a Monty Response item via `monty:response_detail`.
