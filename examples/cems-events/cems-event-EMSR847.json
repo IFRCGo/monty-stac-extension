@@ -102,6 +102,14 @@
     },
     {
       "rel": "related",
+      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
+      "type": "application/geo+json",
+      "roles": [
+        "response"
+      ]
+    },
+    {
+      "rel": "related",
       "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
       "type": "application/geo+json",
       "roles": [

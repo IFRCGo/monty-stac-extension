@@ -39,8 +39,7 @@
         "cems-events",
         "cems-hazards",
         "cems-impacts",
-        "cems-response",
-        "cems-acquisitions"
+        "cems-response"
       ],
       "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/CEMS/",
       "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/cems.py"

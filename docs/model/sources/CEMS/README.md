@@ -16,9 +16,8 @@ payload. This document maps the CEMS RM object model to Monty STAC items.
 |------------|------|------------|------------|
 | Copernicus EMS RM — Events | `cems-events` | `event` | Activation |
 | Copernicus EMS RM — Hazards | `cems-hazards` | `hazard` | Area of Interest (extent refined by the DEL delineation) |
-| Copernicus EMS RM — Response | `cems-response` | `response` | Product (REF / FEP / DEL / GRA) + Situational Report |
+| Copernicus EMS RM — Response | `cems-response` | `response` | Product (REF / FEP / DEL / GRA) + Situational Report + source imagery (`eo-dat`) |
 | Copernicus EMS RM — Impacts | `cems-impacts` | `impact` | GRA product damage/exposure statistics |
-| Copernicus EMS RM — Acquisitions | `cems-acquisitions` | *(none — not a Monty domain object)* | Product `images[]`; source imagery referenced from Response items via `derived_from` |
 
 - **Source organisation**: Copernicus Emergency Management Service (`CEMS`)
 - **Source URL**: <https://mapping.emergency.copernicus.eu/>
@@ -30,8 +29,9 @@ payload. This document maps the CEMS RM object model to Monty STAC items.
 > and [best practices](../../response-best-practices.md), CEMS-specific fields are
 > carried under `monty:response_detail` (there is no `cems:` extension). Response
 > items declare `monty` (+ `processing` recommended); source-imagery extensions
-> (`sat:` / `eo:` / `sar:`) live on the linked **acquisition** items, not on the
-> Response product — except where a raw dataset is the deliverable (not the CEMS case).
+> (`sat:` / `eo:` / `sar:`) live on the linked **acquisition** items — themselves
+> `eo-dat` **Response** items (the taxonomy's Data Product code, §2.1/§3.1), not a
+> separate untyped path — not on the derived REF/FEP/DEL/GRA Response product.
 
 ## Object model
 
@@ -72,6 +72,7 @@ flowchart TD
 | Area of Interest (AOI) | Hazard | `cems-hazard-{code}-aoi{n}-{type}` | `cems-hazards` |
 | Product (REF/FEP/DEL/GRA) | Response | `cems-response-{code}-aoi{n}-{type}[-m{k}]` | `cems-response` |
 | Situational Report (`reportLink`) | Response (`eo-sr`) | `cems-response-{code}-sr` | `cems-response` |
+| Product `images[]` entry | Response (`eo-dat`) | `cems-response-{code}-aoi{n}-dat-{images[].uuid}` | `cems-response` |
 | GRA statistic (per thematic class) | Impact | `cems-impact-{code}-aoi{n}-gra-{thematic}[-m{k}]` | `cems-impacts` |
 
 - `{code}` is the activation code (`EMSR847`); `{n}` is the AOI `number`; `{type}` ∈
@@ -186,11 +187,24 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 | — | `monty:response_detail.producer` | `Copernicus EMS` (mapping provider) |
 | — | `monty:response_detail.methodology` | `human_interpreted` (RM is expert-produced) |
 | — | `monty:response_detail.sendai_targets` | Taxonomy default for the type code |
-| `images[]` | `links[rel=derived_from]` → acquisition item(s) | Source imagery (`sensorType`, `sensorName`, `resolutionClass`, `acquisitionTime`) carries `sat:`/`eo:`/`sar:` on the acquisition, **not** on the Response |
-| `layers[]` (COG), `downloadPath` (ZIP) | `assets` | Web layers + downloadable package |
+| `images[]` | `links[rel=related, roles=["response"]]` → acquisition item(s) (`eo-dat` Response, `cems-response`) | Source imagery (`sensorType`, `sensorName`, `resolutionClass`, `acquisitionTime`) carries `sat:`/`eo:`/`sar:` on the acquisition, **not** on the derived REF/FEP/DEL/GRA Response. `related` (not `derived_from`) since the acquisition is itself a Response item — see [Response Best Practices §2/§4.4](../../response-best-practices.md) |
+| `layers[]` (`vt`, thematic layers), `downloadPath` (ZIP) | `assets` | Web layers (GeoJSON `FeatureCollection` + `sld` style, one asset pair per thematic layer — despite the CEMS "VT" naming, these are plain GeoJSON, not a tiled service; no CEMS schema documents this, verified empirically against the live AWS bucket) + downloadable package. The base-image `cog` layer is also copied here (as `basemap`), so the item alone renders the raster under its own vector overlay — its canonical copy, with imagery identity/metadata, is the linked acquisition item's `data` asset (see below) |
 | activation page | `links[rel=derived_from]` | Upstream CEMS activation provenance |
 
-> **Acquisition item field coverage (implemented, partial).** `images[]` only carries `sensorType`/`sensorName`/`resolutionClass`/`acquisitionTime`/`fileName` — none of these back a typed `sat:`/`eo:`/`sar:` field with real data today, so the shipped acquisition items declare no such extension; `sensorName` maps to the STAC common-metadata `platform` field, and `resolutionClass`/`fileName` are kept as descriptive text (`title`/`description`) pending a schema decision on where they belong. See [pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166).
+> **Acquisition items are `eo-dat` Response items (implemented, field coverage partial).** Each
+> `images[]` entry becomes its own Response item, id `cems-response-{code}-aoi{n}-dat-{uuid}`
+> (`images[].uuid`, not the parent product's own type slug — the acquisition's own
+> `monty:response_detail.type` is `eo-dat`, whatever product it's linked from), living in
+> `cems-response` alongside the REF/FEP/DEL/GRA items it is a sibling `related` Response to
+> (`roles: ["response"]`, both ways — see the Product → Response table above). When CEMS
+> publishes a web-optimized COG of the same acquisition under `layers[]` (matched to the
+> `images[]` entry by filename), it becomes this item's `data` asset. `images[]` only carries
+> `sensorType`/`sensorName`/`resolutionClass`/`acquisitionTime`/`fileName` — none of these back a
+> typed `sat:`/`eo:`/`sar:` field with real data today, so the shipped acquisition items declare
+> no such extension; `sensorName` maps to the STAC common-metadata `platform` field, and
+> `resolutionClass`/`fileName` are kept as descriptive text (`title`/`description`) pending a
+> schema decision on where they belong. See
+> [pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166).
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
 `reportLink` StoryMap URL (no geospatial payload).
@@ -472,6 +486,7 @@ Hazard geometry falls back to the AOI extent:
 - [`cems-hazard-EMSR847-aoi01-storm`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0306`)
 - [`cems-hazard-EMSR847-aoi01-landslide`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
 - [`cems-response-EMSR847-aoi01-gra`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
+- [`cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json) — `eo-dat` Response (source imagery, sibling `related` Response to the `eo-gra` item above)
 - [`cems-impact-EMSR847-aoi01-gra-population`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 
 The GDACS side of the cross-source link is also a real worked example, not a placeholder:
@@ -502,7 +517,7 @@ All mapping decisions are settled — none block ETL implementation.
 | 3 | **Hazard geometry** | AOI → Hazard; geometry = **latest delivered DEL** (`statusCode=F`, max `monitoringNumber`), fallback AOI `extent`, **updated in place**. |
 | 4 | **Multi-hazard** | Driven by `category`/`subCategory` + GRA footprint classes — **not** DEL count. A secondary hazard with no dedicated polygon uses the AOI extent (coarse) and takes severity from its footprint-class figure. |
 | 5 | **Response geometry** | The product's own `extent` (precise footprint); AOI extent only as fallback. |
-| 6 | **Source imagery** | Emit linked **acquisition items** from `images[]` (carrying `sat:`/`eo:`/`sar:`, `resolutionClass`, `acquisitionTime`) referenced via `derived_from` — per the best-practices layer-separation rule; imagery extensions never on the Response product. |
+| 6 | **Source imagery** | Emit linked **acquisition items** from `images[]` as `eo-dat` **Response** items (carrying `resolutionClass`/`acquisitionTime` as descriptive text; `sat:`/`eo:`/`sar:` blocked on upstream field coverage, see [pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166)) in `cems-response`, linked as sibling `related` Response items — per the best-practices layer-separation rule; imagery extensions never on the derived Response product. The matching `layers[]` COG becomes the acquisition item's own asset (its canonical copy) and is also copied onto the derived Response item as `basemap`, so that item alone renders correctly; thematic `vt` layers stay on the derived Response item only. |
 | 7 | **Monitoring & revisions** | Monitoring iterations = separate items chained by `rel: prev`; `version.number` corrections supersede in place — see [Tracking over time](#tracking-over-time). |
 | 8 | **Impact granularity** | Per-product GRA `stats` series (each timestamped), one Impact per exposure class per iteration; aggregated activation `stats` is cross-check only. |
 | 9 | **Cross-source links** | Emit `related` **unconditionally** from the deterministic target id; resolve the GDACS **current** episode via one `geteventdata` call (`-1` only if the lookup fails). |

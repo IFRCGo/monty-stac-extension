@@ -114,11 +114,11 @@
       "title": "CEMS EMSR847 activation"
     },
     {
-      "rel": "derived_from",
-      "href": "../collections/cems-acquisitions/items/cems-acquisition-EMSR847-aoi01-gra-0",
+      "rel": "related",
+      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
       "type": "application/geo+json",
       "roles": [
-        "acquisition"
+        "response"
       ]
     },
     {
@@ -141,13 +141,29 @@
         "data"
       ]
     },
-    "grading_cog": {
+    "basemap": {
       "href": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO_cog.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Grading product (COG)",
+      "title": "Source imagery (COG)",
       "roles": [
         "data",
         "visual"
+      ]
+    },
+    "observedEventP": {
+      "href": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_observedEventP_v1.json",
+      "type": "application/geo+json",
+      "title": "observedEventP (vector layer)",
+      "roles": [
+        "data"
+      ]
+    },
+    "observedEventP_style": {
+      "href": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR847/AOI01/GRA_PRODUCT/EMSR847_AOI01_GRA_PRODUCT_observedEventP_v1.sld",
+      "type": "application/vnd.ogc.sld+xml",
+      "title": "observedEventP style (SLD)",
+      "roles": [
+        "metadata"
       ]
     }
   },
