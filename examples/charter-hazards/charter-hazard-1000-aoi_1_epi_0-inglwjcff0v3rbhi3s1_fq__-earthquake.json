@@ -55,10 +55,6 @@
       "nat-geo-ear-gro"
     ],
     "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "monty:hazard_detail": {
       "severity_value": 101,
       "severity_unit": "km2",
@@ -71,12 +67,16 @@
       "Geological",
       "Seismic"
     ],
+    "processing:version": "0.2.4",
+    "processing:software": {
+      "pystac-monty": "0.2.4"
+    },
     "datetime": "2025-11-03T12:03:00Z"
   },
   "links": [
     {
       "rel": "related",
-      "href": "../charter-events/charter-event-1000.json",
+      "href": "../collections/charter-events/items/charter-event-1000",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -84,7 +84,7 @@
     },
     {
       "rel": "derived_from",
-      "href": "../charter-events/charter-event-1000.json",
+      "href": "../collections/charter-events/items/charter-event-1000",
       "type": "application/geo+json",
       "title": "Parent Charter Event"
     },
