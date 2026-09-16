@@ -958,7 +958,7 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | adult_45_49            | Adult (Age 45-49)                                 |
 | adult_50_54            | Adult (Age 50-54)                                 |
 | adult_55_59            | Adult (Age 55-59)                                 |
-| adult_60_65            | Adult (Age 60-65)                                 |
+| adult_60_64            | Adult (Age 60-64)                                 |
 | elderly                | Elderly (Over 65)                                 |
 | wheelchair_users       | Wheelchair Users                                  |
 | roads                  | Roads                                             |
@@ -968,6 +968,7 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | reconstruction_costs   | Reconstruction Costs                              |
 | hospitals              | Hospitals                                         |
 | schools                | Schools                                           |
+| education_centers      | Education Centres                                 |
 | local_currency         | Local Currency [Date of Event]                    |
 | global_currency        | Global/Regional Currency (e.g. USD)               |
 | local_currency_adj     | Inflation-Adjusted Local Currency [Date of Event] |
@@ -978,6 +979,7 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | ifrc_contribution      | IFRC Appeal Contribution                          |
 | ifrc_requested         | IFRC Appeal Requested                             |
 | alertscore             | Alertscore                                        |
+| total_affected         | Total Affected                                    |
 | households             | Households                                        |
 
 ### Impact Type
