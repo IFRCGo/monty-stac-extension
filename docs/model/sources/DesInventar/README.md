@@ -262,7 +262,7 @@ The following table provides cross-classification across multiple systems, per [
 
 > † These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in [taxonomy.md](../../taxonomy.md)) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: `ACCIDENT` (`TL0007`) → `TL0201` (see `STRUCTURE`), `BOAT CAPSIZE` (`TL0050`) → `TL0403` (see `DROWNING`), `EPIZOOTIC` (`BI0027`) → `BI0301` (see `ANIMAL DISEASE`), `EXPLOSION` (`TL0029`) → `TL0304` (see `EXPLOSIONS`), `LEAK` (`TL0030`) → `TL0301` (see `LEAK OR SPILL`), `STRUCT.COLLAPSE` (`TL0005`) → `TL0201` (see `STRUCTURE`).
 >
-> ‡ `EPIDEMIC`'s GLIDE code is corrected to `EP` here. The upstream `hazard_mapping` dict currently has `OT`, which conflicts with the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. See [IFRCGo/pystac-monty#201](https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864) for the upstream fix.
+> ‡ `EPIDEMIC`'s GLIDE code is `EP`, matching the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. The upstream `hazard_mapping` dict previously had `OT` here; that has since been fixed.
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, when all three are available for that row. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
