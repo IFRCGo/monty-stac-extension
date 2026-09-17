@@ -555,6 +555,14 @@
       "roles": [
         "documentation"
       ]
+    },
+    "thumbnail": {
+      "href": "https://ncics.org/ibtracs/html/plots/v04r01.2024178N09335.png",
+      "title": "IBTrACS Track Plot",
+      "type": "image/png",
+      "roles": [
+        "track-plot"
+      ]
     }
   },
   "links": [
@@ -569,6 +577,38 @@
     {
       "href": "https://www.ncei.noaa.gov/products/international-best-track-archive",
       "rel": "via"
+    },
+    {
+      "href": "../ibtracs-hazards/2024178N09335-hazard-20240626T000000Z.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../ibtracs-hazards/2024178N09335-hazard-20240629T000000Z.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../ibtracs-hazards/2024178N09335-hazard-20240702T000000Z.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "href": "../ibtracs-hazards/2024178N09335-hazard-20240708T000000Z.json",
+      "rel": "related",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
     }
   ]
 }
