@@ -68,7 +68,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/gdacs-events/items/1001230-41",
+      "href": "../gdacs-events/1001230-41.json",
       "type": "application/geo+json",
       "title": "GDACS TC1001230 (episode 41)",
       "roles": [
@@ -77,7 +77,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-events/items/charter-event-996",
+      "href": "../charter-events/charter-event-996.json",
       "type": "application/geo+json",
       "title": "Charter activation 996",
       "roles": [
@@ -86,7 +86,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-storm",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -94,7 +94,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-landslide",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -102,7 +102,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
+      "href": "../cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json",
       "type": "application/geo+json",
       "roles": [
         "response"
@@ -110,7 +110,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
+      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
       "type": "application/geo+json",
       "roles": [
         "response"
@@ -118,7 +118,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-impacts/items/cems-impact-EMSR847-aoi01-gra-population",
+      "href": "../cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json",
       "type": "application/geo+json",
       "roles": [
         "impact"
