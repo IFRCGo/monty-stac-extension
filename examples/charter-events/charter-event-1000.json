@@ -36,16 +36,16 @@
       "nat-geo-ear-gro"
     ],
     "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "keywords": [
       "AFG",
       "Earthquake",
       "Geological",
       "Seismic"
     ],
+    "processing:version": "0.2.4",
+    "processing:software": {
+      "pystac-monty": "0.2.4"
+    },
     "datetime": "2025-11-03T12:03:00Z"
   },
   "links": [
@@ -56,7 +56,7 @@
     },
     {
       "rel": "related",
-      "href": "../charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
+      "href": "../collections/charter-hazards/items/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -64,7 +64,7 @@
     },
     {
       "rel": "related",
-      "href": "../charter-response/charter-response-1000-1144-1.json",
+      "href": "../collections/charter-response/items/charter-response-1000-1144-1",
       "type": "application/geo+json",
       "roles": [
         "response"

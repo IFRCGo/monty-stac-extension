@@ -167,10 +167,6 @@
       "nat-geo-mmd-lan"
     ],
     "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
-    "processing:version": "1.0.0",
-    "processing:software": {
-      "pystac-monty": "1.0.0"
-    },
     "monty:hazard_detail": {
       "severity_value": 57,
       "severity_unit": "km",
@@ -183,12 +179,16 @@
       "Gravitational Mass Movement (Landslide)",
       "Ground Failure"
     ],
+    "processing:version": "0.2.4",
+    "processing:software": {
+      "pystac-monty": "0.2.4"
+    },
     "datetime": "2026-02-24T17:09:00Z"
   },
   "links": [
     {
       "rel": "related",
-      "href": "../charter-events/charter-event-1019.json",
+      "href": "../collections/charter-events/items/charter-event-1019",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -196,7 +196,7 @@
     },
     {
       "rel": "derived_from",
-      "href": "../charter-events/charter-event-1019.json",
+      "href": "../collections/charter-events/items/charter-event-1019",
       "type": "application/geo+json",
       "title": "Parent Charter Event"
     },
