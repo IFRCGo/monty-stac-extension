@@ -152,6 +152,7 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | [processing:version](https://github.com/stac-extensions/processing) | Generated                                          | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated                                          | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | |
+| `related` link in [links](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object) | Generated | One link per generated impact item (when impact data is available for the row), `roles: ["impact"]` — see [Impact Item](#impact-item) |
 
 #### Hazard Code Mapping
 
@@ -318,5 +319,6 @@ For each available impact metric in the Desinventar data, a separate impact item
 | monty:impact_detail.value                                                                                   | From Desinventar field     | Numeric impact value                               |
 | monty:impact_detail.unit                                                                                    | From mapping table         | Unit of measurement                                |
 | monty:impact_detail.estimate_type                                                                           | "primary"                  | All Desinventar data is considered primary         |
+| `related` link in [links](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object) | Generated                  | Link back to the parent event item, `roles: ["event"]` |
 
-The geometry, bbox, datetime and other base fields are inherited from the source event item.
+The geometry, bbox, datetime and other base fields are inherited from the source event item. Every event/impact pair is cross-linked: the event item carries a `related` link (`roles: ["impact"]`) to each of its impact items, and each impact item carries one back (`roles: ["event"]`).
