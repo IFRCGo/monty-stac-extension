@@ -106,6 +106,10 @@
       "source"
     ],
     "monty:corr_id": "20260224-BRA-616285-MH0600-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:country_codes": [
       "BRA"
     ],
@@ -125,16 +129,12 @@
         "D",
         "G"
       ]
-    },
-    "processing:version": "0.2.4",
-    "processing:software": {
-      "pystac-monty": "0.2.4"
     }
   },
   "links": [
     {
       "rel": "related",
-      "href": "../collections/charter-events/items/charter-event-1019",
+      "href": "../charter-events/charter-event-1019.json",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -142,7 +142,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-flood.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -150,7 +150,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-landslide",
+      "href": "../charter-hazards/charter-hazard-1019-matias_barbosa-mhpswaqua3y2ra9gfbzacg__-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -158,7 +158,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood",
+      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-flood.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -166,7 +166,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide",
+      "href": "../charter-hazards/charter-hazard-1019-juiz_de_fora-qvwjejdb0iznzao3svgtow__-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -174,7 +174,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-flood",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-flood.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -182,7 +182,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-landslide",
+      "href": "../charter-hazards/charter-hazard-1019-uba-ltpqia0h7ncclmgnxywldq__-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -190,7 +190,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-flood.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -198,7 +198,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-landslide",
+      "href": "../charter-hazards/charter-hazard-1019-region-_0rslcfuukfunq5irfrtkg__-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
