@@ -148,9 +148,9 @@ Below is an example of a queryables definition for a STAC API implementing the M
         "adult_50_54", "adult_55_59", "adult_60_64", "elderly", 
         "wheelchair_users", "roads", "railways", "vulnerable_employment", 
         "buildings", "reconstruction_costs", "hospitals", "schools", 
-        "local_currency", "global_currency", "local_currency_adj", 
+        "education_centers", "local_currency", "global_currency", "local_currency_adj",
         "global_currency_adj", "usd_uncertain", "cattle", "aid_general", 
-        "ifrc_contribution", "ifrc_requested", "alertscore", "households"
+        "ifrc_contribution", "ifrc_requested", "alertscore", "total_affected", "households"
       ]
     },
     "monty:impact_detail.type": {
