@@ -74,7 +74,7 @@ sources:
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
-    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
+    reviewed: 8fe834c241a12957682aa931379cc073a25cfc97
 
   gdacs:
     extra_paths:
