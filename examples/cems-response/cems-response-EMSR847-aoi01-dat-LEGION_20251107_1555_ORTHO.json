@@ -5,7 +5,7 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
+  "id": "cems-response-EMSR847-aoi01-dat-LEGION_20251107_1555_ORTHO",
   "geometry": {
     "type": "Polygon",
     "coordinates": [
@@ -76,6 +76,7 @@
       ]
     },
     "platform": "Legion",
+    "mission": "legion",
     "processing:version": "0.2.1",
     "processing:software": {
       "pystac-monty": "0.2.1"
@@ -93,7 +94,7 @@
     },
     {
       "rel": "self",
-      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/cems-response/cems-response-EMSR847-aoi01-dat-LEGION_20251107_1555_ORTHO.json",
       "type": "application/json"
     },
     {
