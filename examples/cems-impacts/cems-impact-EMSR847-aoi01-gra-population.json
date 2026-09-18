@@ -80,7 +80,7 @@
   "links": [
     {
       "rel": "derived_from",
-      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-gra",
+      "href": "../cems-response/cems-response-EMSR847-aoi01-gra.json",
       "type": "application/geo+json",
       "roles": [
         "response"

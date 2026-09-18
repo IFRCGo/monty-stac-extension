@@ -85,7 +85,7 @@
   "links": [
     {
       "rel": "related",
-      "href": "../collections/cems-events/items/cems-event-EMSR847",
+      "href": "../cems-events/cems-event-EMSR847.json",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -93,7 +93,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-storm",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-storm.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -101,7 +101,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-hazards/items/cems-hazard-EMSR847-aoi01-landslide",
+      "href": "../cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"
@@ -115,7 +115,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/cems-response/items/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f",
+      "href": "../cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json",
       "type": "application/geo+json",
       "roles": [
         "response"
