@@ -1397,7 +1397,9 @@ schema decision on where they belong. See
 <a href="https://github.com/IFRCGo/pystac-monty/issues/166">pystac-monty#166</a>.</p>
 </blockquote>
 <p><strong>Situational Report</strong> → one Response per activation, <code>type = eo-sr</code>, whose asset is the
-<code>reportLink</code> StoryMap URL (no geospatial payload).</p>
+<code>reportLink</code> StoryMap URL. It has no product <code>extent</code> of its own, so <code>geometry</code>/<code>bbox</code>
+fall back to the activation extent, or the Event's geometry/bbox if the activation has
+none — <code>null</code> geometry is not emitted, since it is not recommended by the STAC specification.</p>
 <p>A <strong>DEL</strong> Response additionally carries a <code>rel: related</code> (<code>roles: ["hazard"]</code>) link to the
 <code>cems-hazards</code> item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
 Every Response links to its Event and Hazard(s) via <code>related</code>, sharing <code>monty:corr_id</code>.</p>
