@@ -1873,6 +1873,7 @@
 <p>Documentation:
 - Technical Details: <a href="https://www.ncei.noaa.gov/sites/g/files/anmtlf171/files/2024-07/IBTrACS_version4r01_Technical_Details.pdf">https://www.ncei.noaa.gov/sites/g/files/anmtlf171/files/2024-07/IBTrACS_version4r01_Technical_Details.pdf</a>
 - Best Track Report: <a href="https://www.metoc.navy.mil/jtwc/products/best-tracks/tc-bt-report.html">https://www.metoc.navy.mil/jtwc/products/best-tracks/tc-bt-report.html</a></p>
+<p>Track plot thumbnails (attached to event items as the <code>thumbnail</code> asset) are served from <code>https://ncics.org/ibtracs/html/plots/{version}.{storm_id}.png</code>.</p>
 <h4 id="data-subsets">Data Subsets</h4>
 <p>In addition to global data files that contain all storms available in IBTrACS, several subsets are provided:</p>
 <ul>
@@ -1994,6 +1995,16 @@
 <td>Link to the IBTrACS data source</td>
 </tr>
 <tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/links.md"><code>related</code> links</a></td>
+<td>Generated</td>
+<td>One <code>related</code> link (roles: <code>["hazard"]</code>) per hazard item produced for this storm</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">assets</a></td>
+<td>Constructed</td>
+<td><code>data</code> (source CSV, roles: <code>["data"]</code>), <code>documentation</code> (roles: <code>["documentation"]</code>), <code>thumbnail</code> (track plot PNG, roles: <code>["track-plot"]</code>)</td>
+</tr>
+<tr>
 <td><a href="https://github.com/stac-extensions/processing">processing:version</a></td>
 <td>Generated</td>
 <td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
@@ -2005,6 +2016,7 @@
 </tr>
 </tbody>
 </table>
+<p>The <code>data</code> asset is labeled "IBTrACS Best Track Data" — the underlying CSV spans whichever basin(s) the ingested file covers, not only the North Atlantic, so the title no longer hardcodes a basin name.</p>
 <h2 id="collection-ibtracs-hazards">Collection: <code>ibtracs-hazards</code></h2>
 <p>A STAC collection holds all the IBTrACS hazards. An example of the IBTrACS hazards collection is <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/ibtracs-hazards/ibtracs-hazards.json">here</a>.</p>
 <h3 id="hazard-items">Hazard Items</h3>
@@ -2091,6 +2103,16 @@
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a></td>
 <td>Constructed URL</td>
 <td>Link to the IBTrACS data source</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/links.md"><code>related</code> link</a></td>
+<td>Generated</td>
+<td>One <code>related</code> link (roles: <code>["event"]</code>) back to the storm's event item</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">assets</a></td>
+<td>Constructed</td>
+<td><code>data</code> (source CSV, roles: <code>["data"]</code>), <code>documentation</code> (roles: <code>["documentation"]</code>)</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">monty:hazard_detail</a></td>
