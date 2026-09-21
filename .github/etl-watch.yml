@@ -16,8 +16,9 @@
 #
 # Field reference:
 #   repo         - upstream repository holding the transformers
-#   defaults     - issue labels, and who gets assigned when the upstream author
-#                  can't be assigned in this repo (not a collaborator here)
+#   defaults     - issue labels, who gets assigned when the upstream author
+#                  can't be assigned in this repo (not a collaborator here), and
+#                  who asked not to be assigned to these issues at all (opt_out)
 #   sources.<id> - keyed by the same `id` as in sources.yml
 #     extra_paths - additional upstream files that carry documented behaviour.
 #                   Validators are listed because they define the source object
@@ -51,6 +52,9 @@ repo: IFRCGo/pystac-monty
 defaults:
   labels: [documentation, etl-drift]
   fallback_assignees: [emmanuelmathot]
+  # Upstream authors who asked not to be assigned to drift issues (#138). They
+  # are still linked in the body, but the daily refresh no longer re-adds them.
+  opt_out: [pantierra]
 
 # Bootstrapped 2026-07-29 at IFRCGo/pystac-monty@34b757c ("Merge pull request
 # #179"), i.e. the docs are *declared* current as of that commit and the
