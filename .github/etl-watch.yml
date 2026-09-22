@@ -70,7 +70,7 @@ sources:
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
-    reviewed: e465c7098716692935bc2d768066cc78de794f62
+    reviewed: 8fe834c241a12957682aa931379cc073a25cfc97
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]

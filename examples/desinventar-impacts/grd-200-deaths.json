@@ -76,6 +76,14 @@
       "href": "../desinventar-impacts.json",
       "type": "application/json",
       "title": "Desinventar Impacts"
+    },
+    {
+      "rel": "related",
+      "href": "../desinventar-events/grd-200.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
     }
   ]
 }
