@@ -74,6 +74,7 @@ nav:
     - Response Taxonomy: model/response-taxonomy.md
     - Response Best Practices: model/response-best-practices.md
     - Response ↔ Impact Boundary: model/response-impact-boundary.md
+    - Risk Model Options: model/risk-model-options.md
     - Event Correlation: model/correlation_identifier.md
     - Questions: model/questions.md
   - Examples: examples/index.md
