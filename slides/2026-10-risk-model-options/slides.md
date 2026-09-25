@@ -313,82 +313,9 @@ layout: default
 
 Each step adds to the previous one. **Every step is a place to stop.**
 
-<div class="roadmap">
-  <div class="track"></div>
-  <div class="skip">level 3 can come without level 2</div>
-  <div class="steps">
-    <div class="step l0">
-      <div class="dot">0</div>
-      <div class="card"><b>Today</b><span>Events, hazards, impacts, responses</span></div>
-      <div class="stop"><b>Stop here:</b> no change. Exposure stays mixed with impact</div>
-      <div class="effort">effort: none</div>
-    </div>
-    <div class="step l1">
-      <div class="dot">1</div>
-      <div class="card"><b>Event-linked exposure</b><span>Exposure separate from impact</span></div>
-      <div class="stop"><b>Stop here:</b> credible figures; exposure for every event</div>
-      <div class="effort">effort: low</div>
-    </div>
-    <div class="step l2 optional">
-      <div class="dot">2</div>
-      <div class="card"><b>Pre-event occurrences</b><span>Forecast hazards and exposure before an event</span></div>
-      <div class="stop"><b>Stop here:</b> anticipatory action</div>
-      <div class="effort">effort: medium</div>
-    </div>
-    <div class="step l3">
-      <div class="dot">3</div>
-      <div class="card"><b>Analytical results</b><span>People-in-need estimates, linked to their inputs</span></div>
-      <div class="stop"><b>Stop here:</b> north-star figure in the catalogue</div>
-      <div class="effort">effort: medium</div>
-    </div>
-    <div class="step l4">
-      <div class="dot">4</div>
-      <div class="card"><b>Context catalogue</b><span>Population, vulnerability, coping, baseline hazards</span></div>
-      <div class="stop"><b>Stop here:</b> all inputs in one place; preparedness</div>
-      <div class="effort">effort: high · scope change</div>
-    </div>
-  </div>
-</div>
+<LevelRoadmap />
 
-<div class="mt-4 text-sm">The partners choose a <b>target level</b>. Details on the next slide.</div>
-
-<style>
-.roadmap { position: relative; margin-top: 1.5rem; }
-.roadmap .track {
-  position: absolute; top: 18px; left: 10%; right: 10%; height: 4px;
-  background: linear-gradient(90deg, #86b6ef, #5598e7, #2a78d6, #1c5cab, #104281);
-}
-.roadmap .skip {
-  position: absolute; top: -18px; left: 30%; width: 40%; height: 26px;
-  border: 2px dashed #1c5cab; border-bottom: none; border-radius: 14px 14px 0 0;
-  font-size: 0.65rem; text-align: center; color: #1c5cab; line-height: 1;
-  padding-top: 2px;
-}
-.roadmap .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.6rem; position: relative; }
-.roadmap .step { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
-.roadmap .dot {
-  width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 1.1rem; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--c); background: var(--c); color: var(--t); z-index: 1;
-}
-.roadmap .card {
-  width: 100%; min-height: 96px; padding: 0.5rem 0.6rem; border-radius: 8px;
-  background: color-mix(in srgb, var(--c) 12%, white); border: 1px solid var(--c); font-size: 0.78rem; line-height: 1.25;
-  display: flex; flex-direction: column; gap: 0.3rem;
-}
-.roadmap .card b { font-size: 0.85rem; }
-.roadmap .optional .card { border-style: dashed; border-width: 2px; }
-.roadmap .stop {
-  width: 100%; min-height: 58px; padding: 0.35rem 0.5rem; border-radius: 6px; font-size: 0.68rem; line-height: 1.2;
-  border-left: 4px solid var(--slidev-theme-primary); background: #fff3ec;
-}
-.roadmap .stop b { color: var(--slidev-theme-primary); }
-.roadmap .effort { font-size: 0.65rem; color: #666; }
-.roadmap .l0 { --c: #86b6ef; --t: #0d1f33; }
-.roadmap .l1 { --c: #5598e7; --t: #0d1f33; }
-.roadmap .l2 { --c: #2a78d6; --t: #fff; }
-.roadmap .l3 { --c: #1c5cab; --t: #fff; }
-.roadmap .l4 { --c: #104281; --t: #fff; }
-</style>
+<div class="mt-2 text-sm">The partners choose a <b>target level</b>. Details on the next slide.</div>
 
 ---
 layout: default

@@ -22,6 +22,8 @@ The core-partner calls of 9 and 23 September 2026 moved the question up one leve
 This document gives the concepts (§2–§4), the ontology (§5), and a ladder of **integration levels** (§7).
 The partners choose a target level on the ladder.
 
+![Risk is where hazard, exposure and vulnerability overlap, and capacity reduces it. Montandon today covers the phase after an event; the proposal extends toward the phases before an event](img/risk-model/risk-intro.svg)
+
 ## 2. Two meanings of "hazard"
 
 The word "hazard" has two meanings. The question "can a hazard exist without an event?" mixes them.
@@ -33,6 +35,8 @@ The word "hazard" has two meanings. The question "can a hazard exist without an 
 | Becomes an event? | Yes, or it is one already | Never. It is a statistic over many possible events |
 | Sources | GDACS, USGS, PDC, IBTrACS | JRC flood hazard maps, GEM seismic hazard, GIRI |
 | In Montandon today | Yes | No |
+
+![A hazard occurrence sits on a time axis, observed then forecast; a baseline hazard has only a return period](img/risk-model/hazard-meanings.svg)
 
 Thus there are two cases of "hazard without an event":
 
@@ -65,6 +69,8 @@ implementation** of `f`. Each one selects its arguments and draws its own bounda
 | Loss models (RDLS, GEM) | hazard, exposure, fragility | physical vulnerability (damage curves) |
 | Rapid people-in-need estimate (§4) | hazard footprint, exposed population, vulnerability factor | per admin unit |
 
+![Grid of the arguments of the risk function that each framework uses](img/risk-model/risk-function.svg)
+
 **Consequence for Montandon:** Montandon stores the **arguments**. The analysis selects `f`.
 This matches the position from the 23 September call: analytical frameworks belong to specialised
 processors, and Montandon collects, structures and documents the source data.
@@ -77,6 +83,8 @@ value to discuss. It is not a change of the model.
 ### 4.1 Is the data tied to a hazard?
 
 Use this test: **if the hazard footprint changes, does the number change?**
+
+![People and buildings inside a hazard footprint are exposure; all of them are context](img/risk-model/key-test.svg)
 
 | Figure | Tied to a hazard? | Concept |
 |---|---|---|
@@ -101,6 +109,8 @@ call noted that "the exposure and hazard link is pretty obvious".
 ### 4.2 How people in need is estimated
 
 The humanitarian chain is: total population → exposed → affected → **in need** → targeted → reached.
+
+![Schematic funnel from total population to people reached, with the data that feeds each stage](img/risk-model/pin-funnel.svg)
 
 There are two families of method:
 
@@ -169,6 +179,8 @@ flowchart LR
 Population grids, poverty indices, coping indicators and admin boundaries are not tied to a hazard.
 Montandon calls this concept **Context**: the conditions of a place or a population that do not depend
 on a hazard.
+
+![Context as stacked layers: admin boundaries, population, buildings and infrastructure, vulnerability, coping capacity. A hazard footprint cuts the population and building layers; the cut is exposure](img/risk-model/context-layers.svg)
 
 The term comes from the JIAF 2.0 pillar "Context": the political, socio-cultural, economic, demographic,
 security and infrastructure characteristics of the area. Humanitarian analysts know it, and it does not
@@ -252,6 +264,8 @@ Names in *italics* are working names.
 
 The options are a **ladder**. Each level adds concepts to Montandon. The partners choose a **target level**
 and a path to it. The levels are mostly cumulative. Level 3 can come without level 2.
+
+![Roadmap of the five integration levels; each level is a place to stop, and level 2 is optional](img/risk-model/level-roadmap.svg)
 
 | Level | Montandon holds | What it adds | Rules relaxed | New pipelines | People-in-need support | Main risk |
 |---|---|---|---|---|---|---|
@@ -344,6 +358,8 @@ It describes packaging and distribution, not meaning. Its maturity is "Proposal"
 
 GDACS event 1001294, episode 13 ([#110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)).
 
+![NOUL-26 population inside the 39 kt and 74 kt wind fields, observed then forecast](img/risk-model/noul26-exposure.svg)
+
 | Level | What Montandon holds for NOUL-26 |
 |---|---|
 | 0 | Event and hazard items. `pop39` = 103 014 755 filed as an impact, type `potentially_affected` |
@@ -368,6 +384,8 @@ PAGER population exposure by shaking intensity (MMI), from `json/exposures.json`
 | India | 96 979 504 | 4 | 0 | 0 | 0 | 0 |
 | Bangladesh | 13 802 713 | 0 | 0 | 0 | 0 | 0 |
 | All countries | 130 864 619 | 147 452 | 61 485 | 27 679 | 6 964 | 2 998 |
+
+![Population exposed by shaking intensity for earthquake us6000pi9w, log scale](img/risk-model/tibet-mmi-exposure.svg)
 
 | Level | What Montandon holds for the earthquake |
 |---|---|

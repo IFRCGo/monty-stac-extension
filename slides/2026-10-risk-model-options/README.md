@@ -16,6 +16,17 @@ pnpm build    # static site in dist/
 pnpm export   # PDF (needs playwright-chromium)
 ```
 
+## Figures in the docs
+
+The visuals in `components/` are also used in the MkDocs page, as static SVG files in
+[docs/model/img/risk-model/](../../docs/model/img/risk-model/). The components are the only source.
+After you change a component, export the SVG files again:
+
+```sh
+pnpm dev --port 3031                    # in a second terminal
+python3 scripts/export_doc_svgs.py      # needs google-chrome
+```
+
 ## Note
 
 The root `npm test` runs `stac-node-validator .` on the whole repository. It also reads the JSON files in
