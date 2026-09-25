@@ -27,179 +27,226 @@ Core partners · October 2026 · discussion #110
 layout: default
 ---
 
-# The question from 23 September
+# This is a risk-modelling question
 
-Discussion #110 closed two gaps. The partners agree:
+<RiskIntro />
 
-- **Forecast** is a qualifier with an issue time and a valid time (`monty:forecast`).
-- **Exposure is not impact.** It goes in separate collections.
-
-The 23 September call asked a larger question:
-
-- Can a hazard exist **without an event**?
-- The partners prefer **INFORM** concepts.
-- North star: **estimate people in need** for forecast, imminent and recent events.
-
-<div class="mt-6 p-3 border-l-4 border-primary">
-This deck proposes an <b>ontology</b> and a <b>ladder of integration levels</b>.<br/>
-It is not a decision. It does not define schema fields.
-</div>
+<div class="text-sm">Risk exists <b>before</b> an event. Montandon records what happens <b>after</b>. The question is how far Montandon goes toward risk.</div>
 
 ---
 layout: default
-class: text-sm
+---
+
+# The question from 23 September
+
+<div class="flow">
+  <div class="fc done">
+    <div class="k">Discussion #110 · agreed</div>
+    <div class="t">Two gaps closed</div>
+    <ul><li><b>Forecast</b> is a qualifier (issue time, valid time)</li><li><b>Exposure is not impact</b>: separate collections</li></ul>
+  </div>
+  <div class="arrow">→</div>
+  <div class="fc open">
+    <div class="k">Call of 23 September · open</div>
+    <div class="t">Can a hazard exist without an event?</div>
+    <ul><li>The partners prefer <b>INFORM</b> concepts</li><li>Montandon has been event-based until now</li></ul>
+  </div>
+  <div class="arrow">→</div>
+  <div class="fc star">
+    <div class="k">North star</div>
+    <div class="t">Estimate people in need</div>
+    <ul><li>for forecast, imminent and recent events</li></ul>
+  </div>
+</div>
+
+<div class="mt-8 p-3 border-l-4 border-primary">
+This deck proposes an <b>ontology</b> and a <b>roadmap of integration levels</b>.<br/>
+It is not a decision. It does not define schema fields.
+</div>
+
+<style>
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0.6rem; align-items: stretch; margin-top: 1.5rem; }
+.fc { border-radius: 10px; padding: 0.8rem 1rem; font-size: 0.85rem; border: 2px solid #ccc; }
+.fc .k { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: #666; }
+.fc .t { font-weight: 700; font-size: 1.05rem; margin: 0.3rem 0 0.4rem; line-height: 1.2; }
+.fc ul { margin: 0; padding-left: 1rem; }
+.fc.done { background: #f2f2f2; }
+.fc.open { border-color: #cf3f02; background: #fff3ec; }
+.fc.star { border-color: #104281; background: #eef4fc; }
+.arrow { align-self: center; font-size: 1.8rem; color: #999; }
+</style>
+
+---
+layout: default
 ---
 
 # Two meanings of "hazard"
 
-| | Hazard **occurrence** | **Baseline** hazard |
-|---|---|---|
-| Example | Cyclone NOUL-26 track, 26 July 2026 | 1-in-100-year flood map of Nepal |
-| Time | A date, or a forecast valid time | No occurrence time. A return period |
-| Becomes an event? | Yes, or it is one already | Never |
-| In Montandon today | Yes | No |
+<HazardMeanings />
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-<div>
-
-**Case A — pre-event occurrence**<br/>
-A forecast track before anybody declares an event.
-
-</div>
-<div>
-
-**Case B — baseline hazard**<br/>
-Describes a place. It never becomes an event.
-
-</div>
-</div>
-
-Both are a **hazard without an event**. A qualifier must tell a baseline from an occurrence.
+Both cases are a **hazard without an event**. A qualifier must tell a baseline from an occurrence.
 
 ---
 layout: default
-class: text-sm
 ---
 
 # A risk function with an open signature
 
-UNDRR: disaster risk is "a function of hazard, exposure, vulnerability and capacity".
+<div class="text-sm">UNDRR: disaster risk is the potential loss "determined probabilistically as a function of hazard, exposure, vulnerability and capacity".</div>
 
-```text
-Risk = f(Hazard, Exposure, [Vulnerability], [Capacity], ...)
-```
+<RiskMatrix />
 
-| Implementation of `f` | How it partitions |
-|---|---|
-| UNDRR | hazard, exposure, vulnerability, capacity |
-| INFORM Risk | (hazard & exposure), vulnerability, lack of coping capacity |
-| IPCC AR5 | vulnerability **includes** lack of capacity to cope |
-| Loss models (RDLS, GEM) | physical vulnerability (damage curves) |
-| Rapid people-in-need estimate | exposed population × vulnerability factor |
-
-**Montandon stores the arguments. The analysis selects `f`.**
+<div class="mt-4"><b>Montandon stores the arguments. The analysis selects <code>f</code>.</b></div>
 
 ---
 layout: default
-class: text-sm
 ---
 
-# The key test: is the data tied to a hazard?
+# The key test
 
 *If the hazard footprint changes, does the number change?*
 
-| Figure | Tied to a hazard? | Concept |
-|---|---|---|
-| 103 M people in the 39 kt wind field (GDACS `pop39`) | Yes | Exposure |
-| 1200 deaths reported | Yes | Impact |
-| WorldPop population grid of Nepal | No | Context |
-| 40 % of a district below the poverty line | No | Context — vulnerability |
-| 0.3 physicians per 1000 people | No | Context — coping capacity |
+<div class="grid grid-cols-[55%_45%] gap-6 items-start">
+<div>
+<FootprintTest />
+</div>
+<div>
 
-<div class="mt-4 p-3 border-l-4 border-primary">
-
-`Exposure = hazard footprint ∩ population or assets`<br/>
-Exposure is where the two kinds of data meet. This is why INFORM has "Hazard & Exposure".
-
+<div class="tests text-sm">
+  <div class="row"><span class="chip yes">yes</span> 103 M people in the 39 kt wind field <span class="c exp">Exposure</span></div>
+  <div class="row"><span class="chip yes">yes</span> 12 hospitals in the flood extent <span class="c exp">Exposure</span></div>
+  <div class="row"><span class="chip yes">yes</span> 1200 deaths reported <span class="c imp">Impact</span></div>
+  <div class="row"><span class="chip no">no</span> WorldPop grid of Nepal <span class="c ctx">Context</span></div>
+  <div class="row"><span class="chip no">no</span> 40 % below the poverty line <span class="c ctx">Context</span></div>
+  <div class="row"><span class="chip no">no</span> 0.3 physicians / 1000 people <span class="c ctx">Context</span></div>
 </div>
 
+<div class="mt-4 p-3 border-l-4 border-primary text-sm">
+<code>Exposure = footprint ∩ people, assets</code>
+</div>
+
+</div>
+</div>
+
+<style>
+.tests .row { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid #eee; }
+.chip { font-size: 0.7rem; font-weight: 700; border-radius: 999px; padding: 0 0.5rem; border: 1.5px solid #3f3f3f; }
+.chip.no { border-style: dashed; color: #666; border-color: #999; }
+.c { margin-left: auto; font-weight: 700; padding-left: 0.6rem; border-left: 6px solid; }
+.c.exp { border-color: #1baf7a; }
+.c.ctx { border-color: #2a78d6; }
+.c.imp { border-color: #8a8a8a; }
+</style>
+
 ---
-layout: two-cols
-gap: 8
-class: text-sm
+layout: default
 ---
 
 # How people in need is estimated
 
-Chain: population → exposed → affected → **in need** → targeted → reached
+<div class="max-w-[88%]"><PinFunnel /></div>
 
-The rapid, model-based method (anticipatory action, DREF, first 72 h):
+<div class="grid grid-cols-2 gap-8 text-xs">
+<div>
+
+Rapid, model-based method (anticipatory action, DREF, first 72 h):
 
 ```text
-PIN(admin) = Σ bands b
-  exposed_population(admin, b)
-  × p_need(b, vulnerability(admin))
+PIN(admin) = Σ over intensity bands b of
+     exposed_population(admin, b)
+   × p_need(b, vulnerability(admin))
 ```
 
-::right::
-
-<div class="mt-16" />
+</div>
+<div>
 
 | Input | In Montandon today? |
 |---|---|
 | Hazard footprint, intensity bands | Yes |
 | Exposed population per band | Partly (as impact) |
-| Population, vulnerability, boundaries | No |
-| Past impacts, to calibrate `p_need` | **Yes** |
+| Population, vulnerability | No |
+| Past impacts (calibration) | **Yes** |
 
-An event-only Montandon gives the exposure and the calibration data.<br/>
-It does not give the vulnerability.
+</div>
+</div>
+
+---
+layout: default
+---
+
+# Context: data not tied to a hazard
+
+<div class="grid grid-cols-[55%_45%] gap-6 items-start">
+<div>
+<ContextLayers />
+</div>
+<div>
+
+<div class="p-3 border-l-4 border-primary">
+<b>Context</b> = the conditions of a place or a population that do not depend on a hazard.
+</div>
+
+- From the **JIAF 2.0** pillar "Context"
+- Not tied to one risk framework
+- In **INFORM** terms: *Vulnerability* and *Lack of coping capacity*
+- A **main** input of a people-in-need estimate, not secondary data
+
+</div>
+</div>
 
 ---
 layout: default
 class: text-sm
 ---
 
-# Context: data not tied to a hazard
-
-Population grids, poverty indices, coping indicators, admin boundaries.
-
-<div class="mt-4 p-3 border-l-4 border-primary">
-<b>Context</b> = the conditions of a place or a population that do not depend on a hazard.
-</div>
-
-- From the **JIAF 2.0** pillar "Context": political, socio-cultural, economic, demographic, security and infrastructure characteristics of the area
-- Not tied to one risk framework
-- In **INFORM** terms: *Vulnerability* and *Lack of coping capacity*
-- A **main** input of a people-in-need estimate, not secondary data
-
----
-layout: two-cols
-gap: 8
-class: text-sm
----
-
 # Vulnerability and coping capacity
 
-If Context holds poverty and coping indicators:
+<div class="grid grid-cols-2 gap-10 mt-4">
+<div>
 
-### Kinds of Context
+### A — Kinds of Context
 
-- Categories of Context data
+<div class="opt">
+  <div class="box ctx big">Context
+    <div class="kids"><span>population</span><span>assets</span><span class="hl">vulnerability</span><span class="hl">coping capacity</span></div>
+  </div>
+  <div class="peers"><span class="box haz">Hazard</span><span class="box exp">Exposure</span></div>
+</div>
+
 - **For:** fewer concepts; each framework's partition is a value
 - **Against:** less visible than Hazard and Exposure
 
-::right::
+</div>
+<div>
 
-<div class="mt-24" />
+### B — Concepts of their own
 
-### Concepts of their own
+<div class="opt">
+  <div class="peers"><span class="box haz">Hazard</span><span class="box exp">Exposure</span><span class="box ctx">Vulnerability</span><span class="box ctx">Coping capacity</span></div>
+  <div class="box ctx small">Context: population, assets</div>
+</div>
 
-- Same level as Hazard and Exposure
 - **For:** matches the INFORM picture
 - **Against:** boundary datasets (health access) force a choice
 
-In both cases: **one precise definition each**, and Vulnerability means **social** vulnerability.
+</div>
+</div>
+
+<div class="mt-4 p-2 border-l-4 border-primary">In both cases: one precise definition each. Vulnerability means <b>social</b> vulnerability.</div>
+
+<style>
+.opt { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.6rem 0 1rem; min-height: 130px; }
+.box { border-radius: 8px; padding: 0.4rem 0.7rem; font-weight: 700; display: inline-block; }
+.box.haz { background: #cf3f02; color: #fff; }
+.box.exp { background: #1baf7a; color: #0d1f17; }
+.box.ctx { background: #2a78d6; color: #fff; }
+.box.big { display: block; }
+.box.small { font-weight: 400; align-self: flex-start; }
+.kids { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.kids span { border: 1px solid rgba(255,255,255,0.7); border-radius: 6px; padding: 0.1rem 0.5rem; font-weight: 400; }
+.kids span.hl { background: #fff; color: #104281; font-weight: 700; }
+.peers { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+</style>
 
 ---
 layout: default
@@ -209,13 +256,13 @@ layout: default
 
 ```mermaid {scale: 0.5}
 flowchart LR
-    Response[Response]
-    Event([Event])
-    Hazard[Hazard<br/>occurrence or baseline]
-    Exposure[Exposure<br/>= footprint ∩ people, assets]
-    Impact[Impact]
-    Need[People in need]
-    Context[(Context<br/>population · assets<br/>vulnerability · coping)]
+    Response[Response]:::neu
+    Event([Event]):::neu
+    Hazard[Hazard<br/>occurrence or baseline]:::haz
+    Exposure[Exposure<br/>= footprint ∩ people, assets]:::exp
+    Impact[Impact]:::neu
+    Need[People in need]:::need
+    Context[(Context<br/>population · assets<br/>vulnerability · coping)]:::ctx
 
     Response == addresses ==> Event
     Event -. groups .-> Hazard
@@ -227,6 +274,12 @@ flowchart LR
     Response -. informs .-> Impact
     Context -. "population, assets in" .-> Exposure
     Context -. "vulnerability, coping" .-> Need
+
+    classDef neu fill:#f2f2f2,stroke:#8a8a8a,color:#222
+    classDef haz fill:#cf3f02,stroke:#a33200,color:#fff
+    classDef exp fill:#1baf7a,stroke:#138a60,color:#0d1f17
+    classDef ctx fill:#2a78d6,stroke:#1c5cab,color:#fff
+    classDef need fill:#104281,stroke:#0d366b,color:#fff
 ```
 
 **Thick** = mandatory · **dashed** = optional · relations are links, not shared data models.<br/>**Forecast** is a qualifier on hazard, exposure, impact and need.
@@ -303,23 +356,23 @@ Each step adds to the previous one. **Every step is a place to stop.**
 .roadmap { position: relative; margin-top: 1.5rem; }
 .roadmap .track {
   position: absolute; top: 18px; left: 10%; right: 10%; height: 4px;
-  background: linear-gradient(90deg, #9e9e9e, #b35c00, #a07800, #1f5f99, #3d7a1f);
+  background: linear-gradient(90deg, #86b6ef, #5598e7, #2a78d6, #1c5cab, #104281);
 }
 .roadmap .skip {
   position: absolute; top: -18px; left: 30%; width: 40%; height: 26px;
-  border: 2px dashed #1f5f99; border-bottom: none; border-radius: 14px 14px 0 0;
-  font-size: 0.65rem; text-align: center; color: #1f5f99; line-height: 1;
+  border: 2px dashed #1c5cab; border-bottom: none; border-radius: 14px 14px 0 0;
+  font-size: 0.65rem; text-align: center; color: #1c5cab; line-height: 1;
   padding-top: 2px;
 }
 .roadmap .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.6rem; position: relative; }
 .roadmap .step { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
 .roadmap .dot {
   width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 1.1rem; border: 3px solid var(--c); background: var(--f); color: #000; z-index: 1;
+  font-weight: 700; font-size: 1.1rem; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--c); background: var(--c); color: var(--t); z-index: 1;
 }
 .roadmap .card {
   width: 100%; min-height: 96px; padding: 0.5rem 0.6rem; border-radius: 8px;
-  background: var(--f); border: 1px solid var(--c); font-size: 0.78rem; line-height: 1.25;
+  background: color-mix(in srgb, var(--c) 12%, white); border: 1px solid var(--c); font-size: 0.78rem; line-height: 1.25;
   display: flex; flex-direction: column; gap: 0.3rem;
 }
 .roadmap .card b { font-size: 0.85rem; }
@@ -330,11 +383,11 @@ Each step adds to the previous one. **Every step is a place to stop.**
 }
 .roadmap .stop b { color: var(--slidev-theme-primary); }
 .roadmap .effort { font-size: 0.65rem; color: #666; }
-.roadmap .l0 { --c: #555;    --f: #e0e0e0; }
-.roadmap .l1 { --c: #b35c00; --f: #f6c89f; }
-.roadmap .l2 { --c: #a07800; --f: #fbe3a6; }
-.roadmap .l3 { --c: #1f5f99; --f: #b9d7f0; }
-.roadmap .l4 { --c: #3d7a1f; --f: #c8e0b4; }
+.roadmap .l0 { --c: #86b6ef; --t: #0d1f33; }
+.roadmap .l1 { --c: #5598e7; --t: #0d1f33; }
+.roadmap .l2 { --c: #2a78d6; --t: #fff; }
+.roadmap .l3 { --c: #1c5cab; --t: #fff; }
+.roadmap .l4 { --c: #104281; --t: #fff; }
 </style>
 
 ---
@@ -385,14 +438,24 @@ flowchart LR
     Context -.-> Exposure
     Baseline -.-> Exposure
 
-    classDef l0 fill:#e0e0e0,stroke:#555,color:#000
-    classDef l1 fill:#f6c89f,stroke:#b35c00,color:#000
-    classDef l2 fill:#fbe3a6,stroke:#a07800,color:#000
-    classDef l3 fill:#b9d7f0,stroke:#1f5f99,color:#000
-    classDef l4 fill:#c8e0b4,stroke:#3d7a1f,color:#000
+    classDef l0 fill:#86b6ef,stroke:#5598e7,color:#0d1f33
+    classDef l1 fill:#5598e7,stroke:#2a78d6,color:#0d1f33
+    classDef l2 fill:#2a78d6,stroke:#1c5cab,color:#fff
+    classDef l3 fill:#1c5cab,stroke:#104281,color:#fff
+    classDef l4 fill:#104281,stroke:#0d366b,color:#fff
 ```
 
-Grey = level 0 · orange = 1 · yellow = 2 · blue = 3 · green = 4 · **thick** = mandatory · **dashed** = optional
+Light → dark blue = level 0 → 4 · **thick** = mandatory · **dashed** = optional
+
+---
+layout: default
+---
+
+# NOUL-26: observed, then forecast
+
+<NoulExposure />
+
+Both gaps from #110 in one chart: a **forecast** needs its own qualifier, and **exposure** is not impact.
 
 ---
 layout: default
@@ -410,6 +473,18 @@ GDACS event 1001294, episode 13
 | 2 | Forecast track positions (advisory 13) are hazard items with `monty:forecast`. Their exposure exists before any event is declared |
 | 3 | A notebook combines exposure per wind band with district vulnerability, and writes a people-in-need estimate per district, linked to its inputs |
 | 4 | The population grid and the vulnerability dataset are Context items. The notebook finds them by location |
+
+---
+layout: default
+---
+
+# Tibet earthquake 2025: who was exposed
+
+USGS `us6000pi9w` · M 7.1 · 7 January 2025
+
+<MmiExposure />
+
+130.9 M people felt light shaking. 2 998 were at MMI IX. Reported toll: 126 deaths.
 
 ---
 layout: default

@@ -286,14 +286,14 @@ flowchart LR
     Context -.-> Exposure
     Baseline -.-> Exposure
 
-    classDef l0 fill:#e0e0e0,stroke:#555,color:#000
-    classDef l1 fill:#f6c89f,stroke:#b35c00,color:#000
-    classDef l2 fill:#fbe3a6,stroke:#a07800,color:#000
-    classDef l3 fill:#b9d7f0,stroke:#1f5f99,color:#000
-    classDef l4 fill:#c8e0b4,stroke:#3d7a1f,color:#000
+    classDef l0 fill:#86b6ef,stroke:#5598e7,color:#0d1f33
+    classDef l1 fill:#5598e7,stroke:#2a78d6,color:#0d1f33
+    classDef l2 fill:#2a78d6,stroke:#1c5cab,color:#fff
+    classDef l3 fill:#1c5cab,stroke:#104281,color:#fff
+    classDef l4 fill:#104281,stroke:#0d366b,color:#fff
 ```
 
-Colours: grey = level 0, orange = level 1, yellow = level 2, blue = level 3, green = level 4.
+Colours: light blue = level 0, darkest blue = level 4.
 Thick arrow = mandatory relation. Dashed arrow = optional relation (see §5.1).
 
 ### 7.1 The arguments, per level
