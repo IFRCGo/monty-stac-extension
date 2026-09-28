@@ -1312,6 +1312,18 @@ geometry from the DEL delineation (§ above); a secondary hazard surfaced only v
 footprint class takes its geometry from that class's extent where available, else the AOI
 extent, and its severity from the class figure. Do <strong>not</strong> infer hazard multiplicity from the
 DEL count.</p>
+<blockquote>
+<p><strong>Same-slug collision:</strong> <code>category</code>+<code>subCategory</code> and a GRA/GRM footprint class can each
+resolve to a different hazard key that still maps to the <em>same</em> id slug (e.g. <code>subCategory:
+"Riverine flood"</code> → <code>flood_riverine</code>, footprint class <code>Flooded area</code> → <code>flood</code>, both slug
+<code>flood</code>) — that is one physical hazard detected two ways, not two hazards, so it collapses
+to a <strong>single</strong> Hazard item. When keys collide on a slug, the <code>category</code>+<code>subCategory</code> key
+always wins for geometry, <code>title</code>, and <code>monty:hazard_codes</code> (it is the more specific,
+authoritative signal); the footprint-derived <code>monty:hazard_detail</code> is kept only if the
+<code>category</code> key didn't already supply one. Keys that resolve to <em>different</em> slugs (e.g. a
+<code>Storm</code> activation with a <code>Landslide</code> footprint class) still emit separate Hazard items as
+above.</p>
+</blockquote>
 <h2 id="product-response">Product → Response</h2>
 <p>Each product maps to a Monty Response item via <code>monty:response_detail</code>.</p>
 <table>
