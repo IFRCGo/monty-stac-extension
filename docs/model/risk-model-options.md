@@ -11,7 +11,9 @@
 >
 > **Contributors:** @emmanuelmathot (author), @arunissun (production analysis), @arnauroviramuntada
 > (review and forecast metadata), @wrynearson, @p-phung, @nicolepaul.
-> Comments on this version are collected in a shared working document. This file follows that discussion.
+> Comments on this version are collected in the
+> [shared working document](https://docs.google.com/document/d/164gsPcwCcwIMZDuTXfi_lk4Vg7eEeBoS/edit).
+> This file follows that discussion.
 
 ## 1. The question
 
