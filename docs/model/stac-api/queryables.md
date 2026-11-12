@@ -100,6 +100,11 @@ Below is an example of a queryables definition for a STAC API implementing the M
       "description": "The unique identifier assigned by the Monty system to the reference event",
       "type": "string"
     },
+    "processing:version": {
+      "description": "The version of the pystac-monty transformer that generated the item, from the processing: extension",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
     "monty:hazard_codes": {
       "description": "The hazard codes of the hazards affecting the event",
       "type": "array",

@@ -59,6 +59,10 @@
     ],
     "disaster:resolution_class": "VHR",
     "monty:corr_id": "20251103-AFG-1138838-GH0101-1-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
     "monty:country_codes": [
       "AFG"
     ],
@@ -84,16 +88,12 @@
       "Geological",
       "Seismic",
       "ValueAddedProduct"
-    ],
-    "processing:version": "0.2.4",
-    "processing:software": {
-      "pystac-monty": "0.2.4"
-    }
+    ]
   },
   "links": [
     {
       "rel": "related",
-      "href": "../collections/charter-events/items/charter-event-1000",
+      "href": "../charter-events/charter-event-1000.json",
       "type": "application/geo+json",
       "roles": [
         "event"
@@ -101,7 +101,7 @@
     },
     {
       "rel": "related",
-      "href": "../collections/charter-hazards/items/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake",
+      "href": "../charter-hazards/charter-hazard-1000-aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__-earthquake.json",
       "type": "application/geo+json",
       "roles": [
         "hazard"

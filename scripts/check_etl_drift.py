@@ -437,7 +437,7 @@ def api(path: str, method: str = "GET", body: dict[str, Any] | None = None) -> A
 
 def is_assignable(login: str) -> bool:
     """Assigning a non-collaborator silently drops the assignee, so the issue
-    would land on nobody. Check first, and fall back to @-mentioning."""
+    would land on nobody. Check first, and fall back to the configured maintainers."""
     request = urllib.request.Request(f"{API}/repos/{THIS_REPO}/assignees/{login}")
     request.add_header("Authorization", f"Bearer {_token()}")
     try:
@@ -665,7 +665,14 @@ def collect_open_prs(repo: str, drifts: dict[str, Drift]) -> None:
 # --------------------------------------------------------------------------- #
 
 
-def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
+def _author(login: str | None) -> str:
+    """Link the login instead of @-mentioning it: the body is rewritten on every
+    drift refresh, and each rewrite of an @-mention notifies that person again,
+    even after they unsubscribed from the issue."""
+    return f"[{login}](https://github.com/{login})" if login else "unknown author"
+
+
+def render_issue(drift: Drift, repo: str) -> str:
     src = drift.source
     doc = f"docs/model/sources/{src['doc']}"
     lines = [
@@ -698,7 +705,7 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
             # one PR reaching main as a branch commit plus a merge commit would
             # otherwise be listed twice.
             if pull:
-                who = f"@{pull['login']}" if pull["login"] else "unknown author"
+                who = _author(pull["login"])
                 label = "commit" if len(commits) == 1 else "commits"
                 lines.append(
                     f"- [#{pull['number']}]({pull['url']}) {pull['title']} — {who}, "
@@ -706,7 +713,7 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
                 )
             else:
                 commit = commits[0]
-                who = f"@{commit['login']}" if commit["login"] else "unknown author"
+                who = _author(commit["login"])
                 lines.append(
                     f"- {shas} {commit['title']} — {who}, {commit['date']} (pushed directly, no PR)"
                 )
@@ -720,7 +727,7 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
             "",
         ]
         for pull in drift.prs:
-            who = f"@{pull['login']}" if pull["login"] else "unknown author"
+            who = _author(pull["login"])
             state = " _(draft)_" if pull.get("draft") else ""
             lines.append(f"- [#{pull['number']}]({pull['url']}) {pull['title']} — {who}{state}")
         lines.append("")
@@ -770,17 +777,6 @@ def render_issue(drift: Drift, repo: str, mentions: list[str]) -> str:
             "The diff was too large for GitHub to return a patch for these files — review them by hand:",
             "",
             *[f"- `{path}`" for path in drift.unreviewable],
-            "",
-        ]
-
-    if mentions:
-        lines += [
-            "## Authors",
-            "",
-            (
-                f"{', '.join('@' + m for m in mentions)} — you made these changes upstream but can't be "
-                "assigned here (not a collaborator on this repo), so this is a mention instead."
-            ),
             "",
         ]
 
@@ -871,16 +867,17 @@ def ensure_labels(labels: list[str]) -> None:
         )
 
 
-def resolve_assignees(authors: list[str], watch: dict[str, Any]) -> tuple[list[str], list[str]]:
-    """Split upstream authors into who can be assigned here and who can only be
-    mentioned, falling back to the configured maintainers when nobody upstream
-    is a collaborator on this repo."""
+def resolve_assignees(authors: list[str], watch: dict[str, Any]) -> list[str]:
+    """Keep the upstream authors who can be assigned here, falling back to the
+    configured maintainers when nobody upstream is a collaborator on this repo.
+    Authors who can't be assigned, or who opted out in `defaults.opt_out`, are
+    only linked in the body, never @-mentioned — see `_author`."""
     defaults = watch.get("defaults") or {}
-    assignees = [login for login in authors if is_assignable(login)]
-    mentions = [login for login in authors if login not in assignees]
+    opted_out = set(defaults.get("opt_out") or [])
+    assignees = [login for login in authors if login not in opted_out and is_assignable(login)]
     if not assignees:
         assignees = [login for login in (defaults.get("fallback_assignees") or []) if is_assignable(login)]
-    return assignees, mentions
+    return assignees
 
 
 def upsert_issue(
@@ -926,10 +923,10 @@ def upsert_issue(
 
 def publish(drift: Drift, repo: str, watch: dict[str, Any]) -> str:
     labels = list((watch.get("defaults") or {}).get("labels") or ["documentation"])
-    assignees, mentions = resolve_assignees(drift.authors, watch)
+    assignees = resolve_assignees(drift.authors, watch)
     return upsert_issue(
         title=f"Source doc drift: {drift.source['name']} ({drift.source['id']})",
-        body=render_issue(drift, repo, mentions),
+        body=render_issue(drift, repo),
         labels=labels,
         assignees=assignees,
         marker_text=marker("source", drift.source["id"]),
@@ -1008,7 +1005,7 @@ def main() -> int:
             print(f"Source doc drift: {drift.source['name']} ({drift.source['id']})")
             print(f"assignees: {', '.join(drift.authors) or '(none resolved)'}")
             print("=" * 78)
-            print(render_issue(drift, repo, []))
+            print(render_issue(drift, repo))
             print()
         else:
             print(f"{drift.source['id']}: {publish(drift, repo, watch)}")

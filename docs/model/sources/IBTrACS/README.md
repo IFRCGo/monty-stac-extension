@@ -33,6 +33,8 @@ Documentation:
 - Technical Details: <https://www.ncei.noaa.gov/sites/g/files/anmtlf171/files/2024-07/IBTrACS_version4r01_Technical_Details.pdf>
 - Best Track Report: <https://www.metoc.navy.mil/jtwc/products/best-tracks/tc-bt-report.html>
 
+Track plot thumbnails (attached to event items as the `thumbnail` asset) are served from `https://ncics.org/ibtracs/html/plots/{version}.{storm_id}.png`.
+
 #### Data Subsets
 
 In addition to global data files that contain all storms available in IBTrACS, several subsets are provided:
@@ -95,8 +97,12 @@ Here is a table with the fields that are mapped from the IBTrACS data to the STA
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                         | Keywords should include the cyclone name                                                                                                                                                                               |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL              | Link to the IBTrACS data source                                                                                                                                                                                        |
+| [`related` links](https://github.com/radiantearth/stac-spec/blob/master/commons/links.md)                              | Generated                    | One `related` link (roles: `["hazard"]`) per hazard item produced for this storm                                                                                                                                       |
+| [assets](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                      | Constructed                  | `data` (source CSV, roles: `["data"]`), `documentation` (roles: `["documentation"]`), `thumbnail` (track plot PNG, roles: `["track-plot"]`)                                                                            |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+
+The `data` asset is labeled "IBTrACS Best Track Data" — the underlying CSV spans whichever basin(s) the ingested file covers, not only the North Atlantic, so the title no longer hardcodes a basin name.
 
 ## Collection: `ibtracs-hazards`
 
@@ -135,6 +141,8 @@ Here is a table with the STAC fields that are mapped from the IBTrACS data to ea
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                             | Fixed as tropical cyclone              | Always `['MH0309', 'nat-met-sto-tro', 'TC']` for codes                           |
 | [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords)                  | NAME                                   | Keywords should include the cyclone name                                         |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                  | Constructed URL                        | Link to the IBTrACS data source                                                  |
+| [`related` link](https://github.com/radiantearth/stac-spec/blob/master/commons/links.md)                               | Generated                              | One `related` link (roles: `["event"]`) back to the storm's event item           |
+| [assets](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                      | Constructed                            | `data` (source CSV, roles: `["data"]`), `documentation` (roles: `["documentation"]`) |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                                           | USA_WIND, WMO_WIND, USA_PRES, WMO_PRES | Detailed description of the hazard at the current position                       |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
