@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -27,10 +27,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1839,6 +1839,11 @@
 <td>Source event ID</td>
 <td></td>
 </tr>
+<tr>
+<td><code>related</code> link in <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object">links</a></td>
+<td>Generated</td>
+<td>One link per generated impact item (when impact data is available for the row), <code>roles: ["impact"]</code> — see <a href="#impact-item">Impact Item</a></td>
+</tr>
 </tbody>
 </table>
 <h4 id="hazard-code-mapping">Hazard Code Mapping</h4>
@@ -2604,7 +2609,7 @@
 </table>
 <blockquote>
 <p>† These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in <a href="../../taxonomy/">taxonomy.md</a>) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: <code>ACCIDENT</code> (<code>TL0007</code>) → <code>TL0201</code> (see <code>STRUCTURE</code>), <code>BOAT CAPSIZE</code> (<code>TL0050</code>) → <code>TL0403</code> (see <code>DROWNING</code>), <code>EPIZOOTIC</code> (<code>BI0027</code>) → <code>BI0301</code> (see <code>ANIMAL DISEASE</code>), <code>EXPLOSION</code> (<code>TL0029</code>) → <code>TL0304</code> (see <code>EXPLOSIONS</code>), <code>LEAK</code> (<code>TL0030</code>) → <code>TL0301</code> (see <code>LEAK OR SPILL</code>), <code>STRUCT.COLLAPSE</code> (<code>TL0005</code>) → <code>TL0201</code> (see <code>STRUCTURE</code>).</p>
-<p>‡ <code>EPIDEMIC</code>'s GLIDE code is corrected to <code>EP</code> here. The upstream <code>hazard_mapping</code> dict currently has <code>OT</code>, which conflicts with the Cross-Classification Mapping table in <a href="../../taxonomy/">taxonomy.md</a>, where <code>BI0101</code> + <code>nat-bio-epi-dis</code> maps to GLIDE <code>EP</code>. See <a href="https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864">IFRCGo/pystac-monty#201</a> for the upstream fix.</p>
+<p>‡ <code>EPIDEMIC</code>'s GLIDE code is <code>EP</code>, matching the Cross-Classification Mapping table in <a href="../../taxonomy/">taxonomy.md</a>, where <code>BI0101</code> + <code>nat-bio-epi-dis</code> maps to GLIDE <code>EP</code>. The upstream <code>hazard_mapping</code> dict previously had <code>OT</code> here; that has since been fixed.</p>
 </blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2751,7 +2756,7 @@
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-properties">title</a></td>
-<td metric="metric">{event title} -</td>
+<td metric>{event title} -</td>
 <td>Title combining event name and impact type</td>
 </tr>
 <tr>
@@ -2784,9 +2789,14 @@
 <td>"primary"</td>
 <td>All Desinventar data is considered primary</td>
 </tr>
+<tr>
+<td><code>related</code> link in <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object">links</a></td>
+<td>Generated</td>
+<td>Link back to the parent event item, <code>roles: ["event"]</code></td>
+</tr>
 </tbody>
 </table>
-<p>The geometry, bbox, datetime and other base fields are inherited from the source event item.</p>
+<p>The geometry, bbox, datetime and other base fields are inherited from the source event item. Every event/impact pair is cross-linked: the event item carries a <code>related</code> link (<code>roles: ["impact"]</code>) to each of its impact items, and each impact item carries one back (<code>roles: ["event"]</code>).</p>
 
 
 
@@ -2836,10 +2846,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>
