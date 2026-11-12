@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="230" data-v-ca802c1b="" viewBox="0 0 950 230" role="img" aria-label="Population funnel from total population to reached, schematic"><style>svg { font-family: Roboto, "Helvetica Neue", Arial, sans-serif; } 
+.st[data-v-ca802c1b] { font-size: 15px; font-weight: 700;
+}
+.fr[data-v-ca802c1b] { font-size: 13px; fill: #555;
+}
+.cap[data-v-ca802c1b] { font-size: 11px; fill: #777;
+}
+</style><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M0,20
+                 L150,34
+                 L150,156
+                 L0,170 Z" fill="#e6e6e6"><title data-v-ca802c1b="">Total population — fed by Context</title></path><text data-v-ca802c1b="" x="75" y="100" text-anchor="middle" class="st" fill="#3f3f3f">Total population</text><text data-v-ca802c1b="" x="75" y="200" text-anchor="middle" class="fr">Context</text></g><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M158,34
+                 L308,47
+                 L308,143
+                 L158,156 Z" fill="#1baf7a"><title data-v-ca802c1b="">Exposed — fed by Hazard ∩ Context</title></path><text data-v-ca802c1b="" x="233" y="100" text-anchor="middle" class="st" fill="#0d1f17">Exposed</text><text data-v-ca802c1b="" x="233" y="200" text-anchor="middle" class="fr">Hazard ∩ Context</text></g><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M316,47
+                 L466,59
+                 L466,131
+                 L316,143 Z" fill="#d9d9d9"><title data-v-ca802c1b="">Affected — fed by Impact</title></path><text data-v-ca802c1b="" x="391" y="100" text-anchor="middle" class="st" fill="#3f3f3f">Affected</text><text data-v-ca802c1b="" x="391" y="200" text-anchor="middle" class="fr">Impact</text></g><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M474,59
+                 L624,69
+                 L624,121
+                 L474,131 Z" fill="#104281"><title data-v-ca802c1b="">In need — fed by × vulnerability</title></path><text data-v-ca802c1b="" x="549" y="100" text-anchor="middle" class="st" fill="#ffffff">In need</text><text data-v-ca802c1b="" x="549" y="200" text-anchor="middle" class="fr">× vulnerability</text></g><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M632,69
+                 L782,77
+                 L782,113
+                 L632,121 Z" fill="#d9d9d9"><title data-v-ca802c1b="">Targeted — fed by Response</title></path><text data-v-ca802c1b="" x="707" y="100" text-anchor="middle" class="st" fill="#3f3f3f">Targeted</text><text data-v-ca802c1b="" x="707" y="200" text-anchor="middle" class="fr">Response</text></g><g data-v-ca802c1b=""><path data-v-ca802c1b="" d="M790,77
+                 L940,80.6
+                 L940,109.4
+                 L790,113 Z" fill="#e6e6e6"><title data-v-ca802c1b="">Reached — fed by Response</title></path><text data-v-ca802c1b="" x="865" y="100" text-anchor="middle" class="st" fill="#3f3f3f">Reached</text><text data-v-ca802c1b="" x="865" y="200" text-anchor="middle" class="fr">Response</text></g><text data-v-ca802c1b="" x="0" y="226" class="cap">Schematic, not to scale. Montandon estimates the exposed and in-need stages.</text></svg>
