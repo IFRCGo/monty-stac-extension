@@ -69,7 +69,8 @@
       "source"
     ],
     "monty:country_codes": [
-      "SYR"
+      "SYR",
+      "TUR"
     ],
     "monty:hazard_codes": [
       "GH0101",

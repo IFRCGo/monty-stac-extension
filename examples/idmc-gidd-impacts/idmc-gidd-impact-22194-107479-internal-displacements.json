@@ -22,7 +22,7 @@
     36.15263
   ],
   "properties": {
-    "title": "Internal Displacements-Household-Household-Syria, Türkiye: Earthquake - 06/02/2023",
+    "title": "Internal Displacements-Household-Syria, Türkiye: Earthquake - 06/02/2023",
     "start_datetime": "2023-02-06T00:00:00+00:00",
     "end_datetime": "2023-03-09T00:00:00+00:00",
     "location": [
@@ -34,7 +34,7 @@
     "location_type": [
       "Destination"
     ],
-    "displacement_occured": null,
+    "displacement_occured": "Displacement without preventive evacuations reported",
     "sources": [
       "Office for the Coordination of Humanitarian Affairs (OCHA)"
     ],
@@ -52,9 +52,9 @@
       "nat-geo-ear-gro"
     ],
     "keywords": [
+      "Earthquake",
       "Geological",
       "SYR",
-      "Earthquake",
       "Seismic"
     ],
     "monty:corr_id": "20230202-SYR-1135088-GH0101-1-GCDB",

@@ -34,7 +34,7 @@
     "location_type": [
       "Destination"
     ],
-    "displacement_occured": null,
+    "displacement_occured": "Displacement without preventive evacuations reported",
     "sources": [
       "Office for the Coordination of Humanitarian Affairs (OCHA)"
     ],
@@ -44,7 +44,8 @@
     "monty:src_event_id": "22194",
     "monty:episode_number": 1,
     "monty:country_codes": [
-      "SYR"
+      "SYR",
+      "TUR"
     ],
     "monty:hazard_codes": [
       "GH0101",
@@ -52,9 +53,10 @@
       "nat-geo-ear-gro"
     ],
     "keywords": [
+      "Earthquake",
       "Geological",
       "SYR",
-      "Earthquake",
+      "TUR",
       "Seismic"
     ],
     "monty:corr_id": "20230202-SYR-1135088-GH0101-1-GCDB",

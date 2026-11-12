@@ -5,7 +5,7 @@ The Internal Displacement Monitoring Centre (IDMC) maintains the Global Internal
 This page describes the **GIDD** transformer (`pystac_monty/sources/gidd.py`). The IDMC **Internal Displacement Updates** (IDU) feed has its own transformer and its own page: [IDU](../IDU/README.md).
 
 > [!NOTE]
-> This page describes the transformer at [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268). That PR corrects the impact item id and the impact type. Until it is merged and deployed, the transformer behaves as described in [Known limitations](#known-limitations), item 1.
+> This page describes the transformer at [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268). That PR corrects the impact id, the impact type, and the fields that impact items copied from another record. Until it is merged and deployed, the transformer behaves as described in [Known limitations](#known-limitations), item 1.
 
 ## Collections
 
@@ -72,7 +72,7 @@ GIDD Event ID ──► 1 event item   idmc-gidd-event-{Event ID}
 
 The transformer groups the records by `Event ID`. Each group gives one event item and one impact item for each record in the group. GIDD has no hazard items.
 
-**The event item is built from the first record of the group.** Each impact item starts as a copy of the event item, and then the transformer sets the record's own fields. See [Known limitations](#known-limitations), item 2.
+**The event item is built from the first record of the group**, except `monty:country_codes`, which lists every country of the group. Each impact item starts as a copy of the event item. Then the transformer sets the fields that belong to the record: geometry, country, location, sources, dates and figure.
 
 ## Data access
 
@@ -91,12 +91,12 @@ The transformer groups the records by `Event ID`. Each group gives one event ite
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)               | `Event start date`                        | Midnight UTC                                                                |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | `Event start date`                        | Midnight UTC                                                                |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)     | `Event end date`                          | Midnight UTC                                                                |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                      | Generated                                 | Hazard profile keywords and the country code                                |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                      | Generated                                 | Hazard profile keywords and the country codes                               |
 | `location`, `location_accuracy`, `location_type`                                                                         | `Locations name`, `Locations accuracy`, `Locations type` of the first record |                                      |
-| `displacement_occured`                                                                                                   | —                                         | Always `null`. See [Known limitations](#known-limitations), item 3          |
+| `displacement_occured`                                                                                                   | `Displacement occurred` of the first record | The property name has a spelling error. It is kept, because it is published |
 | `sources`, `publishers`                                                                                                  | `Sources`, `Publishers` of the first record |                                                                           |
 | `roles`                                                                                                                  | `["source", "event"]`                     |                                                                             |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                 | `[ISO3]` of the first record              | One country only                                                            |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                 | `ISO3` of all records of the event        | The first record's country is first. The correlation id uses it             |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | the four `Hazard …` fields                | See [Hazard codes](#hazard-codes)                                           |
 | [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number)                               | —                                         | Always `1`. GIDD has no episodes                                            |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id)                      | `Event ID`                                |                                                                             |
@@ -113,15 +113,17 @@ The transformer groups the records by `Event ID`. Each group gives one event ite
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------ |
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-impact-{Event ID}-{ID}-{figure-category}` | `figure-category` is `Figure category` in lower case, with `-` for spaces. Example: `idmc-gidd-impact-22194-107479-internal-displacements` |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-gidd-impacts`                               |                                                                    |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry), [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | copied from the event item | **Not the record's own geometry.** See [Known limitations](#known-limitations), item 2 |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                         | `{Figure category}-{Figure unit}-{Figure unit}-{Event name}` | The unit appears twice. See [Known limitations](#known-limitations), item 5 |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry), [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | feature `geometry` of the record | |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                         | `{Figure category}-{Figure unit}-{Event name}`    | Example: `IDPs-Person-Syria, Türkiye: Earthquake - 06/02/2023`     |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)               | `Start date`, else `Stock date`                   | Midnight UTC                                                       |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | `Start date`, else `Stock date`                   | Midnight UTC                                                       |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)     | `End date`, else `Stock reporting date`           | Midnight UTC, or `null`                                            |
 | `figure_category`, `figure_unit`, `figure_cause`, `geographical_region`, `country` | `Figure category`, `Figure unit`, `Figure cause`, `Geographical region`, `Country` | The record's own values |
-| `location`, `location_accuracy`, `location_type`, `sources`, `publishers`, `keywords` | copied from the event item | Values of the first record of the event |
+| `location`, `location_accuracy`, `location_type`, `displacement_occured`, `sources`, `publishers` | `Locations name`, `Locations accuracy`, `Locations type`, `Displacement occurred`, `Sources`, `Publishers` | The record's own values |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `[ISO3]` of the record | |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | Hazard profile keywords and the record's country code |
 | `roles`                                                                                                                  | `["source", "impact"]`                            |                                                                    |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes), [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes), [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id), [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number), [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) | copied from the event item | The impact item has the same `monty:corr_id` as its event |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes), [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id), [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number), [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id) | copied from the event item | The impact item has the same `monty:corr_id` as its event |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [Impact detail](#impact-detail)               |                                                                    |
 | `processing:version`, `processing:software`, `assets.source`, `via` link | as on the event item |  |
 | `related` link                                                                                                           | Generated                                         | To the event item, with `roles: ["event"]`                         |
@@ -156,10 +158,12 @@ GIDD and IDU use the same mapping function (`IDMCUtils.hazard_codes_mapping`). I
 1. **Before [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268) is deployed:**
    - The impact id has no `-` between `Event ID` and `ID`. Example: `idmc-gidd-impact-22194107479-internal-displacements`. Two different pairs can give the same id.
    - Every figure category maps to `displaced_internal`. A `Deaths` record is published as displaced persons.
-2. **Impact items copy the event item, and the event item comes from the first record of the event.** So an impact item has the geometry, the bbox and the location names of the first record, not its own. In the reference file, 46 of the 97 impact items have the geometry of another record. The event geometry is also the geometry of one record only, and `monty:country_codes` has one country only, even when the event covers more.
-3. **`displacement_occured` is always `null`** (and the name has a spelling error). The validator has no alias for the source field `Displacement occurred`.
-4. **One bad record drops the whole event.** See [Data access](#data-access), item 2.
-5. **The impact title repeats the unit**, for example `Internal Displacements-Household-Household-Syria, Türkiye: Earthquake - 06/02/2023`. This question is open in [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268).
+   - Impact items have the geometry, country, keywords, location, sources and publishers of the **first record of the event**, not their own. In the reference file, 46 of the 97 impact items have the geometry of another record, and the 6 Türkiye items of event 22194 have `monty:country_codes: ["SYR"]`.
+   - Event items list one country only.
+   - `displacement_occured` is always `null`, because the validator has no alias for `Displacement occurred`.
+   - The impact title repeats the unit: `Internal Displacements-Household-Household-…`.
+2. **The event geometry is the geometry of the first record only.** It is not an aggregation of all records of the event.
+3. **One bad record drops the whole event.** See [Data access](#data-access), item 2.
 
 ## Examples
 

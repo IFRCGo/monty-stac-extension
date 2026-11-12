@@ -10,41 +10,41 @@
     "type": "MultiPoint",
     "coordinates": [
       [
-        37.411121,
-        36.15263
+        38.27644,
+        37.764
       ]
     ]
   },
   "bbox": [
-    37.411121,
-    36.15263,
-    37.411121,
-    36.15263
+    38.27644,
+    37.764,
+    38.27644,
+    37.764
   ],
   "properties": {
-    "title": "IDPs-Person-Person-Syria, Türkiye: Earthquake - 06/02/2023",
+    "title": "IDPs-Person-Syria, Türkiye: Earthquake - 06/02/2023",
     "start_datetime": "2023-10-16T00:00:00+00:00",
     "end_datetime": "2023-12-31T00:00:00+00:00",
     "location": [
-      "Aleppo, Syria"
+      "Adiyaman, Adıyaman merkez, Adıyaman, Southeastern Anatolia Region, Turkey"
     ],
     "location_accuracy": [
-      "State/Region/Province (ADM1)"
+      "County/City/town/Village/Woreda (ADM3)"
     ],
     "location_type": [
-      "Destination"
+      "Origin"
     ],
-    "displacement_occured": null,
+    "displacement_occured": "Displacement without preventive evacuations reported",
     "sources": [
-      "Office for the Coordination of Humanitarian Affairs (OCHA)"
+      "IOM DTM"
     ],
     "publishers": [
-      "Office for the Coordination of Humanitarian Affairs (OCHA)"
+      "IOM DTM"
     ],
     "monty:src_event_id": "22194",
     "monty:episode_number": 1,
     "monty:country_codes": [
-      "SYR"
+      "TUR"
     ],
     "monty:hazard_codes": [
       "GH0101",
@@ -52,9 +52,9 @@
       "nat-geo-ear-gro"
     ],
     "keywords": [
-      "Geological",
-      "SYR",
       "Earthquake",
+      "TUR",
+      "Geological",
       "Seismic"
     ],
     "monty:corr_id": "20230202-SYR-1135088-GH0101-1-GCDB",

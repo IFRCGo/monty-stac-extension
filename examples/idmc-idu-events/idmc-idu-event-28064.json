@@ -41,10 +41,10 @@
       "nat-hyd-flo-flo"
     ],
     "keywords": [
-      "ESP",
       "Meteorological & Hydrological",
+      "Water-related",
       "Flooding",
-      "Water-related"
+      "ESP"
     ],
     "monty:corr_id": "20241113-ESP-1140278-MH0600-1-GCDB",
     "processing:version": "0.2.8",
