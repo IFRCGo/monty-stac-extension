@@ -305,8 +305,11 @@ That unit correction holds whatever shape the items eventually take.
 > ([#129](https://github.com/IFRCGo/monty-stac-extension/pull/129)), with the uncertainty
 > fields of [#128](https://github.com/IFRCGo/monty-stac-extension/pull/128). That choice is
 > part of the model questions in [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)
-> and the risk model options proposal ([#180](https://github.com/IFRCGo/monty-stac-extension/pull/180)). The transformer
-> change is tracked in [IFRCGo/pystac-monty#200](https://github.com/IFRCGo/pystac-monty/issues/200).
+> and the risk model options proposal ([#180](https://github.com/IFRCGo/monty-stac-extension/pull/180)).
+> Until then, the proposal is to **stop mapping and ingesting `alerts.json`**, because of the
+> problems below. The steps across the repositories are tracked in
+> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125); the transformer part is in
+> [IFRCGo/pystac-monty#200](https://github.com/IFRCGo/pystac-monty/issues/200).
 
 When the event has an `alerts.json`, the transformer adds **two items per event** to
 `usgs-impacts`, one for each type. Each item collapses the histogram into one value: the
