@@ -20,10 +20,21 @@ Pull requests are pre-filled from
 [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md); fill in
 the checklist that matches your change.
 
-Every PR is reviewed by a maintainer before merge. There is no `CODEOWNERS`
-file, so review is not auto-assigned — tag a member of the
-[Montandon Core Team](https://github.com/orgs/IFRCGo/teams/montandon-core-team)
-if a PR goes quiet.
+Every PR is reviewed before merge, and `main` only accepts changes through
+a pull request. [`.github/CODEOWNERS`](.github/CODEOWNERS) assigns reviewers
+automatically. One approval from one of the listed owners is enough:
+
+- The model pages (`docs/model/*.md`), `README.md`, `CHANGELOG.md`,
+  `CONTRIBUTING.md` and the review rules: an approval from
+  @emmanuelmathot, @wrynearson or @arnauroviramuntada.
+- The JSON schema (`json-schema/`), the CI workflows, `.github/etl-watch.yml`
+  and `scripts/`: an approval from @emmanuelmathot or @wrynearson, because
+  each change there needs a technical review.
+- All other changes (source analyses, examples): one approval from anybody
+  with write access.
+
+Nobody approves their own PR, code owners included. Tag a reviewer if a PR
+goes quiet.
 
 ## Ways to contribute
 

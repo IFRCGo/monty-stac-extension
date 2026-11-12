@@ -1,0 +1,21 @@
+# Code owners for the Monty STAC extension.
+# See CONTRIBUTING.md ("Opening an issue or pull request").
+#
+# The last matching pattern takes precedence. An approval from ONE of the
+# listed owners is enough. Files that match no pattern below (source analyses,
+# examples) need one approval from anybody with write access.
+
+# Shared decisions: the model, the public description of the extension, the
+# release notes and the review rules themselves.
+/README.md                 @emmanuelmathot @wrynearson @arnauroviramuntada
+/docs/model/*.md           @emmanuelmathot @wrynearson @arnauroviramuntada
+/CHANGELOG.md              @emmanuelmathot @wrynearson @arnauroviramuntada
+/CONTRIBUTING.md           @emmanuelmathot @wrynearson @arnauroviramuntada
+/GOVERNANCE.md             @emmanuelmathot @wrynearson @arnauroviramuntada
+/.github/                  @emmanuelmathot @wrynearson @arnauroviramuntada
+
+# Technical artefacts: each change needs a technical review.
+/json-schema/              @emmanuelmathot @wrynearson
+/.github/workflows/        @emmanuelmathot @wrynearson
+/.github/etl-watch.yml     @emmanuelmathot @wrynearson
+/scripts/                  @emmanuelmathot @wrynearson
