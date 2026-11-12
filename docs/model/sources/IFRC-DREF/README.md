@@ -305,7 +305,11 @@ This mapping enables standardized hazard categorization while preserving IFRC's 
    listed countries when there is more than one; impact items fall back to
    the parent event's geometry whenever none of their own field report's
    countries resolves to a geometry (an empty list, or a list where every
-   entry fails geocoding).
+   entry fails geocoding). The geocoder has no geometry for Kosovo (`XKX` or
+   the name `Kosovo`), so the transformer uses the geometry of Serbia (`SRB`)
+   for it. The item's country codes keep the original value. This substitution
+   is the `GEOMETRY_COUNTRY_FALLBACK` table
+   ([IFRCGo/pystac-monty#258](https://github.com/IFRCGo/pystac-monty/pull/258)).
 5. Every field report on an event is processed independently — an event with
    *N* field reports and *M* impact types with a truthy value can produce up
    to *N* × *M* impact items, distinguished by the field report ID in each

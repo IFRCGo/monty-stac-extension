@@ -155,6 +155,13 @@ GDACS carries impact data in two different places. The mapping to use depends on
 > `impacts[]` therefore use `type: potentially_affected` and
 > `estimate_type: modelled`. See [Decision: exposure is not impact](#decision-exposure-is-not-impact).
 
+> [!WARNING]
+> The TC and WF sections below are the agreed mapping. The transformer does not
+> follow it yet. Today it makes one TC item for each timeline entry, with the value
+> of `pop`, and an id that ends with the advisory number. The work to align the
+> transformer is tracked in
+> [IFRCGo/pystac-monty#188](https://github.com/IFRCGo/pystac-monty/issues/188).
+
 #### Sendai indicators
 
 When the `sendai` field is present in the GDACS [event](#event-item), it contains an array of Sendai indicators.
@@ -291,7 +298,7 @@ with every band at zero produces none.
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | item.advisory_datetime                                             | The same value                                                                 |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)                       | item.name + advisory number + band                                 | For example `NOUL-26 advisory 13, population in 39 kt wind field`              |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                               | properties.iso3 and properties.affectedcountries.iso3              | Taken from the episode. The timeline entry has no reliable country field       |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                 | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile) | `TC` maps to `MH0306`                                      |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                 | [mappings from properties.eventtype](#mapping-from-gdacs-event-type-to-hazard-profile) | `TC` maps to `MH0309`                                      |
 | [monty:episode_number](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:episode_number)                | properties.episodeid                                               | The episode being processed. See rule 5                                        |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id)                    | properties.eventid                                                 | Unique identifier of the event                                                 |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                              | Generated                                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
@@ -326,6 +333,10 @@ Rules:
 5. **`monty:episode_number` is the episode being processed.** Because observed entries
    repeat, this field can change on re-ingestion. It carries the last episode that
    published the entry, not the first.
+6. **Skip only the entry that fails.** If the transformer cannot build the item for one
+   timeline entry, it skips that entry and logs a warning. The other entries of the
+   episode are still mapped. The transformer does this since
+   [IFRCGo/pystac-monty#261](https://github.com/IFRCGo/pystac-monty/pull/261).
 
 > [!WARNING]
 > Monty has no field that marks an estimate as a forecast. `estimate_type` describes
