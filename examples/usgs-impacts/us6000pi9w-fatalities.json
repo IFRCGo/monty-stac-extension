@@ -6,27 +6,123 @@
     "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
-  "id": "us6000pi9w-fatalities",
+  "id": "usgs-impact-us6000pi9w-fatalities-CHN",
   "geometry": {
-    "type": "Point",
+    "type": "Polygon",
     "coordinates": [
-      87.3608,
-      28.639
+      [
+        [
+          90.3765,
+          28.0796
+        ],
+        [
+          90.389,
+          28.2426
+        ],
+        [
+          89.9982,
+          28.3237
+        ],
+        [
+          89.4875,
+          28.0578
+        ],
+        [
+          88.9169,
+          27.3208
+        ],
+        [
+          88.7646,
+          27.5424
+        ],
+        [
+          88.8358,
+          28.0081
+        ],
+        [
+          88.6244,
+          28.1168
+        ],
+        [
+          87.7205,
+          27.805
+        ],
+        [
+          87.1928,
+          27.8231
+        ],
+        [
+          86.6953,
+          28.1117
+        ],
+        [
+          86.4514,
+          27.9089
+        ],
+        [
+          86.1977,
+          28.1581
+        ],
+        [
+          86.0054,
+          27.8863
+        ],
+        [
+          85.7214,
+          28.2792
+        ],
+        [
+          85.111,
+          28.3067
+        ],
+        [
+          85.1952,
+          28.591
+        ],
+        [
+          84.8467,
+          28.5444
+        ],
+        [
+          84.4862,
+          28.734
+        ],
+        [
+          84.15,
+          29.2132
+        ],
+        [
+          84.15,
+          31.767
+        ],
+        [
+          90.783,
+          31.767
+        ],
+        [
+          90.783,
+          28.0169
+        ],
+        [
+          90.3765,
+          28.0796
+        ]
+      ]
     ]
   },
   "bbox": [
-    87.3608,
-    28.639,
-    87.3608,
-    28.639
+    84.15,
+    27.3208,
+    90.783,
+    31.767
   ],
   "properties": {
     "datetime": "2025-01-07T01:05:16Z",
-    "title": "Estimated Fatalities for 2025 Southern Tibetan Plateau Earthquake",
-    "description": "PAGER estimated fatalities for M7.1 earthquake in Southern Tibetan Plateau",
+    "title": "Estimated Fatalities for M 7.1 - 2025 Southern Tibetan Plateau Earthquake",
+    "description": "PAGER estimated fatalities for M 7.1 - 2025 Southern Tibetan Plateau Earthquake",
     "roles": [
-      "impact",
-      "source"
+      "source",
+      "impact"
     ],
     "monty:src_event_id": "us6000pi9w",
     "monty:country_codes": [
@@ -45,10 +141,11 @@
     "monty:impact_detail": {
       "category": "people",
       "type": "death",
-      "value": 858,
+      "value": 291,
       "unit": "people",
       "estimate_type": "modelled"
-    }
+    },
+    "forecasted": false
   },
   "links": [
     {
@@ -62,18 +159,35 @@
     {
       "rel": "related",
       "href": "../usgs-events/us6000pi9w.json",
+      "type": "application/geo+json",
       "roles": [
         "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-hazards/us6000pi9w-shakemap.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
       ]
     }
   ],
   "assets": {
+    "source": {
+      "href": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000pi9w.geojson",
+      "type": "application/geo+json",
+      "title": "USGS GeoJSON Source",
+      "roles": [
+        "source"
+      ]
+    },
     "pager_onepager": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/onepager.pdf",
       "type": "application/pdf",
       "title": "PAGER One-Pager Report",
       "roles": [
-        "pager-report"
+        "data"
       ]
     },
     "pager_exposure": {
@@ -81,15 +195,15 @@
       "type": "application/json",
       "title": "PAGER Exposure Data",
       "roles": [
-        "pager-exposure"
+        "data"
       ]
     },
     "pager_alert": {
       "href": "https://earthquake.usgs.gov/realtime/product/losspager/us6000pi9w/us/1736298524449/alertfatal.pdf",
       "type": "application/pdf",
-      "title": "PAGER Fatality Alert",
+      "title": "PAGER Fatalities Alert",
       "roles": [
-        "pager-alert"
+        "data"
       ]
     }
   },

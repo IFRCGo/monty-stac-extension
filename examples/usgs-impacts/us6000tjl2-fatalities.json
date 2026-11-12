@@ -5,24 +5,190 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/earthquake/v1.0.0/schema.json"
   ],
-  "id": "us6000tjl2-fatalities",
+  "id": "usgs-impact-us6000tjl2-fatalities-COL",
   "geometry": {
-    "type": "Point",
+    "type": "MultiPolygon",
     "coordinates": [
-      -76.2422,
-      4.8436
+      [
+        [
+          [
+            -78.8449,
+            1.8365
+          ],
+          [
+            -78.5875,
+            1.7672
+          ],
+          [
+            -78.6869,
+            2.1935
+          ],
+          [
+            -78.5653,
+            2.4292
+          ],
+          [
+            -78.4556,
+            2.5042
+          ],
+          [
+            -78.3465,
+            2.4379
+          ],
+          [
+            -77.9869,
+            2.5225
+          ],
+          [
+            -77.9375,
+            2.6509
+          ],
+          [
+            -77.7454,
+            2.6104
+          ],
+          [
+            -77.7811,
+            2.7564
+          ],
+          [
+            -77.0327,
+            3.9184
+          ],
+          [
+            -77.2654,
+            3.8401
+          ],
+          [
+            -77.1872,
+            4.0603
+          ],
+          [
+            -77.3662,
+            3.926
+          ],
+          [
+            -77.4344,
+            4.0314
+          ],
+          [
+            -77.2423,
+            4.2609
+          ],
+          [
+            -77.3824,
+            4.3422
+          ],
+          [
+            -77.3478,
+            5.2406
+          ],
+          [
+            -77.5322,
+            5.5189
+          ],
+          [
+            -77.2408,
+            5.7582
+          ],
+          [
+            -77.4889,
+            6.1854
+          ],
+          [
+            -77.3404,
+            6.5674
+          ],
+          [
+            -77.8897,
+            7.2289
+          ],
+          [
+            -77.744,
+            7.72
+          ],
+          [
+            -77.5774,
+            7.5262
+          ],
+          [
+            -77.2483,
+            7.9
+          ],
+          [
+            -73.133,
+            7.9
+          ],
+          [
+            -73.133,
+            1.767
+          ],
+          [
+            -78.9147,
+            1.767
+          ],
+          [
+            -78.8449,
+            1.8365
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -77.4229,
+            4.3343
+          ],
+          [
+            -77.3197,
+            4.2517
+          ],
+          [
+            -77.3331,
+            4.2394
+          ],
+          [
+            -77.5002,
+            4.2097
+          ],
+          [
+            -77.4229,
+            4.3343
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -78.2149,
+            2.5764
+          ],
+          [
+            -78.1913,
+            2.6392
+          ],
+          [
+            -78.1056,
+            2.596
+          ],
+          [
+            -78.2149,
+            2.5764
+          ]
+        ]
+      ]
     ]
   },
   "bbox": [
-    -76.2422,
-    4.8436,
-    -76.2422,
-    4.8436
+    -78.9147,
+    1.767,
+    -73.133,
+    7.9
   ],
   "properties": {
     "datetime": "2026-08-10T12:34:28Z",
-    "title": "Estimated Fatalities for M 7.4 earthquake, San José del Palmar, Colombia",
-    "description": "PAGER estimated fatalities for 5 km S of San José del Palmar, Colombia",
+    "title": "Estimated Fatalities for M 7.4 - 5 km S of San José del Palmar, Colombia",
+    "description": "PAGER estimated fatalities for M 7.4 - 5 km S of San José del Palmar, Colombia",
     "roles": [
       "source",
       "impact"
@@ -43,7 +209,8 @@
       "value": 961,
       "unit": "people",
       "estimate_type": "modelled"
-    }
+    },
+    "forecasted": false
   },
   "links": [
     {
@@ -57,12 +224,29 @@
     {
       "rel": "related",
       "href": "../usgs-events/us6000tjl2.json",
+      "type": "application/geo+json",
       "roles": [
         "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-hazards/us6000tjl2-shakemap.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
       ]
     }
   ],
   "assets": {
+    "source": {
+      "href": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000tjl2.geojson",
+      "type": "application/geo+json",
+      "title": "USGS GeoJSON Source",
+      "roles": [
+        "source"
+      ]
+    },
     "pager_onepager": {
       "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/onepager.pdf",
       "type": "application/pdf",
@@ -75,6 +259,14 @@
       "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/json/exposures.json",
       "type": "application/json",
       "title": "PAGER Exposure Data",
+      "roles": [
+        "data"
+      ]
+    },
+    "pager_alert": {
+      "href": "https://earthquake.usgs.gov/pdl/products/urn:usgs-product:us:losspager:us6000tjl2:1786452203828/contents/alertfatal.pdf",
+      "type": "application/pdf",
+      "title": "PAGER Fatalities Alert",
       "roles": [
         "data"
       ]
