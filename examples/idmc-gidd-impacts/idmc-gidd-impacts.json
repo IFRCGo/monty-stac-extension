@@ -38,15 +38,19 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#displacement-items-gidd-disaggregated-data",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/sources/IDMC/README.md#impact-items",
       "type": "text/html",
       "title": "IDMC Impact Item Source Mappings"
     },
     {
       "rel": "item",
-      "href": "./idmc-gidd-impact-107479-displaced.json",
-      "type": "application/json",
-      "title": "Internal Displacements of People for Syria, Türkiye: Earthquake - 06/02/2023"
+      "href": "./idmc-gidd-impact-22194-107479-internal-displacements.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "./idmc-gidd-impact-22194-136080-idps.json",
+      "type": "application/geo+json"
     }
   ],
   "stac_extensions": [
@@ -90,12 +94,9 @@
       "SYR"
     ],
     "monty:hazard_codes": [
-      "TC",
-      "nat-met-sto-tro",
-      "MH0309",
-      "FL",
-      "nat-hyd-flo-flo",
-      "MH0600"
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
     ]
   },
   "license": "TBD",

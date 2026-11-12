@@ -69,12 +69,12 @@
       "source"
     ],
     "monty:country_codes": [
-      "IDN"
+      "SYR"
     ],
     "monty:hazard_codes": [
-      "TC",
-      "nat-met-sto-tro",
-      "MH0309"
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
     ]
   },
   "assets": {
@@ -94,7 +94,7 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#event-items",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/sources/IDMC/README.md#event-items",
       "type": "text/html",
       "title": "IDMC Event Item Source Mappings"
     }

@@ -107,7 +107,7 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#internal-displacement-updates-idu-items",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/sources/IDU/README.md#event-items",
       "type": "text/html",
       "title": "IDMC IDU Source Mappings"
     }

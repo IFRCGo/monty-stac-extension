@@ -1,0 +1,120 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "idmc-gidd-impact-22194-136080-idps",
+  "geometry": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        37.411121,
+        36.15263
+      ]
+    ]
+  },
+  "bbox": [
+    37.411121,
+    36.15263,
+    37.411121,
+    36.15263
+  ],
+  "properties": {
+    "title": "IDPs-Person-Person-Syria, Türkiye: Earthquake - 06/02/2023",
+    "start_datetime": "2023-10-16T00:00:00+00:00",
+    "end_datetime": "2023-12-31T00:00:00+00:00",
+    "location": [
+      "Aleppo, Syria"
+    ],
+    "location_accuracy": [
+      "State/Region/Province (ADM1)"
+    ],
+    "location_type": [
+      "Destination"
+    ],
+    "displacement_occured": null,
+    "sources": [
+      "Office for the Coordination of Humanitarian Affairs (OCHA)"
+    ],
+    "publishers": [
+      "Office for the Coordination of Humanitarian Affairs (OCHA)"
+    ],
+    "monty:src_event_id": "22194",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "SYR"
+    ],
+    "monty:hazard_codes": [
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
+    ],
+    "keywords": [
+      "Geological",
+      "SYR",
+      "Earthquake",
+      "Seismic"
+    ],
+    "monty:corr_id": "20230202-SYR-1135088-GH0101-1-GCDB",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "figure_category": "IDPs",
+    "figure_unit": "Person",
+    "figure_cause": "Disaster",
+    "geographical_region": "Europe and Central Asia",
+    "country": "Türkiye",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "displaced_internal",
+      "value": 132168,
+      "unit": "count",
+      "estimate_type": "primary"
+    },
+    "processing:version": "0.2.8",
+    "processing:software": {
+      "pystac-monty": "0.2.8"
+    },
+    "datetime": "2023-10-16T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-impacts/idmc-gidd-impact-22194-136080-idps.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-impacts/idmc-gidd-impacts.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "via",
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/json",
+      "title": "GIDD Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../idmc-gidd-events/idmc-gidd-event-22194.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "source": {
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/geo+json",
+      "title": "GIDD GeoJson Source",
+      "roles": [
+        "source"
+      ]
+    }
+  },
+  "collection": "idmc-gidd-impacts"
+}

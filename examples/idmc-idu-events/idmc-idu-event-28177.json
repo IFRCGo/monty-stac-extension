@@ -1,0 +1,90 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "idmc-idu-event-28177",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -14.26551,
+      28.12569
+    ]
+  },
+  "bbox": [
+    -14.26551,
+    28.12569,
+    -14.26551,
+    28.12569
+  ],
+  "properties": {
+    "title": "Spain: Wildfire - Canarias (El Paso) - 07/11/2024",
+    "description": " **Spain: 200 displacements (evacuated), 11 November - 11 November**    \n According to local authorities, approximately 200 people were evacuated in El Paso (La Palma) on 11 November due to wildfire.   \n [Media - 12 November 2024](https://www.larazon.es/canarias/susto-grande-estabilizar-incendio-forestal-palma-vecinos-desalojados-regresan-casa_2024111267334479759afe000155185d.html)",
+    "start_datetime": "2024-11-07T00:00:00+00:00",
+    "end_datetime": "2024-11-12T00:00:00+00:00",
+    "location": "El Paso, Pájara, Las Palmas, Canary Islands, Spain",
+    "sources": "Local Authorities",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "monty:src_event_id": "28177",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "EN0205",
+      "WF",
+      "nat-cli-wil-wil"
+    ],
+    "keywords": [
+      "Environmental",
+      "ESP",
+      "Environmental Degradation",
+      "Wildfires"
+    ],
+    "monty:corr_id": "20241107-ESP-1062829-EN0205-1-GCDB",
+    "processing:version": "0.2.8",
+    "processing:software": {
+      "pystac-monty": "0.2.8"
+    },
+    "datetime": "2024-11-07T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-idu-events/idmc-idu-event-28177.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-idu-events/idmc-idu-events.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "via",
+      "href": "https://helix-tools-api.idmcdb.org/external-api/idus/last-180-days/",
+      "type": "application/json",
+      "title": "IDU Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../idmc-idu-impacts/idmc-idu-impact-28177-169470-evacuated.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    }
+  ],
+  "assets": {
+    "report": {
+      "href": "https://www.larazon.es/canarias/susto-grande-estabilizar-incendio-forestal-palma-vecinos-desalojados-regresan-casa_2024111267334479759afe000155185d.html",
+      "type": "application/pdf",
+      "title": "Report"
+    }
+  },
+  "collection": "idmc-idu-events"
+}
