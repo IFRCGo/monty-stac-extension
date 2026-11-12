@@ -152,6 +152,7 @@ Here is the mapping of fields from Desinventar XML to STAC event items:
 | [processing:version](https://github.com/stac-extensions/processing) | Generated                                          | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated                                          | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | |
+| `related` link in [links](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object) | Generated | One link per generated impact item (when impact data is available for the row), `roles: ["impact"]` — see [Impact Item](#impact-item) |
 
 #### Hazard Code Mapping
 
@@ -262,7 +263,7 @@ The following table provides cross-classification across multiple systems, per [
 
 > † These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in [taxonomy.md](../../taxonomy.md)) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: `ACCIDENT` (`TL0007`) → `TL0201` (see `STRUCTURE`), `BOAT CAPSIZE` (`TL0050`) → `TL0403` (see `DROWNING`), `EPIZOOTIC` (`BI0027`) → `BI0301` (see `ANIMAL DISEASE`), `EXPLOSION` (`TL0029`) → `TL0304` (see `EXPLOSIONS`), `LEAK` (`TL0030`) → `TL0301` (see `LEAK OR SPILL`), `STRUCT.COLLAPSE` (`TL0005`) → `TL0201` (see `STRUCTURE`).
 >
-> ‡ `EPIDEMIC`'s GLIDE code is corrected to `EP` here. The upstream `hazard_mapping` dict currently has `OT`, which conflicts with the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. See [IFRCGo/pystac-monty#201](https://github.com/IFRCGo/pystac-monty/pull/201#issuecomment-5475551864) for the upstream fix.
+> ‡ `EPIDEMIC`'s GLIDE code is `EP`, matching the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. The upstream `hazard_mapping` dict previously had `OT` here; that has since been fixed.
 
 > [!NOTE]
 > All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability, when all three are available for that row. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
@@ -318,5 +319,6 @@ For each available impact metric in the Desinventar data, a separate impact item
 | monty:impact_detail.value                                                                                   | From Desinventar field     | Numeric impact value                               |
 | monty:impact_detail.unit                                                                                    | From mapping table         | Unit of measurement                                |
 | monty:impact_detail.estimate_type                                                                           | "primary"                  | All Desinventar data is considered primary         |
+| `related` link in [links](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#link-object) | Generated                  | Link back to the parent event item, `roles: ["event"]` |
 
-The geometry, bbox, datetime and other base fields are inherited from the source event item.
+The geometry, bbox, datetime and other base fields are inherited from the source event item. Every event/impact pair is cross-linked: the event item carries a `related` link (`roles: ["impact"]`) to each of its impact items, and each impact item carries one back (`roles: ["event"]`).
