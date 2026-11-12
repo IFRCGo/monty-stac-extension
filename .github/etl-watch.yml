@@ -19,6 +19,14 @@
 #   defaults     - issue labels, who gets assigned when the upstream author
 #                  can't be assigned in this repo (not a collaborator here), and
 #                  who asked not to be assigned to these issues at all (opt_out)
+#   contract_check - the contract check of one upstream PR (--pull), which
+#                  pystac-monty runs as a required status check
+#     reviewers      - GitHub logins whose approval of the PR head commit lets a
+#                      contract change merge. CODEOWNERS protects this file
+#     blocking_rules - rule ids (see SIGNAL_RULES in the script) that need that
+#                      approval. Other rules are listed but do not block
+#     shared_paths   - upstream modules that are not watched for per-source
+#                      drift, but hold mappings of several sources
 #   sources.<id> - keyed by the same `id` as in sources.yml
 #     extra_paths - additional upstream files that carry documented behaviour.
 #                   Validators are listed because they define the source object
@@ -55,6 +63,18 @@ defaults:
   # Upstream authors who asked not to be assigned to drift issues (#138). They
   # are still linked in the body, but the daily refresh no longer re-adds them.
   opt_out: [pantierra]
+
+# Contract check of upstream PRs (scripts/check_etl_drift.py --pull N). A PR
+# that changes an item id or a mapping cannot merge in pystac-monty until one
+# of the reviewers approves its head commit. Measured on the 42 human PRs
+# merged upstream from 2026-08-01 to 2026-11-12, these rules would have asked
+# for that approval on about 3 to 4 PRs a month, #243 among them.
+contract_check:
+  reviewers: [emmanuelmathot, wrynearson]
+  blocking_rules: [item-id, hazard-mapping, value-mapping]
+  shared_paths:
+    - pystac_monty/sources/utils.py
+    - pystac_monty/hazard_profiles.py
 
 # Bootstrapped 2026-07-29 at IFRCGo/pystac-monty@34b757c ("Merge pull request
 # #179"), i.e. the docs are *declared* current as of that commit and the
