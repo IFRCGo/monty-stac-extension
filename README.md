@@ -140,6 +140,25 @@ It is the unique identifier assigned by the Monty system to an episode of the ev
 It is a list of country codes of the countries concerned by the item.
 It must at least contain the countries intersected by the item's geometry.
 
+When an item concerns more than one country, these rules apply:
+
+1. **All the countries of the source.** The list contains every country that the source gives for the item.
+   An event item takes the countries of all the source records of the event, not only of the first record.
+2. **No duplicates.** Each code is in the list one time. `UNK` is used only when the source gives no country.
+3. **The first code is the primary country.** The transformer must select it in the same way on every run:
+   - if the source names a main country (for example GDACS `iso3`), that country is first;
+   - if not, the first country in the order of the source records is first.
+
+   The other codes follow in the order of the source. The order must never come from an unordered
+   collection, such as a Python `set`: its order can change from one run to the next.
+4. **A change of the primary country is a breaking change.** [`monty:corr_id`](#montycorr_id) uses the first
+   code. If the rule that selects the primary country of a source changes, all the correlation ids of that
+   source change.
+
+A source document can set a better rule for its primary country. That rule must give the same result for
+the same source data. Do not use a value that changes when the source adds data later, for example the
+country with the largest figure.
+
 ##### monty:hazard_codes
 
 It is a list of hazard codes of the hazards concerned by the item. There are multiple various classification systems for hazards so the field is open to any code.
