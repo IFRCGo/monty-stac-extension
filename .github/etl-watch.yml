@@ -41,7 +41,7 @@
 #                     covers - optional id globs, when the fixture only covers
 #                             part of the source's worked examples
 #                   Only a few sources can declare it today: the exporter must
-#                   exist upstream (currently cems, gdacs, gfd, glide) and the
+#                   exist upstream (currently cems, charter, gdacs, gfd, glide) and the
 #                   fixture must be machine-readable — several early fixtures
 #                   were saved from a browser and start with a `// timestamp`
 #                   preamble, which is not JSON. Recapturing one is the cheapest
@@ -70,7 +70,10 @@ sources:
 
   charter:
     extra_paths: [pystac_monty/validators/charter.py]
-    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
+    reviewed: 1909155032c1f1c46dd3c15eb14626ffcd1070c1
+    regenerate:
+      batch: charter
+      input: docs/model/sources/Charter
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
