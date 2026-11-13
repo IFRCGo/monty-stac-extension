@@ -63,7 +63,7 @@ The algorithm returns a string with the event id. The event id is a string with 
 Where:
 
 - `{datetime}`: The date and time of the event in the format `YYYYMMDD` or `YYYYMMDDThhmmssZ` ([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)).
-- `{country_code}`: The country code of the related event in the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+- `{country_code}`: The country code of the related event in the [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format. For an event in more than one country, it is the first code of `monty:country_codes`: the primary country, selected by the [multi-country rules](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes).
 - `{block_id}`: The Earth is divided into grid cells measuring 0.2° in latitude and longitude (approximately 20 km × 20 km, with smaller sizes near the polar regions). Each cell is assigned a unique identifier, referred to as the block ID. This approach helps group similar events while reducing the likelihood of assigning the same correlation ID to events that are close in both time and location.
 - `{hazard_code}`: The primary hazard code from the [2025 UNDRR-ISC Hazard Information Profiles](./taxonomy.md#2025-update) (e.g., `MH0600` for River Flood, `GH0101` for Earthquake). For multi-hazard events, the first hazard code in the array is used. Legacy codes may use simplified forms (e.g., `FL` for flood).
 - `{episode_number}`: A number that represents the episode of the event. This number is used to differentiate between events that have the same date, country, and hazard code. The episode number starts at 1 and is incremented by 1 for each new event with the same date, country, and hazard.
