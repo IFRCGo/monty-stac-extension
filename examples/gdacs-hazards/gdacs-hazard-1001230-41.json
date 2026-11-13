@@ -5,7 +5,7 @@
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "type": "Feature",
-  "id": "1001230-41",
+  "id": "gdacs-hazard-1001230-41",
   "collection": "gdacs-hazards",
   "bbox": [
     -78.9222,
@@ -295,7 +295,7 @@
   },
   "links": [
     {
-      "href": "1001230-41.json",
+      "href": "gdacs-hazard-1001230-41.json",
       "rel": "self"
     },
     {
@@ -307,7 +307,7 @@
       "rel": "via"
     },
     {
-      "href": "../gdacs-events/1001230-41.json",
+      "href": "../gdacs-events/gdacs-event-1001230-41.json",
       "rel": "related",
       "roles": [
         "event"
@@ -316,14 +316,6 @@
     },
     {
       "href": "../cems-events/cems-event-EMSR847.json",
-      "rel": "related",
-      "roles": [
-        "event"
-      ],
-      "type": "application/geo+json"
-    },
-    {
-      "href": "../glide-events/TC-2025-000196-HTI.json",
       "rel": "related",
       "roles": [
         "event"
