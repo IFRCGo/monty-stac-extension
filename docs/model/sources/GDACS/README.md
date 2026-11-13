@@ -105,7 +105,7 @@ How often GDACS gives them (live API, events from 2025-01-01 to 2026-11-13, chec
 
 > [!WARNING]
 > The transformer does not write these links before
-> [IFRCGo/pystac-monty#PMPR](https://github.com/IFRCGo/pystac-monty/pull/PMPR). The same change corrects the
+> [IFRCGo/pystac-monty#272](https://github.com/IFRCGo/pystac-monty/pull/272). The same change corrects the
 > CEMS link to GDACS, which used the id `{eventid}-{episodeid}` instead of `gdacs-event-{eventid}-{episodeid}`.
 
 ### Hazard Item
