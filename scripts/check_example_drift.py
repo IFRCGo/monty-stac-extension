@@ -74,7 +74,10 @@ EXAMPLES = ROOT / "examples"
 #   links      - rewritten by the exporter for the output catalog layout
 #   created/updated - stamped at generation time
 IGNORED_ITEM_KEYS = ("links",)
-IGNORED_PROPERTIES = ("created", "updated")
+# processing:version/software name the pystac-monty release that wrote the item.
+# The committed examples carry a placeholder (see CHANGELOG, #134), so every
+# upstream release would otherwise report every example as changed.
+IGNORED_PROPERTIES = ("created", "updated", "processing:version", "processing:software")
 
 # Lists whose order carries no meaning, compared as multisets.
 #   keywords - the transformer builds these with `list(set(...))`, so their
