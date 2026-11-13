@@ -102,6 +102,23 @@ a_contains(monty:country_codes, 'ESP') AND
 t_intersects(datetime, INTERVAL('2024-10-27T00:00:00Z', '2024-10-28T00:00:00Z'))
 ```
 
+**Matching a hazard family, not one profile**: sources classify the same
+storm at different precision. GDACS and IBTrACS assert a tropical cyclone
+(`MH0309`); IFRC GO's `Cyclone` type also contains non-tropical systems, so it
+keeps `MH0306` (see [taxonomy: keep the source meaning](../taxonomy.md#cross-classification-mapping)).
+To find every source item for one storm, match on the EM-DAT or GLIDE code that
+all of them share, not on the UNDRR code:
+
+```sql
+roles IN ('event') AND
+a_overlaps(monty:hazard_codes, ARRAY['nat-met-sto-tro']) AND
+a_contains(monty:country_codes, 'JAM') AND
+t_intersects(datetime, INTERVAL('2025-10-26T00:00:00Z', '2025-10-30T00:00:00Z'))
+```
+
+CQL2 has no prefix match on array elements, so a "`MH030*`" search is written
+as the explicit list: `a_overlaps(monty:hazard_codes, ARRAY['MH0306', 'MH0307', 'MH0308', 'MH0309'])`.
+
 **Use Cases**:
 - Linking GDACS, GLIDE, EM-DAT, and other source events for the same disaster
 - Finding all perspectives on a single event

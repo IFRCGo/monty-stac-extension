@@ -117,7 +117,7 @@ GDACS event types map to multiple classification systems for cross-system intero
 | ---------------------------------------------------- | ----- | --------------- | ------------------------------ | --------- | --------------------- |
 | [FL](https://www.gdacs.org/Knowledge/models_fl.aspx) | FL    | nat-hyd-flo-flo | **MH0600**                     | MH-WATER  | Flooding (chapeau)    |
 | [EQ](https://www.gdacs.org/Knowledge/models_eq.aspx) | EQ    | nat-geo-ear-gro | **GH0101**                     | GEO-SEIS  | Earthquake            |
-| [TC](https://www.gdacs.org/Knowledge/models_tc.aspx) | TC    | nat-met-sto-tro | **MH0306**                     | MH-WIND   | Cyclone or Depression |
+| [TC](https://www.gdacs.org/Knowledge/models_tc.aspx) | TC    | nat-met-sto-tro | **MH0309**                     | MH-WIND   | Tropical Cyclone      |
 | [TS](https://www.gdacs.org/Knowledge/models_ts.aspx) | TS    | nat-geo-ear-tsu | **MH0705**                     | MH-MARINE | Tsunami               |
 | [VO](https://www.gdacs.org/Knowledge/models_vo.aspx) | VO    | nat-geo-vol-vol | **GH0201**                     | GEO-VOLC  | Lava Flows            |
 | [DR](https://www.gdacs.org/Knowledge/models_dr.aspx) | DR    | nat-cli-dro-dro | **MH0401**                     | MH-PRECIP | Drought               |
