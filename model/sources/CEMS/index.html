@@ -1529,7 +1529,7 @@ link</strong> so the graph is directly navigable (65/224 sampled activations car
 <tr>
 <td><code>gdacsId</code></td>
 <td><code>TC1001230</code></td>
-<td>GDACS <code>{eventtype}</code>+<code>{eventid}</code>; Monty id <code>{eventid}-{episodeid}</code> in <code>gdacs-events</code> → <code>1001230-41</code> (current episode via <code>geteventdata</code>)</td>
+<td>GDACS <code>{eventtype}</code>+<code>{eventid}</code>; Monty id <code>gdacs-event-{eventid}-{episodeid}</code> in <code>gdacs-events</code> → <code>gdacs-event-1001230-41</code> (current episode via <code>geteventdata</code>)</td>
 <td><code>rel: related</code>, <code>roles: ["event"]</code></td>
 </tr>
 <tr>
@@ -1560,16 +1560,16 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   <code>{eventid}-{episodeid}</code>. (A bare <code>{eventid}-1</code> would be stale; only fall back to it if the
   lookup fails.)</li>
 </ul>
-<p><strong>Worked, fixture-verified example</strong>: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a>
-and <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> are built from the
+<p><strong>Worked, fixture-verified example</strong>: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1001230-41.json"><code>gdacs-events/gdacs-event-1001230-41</code></a>
+and <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/gdacs-hazard-1001230-41.json"><code>gdacs-hazards/gdacs-hazard-1001230-41</code></a> are built from the
 real GDACS <code>geteventdata</code>/<code>getgeometry</code> API responses for the same Tropical Cyclone Melissa activation
-(<code>iso3: JAM</code>, <code>MH0306</code>, 21–31 Oct 2025), completing the <code>related</code> link this CEMS example already declares
-(#61). Their <code>monty:corr_id</code> (<code>20251021-JAM-1159798-MH0306-41-GCDB</code>, computed with the real
+(<code>iso3: JAM</code>, <code>MH0309</code>, 21–31 Oct 2025), completing the <code>related</code> link this CEMS example already declares
+(#61). Their <code>monty:corr_id</code> (<code>20251021-JAM-1159798-MH0309-41-GCDB</code>, computed with the real
 <code>geo_blocks-0.2.parquet</code> lookup) <strong>does not match</strong> CEMS's (<code>20251026-JAM-983324-MH0306-1-GCDB</code>) — different
 date, different <code>block_id</code>, since GDACS's own centroid for this episode sits mid-Atlantic (<code>-60.5, 39.0</code>,
 the storm's track position at that point), while CEMS's AOI is Kingston. This is a live, real illustration
 of the caveat in #57: <code>corr_id</code> is per-source deterministic and not a cross-source join key. The two items
-still correlate correctly under the dynamic Event-to-Event algorithm — shared <code>MH0306</code>/<code>TC</code>/<code>nat-met-sto-tro</code>
+still correlate correctly under the dynamic Event-to-Event algorithm — shared <code>TC</code>/<code>nat-met-sto-tro</code>
 (<code>a_overlaps</code>), shared <code>JAM</code> (<code>a_contains</code>), and CEMS's <code>2025-10-26</code> falling inside GDACS's <code>2025-10-21</code>–<code>2025-10-31</code>
 window (<code>t_intersects</code>).</p>
 <h2 id="hazard-codes">Hazard codes</h2>
@@ -1729,9 +1729,9 @@ label, checked in this order:</p>
 </table>
 <p>MH0306 / <code>TC</code> / <code>nat-met-sto-tro</code> is kept for the tropical case rather than a
 more specific UNDRR code: it is the row this doc and the <code>examples/cems-*</code>
-items already use, and it keeps the EMSR847 ↔ GDACS <code>1001230-41</code> cross-link
-discoverable via <code>a_overlaps</code>. The repo-wide MH0306 vs MH0309 question stays
-with <a href="https://github.com/IFRCGo/monty-stac-extension/issues/94">#94</a>.</p>
+items already use, and it keeps the EMSR847 ↔ GDACS <code>gdacs-event-1001230-41</code> cross-link
+discoverable via <code>a_overlaps</code> on <code>TC</code>/<code>nat-met-sto-tro</code>, although GDACS emits <code>MH0309</code>. This follows the
+<a href="../../taxonomy/">keep the source meaning</a> rule (<a href="https://github.com/IFRCGo/monty-stac-extension/issues/94">#94</a>).</p>
 <p>Checked against all 23 <code>Storm</code> activations in the catalogue: the rule
 resolves <strong>16 as tropical</strong> (4 by <code>subCategory</code>, 11 by <code>gdacsId</code>, 1 by name),
 <strong>6 as extra-tropical</strong>, and <strong>1 as convective</strong>, with <strong>zero false
@@ -1832,7 +1832,7 @@ canonicalisation is formatting, not verification.</p>
 demonstrating the full chain — note AOI 1's DEL is <code>statusCode=N</code> (not produced), so the
 Hazard geometry falls back to the AOI extent:</p>
 <ul>
-<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>gdacs-event-1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0306</code>)</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>GH0300</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
@@ -1841,8 +1841,8 @@ Hazard geometry falls back to the AOI extent:</p>
 </ul>
 <p>The GDACS side of the cross-source link is also a real worked example, not a placeholder:</p>
 <ul>
-<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json"><code>gdacs-events/1001230-41</code></a> — GDACS Event for the same storm (<code>TC1001230</code>, episode 41), built from the real <code>geteventdata</code> response</li>
-<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json"><code>gdacs-hazards/1001230-41</code></a> — GDACS Hazard, geometry unioned from the real <code>getgeometry</code> <code>Poly_Red</code> footprint features</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1001230-41.json"><code>gdacs-events/gdacs-event-1001230-41</code></a> — GDACS Event for the same storm (<code>TC1001230</code>, episode 41), built from the real <code>geteventdata</code> response</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/gdacs-hazard-1001230-41.json"><code>gdacs-hazards/gdacs-hazard-1001230-41</code></a> — GDACS Hazard, geometry unioned from the real <code>getgeometry</code> <code>Poly_Red</code> footprint features</li>
 </ul>
 <h2 id="reference-files">Reference files</h2>
 <p>Real upstream CEMS API responses, used as mapping fixtures:</p>

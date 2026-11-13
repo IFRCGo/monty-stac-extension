@@ -1122,6 +1122,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Event Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-references
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1605,6 +1622,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Event Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-references
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1938,13 +1972,13 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 </tr>
 <tr>
 <td><code>related</code> link in [links]</td>
-<td>properties.source and&lt;br&gt;properties.sourceid</td>
-<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>) with <code>roles: ["event"]</code></td>
+<td>properties.glide</td>
+<td>If <code>glide</code> is a GLIDE number, a link to <code>glide-event-{glide}</code> in <code>glide-events</code>, with <code>roles: ["event"]</code>. See <a href="#cross-references">Cross-references</a></td>
 </tr>
 <tr>
 <td><code>related</code> link in [links]</td>
-<td>properties.glide</td>
-<td>If the glide number is present, create a <code>related</code> link to the item in <code>glide-events</code> collection with <code>roles: ["event"]</code></td>
+<td>properties.source and<br/>properties.sourceid</td>
+<td>Only if <code>source</code> is <code>NEIC</code>: a link to <code>usgs-event-{sourceid}</code> in <code>usgs-events</code>, with <code>roles: ["event"]</code>. See <a href="#cross-references">Cross-references</a></td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
@@ -1968,6 +2002,63 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 </tr>
 </tbody>
 </table>
+<h4 id="cross-references">Cross-references</h4>
+<p>GDACS gives, for each episode, the identifiers that other providers use for the same event. They are
+exact matches made by the provider, so Monty keeps them as <code>related</code> links on the <strong>event item</strong>. The
+hazard and impact items do not repeat them.</p>
+<table>
+<thead>
+<tr>
+<th>GDACS field</th>
+<th>Condition</th>
+<th>Link target</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>glide</code></td>
+<td>A GLIDE number (<code>XX-YYYY-NNNNNN-ISO</code>), after trim and upper case. Other values are ignored with a warning</td>
+<td><code>glide-event-{glide}</code> in <code>glide-events</code></td>
+<td><code>TC-2025-000196-HTI</code> → <code>glide-event-TC-2025-000196-HTI</code></td>
+</tr>
+<tr>
+<td><code>source</code> + <code>sourceid</code></td>
+<td><code>source</code> is <code>NEIC</code> (the USGS National Earthquake Information Center) and <code>sourceid</code> is not empty</td>
+<td><code>usgs-event-{sourceid}</code> in <code>usgs-events</code></td>
+<td><code>NEIC</code> / <code>us7000txz3</code> → <code>usgs-event-us7000txz3</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each link has <code>rel: related</code>, <code>type: application/geo+json</code>, <code>roles: ["event"]</code> and a title that gives the
+source and its identifier (<code>GLIDE TC-2025-000196-HTI</code>, <code>USGS event us7000txz3</code>). The <code>href</code> has the same
+form as the other links between collections: <code>{eoapi_url}/collections/{collection}/items/{item_id}</code>.</p>
+<p>Rules:</p>
+<ol>
+<li><strong>Other sources get no link.</strong> GDACS also names <code>GLOFAS</code> (floods), <code>GWIS</code> (wildfires), <code>JTWC</code>, <code>NOAA</code> and
+   <code>RSMC</code> (tropical cyclones), <code>GDO</code> (droughts) and the volcanic ash advisory centres (<code>DARWIN</code>, <code>TOKYO</code>, …).
+   Monty has no collection for these sources, so their <code>sourceid</code> is not kept.</li>
+<li><strong>The link does not need a target item.</strong> GDACS gives the link. The target can be missing from the
+   catalog, for example a small quake that the USGS ETL did not ingest, or a GLIDE number that GLIDE has
+   not published yet. The link stays: it records what GDACS says.</li>
+<li><strong>A GLIDE number is for one country.</strong> GLIDE gives one number for each affected country
+   (<code>TC-2025-000196-HTI</code>, <code>TC-2025-000196-JAM</code>, …). GDACS gives one of them, so the link goes to one of the
+   GLIDE events of that disaster.</li>
+<li><strong>The USGS id is the id at the time of the alert.</strong> USGS can change the preferred id of an event after
+   GDACS reads it. Then <code>usgs-event-{sourceid}</code> does not match the id that the USGS ETL wrote.</li>
+<li><strong>Links are not queryable.</strong> A STAC API filter cannot search on <code>links</code>. A process that pairs events
+   across sources (for example <a href="https://github.com/IFRCGo/monty-stac-extension/issues/190">#190</a>) reads them
+   from the items.</li>
+</ol>
+<p>How often GDACS gives them (live API, events from 2025-01-01 to 2026-11-13, checked on 2026-11-13):
+<code>sourceid</code> was set on all of 40 <code>EQ</code> events from <code>NEIC</code> (<code>geteventdata</code>), and <code>glide</code> was set on 22 of 62
+<code>DR</code>, 16 of 100 <code>TC</code>, 15 of 47 <code>VO</code>, 5 of 100 <code>FL</code> and 0 of 100 <code>EQ</code> and <code>WF</code> events (<code>geteventlist</code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The transformer does not write these links before
+<a href="https://github.com/IFRCGo/pystac-monty/pull/272">IFRCGo/pystac-monty#272</a>. The same change corrects the
+CEMS link to GDACS, which used the id <code>{eventid}-{episodeid}</code> instead of <code>gdacs-event-{eventid}-{episodeid}</code>.</p>
+</div>
 <h3 id="hazard-item">Hazard Item</h3>
 <p>A GDACS event and episode will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a> as in the example for the <a href="https://www.gdacs.org/report.aspx?eventid=1102983&amp;episodeid=2&amp;eventtype=FL">flood in Spain from 27 Oct 2024 04 Nov 2024</a>.</p>
 <ul>
@@ -2096,16 +2187,29 @@ Individual events can be accessed via the API endpoint <code>https://www.gdacs.o
 <tbody>
 <tr>
 <td>severity_value</td>
-<td>properties.episodealertlevel</td>
-<td>GDACS alert score</td>
+<td>properties.episodealertscore</td>
+<td>GDACS alert score of the episode (number, for example <code>1.0</code>)</td>
 </tr>
 <tr>
 <td>severity_unit</td>
-<td><code>gdacs</code></td>
-<td>GDACS alert level according to GDCAS event type and model</td>
+<td><code>GDACS Severity Score</code></td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>severity_label</td>
+<td>properties.episodealertlevel</td>
+<td>GDACS alert level of the episode: <code>Green</code>, <code>Orange</code> or <code>Red</code></td>
+</tr>
+<tr>
+<td>estimate_type</td>
+<td><code>primary</code></td>
+<td>Constant</td>
 </tr>
 </tbody>
 </table>
+<p>The alert level is for the <strong>episode</strong>. The event level <code>alertlevel</code> is the highest level of all the
+episodes until now. Monty does not keep it: a consumer can get it as the highest <code>severity_label</code> of the
+hazard items with the same <code>monty:src_event_id</code>.</p>
 <h5 id="mapping-from-gdacs-event-type-to-hazard-profile">Mapping from GDACS event type to Hazard profile</h5>
 <p>GDACS event types map to multiple classification systems for cross-system interoperability. The <strong>2025 UNDRR-ISC</strong> code is the <strong>reference classification</strong> for the Monty extension:</p>
 <table>
@@ -2339,8 +2443,8 @@ The impact item shall have the following fields from both the GDACS event and th
 </tr>
 <tr>
 <td><code>related</code> link in [links]</td>
-<td>properties.source and&lt;br&gt;properties.sourceid</td>
-<td>If the source is present, create a <code>related</code> link to the item in the corresponding collection (e.g. GLOFAS-&gt; <code>glofas-events</code>) with <code>roles: ["event"]</code></td>
+<td>Generated</td>
+<td>Links to the GDACS event item (<code>roles: ["event"]</code>) and hazard item (<code>roles: ["hazard"]</code>) of the same episode. The <a href="#cross-references">cross-references</a> are on the event item only</td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id">monty:corr_id</a></td>
