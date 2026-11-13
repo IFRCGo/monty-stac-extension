@@ -245,11 +245,11 @@
       "CAN"
     ],
     "monty:hazard_codes": [
-      "MH0306",
+      "MH0309",
       "TC",
       "nat-met-sto-tro"
     ],
-    "monty:corr_id": "20251021-JAM-1159798-MH0306-41-GCDB",
+    "monty:corr_id": "20251021-JAM-1159798-MH0309-41-GCDB",
     "processing:version": "1.0.0",
     "processing:software": {
       "pystac-monty": "1.0.0"
