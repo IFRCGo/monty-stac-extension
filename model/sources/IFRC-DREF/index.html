@@ -2340,7 +2340,11 @@ reasonable.</p>
    listed countries when there is more than one; impact items fall back to
    the parent event's geometry whenever none of their own field report's
    countries resolves to a geometry (an empty list, or a list where every
-   entry fails geocoding).</li>
+   entry fails geocoding). The geocoder has no geometry for Kosovo (<code>XKX</code> or
+   the name <code>Kosovo</code>), so the transformer uses the geometry of Serbia (<code>SRB</code>)
+   for it. The item's country codes keep the original value. This substitution
+   is the <code>GEOMETRY_COUNTRY_FALLBACK</code> table
+   (<a href="https://github.com/IFRCGo/pystac-monty/pull/258">IFRCGo/pystac-monty#258</a>).</li>
 <li>Every field report on an event is processed independently — an event with
    <em>N</em> field reports and <em>M</em> impact types with a truthy value can produce up
    to <em>N</em> × <em>M</em> impact items, distinguished by the field report ID in each

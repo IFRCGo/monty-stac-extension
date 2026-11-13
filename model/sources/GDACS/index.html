@@ -2236,6 +2236,14 @@ It does not count the persons that the hazard harmed. All impact items built fro
 <code>impacts[]</code> therefore use <code>type: potentially_affected</code> and
 <code>estimate_type: modelled</code>. See <a href="#decision-exposure-is-not-impact">Decision: exposure is not impact</a>.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The TC and WF sections below are the agreed mapping. The transformer does not
+follow it yet. Today it makes one TC item for each timeline entry, with the value
+of <code>pop</code>, and an id that ends with the advisory number. The work to align the
+transformer is tracked in
+<a href="https://github.com/IFRCGo/pystac-monty/issues/188">IFRCGo/pystac-monty#188</a>.</p>
+</div>
 <h4 id="sendai-indicators">Sendai indicators</h4>
 <p>When the <code>sendai</code> field is present in the GDACS <a href="#event-item">event</a>, it contains an array of Sendai indicators.
 Each Sendai indicator is a JSON object that shall produce an <a href="https://github.com/IFRCGo/monty-stac-extension#impact">impact item</a>.
@@ -2669,7 +2677,7 @@ with every band at zero produces none.</p>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
 <td><a href="#mapping-from-gdacs-event-type-to-hazard-profile">mappings from properties.eventtype</a></td>
-<td><code>TC</code> maps to <code>MH0306</code></td>
+<td><code>TC</code> maps to <code>MH0309</code></td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:episode_number">monty:episode_number</a></td>
@@ -2754,6 +2762,10 @@ with every band at zero produces none.</p>
 <li><strong><code>monty:episode_number</code> is the episode being processed.</strong> Because observed entries
    repeat, this field can change on re-ingestion. It carries the last episode that
    published the entry, not the first.</li>
+<li><strong>Skip only the entry that fails.</strong> If the transformer cannot build the item for one
+   timeline entry, it skips that entry and logs a warning. The other entries of the
+   episode are still mapped. The transformer does this since
+   <a href="https://github.com/IFRCGo/pystac-monty/pull/261">IFRCGo/pystac-monty#261</a>.</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
