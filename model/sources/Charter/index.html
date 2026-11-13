@@ -1399,7 +1399,10 @@ test therefore yields <strong>false positives</strong>.</p>
    Store the last-seen <code>ETag</code> per object key and re-ingest only when it changes;
    the listing is metadata-only and cheap. (Note S3 <code>ETag</code> is a content hash only
    for non-multipart objects — these small JSONs qualify; otherwise hash the
-   normalised body yourself.)</li>
+   normalised body yourself.) The transformer provides that hash:
+   <code>compute_file_hash</code> hashes the JSON without <code>updated</code>, <code>created</code> and the
+   internal Charter properties
+   (<a href="https://github.com/IFRCGo/pystac-monty/pull/189">IFRCGo/pystac-monty#189</a>).</li>
 <li><strong><code>properties.created</code></strong> — the true production timestamp, stable across
    republishes and the best signal for "is this object <strong>new</strong> since the last poll".</li>
 <li><strong><code>cpe:status.stage</code></strong> (acquisitions only) — lifecycle marker. The
@@ -1866,6 +1869,11 @@ copyright <code>"Includes Pleiades material © CNES (2025), Distribution Airbus 
 shorthand <code>rel</code> values <code>related-hazard</code> / <code>related-impact</code> / <code>related-response</code>;
 Charter items use the <code>rel: related</code> + <code>roles</code> form throughout.</p>
 </blockquote>
+<p>The transformer writes each <code>related</code> href as
+<code>{eoapi_url}/collections/{collection}/items/{item_id}</code>, or
+<code>../collections/{collection}/items/{item_id}</code> when it has no STAC API URL. The
+files under <code>examples/</code> use repository-relative paths instead
+(<code>../charter-events/charter-event-1019.json</code>).</p>
 <p>Correlation back to the Event/Hazard uses the shared <code>monty:corr_id</code>.</p>
 <h3 id="example">Example</h3>
 <p><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/charter-response/charter-response-1000-1144-1.json"><code>charter-response-1000-1144-1.json</code></a>
@@ -1943,6 +1951,11 @@ filtering is needed.</p>
 <td>Product type code</td>
 <td><code>monty:response_detail.type = "eo-dat"</code></td>
 <td>Fixed</td>
+</tr>
+<tr>
+<td>Datetime</td>
+<td><code>datetime</code></td>
+<td>Dataset <code>datetime</code>. If the dataset has none, the <code>datetime</code> of the resolved activation Event (<a href="https://github.com/IFRCGo/pystac-monty/pull/236">IFRCGo/pystac-monty#236</a>); the transformer logs a warning. If the Event has none either, the dataset is skipped</td>
 </tr>
 <tr>
 <td>Dataset identifier</td>
