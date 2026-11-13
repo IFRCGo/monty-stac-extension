@@ -172,7 +172,7 @@ IDU and [GIDD](../IDMC/README.md#hazard-codes) use the same function, `IDMCUtils
 1. The function returns `mix-mix-mix-mix`, which is not a code of any classification. The transformer cannot derive a UNDRR-ISC 2025 code from it, so it drops the event. See [Data access](#data-access), item 3.
 2. Before [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268): `EN0303` (Salinity & Sodicity). The [EM-DAT crosswalk](../../taxonomy.md) in this repository still maps `nat-geo-env-slr` to `EN0303`.
 3. Before [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268): `nat-geo-mmd-ava`, the EM-DAT key for a dry avalanche. Both keys map to `MH0801`.
-4. The TC code is part of the repository-wide `MH0306`/`MH0309` question in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+4. IDMC's category asserts a tropical system (`typhoon/hurricane/cyclone`), so it takes `MH0309`. See the taxonomy rule [keep the source meaning](../../taxonomy.md#cross-classification-mapping), decided in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
 
 ## Known limitations
 
