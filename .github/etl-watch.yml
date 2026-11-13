@@ -93,7 +93,7 @@ sources:
       batch: gdacs
       input: docs/model/sources/GDACS/regenerate-bundle.json
       # The bundle holds one event (the 2024 Spanish DANA floods, 1102983).
-      # examples/gdacs-*/1001230-41.json is a different event with no committed
+      # examples/gdacs-*/gdacs-*-1001230-41.json is a different event with no committed
       # fixture, so it is out of scope until one is captured.
       covers: ["*1102983*"]
 

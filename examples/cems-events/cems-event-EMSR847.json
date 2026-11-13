@@ -68,7 +68,7 @@
     },
     {
       "rel": "related",
-      "href": "../gdacs-events/1001230-41.json",
+      "href": "../gdacs-events/gdacs-event-1001230-41.json",
       "type": "application/geo+json",
       "title": "GDACS TC1001230 (episode 41)",
       "roles": [

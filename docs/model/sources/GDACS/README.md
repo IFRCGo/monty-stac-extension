@@ -60,12 +60,53 @@ Here is a table with the fields that are mapped from the GDACS event to the STAC
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                       | Asset with the icon of the event                                                                                                            |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                 | Asset with the link to the GDACS report                                                                                                     |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | properties.url.details                                | Link to the GDACS event details page                                                                                                        |
-| `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid         | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`) with `roles: ["event"]` |
-| `related` link in [links]                                                                                              | properties.glide                                      | If the glide number is present, create a `related` link to the item in `glide-events` collection with `roles: ["event"]`                 |
+| `related` link in [links] | properties.glide | If `glide` is a GLIDE number, a link to `glide-event-{glide}` in `glide-events`, with `roles: ["event"]`. See [Cross-references](#cross-references) |
+| `related` link in [links] | properties.source and<br/>properties.sourceid | Only if `source` is `NEIC`: a link to `usgs-event-{sourceid}` in `usgs-events`, with `roles: ["event"]`. See [Cross-references](#cross-references) |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+
+#### Cross-references
+
+GDACS gives, for each episode, the identifiers that other providers use for the same event. They are
+exact matches made by the provider, so Monty keeps them as `related` links on the **event item**. The
+hazard and impact items do not repeat them.
+
+| GDACS field | Condition | Link target | Example |
+| ----------- | --------- | ----------- | ------- |
+| `glide` | A GLIDE number (`XX-YYYY-NNNNNN-ISO`), after trim and upper case. Other values are ignored with a warning | `glide-event-{glide}` in `glide-events` | `TC-2025-000196-HTI` → `glide-event-TC-2025-000196-HTI` |
+| `source` + `sourceid` | `source` is `NEIC` (the USGS National Earthquake Information Center) and `sourceid` is not empty | `usgs-event-{sourceid}` in `usgs-events` | `NEIC` / `us7000txz3` → `usgs-event-us7000txz3` |
+
+Each link has `rel: related`, `type: application/geo+json`, `roles: ["event"]` and a title that gives the
+source and its identifier (`GLIDE TC-2025-000196-HTI`, `USGS event us7000txz3`). The `href` has the same
+form as the other links between collections: `{eoapi_url}/collections/{collection}/items/{item_id}`.
+
+Rules:
+
+1. **Other sources get no link.** GDACS also names `GLOFAS` (floods), `GWIS` (wildfires), `JTWC`, `NOAA` and
+   `RSMC` (tropical cyclones), `GDO` (droughts) and the volcanic ash advisory centres (`DARWIN`, `TOKYO`, …).
+   Monty has no collection for these sources, so their `sourceid` is not kept.
+2. **The link does not need a target item.** GDACS gives the link. The target can be missing from the
+   catalog, for example a small quake that the USGS ETL did not ingest, or a GLIDE number that GLIDE has
+   not published yet. The link stays: it records what GDACS says.
+3. **A GLIDE number is for one country.** GLIDE gives one number for each affected country
+   (`TC-2025-000196-HTI`, `TC-2025-000196-JAM`, …). GDACS gives one of them, so the link goes to one of the
+   GLIDE events of that disaster.
+4. **The USGS id is the id at the time of the alert.** USGS can change the preferred id of an event after
+   GDACS reads it. Then `usgs-event-{sourceid}` does not match the id that the USGS ETL wrote.
+5. **Links are not queryable.** A STAC API filter cannot search on `links`. A process that pairs events
+   across sources (for example [#190](https://github.com/IFRCGo/monty-stac-extension/issues/190)) reads them
+   from the items.
+
+How often GDACS gives them (live API, events from 2025-01-01 to 2026-11-13, checked on 2026-11-13):
+`sourceid` was set on all of 40 `EQ` events from `NEIC` (`geteventdata`), and `glide` was set on 22 of 62
+`DR`, 16 of 100 `TC`, 15 of 47 `VO`, 5 of 100 `FL` and 0 of 100 `EQ` and `WF` events (`geteventlist`).
+
+> [!WARNING]
+> The transformer does not write these links before
+> [IFRCGo/pystac-monty#272](https://github.com/IFRCGo/pystac-monty/pull/272). The same change corrects the
+> CEMS link to GDACS, which used the id `{eventid}-{episodeid}` instead of `gdacs-event-{eventid}-{episodeid}`.
 
 ### Hazard Item
 
@@ -104,10 +145,16 @@ Here is a table with the STAC fields that are mapped from the GDACS event to the
 
 The [hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:
 
-| STAC field     | GDACS field                  | Description                                               |
-| -------------- | ---------------------------- | --------------------------------------------------------- |
-| severity_value | properties.episodealertlevel | GDACS alert score                                         |
-| severity_unit  | `gdacs`                      | GDACS alert level according to GDCAS event type and model |
+| STAC field     | GDACS field                  | Description                                                            |
+| -------------- | ---------------------------- | ---------------------------------------------------------------------- |
+| severity_value | properties.episodealertscore | GDACS alert score of the episode (number, for example `1.0`)           |
+| severity_unit  | `GDACS Severity Score`       | Constant                                                               |
+| severity_label | properties.episodealertlevel | GDACS alert level of the episode: `Green`, `Orange` or `Red`           |
+| estimate_type  | `primary`                    | Constant                                                               |
+
+The alert level is for the **episode**. The event level `alertlevel` is the highest level of all the
+episodes until now. Monty does not keep it: a consumer can get it as the highest `severity_label` of the
+hazard items with the same `monty:src_event_id`.
 
 ##### Mapping from GDACS event type to Hazard profile
 
@@ -186,7 +233,7 @@ The impact item shall have the following fields from both the GDACS event and th
 | [assets.icon](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                 | properties.icon                                                                                                                                                | Asset with the icon of the event                                                                                              |
 | [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                                | properties.url.report                                                                                                                                          | Asset with the link to the GDACS report                                                                                       |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in [links]                       | properties.url.details                                                                                                                                         | Link to the GDACS event details page                                                                                          |
-| `related` link in [links]                                                                                              | properties.source and<br\>properties.sourceid                                                                                                                  | If the source is present, create a `related` link to the item in the corresponding collection (e.g. GLOFAS-> `glofas-events`) with `roles: ["event"]` |
+| `related` link in [links] | Generated | Links to the GDACS event item (`roles: ["event"]`) and hazard item (`roles: ["hazard"]`) of the same episode. The [cross-references](#cross-references) are on the event item only |
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                                   | Generated                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |

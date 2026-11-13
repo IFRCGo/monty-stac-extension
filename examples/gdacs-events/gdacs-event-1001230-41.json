@@ -5,7 +5,7 @@
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
   ],
   "type": "Feature",
-  "id": "1001230-41",
+  "id": "gdacs-event-1001230-41",
   "collection": "gdacs-events",
   "bbox": [
     -60.5,
@@ -81,7 +81,7 @@
   },
   "links": [
     {
-      "href": "1001230-41.json",
+      "href": "gdacs-event-1001230-41.json",
       "rel": "self"
     },
     {
@@ -93,7 +93,7 @@
       "rel": "via"
     },
     {
-      "href": "../gdacs-hazards/1001230-41.json",
+      "href": "../gdacs-hazards/gdacs-hazard-1001230-41.json",
       "rel": "related",
       "roles": [
         "hazard"
@@ -109,12 +109,13 @@
       "type": "application/geo+json"
     },
     {
-      "href": "../glide-events/TC-2025-000196-HTI.json",
+      "href": "../glide-events/glide-event-TC-2025-000196-HTI.json",
       "rel": "related",
       "roles": [
         "event"
       ],
-      "type": "application/geo+json"
+      "type": "application/geo+json",
+      "title": "GLIDE TC-2025-000196-HTI"
     }
   ]
 }
