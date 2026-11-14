@@ -1,0 +1,97 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "idmc-idu-impact-28064-168623-displaced",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -4.5269466666666665,
+      36.76350916666667
+    ]
+  },
+  "bbox": [
+    -4.5269466666666665,
+    36.76350916666667,
+    -4.5269466666666665,
+    36.76350916666667
+  ],
+  "properties": {
+    "title": "Spain: Flood - Andalusia (Málaga) - 13/11/2024",
+    "description": " **Spain: 4,210 displacements, 13 November - 14 November**    \n According to local authority, a total of 4210 people were displaced in Álora, Cártama, Alhaurín de la Torre, Pizarra, Málaga, Vélez-Málaga due to flood on 13 November.   \n [Local Authorities - 14 November 2024](https://www.juntadeandalucia.es/presidencia/portavoz/emergencias112/198838/suspension/clases/Malaga/Granada/Sevilla/Cadiz/Huelva/balance/incidencias/dana/andalucia/desalojos/avisosmeteorologicos/recomendaciones)",
+    "start_datetime": "2024-11-13T00:00:00+00:00",
+    "end_datetime": "2024-11-14T00:00:00+00:00",
+    "location": "Alhaurín de la Torre, Malaga, Andalusia, Spain; Álora, Malaga, Andalusia, Spain; Cártama, Malaga, Andalusia, Spain; Málaga, Malaga, Andalusia, Spain; Pizarra, Malaga, Andalusia, Spain; Vélez-Málaga, La Axarquía, Malaga, Andalusia, Spain",
+    "sources": "Local Authorities",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:src_event_id": "28064",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "monty:hazard_codes": [
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "Meteorological & Hydrological",
+      "Water-related",
+      "Flooding",
+      "ESP"
+    ],
+    "monty:corr_id": "20241113-ESP-1140278-MH0600-1-GCDB",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "displaced_internal",
+      "value": 4210,
+      "unit": "count",
+      "estimate_type": "primary"
+    },
+    "processing:version": "0.2.8",
+    "processing:software": {
+      "pystac-monty": "0.2.8"
+    },
+    "datetime": "2024-11-13T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-idu-impacts/idmc-idu-impact-28064-168623-displaced.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-idu-impacts/idmc-idu-impacts.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "via",
+      "href": "https://helix-tools-api.idmcdb.org/external-api/idus/last-180-days/",
+      "type": "application/json",
+      "title": "IDU Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../idmc-idu-events/idmc-idu-event-28064.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    }
+  ],
+  "assets": {
+    "report": {
+      "href": "https://www.juntadeandalucia.es/presidencia/portavoz/emergencias112/198838/suspension/clases/Malaga/Granada/Sevilla/Cadiz/Huelva/balance/incidencias/dana/andalucia/desalojos/avisosmeteorologicos/recomendaciones",
+      "type": "application/pdf",
+      "title": "Report"
+    }
+  },
+  "collection": "idmc-idu-impacts"
+}

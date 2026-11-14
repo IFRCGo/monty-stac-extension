@@ -142,7 +142,7 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#idu-impact-details",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/blob/main/docs/model/sources/IDU/README.md#impact-items",
       "type": "text/html",
       "title": "IDMC IDU Impact Item Source Mappings"
     }
