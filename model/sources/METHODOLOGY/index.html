@@ -1815,6 +1815,16 @@ code that hasn't landed. When a large transformer PR is in flight and you want
 the doc update to land alongside it, ask for it explicitly with
 <code>--include-open-prs</code> locally, or the <code>include_open_prs</code> input when dispatching
 the workflow by hand. Scheduled runs never look at open PRs.</p>
+<p><strong>Before the merge: the contract check.</strong> The daily checks find a contract
+change only after it is merged and maybe deployed. <code>check_etl_drift.py --pull N</code>
+applies the same rules to one open upstream PR. If the PR matches a rule in
+<code>contract_check.blocking_rules</code> of <code>.github/etl-watch.yml</code> (today <code>item-id</code>,
+<code>hazard-mapping</code> and <code>value-mapping</code>), the check fails until one of
+<code>contract_check.reviewers</code> approves the PR head commit. The other rules are
+listed but do not block. The check also reads <code>contract_check.shared_paths</code>
+(for example <code>sources/utils.py</code>), which hold mappings of several sources.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>scripts/check_etl_drift.py<span class="w"> </span>--pull<span class="w"> </span><span class="m">243</span><span class="w">    </span><span class="c1"># exit 1: contract change, no reviewer approval</span>
+</code></pre></div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><code>check_example_drift.py</code> reports on whichever <code>pystac-monty</code> is importable, so
