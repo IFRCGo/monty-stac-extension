@@ -43,6 +43,17 @@ Usage
     python scripts/check_etl_drift.py --include-open-prs  # add in-flight PRs
     python scripts/check_etl_drift.py --check-config      # offline, CI runs this
     python scripts/check_etl_drift.py                     # create/update issues
+    python scripts/check_etl_drift.py --pull 243          # contract check of one upstream PR
+
+Contract check (--pull)
+-----------------------
+Run on an open upstream PR, by a required status check in pystac-monty. It
+applies the same rules to the PR diff. When a change matches one of the
+`contract_check.blocking_rules` in .github/etl-watch.yml (for example a new
+item id format or a changed hazard mapping), the check fails until one of
+`contract_check.reviewers` approves the PR head commit. Other findings are
+listed, but do not block. The report goes to stdout (the workflow appends it
+to the job summary); the exit code is the verdict.
 
 Needs a GitHub token in GH_TOKEN/GITHUB_TOKEN, or a logged-in `gh` CLI.
 Reading pystac-monty needs no special scope (it is public); writing issues here
@@ -373,6 +384,8 @@ def _self_test() -> int:
     if "source-model" not in in_validators:
         failures.append(f"validator field declaration not classified as source-model: {in_validators}")
 
+    failures.extend(_self_test_contract_approver())
+
     if failures:
         print("check_etl_drift self-test FAILED:", file=sys.stderr)
         for failure in failures:
@@ -380,6 +393,34 @@ def _self_test() -> int:
         return 1
     print("check_etl_drift self-test passed (patch parser and rules behave as expected).")
     return 0
+
+
+def _self_test_contract_approver() -> list[str]:
+    """The approval rule decides whether an upstream PR can merge, so each case
+    the gate must get right has an expected answer here."""
+    head, old = "h" * 40, "o" * 40
+
+    def review(login: str, state: str, commit: str = head) -> dict[str, Any]:
+        return {"user": {"login": login}, "state": state, "commit_id": commit}
+
+    reviewers = ["emmanuelmathot", "wrynearson"]
+    cases = [
+        ("no review", [], None),
+        ("reviewer approves the head commit", [review("wrynearson", "APPROVED")], "wrynearson"),
+        ("login case does not matter", [review("WRynearson", "APPROVED")], "WRynearson"),
+        ("approval of an older commit", [review("wrynearson", "APPROVED", old)], None),
+        ("approval by somebody else", [review("rup", "APPROVED")], None),
+        ("author approval does not count", [review("emmanuelmathot", "APPROVED")], None),
+        ("changes requested after approval", [review("wrynearson", "APPROVED"), review("wrynearson", "CHANGES_REQUESTED")], None),
+        ("comment after approval keeps it", [review("wrynearson", "APPROVED"), review("wrynearson", "COMMENTED")], "wrynearson"),
+        ("approval after changes requested", [review("wrynearson", "CHANGES_REQUESTED"), review("wrynearson", "APPROVED")], "wrynearson"),
+    ]
+    failures = []
+    for name, reviews, expected in cases:
+        got = contract_approver(reviews, reviewers, head, author="emmanuelmathot")
+        if got != expected:
+            failures.append(f"contract_approver, {name}: expected {expected!r}, got {got!r}")
+    return failures
 
 
 def classify(path: str, patch: str) -> list[Finding]:
@@ -488,6 +529,30 @@ def _check_regenerate(sid: str, entry: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _check_contract_config(config: Any) -> list[str]:
+    """`contract_check` gates upstream PRs, so a typo would either block every
+    PR or none. Catch it in CI here instead."""
+    if config is None:
+        return []
+    if not isinstance(config, dict):
+        return ["contract_check: must be a mapping"]
+    errors = []
+    reviewers = config.get("reviewers")
+    if not (isinstance(reviewers, list) and reviewers and all(isinstance(r, str) and r for r in reviewers)):
+        errors.append("contract_check.reviewers: must be a non-empty list of GitHub logins")
+    rules = config.get("blocking_rules")
+    if not (isinstance(rules, list) and rules):
+        errors.append("contract_check.blocking_rules: must be a non-empty list of rule ids")
+    else:
+        for rule in rules:
+            if rule not in {r.id for r in SIGNAL_RULES}:
+                errors.append(f"contract_check.blocking_rules: unknown rule {rule!r}")
+    for path in config.get("shared_paths", []):
+        if not isinstance(path, str) or path.startswith("/") or ".." in path:
+            errors.append(f"contract_check.shared_paths: {path!r} must be a repo-relative path")
+    return errors
+
+
 def check_config(sources: list[dict[str, Any]], watch: dict[str, Any]) -> int:
     """Offline invariants, so a source added to sources.yml can't quietly go
     unwatched. Run by CI next to gen_sources_index.py --check."""
@@ -527,6 +592,8 @@ def check_config(sources: list[dict[str, Any]], watch: dict[str, Any]) -> int:
                 errors.append(f"{sid}: extra_paths entry {path!r} must be a repo-relative path")
 
         errors.extend(_check_regenerate(sid, entry))
+
+    errors.extend(_check_contract_config(watch.get("contract_check")))
 
     if errors:
         print(f"{WATCH_YML.relative_to(ROOT)} is inconsistent ({len(errors)} problem(s)):", file=sys.stderr)
@@ -658,6 +725,175 @@ def collect_open_prs(repo: str, drifts: dict[str, Drift]) -> None:
             if len(files) < 100:
                 break
             page += 1
+
+
+# --------------------------------------------------------------------------- #
+# contract check of one upstream PR (--pull)
+# --------------------------------------------------------------------------- #
+
+RULE_IDS = tuple(rule.id for rule in SIGNAL_RULES)
+
+
+@dataclass
+class PullCheck:
+    """What one upstream PR changes in the documented contract."""
+
+    number: int
+    title: str
+    url: str
+    author: str | None
+    head_sha: str
+    findings: list[tuple[str, Finding]] = field(default_factory=list)  # (source id or "shared", finding)
+    structural: list[dict[str, str]] = field(default_factory=list)
+    unreviewable: list[str] = field(default_factory=list)
+
+
+def contract_paths(sources: list[dict[str, Any]], watch: dict[str, Any]) -> dict[str, list[str]]:
+    """Upstream path -> the source ids whose doc describes it. Shared modules
+    map to "shared": they are not watched for per-source drift, but a mapping
+    or id change in them changes the contract of several sources at once."""
+    entries = watch.get("sources") or {}
+    by_path: dict[str, list[str]] = {}
+    for src in sources:
+        if src["etl"] is None or src["id"] not in entries:
+            continue
+        for path in watched_paths(src, entries[src["id"]] or {}):
+            by_path.setdefault(path, []).append(src["id"])
+    for path in (watch.get("contract_check") or {}).get("shared_paths", []):
+        by_path.setdefault(path, []).append("shared")
+    return by_path
+
+
+def collect_pull(repo: str, number: int, by_path: dict[str, list[str]]) -> PullCheck:
+    pull = api(f"/repos/{repo}/pulls/{number}")
+    check = PullCheck(
+        number=number,
+        title=pull["title"],
+        url=pull["html_url"],
+        author=(pull.get("user") or {}).get("login"),
+        head_sha=pull["head"]["sha"],
+    )
+    page = 1
+    while True:
+        files = api(f"/repos/{repo}/pulls/{number}/files?per_page=100&page={page}")
+        for file in files or []:
+            owners = by_path.get(file["filename"]) or by_path.get(file.get("previous_filename", ""))
+            if not owners:
+                continue
+            if file["status"] != "modified":
+                check.structural.append(
+                    {"path": file["filename"], "status": file["status"], "previous": file.get("previous_filename", "")}
+                )
+                continue
+            patch = file.get("patch")
+            if not patch:
+                check.unreviewable.append(file["filename"])
+                continue
+            for finding in classify(file["filename"], patch):
+                check.findings.append((", ".join(owners), finding))
+        if not files or len(files) < 100:
+            break
+        page += 1
+    return check
+
+
+def reviews_of(repo: str, number: int) -> list[dict[str, Any]]:
+    reviews: list[dict[str, Any]] = []
+    page = 1
+    while True:
+        batch = api(f"/repos/{repo}/pulls/{number}/reviews?per_page=100&page={page}")
+        reviews.extend(batch or [])
+        if not batch or len(batch) < 100:
+            return reviews
+        page += 1
+
+
+def contract_approver(
+    reviews: list[dict[str, Any]], reviewers: list[str], head_sha: str, author: str | None
+) -> str | None:
+    """A contract reviewer whose latest decisive review is an approval of the
+    head commit. A later push needs a new approval: the reviewer approved the
+    code they saw, not the code that came after it. COMMENTED reviews do not
+    change a decision; CHANGES_REQUESTED and DISMISSED withdraw it."""
+    allowed = {login.lower() for login in reviewers}
+    latest: dict[str, dict[str, Any]] = {}
+    for review in reviews:  # the API returns them in chronological order
+        login = ((review.get("user") or {}).get("login") or "").lower()
+        if review.get("state") in ("APPROVED", "CHANGES_REQUESTED", "DISMISSED"):
+            latest[login] = review
+    for login, review in latest.items():
+        if login not in allowed or login == (author or "").lower():
+            continue
+        if review["state"] == "APPROVED" and review.get("commit_id") == head_sha:
+            return review["user"]["login"]
+    return None
+
+
+def blocking_findings(check: PullCheck, blocking_rules: list[str]) -> list[tuple[str, Finding]]:
+    return [(owner, f) for owner, f in check.findings if f.rule.id in blocking_rules]
+
+
+def render_pull_check(
+    check: PullCheck, blocking: list[tuple[str, Finding]], approver: str | None, config: dict[str, Any]
+) -> str:
+    reviewers = ", ".join(f"`{login}`" for login in config.get("reviewers", []))
+    must_review = bool(blocking or check.structural or check.unreviewable)
+    if not must_review:
+        verdict = "✅ **No contract change.** This PR does not change an item id, a mapping or another blocking rule."
+    elif approver:
+        verdict = f"✅ **Contract change, approved** by `{approver}` on the head commit `{check.head_sha[:8]}`."
+    else:
+        verdict = (
+            f"❌ **Contract change, not approved yet.** One of {reviewers} must approve the head commit "
+            f"`{check.head_sha[:8]}`. The source docs in [{THIS_REPO}](https://github.com/{THIS_REPO}/tree/main/"
+            "docs/model/sources) describe this behaviour, so they must change with it."
+        )
+    lines = [f"## Monty contract check — [#{check.number}]({check.url}) {check.title}", "", verdict, ""]
+
+    if check.structural:
+        lines += ["### Files added, removed or renamed (blocking)", ""]
+        lines += [f"- `{s['path']}`: {s['status']}" + (f" (was `{s['previous']}`)" if s["previous"] else "") for s in check.structural]
+        lines.append("")
+    if check.unreviewable:
+        lines += ["### Diff too large to classify (blocking)", ""]
+        lines += [f"- `{path}`" for path in check.unreviewable]
+        lines.append("")
+
+    def section(title: str, findings: list[tuple[str, Finding]]) -> None:
+        if not findings:
+            return
+        lines.extend([f"### {title}", ""])
+        by_rule: dict[str, list[tuple[str, Finding]]] = {}
+        for owner, finding in findings:
+            by_rule.setdefault(finding.rule.id, []).append((owner, finding))
+        for rule_id, items in by_rule.items():
+            rule = items[0][1].rule
+            lines.append(f"**`{rule_id}`** — {rule.doc_section}: _{rule.why}_")
+            lines.append("")
+            lines.append("```diff")
+            for owner, f in items[:MAX_LINES_PER_RULE]:
+                where = f"{f.path}:{f.lineno}" if f.lineno else f.path
+                lines.append(f"{f.kind} {f.text}   # {where} ({owner})")
+            if len(items) > MAX_LINES_PER_RULE:
+                lines.append(f"# … {len(items) - MAX_LINES_PER_RULE} more line(s)")
+            lines.extend(["```", ""])
+
+    section("Blocking findings", blocking)
+    section("Other findings (not blocking)", [x for x in check.findings if x not in blocking])
+    return "\n".join(lines)
+
+
+def run_pull_check(number: int, sources: list[dict[str, Any]], watch: dict[str, Any]) -> int:
+    repo = watch["repo"]
+    config = watch.get("contract_check") or {}
+    check = collect_pull(repo, number, contract_paths(sources, watch))
+    blocking = blocking_findings(check, config.get("blocking_rules", []))
+    must_review = bool(blocking or check.structural or check.unreviewable)
+    approver = None
+    if must_review:
+        approver = contract_approver(reviews_of(repo, number), config.get("reviewers", []), check.head_sha, check.author)
+    print(render_pull_check(check, blocking, approver, config))
+    return 1 if must_review and not approver else 0
 
 
 # --------------------------------------------------------------------------- #
@@ -954,6 +1190,12 @@ def main() -> int:
         action="store_true",
         help="also report drift from open (including draft) upstream PRs; off by default",
     )
+    parser.add_argument(
+        "--pull",
+        type=int,
+        metavar="N",
+        help="contract check of upstream PR N: exit 1 if it changes the contract without a reviewer's approval",
+    )
     args = parser.parse_args()
 
     if args.self_test:
@@ -964,6 +1206,9 @@ def main() -> int:
 
     if args.check_config:
         return check_config(sources, watch)
+
+    if args.pull is not None:
+        return run_pull_check(args.pull, sources, watch)
 
     repo = watch["repo"]
     entries = watch["sources"]
