@@ -6,8 +6,9 @@
   "type": "Collection",
   "id": "emdat-hazards",
   "title": "EM-DAT Source Hazards",
-  "description": "Hazard records from the Emergency Events Database (EM-DAT). EM-DAT is a global database on natural and technological disasters, containing essential core data on the occurrence and effects of more than 22,000 disasters worldwide from 1900 to the present day. It is maintained by the Centre for Research on the Epidemiology of Disasters (CRED) at the School of Public Health of the Université catholique de Louvain (UCLouvain) in Brussels, Belgium. The database includes detailed hazard information such as hazard type, magnitude, and spatial extent. More information on the EM-DAT mapping in Monty can be found in the [EM-DAT Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/EM-DAT#hazard-item).",
-  "license": "MIT",
+  "description": "Hazard records from the Emergency Events Database (EM-DAT). EM-DAT is a global database on natural and technological disasters, containing essential core data on the occurrence and effects of more than 22,000 disasters worldwide from 1900 to the present day. It is maintained by the Centre for Research on the Epidemiology of Disasters (CRED) at the School of Public Health of the Université catholique de Louvain (UCLouvain) in Brussels, Belgium. The database includes detailed hazard information such as hazard type, magnitude, and spatial extent. More information on the EM-DAT mapping in Monty can be found in the [EM-DAT Hazard Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/EM-DAT#hazard-item). Access to items in this collection requires accepting the EM-DAT Terms of Use and an API token from an IFRC GO account (https://go.ifrc.org), sent as `Authorization: Bearer <token>`.",
+  "license": "other",
+  "private": true,
   "keywords": [
     "emdat",
     "cred",
@@ -381,6 +382,12 @@
       "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/EM-DAT#hazard-item",
       "type": "text/html",
       "title": "EM-DAT Hazard Item Source Mappings"
+    },
+    {
+      "rel": "license",
+      "href": "https://doc.emdat.be/docs/legal/terms-of-use/",
+      "type": "text/html",
+      "title": "EM-DAT Terms of Use"
     }
   ]
 }
