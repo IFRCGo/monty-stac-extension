@@ -1,0 +1,108 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "idmc-gidd-event-15487",
+  "geometry": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        36.673649,
+        36.010311
+      ]
+    ]
+  },
+  "bbox": [
+    36.673649,
+    36.010311,
+    36.673649,
+    36.010311
+  ],
+  "properties": {
+    "title": "Syria: Flood - Idleb (Maaret Tamsrin) - 14/01/2023",
+    "start_datetime": "2023-01-14T00:00:00+00:00",
+    "end_datetime": "2023-01-14T00:00:00+00:00",
+    "location": [
+      "Ma`arrat Misrin, Idlib, Syria"
+    ],
+    "location_accuracy": [
+      "County/City/town/Village/Woreda (ADM3)"
+    ],
+    "location_type": [
+      "Origin"
+    ],
+    "displacement_occured": "",
+    "sources": [
+      "CCCM Cluster"
+    ],
+    "publishers": [
+      "CCCM Cluster"
+    ],
+    "monty:src_event_id": "15487",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "SYR"
+    ],
+    "monty:hazard_codes": [
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related",
+      "SYR"
+    ],
+    "monty:corr_id": "20230114-SYR-1133284-MH0600-1-GCDB",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2023-01-14T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/json",
+      "title": "GIDD Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../idmc-gidd-impacts/idmc-gidd-impact-15487-107555-internal-displacements.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-events/idmc-gidd-event-15487.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-events/idmc-gidd-events.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "source": {
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/geo+json",
+      "title": "GIDD GeoJson Source",
+      "roles": [
+        "source"
+      ]
+    }
+  },
+  "collection": "idmc-gidd-events"
+}

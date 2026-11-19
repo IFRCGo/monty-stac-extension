@@ -2,9 +2,11 @@
 
 The Internal Displacement Monitoring Centre (IDMC) maintains the Global Internal Displacement Database (GIDD), which provides comprehensive information on global internal displacement events from 2008 onwards.
 
-## Collection: `idmc-events`
+## Collections: `idmc-gidd-events` and `idmc-gidd-impacts`
 
-A STAC collection holding IDMC disaster-related displacement events.
+Two STAC collections hold the GIDD data: one for the disaster events, and one for the displacement figures of each event.
+
+The Internal Displacement Updates (IDU) of IDMC are a different source with their own collections. See the [IDU source doc](../IDU/README.md).
 
 - Name: Global Internal Displacement Database (GIDD) Events
 - Code: `IDMC`
@@ -14,7 +16,7 @@ A STAC collection holding IDMC disaster-related displacement events.
 - Source organization email: <info@idmc.ch>
 - Source URL: <https://www.internal-displacement.org/database>
 - Source Data license: None stated by the source (checked 2026-07)
-- Source for: event
+- Source for: event, impact
 - API Documentation: <https://helix-tools-api.idmcdb.org/external-api/>
 
 ### Data
@@ -78,165 +80,179 @@ The returned data is a geojson feature collection. Each feature represents a dis
 - `Locations type`: Type of displacement location (Origin/Destination)
 - `Displacement occurred`: Indicates if preventive evacuations were reported
 
+### Which records are ingested
+
+- Only the features with `Figure cause` = `Disaster` are ingested. `Conflict` and `Other` figures are ignored.
+- The transformer groups the features by `Event ID`. Each group gives one event item, and one impact item for each feature of the group.
+- If one feature of a group is not valid, or the hazard of the event is not in the [hazard type mapping](#hazard-type-mapping), the transformer skips all the group and counts its records as failed. It continues with the next group.
+
+On the reference file [`IDMC_GIDD_Internal_Displacement_Disaggregated.geojson`](./IDMC_GIDD_Internal_Displacement_Disaggregated.geojson) (100 features, 97 of them `Disaster`), the transformer gives 43 event items and 97 impact items.
+
 ### Event Items
 
-The IDMC event items are derived from the GIDD disaggregated data.
+The GIDD event items are derived from the GIDD disaggregated data.
 
 > [!IMPORTANT]
-> A GIDD geojson is a collection of displacement items. Multiple items can be associated with a single event. The event item is created by consolidating these items into a single event.
+> A GIDD geojson is a collection of displacement figures. Several figures can refer to the same event. The event item is built from the **first figure** of the event. Only `monty:country_codes` uses all the figures.
 
-The following table shows how IDMC event fields map to STAC Item fields:
+The following table shows how GIDD fields map to STAC Item fields:
 
-| STAC field                                                                                                               | IDMC field                                                                                   | Required | Notes                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-event-`{Event ID}                                                                      | Yes      | Use format `idmc-event-{id}`                                                       |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | [feature geometry aggregation](#displacement-items-geometry-aggregagtion-for-event-geometry) | Yes      | Aggregation in multi points or multipolygon of all the items referencing the event |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-events`                                                                                | Yes      |                                                                                    |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | {Event name}                                                                                 | Yes      |                                                                                    |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Event start date}                                                                           | Yes      | Convert to datetime with UTC timezone                                              |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Event start date}                                                                           | Yes      | Convert to datetime with UTC timezone                                              |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {Event end date}                                                                             | Yes      | Convert to datetime with UTC timezone                                              |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)[0]                              | country_iso3                                                                                 | Yes      | Direct mapping to array                                                            |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {Hazard Category} and {Hazard Type}                                                          | Yes      | Map using the [hazard type mapping](#hazard-type-mapping)                          |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number)                                 |                                                                                              | Yes      | Always 1 (IDMC doesn't track episodes)                                             |
-| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)                                             | id                                                                                           | Yes      | Generated following the [event pairing procedure](../../correlation_identifier.md) |
-| [processing:version](https://github.com/stac-extensions/processing) | Generated                                                                                    | No       | Semantic version of the transformer that generated the item, via the `processing:` extension |
-| [processing:software](https://github.com/stac-extensions/processing) | Generated                                                                                    | No       | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| STAC field                                                                                                               | GIDD field                               | Required | Notes                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-event-`{Event ID}             | Yes      | For example `idmc-gidd-event-22194`                                                                     |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | feature geometry of the first figure     | Yes      | See [Event geometry](#event-geometry). `bbox` is computed from it                                      |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-gidd-events`                       | Yes      |                                                                                                         |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | {Event name}                             | Yes      |                                                                                                         |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Event start date}                       | Yes      | Convert to datetime with UTC timezone                                                                   |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Event start date}                       | Yes      | Convert to datetime with UTC timezone                                                                   |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {Event end date}                         | Yes      | Convert to datetime with UTC timezone                                                                   |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | Generated                                | No       | The keywords of the hazard profile, then the country codes                                              |
+| `location`, `location_accuracy`, `location_type`                                                                         | {Locations name}, {Locations accuracy}, {Locations type} | No | Lists, copied from the first figure                                                      |
+| `displacement_occured`                                                                                                   | {Displacement occurred}                  | No       | The property name has one `r`. That is the name the transformer writes                                  |
+| `sources`, `publishers`                                                                                                  | {Sources}, {Publishers}                  | No       | Lists, copied from the first figure                                                                     |
+| `roles`                                                                                                                  | `["source", "event"]`                    | Yes      |                                                                                                         |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                 | {ISO3} of all the figures of the event   | Yes      | No duplicates. The country of the first figure is first, because `monty:corr_id` uses the first code   |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {Hazard category}, {Hazard sub category}, {Hazard type}, {Hazard sub type} | Yes | Map using the [hazard type mapping](#hazard-type-mapping)                       |
+| [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number)                               | Generated                                | Yes      | Always 1 (IDMC does not track episodes)                                                                 |
+| [monty:corr_id](https://github.com/IFRCGo/monty-stac-extension#montycorr_id)                                             | Generated                                | Yes      | Generated following the [event pairing procedure](../../correlation_identifier.md)                      |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id)                      | {Event ID}                               | Yes      | The source identifier of the event, as a string                                                         |
+| [processing:version](https://github.com/stac-extensions/processing)                                                      | Generated                                | No       | Semantic version of the transformer that generated the item, via the `processing:` extension            |
+| [processing:software](https://github.com/stac-extensions/processing)                                                     | Generated                                | No       | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension          |
+| `assets.source`                                                                                                          | URL of the source file                   | Yes      | `application/geo+json`, role `source`                                                                   |
+| `links[rel=via]`                                                                                                         | URL of the source file                   | Yes      |                                                                                                         |
+| `links[rel=related]`                                                                                                     | each impact item of the event            | Yes      | `roles: ["impact"]`                                                                                     |
 
-### Displacement items geometry aggregagtion for event geometry
+### Event geometry
 
-The geometry of the event is derived from the geometry of the displacement items. The geometry of the event is an aggregation of the geometries of all the displacement items associated with the event. The aggregation is done based on the following rules:
+The transformer copies the geometry of the first figure of the event. It does not aggregate the geometries of the other figures. For the event `22194` (26 figures in Syria and Türkiye), the event item has the one point of its first figure (Aleppo).
+
+The target is an aggregation of the geometries of all the figures of the event:
 
 1. If all the geometries are points, the event geometry is a MultiPoint geometry.
 2. If all the geometries are polygons, the event geometry is a MultiPolygon geometry.
 3. If the geometries are a mix of points and polygons, the event geometry is a MultiPolygon geometry with the points converted to polygons.
 
+The transformer does not do this aggregation yet. The dates have the same limit: `Event start date` and `Event end date` come from the first figure.
+
 #### Hazard Type Mapping
 
-IDMC uses the same hazard classification as [EM-DAT CRED](../../taxonomy.md#em-dat-cred-classification-tree) and must follow the **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+The IDMC hazard classification has four levels. The **UNDRR-ISC 2025** code is the **reference classification** for the Monty extension. GIDD and [IDU](../IDU/README.md) use the same mapping:
 
-| IDMC Type           | IDMC SubType                | GLIDE | EM-DAT                             | **UNDRR-ISC 2025** (Reference) | Cluster    | Description                     |
-| ------------------- | --------------------------- | ----- | ---------------------------------- | ------------------------------ | ---------- | ------------------------------- |
-| Drought             | Drought                     | DR    | nat-cli-drt-drt                    | **MH0401**                     | MH-PRECIP  | Drought                         |
-| Earthquake          | Earthquake                  | EQ    | nat-geo-eqt-eqt                    | **GH0101**                     | GEO-SEIS   | Earthquake                      |
-| Erosion             | Erosion                     | OT    | nat-geo-env-coa                    | **GH0403**                     | GEO-OTHER  | Erosion                         |
-| Extreme Temperature | Cold wave                   | CW    | nat-met-ext-col                    | **MH0502**                     | MH-TEMP    | Extreme Temperature - Cold Wave |
-| Flood               | Flood                       | FL    | nat-hyd-flo-flo                    | **MH0600**                     | MH-PRECIP  | Flooding (chapeau)              |
-| Flood               | Dam release flood           | FL    | [nat-hyd-flo-flo, tec-mis-col-col] | [**MH0600**, **TL0205**]       | MH-PRECIP  | Dam Break Flood                 |
-| Mass Movement       | Landslide/Wet mass movement | LS    | nat-hyd-mmw-lan                    | **GH0300**                     | GEO-GFAIL  | Mass Movement (chapeau)         |
-| Mass Movement       | Sinkhole                    | OT    | -                                  | **GH0308**                     | GEO-GFAIL  | Sinkhole                        |
-| Sea level Rise      | Sea level rise              | OT    | nat-geo-env-slr                    | **EN0402**                     | ENV-WATER  | Sea Level Rise                  |
-| Storm               | Storm                       | VW    | nat-met-sto-sto                    | **MH0310**                     | MH-WIND    | Storm (chapeau)                 |
-| Storm               | Tornado                     | TO    | nat-met-sto-tor                    | **MH0305**                     | MH-WIND    | Tornado                         |
-| Storm               | Typhoon/Hurricane/Cyclone   | TC    | nat-met-sto-tro                    | **MH0306**                     | MH-WIND    | Cyclone or Depressions          |
-| Volcanic Activity   | Volcanic activity           | VO    | nat-geo-vol-vol                    | **GH0201**                     | GEO-VOLC   | Volcanic Activity               |
-| Wildfire            | Wildfire                    | WF    | nat-cli-wil-wil                    | **EN0205**                     | ENV-FOREST | Wildfire                        |
+| IDMC category / sub category / type / sub type                                       | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Description                 |
+| ----------------------------------------------------------------------------------- | ----- | --------------- | ------------------------------ | --------------------------- |
+| ('geophysical', 'geophysical', 'earthquake', 'earthquake')                          | EQ    | nat-geo-ear-gro | **GH0101**                     | Earthquake                  |
+| ('geophysical', 'geophysical', 'earthquake', 'tsunami')                             | TS    | nat-geo-ear-tsu | **MH0705**                     | Tsunami                     |
+| ('geophysical', 'geophysical', 'mass movement', 'dry mass movement')                | LS    | nat-geo-mmd-lan | **GH0300**                     | Gravitational Mass Movement |
+| ('geophysical', 'geophysical', 'mass movement', 'sinkhole')                         | OT    | nat-geo-mmd-sub | **GH0308**                     | Sinkhole                    |
+| ('geophysical', 'geophysical', 'volcanic activity', 'volcanic activity')            | VO    | nat-geo-vol-vol | **GH0201**                     | Lava Flows                  |
+| ('weather related', 'climatological', 'desertification', 'desertification')         | OT    | nat-geo-env-des | **EN0206**                     | Desertification             |
+| ('weather related', 'climatological', 'drought', 'drought')                         | DR    | nat-cli-dro-dro | **MH0401**                     | Drought                     |
+| ('weather related', 'climatological', 'erosion', 'erosion')                         | OT    | nat-geo-env-soi | **GH0403**                     | Soil Erosion                |
+| ('weather related', 'climatological', 'salinisation', 'salinization')               | OT    | nat-geo-env-slr | **EN0303**                     | Salinity & Sodicity         |
+| ('weather related', 'climatological', 'sea level rise', 'sea level rise')           | OT    | nat-geo-env-slr | **EN0402**                     | Sea Level Rise              |
+| ('weather related', 'climatological', 'wildfire', 'wildfire')                       | WF    | nat-cli-wil-wil | **EN0205**                     | Wildfires                   |
+| ('weather related', 'hydrological', 'flood', 'dam release flood')                   | FL    | tec-mis-col-col | **TL0205**                     | Dam Failure                 |
+| ('weather related', 'hydrological', 'flood', 'flood')                               | FL    | nat-hyd-flo-flo | **MH0600**                     | Flooding (chapeau)          |
+| ('weather related', 'hydrological', 'mass movement', 'avalanche')                   | AV    | nat-hyd-mmw-ava | **MH0801**                     | Avalanche                   |
+| ('weather related', 'hydrological', 'mass movement', 'landslide/wet mass movement') | LS    | nat-hyd-mmw-lan | **GH0304**                     | Slides                      |
+| ('weather related', 'hydrological', 'wave action', 'rogue wave')                    | OT    | nat-hyd-wav-rog | **MH0701**                     | Rogue Wave                  |
+| ('weather related', 'meteorological', 'extreme temperature', 'cold wave')           | CW    | nat-met-ext-col | **MH0502**                     | Cold Wave                   |
+| ('weather related', 'meteorological', 'extreme temperature', 'heat wave')           | HT    | nat-met-ext-hea | **MH0501**                     | Heatwave                    |
+| ('weather related', 'meteorological', 'storm', 'hailstorm')                         | ST    | nat-met-sto-hai | **MH0404**                     | Hail                        |
+| ('weather related', 'meteorological', 'storm', 'sand/dust storm')                   | VW    | nat-met-sto-san | **MH0201**                     | Dust Storm or Sandstorm     |
+| ('weather related', 'meteorological', 'storm', 'storm surge')                       | SS    | nat-met-sto-sur | **MH0703**                     | Storm Surge                 |
+| ('weather related', 'meteorological', 'storm', 'storm')                             | VW    | nat-met-sto-sto | **MH0301**                     | Storm (generic)             |
+| ('weather related', 'meteorological', 'storm', 'tornado')                           | TO    | nat-met-sto-tor | **MH0305**                     | Tornado                     |
+| ('weather related', 'meteorological', 'storm', 'typhoon/hurricane/cyclone')         | TC    | nat-met-sto-tro | **MH0309**                     | Tropical Cyclone            |
+| ('weather related', 'meteorological', 'storm', 'winter storm/blizzard')             | OT    | nat-met-sto-bli | **MH0403**                     | Blizzard                    |
 
-> [!NOTE]
-> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+The comparison is not case-sensitive. The transformer writes the three codes in the order
+UNDRR-ISC 2025, GLIDE, EM-DAT, for example `["MH0600", "FL", "nat-hyd-flo-flo"]`.
 
-This mapping enables standardized hazard categorization while preserving IDMC's original classification in the source properties.
+A hazard that is not in this table gives no item: the transformer skips all the records of
+that event and counts them as failed. This includes `Mixed disasters`. The transformer has a
+row for it (`mix-mix-mix-mix`), but that value has no UNDRR-ISC 2025 code, so the event fails.
 
 ### Impact Items
 
-#### Displacement Items (GIDD Disaggregated Data)
+Each `Disaster` figure of the GIDD dataset gives one impact item. The transformer starts from a copy of the event item, and then sets the fields of the figure. So an impact item also has the `monty:corr_id`, `monty:hazard_codes`, `monty:episode_number` and `monty:src_event_id` of its event.
 
-The following table shows how IDMC displacement item fields map to STAC Item fields:
+| STAC field                                                                                                               | GIDD field                                                  | Required | Notes                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-impact-`{Event ID}`-`{ID}`-`{figure category}    | Yes      | See [Impact item id](#impact-item-id)                                                        |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | feature geometry of the figure                              | Yes      | Direct copy. `bbox` is computed from it                                                      |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-gidd-impacts`                                         | Yes      |                                                                                              |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | {Figure category}`-`{Figure unit}`-`{Event name}            | Yes      | For example `Internal Displacements-Household-Syria, Türkiye: Earthquake - 06/02/2023`       |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Start date}, else {Stock date}                             | Yes      | UTC. A figure with none of the two dates makes its event fail                                |
+| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Start date}, else {Stock date}                             | Yes      | UTC                                                                                          |
+| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {End date}, else {Stock reporting date}                     | No       | UTC                                                                                          |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | Generated                                                   | No       | The keywords of the hazard profile, then the country code of the figure                      |
+| `figure_category`, `figure_unit`, `figure_cause`                                                                         | {Figure category}, {Figure unit}, {Figure cause}            | No       | Direct copy                                                                                  |
+| `geographical_region`, `country`                                                                                         | {Geographical region}, {Country}                            | No       | Direct copy                                                                                  |
+| `location`, `location_accuracy`, `location_type`, `displacement_occured`, `sources`, `publishers`                        | same fields as the event item                               | No       | From the figure, not from the first figure of the event                                      |
+| `roles`                                                                                                                  | `["source", "impact"]`                                      | Yes      |                                                                                              |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                 | {ISO3}                                                      | Yes      | One code: the country of the figure                                                          |
+| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [Displacement Impact details](#displacement-impact-details) | Yes  |                                                                                              |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id)                      | {Event ID}                                                  | Yes      | The identifier of the event, not of the figure                                               |
+| [processing:version](https://github.com/stac-extensions/processing)                                                      | Generated                                                   | No       | Semantic version of the transformer that generated the item, via the `processing:` extension |
+| [processing:software](https://github.com/stac-extensions/processing)                                                     | Generated                                                   | No       | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+| `links[rel=related]`                                                                                                     | the event item                                              | Yes      | `roles: ["event"]`                                                                           |
 
-| STAC field                                                                                                               | IDMC field                                                                                             | Required | Notes                                                     |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-gidd-impact-`{ID}`-displaced`                                                                    | Yes      | Use format `idmc-impact-{ID}-displaced`                   |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | [feature geometry]                                                                                     | Yes      | Direct mapping from feature geometry                      |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-gidd-impacts`                                                                                    | Yes      |                                                           |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | '{Figure category} of {Figure unit} for {Event name} '                                                 | Yes      |                                                           |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {Start date}                                                                                           | Yes      | Convert to datetime with UTC timezone                     |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {Start date}                                                                                           | Yes      | Convert to datetime with UTC timezone                     |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {End date}                                                                                             | Yes      | Convert to datetime with UTC timezone                     |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | [{Locations name}, {Figure category}, {Figure unit}, {Country}, {Geographical region}, {Figure cause}] |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)[0]                              | {ISO3}                                                                                                 | Yes      | Direct mapping to array                                   |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {Hazard Category} and {Hazard Type}                                                                    | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
-| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [Displacement Impact details](#displacement-impact-details)                                        | Yes      |                                                           |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
-| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
-| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+##### Impact item id
+
+The id is `idmc-gidd-impact-{Event ID}-{ID}-{figure category}`:
+
+- `{Event ID}` is the identifier of the event, and `{ID}` is the identifier of the figure.
+- `{figure category}` is the `Figure category` in lower case, with each space replaced by a hyphen: `Internal Displacements` gives `internal-displacements`, and `IDPs` gives `idps`. If the figure has no `Figure category`, the value is `displaced`.
+
+Example: `idmc-gidd-impact-22194-107479-internal-displacements`.
+
+> [!IMPORTANT]
+> Before [IFRCGo/pystac-monty#268](https://github.com/IFRCGo/pystac-monty/pull/268), this doc and its examples gave the id as `idmc-gidd-impact-{ID}-displaced`. No transformer release wrote that form.
 
 ##### Displacement Impact details
 
-The following table shows how IDMC displacement impact fields map to [impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) STAC Item fields:
+The following table shows how GIDD fields map to [impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail):
 
-| STAC field    | IDMC field           | Required | Notes                                                 |
-| ------------- | -------------------- | -------- | ----------------------------------------------------- |
-| category      | `people`             | Yes      | Always "people" for IDMC impacts                      |
-| type          | `displaced_internal` | Yes      | Always "displaced_internal" for IDMC impacts          |
-| value         | {Total figures}      | Yes      | Direct mapping                                        |
-| unit          | `count`              | Yes      | Always people count (household figures are converted) |
-| estimate_type | `primary`            | Yes      | Always "primary" for IDMC impacts                     |
+| STAC field    | GIDD field        | Required | Notes                                                              |
+| ------------- | ----------------- | -------- | ------------------------------------------------------------------ |
+| category      | `people`          | Yes      | From the table below                                               |
+| type          | {Figure category} | Yes      | From the table below. The default is `displaced_internal`          |
+| value         | {Total figures}   | Yes      | Direct mapping. `Total figures` is a count of people, also when `Figure unit` is `Household` |
+| unit          | `count`           | Yes      | Always `count`                                                     |
+| estimate_type | `primary`         | Yes      | Always `primary`                                                   |
 
-##### Impact Item Generation Rules
+The `type` comes from the `Figure category`. The comparison ignores the case, and a space is equal to a hyphen:
 
-1. Each displacement item in the GIDD dataset becomes a separate impact item
-2. Geometry is taken directly from the displacement item's feature geometry
-3. Dates are converted to UTC timezone
-4. Event ID reference uses the format `idmc-gidd-event-{id}`
+| Label                             | `category` | `type`               |
+| --------------------------------- | ---------- | -------------------- |
+| `evacuated`                       | `people`   | `evacuated`          |
+| `displaced`                       | `people`   | `displaced_internal` |
+| `relocated`                       | `people`   | `relocated`          |
+| `sheltered`                       | `people`   | `shelter_emergency`  |
+| `homeless`                        | `people`   | `homeless`           |
+| `affected`                        | `people`   | `affected_total`     |
+| `IDPs`                            | `people`   | `displaced_internal` |
+| `Internal Displacements`          | `people`   | `displaced_internal` |
+| `Deaths`                          | `people`   | `death`              |
+| `People displaced across borders` | `people`   | `displaced_external` |
 
-#### Internal Displacement Updates (IDU) Items
+The GIDD disaggregated data has two `Figure category` values today: `Internal Displacements` and `IDPs`. The two give `displaced_internal`. The other rows are in the table because GIDD and IDU share it.
 
-The Internal Displacement Updates (IDU) provide near real-time information about displacement events. Key characteristics include:
+> [!NOTE]
+> `Internal Displacements` is a flow (movements in a period), and `IDPs` is a stock (people displaced at a date). The two map to the same `type`. The `figure_category` property and the item id keep the difference.
 
-##### Impact Item Field Mapping
+### Examples
 
-The following table shows how IDU fields map to STAC Item fields for impact items:
+The examples are the output of the transformer for the reference file. Only the links are adapted to the layout of `examples/`.
 
-| STAC field                                                                                                               | IDU field                                                  | Required | Notes                                                     |
-| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------- | --------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                    | `idmc-idu-impact-`{id}`-displaced`                         | Yes      | Use format `idmc-idu-impact-{id}-displaced`               |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                        | {latitude}, {longitude}                                    | Yes      | Convert point coordinates to GeoJSON Point geometry       |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                    | `idmc-idu-impacts`                                         | Yes      |                                                           |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | {displacement_type} displacement for {event_name}          | Yes      |                                                           |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | {displacement_date}                                        | Yes      | Convert to datetime with UTC timezone                     |
-| [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | {displacement_start_date}                                  | Yes      | Convert to datetime with UTC timezone                     |
-| [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | {displacement_end_date}                                    | Yes      | Convert to datetime with UTC timezone                     |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#basics)                    | [{locations_name}, {displacement_type}, {role}, {sources}] | No       |                                                           |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)[0]                              | {iso3}                                                     | Yes      | Direct mapping to array                                   |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                   | {category}, {type}                                         | Yes      | Map using the [hazard type mapping](#hazard-type-mapping) |
-| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail)                                 | See [IDU Impact details](#idu-impact-details)              | Yes      |                                                           |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
-| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
-| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+- [`idmc-gidd-event-22194`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-22194.json): an event in two countries (`["SYR", "TUR"]`)
+- [`idmc-gidd-impact-22194-107479-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-22194-107479-internal-displacements.json): one figure of that event (193 245 people, `SYR`)
+- [`idmc-gidd-event-15487`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-15487.json) and [`idmc-gidd-impact-15487-107555-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-15487-107555-internal-displacements.json): a flood
+- [`idmc-gidd-event-15607`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-15607.json) and [`idmc-gidd-impact-15607-108364-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-15607-108364-internal-displacements.json): a generic storm (`MH0301`)
 
-##### IDU Impact details
+In a deployment, the `related` hrefs have the form `{eoapi_url}/collections/{collection}/items/{item_id}`.
 
-The following table shows how IDU fields map to [impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) STAC Item fields:
+### Internal Displacement Updates (IDU)
 
-| STAC field    | IDU field            | Required | Notes                                                                  |
-| ------------- | -------------------- | -------- | ---------------------------------------------------------------------- |
-| category      | `people`             | Yes      | Always "people" for IDU impacts                                        |
-| type          | `displaced_internal` | Yes      | Always "displaced_internal" for IDU impacts                            |
-| value         | {figure}             | Yes      | Direct mapping                                                         |
-| unit          | `count`              | Yes      | Always people count                                                    |
-| estimate_type | {role}               | Yes      | Maps "Recommended figure" to "primary", "Triangulation" to "secondary" |
-
-##### IDU Impact Item Generation Rules
-
-1. Each IDU record becomes a separate impact item
-2. Point geometry is created from latitude/longitude coordinates
-3. Dates are converted to UTC timezone
-4. Event ID reference uses the format `idmc-idu-event-{event_id}`
-5. Role field determines estimate_type in impact_detail
-
-##### Impact Classification
-
-- Type: displaced_internal (internal displacements)
-- Category: people (total displaced population)
-- Two main categories:
-  1. Preventive evacuations (marked in displacement_occurred field)
-  2. Forced displacement due to damage/destruction
-
-##### Data Quality Notes
-
-- Provides near real-time updates compared to annually validated GIDD data
-- Includes source URLs for verification
-- Distinguishes between recommended figures and triangulation
-- Specifies accuracy of location information
-- Indicates if displacement was preventive or post-disaster
+The IDU items are documented in the [IDU source doc](../IDU/README.md). The files `idu-export.json` and `idmc-idu-samples-ESP.json` in this folder are the reference files of that source.
