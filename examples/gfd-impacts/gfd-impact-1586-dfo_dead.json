@@ -1,0 +1,167 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "gfd-impact-1586-dfo_dead",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          148.77567883770345,
+          -37.692190384571404
+        ],
+        [
+          149.9754567941598,
+          -37.692185550952246
+        ],
+        [
+          149.9749728427817,
+          -17.513770729195038
+        ],
+        [
+          149.17465716800353,
+          -17.51377546120134
+        ],
+        [
+          147.97772223305088,
+          -17.512579461230274
+        ],
+        [
+          146.3818089465066,
+          -17.512579422994158
+        ],
+        [
+          144.7858956959944,
+          -17.512579420723743
+        ],
+        [
+          143.1899824714047,
+          -17.512579400063284
+        ],
+        [
+          141.59406922326394,
+          -17.512579402044587
+        ],
+        [
+          139.99815600423668,
+          -17.5125794432258
+        ],
+        [
+          138.40224272344366,
+          -17.512579385808014
+        ],
+        [
+          137.20294874528088,
+          -17.51377068144409
+        ],
+        [
+          137.20246484353038,
+          -37.69218554664975
+        ],
+        [
+          139.59917774865693,
+          -37.692190354915816
+        ],
+        [
+          141.1950909277643,
+          -37.69219034319341
+        ],
+        [
+          143.58896079571315,
+          -37.69219036366114
+        ],
+        [
+          145.18487408134828,
+          -37.69219039048359
+        ],
+        [
+          147.17976561083674,
+          -37.692190365837604
+        ],
+        [
+          148.77567883770345,
+          -37.692190384571404
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    137.20246484353038,
+    -37.69219039048359,
+    149.9754567941598,
+    -17.512579385808014
+  ],
+  "properties": {
+    "title": "Monsoonal rain-dfo_dead",
+    "description": "Monsoonal rain",
+    "start_datetime": "2000-02-18T01:00:00+00:00",
+    "end_datetime": "2000-03-01T01:00:00+00:00",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:src_event_id": "1586",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "AUS"
+    ],
+    "monty:hazard_codes": [
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo"
+    ],
+    "keywords": [
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related",
+      "AUS"
+    ],
+    "monty:corr_id": "20000218-AUS-561419-MH0600-1-GCDB",
+    "monty:impact_detail": {
+      "category": "people",
+      "type": "death",
+      "value": 1,
+      "unit": "count",
+      "estimate_type": "primary"
+    },
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2000-02-18T01:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../gfd-events/gfd-event-1586.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../gfd-hazards/gfd-hazard-1586.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/gfd-impacts/gfd-impact-1586-dfo_dead.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/gfd-impacts/gfd-impacts.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "gfd-impacts"
+}
