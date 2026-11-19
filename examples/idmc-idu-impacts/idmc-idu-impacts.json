@@ -6,7 +6,7 @@
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
   ],
   "title": "IDMC Internal Displacement Updates (IDU) Impacts",
-  "description": "Impact records from the Internal Displacement Monitoring Centre (IDMC) Internal Displacement Updates (IDU) dataset. The IDU provides near real-time information about displacement impacts, offering more timely data compared to the annually validated GIDD. Each impact record includes detailed information about the number of displaced persons, the cause of displacement, and the affected locations. The IDU data includes source URLs for verification, distinguishes between recommended figures and triangulation, and specifies the accuracy of location information. More information on the IDMC mapping in Monty can be found in the [IDMC IDU Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#idu-impact-details).",
+  "description": "Impact records from the Internal Displacement Monitoring Centre (IDMC) Internal Displacement Updates (IDU) dataset. The IDU provides near real-time information about displacement impacts, offering more timely data compared to the annually validated GIDD. Each impact record includes detailed information about the number of displaced persons, the cause of displacement, and the affected locations. The IDU data includes source URLs for verification, distinguishes between recommended figures and triangulation, and specifies the accuracy of location information. More information on the IDMC mapping in Monty can be found in the [IDMC IDU Impact Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/IDU#impact-item).",
   "license": "TBD",
   "keywords": [
     "idmc",
@@ -90,7 +90,8 @@
         "type": {
           "type": "string",
           "enum": [
-            "displaced_internal"
+            "displaced_internal",
+            "evacuated"
           ]
         },
         "unit": {
@@ -142,7 +143,7 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#idu-impact-details",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/IDU#impact-item",
       "type": "text/html",
       "title": "IDMC IDU Impact Item Source Mappings"
     }
