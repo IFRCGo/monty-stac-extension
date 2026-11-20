@@ -166,6 +166,11 @@ The IDMC hazard classification has four levels. The **UNDRR-ISC 2025** code is t
 | ('weather related', 'meteorological', 'storm', 'typhoon/hurricane/cyclone')         | TC    | nat-met-sto-tro | **MH0309**                     | Tropical Cyclone            |
 | ('weather related', 'meteorological', 'storm', 'winter storm/blizzard')             | OT    | nat-met-sto-bli | **MH0403**                     | Blizzard                    |
 
+IDMC's `typhoon/hurricane/cyclone` category states a tropical system, so it takes the
+Tropical Cyclone row (`MH0309`), not the generic storm row (`MH0301`). This follows the rule
+of the [Cross-Classification Mapping](../../taxonomy.md#cross-classification-mapping): pick the row at
+the granularity that the source states, as decided in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+
 The comparison is not case-sensitive. The transformer writes the three codes in the order
 UNDRR-ISC 2025, GLIDE, EM-DAT, for example `["MH0600", "FL", "nat-hyd-flo-flo"]`.
 
@@ -240,7 +245,7 @@ The `type` comes from the `Figure category`. The comparison ignores the case, an
 The GIDD disaggregated data has two `Figure category` values today: `Internal Displacements` and `IDPs`. The two give `displaced_internal`. The other rows are in the table because GIDD and IDU share it.
 
 > [!NOTE]
-> `Internal Displacements` is a flow (movements in a period), and `IDPs` is a stock (people displaced at a date). The two map to the same `type`. The `figure_category` property and the item id keep the difference.
+> `Internal Displacements` is a flow (movements in a period), and `IDPs` is a stock (people displaced at a date). The two map to the same `type`. The `figure_category` property and the item id keep the difference. Do not add them together.
 
 ### Examples
 
@@ -248,6 +253,7 @@ The examples are the output of the transformer for the reference file. Only the 
 
 - [`idmc-gidd-event-22194`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-22194.json): an event in two countries (`["SYR", "TUR"]`)
 - [`idmc-gidd-impact-22194-107479-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-22194-107479-internal-displacements.json): one figure of that event (193 245 people, `SYR`)
+- [`idmc-gidd-impact-22194-136080-idps`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-22194-136080-idps.json): a stock figure (`IDPs`) of the same event (132 168 people, `TUR`)
 - [`idmc-gidd-event-15487`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-15487.json) and [`idmc-gidd-impact-15487-107555-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-15487-107555-internal-displacements.json): a flood
 - [`idmc-gidd-event-15607`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-events/idmc-gidd-event-15607.json) and [`idmc-gidd-impact-15607-108364-internal-displacements`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/idmc-gidd-impacts/idmc-gidd-impact-15607-108364-internal-displacements.json): a generic storm (`MH0301`)
 
