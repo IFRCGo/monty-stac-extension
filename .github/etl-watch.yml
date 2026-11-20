@@ -143,7 +143,7 @@ sources:
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
-    reviewed: 2e31c9c4e43243c6adcf8b5542f92829ba79c4d5
+    reviewed: b831436a02deedbee6effaf5a3d1a1d76ddd3000
 
   usgs:
     extra_paths: [pystac_monty/validators/usgs.py]
