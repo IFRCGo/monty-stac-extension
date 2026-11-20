@@ -37,6 +37,12 @@
       "nat-geo-ear-gro",
       "GH0101"
     ],
+    "keywords": [
+      "Earthquake",
+      "Geological",
+      "Seismic",
+      "CHN"
+    ],
     "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
     "processing:version": "1.0.0",
     "processing:software": {
