@@ -93,6 +93,7 @@ Here is a table with the fields that are mapped from the USGS event to the STAC 
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time            | Time of the event in UTC ISO 8601 format             |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Derived from coordinates, with a losses-based fallback   | ISO3 code of the country where the event occurred (see note below)    |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Fixed as earthquake        | Always `GEO-SEIS` for cluster and `GH0101` for code (see [Hazard Type Mapping](#hazard-type-mapping))  |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)        | Derived                    | The hazard keywords of `monty:hazard_codes`, then the ISO3 country code, with no duplicates and in this order: `["Earthquake", "Geological", "Seismic", "COL"]` |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url             | Link to the USGS event details page                  |
 | [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
 | `related` link in [links]                                                                                    | Reference event item       | Link to reference event item with `roles: ["event"]` |
@@ -149,6 +150,7 @@ Here is a table with the STAC fields that are mapped from the USGS event to the 
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                     | Time of the hazard in UTC ISO 8601 format           |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                                               | Inherited from the event            | Same country code as the event — the hazard item is a clone of the event item |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                                                 | Inherited from the event            | Always `GEO-SEIS` for cluster and `GH0101` for code — same trio as the event (inherited) |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)        | Inherited from the event            | Same list as the event                              |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md)                      | properties.url                      | Link to the USGS hazard details page                |
 | `related` link in [links]                                                                                    | Event item                           | Link to source event item with `roles: ["event"]` |
 | [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail)                                               | properties.mag, properties.magType  | Detailed description of the hazard                  |
@@ -203,7 +205,7 @@ The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment 
 | PAGER content file | What it holds                                                           | Monty mapping                                                                                        |
 | ------------------ | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `json/losses.json` | One deterministic modelled total per type, plus a per-country breakdown | Mapped below — the Estimated Fatalities and Estimated Economic Losses items, one per country          |
-| `json/alerts.json` | A probability histogram (a set of alert bins) per type                  | Two **interim** items per event — see [Alert items: interim mapping](#alert-items-interim-mapping)   |
+| `json/alerts.json` | A probability histogram (a set of alert bins) per type                  | **Not mapped** — see [Alert items: not mapped](#alert-items-not-mapped)                              |
 
 The `losses.json` mapping produces up to two [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) **per country** in the per-country breakdown (`country_fatalities` and `country_dollars`):
 
@@ -223,6 +225,7 @@ The PAGER data is found in the `losspager` product within the USGS event data. H
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | properties.time                   | Found in event's properties.time, convert from Unix timestamp to ISO 8601                        |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes)                   | country_code                      | The ISO2 `country_code` of the per-country entry, converted to ISO3. One country per item        |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes)                     | Fixed as earthquake               | Always `GEO-SEIS` for cluster and `GH0101` for code — same trio as the event (inherited)         |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)        | Inherited from the event          | Same list as the event. The country in the list is the country of the event, not of the item: the `us6000pi9w` economic item for NPL has `CHN` in its keywords |
 | [roles](https://github.com/IFRCGo/monty-stac-extension#roles)                                              | ["source", "impact"]              | Always `["source", "impact"]` for USGS impact items                                              |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)           | properties.title                  | "Estimated Fatalities for {title}" or "Estimated Economic Losses for {title}"                    |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics)     | properties.title                  | "PAGER estimated fatalities for {title}" or "PAGER estimated economic losses for {title}"        |
@@ -287,68 +290,45 @@ while `alerts.json` gives the spread of possible outcomes around it.
 > PAGER's own published alert thresholds — yellow ≥ \$1M, orange ≥ \$100M, red ≥ \$1B
 > ([PAGER Scientific Background](https://earthquake.usgs.gov/data/pager/background.php)):
 > the `100`–`1000` bin is colored `orange` in the reference fixture, which only agrees
-> with that threshold table if the bin is read as \$100M–\$1B. Since
-> [pystac-monty#204](https://github.com/IFRCGo/pystac-monty/pull/204), the transformer
-> multiplies the economic value by 1,000,000 and sets `unit: usd`. The **fatality** type
-> has no such ambiguity: its bins and its `"units": "fatalities"` label are both plain
-> counts of people.
+> with that threshold table if the bin is read as \$100M–\$1B. A future mapping must
+> multiply the economic values by 1,000,000 and set `unit: usd`, as the removed alert
+> items did since [pystac-monty#204](https://github.com/IFRCGo/pystac-monty/pull/204).
+> The **fatality** type has no such ambiguity: its bins and its `"units": "fatalities"`
+> label are both plain counts of people.
 
-That unit correction holds whatever shape the items eventually take.
+That unit correction holds whatever shape a future mapping takes.
 
-#### Alert items: interim mapping
+#### Alert items: not mapped
 
 > [!IMPORTANT]
-> This mapping is **interim**. It records what pystac-monty emits today (reviewed at
-> [`2e31c9c4`](https://github.com/IFRCGo/pystac-monty/commit/2e31c9c4e43243c6adcf8b5542f92829ba79c4d5)).
-> It is **not** the target representation, and the problems listed below are known.
-> Do not build on these items. The proposed target is one impact item per alert bin
+> `alerts.json` is **not mapped** to Monty items. pystac-monty stopped making the alert items in
+> [IFRCGo/pystac-monty#287](https://github.com/IFRCGo/pystac-monty/pull/287)
+> ([`b831436`](https://github.com/IFRCGo/pystac-monty/commit/b831436a02deedbee6effaf5a3d1a1d76ddd3000)),
+> and the transformer input no longer has an `alerts_data` field. The ETL change that stops the
+> fetch of `alerts.json` is [IFRCGo/montandon-etl#480](https://github.com/IFRCGo/montandon-etl/issues/480).
+> The steps across the repositories are tracked in
+> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125).
+>
+> The proposed target is one impact item per alert bin
 > ([#129](https://github.com/IFRCGo/monty-stac-extension/pull/129)), with the uncertainty
 > fields of [#128](https://github.com/IFRCGo/monty-stac-extension/pull/128). That choice is
 > part of the model questions in [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)
 > and the risk model options proposal ([#180](https://github.com/IFRCGo/monty-stac-extension/pull/180)).
-> Until then, the proposal is to **stop mapping and ingesting `alerts.json`**, because of the
-> problems below. The steps across the repositories are tracked in
-> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125); the transformer part is in
-> [IFRCGo/pystac-monty#200](https://github.com/IFRCGo/pystac-monty/issues/200).
 
-When the event has an `alerts.json`, the transformer adds **two items per event** to
-`usgs-impacts`, one for each type. Each item collapses the histogram into one value: the
-sum of each bin's arithmetic midpoint multiplied by its probability.
+Nothing is lost for users. The `losses.json` items keep the point estimates and the PAGER
+alert PDFs (`pager_alert`), and the PAGER alert level is a category of those estimates.
 
-| STAC field | Value | Details |
-| --- | --- | --- |
-| id | `usgs-impact-{id}-fatality-alert-{ISO3}` or `usgs-impact-{id}-economic-alert-{ISO3}` | The type comes from the `type` field of `alerts.json`. The `-alert-` segment keeps the id different from the `losses.json` items |
-| geometry, bbox | Event | The epicenter point of the event, copied |
-| monty:country_codes | Event | Copied from the event item. The first code is used in the id |
-| title, description | Event | Copied from the event item, not changed |
-| `forecasted` | `true` | Not declared by the Monty schema (see above) |
-| assets | losspager contents | Same as the `losses.json` items, with `pager_alert` set to `alertfatal.pdf` or `alertecon.pdf` |
+##### Why the earlier mapping was removed
 
-```json
-{
-  "category": "people",
-  "type": "potentially_affected",
-  "value": "<sum over fatality.bins of (min + max) / 2 * probability>",
-  "unit": "people",
-  "estimate_type": "modelled"
-}
-```
+Until `b831436`, the transformer added **two items per event** to `usgs-impacts`, one for each
+type, with the ids `usgs-impact-{id}-fatality-alert-{ISO3}` and
+`usgs-impact-{id}-economic-alert-{ISO3}`. Each item collapsed the histogram into one value: the
+sum of each bin's arithmetic midpoint multiplied by its probability. That mapping had these
+problems:
 
-```json
-{
-  "category": "global_currency",
-  "type": "potentially_affected",
-  "value": "<sum over economic.bins of (min + max) / 2 * probability, * 1000000>",
-  "unit": "usd",
-  "estimate_type": "modelled"
-}
-```
-
-Known problems with this mapping:
-
-1. **Wrong impact type.** The values are estimates of deaths and of cost. `potentially_affected`
-   is for people affected (in other sources, often people exposed), so these items mix with
-   other meanings of that type.
+1. **Wrong impact type.** The values are estimates of deaths and of cost, but the items used
+   `type: potentially_affected`. That type is for people affected (in other sources, often people
+   exposed), so the items entered any total of affected people.
 2. **The single value is not a usable estimate.** PAGER bins are logarithmic, and the top bin
    (`100000`–`10000000`) is open: its upper bound is a display limit, not a real maximum. Its
    arithmetic midpoint (5,050,000) controls the sum, although its probability is low. For
@@ -361,10 +341,15 @@ Known problems with this mapping:
 
    709.2 billion USD is about twice the GDP of Colombia. Rescaling cannot repair this: the
    arithmetic midpoint is the wrong estimator for a log-spaced histogram.
-3. **Inconsistent category.** The economic alert item uses `global_currency`. The economic
+3. **Inconsistent category.** The economic alert item used `global_currency`. The economic
    `losses.json` item uses `buildings` for the same quantity.
-4. **Not distinguishable by title.** The items copy the event title and description, and the
-   epicenter geometry, so in a search result they look like the event.
+4. **Not distinguishable by title.** The items copied the event title, description and
+   epicenter geometry, so in a search result they looked like the event.
 
-To get only the `losses.json` point estimates from `usgs-impacts`, exclude the items whose
-id contains `-alert-`, or filter on `forecasted = false`.
+> [!WARNING]
+> Items made before this change can stay in `usgs-impacts` until they are deleted
+> ([IFRCGo/montandon-etl#480](https://github.com/IFRCGo/montandon-etl/issues/480)). To exclude
+> them, exclude the items with `forecasted = true`, or the items whose id contains `-alert-`.
+> Before [IFRCGo/pystac-monty#264](https://github.com/IFRCGo/pystac-monty/pull/264), the alert
+> ids had no `-alert-` segment (`usgs-impact-{id}-fatality-{ISO3}`, `usgs-impact-{id}-economic-{ISO3}`),
+> so `forecasted = true` is the safer filter.
