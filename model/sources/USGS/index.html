@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
       
@@ -1487,13 +1487,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#alert-items-interim-mapping" class="md-nav__link">
+  <a href="#alert-items-not-mapped" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alert items: interim mapping
+        Alert items: not mapped
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Alert items: not mapped">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-earlier-mapping-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the earlier mapping was removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1724,13 +1741,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#alert-items-interim-mapping" class="md-nav__link">
+  <a href="#alert-items-not-mapped" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alert items: interim mapping
+        Alert items: not mapped
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Alert items: not mapped">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-earlier-mapping-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the earlier mapping was removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1887,6 +1921,11 @@ The following supported ones are linked to the section where the information mus
 <td>Always <code>GEO-SEIS</code> for cluster and <code>GH0101</code> for code (see <a href="#hazard-type-mapping">Hazard Type Mapping</a>)</td>
 </tr>
 <tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived</td>
+<td>The hazard keywords of <code>monty:hazard_codes</code>, then the ISO3 country code, with no duplicates and in this order: <code>["Earthquake", "Geological", "Seismic", "COL"]</code></td>
+</tr>
+<tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a></td>
 <td>properties.url</td>
 <td>Link to the USGS event details page</td>
@@ -2023,6 +2062,11 @@ matching on <code>corr_id</code>.</p>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
 <td>Inherited from the event</td>
 <td>Always <code>GEO-SEIS</code> for cluster and <code>GH0101</code> for code — same trio as the event (inherited)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Inherited from the event</td>
+<td>Same list as the event</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a></td>
@@ -2209,7 +2253,7 @@ matching on <code>corr_id</code>.</p>
 <tr>
 <td><code>json/alerts.json</code></td>
 <td>A probability histogram (a set of alert bins) per type</td>
-<td>Two <strong>interim</strong> items per event — see <a href="#alert-items-interim-mapping">Alert items: interim mapping</a></td>
+<td><strong>Not mapped</strong> — see <a href="#alert-items-not-mapped">Alert items: not mapped</a></td>
 </tr>
 </tbody>
 </table>
@@ -2263,6 +2307,11 @@ matching on <code>corr_id</code>.</p>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
 <td>Fixed as earthquake</td>
 <td>Always <code>GEO-SEIS</code> for cluster and <code>GH0101</code> for code — same trio as the event (inherited)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Inherited from the event</td>
+<td>Same list as the event. The country in the list is the country of the event, not of the item: the <code>us6000pi9w</code> economic item for NPL has <code>CHN</code> in its keywords</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#roles">roles</a></td>
@@ -2358,94 +2407,38 @@ even though <code>alerts.json</code> labels the field <code>"units": "USD"</code
 PAGER's own published alert thresholds — yellow ≥ \$1M, orange ≥ \$100M, red ≥ \$1B
 (<a href="https://earthquake.usgs.gov/data/pager/background.php">PAGER Scientific Background</a>):
 the <code>100</code>–<code>1000</code> bin is colored <code>orange</code> in the reference fixture, which only agrees
-with that threshold table if the bin is read as \$100M–\$1B. Since
-<a href="https://github.com/IFRCGo/pystac-monty/pull/204">pystac-monty#204</a>, the transformer
-multiplies the economic value by 1,000,000 and sets <code>unit: usd</code>. The <strong>fatality</strong> type
-has no such ambiguity: its bins and its <code>"units": "fatalities"</code> label are both plain
-counts of people.</p>
+with that threshold table if the bin is read as \$100M–\$1B. A future mapping must
+multiply the economic values by 1,000,000 and set <code>unit: usd</code>, as the removed alert
+items did since <a href="https://github.com/IFRCGo/pystac-monty/pull/204">pystac-monty#204</a>.
+The <strong>fatality</strong> type has no such ambiguity: its bins and its <code>"units": "fatalities"</code>
+label are both plain counts of people.</p>
 </div>
-<p>That unit correction holds whatever shape the items eventually take.</p>
-<h4 id="alert-items-interim-mapping">Alert items: interim mapping</h4>
+<p>That unit correction holds whatever shape a future mapping takes.</p>
+<h4 id="alert-items-not-mapped">Alert items: not mapped</h4>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>This mapping is <strong>interim</strong>. It records what pystac-monty emits today (reviewed at
-<a href="https://github.com/IFRCGo/pystac-monty/commit/2e31c9c4e43243c6adcf8b5542f92829ba79c4d5"><code>2e31c9c4</code></a>).
-It is <strong>not</strong> the target representation, and the problems listed below are known.
-Do not build on these items. The proposed target is one impact item per alert bin
+<p><code>alerts.json</code> is <strong>not mapped</strong> to Monty items. pystac-monty stopped making the alert items in
+<a href="https://github.com/IFRCGo/pystac-monty/pull/287">IFRCGo/pystac-monty#287</a>
+(<a href="https://github.com/IFRCGo/pystac-monty/commit/b831436a02deedbee6effaf5a3d1a1d76ddd3000"><code>b831436</code></a>),
+and the transformer input no longer has an <code>alerts_data</code> field.</p>
+<p>The proposed target is one impact item per alert bin
 (<a href="https://github.com/IFRCGo/monty-stac-extension/pull/129">#129</a>), with the uncertainty
 fields of <a href="https://github.com/IFRCGo/monty-stac-extension/pull/128">#128</a>. That choice is
 part of the model questions in <a href="https://github.com/IFRCGo/monty-stac-extension/discussions/110">Discussion #110</a>
-and the risk model options proposal (<a href="https://github.com/IFRCGo/monty-stac-extension/pull/180">#180</a>).
-Until then, the proposal is to <strong>stop mapping and ingesting <code>alerts.json</code></strong>, because of the
-problems below. The steps across the repositories are tracked in
-<a href="https://github.com/IFRCGo/monty-stac-extension/issues/125">#125</a>; the transformer part is in
-<a href="https://github.com/IFRCGo/pystac-monty/issues/200">IFRCGo/pystac-monty#200</a>.</p>
+and the risk model options proposal (<a href="https://github.com/IFRCGo/monty-stac-extension/pull/180">#180</a>).</p>
 </div>
-<p>When the event has an <code>alerts.json</code>, the transformer adds <strong>two items per event</strong> to
-<code>usgs-impacts</code>, one for each type. Each item collapses the histogram into one value: the
-sum of each bin's arithmetic midpoint multiplied by its probability.</p>
-<table>
-<thead>
-<tr>
-<th>STAC field</th>
-<th>Value</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td><code>usgs-impact-{id}-fatality-alert-{ISO3}</code> or <code>usgs-impact-{id}-economic-alert-{ISO3}</code></td>
-<td>The type comes from the <code>type</code> field of <code>alerts.json</code>. The <code>-alert-</code> segment keeps the id different from the <code>losses.json</code> items</td>
-</tr>
-<tr>
-<td>geometry, bbox</td>
-<td>Event</td>
-<td>The epicenter point of the event, copied</td>
-</tr>
-<tr>
-<td>monty:country_codes</td>
-<td>Event</td>
-<td>Copied from the event item. The first code is used in the id</td>
-</tr>
-<tr>
-<td>title, description</td>
-<td>Event</td>
-<td>Copied from the event item, not changed</td>
-</tr>
-<tr>
-<td><code>forecasted</code></td>
-<td><code>true</code></td>
-<td>Not declared by the Monty schema (see above)</td>
-</tr>
-<tr>
-<td>assets</td>
-<td>losspager contents</td>
-<td>Same as the <code>losses.json</code> items, with <code>pager_alert</code> set to <code>alertfatal.pdf</code> or <code>alertecon.pdf</code></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"people"</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"potentially_affected"</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;sum over fatality.bins of (min + max) / 2 * probability&gt;"</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"people"</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">"estimate_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modelled"</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"global_currency"</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"potentially_affected"</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;sum over economic.bins of (min + max) / 2 * probability, * 1000000&gt;"</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usd"</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">"estimate_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modelled"</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
-</code></pre></div>
-<p>Known problems with this mapping:</p>
+<p>Nothing is lost for users. The <code>losses.json</code> items keep the point estimates and the PAGER
+alert PDFs (<code>pager_alert</code>), and the PAGER alert level is a category of those estimates.</p>
+<h5 id="why-the-earlier-mapping-was-removed">Why the earlier mapping was removed</h5>
+<p>Until <code>b831436</code>, the transformer added <strong>two items per event</strong> to <code>usgs-impacts</code>, one for each
+type, with the ids <code>usgs-impact-{id}-fatality-alert-{ISO3}</code> and
+<code>usgs-impact-{id}-economic-alert-{ISO3}</code>. Each item collapsed the histogram into one value: the
+sum of each bin's arithmetic midpoint multiplied by its probability. That mapping had these
+problems:</p>
 <ol>
-<li><strong>Wrong impact type.</strong> The values are estimates of deaths and of cost. <code>potentially_affected</code>
-   is for people affected (in other sources, often people exposed), so these items mix with
-   other meanings of that type.</li>
+<li><strong>Wrong impact type.</strong> The values are estimates of deaths and of cost, but the items used
+   <code>type: potentially_affected</code>. That type is for people affected (in other sources, often people
+   exposed), so the items entered any total of affected people.</li>
 <li><strong>The single value is not a usable estimate.</strong> PAGER bins are logarithmic, and the top bin
    (<code>100000</code>–<code>10000000</code>) is open: its upper bound is a display limit, not a real maximum. Its
    arithmetic midpoint (5,050,000) controls the sum, although its probability is low. For
@@ -2480,12 +2473,10 @@ sum of each bin's arithmetic midpoint multiplied by its probability.</p>
 </table>
 <p>709.2 billion USD is about twice the GDP of Colombia. Rescaling cannot repair this: the
    arithmetic midpoint is the wrong estimator for a log-spaced histogram.
-3. <strong>Inconsistent category.</strong> The economic alert item uses <code>global_currency</code>. The economic
+3. <strong>Inconsistent category.</strong> The economic alert item used <code>global_currency</code>. The economic
    <code>losses.json</code> item uses <code>buildings</code> for the same quantity.
-4. <strong>Not distinguishable by title.</strong> The items copy the event title and description, and the
-   epicenter geometry, so in a search result they look like the event.</p>
-<p>To get only the <code>losses.json</code> point estimates from <code>usgs-impacts</code>, exclude the items whose
-id contains <code>-alert-</code>, or filter on <code>forecasted = false</code>.</p>
+4. <strong>Not distinguishable by title.</strong> The items copied the event title, description and
+   epicenter geometry, so in a search result they looked like the event.</p>
 
 
 
