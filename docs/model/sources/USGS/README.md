@@ -304,10 +304,7 @@ That unit correction holds whatever shape a future mapping takes.
 > `alerts.json` is **not mapped** to Monty items. pystac-monty stopped making the alert items in
 > [IFRCGo/pystac-monty#287](https://github.com/IFRCGo/pystac-monty/pull/287)
 > ([`b831436`](https://github.com/IFRCGo/pystac-monty/commit/b831436a02deedbee6effaf5a3d1a1d76ddd3000)),
-> and the transformer input no longer has an `alerts_data` field. The ETL change that stops the
-> fetch of `alerts.json` is [IFRCGo/montandon-etl#480](https://github.com/IFRCGo/montandon-etl/issues/480).
-> The steps across the repositories are tracked in
-> [#125](https://github.com/IFRCGo/monty-stac-extension/issues/125).
+> and the transformer input no longer has an `alerts_data` field.
 >
 > The proposed target is one impact item per alert bin
 > ([#129](https://github.com/IFRCGo/monty-stac-extension/pull/129)), with the uncertainty
@@ -345,11 +342,3 @@ problems:
    `losses.json` item uses `buildings` for the same quantity.
 4. **Not distinguishable by title.** The items copied the event title, description and
    epicenter geometry, so in a search result they looked like the event.
-
-> [!WARNING]
-> Items made before this change can stay in `usgs-impacts` until they are deleted
-> ([IFRCGo/montandon-etl#480](https://github.com/IFRCGo/montandon-etl/issues/480)). To exclude
-> them, exclude the items with `forecasted = true`, or the items whose id contains `-alert-`.
-> Before [IFRCGo/pystac-monty#264](https://github.com/IFRCGo/pystac-monty/pull/264), the alert
-> ids had no `-alert-` segment (`usgs-impact-{id}-fatality-{ISO3}`, `usgs-impact-{id}-economic-{ISO3}`),
-> so `forecasted = true` is the safer filter.
