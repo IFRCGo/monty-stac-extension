@@ -114,6 +114,11 @@ The IDMC hazard classification has four levels. The **UNDRR-ISC 2025** code is t
 | ('weather related', 'meteorological', 'storm', 'typhoon/hurricane/cyclone')         | TC    | nat-met-sto-tro | **MH0309**                     | Tropical Cyclone            |
 | ('weather related', 'meteorological', 'storm', 'winter storm/blizzard')             | OT    | nat-met-sto-bli | **MH0403**                     | Blizzard                    |
 
+IDMC's `typhoon/hurricane/cyclone` category states a tropical system, so it takes the
+Tropical Cyclone row (`MH0309`), not the generic storm row (`MH0301`). This follows the rule
+of the [Cross-Classification Mapping](../../taxonomy.md#cross-classification-mapping): pick the row at
+the granularity that the source states, as decided in [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+
 The comparison is not case-sensitive. The transformer writes the three codes in the order
 UNDRR-ISC 2025, GLIDE, EM-DAT, for example `["MH0600", "FL", "nat-hyd-flo-flo"]`.
 
