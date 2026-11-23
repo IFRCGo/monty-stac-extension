@@ -43,6 +43,13 @@
     "datetime": "2012-08-03T00:00:00Z",
     "title": "Tropical Storm Ernesto in Grenada",
     "description": "Tropical Storm Watch issued but tropical storm conditions not experienced",
+    "keywords": [
+      "Depression or Cyclone",
+      "Meteorological & Hydrological",
+      "Tropical Cyclone",
+      "Wind & Pressure-related",
+      "GRD"
+    ],
     "monty:src_event_id": "194",
     "monty:episode_number": 1,
     "monty:country_codes": [

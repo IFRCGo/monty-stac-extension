@@ -97,11 +97,11 @@ sources:
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
-    reviewed: 8fe834c241a12957682aa931379cc073a25cfc97
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
-    reviewed: 8fe834c241a12957682aa931379cc073a25cfc97
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
 
   gdacs:
     extra_paths:
@@ -119,14 +119,14 @@ sources:
 
   gfd:
     extra_paths: [pystac_monty/validators/gfd.py]
-    reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
     regenerate:
       batch: gfd
       input: docs/model/sources/GFD/DFO_1586_From_20000218_to_20000301.json
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
     regenerate:
       batch: glide
       input: docs/model/sources/GLIDE/FL-2024-000199-ESP.json
@@ -137,7 +137,7 @@ sources:
 
   ibtracs:
     extra_paths: [pystac_monty/validators/ibtracs.py]
-    reviewed: 647b025adaaf0f9406930628132d28088da7e1dd
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
 
   idmc-gidd:
     extra_paths: [pystac_monty/validators/gidd.py]
@@ -149,7 +149,7 @@ sources:
 
   ifrcevent:
     extra_paths: [pystac_monty/validators/ifrc.py]
-    reviewed: 2e31c9c4e43243c6adcf8b5542f92829ba79c4d5
+    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
