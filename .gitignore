@@ -2,3 +2,6 @@ node_modules/
 .venv/
 site/
 __pycache__/
+# Local agent settings — machine-specific, never shared. The tracked agent
+# surface is AGENTS.md and .claude/skills/.
+.claude/settings.local.json
