@@ -44,7 +44,7 @@ The reference files are in the IDMC folder: [`idu-export.json`](../IDMC/idu-expo
 
 - Only the records with `displacement_type` = `Disaster` are ingested. `Conflict` and `Other` records are ignored.
 - A record must have the fields `latitude`, `longitude` and `event_id`. A record without one of them is ignored, with a warning.
-- The `role` field is not used. The `Recommended figure` records and the `Triangulation` records are all ingested, and all get `estimate_type: primary`.
+- The `Recommended figure` records and the `Triangulation` records are all ingested. The `role` field gives the [`estimate_type`](#impact-detail) of the impact item.
 - The transformer groups the records by `event_id`. Each group gives one event item, and one impact item for each record of the group.
 - If one record of a group is not valid, or the hazard of the event is not in the [hazard type mapping](#hazard-type-mapping), the transformer skips all the group and counts its records as failed. It continues with the next group.
 
@@ -186,7 +186,18 @@ An `impact_type` that is not in the table gives `people` / `displaced_internal`.
 | type          | from the table above         |
 | value         | `figure` field of the record |
 | unit          | `count`                      |
-| estimate_type | `primary`, for all records   |
+| estimate_type | from the `role` field (see below) |
+
+The `role` field of the record gives the `estimate_type`:
+
+| `role`               | `estimate_type` | Meaning                                                                                 |
+| -------------------- | --------------- | --------------------------------------------------------------------------------------- |
+| `Recommended figure` | `primary`       | The figure that IDMC recommends for the event                                           |
+| `Triangulation`      | `secondary`     | A figure from a second source, which IDMC uses to check the recommended figure          |
+| other value, or none | `primary`       |                                                                                         |
+
+> [!WARNING]
+> A `Triangulation` figure is not an additional number of people. It can describe the same people as the recommended figure of the event. To get the total of an event, add only the `primary` values.
 
 ### Examples
 
