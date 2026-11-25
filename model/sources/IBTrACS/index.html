@@ -1986,8 +1986,8 @@
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords">keywords</a></td>
-<td>NAME</td>
-<td>Keywords should include the cyclone name</td>
+<td>NAME, SEASON, BASIN</td>
+<td>In this order: <code>tropical cyclone</code>; <code>hurricane</code>, <code>tropical storm</code> or <code>tropical depression</code> (from the maximum category of the storm); the cyclone name, if there is one; the season; the basin name. Example: <code>["tropical cyclone", "hurricane", "BERYL", "2024", "North Atlantic"]</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a></td>
@@ -2096,8 +2096,8 @@
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#keywords">keywords</a></td>
-<td>NAME</td>
-<td>Keywords should include the cyclone name</td>
+<td>NAME, SEASON, BASIN</td>
+<td>Same rule as the event, but the second keyword comes from the status of the track position (<code>HU</code>: <code>hurricane</code>, <code>TS</code>: <code>tropical storm</code>, other: <code>tropical depression</code>)</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md"><code>via</code> link</a></td>

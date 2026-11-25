@@ -1716,6 +1716,11 @@ Include historical events in the results (they are by default excluded unless th
 <td>Description of the event. HTML description should be privileged over plain text description and translated to markdown</td>
 </tr>
 <tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived from Classification Key and Country</td>
+<td>The hazard keywords of <code>monty:hazard_codes</code> in alphabetical order, then the country name from the <code>Country</code> field (not the ISO3 code), with no duplicates: <code>["Flooding", "Meteorological &amp; Hydrological", "Water-related", "Spain"]</code>. The hazard and impact items of the event have the same list</td>
+</tr>
+<tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
 <td>start year + start month + start day</td>
 <td>Date and time of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.</td>
@@ -1728,12 +1733,12 @@ Include historical events in the results (they are by default excluded unless th
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range">end_datetime</a></td>
 <td>start year + start month + start day</td>
-<td>End date of the event converted in UTC ISO 8601 format</td>
+<td>End date of the event converted in UTC ISO 8601 format. A missing month or day is set to 1. If the start date is then later than the end date, the record fails and gives no item</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
 <td>iso</td>
-<td>ISO3 code of the country where the event occurred. Keywords shall also contain the human readable country name</td>
+<td>ISO3 code of the country where the event occurred.</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>

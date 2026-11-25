@@ -1675,6 +1675,11 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 <td></td>
 </tr>
 <tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived</td>
+<td>The hazard keywords of <code>monty:hazard_codes</code> in alphabetical order, then the ISO3 codes of <code>monty:country_codes</code> in the same order, with no duplicates: <code>["Flooding", "Meteorological &amp; Hydrological", "Water-related", "AUS"]</code>. The hazard and impact items of the event have the same list</td>
+</tr>
+<tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
 <td>system:time_start</td>
 <td></td>
