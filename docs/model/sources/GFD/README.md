@@ -125,3 +125,14 @@ The following fields are used to create several **Impact Detail** items.
 |value|value from *dfo_displaced* |Get the value using the key *dfo_displaced*|
 | unit | count |     |
 |estimate_type|MontyEstimateType.PRIMARY| |
+
+## Examples
+
+The examples are the output of the pystac-monty transformer for one record of the image collection: the flood of February 2000 in Australia (`DFO_1586_From_20000218_to_20000301`).
+
+- The source record is in the file [DFO_1586_From_20000218_to_20000301.json](DFO_1586_From_20000218_to_20000301.json).
+- The event item is [gfd-events/gfd-event-1586.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-events/gfd-event-1586.json).
+- The hazard item is [gfd-hazards/gfd-hazard-1586.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-hazards/gfd-hazard-1586.json).
+- The impact items are [gfd-impacts/gfd-impact-1586-dfo_dead.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_dead.json) and [gfd-impacts/gfd-impact-1586-dfo_displaced.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_displaced.json).
+
+`scripts/check_example_drift.py --source gfd` runs the transformer on the source record and compares the result with these examples.

@@ -1,6 +1,6 @@
 {
   "type": "Feature",
-  "stac_version": "1.0.0",
+  "stac_version": "1.1.0",
   "stac_extensions": [
     "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
@@ -20,34 +20,39 @@
     38.6013316868745
   ],
   "properties": {
-    "title": "",
+    "title": "FL in Spain on 2024, 10, 27",
     "description": "GDACS - Medium humanitarian impact in for Spain.According to the authorities (CENEM), as of 30 October at 14.00 UTC , the number of deaths stands at 62 in the Autonomous Region of Valencia (eastern Spain), with an undetermined number of missing in Autonomous Region of Valencia, in Albacete province in Castilla La Mancha autonomous Region. Dozens have been rescued and several have been displaced in Valencia province. In addition, a bridge collapsed in Ribarroja del Turia (Valencia province), several roads have been closed, including some in Granada and Malaga cities in the Andalucia region, and train disruptions have been recorded in the affected area. ",
     "magnitude": "0",
     "source": "GDACS",
     "docid": 23388,
     "status": "A",
     "roles": [
+      "source",
       "hazard"
     ],
-    "monty:src_event_id": "000199",
+    "monty:src_event_id": "2024-000199",
     "monty:episode_number": 1,
     "monty:hazard_codes": [
-      "FL",
-      "nat-hyd-flo-flo",
       "MH0600"
     ],
     "monty:country_codes": [
       "ESP"
     ],
-    "monty:corr_id": "20241027-ESP-FL-1-GCDB",
+    "keywords": [
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related",
+      "ESP"
+    ],
+    "monty:corr_id": "20241027-ESP-1156484-MH0600-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": -1,
+      "severity_unit": "glide",
+      "estimate_type": "primary"
+    },
     "processing:version": "1.0.0",
     "processing:software": {
       "pystac-monty": "1.0.0"
-    },
-    "monty:hazard_detail": {
-      "severity_value": 0,
-      "severity_unit": "glide",
-      "estimate_type": "primary"
     },
     "datetime": "2024-10-27T00:00:00Z"
   },
