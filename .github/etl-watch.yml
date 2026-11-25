@@ -83,7 +83,7 @@ contract_check:
 sources:
   cems:
     extra_paths: [pystac_monty/validators/cems.py]
-    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
+    reviewed: a2c62b3d86418e12f6aebe97a945efb50d9c01f3
     regenerate:
       batch: cems
       input: docs/model/sources/CEMS/api-files
@@ -120,10 +120,20 @@ sources:
   gfd:
     extra_paths: [pystac_monty/validators/gfd.py]
     reviewed: 34b757cf114ec4c8d3c1a7412dd9213602fe291c
+    regenerate:
+      batch: gfd
+      input: docs/model/sources/GFD/DFO_1586_From_20000218_to_20000301.json
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
     reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
+    regenerate:
+      batch: glide
+      input: docs/model/sources/GLIDE/FL-2024-000199-ESP.json
+      # The fixture holds one record (the 2024 floods in Spain).
+      # examples/glide-events/EQ-2008-000062-CHN.json has no committed fixture and
+      # is not transformer output, so it is out of scope.
+      covers: ["*FL-2024-000199-ESP"]
 
   ibtracs:
     extra_paths: [pystac_monty/validators/ibtracs.py]
@@ -143,7 +153,7 @@ sources:
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
-    reviewed: 2e31c9c4e43243c6adcf8b5542f92829ba79c4d5
+    reviewed: b831436a02deedbee6effaf5a3d1a1d76ddd3000
 
   usgs:
     extra_paths: [pystac_monty/validators/usgs.py]
