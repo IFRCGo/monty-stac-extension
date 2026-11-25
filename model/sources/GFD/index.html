@@ -1224,6 +1224,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1565,6 +1576,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1971,6 +1993,15 @@ The following sections describe the mapping of specific GFD event information to
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>The examples are the output of the pystac-monty transformer for one record of the image collection: the flood of February 2000 in Australia (<code>DFO_1586_From_20000218_to_20000301</code>).</p>
+<ul>
+<li>The source record is in the file <a href="DFO_1586_From_20000218_to_20000301.json">DFO_1586_From_20000218_to_20000301.json</a>.</li>
+<li>The event item is <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-events/gfd-event-1586.json">gfd-events/gfd-event-1586.json</a>.</li>
+<li>The hazard item is <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-hazards/gfd-hazard-1586.json">gfd-hazards/gfd-hazard-1586.json</a>.</li>
+<li>The impact items are <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_dead.json">gfd-impacts/gfd-impact-1586-dfo_dead.json</a> and <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_displaced.json">gfd-impacts/gfd-impact-1586-dfo_displaced.json</a>.</li>
+</ul>
+<p><code>scripts/check_example_drift.py --source gfd</code> runs the transformer on the source record and compares the result with these examples.</p>
 
 
 
