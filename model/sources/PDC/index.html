@@ -1298,21 +1298,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#endpoints-for-extraction" class="md-nav__link">
+  <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Endpoints for Extraction
+        Data flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformer-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformer input
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#data-schema" class="md-nav__link">
+  <a href="#items-made-for-one-pdc-hazard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Schema
+        Items made for one PDC hazard
       
     </span>
   </a>
@@ -1371,10 +1388,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#impact-details" class="md-nav__link">
+  <a href="#impact-detail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Impact Details
+        Impact Detail
       
     </span>
   </a>
@@ -1383,6 +1400,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations-and-exclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations and exclusions
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1468,21 +1496,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#endpoints-for-extraction" class="md-nav__link">
+  <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Endpoints for Extraction
+        Data flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformer-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformer input
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#data-schema" class="md-nav__link">
+  <a href="#items-made-for-one-pdc-hazard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Schema
+        Items made for one PDC hazard
       
     </span>
   </a>
@@ -1541,10 +1586,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#impact-details" class="md-nav__link">
+  <a href="#impact-detail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Impact Details
+        Impact Detail
       
     </span>
   </a>
@@ -1553,6 +1598,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations-and-exclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations and exclusions
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1578,6 +1634,13 @@
 
 <h1 id="pacific-disaster-center-pdc">Pacific Disaster Center (PDC)</h1>
 <p>The Pacific Disaster Center (PDC) tracks a wide range of natural and human made hazards viz. <strong>Tropical Cyclone</strong>, <strong>Earthquake</strong>, <strong>Flood</strong>, <strong>Landslides</strong>, <strong>Wildfire</strong>, <strong>Drought</strong>, <strong>Volcanic Eruptions</strong> etc to support disaster preparedness, response, and risk reduction efforts.</p>
+<p>This document describes the PDC transformer at
+<a href="https://github.com/IFRCGo/pystac-monty/commit/b831436a02deedbee6effaf5a3d1a1d76ddd3000">IFRCGo/pystac-monty@b831436</a>
+(<code>pystac_monty/sources/pdc.py</code>). Each statement about the items was checked by a run of that
+transformer on the upstream fixtures in
+<a href="https://github.com/IFRCGo/pystac-monty/tree/b831436a02deedbee6effaf5a3d1a1d76ddd3000/tests/data/pdc"><code>tests/data/pdc/</code></a>
+(hazard <code>313159</code>, a landslide in Peru), and on variants of them: no exposure data, two snapshots,
+two countries and an unknown hazard type.</p>
 <h2 id="collection-pdc-events">Collection: <code>pdc-events</code></h2>
 <p>A STAC collection hold all the PDC events.</p>
 <ul>
@@ -1591,44 +1654,96 @@
 <li>Source Data License: Restricted — disaster/emergency management use only, no redistribution without authorization (PDC Terms &amp; Conditions)</li>
 <li>Source for: event, hazard, impact</li>
 </ul>
-<h2 id="endpoints-for-extraction">Endpoints for Extraction</h2>
-<p>To get the relevant PDC data, we use the following endpoints:</p>
+<p>The three PDC collections (<code>pdc-events</code>, <code>pdc-hazards</code>, <code>pdc-impacts</code>) are marked private
+(<a href="https://github.com/IFRCGo/monty-stac-extension/pull/195">#195</a>), because of this license.</p>
+<p>Examples: the transformer output for the upstream fixture, with the <code>self</code>, <code>collection</code> and
+<code>related</code> links changed to point into this repository, and only two of the 19 impact items:</p>
+<ul>
+<li>Event: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events/pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json">pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json</a></li>
+<li>Hazard: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards/pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json">pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json</a></li>
+<li>Impact, total population: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0.json">pdc-impact-…-population-total-PER-0.json</a></li>
+<li>Impact, capital: <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-capital-total-PER-0.json">pdc-impact-…-capital-total-PER-0.json</a></li>
+</ul>
+<h2 id="data-flow">Data flow</h2>
+<p>The ETL (<a href="https://github.com/IFRCGo/montandon-etl">montandon-etl</a>, <code>apps/etl/etl_tasks/pdc.py</code> and
+<code>apps/etl/extraction/sources/pdc/extract.py</code>) uses these PDC Sentry endpoints:</p>
 <ol>
-<li>Get a list of Active Hazards: <a href="https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards">https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards</a></li>
-<li>Get exposure list for each Hazard: <a href="https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure">https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure</a></li>
-<li>Get exposure details for each exposure: <a href="https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}">https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}</a></li>
+<li><strong>Hazard list:</strong> <code>POST https://sentry.pdc.org/hp_srv/services/hazards/t/json/search_hazard</code>, with a
+   <code>createDate</code> window. The window starts at <code>PDC_START_DATE</code> (default: the first day of the current
+   month) and ends now.</li>
+<li><strong>Exposure list</strong> of each hazard: <code>https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure</code>.
+   It gives the timestamps of the exposure snapshots.</li>
+<li><strong>Exposure detail</strong> of each snapshot: <code>https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}</code>.</li>
+<li><strong>Hazard area</strong> (GeoJSON): <code>https://sentry.pdc.org/hp_srv/services/mags/1/json/get_mags?hazard_id={hazard_ID}</code>.</li>
 </ol>
-<h2 id="data-schema">Data Schema</h2>
-<p>The <code>PDCDataSource</code> class when instantiated takes two parameters viz. <code>source_url: str</code> and <code>data: Any</code>.</p>
-<p>The <code>data</code> parameter primarily takes a json object of the following format.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"hazards_file_path"</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"exposure_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"exposure_detail_file_path"</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"geojson_file_path"</span><span class="p">:</span><span class="w"> </span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">nal</span><span class="p">[</span><span class="err">s</span><span class="kc">tr</span><span class="p">]</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div></p>
+<p>The ETL keeps a hash of each exposure detail, without its timestamp. A snapshot with the same
+content as the one before it is not sent again to the transformer.</p>
+<h3 id="transformer-input">Transformer input</h3>
+<p><code>PDCDataSource</code> takes a <code>PDCDataSourceType</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">PDCDataSourceType</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">source_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>                                   <span class="c1"># the PDC hazard uuid</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">hazard_data</span><span class="p">:</span> <span class="n">File</span> <span class="o">|</span> <span class="n">Memory</span><span class="p">,</span>                  <span class="c1"># the hazard list (search_hazard response)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">exposure_detail_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">File</span> <span class="o">|</span> <span class="n">Memory</span><span class="p">],</span>   <span class="c1"># zero, one or more snapshots of this hazard</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">geojson_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>                           <span class="c1"># where the hazard area GeoJSON is stored</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
+</code></pre></div>
+<p><code>exposure_detail_data</code> can be empty. A single <code>File</code> or <code>Memory</code> is also accepted.</p>
+<h2 id="items-made-for-one-pdc-hazard">Items made for one PDC hazard</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Number</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event</td>
+<td>1</td>
+<td>Always, when <code>type_ID</code> is in the <a href="#hazard-type-mapping">Hazard Type Mapping</a></td>
+</tr>
+<tr>
+<td>Hazard</td>
+<td>1</td>
+<td>Same as the event</td>
+</tr>
+<tr>
+<td>Impact</td>
+<td>One per snapshot × <a href="#impact-detail">impact field</a> × <code>totalByAdmin</code> row</td>
+<td>Only for a valid snapshot, and only when the field has a value</td>
+</tr>
+</tbody>
+</table>
+<p>For the upstream fixture (one snapshot, one <code>totalByAdmin</code> row), the transformer makes 21 items: the
+event, the hazard and 19 impact items. With a second snapshot that has three <code>totalByAdmin</code> rows,
+it makes 78 items: the event, the hazard, 19 impact items for the first snapshot and 57 for the
+second.</p>
 <h2 id="event-item">Event Item</h2>
-<p>A PDC event will always produce an Event STAC Item. Here is a table with the fields that are mapped from the PDC event to the STAC event:</p>
 <table>
 <thead>
 <tr>
 <th>STAC field</th>
-<th>PDC Field</th>
+<th>PDC field</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
-<td>id</td>
-<td>Unique Identifier</td>
+<td><code>uuid</code>, <code>hazard_ID</code></td>
+<td><code>pdc-event-{uuid}-{hazard_ID}</code>, e.g. <code>pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159</code>. The id does not change when a new snapshot comes</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
-<td>latitude, longitude</td>
-<td>Geometric point using latitude and longitude</td>
+<td><code>latitude</code>, <code>longitude</code></td>
+<td>Point</td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
+<td><code>longitude</code>, <code>latitude</code></td>
+<td>The bbox of the point</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
@@ -1636,49 +1751,79 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
-<td>longitude, latitude, longitude, latitude</td>
-<td></td>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
+<td><code>start_Date</code></td>
+<td>Milliseconds since epoch, converted to UTC</td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
-<td>create_Date</td>
-<td></td>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">start_datetime, end_datetime</a></td>
+<td><code>start_Date</code>, <code>end_Date</code></td>
+<td>Milliseconds since epoch, converted to UTC</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
-<td>hazard_Name</td>
+<td><code>hazard_Name</code></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
-<td>description</td>
-<td></td>
+<td><code>description</code></td>
+<td>HTML converted to Markdown. <code>NA</code> when it is empty</td>
+</tr>
+<tr>
+<td><code>category_id</code></td>
+<td><code>category_ID</code></td>
+<td>Copied, e.g. <code>EVENT</code>. This property is not declared by the Monty schema</td>
 </tr>
 <tr>
 <td>roles</td>
-<td>["event", "source"]</td>
-<td>Include both <code>event</code> and <code>source</code> roles (order does not matter)</td>
+<td>Fixed</td>
+<td><code>["source", "event"]</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
-<td><code>country</code> field in the list <code>totalByCountry</code></td>
-<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+<td><code>totalByCountry[].country</code> of all the snapshots</td>
+<td>The ISO3 codes of all the snapshots, earliest snapshot first, in source order, with no duplicates. Without exposure data, the country of the hazard point from the geocoder, else <code>UNK</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
-<td>type_ID</td>
-<td>The hazard codes are generated using the <a href="#hazard-type-mapping">Hazard Type Mapping</a></td>
+<td><code>type_ID</code></td>
+<td>The three codes of the <a href="#hazard-type-mapping">Hazard Type Mapping</a>, e.g. <code>["GH0300", "LS", "nat-geo-mmd-lan"]</code></td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
-<td>snc_url</td>
-<td>Asset with the link to the PDC report</td>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyepisode_number">monty:episode_number</a></td>
+<td>Fixed</td>
+<td>Always <code>1</code>. PDC has no episode number</td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
-<td>Source event ID</td>
-<td>Unique identifier of the event</td>
+<td><code>hazard_ID</code></td>
+<td>e.g. <code>313159</code></td>
+</tr>
+<tr>
+<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id">monty:corr_id</a></td>
+<td>Generated</td>
+<td>Generated following the <a href="../../correlation_identifier/">event correlation</a> convention, with the first country code, e.g. <code>20250207-PER-720514-GH0300-1-GCDB</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived</td>
+<td>The hazard keywords, then the <code>admin0</code> names of <code>totalByCountry</code> of all the snapshots, with no duplicates, e.g. <code>["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru"]</code>. Without exposure data, no country name</td>
+</tr>
+<tr>
+<td><code>Maps</code> asset</td>
+<td><code>geojson_path</code></td>
+<td>The hazard area GeoJSON, with <code>type: geojson</code>. The ETL stores a copy of the <code>get_mags</code> response and gives its URL. The examples use the PDC <code>get_mags</code> URL</td>
+</tr>
+<tr>
+<td><code>report</code> asset</td>
+<td><code>snc_url</code></td>
+<td>The PDC report page, with <code>type: html</code>. Only when <code>snc_url</code> has a value</td>
+</tr>
+<tr>
+<td><code>related</code> links</td>
+<td>Generated</td>
+<td>To the hazard item and to each impact item</td>
 </tr>
 <tr>
 <td><a href="https://github.com/stac-extensions/processing">processing:version</a></td>
@@ -1692,13 +1837,22 @@
 </tr>
 </tbody>
 </table>
-<h4 id="hazard-type-mapping">Hazard Type Mapping</h4>
-<p>PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical hazards. The <strong>2025 UNDRR-ISC</strong> code is the <strong>reference classification</strong> for the Monty extension:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The earliest snapshot comes first, so a new snapshot can only add countries at the end of
+<code>monty:country_codes</code>. The first code, and so <code>monty:corr_id</code>, stays the same
+(<a href="https://github.com/IFRCGo/pystac-monty/pull/273">IFRCGo/pystac-monty#273</a>,
+<a href="https://github.com/IFRCGo/pystac-monty/pull/276">#276</a>). The rules for multi-country items are in
+<a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes"><code>monty:country_codes</code></a>.</p>
+</div>
+<h3 id="hazard-type-mapping">Hazard Type Mapping</h3>
+<p>PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical hazards. The <strong>2025 UNDRR-ISC</strong> code is the <strong>reference classification</strong> for the Monty extension. The transformer maps the <code>type_ID</code> value of the hazard:</p>
 <p><strong>Natural Hazards:</strong></p>
 <table>
 <thead>
 <tr>
 <th>PDC Type</th>
+<th><code>type_ID</code></th>
 <th>GLIDE</th>
 <th>EM-DAT</th>
 <th><strong>UNDRR-ISC 2025</strong> (Reference)</th>
@@ -1709,6 +1863,7 @@
 <tbody>
 <tr>
 <td>Avalanche</td>
+<td><code>AVALANCHE</code></td>
 <td>AV</td>
 <td>nat-hyd-mmw-ava</td>
 <td><strong>MH0801</strong></td>
@@ -1717,6 +1872,7 @@
 </tr>
 <tr>
 <td>Biomedical</td>
+<td><code>BIOMEDICAL</code></td>
 <td>EP</td>
 <td>nat-bio-epi-dis</td>
 <td><strong>BI0101</strong></td>
@@ -1725,6 +1881,7 @@
 </tr>
 <tr>
 <td>Drought</td>
+<td><code>DROUGHT</code></td>
 <td>DR</td>
 <td>nat-cli-dro-dro</td>
 <td><strong>MH0401</strong></td>
@@ -1733,6 +1890,7 @@
 </tr>
 <tr>
 <td>Earthquake</td>
+<td><code>EARTHQUAKE</code></td>
 <td>EQ</td>
 <td>nat-geo-ear-gro</td>
 <td><strong>GH0101</strong></td>
@@ -1741,14 +1899,16 @@
 </tr>
 <tr>
 <td>Extreme Temperature</td>
-<td>HT/CW</td>
+<td><code>EXTREMETEMPERATURE</code></td>
+<td>HT</td>
 <td>nat-met-ext-hea</td>
 <td><strong>MH0501</strong></td>
 <td>MH-TEMP</td>
-<td>Heatwave (or MH0502 for Cold)</td>
+<td>Heatwave (also for cold, see the note)</td>
 </tr>
 <tr>
 <td>Flood</td>
+<td><code>FLOOD</code></td>
 <td>FL</td>
 <td>nat-hyd-flo-flo</td>
 <td><strong>MH0600</strong></td>
@@ -1757,6 +1917,7 @@
 </tr>
 <tr>
 <td>High Surf</td>
+<td><code>HIGHSURF</code></td>
 <td>OT</td>
 <td>nat-hyd-wav-wav</td>
 <td><strong>MH0702</strong></td>
@@ -1765,6 +1926,7 @@
 </tr>
 <tr>
 <td>High Wind</td>
+<td><code>HIGHWIND</code></td>
 <td>VW</td>
 <td>nat-met-sto-sto</td>
 <td><strong>MH0301</strong></td>
@@ -1773,6 +1935,7 @@
 </tr>
 <tr>
 <td>Landslide</td>
+<td><code>LANDSLIDE</code></td>
 <td>LS</td>
 <td>nat-geo-mmd-lan</td>
 <td><strong>GH0300</strong></td>
@@ -1781,6 +1944,7 @@
 </tr>
 <tr>
 <td>Marine</td>
+<td><code>MARINE</code></td>
 <td>OT</td>
 <td>nat-hyd-wav-wav</td>
 <td><strong>MH0700</strong></td>
@@ -1789,6 +1953,7 @@
 </tr>
 <tr>
 <td>Severe Weather</td>
+<td><code>SEVEREWEATHER</code></td>
 <td>ST</td>
 <td>nat-met-sto-sto</td>
 <td><strong>MH0103</strong></td>
@@ -1797,6 +1962,7 @@
 </tr>
 <tr>
 <td>Storm</td>
+<td><code>STORM</code></td>
 <td>ST</td>
 <td>nat-met-sto-sto</td>
 <td><strong>MH0103</strong></td>
@@ -1805,6 +1971,7 @@
 </tr>
 <tr>
 <td>Tornado</td>
+<td><code>TORNADO</code></td>
 <td>TO</td>
 <td>nat-met-sto-tor</td>
 <td><strong>MH0305</strong></td>
@@ -1813,6 +1980,7 @@
 </tr>
 <tr>
 <td>Tropical Cyclone</td>
+<td><code>CYCLONE</code></td>
 <td>TC</td>
 <td>nat-met-sto-tro</td>
 <td><strong>MH0306</strong></td>
@@ -1821,6 +1989,7 @@
 </tr>
 <tr>
 <td>Tsunami</td>
+<td><code>TSUNAMI</code></td>
 <td>TS</td>
 <td>nat-geo-ear-tsu</td>
 <td><strong>MH0705</strong></td>
@@ -1829,6 +1998,7 @@
 </tr>
 <tr>
 <td>Volcano</td>
+<td><code>VOLCANO</code></td>
 <td>VO</td>
 <td>nat-geo-vol-vol</td>
 <td><strong>GH0201</strong></td>
@@ -1837,6 +2007,7 @@
 </tr>
 <tr>
 <td>Wildfire</td>
+<td><code>WILDFIRE</code></td>
 <td>WF</td>
 <td>nat-cli-wil-wil</td>
 <td><strong>EN0205</strong></td>
@@ -1845,6 +2016,7 @@
 </tr>
 <tr>
 <td>Winter Storm</td>
+<td><code>WINTERSTORM</code></td>
 <td>OT</td>
 <td>nat-met-sto-bli</td>
 <td><strong>MH0403</strong></td>
@@ -1858,6 +2030,7 @@
 <thead>
 <tr>
 <th>PDC Type</th>
+<th><code>type_ID</code></th>
 <th>GLIDE</th>
 <th>EM-DAT</th>
 <th><strong>UNDRR-ISC 2025</strong> (Reference)</th>
@@ -1868,6 +2041,7 @@
 <tbody>
 <tr>
 <td>Accident</td>
+<td><code>ACCIDENT</code></td>
 <td>AC</td>
 <td>tec-mis-col-col</td>
 <td><strong>TL0200</strong></td>
@@ -1876,6 +2050,7 @@
 </tr>
 <tr>
 <td>Active Shooter</td>
+<td><code>ACTIVESHOOTER</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0201</strong></td>
@@ -1884,6 +2059,7 @@
 </tr>
 <tr>
 <td>Civil Unrest</td>
+<td><code>CIVILUNREST</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0202</strong></td>
@@ -1892,6 +2068,7 @@
 </tr>
 <tr>
 <td>Combat</td>
+<td><code>COMBAT</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0201</strong></td>
@@ -1900,6 +2077,7 @@
 </tr>
 <tr>
 <td>Cyber</td>
+<td><code>CYBER</code></td>
 <td>OT</td>
 <td>N/A</td>
 <td><strong>TL0601</strong></td>
@@ -1908,6 +2086,7 @@
 </tr>
 <tr>
 <td>Man Made</td>
+<td><code>MANMADE</code></td>
 <td>OT</td>
 <td>tec-tec-tec-tec</td>
 <td><strong>TL0000</strong></td>
@@ -1916,6 +2095,7 @@
 </tr>
 <tr>
 <td>Occurrence</td>
+<td><code>OCCURRENCE</code></td>
 <td>OT</td>
 <td>N/A</td>
 <td><strong>OT0000</strong></td>
@@ -1924,6 +2104,7 @@
 </tr>
 <tr>
 <td>Political Conflict</td>
+<td><code>POLITICALCONFLICT</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0201</strong></td>
@@ -1932,6 +2113,7 @@
 </tr>
 <tr>
 <td>Terrorism</td>
+<td><code>TERRORISM</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0203</strong></td>
@@ -1940,6 +2122,7 @@
 </tr>
 <tr>
 <td>Weapons</td>
+<td><code>WEAPONS</code></td>
 <td>OT</td>
 <td>soc-soc-vio-vio</td>
 <td><strong>SO0201</strong></td>
@@ -1950,30 +2133,26 @@
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event. For "Extreme Temperature", use MH0501 for heat-related events and MH0502 for cold-related events.</p>
+<p>All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the <code>monty:hazard_codes</code> array for maximum interoperability. A type with no EM-DAT code (<code>CYBER</code>, <code>OCCURRENCE</code>) gets only two codes. More specific <a href="../../taxonomy/#complete-2025-hazard-list">hazard codes</a> can be added following the characteristics of the event.</p>
+<p><strong>Extreme Temperature:</strong> the transformer always uses <code>MH0501</code> (Heatwave) and <code>HT</code>, also for a cold event. The correct codes for a cold event are <code>MH0502</code> and <code>CW</code>. PDC gives no field that tells heat from cold, so this is not fixed yet.</p>
+<p><strong>Unknown <code>type_ID</code>:</strong> the transformer logs a warning, makes no item for the hazard, and counts the hazard as a failed row.</p>
 <p><strong>Scope decision — <code>HIGHWIND</code> (<a href="https://github.com/IFRCGo/pystac-monty/issues/196">pystac-monty#196</a>):</strong> PDC issues <code>HighWind</code> from NWS High Wind Warnings/Advisories — sustained wind of 40 mph (35 kt) or more for 1 hour or more, or gusts of 58 mph (50 kt) or more, when no tropical cyclone or thunderstorm is present. This is a general wind event, not a Beaufort-scale term. So it maps to <strong>MH0301 (Wind)</strong>, not <strong>MH0303 (Gale)</strong>. This choice follows the existing GLIDE↔EM-DAT↔UNDRR crosswalk in <a href="../../taxonomy/#complete-2025-hazard-list">taxonomy.md</a> (<code>VW</code> → <code>nat-met-sto-sto</code> → <code>MH0301</code>).</p>
 </div>
-<p>This comprehensive mapping ensures standardized hazard categorization for all PDC tracked hazards, including both natural and geopolitical/technological events.</p>
 <h2 id="hazard-item">Hazard Item</h2>
-<p>A PDC event and the timestamp from exposure endpoint will <strong>ALWAYS</strong> produce one <a href="https://github.com/IFRCGo/monty-stac-extension#hazard"><strong>hazard STAC item</strong></a>. Here is a table with the STAC fields that are managed from the PDC event to the STAC hazard.</p>
+<p>The hazard item is a copy of the event item, with these differences:</p>
 <table>
 <thead>
 <tr>
 <th>STAC field</th>
-<th>PDC Field</th>
+<th>Value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
-<td>id</td>
-<td>Unique Identifier</td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
-<td>latitude, longitude</td>
-<td>Geometric point using latitude and longitude</td>
+<td><code>pdc-hazard-{uuid}-{hazard_ID}</code></td>
+<td>The event id with the <code>pdc-hazard-</code> prefix</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
@@ -1981,88 +2160,60 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
-<td>longitude, latitude, longitude, latitude</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
-<td>create_Date</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
-<td>hazard_Name</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
-<td>description</td>
-<td></td>
-</tr>
-<tr>
 <td>roles</td>
-<td>["hazard", "source"]</td>
-<td>Include both <code>hazard</code> and <code>source</code> roles (order does not matter)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
-<td><code>country</code> field in the list <code>totalByCountry</code></td>
-<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+<td>Fixed</td>
+<td><code>["source", "hazard"]</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
-<td>type_ID</td>
-<td>The hazard codes are generated using the mapping</td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
-<td>snc_url</td>
-<td>Asset with the link to the PDC report</td>
+<td>Derived</td>
+<td>The UNDRR-ISC 2025 code only, e.g. <code>["GH0300"]</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">monty:hazard_detail</a></td>
-<td></td>
-<td></td>
+<td><code>severity_ID</code></td>
+<td>See below</td>
 </tr>
 <tr>
-<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
-<td>Source event ID</td>
-<td>Unique identifier of the event</td>
-</tr>
-<tr>
-<td><a href="https://github.com/stac-extensions/processing">processing:version</a></td>
+<td><code>related</code> links</td>
 <td>Generated</td>
-<td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
-</tr>
-<tr>
-<td><a href="https://github.com/stac-extensions/processing">processing:software</a></td>
-<td>Generated</td>
-<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
+<td>To the event item and to each impact item</td>
 </tr>
 </tbody>
 </table>
+<p>All the other fields (geometry, datetime, <code>monty:country_codes</code>, <code>monty:corr_id</code>, keywords, assets)
+are the same as the event.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"severity_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"severity_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PDC Severity Score"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"severity_label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;severity_ID, e.g. WARNING&gt;"</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">"estimate_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary"</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>severity_value</code> is always <code>0.1</code>. It is a placeholder, because the schema requires a value and PDC
+gives no number. Do not use it. The PDC severity is in <code>severity_label</code>.</p>
+</div>
 <h2 id="impact-item">Impact item</h2>
-<p>The PDC events will produce multiple <a href="https://github.com/IFRCGo/monty-stac-extension#impact"><strong>Impact STAC Items</strong></a> when impact related data is available through exposure endpoint.</p>
-<p>The following table shows the mapping of PDC impact fields to STAC items.</p>
+<p>The transformer makes one impact item for each snapshot, each <a href="#impact-detail">impact field</a> and each
+row of <code>totalByAdmin</code>, when the field has a value in that row. A field without a value gives no item.
+An invalid snapshot is skipped with a warning; the event and the hazard are still made. When two
+snapshots have the same timestamp, the transformer keeps the last one.</p>
+<p>The impact item is a copy of the event item, with these differences:</p>
 <table>
 <thead>
 <tr>
 <th>STAC field</th>
-<th>PDC Field</th>
+<th>Value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
-<td>id</td>
-<td>Unique Identifier</td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
-<td>latitude, longitude</td>
-<td>Geometric point using latitude and longitude</td>
+<td>Generated</td>
+<td><code>pdc-impact-{uuid}-{hazard_ID}-{timestamp_ms}-{episode}-{group}-{field}-{admin}</code>, see below</td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
@@ -2070,810 +2221,184 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox">bbox</a></td>
-<td>longitude, latitude, longitude, latitude</td>
-<td></td>
-</tr>
-<tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time">datetime</a></td>
-<td>create_Date</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">title</a></td>
-<td>hazard_Name</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">description</a></td>
-<td>description</td>
-<td></td>
+<td><code>timestamp</code> of the snapshot</td>
+<td>Converted to UTC. <code>start_datetime</code> and <code>end_datetime</code> stay the same as the event</td>
 </tr>
 <tr>
 <td>roles</td>
-<td>["impact", "source"]</td>
-<td>Include both <code>impact</code> and <code>source</code> roles (order does not matter)</td>
+<td>Fixed</td>
+<td><code>["source", "impact"]</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a></td>
-<td><code>country</code> field in the list <code>totalByCountry</code></td>
-<td>List of country iso3 are pulled from exposure endpoint by iterating <code>totalByCountry</code> field</td>
+<td><code>totalByAdmin[].country</code></td>
+<td>The country of the row. One code</td>
 </tr>
 <tr>
-<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
-<td>type_ID</td>
-<td>The hazard codes are generated using the mapping</td>
+<td><a href="https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail">monty:impact_detail</a></td>
+<td>The field</td>
+<td>See <a href="#impact-detail">Impact Detail</a></td>
 </tr>
 <tr>
-<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md">asset.report</a></td>
-<td>snc_url</td>
-<td>Asset with the link to the PDC report</td>
-</tr>
-<tr>
-<td>[monty:impact_detail]</td>
-<td>Impact items using different fields</td>
-<td>Several impact items are created based on several fields available from the exposure endpoint</td>
-</tr>
-<tr>
-<td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
-<td>Source event ID</td>
-<td>Unique identifier of the event</td>
-</tr>
-<tr>
-<td><a href="https://github.com/stac-extensions/processing">processing:version</a></td>
+<td><code>related</code> links</td>
 <td>Generated</td>
-<td>Semantic version of the transformer that generated the item, via the <code>processing:</code> extension</td>
-</tr>
-<tr>
-<td><a href="https://github.com/stac-extensions/processing">processing:software</a></td>
-<td>Generated</td>
-<td>Dependency/provenance chain (<code>{"pystac-monty": "&lt;version&gt;"}</code>), via the <code>processing:</code> extension</td>
+<td>To the event item and to the hazard item</td>
 </tr>
 </tbody>
 </table>
-<h3 id="impact-details">Impact Details</h3>
-<p>The following fields are used to create several <strong>Impact Details</strong> items.</p>
-<ol>
-<li>Population -&gt; Age group 0 - 4</li>
-</ol>
+<p>The geometry (the hazard point), <code>monty:hazard_codes</code> (all three codes), <code>monty:corr_id</code>, keywords
+and assets are the same as the event. So the keywords of an impact item can name other countries
+than its <code>monty:country_codes</code>.</p>
+<p>The parts of the impact id:</p>
+<ul>
+<li><code>{timestamp_ms}</code>: the snapshot <code>timestamp</code> in milliseconds. PDC sends milliseconds or seconds
+  with decimals (<code>1738897884.7774327</code> in the fixture). A value below 10¹¹ is read as seconds.</li>
+<li><code>{episode}</code>: always <code>1</code>.</li>
+<li><code>{group}-{field}</code>: the impact field, e.g. <code>population-total0_4</code>, <code>capital-total</code>.</li>
+<li><code>{admin}</code>: the <code>country</code> of the row, then <code>admin1</code> and <code>admin2</code> when they have a value, in
+  lowercase ASCII (<code>San Martín</code> → <code>san-martin</code>), then <code>-0</code>. When a row has the same
+  <code>country</code>/<code>admin1</code>/<code>admin2</code> as a row before it, <code>-0</code> becomes the row index (<code>-1</code>, <code>-2</code>, …).</li>
+</ul>
+<p>Example: <code>pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0</code>.</p>
+<h3 id="impact-detail">Impact Detail</h3>
+<p>Each impact field is read from <code>totalByAdmin[].{group}.{field}.value</code>. <code>estimate_type</code> is always
+<code>primary</code>. <code>unit</code> is not set.</p>
 <table>
 <thead>
 <tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
+<th><code>{group}.{field}</code></th>
+<th>category</th>
+<th>type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.CHILDREN_0_4</td>
-<td></td>
+<td><code>population.total0_4</code></td>
+<td><code>children_0_4</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
+<td><code>population.total5_9</code></td>
+<td><code>children_5_9</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>value</td>
-<td>value from <code>[population][total0_4]</code></td>
-<td>Get the value using the key <code>[population][total0_4]</code></td>
+<td><code>population.total10_14</code></td>
+<td><code>children_10_14</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
+<td><code>population.total15_19</code></td>
+<td><code>children_15_19</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 5 - 9</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.CHILDREN_5_9</td>
-<td></td>
+<td><code>population.total20_24</code></td>
+<td><code>adult_20_24</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
+<td><code>population.total25_29</code></td>
+<td><code>adult_25_29</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>value</td>
-<td>value from <code>[population][total5_9]</code></td>
-<td>Get the value using the key <code>[population][total5_9]</code></td>
+<td><code>population.total30_34</code></td>
+<td><code>adult_30_34</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
+<td><code>population.total35_39</code></td>
+<td><code>adult_35_39</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 10 - 14</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.CHILDREN_10_14</td>
-<td></td>
+<td><code>population.total40_44</code></td>
+<td><code>adult_40_44</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
+<td><code>population.total45_49</code></td>
+<td><code>adult_45_49</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>value</td>
-<td>value from <code>[population][total10_14]</code></td>
-<td>Get the value using the key <code>[population][total10_14]</code></td>
+<td><code>population.total50_54</code></td>
+<td><code>adult_50_54</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
+<td><code>population.total55_59</code></td>
+<td><code>adult_55_59</code></td>
+<td><code>affected_total</code></td>
 </tr>
 <tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
+<td><code>population.total60_64</code></td>
+<td><code>adult_60_64</code></td>
+<td><code>affected_total</code></td>
+</tr>
+<tr>
+<td><code>population.total65_Plus</code></td>
+<td><code>elderly</code></td>
+<td><code>affected_total</code></td>
+</tr>
+<tr>
+<td><code>population.total</code></td>
+<td><code>people</code></td>
+<td><code>affected_total</code></td>
+</tr>
+<tr>
+<td><code>population.households</code></td>
+<td><code>households</code></td>
+<td><code>affected_total</code></td>
+</tr>
+<tr>
+<td><code>capital.total</code></td>
+<td><code>global_currency</code></td>
+<td><code>cost</code></td>
+</tr>
+<tr>
+<td><code>capital.school</code></td>
+<td><code>schools</code></td>
+<td><code>affected_total</code></td>
+</tr>
+<tr>
+<td><code>capital.hospital</code></td>
+<td><code>hospitals</code></td>
+<td><code>affected_total</code></td>
 </tr>
 </tbody>
 </table>
-<ol>
-<li>Population -&gt; Age group 15 - 19</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.CHILDREN_15_19</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total15_19]</code></td>
-<td>Get the value using the key <code>[population][total15_19]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 20 - 24</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_20_24</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total20_24]</code></td>
-<td>Get the value using the key <code>[population][total20_24]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 25 - 29</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_25_29</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total25_29]</code></td>
-<td>Get the value using the key <code>[population][total25_29]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 30 - 34</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_30_34</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total30_34]</code></td>
-<td>Get the value using the key <code>[population][total30_34]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 35 - 39</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_35_39</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total35_39]</code></td>
-<td>Get the value using the key <code>[population][total35_39]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 40 - 44</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_40_44</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total40_44]</code></td>
-<td>Get the value using the key <code>[population][total40_44]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 45 - 49</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_45_49</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total45_49]</code></td>
-<td>Get the value using the key <code>[population][total45_49]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 50 - 54</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_50_54</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total50_54]</code></td>
-<td>Get the value using the key <code>[population][total50_54]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 55 - 59</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_55_59</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total55_59]</code></td>
-<td>Get the value using the key <code>[population][total55_59]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 60 - 64</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ADULT_60_64</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total60_64]</code></td>
-<td>Get the value using the key <code>[population][total60_64]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Age group 65 and plus</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ELDERLY</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total65_plus]</code></td>
-<td>Get the value using the key <code>[population][total65_plus]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Total population</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.ALL_PEOPLE</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][total]</code></td>
-<td>Get the value using the key <code>[population][total]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Population -&gt; Households</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.HOUSEHOLDS</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[population][houselholds]</code></td>
-<td>Get the value using the key <code>[population][households]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Capital -&gt; Total</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.GLOBAL_CURRENCY</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.LOSS_COUNT</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[capital][total]</code></td>
-<td>Get the value using the key <code>[capital][total]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Capital -&gt; School</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.SCHOOLS</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[capital][school]</code></td>
-<td>Get the value using the key <code>[capital][school]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>Capital -&gt; Hospital</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>STAC Field</th>
-<th>PDC Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>category</td>
-<td>MontyImpactExposureCategory.HOSPITALS</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>MontyImpactType.TOTAL_AFFECTED</td>
-<td></td>
-</tr>
-<tr>
-<td>value</td>
-<td>value from <code>[capital][hospital]</code></td>
-<td>Get the value using the key <code>[capital][hospital]</code></td>
-</tr>
-<tr>
-<td>unit</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>estimate_type</td>
-<td>MontyEstimateType.PRIMARY</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>For the fixture, <code>capital.total</code> gives <code>{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "primary"}</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These values are PDC <strong>exposure</strong> estimates: the people and the assets in the hazard area. They are
+not observed impacts. The <code>capital.total</code> value is in USD, but the item has no <code>unit</code>. How Monty
+represents exposure is open in <a href="https://github.com/IFRCGo/monty-stac-extension/issues/169">#169</a>
+and <a href="https://github.com/IFRCGo/monty-stac-extension/discussions/110">Discussion #110</a>.</p>
+</div>
+<h2 id="limitations-and-exclusions">Limitations and exclusions</h2>
+<ul>
+<li><strong>Hazards without exposure data.</strong> Such a hazard gives an event item and a hazard item, but no
+  impact item (<a href="https://github.com/IFRCGo/pystac-monty/pull/274">IFRCGo/pystac-monty#274</a>).</li>
+<li><strong>Historical hazards.</strong> For most old hazards (e.g. 2010 or 2015), the exposure list endpoint
+  returns <code>404 Not Found</code> (<a href="https://github.com/IFRCGo/montandon-etl/issues/425">IFRCGo/montandon-etl#425</a>).
+  There is no other endpoint for this data. These hazards can have event and hazard items only. PDC
+  offered targeted exports of its historical database on request.</li>
+<li><strong>Unchanged snapshots.</strong> The ETL does not send a snapshot that has the same content as the one
+  before it, so such a snapshot gives no impact item.</li>
+<li><strong>Unknown hazard types.</strong> A <code>type_ID</code> that is not in the <a href="#hazard-type-mapping">Hazard Type Mapping</a>
+  gives no item.</li>
+<li><strong>Fields not mapped.</strong> A <code>totalByAdmin</code> row has more fields than the 19 in <a href="#impact-detail">Impact Detail</a>.
+  These are not mapped: the other <code>population</code> groups (<code>total0_14</code>, <code>total15_64</code>, <code>total65_69</code> to
+  <code>total95_99</code>, <code>total100AndOver</code>, <code>vulnerable</code>, <code>vulnerable0_14</code>, <code>vulnerable15_64</code>,
+  <code>vulnerable65_Plus</code>), and the needs (<code>foodNeeds</code>, <code>waterNeeds</code>, <code>wasteNeeds</code>, <code>shelterNeeds</code>)
+  with their units. <code>total65_Plus</code> (mapped) and <code>total65_69</code> to <code>total100AndOver</code> (not mapped)
+  overlap.</li>
+<li><strong>No polygon geometry.</strong> All the items have the hazard point as geometry. The hazard area is only
+  in the <code>Maps</code> asset.</li>
+</ul>
 
 
 
