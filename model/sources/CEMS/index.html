@@ -471,6 +471,19 @@
       
     </span>
 </a>
+<nav aria-label="Activation → Event" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#country-names">
+<span class="md-ellipsis">
+      
+        Country names
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#area-of-interest-hazard">
@@ -502,6 +515,28 @@
       
     </span>
 </a>
+<nav aria-label="Product → Response" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#acquisition-items">
+<span class="md-ellipsis">
+      
+        Acquisition items
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-response-items-and-links">
+<span class="md-ellipsis">
+      
+        Other Response items and links
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#gra-statistics-impact">
@@ -831,6 +866,19 @@
       
     </span>
 </a>
+<nav aria-label="Activation → Event" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#country-names">
+<span class="md-ellipsis">
+      
+        Country names
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#area-of-interest-hazard">
@@ -862,6 +910,28 @@
       
     </span>
 </a>
+<nav aria-label="Product → Response" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#acquisition-items">
+<span class="md-ellipsis">
+      
+        Acquisition items
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-response-items-and-links">
+<span class="md-ellipsis">
+      
+        Other Response items and links
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#gra-statistics-impact">
@@ -1101,7 +1171,7 @@ through the Rapid Mapping lifecycle, and each product may be re-issued as timed
 <tr>
 <td>Product <code>images[]</code> entry</td>
 <td>Response (<code>eo-dat</code>)</td>
-<td><code>cems-response-{code}-aoi{n}-dat-{images[].uuid}</code></td>
+<td><code>cems-response-{code}-aoi{n}-dat-{image}</code> (e.g. <code>cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho</code>)</td>
 <td><code>cems-response</code></td>
 </tr>
 <tr>
@@ -1116,6 +1186,10 @@ through the Rapid Mapping lifecycle, and each product may be re-issued as timed
 <li><code>{code}</code> is the activation code (<code>EMSR847</code>); <code>{n}</code> is the AOI <code>number</code>; <code>{type}</code> ∈
   <code>ref</code>/<code>fep</code>/<code>del</code>/<code>gra</code> (or the hazard type slug for <code>cems-hazards</code>); <code>-m{k}</code> is
   appended only for monitoring iterations (<code>monitoringNumber &gt; 0</code>).</li>
+<li><code>{image}</code> comes from <code>images[].fileName</code>, not from <code>images[].uuid</code>. See
+  <a href="#acquisition-items">Acquisition items</a> for the rule.</li>
+<li><code>{thematic}</code> is a lowercase slug of the thematic class (<code>Estimated population</code> →
+  <code>population</code>). Only <code>{code}</code> keeps its upper case.</li>
 <li><strong>The AOI is the hazard-area entity</strong> — the direct analog of a Charter Area — so it
   maps to a <strong>Hazard</strong> item (one per AOI, split per hazard code for multi-hazard
   activations, as Charter does). Geometry is the AOI <code>extent</code>, <strong>refined to the DEL
@@ -1196,7 +1270,7 @@ and every product (with images, stats, layers, downloads):</p>
 <tr>
 <td><code>countries[].name</code></td>
 <td><code>monty:country_codes</code></td>
-<td>Map country name → ISO 3166-1 alpha-3</td>
+<td>Map country name → ISO 3166-1 alpha-3. See <a href="#country-names">Country names</a></td>
 </tr>
 <tr>
 <td>derived</td>
@@ -1225,6 +1299,57 @@ and every product (with images, stats, layers, downloads):</p>
 </tr>
 </tbody>
 </table>
+<h3 id="country-names">Country names</h3>
+<p>The transformer finds the ISO 3166-1 alpha-3 code of each <code>countries[].name</code> in three steps:</p>
+<ol>
+<li>It replaces the CEMS names that the geocoder does not know with the name that the
+   geocoder uses
+   (<a href="https://github.com/IFRCGo/pystac-monty/pull/215">pystac-monty#215</a>):</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>CEMS name</th>
+<th>Geocoder name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Bosnia and Herzegovina</code></td>
+<td><code>Bosnia &amp; Herzegovina</code></td>
+</tr>
+<tr>
+<td><code>Czechia</code></td>
+<td><code>Czech Republic</code></td>
+</tr>
+<tr>
+<td><code>Libya</code></td>
+<td><code>Libyan Arab Jamahiriya</code></td>
+</tr>
+<tr>
+<td><code>Micronesia</code></td>
+<td><code>Micronesia (Federated States of)</code></td>
+</tr>
+<tr>
+<td><code>Syria</code></td>
+<td><code>Syrian Arab Republic</code></td>
+</tr>
+<tr>
+<td><code>United Kingdom</code></td>
+<td><code>U.K. of Great Britain and Northern Ireland</code></td>
+</tr>
+<tr>
+<td><code>Viet Nam</code></td>
+<td><code>Vietnam</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>It looks for the name in a fixed alias list of long official names (for example
+   <code>Russian Federation</code> → <code>RUS</code>, <code>Republic of Korea</code> → <code>KOR</code>).</li>
+<li>If the alias list has no entry, it asks the geocoder for the country with that name.</li>
+</ol>
+<p>A name that no step resolves gives no code. The transformer does not stop.</p>
 <h2 id="area-of-interest-hazard">Area of Interest → Hazard</h2>
 <p>Each AOI maps to a Monty Hazard item (<code>cems-hazards</code>); Monty extension only. This
 mirrors the Charter Area→Hazard mapping.</p>
@@ -1392,22 +1517,134 @@ above.</p>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>Acquisition items are <code>eo-dat</code> Response items (implemented, field coverage partial).</strong> Each
-<code>images[]</code> entry becomes its own Response item, id <code>cems-response-{code}-aoi{n}-dat-{uuid}</code>
-(<code>images[].uuid</code>, not the parent product's own type slug — the acquisition's own
-<code>monty:response_detail.type</code> is <code>eo-dat</code>, whatever product it's linked from), living in
-<code>cems-response</code> alongside the REF/FEP/DEL/GRA items it is a sibling <code>related</code> Response to
-(<code>roles: ["response"]</code>, both ways — see the Product → Response table above). When CEMS
-publishes a web-optimized COG of the same acquisition under <code>layers[]</code> (matched to the
-<code>images[]</code> entry by filename), it becomes this item's <code>data</code> asset. <code>images[]</code> only carries
-<code>sensorType</code>/<code>sensorName</code>/<code>resolutionClass</code>/<code>acquisitionTime</code>/<code>fileName</code> — none of these back a
-typed <code>sat:</code>/<code>eo:</code>/<code>sar:</code> field with real data today, so the shipped acquisition items declare
-no such extension; <code>sensorName</code> maps to the STAC common-metadata <code>platform</code> field, and
-<code>resolutionClass</code>/<code>fileName</code> are kept as descriptive text (<code>title</code>/<code>description</code>) pending a
-schema decision on where they belong. See
+<h3 id="acquisition-items">Acquisition items</h3>
+<p>Each <code>images[]</code> entry of a product becomes its own Response item in <code>cems-response</code>, with
+<code>monty:response_detail.type</code> = <code>eo-dat</code> (the Data Product code of the taxonomy). The
+REF/FEP/DEL/GRA item and the acquisition item are sibling Response items: each has a
+<code>related</code> link (<code>roles: ["response"]</code>) to the other.</p>
+<table>
+<thead>
+<tr>
+<th>CEMS field (image / product)</th>
+<th>Monty field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fileName</code></td>
+<td><code>id</code></td>
+<td><code>cems-response-{code}-aoi{n}-dat-{image}</code>. See the id rule below</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>collection: "cems-response"</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>acquisitionTime</code></td>
+<td><code>datetime</code></td>
+<td>Falls back to the delivery time of the product, then to the activation <code>eventTime</code>. If all three are absent, the image gets no item</td>
+</tr>
+<tr>
+<td>product <code>extent</code> (WKT)</td>
+<td><code>geometry</code> / <code>bbox</code></td>
+<td>The footprint of the first product that cites the image</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.type</code></td>
+<td><code>eo-dat</code> for all images, for all product types</td>
+</tr>
+<tr>
+<td><code>code</code> (activation)</td>
+<td><code>monty:response_detail.source_id</code></td>
+<td>e.g. <code>EMSR847</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.producer</code></td>
+<td><code>Copernicus EMS</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>monty:response_detail.sendai_targets</code></td>
+<td><code>["D", "G"]</code></td>
+</tr>
+<tr>
+<td><code>sensorName</code></td>
+<td><code>platform</code></td>
+<td>Direct copy (<code>Legion</code>)</td>
+</tr>
+<tr>
+<td><code>sensorName</code> → else <code>fileName</code></td>
+<td><code>mission</code></td>
+<td><code>sensorName</code> in lower case (<code>legion</code>). If <code>sensorName</code> is absent, the first token of the <code>{image}</code> key</td>
+</tr>
+<tr>
+<td><code>sensorType</code>, <code>sensorName</code></td>
+<td><code>title</code></td>
+<td><code>CEMS {sensorType} acquisition — {sensorName}</code></td>
+</tr>
+<tr>
+<td><code>resolutionClass</code>, <code>fileName</code></td>
+<td><code>description</code></td>
+<td>Descriptive text. No typed field holds them yet</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>roles</code></td>
+<td><code>["source", "acquisition", "response"]</code></td>
+</tr>
+<tr>
+<td>activation, AOI</td>
+<td><code>monty:corr_id</code>, <code>monty:country_codes</code>, <code>monty:hazard_codes</code></td>
+<td>Same values as the product that cites the image</td>
+</tr>
+<tr>
+<td><code>layers[]</code> entry with <code>format: cog</code></td>
+<td><code>assets.data</code></td>
+<td>The COG of the same acquisition, matched by file name (<code>{fileName stem}</code> or <code>{fileName stem}_cog</code>). The href is <code>{aws_bucket}/{layer name}</code>. No match gives no asset</td>
+</tr>
+<tr>
+<td>product that cites the image</td>
+<td><code>links[rel=related]</code> (<code>roles: ["response"]</code>)</td>
+<td>One link for each product that cites the image</td>
+</tr>
+</tbody>
+</table>
+<p>An image with no <code>sensorType</code>, <code>sensorName</code>, <code>resolutionClass</code> and <code>fileName</code> gets no item.</p>
+<p><strong>Id rule.</strong> <code>{image}</code> is the key of one physical acquisition
+(<a href="https://github.com/IFRCGo/pystac-monty/pull/251">pystac-monty#251</a>,
+<a href="https://github.com/IFRCGo/pystac-monty/pull/253">#253</a>):</p>
+<ol>
+<li>Take the <code>fileName</code> without its extension:
+   <code>EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO</code>.</li>
+<li>Remove the product prefix <code>{code}_AOI{nn}_{TYPE}_</code> and the <code>PRODUCT_</code> or <code>MONIT{nn}_</code>
+   token when there is one: <code>LEGION_20251107_1555_ORTHO</code>. The prefix identifies the product
+   that cites the image, not the acquisition.</li>
+<li>Change the result to lower case: <code>legion_20251107_1555_ortho</code>.</li>
+</ol>
+<p>If <code>fileName</code> is absent, the key is <code>images[].uuid</code> in lower case. If <code>uuid</code> is also absent,
+the key is <code>{type}[-m{k}]-img{index}</code>, from the product that cites the image and the position
+of the image in <code>images[]</code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>images[].uuid</code> does not identify an acquisition. CEMS uses the same <code>uuid</code> again in
+products that have different source images, with a different sensor and a different date
+(<a href="https://github.com/IFRCGo/pystac-monty/issues/242">pystac-monty#242</a>). The ids that used
+the <code>uuid</code> (<code>…-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f</code>) are replaced by the ids from
+<code>fileName</code>.</p>
+</div>
+<p><strong>One item for each acquisition in an AOI.</strong> When two products of the same AOI cite the same
+image (EMSR659 AOI 1 is such a case), the transformer builds one acquisition item. Each
+product that cites it gets a <code>related</code> link to that item, and the item has a <code>related</code> link
+back to each product. The same image in two different AOIs gives two items, because the AOI
+number is part of the id.</p>
+<p>The acquisition items declare the <code>monty</code> and <code>processing</code> extensions only. <code>images[]</code> has no
+field that backs a typed <code>sat:</code> / <code>eo:</code> / <code>sar:</code> field with real data. See
 <a href="https://github.com/IFRCGo/pystac-monty/issues/166">pystac-monty#166</a>.</p>
-</blockquote>
+<h3 id="other-response-items-and-links">Other Response items and links</h3>
 <p><strong>Situational Report</strong> → one Response per activation, <code>type = eo-sr</code>, whose asset is the
 <code>reportLink</code> StoryMap URL. It has no product <code>extent</code> of its own, so <code>geometry</code>/<code>bbox</code>
 fall back to the activation extent, or the Event's geometry/bbox if the activation has
@@ -1415,6 +1652,11 @@ none — <code>null</code> geometry is not emitted, since it is not recommended 
 <p>A <strong>DEL</strong> Response additionally carries a <code>rel: related</code> (<code>roles: ["hazard"]</code>) link to the
 <code>cems-hazards</code> item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
 Every Response links to its Event and Hazard(s) via <code>related</code>, sharing <code>monty:corr_id</code>.</p>
+<p>The transformer writes each href to another CEMS item (<code>related</code>, and <code>prev</code> between
+monitoring iterations) as <code>{eoapi_url}/collections/{collection}/items/{item_id}</code>, or
+<code>../collections/{collection}/items/{item_id}</code> when it has no STAC API URL. The files under
+<code>examples/</code> use repository-relative paths instead
+(<code>../cems-events/cems-event-EMSR847.json</code>).</p>
 <blockquote>
 <p><strong>Do not</strong> put damage/exposure statistics in <code>monty:response_detail</code> — those become
 separate <strong>Impact</strong> items (below). <strong>Do not</strong> set <code>status</code> from anything but
@@ -1542,10 +1784,15 @@ link</strong> so the graph is directly navigable (65/224 sampled activations car
 <td><code>relatedevents</code></td>
 <td>EMSR codes</td>
 <td><code>cems-event-{code}</code></td>
-<td><code>rel: related</code>, <code>roles: ["event"]</code></td>
+<td><code>rel: related</code>, <code>roles: ["event"]</code>. Only the entries that are a code string (<code>"EMSR661"</code>) get a link</td>
 </tr>
 </tbody>
 </table>
+<p><code>relatedevents</code> has two entry shapes. Most entries are an activation code string. Some
+activations (for example EMSR682 and EMSR715) also have <code>{"title", "url"}</code> objects that
+point to a related <strong>EMSN</strong> (Risk &amp; Recovery) activation. That service is out of scope, and
+Monty has no item for it. The transformer accepts these objects and makes no link for them
+(<a href="https://github.com/IFRCGo/pystac-monty/pull/206">pystac-monty#206</a>).</p>
 <p>This is a <strong>reusable pattern</strong>: any cross-reference field that yields a deterministic
 source-item id becomes a typed <code>related</code> link, with <code>monty:corr_id</code> as the fallback join.
 The edge is reciprocal — the Charter source doc already links VAPs to sibling Responses.</p>
@@ -1594,7 +1841,7 @@ casings):</p>
 <td>MH0600</td>
 <td>FL</td>
 <td>nat-hyd-flo-flo</td>
-<td><code>Riverine flood</code>→MH0604, flash→MH0603, coastal/surge→MH0601</td>
+<td><code>subCategory</code> changes all three codes: <code>Riverine flood</code>→<strong>MH0604</strong> / <code>FL</code> / <code>nat-hyd-flo-riv</code>, <code>Flash flood</code>→<strong>MH0603</strong> / <code>FF</code> / <code>nat-hyd-flo-fla</code>, <code>Coastal flood</code> or <code>Storm surge</code>→<strong>MH0601</strong> / <code>FL</code> / <code>nat-hyd-flo-coa</code></td>
 </tr>
 <tr>
 <td>Wildfire</td>
@@ -1633,10 +1880,10 @@ casings):</p>
 </tr>
 <tr>
 <td>Industrial Accident</td>
-<td>—</td>
-<td>—</td>
-<td>tec-ind</td>
-<td>Technological — no single chapeau; <code>subCategory: Chemical</code>→<strong>TL0301</strong>, <code>Explosion</code>→<strong>TL0304</strong>. Anything else — including <code>gas leak</code>, which is not a distinct key — falls through to the category default, <strong>TL0301</strong>, not TL0309</td>
+<td>TL0301</td>
+<td>AC</td>
+<td>tec-ind-che-che</td>
+<td>Technological — no single chapeau, so the category default is the chemical row. <code>subCategory: Chemical</code> or <code>Oil spill</code>→<strong>TL0301</strong> / <code>AC</code> / <code>tec-ind-che-che</code>, <code>Explosion</code>→<strong>TL0304</strong> / <code>AC</code> / <code>tec-ind-exp-exp</code>. Anything else — including <code>gas leak</code>, which is not a distinct key — falls through to the category default, <strong>TL0301</strong>, not TL0309</td>
 </tr>
 <tr>
 <td>Transport accident</td>
@@ -1793,6 +2040,9 @@ disasters:</p>
 </tr>
 </tbody>
 </table>
+<p>The transformer finds a planned event from the activation <code>name</code> only: the name contains
+<code>public event</code>, <code>festival</code> or <code>olympic</code> (not case-sensitive). The <code>reason</code> text is not used
+for this check.</p>
 <p>A planned event has no hazard to resolve, so these five are a <strong>deliberate
 scope exclusion</strong> — reported, not dropped silently, and not a transformation
 failure — the same kind of decision as
@@ -1835,8 +2085,8 @@ Hazard geometry falls back to the AOI extent:</p>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json"><code>cems-event-EMSR847</code></a> — Event, with cross-source <code>related</code> links to the GDACS (<code>gdacs-event-1001230-41</code>) and Charter (<code>charter-event-996</code>) events</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json"><code>cems-hazard-EMSR847-aoi01-storm</code></a> — Hazard (tropical cyclone, <code>MH0306</code>)</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json"><code>cems-hazard-EMSR847-aoi01-landslide</code></a> — secondary Hazard (landslide, <code>GH0300</code>) surfaced from the GRA <code>Landslide</code> footprint class; geometry falls back to the AOI extent</li>
-<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (COG + download assets)</li>
-<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json"><code>cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f</code></a> — <code>eo-dat</code> Response (source imagery, sibling <code>related</code> Response to the <code>eo-gra</code> item above)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json"><code>cems-response-EMSR847-aoi01-gra</code></a> — <code>eo-gra</code> Response (<code>download</code> package, <code>basemap</code> COG, and the <code>observedEventP</code> GeoJSON layer with its SLD style)</li>
+<li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho.json"><code>cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho</code></a> — <code>eo-dat</code> Response (source imagery, sibling <code>related</code> Response to the <code>eo-gra</code> item above)</li>
 <li><a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json"><code>cems-impact-EMSR847-aoi01-gra-population</code></a> — Impact (84 000 people, <code>derived_from</code> the GRA Response)</li>
 </ul>
 <p>The GDACS side of the cross-source link is also a real worked example, not a placeholder:</p>
