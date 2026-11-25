@@ -72,7 +72,7 @@ body:
         you have checked and the source publishes no explicit reuse terms —
         blank is recorded as "not stated by the source", not as "unknown".
     validations:
-      required: false
+      required: true
   - type: dropdown
     id: types
     attributes:
