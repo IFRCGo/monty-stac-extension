@@ -470,6 +470,11 @@ def write_examples(result: Result, recipe: dict[str, Any]) -> list[Path]:
             # Keep the links the repo curates (relative catalog links between
             # the committed examples); everything else comes from upstream.
             fresh["links"] = committed.get("links", [])
+            # Keep the committed provenance values too. The examples carry a
+            # placeholder (see IGNORED_PROPERTIES), and the comparison ignores them.
+            for key in ("processing:version", "processing:software"):
+                if key in committed.get("properties", {}):
+                    fresh["properties"][key] = committed["properties"][key]
             path.write_text(json.dumps(fresh, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             written.append(path)
     return written
