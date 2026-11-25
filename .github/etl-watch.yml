@@ -145,10 +145,16 @@ sources:
   idmc-gidd:
     extra_paths: [pystac_monty/validators/gidd.py]
     reviewed: a2c62b3d86418e12f6aebe97a945efb50d9c01f3
+    regenerate:
+      batch: idmc-gidd
+      input: docs/model/sources/IDMC/IDMC_GIDD_Internal_Displacement_Disaggregated.geojson
 
   idmc-idu:
     extra_paths: [pystac_monty/validators/idu.py]
     reviewed: a2c62b3d86418e12f6aebe97a945efb50d9c01f3
+    regenerate:
+      batch: idmc-idu
+      input: docs/model/sources/IDMC/idu-export.json
 
   ifrcevent:
     extra_paths: [pystac_monty/validators/ifrc.py]
