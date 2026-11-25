@@ -42,6 +42,12 @@
   "properties": {
     "datetime": "1854-07-01T00:00:00Z",
     "title": "Deaths from Cholera Epidemic in Carriacou",
+    "keywords": [
+      "Airborne Diseases (human and Animal)",
+      "Biological",
+      "Infectious Diseases",
+      "GRD"
+    ],
     "monty:src_event_id": "200",
     "monty:impact_detail": {
       "category": "people",
