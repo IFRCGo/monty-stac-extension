@@ -35,6 +35,7 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | `coordinates` from system:footprint | Max and min latitude and longitude are calculated from the `coordinates` from system:footprint |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |        |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | The hazard keywords of `monty:hazard_codes` in alphabetical order, then the ISO3 codes of `monty:country_codes` in the same order, with no duplicates: `["Flooding", "Meteorological & Hydrological", "Water-related", "AUS"]`. The hazard and impact items of the event have the same list |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start | |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source (see [Hazard Type Mapping](#hazard-type-mapping)). |
