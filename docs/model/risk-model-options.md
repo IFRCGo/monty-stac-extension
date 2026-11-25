@@ -225,6 +225,7 @@ flowchart LR
 - **Relations are links.** Two linked concepts do not share a data model.
 - **Forecast is a qualifier, not a concept.** It applies to Hazard, Exposure, Impact and People in need.
   It carries an issue time and a valid time (`monty:forecast`, #110 option 1b).
+  §8.3 proposes a more general form: a temporal status for each item, derived from its time fields.
 - **Context has no stored link** to an event or a hazard. It is found at query time, by location or by country.
 
 ### 5.2 Context: data that is not tied to a hazard
@@ -433,6 +434,71 @@ The [product extension](https://github.com/stac-extensions/product) can describe
 It describes packaging and distribution, not meaning. Its maturity is "Proposal".
 `product:status` overlaps `monty:response_detail.status`. Do not use it before this overlap has a rule.
 
+### 8.3 Temporal status from the STAC time fields (proposal)
+
+A comment of 25 November on §5.1 proposes a **temporal status** for each item of each class, and not a
+qualifier for forecasts only: future prediction, current or past estimate, hypothetical scenario
+(question 12). This section proposes one way to do it. It is an option for the partners, not a decision.
+
+**The idea:** do not add a status field. Give each item its time fields, and derive the status from them.
+STAC already has the necessary fields:
+
+| Question | Field | Defined in |
+|---|---|---|
+| What time is the figure about? | `datetime`, or `start_datetime` and `end_datetime` | STAC core |
+| When did the source publish it first? | `published` | [timestamps extension](https://github.com/stac-extensions/timestamps) |
+| Until when is it valid? | `expires` | timestamps extension |
+| When did the source remove it? | `unpublished` | timestamps extension |
+| When was the Montandon record made, and changed? | `created`, `updated` | STAC core |
+| For a forecast: what is the issue time, and the lead time? | `forecast:reference_datetime`, `forecast:horizon` | [forecast extension](https://github.com/stac-extensions/forecast) |
+
+**The rule:**
+
+| Temporal status | Rule | Fields necessary |
+|---|---|---|
+| Future prediction | The item has an issue time, and its `datetime` is after the issue time | `datetime`, `forecast:reference_datetime` |
+| Current or past estimate | The `datetime` of the item is not after its `published` time | `datetime`, `published` |
+| Hypothetical scenario | The time fields cannot give this status. An explicit marker is necessary (the baseline qualifier of §2) | — |
+
+The examples of the comment, and the two worked examples of §9:
+
+| Item | `datetime` (about) | Issue or `published` time | Status |
+|---|---|---|---|
+| NOUL-26 forecast track position (§9.1) | 27 Jul 2026 00:00 | issued 26 Jul 2026 00:00 (`forecast:horizon` = `PT24H`) | Future prediction |
+| PAGER fatalities, us6000pi9w (§9.2) | 7 Jan 2025 01:05 | published after the earthquake | Past estimate |
+| National Society assessment | the period assessed | published after the period | Past estimate |
+| Satellite-derived flood extent | the acquisition time | published after the acquisition | Past estimate |
+| 1-in-100-year flood map | no occurrence time | release date | Hypothetical scenario (explicit marker) |
+
+**For:**
+
+- No new vocabulary to agree on. The status cannot contradict the dates, because it comes from them.
+- A forecast stays a forecast after its valid time. Its issue time does not change.
+- `expires` solves a second problem: when advisory 14 replaces advisory 13, advisory 13 gets an `expires`
+  time. A client can then ask for the forecasts that are in effect.
+- The fields are those of the STAC ecosystem. This agrees with the first mapping in
+  [#178](https://github.com/IFRCGo/monty-stac-extension/issues/178).
+
+**Against:**
+
+- A derived status is harder to query than a stored value: a filter must compare two dates.
+- The time fields do not give the third status. STAC requires a `datetime` or a period for each item.
+  A 100-year flood map thus has dates (its validity period), and only an explicit marker tells it from an
+  occurrence.
+- The time fields say nothing about the evidence behind a figure (question 13). PAGER, a National Society
+  assessment and a satellite flood extent get the same status here. That difference is a second axis.
+- In the timestamps extension, `published` in the item properties is the time of the **metadata**, not of
+  the source data. Montandon needs a written rule: `published` is the first publication by the source,
+  and `created` and `updated` are the times of the Montandon record.
+- One item can cover an observed part and a forecast part (a cyclone track from 21 to 31 October in one
+  item). The rule must say which status such an item gets.
+- The maturity of the timestamps extension is "Pilot". The maturity of the forecast extension is
+  "Proposal", and it is written for weather forecasts.
+
+**Safeguard:** before adoption, apply the rule to one forecast source (GDACS cyclones) and one
+non-forecast source (USGS PAGER) from production. Each item must get one status, and only one. Decide
+with the forecast fields in [#168](https://github.com/IFRCGo/monty-stac-extension/discussions/168).
+
 ## 9. Worked examples
 
 ### 9.1 Cyclone NOUL-26 up the ladder
@@ -506,6 +572,8 @@ and the review of 20 October
 | 9 | Which `estimate_type` values can be trusted? GDACS marks modelled figures as `primary` | — | New |
 | 10 | How are "affected" figures defined? Do the populations overlap? Is total affected the sum of directly and indirectly affected? | — | New (20 October review) |
 | 11 | Does Montandon stay a catalogue of metadata and links, or also store harmonised copies of hazard data? Who pays and operates the store? | — | New, [#178](https://github.com/IFRCGo/monty-stac-extension/issues/178) |
+| 12 | Is forecast one value of a **temporal status** that each item of each class carries (future prediction, current or past estimate, hypothetical scenario), and not a qualifier for forecasts only (§5.1)? Is the baseline qualifier (§2) a value of the same status? | Proposal in §8.3: derive the status from the STAC time fields (core, timestamps and forecast extensions). The hypothetical scenario needs an explicit marker | New (25 November comment), related to question 3 |
+| 13 | Does each item record the **evidence** behind its figure (direct observation, reported, modelled, inferred, analysed, mixed, unknown)? What is the relation to `estimate_type`? | — | New (25 November comment), related to question 9 |
 
 ## 11. Facts checked, and open points
 
@@ -538,5 +606,6 @@ and the review of 20 October
 - [Risk Data Library Standard](https://docs.riskdatalibrary.org/) and its [exposure component](https://docs.riskdatalibrary.org/en/1.0/reference/schema/exposure/)
 - [CLIMADA exposures](https://climada-python.readthedocs.io/en/v5.0.0/tutorial/climada_entity_Exposures.html)
 - [STAC forecast extension](https://github.com/stac-extensions/forecast)
+- [STAC timestamps extension](https://github.com/stac-extensions/timestamps)
 - [UNDRR terminology](https://www.undrr.org/terminology)
 - [STAC product extension](https://github.com/stac-extensions/product)
