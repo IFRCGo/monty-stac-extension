@@ -1623,7 +1623,7 @@
 <ul>
 <li>Only the records with <code>displacement_type</code> = <code>Disaster</code> are ingested. <code>Conflict</code> and <code>Other</code> records are ignored.</li>
 <li>A record must have the fields <code>latitude</code>, <code>longitude</code> and <code>event_id</code>. A record without one of them is ignored, with a warning.</li>
-<li>The <code>role</code> field is not used. The <code>Recommended figure</code> records and the <code>Triangulation</code> records are all ingested, and all get <code>estimate_type: primary</code>.</li>
+<li>The <code>Recommended figure</code> records and the <code>Triangulation</code> records are all ingested. The <code>role</code> field gives the <a href="#impact-detail"><code>estimate_type</code></a> of the impact item.</li>
 <li>The transformer groups the records by <code>event_id</code>. Each group gives one event item, and one impact item for each record of the group.</li>
 <li>If one record of a group is not valid, or the hazard of the event is not in the <a href="#hazard-type-mapping">hazard type mapping</a>, the transformer skips all the group and counts its records as failed. It continues with the next group.</li>
 </ul>
@@ -2171,10 +2171,41 @@ row for it (<code>mix-mix-mix-mix</code>), but that value has no UNDRR-ISC 2025 
 </tr>
 <tr>
 <td>estimate_type</td>
-<td><code>primary</code>, for all records</td>
+<td>from the <code>role</code> field (see below)</td>
 </tr>
 </tbody>
 </table>
+<p>The <code>role</code> field of the record gives the <code>estimate_type</code>:</p>
+<table>
+<thead>
+<tr>
+<th><code>role</code></th>
+<th><code>estimate_type</code></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Recommended figure</code></td>
+<td><code>primary</code></td>
+<td>The figure that IDMC recommends for the event</td>
+</tr>
+<tr>
+<td><code>Triangulation</code></td>
+<td><code>secondary</code></td>
+<td>A figure from a second source, which IDMC uses to check the recommended figure</td>
+</tr>
+<tr>
+<td>other value, or none</td>
+<td><code>primary</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A <code>Triangulation</code> figure is not an additional number of people. It can describe the same people as the recommended figure of the event. To get the total of an event, add only the <code>primary</code> values.</p>
+</div>
 <h3 id="examples">Examples</h3>
 <p>The examples are the output of the transformer for <code>idmc-idu-samples-ESP.json</code>. Only the links are adapted to the layout of <code>examples/</code>.</p>
 <ul>
