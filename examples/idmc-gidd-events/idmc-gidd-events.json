@@ -6,7 +6,7 @@
   "type": "Collection",
   "id": "idmc-gidd-events",
   "title": "IDMC GIDD Source Events",
-  "description": "Events from the Internal Displacement Monitoring Centre (IDMC) Global Internal Displacement Database (GIDD). IDMC maintains comprehensive information on global internal displacement events from 2008 onwards, tracking both conflict and disaster-induced displacement. The GIDD provides quality-controlled, annually validated data on internal displacement, disaggregated by caseload, location, and event. Each event includes information about the displacement trigger, affected locations, and temporal details. More information on the IDMC mapping in Monty can be found in the [IDMC Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#event-items).",
+  "description": "Events from the Internal Displacement Monitoring Centre (IDMC) Global Internal Displacement Database (GIDD). IDMC maintains comprehensive information on global internal displacement events from 2008 onwards, tracking both conflict and disaster-induced displacement. The GIDD provides quality-controlled, annually validated data on internal displacement, disaggregated by caseload, location, and event. Each event includes information about the displacement trigger, affected locations, and temporal details. More information on the IDMC mapping in Monty can be found in the [IDMC Event Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/IDMC#event-items).",
   "license": "TBD",
   "keywords": [
     "idmc",
@@ -69,12 +69,23 @@
       "source"
     ],
     "monty:country_codes": [
-      "IDN"
+      "IDN",
+      "SYR",
+      "TUR"
     ],
     "monty:hazard_codes": [
       "TC",
       "nat-met-sto-tro",
-      "MH0309"
+      "MH0309",
+      "MH0600",
+      "FL",
+      "nat-hyd-flo-flo",
+      "MH0301",
+      "VW",
+      "nat-met-sto-sto",
+      "GH0101",
+      "EQ",
+      "nat-geo-ear-gro"
     ]
   },
   "assets": {
@@ -94,7 +105,7 @@
     },
     {
       "rel": "describedby",
-      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/model/sources/IDMC#event-items",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/IDMC#event-items",
       "type": "text/html",
       "title": "IDMC Event Item Source Mappings"
     }
