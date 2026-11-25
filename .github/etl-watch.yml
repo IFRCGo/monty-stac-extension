@@ -83,7 +83,7 @@ contract_check:
 sources:
   cems:
     extra_paths: [pystac_monty/validators/cems.py]
-    reviewed: e4fc88b3d30c2e7d7d0ac359de6bd24096e972cd
+    reviewed: a2c62b3d86418e12f6aebe97a945efb50d9c01f3
     regenerate:
       batch: cems
       input: docs/model/sources/CEMS/api-files
@@ -126,13 +126,16 @@ sources:
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
+    reviewed: b3477b68ab177d12ac5d3f1b87ad9597ec888c2c
     regenerate:
       batch: glide
       input: docs/model/sources/GLIDE/FL-2024-000199-ESP.json
       # The fixture holds one record (the 2024 floods in Spain).
       # examples/glide-events/EQ-2008-000062-CHN.json has no committed fixture and
       # is not transformer output, so it is out of scope.
+      # The FL-2022-000230-NPL examples (a record with no coordinates) come from
+      # a second fixture, docs/model/sources/GLIDE/FL-2022-000230-NPL.json. A
+      # recipe has one input, so this check does not cover them.
       covers: ["*FL-2024-000199-ESP"]
 
   ibtracs:
@@ -153,7 +156,7 @@ sources:
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
-    reviewed: 2e31c9c4e43243c6adcf8b5542f92829ba79c4d5
+    reviewed: b831436a02deedbee6effaf5a3d1a1d76ddd3000
 
   usgs:
     extra_paths: [pystac_monty/validators/usgs.py]

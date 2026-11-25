@@ -2,6 +2,14 @@
 
 The Pacific Disaster Center (PDC) tracks a wide range of natural and human made hazards viz. **Tropical Cyclone**, **Earthquake**, **Flood**, **Landslides**, **Wildfire**, **Drought**, **Volcanic Eruptions** etc to support disaster preparedness, response, and risk reduction efforts.
 
+This document describes the PDC transformer at
+[IFRCGo/pystac-monty@b831436](https://github.com/IFRCGo/pystac-monty/commit/b831436a02deedbee6effaf5a3d1a1d76ddd3000)
+(`pystac_monty/sources/pdc.py`). Each statement about the items was checked by a run of that
+transformer on the upstream fixtures in
+[`tests/data/pdc/`](https://github.com/IFRCGo/pystac-monty/tree/b831436a02deedbee6effaf5a3d1a1d76ddd3000/tests/data/pdc)
+(hazard `313159`, a landslide in Peru), and on variants of them: no exposure data, two snapshots,
+two countries and an unknown hazard type.
+
 ## Collection: `pdc-events`
 
 A STAC collection hold all the PDC events.
@@ -16,332 +24,262 @@ A STAC collection hold all the PDC events.
 - Source Data License: Restricted — disaster/emergency management use only, no redistribution without authorization (PDC Terms & Conditions)
 - Source for: event, hazard, impact
 
-## Endpoints for Extraction
-To get the relevant PDC data, we use the following endpoints:
+The three PDC collections (`pdc-events`, `pdc-hazards`, `pdc-impacts`) are marked private
+([#195](https://github.com/IFRCGo/monty-stac-extension/pull/195)), because of this license.
 
-1. Get a list of Active Hazards: <https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards>
-2. Get exposure list for each Hazard: <https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure>
-3. Get exposure details for each exposure: <https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}>
+Examples: the transformer output for the upstream fixture, with the `self`, `collection` and
+`related` links changed to point into this repository, and only two of the 19 impact items:
 
-## Data Schema
-The `PDCDataSource` class when instantiated takes two parameters viz. `source_url: str` and `data: Any`.
+- Event: [pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events/pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json)
+- Hazard: [pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards/pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json)
+- Impact, total population: [pdc-impact-…-population-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0.json)
+- Impact, capital: [pdc-impact-…-capital-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-capital-total-PER-0.json)
 
-The `data` parameter primarily takes a json object of the following format.
-```json
-{
-    "hazards_file_path": str,
-    "exposure_timestamp": str,
-    "uuid": str,
-    "exposure_detail_file_path": str,
-    "geojson_file_path": Optional[str]
-}
+## Data flow
+
+The ETL ([montandon-etl](https://github.com/IFRCGo/montandon-etl), `apps/etl/etl_tasks/pdc.py` and
+`apps/etl/extraction/sources/pdc/extract.py`) uses these PDC Sentry endpoints:
+
+1. **Hazard list:** `POST https://sentry.pdc.org/hp_srv/services/hazards/t/json/search_hazard`, with a
+   `createDate` window. The window starts at `PDC_START_DATE` (default: the first day of the current
+   month) and ends now.
+2. **Exposure list** of each hazard: `https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure`.
+   It gives the timestamps of the exposure snapshots.
+3. **Exposure detail** of each snapshot: `https://sentry.pdc.org/hp_srv/services/hazard/{uuid}/exposure/{timestamp}`.
+4. **Hazard area** (GeoJSON): `https://sentry.pdc.org/hp_srv/services/mags/1/json/get_mags?hazard_id={hazard_ID}`.
+
+The ETL keeps a hash of each exposure detail, without its timestamp. A snapshot with the same
+content as the one before it is not sent again to the transformer.
+
+### Transformer input
+
+`PDCDataSource` takes a `PDCDataSourceType`:
+
+```python
+PDCDataSourceType(
+    source_url: str,
+    uuid: str,                                   # the PDC hazard uuid
+    hazard_data: File | Memory,                  # the hazard list (search_hazard response)
+    exposure_detail_data: list[File | Memory],   # zero, one or more snapshots of this hazard
+    geojson_path: str,                           # where the hazard area GeoJSON is stored
+)
 ```
+
+`exposure_detail_data` can be empty. A single `File` or `Memory` is also accepted.
+
+## Items made for one PDC hazard
+
+| Item | Number | Condition |
+| --- | --- | --- |
+| Event | 1 | Always, when `type_ID` is in the [Hazard Type Mapping](#hazard-type-mapping) |
+| Hazard | 1 | Same as the event |
+| Impact | One per snapshot × [impact field](#impact-detail) × `totalByAdmin` row | Only for a valid snapshot, and only when the field has a value |
+
+For the upstream fixture (one snapshot, one `totalByAdmin` row), the transformer makes 21 items: the
+event, the hazard and 19 impact items. With a second snapshot that has three `totalByAdmin` rows,
+it makes 78 items: the event, the hazard, 19 impact items for the first snapshot and 57 for the
+second.
 
 ## Event Item
 
-A PDC event will always produce an Event STAC Item. Here is a table with the fields that are mapped from the PDC event to the STAC event:
-
-| STAC field | PDC Field | Description |
-| -----------|-----------|-------------|
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | id | Unique Identifier |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry) | latitude, longitude | Geometric point using latitude and longitude |
+| STAC field | PDC field | Description |
+| --- | --- | --- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | `uuid`, `hazard_ID` | `pdc-event-{uuid}-{hazard_ID}`, e.g. `pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159`. The id does not change when a new snapshot comes |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry) | `latitude`, `longitude` | Point |
+| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | `longitude`, `latitude` | The bbox of the point |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-events` | |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | longitude, latitude, longitude, latitude |  |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["event", "source"] | Include both `event` and `source` roles (order does not matter) |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the [Hazard Type Mapping](#hazard-type-mapping) |
-| [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `start_Date` | Milliseconds since epoch, converted to UTC |
+| [start_datetime, end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `start_Date`, `end_Date` | Milliseconds since epoch, converted to UTC |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `hazard_Name` | |
+| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `description` | HTML converted to Markdown. `NA` when it is empty |
+| `category_id` | `category_ID` | Copied, e.g. `EVENT`. This property is not declared by the Monty schema |
+| roles | Fixed | `["source", "event"]` |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByCountry[].country` of all the snapshots | The ISO3 codes of all the snapshots, earliest snapshot first, in source order, with no duplicates. Without exposure data, the country of the hazard point from the geocoder, else `UNK` |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | `type_ID` | The three codes of the [Hazard Type Mapping](#hazard-type-mapping), e.g. `["GH0300", "LS", "nat-geo-mmd-lan"]` |
+| [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number) | Fixed | Always `1`. PDC has no episode number |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | `hazard_ID` | e.g. `313159` |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention, with the first country code, e.g. `20250207-PER-720514-GH0300-1-GCDB` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | The hazard keywords, then the `admin0` names of `totalByCountry` of all the snapshots, with no duplicates, e.g. `["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru"]`. Without exposure data, no country name |
+| `Maps` asset | `geojson_path` | The hazard area GeoJSON, with `type: geojson`. The ETL stores a copy of the `get_mags` response and gives its URL. The examples use the PDC `get_mags` URL |
+| `report` asset | `snc_url` | The PDC report page, with `type: html`. Only when `snc_url` has a value |
+| `related` links | Generated | To the hazard item and to each impact item |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 
-#### Hazard Type Mapping
+> [!NOTE]
+> The earliest snapshot comes first, so a new snapshot can only add countries at the end of
+> `monty:country_codes`. The first code, and so `monty:corr_id`, stays the same
+> ([IFRCGo/pystac-monty#273](https://github.com/IFRCGo/pystac-monty/pull/273),
+> [#276](https://github.com/IFRCGo/pystac-monty/pull/276)). The rules for multi-country items are in
+> [`monty:country_codes`](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes).
 
-PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical hazards. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension:
+### Hazard Type Mapping
+
+PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical hazards. The **2025 UNDRR-ISC** code is the **reference classification** for the Monty extension. The transformer maps the `type_ID` value of the hazard:
 
 **Natural Hazards:**
 
-| PDC Type            | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
-| ------------------- | ----- | ------------------- | ------------------------------ | ------------ | -------------------------------- |
-| Avalanche           | AV    | nat-hyd-mmw-ava     | **MH0801**                     | MH-TERR      | Avalanche                        |
-| Biomedical          | EP    | nat-bio-epi-dis     | **BI0101**                     | BIO-INFECT   | Infectious Diseases              |
-| Drought             | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP    | Drought                          |
-| Earthquake          | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS     | Earthquake                       |
-| Extreme Temperature | HT/CW | nat-met-ext-hea     | **MH0501**                     | MH-TEMP      | Heatwave (or MH0502 for Cold)    |
-| Flood               | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER     | Flooding (chapeau)               |
-| High Surf           | OT    | nat-hyd-wav-wav     | **MH0702**                     | MH-MARINE    | Wave Action                      |
-| High Wind           | VW    | nat-met-sto-sto     | **MH0301**                     | MH-WIND      | Wind (general)                   |
-| Landslide           | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL    | Gravitational Mass Movement      |
-| Marine              | OT    | nat-hyd-wav-wav     | **MH0700**                     | MH-MARINE    | Marine-related (chapeau)         |
-| Severe Weather      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
-| Storm               | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
-| Tornado             | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND      | Tornado                          |
-| Tropical Cyclone    | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND      | Tropical Cyclone                 |
-| Tsunami             | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE    | Tsunami                          |
-| Volcano             | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC     | Lava Flows                       |
-| Wildfire            | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
-| Winter Storm        | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP    | Blizzard                         |
+| PDC Type            | `type_ID`            | GLIDE | EM-DAT              | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
+| ------------------- | -------------------- | ----- | ------------------- | ------------------------------ | ------------ | -------------------------------- |
+| Avalanche           | `AVALANCHE`          | AV    | nat-hyd-mmw-ava     | **MH0801**                     | MH-TERR      | Avalanche                        |
+| Biomedical          | `BIOMEDICAL`         | EP    | nat-bio-epi-dis     | **BI0101**                     | BIO-INFECT   | Infectious Diseases              |
+| Drought             | `DROUGHT`            | DR    | nat-cli-dro-dro     | **MH0401**                     | MH-PRECIP    | Drought                          |
+| Earthquake          | `EARTHQUAKE`         | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS     | Earthquake                       |
+| Extreme Temperature | `EXTREMETEMPERATURE` | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP      | Heatwave (also for cold, see the note) |
+| Flood               | `FLOOD`              | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER     | Flooding (chapeau)               |
+| High Surf           | `HIGHSURF`           | OT    | nat-hyd-wav-wav     | **MH0702**                     | MH-MARINE    | Wave Action                      |
+| High Wind           | `HIGHWIND`           | VW    | nat-met-sto-sto     | **MH0301**                     | MH-WIND      | Wind (general)                   |
+| Landslide           | `LANDSLIDE`          | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL    | Gravitational Mass Movement      |
+| Marine              | `MARINE`             | OT    | nat-hyd-wav-wav     | **MH0700**                     | MH-MARINE    | Marine-related (chapeau)         |
+| Severe Weather      | `SEVEREWEATHER`      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
+| Storm               | `STORM`              | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
+| Tornado             | `TORNADO`            | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND      | Tornado                          |
+| Tropical Cyclone    | `CYCLONE`            | TC    | nat-met-sto-tro     | **MH0306**                     | MH-WIND      | Tropical Cyclone                 |
+| Tsunami             | `TSUNAMI`            | TS    | nat-geo-ear-tsu     | **MH0705**                     | MH-MARINE    | Tsunami                          |
+| Volcano             | `VOLCANO`            | VO    | nat-geo-vol-vol     | **GH0201**                     | GEO-VOLC     | Lava Flows                       |
+| Wildfire            | `WILDFIRE`           | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
+| Winter Storm        | `WINTERSTORM`        | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP    | Blizzard                         |
 
 **Geopolitical & Technological Hazards:**
 
-| PDC Type          | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
-| ----------------- | ----- | --------------- | ------------------------------ | ------------ | -------------------------------- |
-| Accident          | AC    | tec-mis-col-col | **TL0200**                     | TECH-STRFAIL | Structural Failure (chapeau)     |
-| Active Shooter    | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Civil Unrest      | OT    | soc-soc-vio-vio | **SO0202**                     | SOC-CONF     | Civil Unrest                     |
-| Combat            | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Cyber             | OT    | N/A             | **TL0601**                     | TECH-CYBER   | Cyber Incidents                  |
-| Man Made          | OT    | tec-tec-tec-tec | **TL0000**                     | TECH         | Technological (general)          |
-| Occurrence        | OT    | N/A             | **OT0000**                     | OTHER        | Other/Unspecified                |
-| Political Conflict| OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Terrorism         | OT    | soc-soc-vio-vio | **SO0203**                     | SOC-CONF     | Terrorism                        |
-| Weapons           | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| PDC Type          | `type_ID`           | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
+| ----------------- | ------------------- | ----- | --------------- | ------------------------------ | ------------ | -------------------------------- |
+| Accident          | `ACCIDENT`          | AC    | tec-mis-col-col | **TL0200**                     | TECH-STRFAIL | Structural Failure (chapeau)     |
+| Active Shooter    | `ACTIVESHOOTER`     | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Civil Unrest      | `CIVILUNREST`       | OT    | soc-soc-vio-vio | **SO0202**                     | SOC-CONF     | Civil Unrest                     |
+| Combat            | `COMBAT`            | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Cyber             | `CYBER`             | OT    | N/A             | **TL0601**                     | TECH-CYBER   | Cyber Incidents                  |
+| Man Made          | `MANMADE`           | OT    | tec-tec-tec-tec | **TL0000**                     | TECH         | Technological (general)          |
+| Occurrence        | `OCCURRENCE`        | OT    | N/A             | **OT0000**                     | OTHER        | Other/Unspecified                |
+| Political Conflict| `POLITICALCONFLICT` | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Terrorism         | `TERRORISM`         | OT    | soc-soc-vio-vio | **SO0203**                     | SOC-CONF     | Terrorism                        |
+| Weapons           | `WEAPONS`           | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
 
 > [!NOTE]
-> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event. For "Extreme Temperature", use MH0501 for heat-related events and MH0502 for cold-related events.
+> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. A type with no EM-DAT code (`CYBER`, `OCCURRENCE`) gets only two codes. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+>
+> **Extreme Temperature:** the transformer always uses `MH0501` (Heatwave) and `HT`, also for a cold event. The correct codes for a cold event are `MH0502` and `CW`. PDC gives no field that tells heat from cold, so this is not fixed yet.
+>
+> **Unknown `type_ID`:** the transformer logs a warning, makes no item for the hazard, and counts the hazard as a failed row.
 >
 > **Scope decision — `HIGHWIND` ([pystac-monty#196](https://github.com/IFRCGo/pystac-monty/issues/196)):** PDC issues `HighWind` from NWS High Wind Warnings/Advisories — sustained wind of 40 mph (35 kt) or more for 1 hour or more, or gusts of 58 mph (50 kt) or more, when no tropical cyclone or thunderstorm is present. This is a general wind event, not a Beaufort-scale term. So it maps to **MH0301 (Wind)**, not **MH0303 (Gale)**. This choice follows the existing GLIDE↔EM-DAT↔UNDRR crosswalk in [taxonomy.md](../../taxonomy.md#complete-2025-hazard-list) (`VW` → `nat-met-sto-sto` → `MH0301`).
 
-This comprehensive mapping ensures standardized hazard categorization for all PDC tracked hazards, including both natural and geopolitical/technological events.
-
 ## Hazard Item
 
-A PDC event and the timestamp from exposure endpoint will **ALWAYS** produce one [**hazard STAC item**](https://github.com/IFRCGo/monty-stac-extension#hazard). Here is a table with the STAC fields that are managed from the PDC event to the STAC hazard.
+The hazard item is a copy of the event item, with these differences:
 
-| STAC field | PDC Field | Description |
-| -----------|-----------|-------------|
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | id | Unique Identifier |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry) | latitude, longitude | Geometric point using latitude and longitude |
+| STAC field | Value | Description |
+| --- | --- | --- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | `pdc-hazard-{uuid}-{hazard_ID}` | The event id with the `pdc-hazard-` prefix |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-hazards` | |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | longitude, latitude, longitude, latitude |  |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["hazard", "source"] | Include both `hazard` and `source` roles (order does not matter) |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
-| [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
-| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) |      |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
-| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
-| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+| roles | Fixed | `["source", "hazard"]` |
+| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | Derived | The UNDRR-ISC 2025 code only, e.g. `["GH0300"]` |
+| [monty:hazard_detail](https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail) | `severity_ID` | See below |
+| `related` links | Generated | To the event item and to each impact item |
+
+All the other fields (geometry, datetime, `monty:country_codes`, `monty:corr_id`, keywords, assets)
+are the same as the event.
+
+```json
+{
+  "severity_value": 0.1,
+  "severity_unit": "PDC Severity Score",
+  "severity_label": "<severity_ID, e.g. WARNING>",
+  "estimate_type": "primary"
+}
+```
+
+> [!WARNING]
+> `severity_value` is always `0.1`. It is a placeholder, because the schema requires a value and PDC
+> gives no number. Do not use it. The PDC severity is in `severity_label`.
 
 ## Impact item
 
-The PDC events will produce multiple [**Impact STAC Items**](https://github.com/IFRCGo/monty-stac-extension#impact) when impact related data is available through exposure endpoint.
+The transformer makes one impact item for each snapshot, each [impact field](#impact-detail) and each
+row of `totalByAdmin`, when the field has a value in that row. A field without a value gives no item.
+An invalid snapshot is skipped with a warning; the event and the hazard are still made. When two
+snapshots have the same timestamp, the transformer keeps the last one.
 
-The following table shows the mapping of PDC impact fields to STAC items.
+The impact item is a copy of the event item, with these differences:
 
-| STAC field | PDC Field | Description |
-| -----------|-----------|-------------|
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | id | Unique Identifier |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry) | latitude, longitude | Geometric point using latitude and longitude |
+| STAC field | Value | Description |
+| --- | --- | --- |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | Generated | `pdc-impact-{uuid}-{hazard_ID}-{timestamp_ms}-{episode}-{group}-{field}-{admin}`, see below |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-impacts` | |
-| [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | longitude, latitude, longitude, latitude |  |
-| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | create_Date |     |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | hazard_Name |   |
-| [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | description |   |
-| roles | ["impact", "source"] | Include both `impact` and `source` roles (order does not matter) |
-| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `country` field in the list `totalByCountry` | List of country iso3 are pulled from exposure endpoint by iterating `totalByCountry` field |
-| [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | type_ID | The hazard codes are generated using the mapping |
-| [asset.report](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) | snc_url | Asset with the link to the PDC report |
-| [monty:impact_detail] | Impact items using different fields | Several impact items are created based on several fields available from the exposure endpoint |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | Source event ID | Unique identifier of the event |
-| [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
-| [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+| [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `timestamp` of the snapshot | Converted to UTC. `start_datetime` and `end_datetime` stay the same as the event |
+| roles | Fixed | `["source", "impact"]` |
+| [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByAdmin[].country` | The country of the row. One code |
+| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) | The field | See [Impact Detail](#impact-detail) |
+| `related` links | Generated | To the event item and to the hazard item |
 
-### Impact Details
-The following fields are used to create several **Impact Details** items.
+The geometry (the hazard point), `monty:hazard_codes` (all three codes), `monty:corr_id`, keywords
+and assets are the same as the event. So the keywords of an impact item can name other countries
+than its `monty:country_codes`.
 
-1. Population -> Age group 0 - 4
+The parts of the impact id:
 
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.CHILDREN_0_4|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total0_4]` |Get the value using the key `[population][total0_4]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
+- `{timestamp_ms}`: the snapshot `timestamp` in milliseconds. PDC sends milliseconds or seconds
+  with decimals (`1738897884.7774327` in the fixture). A value below 10¹¹ is read as seconds.
+- `{episode}`: always `1`.
+- `{group}-{field}`: the impact field, e.g. `population-total0_4`, `capital-total`.
+- `{admin}`: the `country` of the row, then `admin1` and `admin2` when they have a value, in
+  lowercase ASCII (`San Martín` → `san-martin`), then `-0`. When a row has the same
+  `country`/`admin1`/`admin2` as a row before it, `-0` becomes the row index (`-1`, `-2`, …).
 
-2. Population -> Age group 5 - 9
+Example: `pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0`.
 
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.CHILDREN_5_9|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total5_9]` |Get the value using the key `[population][total5_9]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
+### Impact Detail
 
-3. Population -> Age group 10 - 14
+Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate_type` is always
+`primary`. `unit` is not set.
 
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.CHILDREN_10_14|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total10_14]` |Get the value using the key `[population][total10_14]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
+| `{group}.{field}` | category | type |
+| --- | --- | --- |
+| `population.total0_4` | `children_0_4` | `affected_total` |
+| `population.total5_9` | `children_5_9` | `affected_total` |
+| `population.total10_14` | `children_10_14` | `affected_total` |
+| `population.total15_19` | `children_15_19` | `affected_total` |
+| `population.total20_24` | `adult_20_24` | `affected_total` |
+| `population.total25_29` | `adult_25_29` | `affected_total` |
+| `population.total30_34` | `adult_30_34` | `affected_total` |
+| `population.total35_39` | `adult_35_39` | `affected_total` |
+| `population.total40_44` | `adult_40_44` | `affected_total` |
+| `population.total45_49` | `adult_45_49` | `affected_total` |
+| `population.total50_54` | `adult_50_54` | `affected_total` |
+| `population.total55_59` | `adult_55_59` | `affected_total` |
+| `population.total60_64` | `adult_60_64` | `affected_total` |
+| `population.total65_Plus` | `elderly` | `affected_total` |
+| `population.total` | `people` | `affected_total` |
+| `population.households` | `households` | `affected_total` |
+| `capital.total` | `global_currency` | `cost` |
+| `capital.school` | `schools` | `affected_total` |
+| `capital.hospital` | `hospitals` | `affected_total` |
 
-4. Population -> Age group 15 - 19
+For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "primary"}`.
 
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.CHILDREN_15_19|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total15_19]` |Get the value using the key `[population][total15_19]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
+> [!NOTE]
+> These values are PDC **exposure** estimates: the people and the assets in the hazard area. They are
+> not observed impacts. The `capital.total` value is in USD, but the item has no `unit`. How Monty
+> represents exposure is open in [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169)
+> and [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
 
-5. Population -> Age group 20 - 24
+## Limitations and exclusions
 
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_20_24|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total20_24]` |Get the value using the key `[population][total20_24]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-6. Population -> Age group 25 - 29
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_25_29|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total25_29]` |Get the value using the key `[population][total25_29]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-7. Population -> Age group 30 - 34
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_30_34|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total30_34]` |Get the value using the key `[population][total30_34]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-8. Population -> Age group 35 - 39
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_35_39|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total35_39]` |Get the value using the key `[population][total35_39]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-9. Population -> Age group 40 - 44
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_40_44|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total40_44]` |Get the value using the key `[population][total40_44]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-10. Population -> Age group 45 - 49
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_45_49|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total45_49]` |Get the value using the key `[population][total45_49]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-11. Population -> Age group 50 - 54
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_50_54|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total50_54]` |Get the value using the key `[population][total50_54]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-12. Population -> Age group 55 - 59
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_55_59|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total55_59]` |Get the value using the key `[population][total55_59]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-13. Population -> Age group 60 - 64
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ADULT_60_64|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total60_64]` |Get the value using the key `[population][total60_64]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-14. Population -> Age group 65 and plus
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ELDERLY|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total65_plus]`|Get the value using the key `[population][total65_plus]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-15. Population -> Total population
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.ALL_PEOPLE|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][total]` |Get the value using the key `[population][total]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-16. Population -> Households
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.HOUSEHOLDS|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[population][houselholds]`|Get the value using the key `[population][households]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-17. Capital -> Total
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.GLOBAL_CURRENCY|  |
-| type |MontyImpactType.LOSS_COUNT| |
-|value |value from `[capital][total]` |Get the value using the key `[capital][total]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-18. Capital -> School
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.SCHOOLS|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[capital][school]` |Get the value using the key `[capital][school]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
-
-19. Capital -> Hospital
-
-|STAC Field | PDC Field | Description |
-|-----------|-----------|-------------|
-| category |MontyImpactExposureCategory.HOSPITALS|  |
-| type |MontyImpactType.TOTAL_AFFECTED| |
-|value |value from `[capital][hospital]` |Get the value using the key `[capital][hospital]`|
-| unit | None |     |
-|estimate_type|MontyEstimateType.PRIMARY| |
+- **Hazards without exposure data.** Such a hazard gives an event item and a hazard item, but no
+  impact item ([IFRCGo/pystac-monty#274](https://github.com/IFRCGo/pystac-monty/pull/274)).
+- **Historical hazards.** For most old hazards (e.g. 2010 or 2015), the exposure list endpoint
+  returns `404 Not Found` ([IFRCGo/montandon-etl#425](https://github.com/IFRCGo/montandon-etl/issues/425)).
+  There is no other endpoint for this data. These hazards can have event and hazard items only. PDC
+  offered targeted exports of its historical database on request.
+- **Unchanged snapshots.** The ETL does not send a snapshot that has the same content as the one
+  before it, so such a snapshot gives no impact item.
+- **Unknown hazard types.** A `type_ID` that is not in the [Hazard Type Mapping](#hazard-type-mapping)
+  gives no item.
+- **Fields not mapped.** A `totalByAdmin` row has more fields than the 19 in [Impact Detail](#impact-detail).
+  These are not mapped: the other `population` groups (`total0_14`, `total15_64`, `total65_69` to
+  `total95_99`, `total100AndOver`, `vulnerable`, `vulnerable0_14`, `vulnerable15_64`,
+  `vulnerable65_Plus`), and the needs (`foodNeeds`, `waterNeeds`, `wasteNeeds`, `shelterNeeds`)
+  with their units. `total65_Plus` (mapped) and `total65_69` to `total100AndOver` (not mapped)
+  overlap.
+- **No polygon geometry.** All the items have the hazard point as geometry. The hazard area is only
+  in the `Maps` asset.

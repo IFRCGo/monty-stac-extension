@@ -1,0 +1,101 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "glide-hazard-FL-2022-000230-NPL",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          80.058,
+          26.347
+        ],
+        [
+          80.058,
+          30.447
+        ],
+        [
+          88.201,
+          30.447
+        ],
+        [
+          88.201,
+          26.347
+        ],
+        [
+          80.058,
+          26.347
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    80.058,
+    26.347,
+    88.201,
+    30.447
+  ],
+  "properties": {
+    "title": "FL in Khandachakra, Tripurasundari, Paribartan, Anbu Khaireni on 2022, 6, 1",
+    "description": "Since the beginning of June, 2022, heavy rainfall, strong winds, and thunderstorms have been affecting parts of Nepal, causing floods, flash floods, landslides and leading to casualties. 21 people have died.",
+    "magnitude": "",
+    "source": "ADRC",
+    "docid": 22593,
+    "status": "A",
+    "roles": [
+      "source",
+      "hazard"
+    ],
+    "monty:src_event_id": "2022-000230",
+    "monty:episode_number": 1,
+    "monty:hazard_codes": [
+      "MH0600"
+    ],
+    "monty:country_codes": [
+      "NPL"
+    ],
+    "keywords": [
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related",
+      "NPL"
+    ],
+    "monty:corr_id": "20220601-NPL-1065121-MH0600-1-GCDB",
+    "monty:hazard_detail": {
+      "severity_value": -1,
+      "severity_unit": "glide",
+      "estimate_type": "primary"
+    },
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2022-06-01T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "collection",
+      "href": "./glide-hazards.json",
+      "type": "application/json",
+      "title": "GLIDE Source Hazards"
+    },
+    {
+      "rel": "via",
+      "href": "https://www.glidenumber.net/glide/jsonglideset.jsp?level1=NPL&fromyear=2022&toyear=2022&events=FL&number=2022-000230",
+      "type": "application/json",
+      "title": "Glide Event Data"
+    }
+  ],
+  "assets": {
+    "report": {
+      "href": "https://www.glidenumber.net/glide/public/search/details.jsp?glide=22593",
+      "type": "application/json",
+      "title": "Report"
+    }
+  },
+  "collection": "glide-hazards"
+}
