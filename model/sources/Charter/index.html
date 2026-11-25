@@ -1271,9 +1271,14 @@ both are Response items.</p>
 <p><code>{area_id}</code> is the upstream Area <code>id</code>, lowercased (e.g.
 <code>AOI_1_Epi_0-iNglWjcFF0v3rBHi3s1_fQ__</code> → <code>aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__</code>).
 <code>{call_id}-{vap_number}</code> is the VAP identifier from the upstream <code>&lt;identifier&gt;</code>
-(e.g. <code>1166-19</code>). <code>{dataset_id}</code> is a short URL-safe slug for the calibrated
-dataset used inside the Monty item <code>id</code>; the full upstream dataset identifier is
-preserved separately in <code>monty:response_detail.source_id</code>.</p>
+(e.g. <code>1166-19</code>). <code>{dataset_id}</code> is the full upstream dataset identifier without the
+<code>-calibrated</code> suffix, lowercased, with each character that a STAC API item id
+cannot contain replaced by <code>-</code> (e.g. <code>DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated</code>
+→ <code>ds_phr1a_202603021304008_fr1_px_w044s22_0907_00777</code>). The identifier is not
+shortened: a shorter form can give the same id to two different datasets. If the
+same dataset occurs more than one time in the input of one activation, only the
+first occurrence gives an item. The upstream identifier is also kept unchanged in
+<code>monty:response_detail.source_id</code>.</p>
 <blockquote>
 <p>The <code>Call</code> object is never emitted as its own item. Its <code>call_id</code> is carried on
 Response items (via <code>disaster:call_ids</code> and the <code>{call_id}</code> segment of the item
@@ -1960,7 +1965,7 @@ filtering is needed.</p>
 <tr>
 <td>Dataset identifier</td>
 <td><code>monty:response_detail.source_id</code></td>
-<td>Full upstream dataset id (e.g. <code>DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777</code>); the <code>{dataset_id}</code> slug in the item <code>id</code> is a short URL-safe form of it</td>
+<td>Full upstream dataset id (e.g. <code>DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777</code>); the <code>{dataset_id}</code> in the item <code>id</code> is the lowercased, URL-safe form of it, not shortened</td>
 </tr>
 <tr>
 <td>Producer</td>
