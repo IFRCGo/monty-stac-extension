@@ -126,13 +126,16 @@ sources:
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
+    reviewed: b3477b68ab177d12ac5d3f1b87ad9597ec888c2c
     regenerate:
       batch: glide
       input: docs/model/sources/GLIDE/FL-2024-000199-ESP.json
       # The fixture holds one record (the 2024 floods in Spain).
       # examples/glide-events/EQ-2008-000062-CHN.json has no committed fixture and
       # is not transformer output, so it is out of scope.
+      # The FL-2022-000230-NPL examples (a record with no coordinates) come from
+      # a second fixture, docs/model/sources/GLIDE/FL-2022-000230-NPL.json. A
+      # recipe has one input, so this check does not cover them.
       covers: ["*FL-2024-000199-ESP"]
 
   ibtracs:
