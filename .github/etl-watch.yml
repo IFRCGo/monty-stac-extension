@@ -126,7 +126,7 @@ sources:
 
   glide:
     extra_paths: [pystac_monty/validators/glide.py]
-    reviewed: 2c5f06ae46c6c4ed3b91c1c31588812d5c7fc651
+    reviewed: b3477b68ab177d12ac5d3f1b87ad9597ec888c2c
     regenerate:
       batch: glide
       input: docs/model/sources/GLIDE/FL-2024-000199-ESP.json
