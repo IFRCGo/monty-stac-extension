@@ -220,7 +220,7 @@ flowchart LR
 
 - **Thick arrow = mandatory:** every instance of the source concept must have this relation.
   **Dashed arrow = optional.**
-- Mandatory relations: a Response addresses an Event; an Exposure is always the footprint of a Hazard;
+- Mandatory relations: a Response addresses an Event; an Exposure always refers to a Hazard;
   a People-in-need estimate always uses an Exposure. All other relations are optional.
 - **Relations are links.** Two linked concepts do not share a data model.
 - **Forecast is a qualifier, not a concept.** It applies to Hazard, Exposure, Impact and People in need.
@@ -251,6 +251,13 @@ them as follows:
 - **Context** holds the population and asset inventories (with the other data not tied to a hazard).
 - **Exposure** always means hazard exposure: the part of the inventories inside a hazard footprint,
   for a stated intensity threshold. The hazard need not be an event (§2, case B).
+
+The link to a hazard is mandatory. The footprint geometry is not. A hazard item can be a point that
+gives a location and no extent, and a source can publish an exposure figure without its footprint.
+In these cases, the Exposure item keeps the spatial and method information that the source gives,
+and it states that the footprint is not available. Such a figure cannot be checked or computed again.
+The source review in [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169) must count
+these cases (see also question 8).
 
 Context is a **main** input of a people-in-need estimate (§4.2). It is not secondary data.
 
@@ -318,7 +325,7 @@ Names in *italics* are working names.
 | Relation | Meaning | Carried by | Level |
 |---|---|---|---|
 | Hazard → Event | the occurrence belongs to the event | `related` link with `roles: ["event"]`; query-time correlation for pre-event items (§8.1) | 0, 2 |
-| Exposure → Hazard | exposure to this footprint and threshold | `related` link with `roles: ["hazard"]`, **required** | 1 |
+| Exposure → Hazard | exposure to this hazard and threshold. The footprint geometry is optional (§5.2) | `related` link with `roles: ["hazard"]`, **required** | 1 |
 | Exposure → Context | the population or asset data used to compute the exposure | `derived_from` link | 1, 4 |
 | Impact → Hazard | effect of this hazard | `related` link with `roles: ["hazard"]` | 0 |
 | Impact → Response | figure taken from a response product | `derived_from` link | 0 |
@@ -564,7 +571,7 @@ and the review of 20 October
 | 1 | What is the **target level**, and what is the path to it? | Level 2 for the current phase. Path: Level 1 first (reclassify PDC, split GDACS, move DREF at-risk figures, add PAGER exposure, re-type PAGER alert bins), then the forecast qualifier, starting with GDACS cyclones | Converging (§1.2) |
 | 2 | How is exposure represented: interim value in Impact (2b), or separate class (2c)? | 2b as an interim step, piloted on GDACS, then decide on 2c. A full source-by-source review first | Open, [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169) |
 | 3 | Which forecast fields, and where? A `monty:forecast` object, the STAC `forecast` extension, or both? Which fields are mandatory per hazard type? | Proposed table of forecast metadata (20 October). First mapping to the STAC `forecast` extension in #178 | Open, [#168](https://github.com/IFRCGo/monty-stac-extension/discussions/168) |
-| 4 | Are Vulnerability and Coping capacity concepts of their own, or kinds of Context (§5.3)? | Concepts of their own: this matches INFORM, and they are separate inputs of a people-in-need estimate | One answer; to confirm |
+| 4 | Are Vulnerability and Coping capacity concepts of their own, or kinds of Context (§5.3)? | Concepts of their own: this matches INFORM, and they are separate inputs of a people-in-need estimate. Counterpoint (25 November comment): if the Context categories follow JIAF 2.0 (question 14), vulnerability and coping capacity go across the categories | Two positions; open |
 | 5 | Does Vulnerability mean **social** vulnerability in Montandon (§6.1)? | Yes, but reserve a name for physical vulnerability (building stock). PAGER results already include physical vulnerability, so they are modelled Impact, not exposure | One answer; to confirm |
 | 6 | For Level 3: who is accountable for a people-in-need figure that Montandon publishes? | A named owner per method. Montandon stores inputs and results unaltered, with the version trail. The partners' governance decides if a figure is official | One answer; Level 3 is not in the current phase |
 | 7 | For Level 4: which Context datasets are necessary, and which stay with their publishers (INFORM, HDX, RDL)? | Few datasets, all linked, none hosted: population (WorldPop or GHSL), admin boundaries (OCHA CODs), vulnerability (INFORM, HDX HAPI), hazard maps (JRC, GEM — GEM needs a licence review) | One answer; Level 4 is not in the current phase |
@@ -574,6 +581,7 @@ and the review of 20 October
 | 11 | Does Montandon stay a catalogue of metadata and links, or also store harmonised copies of hazard data? Who pays and operates the store? | — | New, [#178](https://github.com/IFRCGo/monty-stac-extension/issues/178) |
 | 12 | Is forecast one value of a **temporal status** that each item of each class carries (future prediction, current or past estimate, hypothetical scenario), and not a qualifier for forecasts only (§5.1)? Is the baseline qualifier (§2) a value of the same status? | Proposal in §8.3: derive the status from the STAC time fields (core, timestamps and forecast extensions). The hypothetical scenario needs an explicit marker | New (25 November comment), related to question 3 |
 | 13 | Does each item record the **evidence** behind its figure (direct observation, reported, modelled, inferred, analysed, mixed, unknown)? What is the relation to `estimate_type`? | — | New (25 November comment), related to question 9 |
+| 14 | Which categories structure Context? A comment of 25 November proposes JIAF 2.0 as the reference (five areas: human, financial, natural, social and political, physical), with three principles: hazard independence, temporal relevance, analytical interoperability. How does Montandon record that Context changes with time (§8.2)? | Hazard independence is the definition of §5.2. Interoperability agrees with §3: Montandon stores the inputs, and the analysis selects the method. The categories and the release frequency are open | New (25 November comment); Level 4 is not in the current phase |
 
 ## 11. Facts checked, and open points
 
@@ -583,6 +591,7 @@ and the review of 20 October
 | IPCC AR5 vulnerability includes "lack of capacity to cope and adapt" | Checked (IPCC WGII AR5 glossary) |
 | JIAF 2.0 pillar "Context" covers demographic, socio-economic, infrastructure characteristics | Checked ([IASC JIAF 2.0](https://interagencystandingcommittee.org/operational-policy-and-advocacy-group/iasc-technical-manual-joint-and-intersectoral-analysis-framework-jiaf-20)) |
 | JIAF 2.0: exact name of the fifth pillar (current and forecast priority needs) | **To verify** in the JIAF technical manual |
+| JIAF 2.0 structures its context analysis on the Five Capitals framework (human, financial, natural, social and political, manufactured or physical) | **To verify** in the JIAF technical manual (25 November comment) |
 | INFORM Severity dimensions: impact, conditions of affected people, complexity | Checked ([ACAPS](https://www.acaps.org/en/thematics/all-topics/inform-severity-index)) |
 | INFORM Warning is in development | Checked ([DRMKC](https://drmkc.jrc.ec.europa.eu/inform-index)) |
 | INFORM subnational models: Bangladesh and Myanmar exist; **no model for Nepal** | Checked ([DRMKC](https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Subnational-Risk)). Important for the Nepal use case |
