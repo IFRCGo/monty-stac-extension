@@ -134,9 +134,14 @@ process pivot Monty does not emit but references through its `call_id`.
 `{area_id}` is the upstream Area `id`, lowercased (e.g.
 `AOI_1_Epi_0-iNglWjcFF0v3rBHi3s1_fQ__` → `aoi_1_epi_0-inglwjcff0v3rbhi3s1_fq__`).
 `{call_id}-{vap_number}` is the VAP identifier from the upstream `<identifier>`
-(e.g. `1166-19`). `{dataset_id}` is a short URL-safe slug for the calibrated
-dataset used inside the Monty item `id`; the full upstream dataset identifier is
-preserved separately in `monty:response_detail.source_id`.
+(e.g. `1166-19`). `{dataset_id}` is the full upstream dataset identifier without the
+`-calibrated` suffix, lowercased, with each character that a STAC API item id
+cannot contain replaced by `-` (e.g. `DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777-calibrated`
+→ `ds_phr1a_202603021304008_fr1_px_w044s22_0907_00777`). The identifier is not
+shortened: a shorter form can give the same id to two different datasets. If the
+same dataset occurs more than one time in the input of one activation, only the
+first occurrence gives an item. The upstream identifier is also kept unchanged in
+`monty:response_detail.source_id`.
 
 > The `Call` object is never emitted as its own item. Its `call_id` is carried on
 > Response items (via `disaster:call_ids` and the `{call_id}` segment of the item
@@ -509,7 +514,7 @@ filtering is needed.
 | Resolution class | `disaster:resolution_class` | Dataset item (`VHR` / `HR` / `MR` / …) |
 | Product type code | `monty:response_detail.type = "eo-dat"` | Fixed |
 | Datetime | `datetime` | Dataset `datetime`. If the dataset has none, the `datetime` of the resolved activation Event ([IFRCGo/pystac-monty#236](https://github.com/IFRCGo/pystac-monty/pull/236)); the transformer logs a warning. If the Event has none either, the dataset is skipped |
-| Dataset identifier | `monty:response_detail.source_id` | Full upstream dataset id (e.g. `DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777`); the `{dataset_id}` slug in the item `id` is a short URL-safe form of it |
+| Dataset identifier | `monty:response_detail.source_id` | Full upstream dataset id (e.g. `DS_PHR1A_202603021304008_FR1_PX_W044S22_0907_00777`); the `{dataset_id}` in the item `id` is the lowercased, URL-safe form of it, not shortened |
 | Producer | `monty:response_detail.producer` | Dataset `providers[].name` (e.g. `Airbus`, `USGS/NASA`, `ESA/EC (Copernicus)`, `DLR`) |
 | Sensor / orbit / cloud cover | `eo:` / `sar:` / `sat:` fields | Dataset item (already present) |
 
