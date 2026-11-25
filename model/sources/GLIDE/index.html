@@ -1189,7 +1189,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Hazard Item">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#records-with-no-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Records with no coordinates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Records with no coordinates">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1533,7 +1544,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Hazard Item">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#records-with-no-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Records with no coordinates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Records with no coordinates">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1692,13 +1714,13 @@
 <tbody>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
-<td>event + number + geocode</td>
-<td>Unique identifier for the event</td>
+<td><code>glide-event-</code> + event + <code>-</code> + number + <code>-</code> + geocode</td>
+<td>Unique identifier for the item, for example <code>glide-event-FL-2024-000199-ESP</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
-<td>longitude + latitude as geojson POINT</td>
-<td>Geometry of the event (POINT)</td>
+<td>longitude + latitude as geojson POINT (fallback: country geometry of geocode)</td>
+<td>Geometry of the event (POINT). When <code>latitude</code> and <code>longitude</code> are both <code>0.0</code>, the record has no location: the geometry is the country geometry of <code>geocode</code> (Polygon or MultiPolygon) and <code>bbox</code> is its bounds. See <a href="#records-with-no-coordinates">Records with no coordinates</a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
@@ -1723,7 +1745,7 @@
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
 <td>geocode (fallback: reverse-geocoded point)</td>
-<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
+<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. A record with <code>---</code> and no coordinates gives no item (see <a href="#records-with-no-coordinates">Records with no coordinates</a>). <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
@@ -1734,6 +1756,11 @@
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
 <td>event</td>
 <td>List of hazard codes converted following the <a href="#mapping-from-glide-event-type-to-hazard-profile">GLIDE event type to Hazard profile mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived + geocode</td>
+<td>The hazard keywords of <code>monty:hazard_codes</code>, then the raw <code>geocode</code> value, with no duplicates and in this order: <code>["Flooding", "Meteorological &amp; Hydrological", "Water-related", "ESP"]</code>. The hazard item has the same list as the event item</td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
@@ -1780,13 +1807,13 @@
 <tbody>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id">id</a></td>
-<td>event + number + geocode</td>
-<td>Unique identifier for the event</td>
+<td><code>glide-hazard-</code> + event + <code>-</code> + number + <code>-</code> + geocode</td>
+<td>Unique identifier for the item, for example <code>glide-hazard-FL-2024-000199-ESP</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry">geometry</a></td>
-<td>longitude + latitude as geojson POINT</td>
-<td>Geometry of the event (POINT)</td>
+<td>longitude + latitude as geojson POINT (fallback: country geometry of geocode)</td>
+<td>Geometry of the event (POINT). When <code>latitude</code> and <code>longitude</code> are both <code>0.0</code>, the record has no location: the geometry is the country geometry of <code>geocode</code> (Polygon or MultiPolygon) and <code>bbox</code> is its bounds. See <a href="#records-with-no-coordinates">Records with no coordinates</a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection">collection</a></td>
@@ -1811,7 +1838,7 @@
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[0]</td>
 <td>geocode (fallback: reverse-geocoded point)</td>
-<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
+<td>ISO3 code from <code>geocode</code>. When GLIDE reports the sentinel <code>---</code> (unresolved) and a geocoder is configured, the transformer instead reverse-geocodes the event's lat/lon point via <code>MontyGeoCoder.get_iso3_from_point</code>. If no geocoder is configured, <code>monty:country_codes</code> is an empty list; if a geocoder is configured but the point does not resolve to any country, the list is <code>[null]</code>. A record with <code>---</code> and no coordinates gives no item (see <a href="#records-with-no-coordinates">Records with no coordinates</a>). <code>keywords</code> is always built from the raw <code>geocode</code> value (e.g. <code>---</code>), even when <code>monty:country_codes</code> was reverse-geocoded — the two fields can diverge</td>
 </tr>
 <tr>
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montycountry_codes">monty:country_codes</a>[1..*]</td>
@@ -1822,6 +1849,11 @@
 <td><a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes">monty:hazard_codes</a></td>
 <td>event</td>
 <td>List of hazard codes converted following the <a href="#mapping-from-glide-event-type-to-hazard-profile">GLIDE event type to Hazard profile mapping</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics">keywords</a></td>
+<td>Derived + geocode</td>
+<td>The hazard keywords of <code>monty:hazard_codes</code>, then the raw <code>geocode</code> value, with no duplicates and in this order: <code>["Flooding", "Meteorological &amp; Hydrological", "Water-related", "ESP"]</code>. The hazard item has the same list as the event item</td>
 </tr>
 <tr>
 <td><a href="https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id">monty:src_event_id</a></td>
@@ -1855,6 +1887,43 @@
 </tr>
 </tbody>
 </table>
+<h3 id="records-with-no-coordinates">Records with no coordinates</h3>
+<p>GLIDE writes <code>latitude: 0.0</code> and <code>longitude: 0.0</code> when a record has no location. The record <code>FL-2022-000230-NPL</code> in the file <a href="FL-2022-000230-NPL.json">FL-2022-000230-NPL.json</a> is an example. That file is the output of the <a href="https://www.glidenumber.net/glide/jsonglideset.jsp?level1=NPL&amp;fromyear=2022&amp;toyear=2022&amp;events=FL&amp;number=2022-000230"><code>jsonglideset</code></a> API endpoint. It has two records, and only <code>FL-2022-000347-NPL</code> has coordinates.</p>
+<p>The transformer does not write a point at 0,0 for such a record. These rules apply to the event item and to the hazard item:</p>
+<table>
+<thead>
+<tr>
+<th>Record</th>
+<th><code>geometry</code> and <code>bbox</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>latitude</code> or <code>longitude</code> is not <code>0.0</code></td>
+<td>The point, as in the tables above</td>
+</tr>
+<tr>
+<td>Both are <code>0.0</code>, and <code>geocode</code> is an ISO3 code</td>
+<td>The country geometry from <code>MontyGeoCoder.get_geometry_from_iso3(geocode, simplified=True)</code>, and the bounds of that geometry</td>
+</tr>
+<tr>
+<td>Both are <code>0.0</code>, and <code>geocode</code> is <code>---</code></td>
+<td>No item. The transformer writes a warning to the log</td>
+</tr>
+<tr>
+<td>Both are <code>0.0</code>, and the geocoder has no geometry for <code>geocode</code>, or no geocoder is configured</td>
+<td>No item. The transformer writes a warning to the log</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>shape_type</code> is not used. Its value is <code>0</code> in the two records of the fixture: the record with coordinates and the record without coordinates.</li>
+<li>The produced STAC items are in the files <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-events/FL-2022-000230-NPL.json">glide-events/FL-2022-000230-NPL.json</a> and <a href="https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/glide-hazards/FL-2022-000230-NPL.json">glide-hazards/FL-2022-000230-NPL.json</a>. They come from the batch exporter of the transformer, which uses the test geocoder. Thus the geometry in the examples is a rectangle, not the real border of Nepal.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>A country geometry is not the location of the event.</strong> It is the largest area where the event can be. The item has no field that tells a client that the geometry is a fallback. A client can only see it from the geometry type: a GLIDE item with a Polygon or a MultiPolygon has a country geometry. The text of <code>title</code> (GLIDE <code>location</code>) and of <code>description</code> (GLIDE <code>comments</code>) frequently gives a more accurate place, but the transformer does not use it.</p>
+</div>
 <h4 id="hazard-detail">Hazard Detail</h4>
 <p>The <a href="https://github.com/IFRCGo/monty-stac-extension#montyhazard_detail">hazard_detail</a> field is a JSON object that contains the detailed information about the hazard. The object is a mapping of the hazard codes to the detailed information. The detailed information is a JSON object with the following fields:</p>
 <table>
