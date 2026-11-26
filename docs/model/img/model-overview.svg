@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360" role="img" aria-label="Block diagram of the five classes of the Monty model: an Event has Hazards; the area of a Hazard holds Exposure; a Hazard causes Impact; a Response addresses the Event and informs Impact">
+<style>
+svg { font-family: Roboto, "Helvetica Neue", Arial, sans-serif; }
+.n { font-size: 15px; font-weight: 700; fill: #ffffff; }
+.q { font-size: 13px; fill: #3f3f3f; }
+.c { font-size: 11.5px; fill: #6b6b6b; font-family: monospace; }
+.l { font-size: 12px; fill: #5a6470; font-style: italic; }
+</style>
+<rect x="0" y="0" width="820" height="360" rx="12" fill="#f4f8fd"/>
+<path d="M190 160 L262 160" stroke="#5a6470" stroke-width="2" fill="none"/>
+<polygon points="270 160 260 155 260 165" fill="#5a6470"/>
+<text x="228" y="152" text-anchor="middle" class="l">has</text>
+<path d="M450 145 L505 145 L505 72 L552 72" stroke="#5a6470" stroke-width="2" fill="none"/>
+<polygon points="560 72 550 67 550 77" fill="#5a6470"/>
+<text x="548" y="62" text-anchor="end" class="l">its area holds</text>
+<path d="M450 175 L505 175 L505 236 L552 236" stroke="#5a6470" stroke-width="2" fill="none"/>
+<polygon points="560 236 550 231 550 241" fill="#5a6470"/>
+<text x="548" y="228" text-anchor="end" class="l">causes</text>
+<path d="M270 292 L105 292 L105 210" stroke="#5a6470" stroke-width="2" fill="none"/>
+<polygon points="105 202 100 212 110 212" fill="#5a6470"/>
+<text x="188" y="284" text-anchor="middle" class="l">addresses</text>
+<path d="M450 275 L552 275" stroke="#5a6470" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+<polygon points="560 275 550 270 550 280" fill="#5a6470"/>
+<text x="503" y="267" text-anchor="middle" class="l">informs</text>
+<rect x="20" y="118" width="170" height="84" rx="8" fill="#ffffff" stroke="#3f3f3f" stroke-width="2"/>
+<path d="M20 148 L20 126 Q20 118 28 118 L182 118 Q190 118 190 126 L190 148 Z" fill="#3f3f3f"/>
+<text x="32" y="139" class="n">Event</text>
+<text x="32" y="170" class="q">What occurred?</text>
+<text x="32" y="190" class="c">&lt;source&gt;-events</text>
+<rect x="270" y="118" width="180" height="84" rx="8" fill="#ffffff" stroke="#cf3f02" stroke-width="2"/>
+<path d="M270 148 L270 126 Q270 118 278 118 L442 118 Q450 118 450 126 L450 148 Z" fill="#cf3f02"/>
+<text x="282" y="139" class="n">Hazard</text>
+<text x="282" y="170" class="q">Where, and how strong?</text>
+<text x="282" y="190" class="c">&lt;source&gt;-hazards</text>
+<rect x="560" y="30" width="240" height="84" rx="8" fill="#ffffff" stroke="#128a5f" stroke-width="2"/>
+<path d="M560 60 L560 38 Q560 30 568 30 L792 30 Q800 30 800 38 L800 60 Z" fill="#128a5f"/>
+<text x="572" y="51" class="n">Exposure</text>
+<text x="572" y="82" class="q">Who and what is in the hazard area?</text>
+<text x="572" y="102" class="c">&lt;source&gt;-exposure</text>
+<rect x="560" y="206" width="240" height="84" rx="8" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+<path d="M560 236 L560 214 Q560 206 568 206 L792 206 Q800 206 800 214 L800 236 Z" fill="#b3261e"/>
+<text x="572" y="227" class="n">Impact</text>
+<text x="572" y="258" class="q">What was the effect?</text>
+<text x="572" y="278" class="c">&lt;source&gt;-impacts</text>
+<rect x="270" y="250" width="180" height="84" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<path d="M270 280 L270 258 Q270 250 278 250 L442 250 Q450 250 450 258 L450 280 Z" fill="#2a78d6"/>
+<text x="282" y="271" class="n">Response</text>
+<text x="282" y="302" class="q">What was done?</text>
+<text x="282" y="322" class="c">&lt;source&gt;-response</text>
+</svg>

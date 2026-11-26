@@ -20,6 +20,11 @@ The normalized model must keep all the information from the Monty model and cove
 
 ### Data Overview
 
+![Block diagram of the five classes of the Monty model: an Event has Hazards; the area of a Hazard holds Exposure; a Hazard causes Impact; a Response addresses the Event and informs Impact](img/model-overview.svg)
+
+Each block is one class of the model, with the question that it answers and the name of its
+collections. An arrow shows the meaning of a relation. A dashed arrow is an optional relation.
+
 The Monty model is based on **Event** data type that consititutes the core of the model.
 In STAC, they will be represented as an item. Then for each event,
 4 kinds of data are collected:
