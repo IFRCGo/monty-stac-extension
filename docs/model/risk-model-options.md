@@ -441,7 +441,7 @@ The partners agreed to split the work in four chunks, one for each level above L
 
 | Chunk | Level | Content | Target | Status |
 |---|---|---|---|---|
-| 1 | 1 | Event-linked exposure: exposure is a class of its own, separate from impact | Q1 2027, Monty STAC extension v2.0 | Started. One pull request |
+| 1 | 1 | Event-linked exposure: exposure is a class of its own, separate from impact | Q1 2027, Monty STAC extension v2.0 | Started, with this proposal, in [pull request #180](https://github.com/IFRCGo/monty-stac-extension/pull/180) |
 | 2 | 2 | Pre-event occurrences: forecast hazards, and exposure before an event exists | Q2 2027, Monty STAC extension v2.1 | Next. One pull request, after chunk 1 |
 | 3 | 3 | Analytical results: people-in-need estimates | To be defined | Not started |
 | 4 | 4 | Context catalogue: population, vulnerability, coping capacity | To be defined | Not started |
@@ -452,8 +452,8 @@ Working mode:
 - The blocking points go to the partner meetings.
 - For each chunk, the specification comes first: the schema, the source documents and the worked
   examples. The transformers follow the specification, and the examples are the test.
-- This document stays a discussion document. It is not merged. The agreed content moves to the
-  specification with each chunk.
+- This document is a proposal, not a normative text. The agreed content moves to the
+  specification with each chunk, and the specification is the reference.
 
 ## 8. Supporting choices
 
