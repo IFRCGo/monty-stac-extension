@@ -171,13 +171,12 @@ Below is an example of a queryables definition for a STAC API implementing the M
       "description": "The estimated value type of the impact",
       "type": "string",
       "enum": [
-        "unspecified", "unaffected", "damaged", "destroyed", 
+        "unspecified", "damaged", "destroyed", 
         "affected_total", "affected_direct", "affected_indirect", "death", 
         "missing", "injured", "evacuated", "relocated", "assisted", 
         "shelter_emergency", "shelter_temporary", "shelter_longterm", "in_need", 
         "targeted", "disrupted", "cost", "homeless", "displaced_internal", 
-        "displaced_external", "displaced_total", "alertscore", 
-        "highest_risk"
+        "displaced_external", "displaced_total"
       ]
     },
     "monty:impact_detail.value": {

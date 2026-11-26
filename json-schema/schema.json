@@ -306,7 +306,6 @@
               "type": "string",
               "enum": [
                 "unspecified",
-                "unaffected",
                 "damaged",
                 "destroyed",
                 "affected_total",
@@ -328,9 +327,7 @@
                 "homeless",
                 "displaced_internal",
                 "displaced_external",
-                "displaced_total",
-                "alertscore",
-                "highest_risk"
+                "displaced_total"
               ]
             },
             "value": true,

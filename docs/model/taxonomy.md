@@ -987,7 +987,6 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | Impact Type Code    | Impact Type Label                                         |
 | ------------------- | --------------------------------------------------------- |
 | unspecified         | Unspecified                                               |
-| unaffected          | Unaffected                                                |
 | damaged             | Damaged                                                   |
 | destroyed           | Destroyed                                                 |
 | affected_total      | Total Affected                                            |
@@ -1010,5 +1009,3 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 | displaced_internal  | Internally Displaced Persons (IDPs)                       |
 | displaced_external  | Refugees, Asylum Seekers and Externally Displaced Persons |
 | displaced_total     | Displaced Persons (Internal & External)                   |
-| alertscore          | Alertscore                                                |
-| highest_risk        | Highest Risk                                              |

@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **BREAKING** (draft for v2.0.0): `potentially_affected` and `potentially_damaged` are removed from `monty:impact_detail.type`. These figures are exposure, and they go to Exposure items
+- **BREAKING** (draft for v2.0.0): `highest_risk`, `alertscore` and `unaffected` are removed from `monty:impact_detail.type`. They are not effects of a hazard. The IFRC-DREF fields `num_potentially_affected` and `num_highest_risk` are no longer mapped (`docs/model/sources/IFRC-DREF/README.md`)
 - **BREAKING** (draft for v2.0.0): the schema now requires `category` and `value` in `monty:impact_detail`, as the README already said. `monty:impact_detail` and `monty:exposure_detail` share one base definition (`figure_detail`) and one category enum (`exposure_category`) in the schema. `scripts/check_impact_categories.py` reads the shared enum
 - GDACS `popstormsurge` and wildfire `POPAFFECTED` are no longer mapped: they are exposure figures with no intensity value, which is an open point of `docs/model/exposure-impact-boundary.md`
 - `scripts/gen_sources_index.py`, `docs/model/sources/sources.yml`, `SOURCE_TEMPLATE.md`, `METHODOLOGY.md` and the new-source issue template accept the `exposure` type and the `-exposure` collection suffix

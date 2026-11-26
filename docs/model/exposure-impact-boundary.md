@@ -75,6 +75,8 @@ If yes, the figure is an Exposure.
 | I1 | Reported effect | Deaths that an authority reports | Impact | |
 | I2 | Modelled effect | Fatalities or economic losses that a loss model estimates | Impact | `estimate_type: modelled`. A loss model already applies vulnerability to the exposure. Its result is not an exposure |
 | I3 | Observed damage | Buildings destroyed in a damage grading map | Impact | See also the [Response ↔ Impact boundary rules](response-impact-boundary.md) |
+| N1 | Risk or alert indicator: people at risk before or outside a hazard area, an alert score | People at highest risk in a field report; the alert score of a track point | Not Exposure, not Impact | It is not an effect, and it is not a count inside a hazard area for a stated intensity. Monty has no class for it, and it is not mapped |
+| N2 | People or assets with no effect | The unaffected buildings of a damage grading map | Not Impact | An impact figure counts an effect. A figure of no effect is not mapped |
 | R1 | Reach of a response | People assisted by an operation | Not Exposure | It measures the response. See the [Response ↔ Impact boundary rules](response-impact-boundary.md) |
 
 ## 3. Rules for an Exposure item
@@ -116,13 +118,11 @@ In these cases:
 - A client cannot check the figure or compute it again. A client finds the item through the hazard
   link, `monty:country_codes` or `monty:corr_id`. A spatial search does not return it.
 
-## 5. Open points
+## 5. Open point
 
 - **Hazards with an extent and no intensity scale (pattern X3).** For a flood extent, a burnt area
   or a storm surge zone, the source gives a count inside the area and no intensity value. The
   class requires an intensity. Until this point is decided, such a figure has no mapping.
-- **Figures that are not a count inside a hazard area.** The impact types `highest_risk` and
-  `alertscore` stay in `monty:impact_detail` for now.
 
 ## See also
 

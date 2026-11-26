@@ -340,7 +340,7 @@ Rules:
 
 6. **`popstormsurge` is not mapped.** GDACS gives a count for the storm surge zone and
    no intensity value. The Exposure class requires an intensity. This is an open point of the
-   [Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-points).
+   [Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-point).
 7. **The geometry is `null`.** The count covers the wind field, and GDACS does not publish
    the wind field of each track point. If the hazard item gives the wind field of the same
    track point, a transformer can use it.
@@ -380,7 +380,7 @@ The `POP` datum carries a series of scalars:
 burnt area is available (the `Shape` WKT of the `INPUT PARAMETERS` datum), but a burnt
 area has no intensity value, and the Exposure class requires one. **This figure is not
 mapped** until the open point of the
-[Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-points) is
+[Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-point) is
 decided. It must not become an impact item.
 
 The `modelname`, `modelrun` and `modelstatus` fields show that GDACS derived this
