@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="340" viewBox="0 0 880 340" role="img" aria-label="Monty in one picture: disaster data sources are mapped to one data model, and written as STAC with the Monty extension">
+<style>
+svg { font-family: Roboto, "Helvetica Neue", Arial, sans-serif; }
+.h { font-size: 24px; font-weight: 800; fill: #ffffff; }
+.sub { font-size: 14px; fill: #c9d6e6; }
+.t { font-size: 12px; font-weight: 700; fill: #ff8a5c; letter-spacing: 1.5px; }
+.chip { font-size: 12px; font-weight: 600; fill: #ffffff; }
+.pill { font-size: 13px; font-weight: 700; fill: #ffffff; }
+.cap { font-size: 13px; fill: #c9d6e6; }
+.code { font-size: 10.5px; fill: #d7e3f1; font-family: monospace; }
+</style>
+<rect x="0" y="0" width="880" height="340" rx="14" fill="#0f2540"/>
+<text x="24" y="46" class="h">Many sources. One model. One STAC catalogue.</text>
+<text x="24" y="72" class="sub">Monty turns disaster data feeds into data that you can search and compare.</text>
+<rect x="24" y="100" width="264" height="216" rx="10" fill="#17355a" stroke="#2b4f7d" stroke-width="1.5"/>
+<text x="40" y="128" class="t">SOURCES</text>
+<text x="40" y="300" class="cap">Real-world disaster data feeds</text>
+<rect x="324" y="100" width="250" height="216" rx="10" fill="#17355a" stroke="#2b4f7d" stroke-width="1.5"/>
+<text x="340" y="128" class="t">MODEL</text>
+<text x="340" y="300" class="cap">What the data means</text>
+<rect x="610" y="100" width="246" height="216" rx="10" fill="#17355a" stroke="#2b4f7d" stroke-width="1.5"/>
+<text x="626" y="128" class="t">EXTENSION SPEC</text>
+<text x="626" y="300" class="cap">How it is written in STAC</text>
+<path d="M292 208 L310 208" stroke="#ff8a5c" stroke-width="3" fill="none"/><polygon points="320 208 308 201 308 215" fill="#ff8a5c"/>
+<path d="M578 208 L596 208" stroke="#ff8a5c" stroke-width="3" fill="none"/><polygon points="606 208 594 201 594 215" fill="#ff8a5c"/>
+<rect x="40" y="140" width="55" height="22" rx="11" fill="#23507f"/><text x="67.5" y="155.5" text-anchor="middle" class="chip">GDACS</text>
+<rect x="102" y="140" width="47" height="22" rx="11" fill="#23507f"/><text x="125.5" y="155.5" text-anchor="middle" class="chip">USGS</text>
+<rect x="156" y="140" width="62" height="22" rx="11" fill="#23507f"/><text x="187.0" y="155.5" text-anchor="middle" class="chip">EM-DAT</text>
+<rect x="225" y="140" width="47" height="22" rx="11" fill="#23507f"/><text x="248.5" y="155.5" text-anchor="middle" class="chip">CEMS</text>
+<rect x="40" y="168" width="69" height="22" rx="11" fill="#23507f"/><text x="74.5" y="183.5" text-anchor="middle" class="chip">Charter</text>
+<rect x="116" y="168" width="55" height="22" rx="11" fill="#23507f"/><text x="143.5" y="183.5" text-anchor="middle" class="chip">GLIDE</text>
+<rect x="178" y="168" width="69" height="22" rx="11" fill="#23507f"/><text x="212.5" y="183.5" text-anchor="middle" class="chip">IBTrACS</text>
+<rect x="40" y="196" width="84" height="22" rx="11" fill="#23507f"/><text x="82.0" y="211.5" text-anchor="middle" class="chip">IDMC GIDD</text>
+<rect x="131" y="196" width="77" height="22" rx="11" fill="#23507f"/><text x="169.5" y="211.5" text-anchor="middle" class="chip">IDMC IDU</text>
+<rect x="40" y="224" width="99" height="22" rx="11" fill="#23507f"/><text x="89.5" y="239.5" text-anchor="middle" class="chip">DesInventar</text>
+<rect x="146" y="224" width="40" height="22" rx="11" fill="#23507f"/><text x="166.0" y="239.5" text-anchor="middle" class="chip">PDC</text>
+<rect x="193" y="224" width="40" height="22" rx="11" fill="#23507f"/><text x="213.0" y="239.5" text-anchor="middle" class="chip">GFD</text>
+<rect x="40" y="252" width="84" height="22" rx="11" fill="#23507f"/><text x="82.0" y="267.5" text-anchor="middle" class="chip">IFRC DREF</text>
+<rect x="340" y="146" width="104" height="30" rx="6" fill="#6f7f91"/><text x="392" y="166" text-anchor="middle" class="pill">Event</text>
+<rect x="452" y="146" width="104" height="30" rx="6" fill="#cf3f02"/><text x="504" y="166" text-anchor="middle" class="pill">Hazard</text>
+<rect x="340" y="186" width="104" height="30" rx="6" fill="#128a5f"/><text x="392" y="206" text-anchor="middle" class="pill">Exposure</text>
+<rect x="452" y="186" width="104" height="30" rx="6" fill="#b3261e"/><text x="504" y="206" text-anchor="middle" class="pill">Impact</text>
+<rect x="340" y="226" width="104" height="30" rx="6" fill="#2a78d6"/><text x="392" y="246" text-anchor="middle" class="pill">Response</text>
+<text x="452" y="246" class="cap">+ taxonomies</text>
+<rect x="622" y="142" width="222" height="124" rx="6" fill="#0b1c31"/>
+<text x="632" y="164" class="code">&quot;roles&quot;: [&quot;hazard&quot;, &quot;source&quot;],</text>
+<text x="632" y="186" class="code">&quot;monty:hazard_codes&quot;: [&quot;MH0306&quot;],</text>
+<text x="632" y="208" class="code">&quot;monty:country_codes&quot;: [&quot;PHL&quot;],</text>
+<text x="632" y="230" class="code">&quot;monty:corr_id&quot;: &quot;2026…-GCDB&quot;,</text>
+<text x="632" y="252" class="code">&quot;monty:hazard_detail&quot;: { … }</text>
+</svg>

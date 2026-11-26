@@ -17,6 +17,8 @@ For more information about the Montandon project, please check out [this 5-minut
 
 ## The Three Pillars
 
+![Monty in one picture: disaster data sources are mapped to one data model, and written as STAC with the Monty extension](docs/img/monty-overview.svg)
+
 This repository is more than the field spec below. It is organized around three pieces that build on each other:
 
 1. **[Extension Spec](#fields)** (this document) — the normative STAC fields, roles and relation types that carry Monty data in a STAC Item or Collection.
