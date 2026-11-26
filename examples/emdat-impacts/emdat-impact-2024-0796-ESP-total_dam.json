@@ -66,10 +66,10 @@
       "impact"
     ],
     "monty:impact_detail": {
-      "category": "total_affected",
+      "category": "global_currency",
       "type": "cost",
-      "value": 11000000,
-      "unit": "count",
+      "value": 11000000000,
+      "unit": "USD",
       "estimate_type": "primary"
     },
     "processing:version": "1.0.0",

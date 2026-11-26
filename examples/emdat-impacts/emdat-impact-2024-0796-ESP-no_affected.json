@@ -67,7 +67,7 @@
     ],
     "monty:impact_detail": {
       "category": "people",
-      "type": "affected_total",
+      "type": "affected_direct",
       "value": 36115,
       "unit": "count",
       "estimate_type": "primary"

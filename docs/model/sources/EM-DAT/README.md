@@ -220,8 +220,8 @@ The impact item is a copy of the [event item](#event-item), with the three hazar
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event item + ` - ` + the field name: `Flood (General) in Spain - total_deaths` |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).category | Generated | See the [Impact Field Mapping](#impact-field-mapping) |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).type | Generated | See the [Impact Field Mapping](#impact-field-mapping) |
-| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).value | The impact column | The value of the column, not converted |
-| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).unit | Generated | Always `count` |
+| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).value | The impact column | The value of the column. Total Damage is multiplied by 1000 |
+| [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).unit | Generated | `count` for the people columns, `USD` for Total Damage |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).estimate_type | Generated | Always `primary` |
 
 #### Impact Field Mapping
@@ -230,16 +230,14 @@ The impact item is a copy of the [event item](#event-item), with the three hazar
 | ------------- | ---------- | -------- | ---- |
 | Total Deaths | `total_deaths` | `people` | `death` |
 | No. Injured | `no_injured` | `people` | `injured` |
-| No. Affected | `no_affected` | `people` | `affected_total` |
+| No. Affected | `no_affected` | `people` | `affected_direct` |
 | No. Homeless | `no_homeless` | `people` | `displaced_total` |
 | Total Affected | `total_affected` | `people` | `affected_total` |
-| Total Damage ('000 US$) | `total_dam` | `total_affected` | `cost` |
+| Total Damage ('000 US$) | `total_dam` | `global_currency` | `cost` |
 
 The transformer does not map the other impact columns of EM-DAT: the reconstruction costs, the insured damage, and the adjusted values.
 
-> [!WARNING]
-> **Known limits of the impact mapping.** This section describes what the transformer does today. Three points are not correct yet:
+> [!NOTE]
+> **Total Damage.** EM-DAT gives this column in thousands of US dollars. The transformer multiplies the value by 1000 and writes it in `USD`. The example disaster has `11000000` in EM-DAT, and the item has `value: 11000000000` with `unit: USD`.
 >
-> - **Total Damage has the unit `count` and is not converted.** EM-DAT gives this column in thousands of US dollars. The example disaster has `11000000`, which is 11 billion US dollars, and the item has `value: 11000000.0` with `unit: count`.
-> - **No. Affected and Total Affected give the same type.** The two items have `affected_total`. In EM-DAT, Total Affected is the sum of No. Injured, No. Affected and No. Homeless.
-> - **The category of Total Damage is `total_affected`.** This category is a generic one, and it does not say what was damaged.
+> **No. Affected and Total Affected.** In EM-DAT, No. Affected is the number of people who need immediate assistance, and Total Affected is the sum of No. Injured, No. Affected and No. Homeless. The two columns thus give two types: `affected_direct` and `affected_total`. Do not add the two values.
