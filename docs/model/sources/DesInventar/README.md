@@ -169,7 +169,7 @@ The following table provides cross-classification across multiple systems, per [
 
 | DesInventar Event | GLIDE | EM-DAT | **UNDRR-ISC 2025** (Reference) | Cluster | Description |
 | ------------------ | ----- | ------------------- | ------------------------------- | ---------- | ------------------------------- |
-| ACCIDENT | AC | tec-mis-col-col | **TL0007** † | TECH-STRFAIL | Structural Failure |
+| ACCIDENT | AC | tec-mis-col-col | **TL0201** | TECH-STRFAIL | Building Collapse |
 | Acid rain | OT |  | **EN0105** | ENV-AIR | Acid Rain |
 | AFLATOXIN | OT |  | **CH0201** | CHEM-CARC | Aflatoxins |
 | Air pollution | OT |  | **EN0102** | ENV-AIR | Air Pollution (Point Source) |
@@ -179,7 +179,7 @@ The following table provides cross-classification across multiple systems, per [
 | ANIMAL DISEASE | OT |  | **BI0301** | BIO-ANIMAL | Animal Diseases (Not Zoonoses) |
 | ASPHYXIA | OT |  | **CH0400** | CHEM-AGAS | Asphyxiant Gases |
 | AVALANCHE | AV | nat-geo-mmd-ava | **MH0801** | MH-TERR | Avalanche |
-| BOAT CAPSIZE | AC | tec-tra-wat-wat | **TL0050** † | TECH-TRANSP | Marine Accident |
+| BOAT CAPSIZE | AC | tec-tra-wat-wat | **TL0403** | TECH-TRANSP | Maritime Accident |
 | BREACH | FL | tec-mis-col-col | **TL0205** | TECH-STRFAIL | Dam Failure |
 | CHEMICAL SUBSTANCE | OT |  | **CH0903** | CHEM-OTHER | Chemical Warfare Agents |
 | Cholera | OT |  | **BI0204** | BIO-SPEC | Cholera (Human) |
@@ -197,9 +197,9 @@ The following table provides cross-classification across multiple systems, per [
 | EARTHQUAKE | EQ | nat-geo-ear-gro | **GH0101** | GEO-SEIS | Earthquake |
 | ELECTROCUTION | OT |  | **TL0209** | TECH-STRFAIL | Power Outage / Blackout |
 | EPIDEMIC | EP ‡ | nat-bio-epi-dis | **BI0101** | BIO-INFECT | Airborne Diseases (human and Animal) |
-| EPIZOOTIC |  | nat-bio-ani-ani | **BI0027** † | BIO_INFDISANIHUM | Zoonotic Diseases |
+| EPIZOOTIC | OT |  | **BI0301** | BIO-ANIMAL | Animal Diseases (Not Zoonoses) |
 | EROSION | OT | nat-geo-env-soi | **GH0403** | GEO-OTHER | Soil Erosion |
-| EXPLOSION | AC | tec-ind-exp-exp | **TL0029** † | TECH-INDFAIL | Explosion |
+| EXPLOSION | AC | tec-ind-exp-exp | **TL0304** | TECH-INDFAIL | Explosion |
 | EXPLOSIONS | AC | tec-ind-exp-exp | **TL0304** | TECH-INDFAIL | Explosion |
 | FIRE | WF | nat-cli-wil-wil | **EN0205** | ENV-FOREST | Wildfires |
 | FISSURES | EQ | nat-geo-ear-gro | **GH0311** | GEO-GFAIL | Surface Rupture & Fissure |
@@ -221,7 +221,7 @@ The following table provides cross-classification across multiple systems, per [
 | LAHAR | VO | nat-geo-vol-lah | **GH0204** | GEO-VOLC | Lahars |
 | LAND DEGRADATION | OT |  | **EN0301** | ENV-LAND | Land Degradation |
 | LANDSLIDE | LS | nat-geo-mmd-lan | **GH0300** | GEO-GFAIL | Gravitational Mass Movement (Landslide) |
-| LEAK | AC | tec-ind-che-che | **TL0030** † | TECH-INDFAIL | Leaks and Spills |
+| LEAK | AC | tec-ind-che-che | **TL0301** | TECH-INDFAIL | Leaks and Spills |
 | LEAK OR SPILL | AC | tec-ind-che-che | **TL0301** | TECH-INDFAIL | Leaks and Spills |
 | LIGHTNING | ST | nat-met-sto-lig | **MH0102** | MH-CONV | Lightning (electrical storm) |
 | LIQUEFACTION | EQ | nat-geo-ear-gro | **GH0307** | GEO-GFAIL | Liquefaction |
@@ -248,7 +248,7 @@ The following table provides cross-classification across multiple systems, per [
 | Snowfall | OT |  | **MH0405** | MH-PRECIP | Snow |
 | STORM | ST | nat-met-sto-sto | **MH0103** | MH-CONV | Thunderstorm |
 | STRONG WIND | VW | nat-met-sto-sto | **MH0301** | MH-WIND | Wind |
-| STRUCT.COLLAPSE | AC | tec-mis-col-col | **TL0005** † | TECH-STRFAIL | Building Collapse |
+| STRUCT.COLLAPSE | AC | tec-mis-col-col | **TL0201** | TECH-STRFAIL | Building Collapse |
 | STRUCTURE | AC | tec-mis-col-col | **TL0201** | TECH-STRFAIL | Building Collapse |
 | SUBSIDENCE |  | nat-geo-ear-gro | **GH0309** | GEO-GFAIL | Subsidence and Uplift |
 | SURGE | SS | nat-met-sto-sur | **MH0703** | MH-MARINE | Storm Surge |
@@ -262,8 +262,6 @@ The following table provides cross-classification across multiple systems, per [
 | WETLAND LOSS/DEGRADATION | OT |  | **EN0304** | ENV-LAND | Wetland Loss/Degradation |
 | YELLOW FEVER | OT |  | **BI0241** | BIO-SPEC | Yellow Fever (Human) |
 
-> † These six entries still carry pre-2025 UNDRR-ISC codes from the 2020 Hazard Information Profiles (historical reference table in [taxonomy.md](../../taxonomy.md)) that haven't been migrated. Per the Cross-Classification Mapping table in taxonomy.md, their 2025 equivalents are already used by a newer, differently-named entry in this same table: `ACCIDENT` (`TL0007`) → `TL0201` (see `STRUCTURE`), `BOAT CAPSIZE` (`TL0050`) → `TL0403` (see `DROWNING`), `EPIZOOTIC` (`BI0027`) → `BI0301` (see `ANIMAL DISEASE`), `EXPLOSION` (`TL0029`) → `TL0304` (see `EXPLOSIONS`), `LEAK` (`TL0030`) → `TL0301` (see `LEAK OR SPILL`), `STRUCT.COLLAPSE` (`TL0005`) → `TL0201` (see `STRUCTURE`).
->
 > ‡ `EPIDEMIC`'s GLIDE code is `EP`, matching the Cross-Classification Mapping table in [taxonomy.md](../../taxonomy.md), where `BI0101` + `nat-bio-epi-dis` maps to GLIDE `EP`. The upstream `hazard_mapping` dict previously had `OT` here; that has since been fixed.
 
 > [!NOTE]
