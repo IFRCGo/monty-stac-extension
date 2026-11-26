@@ -1,0 +1,80 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "us6000pi9w-exposure-IND-mmi4",
+  "geometry": null,
+  "properties": {
+    "datetime": "2025-01-07T01:05:16Z",
+    "title": "Population exposed to MMI IV shaking in IND, 2025 Southern Tibetan Plateau Earthquake",
+    "description": "PAGER estimate of the population in IND that experienced shaking of intensity MMI IV (light) from the M7.1 earthquake in the Southern Tibetan Plateau. The figure counts presence in the shaking area. It does not count harm.",
+    "roles": [
+      "exposure",
+      "source"
+    ],
+    "monty:src_event_id": "us6000pi9w",
+    "monty:country_codes": [
+      "IND"
+    ],
+    "monty:hazard_codes": [
+      "EQ",
+      "nat-geo-ear-gro",
+      "GH0101"
+    ],
+    "monty:corr_id": "20250107T010516Z-CHN-GEO-SEIS-001-GCDB",
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "monty:exposure_detail": {
+      "category": "people",
+      "value": 96979504,
+      "unit": "people",
+      "estimate_type": "modelled",
+      "intensity_value": 4,
+      "intensity_unit": "mmi",
+      "intensity_label": "MMI IV (light)",
+      "intensity_range": "band"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "us6000pi9w-exposure-IND-mmi4.json"
+    },
+    {
+      "rel": "collection",
+      "href": "usgs-exposure.json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-events/us6000pi9w.json",
+      "roles": [
+        "event"
+      ],
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "related",
+      "href": "../usgs-hazards/us6000pi9w-shakemap.json",
+      "roles": [
+        "hazard"
+      ],
+      "type": "application/geo+json"
+    }
+  ],
+  "assets": {
+    "pager_exposure": {
+      "href": "https://earthquake.usgs.gov/product/losspager/us6000pi9w/us/1738121158378/json/exposures.json",
+      "type": "application/json",
+      "title": "PAGER Exposure Data",
+      "roles": [
+        "pager-exposure"
+      ]
+    }
+  },
+  "collection": "usgs-exposure"
+}

@@ -307,6 +307,10 @@ The Montandon STAC API organizes data into collections by source and data type:
 - `desinventar-impacts` - DesInventar impact data
 - `ifrcevent-impacts` - IFRC impact data
 
+### Exposure Collections
+- `gdacs-exposure` - GDACS population exposure (tropical cyclone wind fields)
+- `usgs-exposure` - USGS PAGER population exposure per shaking intensity
+
 ---
 
 ## Resources

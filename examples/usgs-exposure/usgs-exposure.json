@@ -1,0 +1,92 @@
+{
+ "stac_version": "1.0.0",
+ "stac_extensions": [
+  "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+ ],
+ "type": "Collection",
+ "id": "usgs-exposure",
+ "title": "USGS Exposure",
+ "description": "Population exposure records from the United States Geological Survey (USGS) PAGER (Prompt Assessment of Global Earthquakes for Response) products. Each record gives the estimated number of people, in one country, who experienced one level of shaking intensity (MMI). An exposure record counts presence in the shaking area. It does not count harm: the PAGER fatality and economic loss estimates are in the `usgs-impacts` collection. More information on the USGS mapping in Monty can be found in the [USGS Exposure Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/USGS#exposure-items-from-pager).",
+ "license": "Apache-2.0",
+ "roles": [
+  "exposure",
+  "source"
+ ],
+ "providers": [
+  {
+   "name": "USGS",
+   "roles": [
+    "producer"
+   ],
+   "url": "https://earthquake.usgs.gov/",
+   "email": "info@usgs.gov"
+  }
+ ],
+ "extent": {
+  "spatial": {
+   "bbox": [
+    [
+     -180,
+     -90,
+     180,
+     90
+    ]
+   ]
+  },
+  "temporal": {
+   "interval": [
+    [
+     "2025-01-07T01:05:16Z",
+     "2025-01-07T01:05:16Z"
+    ]
+   ]
+  }
+ },
+ "summaries": {
+  "datetime": {
+   "minimum": "2025-01-07T01:05:16Z",
+   "maximum": "2025-01-07T01:05:16Z"
+  },
+  "roles": [
+   "exposure",
+   "source"
+  ],
+  "monty:country_codes": [
+   "CHN",
+   "IND",
+   "NPL"
+  ],
+  "monty:hazard_codes": [
+   "EQ",
+   "nat-geo-ear-gro",
+   "GH0101"
+  ]
+ },
+ "links": [
+  {
+   "href": "usgs-exposure.json",
+   "rel": "self"
+  },
+  {
+   "rel": "describedby",
+   "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/USGS#exposure-items-from-pager",
+   "type": "text/html",
+   "title": "USGS Exposure Item Source Mappings"
+  },
+  {
+   "rel": "item",
+   "href": "us6000pi9w-exposure-CHN-mmi6.json",
+   "type": "application/geo+json"
+  },
+  {
+   "rel": "item",
+   "href": "us6000pi9w-exposure-NPL-mmi5.json",
+   "type": "application/geo+json"
+  },
+  {
+   "rel": "item",
+   "href": "us6000pi9w-exposure-IND-mmi4.json",
+   "type": "application/geo+json"
+  }
+ ]
+}

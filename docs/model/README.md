@@ -22,11 +22,13 @@ The normalized model must keep all the information from the Monty model and cove
 
 The Monty model is based on **Event** data type that consititutes the core of the model.
 In STAC, they will be represented as an item. Then for each event,
-3 kinds of data are collected:
+4 kinds of data are collected:
 
 - **Hazard**: The type of hazard, its location and the intensity
 - **Impact**: All type of impact affecting the population, the infrastructure, the environment, etc
   in terms of number of people affected, financial loss, dmaage to infrastructure, etc.
+- **Exposure**: The people or assets that are inside the area of a hazard, for a stated intensity.
+  It counts presence, not harm
 - **Response**: Anticipatory measures and actions taken in response to the event
 
 ![GCDB](gcdb.png)
@@ -203,8 +205,8 @@ The event class has the following attributes:
 
 #### Cross-item Link Typing
 
-Event, hazard, and impact items may be connected with STAC links using `rel="related"`.
-For these links, `roles` should contain exactly one target type value: `event`, `hazard`, or `impact`.
+Event, hazard, impact, exposure and response items may be connected with STAC links using `rel="related"`.
+For these links, `roles` should contain exactly one target type value: `event`, `hazard`, `impact`, `exposure` or `response`.
 This allows clients to resolve item relationships without custom fields.
 
 ### Hazard
@@ -271,6 +273,28 @@ The impact class has the following attributes:
     - Primary data
     - Secondary data
     - Modelled data: estimated without any event-specific data
+
+### Exposure
+
+Exposure data is a count of the people or assets that are inside the area of a hazard, for a stated intensity of this hazard. It counts presence. It does not count harm: a person can be in an exposure figure and have no harm. An exposure figure and an impact figure must not be added. The rules that separate the two are in the [Exposure ↔ Impact boundary rules](exposure-impact-boundary.md).
+
+The exposure class has the following attributes:
+
+- **id**: A unique identifier for the exposure. Preferably, the identifier assigned by the issuer (source) of the data. If not available, an identifier can be generated and should be prefixed with the related event id.
+- **title**: The name of the exposure figure.
+- **geometry** (GeoJSON geometry): The area that the figure covers. It is `null` when the source does not give this area.
+- **datetime**: The time of the hazard situation that the figure describes.
+- **hazard_id**: The identifier of the hazard to which the exposure refers. **REQUIRED**
+- **source**: Information about the organization and the database capturing, producing, processing, hosting or publishing this exposure data.
+- **exposure_detail**: A detailed description of the exposure including:
+  - **category**: The category of people or assets that the figure counts. It uses the [same categories](taxonomy.md#exposure-category) as the impact.
+  - **value**: The value of the figure, as a number, without the units.
+  - **unit**: The units of the figure.
+  - **estimate_type**: The type of data source that was used to create this figure (primary, secondary or modelled data).
+  - **intensity_value** and **intensity_unit**: The hazard intensity that the figure counts. For example 39 kt of wind, or a shaking intensity of MMI VI. **REQUIRED**
+  - **intensity_range**: `at_or_above` if the figure counts all the people or assets at this intensity or above it, `band` if it counts only the people or assets at this intensity level. **REQUIRED**
+
+The fields `category`, `value`, `unit` and `estimate_type` have the same definition in the impact and in the exposure. The two classes stay separate: they have different roles, different detail objects and different collections.
 
 ### Response
 

@@ -49,7 +49,7 @@
 #                   production   - proven pipeline (legacy or current) behind
 #                                  the shipped examples
 #   types       - Monty roles this source produces: event | hazard | impact |
-#                 response
+#                 exposure | response
 #   collections - example collection ids under examples/, one per type
 #   doc         - path to the source doc, relative to docs/model/sources/, or
 #                 null if status is undocumented
@@ -118,8 +118,8 @@ sources:
     contact: coordination@gdacs.org
     license: MIT License
     status: production
-    types: [event, hazard, impact]
-    collections: [gdacs-events, gdacs-hazards, gdacs-impacts]
+    types: [event, hazard, impact, exposure]
+    collections: [gdacs-events, gdacs-hazards, gdacs-impacts, gdacs-exposure]
     doc: GDACS/README.md
     etl: https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/gdacs.py
 
@@ -222,8 +222,8 @@ sources:
     contact: earthquakeinfo@usgs.gov
     license: Public Domain
     status: production
-    types: [event, hazard, impact]
-    collections: [usgs-events, usgs-hazards, usgs-impacts]
+    types: [event, hazard, impact, exposure]
+    collections: [usgs-events, usgs-hazards, usgs-impacts, usgs-exposure]
     doc: USGS/README.md
     etl: https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/usgs.py
 

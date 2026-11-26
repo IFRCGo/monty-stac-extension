@@ -53,7 +53,7 @@ SITE_BASE_URL = "https://ifrcgo.org/monty-stac-extension/"
 EXAMPLES_TREE_URL = "https://github.com/IFRCGo/monty-stac-extension/tree/main/examples"
 
 VALID_STATUSES = {"undocumented", "analysis", "templates", "etl", "production"}
-VALID_TYPES = {"event", "hazard", "impact", "response"}
+VALID_TYPES = {"event", "hazard", "impact", "exposure", "response"}
 
 # Closed vocabulary for `org_type`. Values are display-ready on purpose:
 # montandon-website prints them verbatim in its source table rather than
@@ -69,11 +69,23 @@ VALID_ORG_TYPES = {
     "Private Sector",
     "Interagency Consortium",
 }
-TYPE_COLUMNS = [("event", "Events"), ("hazard", "Hazards"), ("impact", "Impacts"), ("response", "Response")]
+TYPE_COLUMNS = [
+    ("event", "Events"),
+    ("hazard", "Hazards"),
+    ("impact", "Impacts"),
+    ("exposure", "Exposure"),
+    ("response", "Response"),
+]
 
 # Maps a Monty type to the suffix its example collections use (e.g. cems-events),
 # so the collections listing can be grouped by type.
-COLLECTION_SUFFIX = {"event": "-events", "hazard": "-hazards", "impact": "-impacts", "response": "-response"}
+COLLECTION_SUFFIX = {
+    "event": "-events",
+    "hazard": "-hazards",
+    "impact": "-impacts",
+    "exposure": "-exposure",
+    "response": "-response",
+}
 
 # Collection directories under examples/ that aren't a source's collection
 # and are deliberately excluded from the reconciliation check.

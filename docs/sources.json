@@ -120,12 +120,14 @@
       "types": [
         "event",
         "hazard",
-        "impact"
+        "impact",
+        "exposure"
       ],
       "collections": [
         "gdacs-events",
         "gdacs-hazards",
-        "gdacs-impacts"
+        "gdacs-impacts",
+        "gdacs-exposure"
       ],
       "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/GDACS/",
       "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/gdacs.py"
@@ -306,12 +308,14 @@
       "types": [
         "event",
         "hazard",
-        "impact"
+        "impact",
+        "exposure"
       ],
       "collections": [
         "usgs-events",
         "usgs-hazards",
-        "usgs-impacts"
+        "usgs-impacts",
+        "usgs-exposure"
       ],
       "doc": "https://ifrcgo.org/monty-stac-extension/model/sources/USGS/",
       "etl": "https://github.com/IFRCGo/pystac-monty/blob/main/pystac_monty/sources/usgs.py"

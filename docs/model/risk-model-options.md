@@ -58,6 +58,22 @@ The four collections that do not fit are all impact collections: `pdc-impacts`, 
 
 **Consequence:** Montandon is at Level 0, and the content of Level 1 already exists, filed in the wrong place.
 
+**Second audit, 20 November 2026.** @arunissun repeated the analysis on a sample five times larger:
+537 175 items from all 34 collections and 13 sources, over eight years
+(comment on [pull request #180](https://github.com/IFRCGo/monty-stac-extension/pull/180)). It is also a
+sample, not a full audit. It confirms the results above, and it changes four points:
+
+| Point | September sample | November audit |
+|---|---|---|
+| Collections that do not fit | 4, all impact collections | 7: add `cems-impacts` (the total population of the mapped area is stored as `affected_total` when the source gives no affected value), `charter-hazards` (the size of the mapped area is in the hazard severity field) and a part of `idmc-idu-impacts` (evacuation and shelter figures) |
+| Exposure filed as impact | 29 % of the sampled impact items | At least 33 137 of 146 795 impact items. The percentage depends on the sources in the sample, so the counts per source are the reference: all 27 605 `pdc-impacts` items, at least 5 483 of 13 796 `gdacs-impacts` items |
+| The `forecasted` flag | On GDACS cyclone impacts | It has two meanings: a forecast track point on 1 707 GDACS items, and a PAGER alert figure on 1 632 USGS items, which is a loss estimate made after the earthquake |
+| Hazard footprint | Not measured | A missing footprint is common: the Charter and CEMS hazard items can be the mapped area, and the PDC and GLIDE hazard items are points |
+
+The audit gives one example of the cost. For typhoon HATO-17, one GDACS item stores 17 055 714 people as
+`affected_total` (the people in the wind field of one track point). EM-DAT reports about 22 600 people
+affected by the same storm. The two figures have the same label, and they differ by a factor of about 750.
+
 ### 1.2 Status of the discussion
 
 **Agreed** in [#110](https://github.com/IFRCGo/monty-stac-extension/discussions/110):
@@ -68,6 +84,8 @@ The four collections that do not fit are all impact collections: `pdc-impacts`, 
 | Montandon identifies forecasts, and keeps the class of the item (Hazard, Exposure, Impact) | @arnauroviramuntada (20 October), @arunissun |
 | Target for the current phase: up to Level 2 | @arnauroviramuntada: "consolidate Montandon up to Level 2"; @arunissun: "target Level 2" |
 | Level 2 applies only to hazards that have forecasts. The minimum fields can differ per hazard type | @arunissun; @arnauroviramuntada; §9.2 (earthquakes) |
+| Exposure is a **separate class** (option 2c), not a value inside Impact | @arunissun (20 November audit): only a separate class lets the schema require the hazard link and the threshold; agreed on 26 November |
+| The work is split in four chunks, with a target for the first two (§7.2) | @arnauroviramuntada and @emmanuelmathot, 26 November |
 | Levels 3 and 4 are not in the current phase | @arnauroviramuntada: "in later phases"; @arunissun: Level 3 only as an experiment, Level 4 as links |
 
 The two topics run as **parallel tracks** (@arnauroviramuntada, 20 October): exposure and impact is mainly an
@@ -417,6 +435,26 @@ of their publishers (for example WorldPop, which has its own STAC API), and host
 use case cannot work with a link. Hosting data is a scope and cost decision of its own
 ([#178](https://github.com/IFRCGo/monty-stac-extension/issues/178)).
 
+### 7.2 Agreed split and targets (26 November 2026)
+
+The partners agreed to split the work in four chunks, one for each level above Level 0:
+
+| Chunk | Level | Content | Target | Status |
+|---|---|---|---|---|
+| 1 | 1 | Event-linked exposure: exposure is a class of its own, separate from impact | Q1 2027, Monty STAC extension v2.0 | Started. One pull request |
+| 2 | 2 | Pre-event occurrences: forecast hazards, and exposure before an event exists | Q2 2027, Monty STAC extension v2.1 | Next. One pull request, after chunk 1 |
+| 3 | 3 | Analytical results: people-in-need estimates | To be defined | Not started |
+| 4 | 4 | Context catalogue: population, vulnerability, coping capacity | To be defined | Not started |
+
+Working mode:
+
+- Each chunk has its own pull request and its own tracking issue. The review is asynchronous.
+- The blocking points go to the partner meetings.
+- For each chunk, the specification comes first: the schema, the source documents and the worked
+  examples. The transformers follow the specification, and the examples are the test.
+- This document stays a discussion document. It is not merged. The agreed content moves to the
+  specification with each chunk.
+
 ## 8. Supporting choices
 
 ### 8.1 Pre-event items: link at query time
@@ -501,9 +539,16 @@ The examples of the comment, and the two worked examples of §9:
   item). The rule must say which status such an item gets.
 - The maturity of the timestamps extension is "Pilot". The maturity of the forecast extension is
   "Proposal", and it is written for weather forecasts.
+- The 20 November audit found none of these fields in production: no item has `published`, `expires`,
+  `forecast:reference_datetime` or `forecast:horizon`. On the GDACS cyclone items, `created` is equal
+  to `datetime` (the time of the track point), so `created` is not the time of the Montandon record.
+  Each source transformer must fill the fields before the rule can run.
+- The audit also makes one point above smaller for GDACS: production stores each cyclone track point
+  as its own item, so each item gets one status.
 
 **Safeguard:** before adoption, apply the rule to one forecast source (GDACS cyclones) and one
-non-forecast source (USGS PAGER) from production. Each item must get one status, and only one. Decide
+non-forecast source (USGS PAGER) from production. Each item must get one status, and only one. The
+time fields must be added to these two sources first, because production does not have them. Decide
 with the forecast fields in [#168](https://github.com/IFRCGo/monty-stac-extension/discussions/168).
 
 ## 9. Worked examples
@@ -537,6 +582,7 @@ PAGER population exposure by shaking intensity (MMI), from `json/exposures.json`
 | Nepal | 19 339 548 | 1 942 | 0 | 0 | 0 | 0 |
 | India | 96 979 504 | 4 | 0 | 0 | 0 | 0 |
 | Bangladesh | 13 802 713 | 0 | 0 | 0 | 0 | 0 |
+| Bhutan | 131 747 | 0 | 0 | 0 | 0 | 0 |
 | All countries | 130 864 619 | 147 452 | 61 485 | 27 679 | 6 964 | 2 998 |
 
 ![Population exposed by shaking intensity for earthquake us6000pi9w, log scale](img/risk-model/tibet-mmi-exposure.svg)
@@ -568,8 +614,8 @@ and the review of 20 October
 
 | # | Question | Answers so far | Status |
 |---|---|---|---|
-| 1 | What is the **target level**, and what is the path to it? | Level 2 for the current phase. Path: Level 1 first (reclassify PDC, split GDACS, move DREF at-risk figures, add PAGER exposure, re-type PAGER alert bins), then the forecast qualifier, starting with GDACS cyclones | Converging (§1.2) |
-| 2 | How is exposure represented: interim value in Impact (2b), or separate class (2c)? | 2b as an interim step, piloted on GDACS, then decide on 2c. A full source-by-source review first | Open, [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169) |
+| 1 | What is the **target level**, and what is the path to it? | Level 2 for the current phase. Path: Level 1 first (reclassify PDC, split GDACS, move DREF at-risk figures, add PAGER exposure, re-type PAGER alert bins), then the forecast qualifier, starting with GDACS cyclones. The 20 November audit adds two items to the path: correct the CEMS population totals, and stop the use of the Charter mapped area as the hazard severity. The PAGER alert items are removed, not re-typed | **Agreed** (26 November): Level 1 in v2.0 for Q1 2027, Level 2 in v2.1 for Q2 2027 (§7.2) |
+| 2 | How is exposure represented: interim value in Impact (2b), or separate class (2c)? | First answer: 2b as an interim step. After the 20 November audit: 2c is the target, because the exposure figures have four different shapes (GDACS, PDC, PAGER, CEMS) and only a separate class lets the schema require the hazard link and the threshold | **Agreed** (26 November): separate class (2c). The source review continues in [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169) |
 | 3 | Which forecast fields, and where? A `monty:forecast` object, the STAC `forecast` extension, or both? Which fields are mandatory per hazard type? | Proposed table of forecast metadata (20 October). First mapping to the STAC `forecast` extension in #178 | Open, [#168](https://github.com/IFRCGo/monty-stac-extension/discussions/168) |
 | 4 | Are Vulnerability and Coping capacity concepts of their own, or kinds of Context (§5.3)? | Concepts of their own: this matches INFORM, and they are separate inputs of a people-in-need estimate. Counterpoint (25 November comment): if the Context categories follow JIAF 2.0 (question 14), vulnerability and coping capacity go across the categories | Two positions; open |
 | 5 | Does Vulnerability mean **social** vulnerability in Montandon (§6.1)? | Yes, but reserve a name for physical vulnerability (building stock). PAGER results already include physical vulnerability, so they are modelled Impact, not exposure | One answer; to confirm |
@@ -582,6 +628,9 @@ and the review of 20 October
 | 12 | Is forecast one value of a **temporal status** that each item of each class carries (future prediction, current or past estimate, hypothetical scenario), and not a qualifier for forecasts only (§5.1)? Is the baseline qualifier (§2) a value of the same status? | Proposal in §8.3: derive the status from the STAC time fields (core, timestamps and forecast extensions). The hypothetical scenario needs an explicit marker | New (25 November comment), related to question 3 |
 | 13 | Does each item record the **evidence** behind its figure (direct observation, reported, modelled, inferred, analysed, mixed, unknown)? What is the relation to `estimate_type`? | — | New (25 November comment), related to question 9 |
 | 14 | Which categories structure Context? A comment of 25 November proposes JIAF 2.0 as the reference (five areas: human, financial, natural, social and political, physical), with three principles: hazard independence, temporal relevance, analytical interoperability. How does Montandon record that Context changes with time (§8.2)? | Hazard independence is the definition of §5.2. Interoperability agrees with §3: Montandon stores the inputs, and the analysis selects the method. The categories and the release frequency are open | New (25 November comment); Level 4 is not in the current phase |
+| 15 | CEMS and Charter items have no `monty:src_event_id`: the activation code is only in the item identifier. Is the activation code the source event identifier? | Yes, proposed by the 20 November audit: without it, a query for all the items of one activation by source identifier returns nothing | New (20 November audit) |
+| 16 | How does Montandon record the versions of a product (CEMS `-m1`, `-m2`), and the three times of a satellite product (start of the event, image acquisition, delivery of the map)? | A version number and a link to the replaced version, so that a query keeps only the last valid version. Related to §8.3 | New (20 November audit) |
+| 17 | Hazards with an extent and no intensity scale (flood extent, burnt area, storm surge zone): what is the threshold of their exposure figure? | — | New (found in the draft of chunk 1: GDACS `popstormsurge` and wildfire `POPAFFECTED`) |
 
 ## 11. Facts checked, and open points
 
