@@ -150,9 +150,9 @@ Here is a table with the fields that are mapped from the EM-DAT event to the STA
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox)                              | Admin Units                                                                                                  | Bounding box of the disaster [geocoded from Natural Earth Data (NED)](https://doc.emdat.be/docs/additional-resources-and-tutorials/tutorials/python_tutorial_2/)                                                                                           |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | Admin Units                                                                                                  | Level 1 Admin boundaries polygons of the disaster [geocoded from Natural Earth Data (NED)](https://doc.emdat.be/docs/additional-resources-and-tutorials/tutorials/python_tutorial_2/). Note: Discard the items that has neither lat lng nor the shapefiles |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `emdat-events`                                                                                               | The collection for EM-DAT events                                                                                                                                                                                                                           |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Event Name, or Disaster Subtype + Country | The Event Name when EM-DAT gives one (`Hurricane 'Milton'`). Most records have no name. The title is then the disaster subtype and the country: `Flood (General) in Spain`. It uses the disaster type when there is no subtype |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Event Name, or Disaster Subtype + Country + Start Month + Start Year | The Event Name when EM-DAT gives one (`Hurricane 'Milton'`). Most records have no name. The title is then the disaster subtype, the country, and the month and year of the start: `Flood (General) in Spain, October 2024`. It uses the disaster type when there is no subtype, and only the year when there is no start month |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Disaster Type, Disaster Subtype, Location, Country, Start Month, Start Year | A generated text: `<type> (<subtype>) in <location>, <country> of <month> <year>`. The subtype is shown only when it is different from the type. EM-DAT has no description field |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived from Classification Key and Country | The hazard keywords of `monty:hazard_codes` in alphabetical order, then the country name from the `Country` field (not the ISO3 code), with no duplicates: `["Flooding", "Meteorological & Hydrological", "Water-related", "Spain"]`. The hazard and impact items of the event have the same list |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived from Classification Key and Country | The hazard keywords of `monty:hazard_codes` in alphabetical order, then the country name from the `Country` field (not the ISO3 code), with no duplicates: `["Flooding", "Meteorological & Hydrological", "Water-related", "Spain"]`. The hazard item of the event has the same list. An [impact item](#impact-item) adds two keywords |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | start year + start month + start day                                                                         | Date and time of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                         |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | start year + start month + start day                                                                         | Start date of the disaster converted in UTC ISO 8601 format. Start year is mandatory while month and day might not always be available. If no start day, keep 1 (start of the month) and set the flag missing_startday to true.                            |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | start year + start month + start day                                                                         | End date of the event converted in UTC ISO 8601 format. A missing month or day is set to 1. If the start date is then later than the end date, the record fails and gives no item                                                                                                                                                                                                     |
@@ -217,7 +217,8 @@ The impact item is a copy of the [event item](#event-item), with the three hazar
 | [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | DisNo. | `emdat-impact-` + the disaster number + `-` + the field name of the [Impact Field Mapping](#impact-field-mapping): `emdat-impact-2024-0796-ESP-total_deaths` |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `emdat-impacts` | The collection for EM-DAT impacts |
 | roles | Generated | `["source", "impact"]` |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event item + ` - ` + the field name: `Flood (General) in Spain - total_deaths` |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event item + ` - ` + the title text of the [Impact Field Mapping](#impact-field-mapping): `Flood (General) in Spain, October 2024 - Total deaths` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The keywords of the event item, then the label of the impact type and the label of the exposure category from the [taxonomy](../../taxonomy.md#impact): `["Flooding", "Meteorological & Hydrological", "Water-related", "Spain", "Death", "People (All Demographics)"]` |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).category | Generated | See the [Impact Field Mapping](#impact-field-mapping) |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).type | Generated | See the [Impact Field Mapping](#impact-field-mapping) |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail).value | The impact column | The value of the column. Total Damage is multiplied by 1000 |
@@ -226,14 +227,14 @@ The impact item is a copy of the [event item](#event-item), with the three hazar
 
 #### Impact Field Mapping
 
-| EM-DAT column | Field name | Category | Type |
-| ------------- | ---------- | -------- | ---- |
-| Total Deaths | `total_deaths` | `people` | `death` |
-| No. Injured | `no_injured` | `people` | `injured` |
-| No. Affected | `no_affected` | `people` | `affected_direct` |
-| No. Homeless | `no_homeless` | `people` | `displaced_total` |
-| Total Affected | `total_affected` | `people` | `affected_total` |
-| Total Damage ('000 US$) | `total_dam` | `global_currency` | `cost` |
+| EM-DAT column | Field name (in the id) | Title text | Category | Type |
+| ------------- | --------------------- | ---------- | -------- | ---- |
+| Total Deaths | `total_deaths` | Total deaths | `people` | `death` |
+| No. Injured | `no_injured` | Injured | `people` | `injured` |
+| No. Affected | `no_affected` | Affected | `people` | `affected_direct` |
+| No. Homeless | `no_homeless` | Homeless | `people` | `displaced_total` |
+| Total Affected | `total_affected` | Total affected | `people` | `affected_total` |
+| Total Damage ('000 US$) | `total_dam` | Total damage | `global_currency` | `cost` |
 
 The transformer does not map the other impact columns of EM-DAT: the reconstruction costs, the insured damage, and the adjusted values.
 
