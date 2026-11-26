@@ -14,7 +14,7 @@ A STAC collection holds all the USGS earthquake events. An example of the USGS c
 - Source organization email: <earthquakeinfo@usgs.gov>
 - Source URL: <https://earthquake.usgs.gov>
 - Source Data license: [Public Domain](https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits)
-- Source for: event, hazard
+- Source for: event, hazard, impact, exposure
 
 ### Data
 
@@ -206,6 +206,7 @@ The [PAGER product](https://earthquake.usgs.gov/data/pager/) (Prompt Assessment 
 | ------------------ | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `json/losses.json` | One deterministic modelled total per type, plus a per-country breakdown | Mapped below — the Estimated Fatalities and Estimated Economic Losses items, one per country          |
 | `json/alerts.json` | A probability histogram (a set of alert bins) per type                  | **Not mapped** — see [Alert items: not mapped](#alert-items-not-mapped)                              |
+| `json/exposures.json` | The population and the economic value per level of shaking intensity, per country | See [Exposure Items (from PAGER)](#exposure-items-from-pager). They are exposure items, not impact items |
 
 The `losses.json` mapping produces up to two [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) **per country** in the per-country breakdown (`country_fatalities` and `country_dollars`):
 
@@ -342,3 +343,46 @@ problems:
    `losses.json` item uses `buildings` for the same quantity.
 4. **Not distinguishable by title.** The items copied the event title, description and
    epicenter geometry, so in a search result they looked like the event.
+
+### Exposure Items (from PAGER)
+
+The PAGER content file `json/exposures.json` gives the population that experienced each level of shaking intensity (MMI I to X), as a total and per country. This is an exposure: it counts presence in the shaking area, and it does not count harm. For the earthquake `us6000pi9w`, 130.9 million people are at MMI IV (light shaking), and the modelled fatalities are 858.
+
+Reference file: [`us6000pi9w-exposures.json`](us6000pi9w-exposures.json) (PAGER version `1738121158378`).
+
+`population_exposure.country_exposures[]` shall produce one [**exposure STAC item**](https://github.com/IFRCGo/monty-stac-extension#exposure) for each country and each MMI level with a value above zero, from MMI IV. Examples: [us6000pi9w-exposure-CHN-mmi6.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-exposure/us6000pi9w-exposure-CHN-mmi6.json), [us6000pi9w-exposure-NPL-mmi5.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-exposure/us6000pi9w-exposure-NPL-mmi5.json), [us6000pi9w-exposure-IND-mmi4.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-exposure/us6000pi9w-exposure-IND-mmi4.json).
+
+| STAC field | USGS field | Details |
+| ---------- | ---------- | ------- |
+| id | id + `-exposure-` + ISO3 country code + `-mmi` + MMI level | For example `us6000pi9w-exposure-CHN-mmi6` |
+| geometry | `null` | `exposures.json` gives a count per country and MMI level, and no area. A transformer can compute the area from the ShakeMap MMI contours and the country boundary. If it does not, the geometry is `null`. It is never the epicenter, and never the full country |
+| collection | `usgs-exposure` | Fixed value for all USGS exposure items |
+| datetime | properties.time | The time of the earthquake |
+| monty:country_codes | country_exposures[].country_code | Converted from ISO 3166-1 alpha-2 to alpha-3. One country per item |
+| monty:hazard_codes | Fixed as earthquake | The same codes as the hazard item |
+| roles | `["exposure", "source"]` | Always |
+| monty:src_event_id | Source event ID | Unique identifier of the event |
+| monty:corr_id | Generated | The same value as the event item |
+| `related` link in \[links] | ShakeMap hazard item | **Required.** Link to the hazard item with `roles: ["hazard"]` |
+| `related` link in \[links] | Event item | Link to the source event item with `roles: ["event"]` |
+| `pager_exposure` asset | the URL of `json/exposures.json` | The source file of the figure |
+
+The [monty:exposure_detail](https://github.com/IFRCGo/monty-stac-extension#montyexposure_detail) object:
+
+| Field | Value |
+| ----- | ----- |
+| `category` | `people` |
+| `value` | country_exposures[].exposure[i], for the MMI level `mmi[i]` |
+| `unit` | `people` |
+| `estimate_type` | `modelled` |
+| `intensity_value` | The MMI level, from 4 to 10 |
+| `intensity_unit` | `mmi` |
+| `intensity_range` | `band`. Each figure counts only the people at this MMI level. A client can add the figures of the different levels |
+| `intensity_label` | For example `MMI VI (strong)` |
+
+Rules:
+
+1. **MMI I to III are not mapped.** PAGER reports these levels as not felt or weak, and its own exposure table starts at MMI IV.
+2. **`economic_exposure` is not mapped** in this version. Its unit is not stated in the file.
+3. **The PAGER loss estimates are not exposure.** The fatalities and the economic losses of `losses.json` already include the vulnerability of the buildings. They stay [impact items](#impact-items-from-pager) with `estimate_type: modelled`.
+4. **The PAGER version changes the URL.** PAGER publishes new versions of a product, and the URL of an earlier version can stop to work. The asset must point to the version that the transformer read.

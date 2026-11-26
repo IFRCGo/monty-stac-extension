@@ -169,8 +169,12 @@ the first), with multiple impact types per report:
 | [Missing](../../../model/taxonomy.md#impact-type) | num_missing, gov_num_missing, other_num_missing | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
 | [Affected](../../../model/taxonomy.md#impact-type) | num_affected, gov_num_affected, other_num_affected | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
 | [Assisted](../../../model/taxonomy.md#impact-type) | num_assisted, gov_num_assisted, other_num_assisted | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
-| [Potentially Affected](../../../model/taxonomy.md#impact-type) | num_potentially_affected, gov_num_potentially_affected, other_num_potentially_affected | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
-| [Highest Risk](../../../model/taxonomy.md#impact-type) | num_highest_risk, gov_num_highest_risk, other_num_highest_risk | [ALL_PEOPLE](../../../model/taxonomy.md#exposure-category) |
+
+The fields `num_potentially_affected` and `num_highest_risk` (with their `gov_` and `other_`
+variants) are **not mapped**. They count people at risk, not an effect of the hazard, so they are
+not impact items. They are not exposure items: the field report gives no hazard intensity for
+them. See patterns X3 and N1 of the
+[Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#2-pattern-catalogue).
 
 Each field report yields one item per impact type that has at least one
 truthy (non-zero, non-empty) source field — a field report where all three

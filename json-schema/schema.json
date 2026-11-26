@@ -52,6 +52,59 @@
                 ]
               }
             }
+          },
+          "if": {
+            "$comment": "An Exposure item must carry monty:exposure_detail and a related link to its hazard item.",
+            "required": [
+              "properties"
+            ],
+            "properties": {
+              "properties": {
+                "required": [
+                  "roles"
+                ],
+                "properties": {
+                  "roles": {
+                    "type": "array",
+                    "contains": {
+                      "const": "exposure"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "links"
+            ],
+            "properties": {
+              "properties": {
+                "required": [
+                  "monty:exposure_detail"
+                ]
+              },
+              "links": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "rel",
+                    "roles"
+                  ],
+                  "properties": {
+                    "rel": {
+                      "const": "related"
+                    },
+                    "roles": {
+                      "type": "array",
+                      "contains": {
+                        "const": "hazard"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       ]
@@ -242,59 +295,19 @@
         },
         "monty:impact_detail": {
           "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/figure_detail"
+            }
+          ],
           "properties": {
-            "category": {
-              "type": "string",
-              "enum": [
-                "people",
-                "crops",
-                "women",
-                "men",
-                "children_0_4",
-                "children_5_9",
-                "children_10_14",
-                "children_15_19",
-                "adult_20_24",
-                "adult_25_29",
-                "adult_30_34",
-                "adult_35_39",
-                "adult_40_44",
-                "adult_45_49",
-                "adult_50_54",
-                "adult_55_59",
-                "adult_60_64",
-                "elderly",
-                "wheelchair_users",
-                "roads",
-                "railways",
-                "vulnerable_employment",
-                "buildings",
-                "reconstruction_costs",
-                "hospitals",
-                "schools",
-                "education_centers",
-                "local_currency",
-                "global_currency",
-                "local_currency_adj",
-                "global_currency_adj",
-                "usd_uncertain",
-                "cattle",
-                "aid_general",
-                "ifrc_contribution",
-                "ifrc_requested",
-                "alertscore",
-                "total_affected",
-                "households"
-              ]
-            },
+            "category": true,
             "type": {
               "type": "string",
               "enum": [
                 "unspecified",
-                "unaffected",
                 "damaged",
                 "destroyed",
-                "potentially_damaged",
                 "affected_total",
                 "affected_direct",
                 "affected_indirect",
@@ -314,23 +327,49 @@
                 "homeless",
                 "displaced_internal",
                 "displaced_external",
-                "displaced_total",
-                "alertscore",
-                "potentially_affected",
-                "highest_risk"
+                "displaced_total"
               ]
             },
-            "value": {
+            "value": true,
+            "unit": true,
+            "estimate_type": true,
+            "description": true
+          },
+          "additionalProperties": false
+        },
+        "monty:exposure_detail": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/figure_detail"
+            }
+          ],
+          "required": [
+            "intensity_value",
+            "intensity_unit",
+            "intensity_range"
+          ],
+          "properties": {
+            "category": true,
+            "value": true,
+            "unit": true,
+            "estimate_type": true,
+            "description": true,
+            "intensity_value": {
               "type": "number"
             },
-            "unit": {
+            "intensity_unit": {
               "type": "string"
             },
-            "estimate_type": {
-              "$ref": "#/definitions/estimate_type"
-            },
-            "description": {
+            "intensity_label": {
               "type": "string"
+            },
+            "intensity_range": {
+              "type": "string",
+              "enum": [
+                "at_or_above",
+                "band"
+              ]
             }
           },
           "additionalProperties": false
@@ -350,6 +389,76 @@
         "secondary",
         "modelled"
       ]
+    },
+    "exposure_category": {
+      "$comment": "Category of people or assets. Shared by monty:impact_detail and monty:exposure_detail.",
+      "type": "string",
+      "enum": [
+        "people",
+        "crops",
+        "women",
+        "men",
+        "children_0_4",
+        "children_5_9",
+        "children_10_14",
+        "children_15_19",
+        "adult_20_24",
+        "adult_25_29",
+        "adult_30_34",
+        "adult_35_39",
+        "adult_40_44",
+        "adult_45_49",
+        "adult_50_54",
+        "adult_55_59",
+        "adult_60_64",
+        "elderly",
+        "wheelchair_users",
+        "roads",
+        "railways",
+        "vulnerable_employment",
+        "buildings",
+        "reconstruction_costs",
+        "hospitals",
+        "schools",
+        "education_centers",
+        "local_currency",
+        "global_currency",
+        "local_currency_adj",
+        "global_currency_adj",
+        "usd_uncertain",
+        "cattle",
+        "aid_general",
+        "ifrc_contribution",
+        "ifrc_requested",
+        "alertscore",
+        "total_affected",
+        "households"
+      ]
+    },
+    "figure_detail": {
+      "$comment": "Abstract base of monty:impact_detail and monty:exposure_detail. It is not a property and not a role: no item carries it.",
+      "type": "object",
+      "required": [
+        "category",
+        "value"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/exposure_category"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "estimate_type": {
+          "$ref": "#/definitions/estimate_type"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
     },
     "base_link": {
       "$comment": "Minimal STAC Link Object requirements shared by all link variants in this extension.",
@@ -415,6 +524,7 @@
                   "event",
                   "hazard",
                   "impact",
+                  "exposure",
                   "response"
                 ]
               }
@@ -461,6 +571,14 @@
           "allOf": [
             {
               "$ref": "#/definitions/is_impact"
+            }
+          ]
+        },
+        {
+          "$comment": "Exposure",
+          "allOf": [
+            {
+              "$ref": "#/definitions/is_exposure"
             }
           ]
         },
@@ -553,6 +671,17 @@
           "minItems": 1,
           "contains": {
             "const": "impact"
+          }
+        }
+      }
+    },
+    "is_exposure": {
+      "properties": {
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "exposure"
           }
         }
       }

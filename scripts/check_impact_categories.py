@@ -16,9 +16,8 @@ TABLE_ROW_RE = re.compile(r"^\|(.+)\|\s*$")
 
 def load_schema_categories() -> list[str]:
     schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
-    return schema["definitions"]["fields"]["properties"]["monty:impact_detail"][
-        "properties"
-    ]["category"]["enum"]
+    # The enum is shared by monty:impact_detail and monty:exposure_detail.
+    return schema["definitions"]["exposure_category"]["enum"]
 
 
 def load_taxonomy_categories() -> list[str]:

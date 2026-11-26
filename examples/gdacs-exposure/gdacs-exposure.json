@@ -1,0 +1,93 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "gdacs-exposure",
+  "title": "GDACS Exposure",
+  "description": "Population exposure records from the Global Disaster Alert and Coordination System (GDACS). Each record gives the modelled number of people inside the wind field of a tropical cyclone track point, for a stated wind threshold (39 kt or 74 kt). An exposure record counts presence in the hazard area. It does not count harm: the reported effects are in the `gdacs-impacts` collection. More information on the GDACS mapping in Monty can be found in the [GDACS Source Mappings](https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/GDACS#tropical-cyclone-advisory-timeline).",
+  "license": "MIT",
+  "keywords": [
+    "gdacs",
+    "exposure",
+    "population exposure",
+    "tropical cyclone",
+    "wind field",
+    "modelled",
+    "global"
+  ],
+  "roles": [
+    "exposure"
+  ],
+  "providers": [
+    {
+      "name": "GDACS",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.gdacs.org/",
+      "email": "coordination@gdacs.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-07-23T18:00:00Z",
+          "2026-07-26T12:00:00Z"
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "datetime": {
+      "minimum": "2026-07-23T18:00:00Z",
+      "maximum": "2026-07-26T12:00:00Z"
+    },
+    "roles": [
+      "exposure"
+    ],
+    "monty:country_codes": [
+      "CHN",
+      "PHL"
+    ],
+    "monty:hazard_codes": [
+      "MH0306",
+      "TC",
+      "nat-met-sto-tro"
+    ]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://brands.home-assistant.io/_/gdacs//logo.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "GDACS Logo"
+    }
+  },
+  "links": [
+    {
+      "href": "gdacs-exposure.json",
+      "rel": "self"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://github.com/IFRCGo/monty-stac-extension/tree/main/docs/model/sources/GDACS#tropical-cyclone-advisory-timeline",
+      "type": "text/html",
+      "title": "GDACS Exposure Item Source Mappings"
+    }
+  ]
+}

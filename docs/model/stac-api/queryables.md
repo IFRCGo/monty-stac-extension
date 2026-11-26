@@ -26,7 +26,7 @@ The following properties from the Monty STAC Extension can be used as queryables
 | monty:country_codes  | array[string] | The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                            |
 | monty:corr_id        | string        | The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](../correlation_identifier.md) page. See also [Correlation Algorithms](./correlation_algorithms.md) for dynamic correlation approaches |
 | monty:hazard_codes   | array[string] | The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](../taxonomy.md#hazards)                                                                  |
-| roles                | array[string] | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, response)                                                                                                                                                    |
+| roles                | array[string] | The roles of the item. Used to identify the type of data (event, reference, source, hazard, impact, exposure, response)                                                                                                                                                    |
 
 > [!TIP]
 > Items may also be filtered by [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) transformer revision via `processing:version` from the [`processing:` extension](https://github.com/stac-extensions/processing) — see [Usage Examples](#usage-examples) below. This always identifies the `pystac-monty` transformer, not any processing chain the source data itself went through; see [response best practices, governing principle 2](../response-best-practices.md#1-governing-principles).
@@ -54,6 +54,20 @@ The following properties from the `monty:impact_detail` object can be used as qu
 | monty:impact_detail.unit          | string | The units of the impact estimate                                                                                                                                                                            |
 | monty:impact_detail.estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                     |
 | monty:impact_detail.description   | string | The description of the impact                                                                                                                                                                               |
+
+### Exposure Detail Queryables
+
+The following properties from the `monty:exposure_detail` object can be used as queryables:
+
+| Field Name                            | Type   | Description |
+| ------------------------------------- | ------ | ----------- |
+| monty:exposure_detail.category        | string | The category of people or assets that the figure counts. The possible values are defined in [this table](../taxonomy.md#exposure-category) |
+| monty:exposure_detail.value           | number | The value of the figure, as a number, without the units |
+| monty:exposure_detail.unit            | string | The units of the figure |
+| monty:exposure_detail.estimate_type   | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled` |
+| monty:exposure_detail.intensity_value | number | The hazard intensity that the figure counts, as a number, without the units |
+| monty:exposure_detail.intensity_unit  | string | The unit of `intensity_value` |
+| monty:exposure_detail.intensity_range | string | `at_or_above` or `band` |
 
 ## Example Queryables Definition
 
@@ -118,7 +132,7 @@ Below is an example of a queryables definition for a STAC API implementing the M
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["event", "reference", "source", "hazard", "impact", "response"]
+        "enum": ["event", "reference", "source", "hazard", "impact", "exposure", "response"]
       }
     },
     "monty:hazard_detail.cluster": {
@@ -157,13 +171,12 @@ Below is an example of a queryables definition for a STAC API implementing the M
       "description": "The estimated value type of the impact",
       "type": "string",
       "enum": [
-        "unspecified", "unaffected", "damaged", "destroyed", "potentially_damaged", 
+        "unspecified", "damaged", "destroyed", 
         "affected_total", "affected_direct", "affected_indirect", "death", 
         "missing", "injured", "evacuated", "relocated", "assisted", 
         "shelter_emergency", "shelter_temporary", "shelter_longterm", "in_need", 
         "targeted", "disrupted", "cost", "homeless", "displaced_internal", 
-        "displaced_external", "displaced_total", "alertscore", "potentially_affected", 
-        "highest_risk"
+        "displaced_external", "displaced_total"
       ]
     },
     "monty:impact_detail.value": {

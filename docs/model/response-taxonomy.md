@@ -142,7 +142,7 @@ The object does not permit additional properties (`additionalProperties: false`)
 - **Source landing page / product URL** — expressed as a STAC `rel: derived_from` link, not a property.
 - **Spatial resolution, sensor, orbit** — for derived products, carried on linked acquisition items (`sar:` / `eo:` / `sat:`) reached via `derived_from`. Exception: `eo-dat` items carry these extensions directly because the dataset is the deliverable.
 - **Charter activation/call/resolution fields** — carried by the `disaster:` extension on Charter VAP items (`disaster:activation_id`, `disaster:activation_status`, `disaster:resolution_class`, …).
-- **Damage / exposure statistics** — emitted as separate Monty Impact items linked via `monty:corr_id` (see §3.3).
+- **Damage / exposure statistics** — emitted as separate Monty Impact or Exposure items linked via `monty:corr_id` (see §3.3 and the [Exposure ↔ Impact boundary rules](exposure-impact-boundary.md)).
 
 **Minimal example — CEMS Delineation product:**
 

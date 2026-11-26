@@ -45,7 +45,7 @@ TODO: one-paragraph description.
 
 <!--
   One row per Monty collection this source produces. `Code` is the collection id
-  (`{source}-events`, …); `Monty role` is event | hazard | impact | response;
+  (`{source}-events`, …); `Monty role` is event | hazard | impact | exposure | response;
   `Source for` names the upstream object the collection is built from.
   These rows MUST match the source's entry in ./sources.yml (`collections`,
   `types`), which is what gen_sources_index.py checks.
@@ -56,6 +56,7 @@ TODO: one-paragraph description.
 | {Source} — Events | `{source}-events` | `event` | {upstream object} |
 | {Source} — Hazards | `{source}-hazards` | `hazard` | {upstream object} |
 | {Source} — Impacts | `{source}-impacts` | `impact` | {upstream object} |
+| {Source} — Exposure | `{source}-exposure` | `exposure` | {upstream object} |
 | {Source} — Response | `{source}-response` | `response` | {upstream object} |
 
 <!--
@@ -176,7 +177,7 @@ Reference fixtures in `api-files/`: TODO (name them and say what each exercises)
 > Follow the [Response best practices](../response-best-practices.md) for
 > extension layering, and the [Response ↔ Impact boundary rules](../response-impact-boundary.md)
 > for what belongs on a Response vs. a paired Impact. **Do not** put
-> damage/exposure statistics in `monty:response_detail` — those become Impact items.
+> damage/exposure statistics in `monty:response_detail` — damage figures become Impact items, and counts of people or assets inside the hazard area become Exposure items (see the [Exposure ↔ Impact boundary rules](../exposure-impact-boundary.md)).
 
 ## Object → Impact
 

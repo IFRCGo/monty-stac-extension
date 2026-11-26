@@ -32,23 +32,23 @@ Run it after editing `sources.yml`; CI runs it with `--check` and fails on drift
 <!-- gen_sources_index.py: BEGIN data-types-by-source -->
 ## Data Types by Source
 
-| Source | Events | Hazards | Impacts | Response |
-|---|---|---|---|---|
-| AlertHub | ✓ | ✓ | - | - |
-| [Copernicus Emergency Management Service — Rapid Mapping](./CEMS/README.md) | ✓ | ✓ | ✓ | ✓ |
-| [International Charter on Space and Major Disasters](./Charter/README.md) | ✓ | ✓ | - | ✓ |
-| [DesInventar](./DesInventar/README.md) | ✓ | - | ✓ | - |
-| [EM-DAT](./EM-DAT/README.md) | ✓ | ✓ | ✓ | - |
-| [GDACS](./GDACS/README.md) | ✓ | ✓ | ✓ | - |
-| [Global Flood Database (GFD)](./GFD/README.md) | ✓ | ✓ | ✓ | - |
-| [GLIDE](./GLIDE/README.md) | ✓ | ✓ | - | - |
-| [IBTrACS](./IBTrACS/README.md) | ✓ | ✓ | - | - |
-| [IDMC — Global Internal Displacement Database (GIDD)](./IDMC/README.md) | ✓ | - | ✓ | - |
-| [IDMC — Internal Displacement Updates (IDU)](./IDU/README.md) | ✓ | - | ✓ | - |
-| [IFRC DREF](./IFRC-DREF/README.md) | ✓ | ✓ | ✓ | - |
-| [Pacific Disaster Center (PDC)](./PDC/README.md) | ✓ | ✓ | ✓ | - |
-| Reference Events | ✓ | - | - | - |
-| [USGS Earthquake Catalog](./USGS/README.md) | ✓ | ✓ | ✓ | - |
+| Source | Events | Hazards | Impacts | Exposure | Response |
+|---|---|---|---|---|---|
+| AlertHub | ✓ | ✓ | - | - | - |
+| [Copernicus Emergency Management Service — Rapid Mapping](./CEMS/README.md) | ✓ | ✓ | ✓ | - | ✓ |
+| [International Charter on Space and Major Disasters](./Charter/README.md) | ✓ | ✓ | - | - | ✓ |
+| [DesInventar](./DesInventar/README.md) | ✓ | - | ✓ | - | - |
+| [EM-DAT](./EM-DAT/README.md) | ✓ | ✓ | ✓ | - | - |
+| [GDACS](./GDACS/README.md) | ✓ | ✓ | ✓ | ✓ | - |
+| [Global Flood Database (GFD)](./GFD/README.md) | ✓ | ✓ | ✓ | - | - |
+| [GLIDE](./GLIDE/README.md) | ✓ | ✓ | - | - | - |
+| [IBTrACS](./IBTrACS/README.md) | ✓ | ✓ | - | - | - |
+| [IDMC — Global Internal Displacement Database (GIDD)](./IDMC/README.md) | ✓ | - | ✓ | - | - |
+| [IDMC — Internal Displacement Updates (IDU)](./IDU/README.md) | ✓ | - | ✓ | - | - |
+| [IFRC DREF](./IFRC-DREF/README.md) | ✓ | ✓ | ✓ | - | - |
+| [Pacific Disaster Center (PDC)](./PDC/README.md) | ✓ | ✓ | ✓ | - | - |
+| Reference Events | ✓ | - | - | - | - |
+| [USGS Earthquake Catalog](./USGS/README.md) | ✓ | ✓ | ✓ | ✓ | - |
 <!-- gen_sources_index.py: END data-types-by-source -->
 
 ## Source Characteristics
@@ -71,7 +71,10 @@ Use the following role conventions consistently in source mappings:
     - event item: include `event` and `source`
     - hazard item: include `hazard` and `source`
     - impact item: include `impact` and `source`
-- For cross-item relationships using link `rel="related"`, link `roles` should contain exactly one target type value: `event`, `hazard`, or `impact`.
+    - exposure item: include `exposure` and `source`
+    - response item: include `response` and `source`
+- For cross-item relationships using link `rel="related"`, link `roles` should contain exactly one target type value: `event`, `hazard`, `impact`, `exposure` or `response`.
+- An exposure item must have one `related` link with `roles: ["hazard"]`.
 
 Role order in arrays is not semantically significant.
 

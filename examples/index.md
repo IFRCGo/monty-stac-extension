@@ -58,6 +58,11 @@ new collection appears in both places from a single edit to `sources.yml`.
 - [pdc-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts) — Pacific Disaster Center (PDC)
 - [usgs-impacts](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-impacts) — USGS Earthquake Catalog
 
+### Exposure
+
+- [gdacs-exposure](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-exposure) — GDACS
+- [usgs-exposure](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/usgs-exposure) — USGS Earthquake Catalog
+
 ### Response
 
 - [cems-response](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response) — Copernicus Emergency Management Service — Rapid Mapping

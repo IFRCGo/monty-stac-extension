@@ -14,7 +14,7 @@ A STAC collection hold all the GDACS events. An example of the GDACS collection 
 - Source organization email: <coordination@gdacs.org>
 - Source URL: <https://www.gdacs.org>
 - Source Data license: MIT License
-- Source for: event, hazard, impact
+- Source for: event, hazard, impact, exposure
 
 - previous implementation (R): <https://github.com/IFRCGo/GCDB/blob/main/RCode/MainlyHazardData/GetGDACS.R>
 
@@ -186,21 +186,22 @@ The following table shows the magnitude scale and unit to be used for each event
 According to the event type and the fields available in the GDACS event, one or more [**impact STAC items**](https://github.com/IFRCGo/monty-stac-extension#impact) can be created.
 The following sections describe the mapping of specific GDACS event information to the STAC impact item.
 
-GDACS carries impact data in two different places. The mapping to use depends on the event type:
+GDACS carries figures in two different places. The mapping to use depends on the event type:
 
-| GDACS event type | Source field                        | Section                                                                     |
-| ---------------- | ----------------------------------- | --------------------------------------------------------------------------- |
-| FL               | `properties.sendai`                 | [Sendai indicators](#sendai-indicators)                                     |
-| TC               | `properties.impacts[].resource.timeline` | [Tropical cyclone advisory timeline](#tropical-cyclone-advisory-timeline) |
-| WF               | `properties.impacts[].resource.impact`   | [Wildfire population exposure](#wildfire-population-exposure)             |
-| EQ, DR, TS, VO   | none                                | No impact item is produced. See [Event types without an impact mapping](#event-types-without-an-impact-mapping) |
+| GDACS event type | Source field                             | Monty class | Section                                                                     |
+| ---------------- | ---------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| FL               | `properties.sendai`                      | Impact      | [Sendai indicators](#sendai-indicators)                                     |
+| TC               | `properties.impacts[].resource.timeline` | Exposure    | [Tropical cyclone advisory timeline](#tropical-cyclone-advisory-timeline)   |
+| WF               | `properties.impacts[].resource.impact`   | Not mapped  | [Wildfire population exposure](#wildfire-population-exposure)               |
+| EQ, DR, TS, VO   | none                                     | None        | See [Event types without an impact mapping](#event-types-without-an-impact-mapping) |
 
 > [!IMPORTANT]
 > The `impacts[]` figures are **exposure estimates**, not observed losses. GDACS
 > computes them with a model. It counts the population inside a hazard footprint.
-> It does not count the persons that the hazard harmed. All impact items built from
-> `impacts[]` therefore use `type: potentially_affected` and
-> `estimate_type: modelled`. See [Decision: exposure is not impact](#decision-exposure-is-not-impact).
+> It does not count the persons that the hazard harmed. The figures built from
+> `impacts[]` are therefore [**exposure STAC items**](https://github.com/IFRCGo/monty-stac-extension#exposure)
+> in the `gdacs-exposure` collection, with `estimate_type: modelled`. They are not impact items.
+> See [Decision: exposure is not impact](#decision-exposure-is-not-impact).
 
 > [!WARNING]
 > The TC and WF sections below are the agreed mapping. The transformer does not
@@ -304,7 +305,7 @@ Reference files, trimmed to the mapped fields:
 **1. The timeline is cumulative, and it repeats.** Each episode returns every earlier
 advisory entry again, unchanged. The 9 observed entries of episode 9 are identical to
 the same 9 entries of episode 13, and they keep the same `id`. A transformer that keys
-the impact item on the episode therefore creates one duplicate for each later episode.
+the item on the episode therefore creates one duplicate for each later episode.
 
 **2. `advisory_number` is not unique.** The current advisory appears once as an
 observed position, then once more for each forecast lead time. In episode 13 below,
@@ -331,15 +332,16 @@ it, use `pop39` and `pop74`, which the GDACS
 
 ##### Mapping
 
-Each timeline entry shall produce **one impact item for each non-zero exposure band**.
-An entry with `pop39` and `pop74` both above zero therefore produces 2 items. An entry
-with every band at zero produces none.
+Each timeline entry shall produce **one exposure item for each non-zero wind band**
+(`pop39` and `pop74`). An entry with `pop39` and `pop74` both above zero therefore
+produces 2 items. An entry with the two bands at zero produces none.
+`popstormsurge` is not mapped: see rule 7.
 
 | STAC field                                                                                                             | GDACS field                                                       | Description                                                                    |
 | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | `gdacs-impact-` + properties.eventid + `-` + item.id + `-` + band  | Band is `pop39`, `pop74` or `surge`. **The episode is not part of the id.** See rule 1 |
-| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | Point built from item.coordinates                                  | Position of the track point                                                    |
-| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `gdacs-impacts`                                                    | The collection for GDACS impacts                                               |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id)                                  | `gdacs-exposure-` + properties.eventid + `-` + item.id + `-` + band | Band is `pop39` or `pop74`. **The episode is not part of the id.** See rule 1 |
+| [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry)                      | `null`                                                             | GDACS does not publish the wind field of a track point. A point is a location, not an area. See rule 8 |
+| [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection)                  | `gdacs-exposure`                                                   | The collection for GDACS exposure                                              |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time)             | item.advisory_datetime                                             | Validity time of the advisory point, converted to UTC ISO 8601                 |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range) | item.advisory_datetime                                             | The same value. The entry describes an instant, not a period                   |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time-range)   | item.advisory_datetime                                             | The same value                                                                 |
@@ -351,18 +353,28 @@ with every band at zero produces none.
 | [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id)                              | Generated                                                          | Generated following the [event correlation](../../correlation_identifier.md) convention |
 | [processing:version](https://github.com/stac-extensions/processing) | Generated | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | [processing:software](https://github.com/stac-extensions/processing) | Generated | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
+| `related` link in \[links] with `roles: ["hazard"]`                                                                   | the hazard item of the episode                                    | **Required.** The exposure refers to this hazard                               |
 | [`via` link](https://github.com/radiantearth/stac-spec/blob/master/commons/assets.md) in \[links]                      | the `timeline` URL of the episode                                  | The URL changes with each episode. Consumers shall not use it as identity      |
 
-The `monty:impact_detail` object:
+The `monty:exposure_detail` object:
 
-| Field           | Value                                                                            |
-| --------------- | ---------------------------------------------------------------------------------- |
-| `category`      | `people`                                                                          |
-| `type`          | `potentially_affected`                                                            |
-| `value`         | `pop39`, `pop74` or `popstormsurge`, as an integer, for the band of the item      |
-| `unit`          | `count`                                                                           |
-| `estimate_type` | `modelled`                                                                        |
-| `description`   | The band, in words. For example `Population in the wind field of 39 kt or more`   |
+| Field             | Value                                                                           |
+| ----------------- | ------------------------------------------------------------------------------- |
+| `category`        | `people`                                                                        |
+| `value`           | `pop39` or `pop74`, as an integer, for the band of the item                     |
+| `unit`            | `count`                                                                         |
+| `estimate_type`   | `modelled`                                                                      |
+| `intensity_value` | `39` or `74`                                                                    |
+| `intensity_unit`  | `kt`                                                                            |
+| `intensity_range` | `at_or_above`                                                                   |
+| `intensity_label` | The band, in words. For example `Wind field of 39 kt or more`                   |
+
+For example, entry `271323` of
+[`api-files/1001294-13-gettimeline-source.json`](api-files/1001294-13-gettimeline-source.json)
+(advisory 11, 25 Jul 2026 18:00) gives two items: `gdacs-exposure-1001294-271323-pop39`
+with `value: 103014755` and `intensity_value: 39`, and `gdacs-exposure-1001294-271323-pop74`
+with `value: 11167854` and `intensity_value: 74`. The two figures overlap, and a client
+must not add them.
 
 Rules:
 
@@ -375,8 +387,7 @@ Rules:
 3. **`estimate_type` is always `modelled`.** The `actual` field describes the track
    position, not the exposure figure. GDACS models the exposure for observed positions
    in the same way as for forecast positions.
-4. **`type` is always `potentially_affected`.** See
-   [Decision: exposure is not impact](#decision-exposure-is-not-impact).
+4. **`intensity_range` is always `at_or_above`.** `pop74` is a part of `pop39`.
 5. **`monty:episode_number` is the episode being processed.** Because observed entries
    repeat, this field can change on re-ingestion. It carries the last episode that
    published the entry, not the first.
@@ -384,6 +395,12 @@ Rules:
    timeline entry, it skips that entry and logs a warning. The other entries of the
    episode are still mapped. The transformer does this since
    [IFRCGo/pystac-monty#261](https://github.com/IFRCGo/pystac-monty/pull/261).
+7. **`popstormsurge` is not mapped.** GDACS gives a count for the storm surge zone and
+   no intensity value. The Exposure class requires an intensity. This is an open point of the
+   [Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-point).
+8. **The geometry is `null`.** The count covers the wind field, and GDACS does not publish
+   the wind field of each track point. If the hazard item gives the wind field of the same
+   track point, a transformer can use it.
 
 > [!WARNING]
 > Monty has no field that marks an estimate as a forecast. `estimate_type` describes
@@ -416,28 +433,15 @@ The `POP` datum carries a series of scalars:
 | `SUMPOP5.0`   | Population within 5 km                              |
 | `SUMPOP10.0`  | Population within 10 km                             |
 
-Each `getimpact` document shall produce **one impact item** from `POPAFFECTED`.
-
-| STAC field | GDACS field                                                                       | Description                                                          |
-| ---------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| id         | `gdacs-impact-` + properties.eventid + `-` + properties.episodeid + `-popaffected` | The impact document has no identifier of its own                     |
-| geometry   | the `Shape` WKT of the `INPUT PARAMETERS` datum                                    | The burnt area. Fall back to the event geometry if `Shape` is absent |
-| datetime   | properties.fromdate of the episode                                                 | The document has no observation time, only a model run time          |
-| collection | `gdacs-impacts`                                                                    | The collection for GDACS impacts                                     |
-
-The `monty:impact_detail` object:
-
-| Field           | Value                          |
-| --------------- | -------------------------------- |
-| `category`      | `people`                        |
-| `type`          | `potentially_affected`          |
-| `value`         | `POPAFFECTED`, as an integer    |
-| `unit`          | `count`                         |
-| `estimate_type` | `modelled`                      |
-| `description`   | `Population in the burnt area`  |
+`POPAFFECTED` is an exposure figure: it counts the population in the burnt area. The
+burnt area is available (the `Shape` WKT of the `INPUT PARAMETERS` datum), but a burnt
+area has no intensity value, and the Exposure class requires one. **This figure is not
+mapped** until the open point of the
+[Exposure ↔ Impact boundary rules](../../exposure-impact-boundary.md#5-open-point) is
+decided. It must not become an impact item.
 
 The `modelname`, `modelrun` and `modelstatus` fields show that GDACS derived this
-figure from a model. `estimate_type` is therefore `modelled`, and never `primary`.
+figure from a model. Its `estimate_type` is `modelled`, and never `primary`.
 
 #### Event types without an impact mapping
 
@@ -453,20 +457,21 @@ not count the persons that the hazard harmed. UNDRR keeps these two concepts apa
 *exposure* is the presence of persons or assets in hazard-prone areas, and *impact* is
 the effect of the hazard on them.
 
-Monty has no exposure class. The nearest impact type is `potentially_affected`, and
-this document uses it for every figure that comes from `impacts[]`. The choice is
-deliberate, and it is a compromise. A consumer that sums `affected_total` across
-sources does not pick up these figures, which is the intended behaviour. A consumer
-that wants the exposure figures shall filter on `type = potentially_affected`.
+Monty has an [Exposure class](https://github.com/IFRCGo/monty-stac-extension#exposure)
+for these figures. They are exposure items in the `gdacs-exposure` collection. They are
+not impact items, and the `gdacs-impacts` collection holds only effects (the Sendai
+indicators). A consumer that sums `affected_total` across sources does not pick up
+these figures, which is the intended behaviour.
 
 #### Open questions raised by this mapping
 
-Two questions in this mapping belong to the Monty model, not to GDACS. They are open
+One question in this mapping belongs to the Monty model, not to GDACS. It is open
 for the Montandon Technical Working Group:
 
 1. **Should Monty mark an estimate as a forecast?** `estimate_type` describes
    provenance. It cannot say whether an estimate is about the future.
-2. **Should exposure be a class of its own?** `potentially_affected` carries the
-   exposure figures today, and it also carries other meanings for other sources.
 
-Until the group settles these questions, the rules above hold.
+The second question of an earlier version of this document, "should exposure be a class
+of its own?", is answered: the Exposure class exists.
+
+Until the group settles this question, the rules above hold.

@@ -17,6 +17,8 @@ For more information about the Montandon project, please check out [this 5-minut
 
 ## The Three Pillars
 
+![Monty in one picture: disaster data sources are mapped to one data model, and written as STAC with the Monty extension](docs/img/monty-overview.svg)
+
 This repository is more than the field spec below. It is organized around three pieces that build on each other:
 
 1. **[Extension Spec](#fields)** (this document) — the normative STAC fields, roles and relation types that carry Monty data in a STAC Item or Collection.
@@ -29,7 +31,7 @@ Start with whichever pillar matches what you're doing: implement against the spe
 
 - **Validate an example against the spec** — clone the repo, run `npm install` then `npm test`. This checks every file under [`examples/`](examples/) against [`json-schema/schema.json`](json-schema/schema.json) and lints the markdown; see [Running tests locally](CONTRIBUTING.md#running-tests-locally) in `CONTRIBUTING.md`.
 - **Find a field** — the [Fields](#fields) table below lists every `monty:*` property; each links to an [Additional Field Information](#additional-field-information) subsection with the full rules. For the values a field can take (hazard codes, impact types, response codes), see the [taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy/) and [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/) in the model.
-- **See a worked example** — the [Event](#event), [Hazard](#hazard), [Impact](#impact) and [Response](#response) sections below each link example STAC Items from a real source.
+- **See a worked example** — the [Event](#event), [Hazard](#hazard), [Impact](#impact), [Exposure](#exposure) and [Response](#response) sections below each link example STAC Items from a real source.
 
 ## Repository Map
 
@@ -67,6 +69,7 @@ The specification is organized as follows
 - [Data](#data): Describes the mandatory fields for all data objects.
   - [Hazard](#hazard): Describes the mandatory fields for the hazard object.
   - [Impact](#impact): Describes the mandatory fields for the impact object.
+  - [Exposure](#exposure): Describes the mandatory fields for the exposure object.
   - [Response](#response): Describes the mandatory fields for the response object.
 - [Queryables](https://ifrcgo.org/monty-stac-extension/model/stac-api/queryables/): Describes the properties that can be used as queryables in a STAC API implementing the Filter Extension.
 
@@ -87,13 +90,14 @@ The fields in the sections below can be used in these parts of STAC documents:
 
 | Field Name            | Type                                            | Description                                                                                                                                                                                                                                                                                                         |
 | --------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monty:src_event_id    | string                                          | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`.                                                                                                                               |
+| monty:src_event_id    | string                                          | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts, exposures) belonging to the same source event, independently of the STAC item `id`.                                                                                                                               |
 | monty:episode_number  | integer                                         | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
-| monty:country_codes   | \[string]                                       | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
+| monty:country_codes   | \[string]                                       | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact, exposure or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
 | monty:corr_id         | string                                          | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/) page |
 | monty:hazard_codes    | \[string]                                       | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#hazards)                                                                  |
 | monty:hazard_detail   | [Hazard Detail object](#montyhazard_detail)     | The details of the hazard                                                                                                                                                                                                                                                                                           |
 | monty:impact_detail   | [Impact Detail object](#montyimpact_detail)     | The details of the impact                                                                                                                                                                                                                                                                                           |
+| monty:exposure_detail | [Exposure Detail object](#montyexposure_detail) | The details of the exposure |
 | monty:response_detail | [Response Detail object](#montyresponse_detail) | The details of the response                                                                                                                                                                                                                                                                                         |
 
 > [!TIP]
@@ -110,17 +114,18 @@ A set of roles are defined to describe the type of the data. The following roles
 | source    | The data is a source event    |
 | hazard    | The data is a hazard          |
 | impact    | The data is an impact         |
+| exposure  | The data is an exposure       |
 | response  | The data is a response        |
 
 The roles are used at the item level in the `roles` field to characterize the data. It is also used in the link object to characterize the linked item.
 
-For cross-item relationships represented by `rel="related"` links, the link `roles` field SHOULD include exactly one target type: `event`, `hazard`, `impact`, or `response`.
+For cross-item relationships represented by `rel="related"` links, the link `roles` field SHOULD include exactly one target type: `event`, `hazard`, `impact`, `exposure` or `response`.
 
 ### Link Attributes
 
 | Field Name  | Type      | Description                                                                                                                                                        |
 | ----------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| roles       | \[string] | Semantic classification for the linked entity as an array of strings. For `rel="related"` links between Monty items, use `event`, `hazard`, `impact` or `response` |
+| roles       | \[string] | Semantic classification for the linked entity as an array of strings. For `rel="related"` links between Monty items, use `event`, `hazard`, `impact`, `exposure` or `response` |
 | occ_type    | string    | The type of the occurrence. It can be one of the following values: `known`, `potential`                                                                            |
 | occ_prob    | string    | It is a qualitative assessment of the likelihood of the linked hazard occurring with the main hazard (e.g. `high`)                                                 |
 | occ_probdef | uri       | It is a link to the definition of the probability for the hazard relationship                                                                                      |
@@ -129,7 +134,7 @@ For cross-item relationships represented by `rel="related"` links, the link `rol
 
 ##### monty:src_event_id
 
-The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts) belonging to the same source event, independently of the STAC item `id`.
+The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts, exposures) belonging to the same source event, independently of the STAC item `id`.
 
 ##### monty:episode_number
 
@@ -197,7 +202,7 @@ for which a human-readable keyword can be generated and stored in the `keywords`
 ##### monty:corr_id
 
 It is the unique identifier assigned by the Monty system to every item in the system.
-This correlation identifier is critical to associate event, hazard, impact and response items together.
+This correlation identifier is critical to associate event, hazard, impact, exposure and response items together.
 Each item *MUST* have one.
 More information about the correlation identifier is available in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/) page.
 
@@ -217,16 +222,38 @@ For instance, `category` and `pressure` can be added to provide the category and
 
 ##### monty:impact_detail
 
-It is an object that contains the details of the impact estimate. Preferably used only in an Impact item.
+It is an object that contains the details of the impact estimate. It MUST be used only in an Impact item.
+It has the [shared figure fields](#shared-figure-fields) and this field:
 
-| Field Name    | Type   | Description                                                                                                                                                                                                                                                   |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category      | string | **REQUIRED** The category of impact, which is the specific asset or population demographic that has been impacted by the hazard. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#exposure-category) |
-| type          | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#impact-type)                                                                                   |
-| value         | number | **REQUIRED** The estimated impact value, as a number, without the units                                                                                                                                                                                       |
-| unit          | string | The units of the impact estimate                                                                                                                                                                                                                              |
-| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled`                                                                                                                                                                       |
-| description   | string | The description of the impact                                                                                                                                                                                                                                 |
+| Field Name | Type   | Description |
+| ---------- | ------ | ----------- |
+| type       | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#impact-type) |
+
+##### monty:exposure_detail
+
+It is an object that contains the details of the exposure figure. It MUST be used only in an Exposure item, and an Exposure item MUST have it.
+It has the [shared figure fields](#shared-figure-fields) and these fields:
+
+| Field Name      | Type   | Description |
+| --------------- | ------ | ----------- |
+| intensity_value | number | **REQUIRED** The hazard intensity that the figure counts, as a number, without the units. For example `39` for a wind field of 39 kt, or `6` for a shaking intensity of MMI VI |
+| intensity_unit  | string | **REQUIRED** The unit of `intensity_value`. For example `kt` or `mmi` |
+| intensity_range | string | **REQUIRED** How the figure relates to `intensity_value`. `at_or_above`: the figure counts all the people or assets where the intensity is at this value or above it. `band`: the figure counts only the people or assets at this intensity level. Figures with `at_or_above` for two values of one hazard overlap, and MUST NOT be added |
+| intensity_label | string | A label for the intensity, as the source gives it. For example `MMI VI (strong)` |
+
+##### Shared figure fields
+
+`monty:impact_detail` and `monty:exposure_detail` are two different objects with a common base. The base is not a field and not a role: no item has it. It only gives one definition to the fields below, so that a client reads a figure in the same way in the two objects.
+
+| Field Name    | Type   | Description |
+| ------------- | ------ | ----------- |
+| category      | string | **REQUIRED** The category of people or assets that the figure counts. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#exposure-category) |
+| value         | number | **REQUIRED** The value of the figure, as a number, without the units |
+| unit          | string | The units of the figure |
+| estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled` |
+| description   | string | The description of the figure |
+
+An impact figure and an exposure figure MUST NOT be added together. See the [Exposure ↔ Impact boundary rules](https://ifrcgo.org/monty-stac-extension/model/exposure-impact-boundary/).
 
 ##### monty:response_detail
 
@@ -254,11 +281,12 @@ The following types should be used as applicable `rel` types in the
 
 | Type                | Description                                                                                                                              |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| related             | This link points to another related STAC item. Use link `roles` with exactly one target type: `event`, `hazard`, `impact`, or `response` |
+| related             | This link points to another related STAC item. Use link `roles` with exactly one target type: `event`, `hazard`, `impact`, `exposure` or `response` |
 | reference-event     | This link points to the reference event                                                                                                  |
 | source-event        | This link points to the source event                                                                                                     |
 | related-hazard      | This link points to a related hazard. For example, a flood related to the event                                                          |
 | related-impact      | This link points to a related impact. For example, a flood related to the impact                                                         |
+| related-exposure    | This link points to a related exposure. For example, the population inside the wind field of a cyclone |
 | related-response    | This link points to a related response. For example, a CEMS Delineation product produced for the event                                   |
 | triggers-hazard     | This link points to a triggered hazard. For example, an earthquake triggers a landslide                                                  |
 | triggered-by-hazard | This link points to the hazard that triggered this hazard. For example, an earthquake that triggered a landslide                         |
@@ -304,7 +332,7 @@ The global crisis data bank records multiple instances of events that are relate
 
 ### STAC Item fields for all data objects
 
-The table below describes the rules for the core fields in the representation of a data (Hazard, Impact or Response).
+The table below describes the rules for the core fields in the representation of a data (Hazard, Impact, Exposure or Response).
 
 | Field Name            | Description                                                                                                                 |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -312,7 +340,7 @@ The table below describes the rules for the core fields in the representation of
 | geometry              | Defines the location of the data, formatted according to RFC 7946                                                           |
 | **properties object** |                                                                                                                             |
 | title                 | The name of the data assigned by the issuer (source) of the data                                                            |
-| roles                 | It MUST include the data type role: `hazard`, `impact` or `response`                                                        |
+| roles                 | It MUST include the data type role: `hazard`, `impact`, `exposure` or `response`                                                      |
 | keywords              | A list of keywords that describe the data. This list includes the human-readable names of any codification used in the item |
 | created               | The date and time of the creation of the data by the issuer (source) of the data                                            |
 
@@ -358,6 +386,24 @@ The impact class represents the consequences of a hazard on the affected assets 
 In the [Monty model](https://ifrcgo.org/monty-stac-extension/model#data-overview), an impact is **ALWAYS** linked to a hazard as a source of the impact, impacts are recorded from multiple [sources](https://ifrcgo.org/monty-stac-extension/model/sources/).
 
 An impact object **MUST** have the [`monty:impact_detail`](#montyimpact_detail) field with all the details of the impact.
+
+A count of the people or assets inside a hazard area is not an impact. It is an [Exposure](#exposure).
+
+### Exposure
+
+This section describes in details the usage of the fields and links for the exposure object.
+The rules that separate an exposure from an impact are in the [Exposure ↔ Impact boundary rules](https://ifrcgo.org/monty-stac-extension/model/exposure-impact-boundary/).
+
+- Examples:
+  - [Population exposed to MMI VI shaking in China](examples/usgs-exposure/us6000pi9w-exposure-CHN-mmi6.json): Shows usage of the extension for a population exposure from USGS PAGER
+
+The exposure class represents the people or assets that are inside the area of a hazard, for a stated intensity of this hazard. It counts presence. It does not count harm.
+
+- An exposure object **MUST** have the [`monty:exposure_detail`](#montyexposure_detail) field. The JSON Schema enforces this rule.
+- An exposure object **MUST** have a `related` link with `roles: ["hazard"]` to the Hazard item that it refers to. The JSON Schema enforces this rule.
+- An exposure object **MUST NOT** have the `impact` role, and it is in a `<source>-exposure` collection.
+- The `geometry` of an exposure object is the area that the figure covers. When the source does not give this area, and the transformer cannot compute it from the Hazard item, the `geometry` **MUST** be `null`. It **MUST NOT** be a point copied from the hazard, and it **MUST NOT** be an area larger than the area that the figure covers (for example a full country for a figure that covers a part of it). An item with a `null` geometry is not found by a spatial search: use the hazard link, `monty:country_codes` or `monty:corr_id`.
+- The `datetime` of an exposure object is the time of the hazard situation that the figure describes.
 
 ### Response
 
