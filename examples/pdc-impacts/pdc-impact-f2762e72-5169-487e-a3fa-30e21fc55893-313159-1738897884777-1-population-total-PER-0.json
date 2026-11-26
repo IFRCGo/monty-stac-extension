@@ -24,7 +24,6 @@
     "description": "A Landslide Warning has been indicated by the Landslide Hazard Assessment Model (LHASA) on February 7, 2025, 00:40:00 UTC for Central Andes, Huaraz, Ancash, Peru. Landslide Warnings indicate a significant risk of rainfall induced landslide.\nIt is estimated that 1.32 Million people, 381,000 households, and $21.0 Billion of infrastructure\\* are within the affected area(s). \\*The cost represents the total replacement value of the infrastructure.\nAffected areas include: Ancash, Ucayali, Lima, Huánuco, Cajamarca, Junín, Cusco, Amazonas, Huancavelica, La Libertad, San Martín, Pasco and Loreto",
     "start_datetime": "2025-02-07T01:40:50.166000+00:00",
     "end_datetime": "2025-02-08T13:40:50.166000+00:00",
-    "category_id": "EVENT",
     "roles": [
       "source",
       "impact"

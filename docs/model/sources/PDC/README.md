@@ -99,7 +99,6 @@ second.
 | [start_datetime, end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `start_Date`, `end_Date` | Milliseconds since epoch, converted to UTC |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `hazard_Name` | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `description` | HTML converted to Markdown. `NA` when it is empty |
-| `category_id` | `category_ID` | Copied, e.g. `EVENT`. This property is not declared by the Monty schema |
 | roles | Fixed | `["source", "event"]` |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByCountry[].country` of all the snapshots | The ISO3 codes of all the snapshots, earliest snapshot first, in source order, with no duplicates. Without exposure data, the country of the hazard point from the geocoder, else `UNK` |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | `type_ID` | The three codes of the [Hazard Type Mapping](#hazard-type-mapping), e.g. `["GH0300", "LS", "nat-geo-mmd-lan"]` |
