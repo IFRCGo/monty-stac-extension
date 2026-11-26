@@ -1947,6 +1947,10 @@
 </tr>
 </tbody>
 </table>
+<p>IDMC's <code>typhoon/hurricane/cyclone</code> category states a tropical system, so it takes the
+Tropical Cyclone row (<code>MH0309</code>), not the generic storm row (<code>MH0301</code>). This follows the rule
+of the <a href="../../taxonomy/#cross-classification-mapping">Cross-Classification Mapping</a>: pick the row at
+the granularity that the source states, as decided in <a href="https://github.com/IFRCGo/monty-stac-extension/issues/94">#94</a>.</p>
 <p>The comparison is not case-sensitive. The transformer writes the three codes in the order
 UNDRR-ISC 2025, GLIDE, EM-DAT, for example <code>["MH0600", "FL", "nat-hyd-flo-flo"]</code>.</p>
 <p>A hazard that is not in this table gives no item: the transformer skips all the records of
