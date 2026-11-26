@@ -220,13 +220,15 @@ The impact item is a copy of the event item, with these differences:
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-impacts` | |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `timestamp` of the snapshot | Converted to UTC. `start_datetime` and `end_datetime` stay the same as the event |
 | roles | Fixed | `["source", "impact"]` |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event, then the title text of the [impact field](#impact-detail), then the place of the row in parentheses (`admin2`, `admin1`, `country`, when they have a value): `Landslide - Central Andes, Huaraz, Ancash, Peru - Total population (PER)` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The keywords of the event, then the label of the impact type and the label of the exposure category from the [taxonomy](../../taxonomy.md#impact): `["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru", "Total Affected", "People (All Demographics)"]` |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByAdmin[].country` | The country of the row. One code |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) | The field | See [Impact Detail](#impact-detail) |
 | `related` links | Generated | To the event item and to the hazard item |
 
-The geometry (the hazard point), `monty:hazard_codes` (all three codes), `monty:corr_id`, keywords
-and assets are the same as the event. So the keywords of an impact item can name other countries
-than its `monty:country_codes`.
+The geometry (the hazard point), `monty:hazard_codes` (all three codes), `monty:corr_id` and the
+assets are the same as the event. The first keywords are those of the event, so the keywords of an
+impact item can name other countries than its `monty:country_codes`.
 
 The parts of the impact id:
 
@@ -245,27 +247,27 @@ Example: `pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1
 Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate_type` is always
 `primary`. `unit` is not set.
 
-| `{group}.{field}` | category | type |
-| --- | --- | --- |
-| `population.total0_4` | `children_0_4` | `affected_total` |
-| `population.total5_9` | `children_5_9` | `affected_total` |
-| `population.total10_14` | `children_10_14` | `affected_total` |
-| `population.total15_19` | `children_15_19` | `affected_total` |
-| `population.total20_24` | `adult_20_24` | `affected_total` |
-| `population.total25_29` | `adult_25_29` | `affected_total` |
-| `population.total30_34` | `adult_30_34` | `affected_total` |
-| `population.total35_39` | `adult_35_39` | `affected_total` |
-| `population.total40_44` | `adult_40_44` | `affected_total` |
-| `population.total45_49` | `adult_45_49` | `affected_total` |
-| `population.total50_54` | `adult_50_54` | `affected_total` |
-| `population.total55_59` | `adult_55_59` | `affected_total` |
-| `population.total60_64` | `adult_60_64` | `affected_total` |
-| `population.total65_Plus` | `elderly` | `affected_total` |
-| `population.total` | `people` | `affected_total` |
-| `population.households` | `households` | `affected_total` |
-| `capital.total` | `global_currency` | `cost` |
-| `capital.school` | `schools` | `affected_total` |
-| `capital.hospital` | `hospitals` | `affected_total` |
+| `{group}.{field}` | Title text | category | type |
+| --- | --- | --- | --- |
+| `population.total0_4` | Population aged 0 to 4 | `children_0_4` | `affected_total` |
+| `population.total5_9` | Population aged 5 to 9 | `children_5_9` | `affected_total` |
+| `population.total10_14` | Population aged 10 to 14 | `children_10_14` | `affected_total` |
+| `population.total15_19` | Population aged 15 to 19 | `children_15_19` | `affected_total` |
+| `population.total20_24` | Population aged 20 to 24 | `adult_20_24` | `affected_total` |
+| `population.total25_29` | Population aged 25 to 29 | `adult_25_29` | `affected_total` |
+| `population.total30_34` | Population aged 30 to 34 | `adult_30_34` | `affected_total` |
+| `population.total35_39` | Population aged 35 to 39 | `adult_35_39` | `affected_total` |
+| `population.total40_44` | Population aged 40 to 44 | `adult_40_44` | `affected_total` |
+| `population.total45_49` | Population aged 45 to 49 | `adult_45_49` | `affected_total` |
+| `population.total50_54` | Population aged 50 to 54 | `adult_50_54` | `affected_total` |
+| `population.total55_59` | Population aged 55 to 59 | `adult_55_59` | `affected_total` |
+| `population.total60_64` | Population aged 60 to 64 | `adult_60_64` | `affected_total` |
+| `population.total65_Plus` | Population aged 65 and over | `elderly` | `affected_total` |
+| `population.total` | Total population | `people` | `affected_total` |
+| `population.households` | Households | `households` | `affected_total` |
+| `capital.total` | Total capital | `global_currency` | `cost` |
+| `capital.school` | School capital | `schools` | `affected_total` |
+| `capital.hospital` | Hospital capital | `hospitals` | `affected_total` |
 
 For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "primary"}`.
 
