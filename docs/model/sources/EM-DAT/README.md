@@ -137,7 +137,7 @@ Include historical events in the results (they are by default excluded unless th
 
 A [EM-DAT disaster](https://doc.emdat.be/docs/data-structure-and-content/general-definitions-and-concepts/) will **ALWAYS** produce an [**event STAC item**](https://github.com/IFRCGo/monty-stac-extension#event) as in the example for the [flood in Spain from 27 Oct 2024 04 Nov 2024](../EM-DAT/public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx).
 
-- The source events is the output of the [`data`](https://public.emdat.be/data) API endpoint. The example is [public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx](../EM-DAT/public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx) and the STAC item is [emdat-events/2024-0796-ESP.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-events/2024-0796-ESP.json).
+- The source events is the output of the [`data`](https://public.emdat.be/data) API endpoint. The example is [public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx](../EM-DAT/public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx) and the STAC item is [emdat-events/emdat-event-2024-0796-ESP.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/emdat-events/emdat-event-2024-0796-ESP.json).
 
 > [!IMPORTANT]  
 > As there is no permanent link to the EM-DAT event, the URl used to trace back the event should be composed with `https://public.emdat.be/data/` + the disaster ID. In the example, the URL is `https://public.emdat.be/data/2024-0796-ESP`.

@@ -102,6 +102,10 @@ sources:
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
     reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
+    regenerate:
+      batch: emdat
+      # A custom request export of the EM-DAT site, with one record (2024-0796-ESP).
+      input: docs/model/sources/EM-DAT/public_emdat_custom_request_2025-01-13_4cf1ccf1-9f6e-41a3-9aec-0a19903febae.xlsx
 
   gdacs:
     extra_paths:
