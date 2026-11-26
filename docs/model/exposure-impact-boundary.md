@@ -46,23 +46,56 @@ This document is source-agnostic. The mapping of each source is in its
 
 ---
 
-## 1. The test
+## 1. Decision procedure
 
-Use this test for each figure:
+The class of a figure does not depend on its label in the source ("affected", "population",
+"exposed"). It depends on the **counting rule**: the condition that one person or one asset must
+satisfy to be in the figure.
 
-> **If the area or the intensity of the hazard changes, and nothing else changes, does the figure change?**
+**Step 1. Write the counting rule of the figure as one sentence:**
 
-| Answer | Class |
-| ------ | ----- |
-| Yes, and the figure counts presence in the hazard area | **Exposure** |
-| Yes, and the figure counts an effect (a death, a loss, a damaged building) | **Impact** |
-| No | Not Exposure and not Impact. It is data that is not tied to a hazard (for example a population grid). Monty has no class for it |
+> One person (or one asset) is counted if ...
 
-A second test separates the two "yes" answers:
+Use the method document of the source, not the name of the field. If the source does not give the
+counting rule, the figure is not mapped.
 
-> **Can a person or an asset be in the figure and have no harm?**
+**Step 2. Read the sentence, and follow the tree:**
 
-If yes, the figure is an Exposure.
+```mermaid
+flowchart TD
+    A["One person or asset is counted if ..."] --> B{"What kind of<br/>condition is it?"}
+    B -- "something occurred to it:<br/>it died, was displaced,<br/>was damaged, was lost" --> I["Impact"]
+    B -- "it is in an area" --> C{"Which area?"}
+    B -- "a judgement about the future:<br/>it is at risk, it can be affected" --> N["Not mapped (N1)"]
+    C -- "the area of the hazard" --> D{"Does the source state<br/>the hazard intensity<br/>of this area?"}
+    C -- "a different area: a mapped area,<br/>an admin unit, a country" --> X["Not mapped (X4)"]
+    D -- "yes" --> E["Exposure"]
+    D -- "no" --> O["Open point (X3)"]
+```
+
+The first question is the important one. It has three answers, and they do not overlap:
+
+| The condition is about | Example of a counting rule | Class |
+| ---------------------- | -------------------------- | ----- |
+| **An effect** on the person or the asset | "... if the person died" | Impact |
+| **A location** of the person or the asset | "... if the person lives where the wind is 39 kt or more" | Exposure, if the area is the hazard area and the intensity is stated |
+| **A judgement** about what can occur | "... if the person is at high risk" | Not mapped |
+
+A model does not change the answer. A loss model that estimates deaths gives an Impact with
+`estimate_type: modelled`: its counting rule is "the model estimates that the person died". A model
+that puts a population dataset on a wind field gives an Exposure: its counting rule is a location.
+
+**Step 3. Check the result with real figures:**
+
+| Figure | Counting rule: one person is counted if ... | Result |
+| ------ | ------------------------------------------- | ------ |
+| GDACS `pop39` | ... the person lives in the wind field of 39 kt or more | Exposure |
+| USGS PAGER, population at MMI VI | ... the person lives where the shaking intensity is MMI VI | Exposure |
+| USGS PAGER, estimated fatalities | ... the loss model estimates that the person died | Impact, modelled |
+| Deaths in a situation report | ... an authority reports that the person died | Impact |
+| GDACS `popstormsurge` | ... the person lives in the storm surge zone (no intensity stated) | Open point (X3) |
+| Population of the area of interest of a satellite map | ... the person lives in the mapped area | Not mapped (X4) |
+| People at highest risk in a field report | ... the report judges that the person is at risk | Not mapped (N1) |
 
 ## 2. Pattern catalogue
 

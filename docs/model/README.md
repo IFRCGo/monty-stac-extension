@@ -93,6 +93,13 @@ classDiagram
     Impact --|> MontyData
     Impact "0..*" --> "1..*" Hazard : is the effect of
 
+    class Exposure {
+        +exposure_detail: ExposureDetail
+    }
+
+    Exposure --|> MontyData
+    Exposure "0..*" --> "1" Hazard : is in the area of
+
     class Response {
         +response_detail: ResponseDetail
     }
@@ -145,17 +152,34 @@ classDiagram
         +probdef: string
     }
 
-    class ImpactDetail {
+    class FigureDetail {
+        <<abstract>>
         +category: string
         +value: number
-        +type: string
         +unit: string
-        +date: datetime
         +estimate_type: string
+        +description: string
     }
 
+    class ImpactDetail {
+        +type: string
+        +date: datetime
+    }
+
+    ImpactDetail --|> FigureDetail
     ImpactDetail --* Impact
     Impact "*" --> "*" HazardCode : has
+
+    class ExposureDetail {
+        +intensity_value: number
+        +intensity_unit: string
+        +intensity_range: string
+        +intensity_label: string
+    }
+
+    ExposureDetail --|> FigureDetail
+    ExposureDetail --* Exposure
+    Exposure "*" --> "*" HazardCode : has
 
     
 ```
