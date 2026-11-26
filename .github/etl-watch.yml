@@ -163,6 +163,11 @@ sources:
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
     reviewed: b831436a02deedbee6effaf5a3d1a1d76ddd3000
+    regenerate:
+      batch: pdc
+      # One hazard (the landslide 313159) with one exposure snapshot. The bundle
+      # names the two files that the transformer reads.
+      input: docs/model/sources/PDC/313159-bundle.json
 
   usgs:
     extra_paths: [pystac_monty/validators/usgs.py]

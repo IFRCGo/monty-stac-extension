@@ -35,6 +35,13 @@ Examples: the transformer output for the upstream fixture, with the `self`, `col
 - Impact, total population: [pdc-impact-…-population-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0.json)
 - Impact, capital: [pdc-impact-…-capital-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-capital-total-PER-0.json)
 
+The fixture is in this folder, as sample data: the hazard record
+[313159-hazard_data.json](313159-hazard_data.json) and the exposure snapshot
+[313159-exposure_detail.json](313159-exposure_detail.json). The bundle
+[313159-bundle.json](313159-bundle.json) names the two files for the batch exporter `pdc`.
+`scripts/check_example_drift.py` runs the transformer on the bundle and compares the result with
+the four examples.
+
 ## Data flow
 
 The ETL ([montandon-etl](https://github.com/IFRCGo/montandon-etl), `apps/etl/etl_tasks/pdc.py` and
