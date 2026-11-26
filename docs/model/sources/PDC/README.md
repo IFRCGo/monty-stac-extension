@@ -245,37 +245,42 @@ Example: `pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1
 ### Impact Detail
 
 Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate_type` is always
-`primary`. `unit` is not set.
+`modelled`. `unit` is not set.
 
 | `{group}.{field}` | Title text | category | type |
 | --- | --- | --- | --- |
-| `population.total0_4` | Population aged 0 to 4 | `children_0_4` | `affected_total` |
-| `population.total5_9` | Population aged 5 to 9 | `children_5_9` | `affected_total` |
-| `population.total10_14` | Population aged 10 to 14 | `children_10_14` | `affected_total` |
-| `population.total15_19` | Population aged 15 to 19 | `children_15_19` | `affected_total` |
-| `population.total20_24` | Population aged 20 to 24 | `adult_20_24` | `affected_total` |
-| `population.total25_29` | Population aged 25 to 29 | `adult_25_29` | `affected_total` |
-| `population.total30_34` | Population aged 30 to 34 | `adult_30_34` | `affected_total` |
-| `population.total35_39` | Population aged 35 to 39 | `adult_35_39` | `affected_total` |
-| `population.total40_44` | Population aged 40 to 44 | `adult_40_44` | `affected_total` |
-| `population.total45_49` | Population aged 45 to 49 | `adult_45_49` | `affected_total` |
-| `population.total50_54` | Population aged 50 to 54 | `adult_50_54` | `affected_total` |
-| `population.total55_59` | Population aged 55 to 59 | `adult_55_59` | `affected_total` |
-| `population.total60_64` | Population aged 60 to 64 | `adult_60_64` | `affected_total` |
-| `population.total65_Plus` | Population aged 65 and over | `elderly` | `affected_total` |
-| `population.total` | Total population | `people` | `affected_total` |
-| `population.households` | Households | `households` | `affected_total` |
+| `population.total0_4` | Population aged 0 to 4 | `children_0_4` | `potentially_affected` |
+| `population.total5_9` | Population aged 5 to 9 | `children_5_9` | `potentially_affected` |
+| `population.total10_14` | Population aged 10 to 14 | `children_10_14` | `potentially_affected` |
+| `population.total15_19` | Population aged 15 to 19 | `children_15_19` | `potentially_affected` |
+| `population.total20_24` | Population aged 20 to 24 | `adult_20_24` | `potentially_affected` |
+| `population.total25_29` | Population aged 25 to 29 | `adult_25_29` | `potentially_affected` |
+| `population.total30_34` | Population aged 30 to 34 | `adult_30_34` | `potentially_affected` |
+| `population.total35_39` | Population aged 35 to 39 | `adult_35_39` | `potentially_affected` |
+| `population.total40_44` | Population aged 40 to 44 | `adult_40_44` | `potentially_affected` |
+| `population.total45_49` | Population aged 45 to 49 | `adult_45_49` | `potentially_affected` |
+| `population.total50_54` | Population aged 50 to 54 | `adult_50_54` | `potentially_affected` |
+| `population.total55_59` | Population aged 55 to 59 | `adult_55_59` | `potentially_affected` |
+| `population.total60_64` | Population aged 60 to 64 | `adult_60_64` | `potentially_affected` |
+| `population.total65_Plus` | Population aged 65 and over | `elderly` | `potentially_affected` |
+| `population.total` | Total population | `people` | `potentially_affected` |
+| `population.households` | Households | `households` | `potentially_affected` |
 | `capital.total` | Total capital | `global_currency` | `cost` |
-| `capital.school` | School capital | `schools` | `affected_total` |
-| `capital.hospital` | Hospital capital | `hospitals` | `affected_total` |
+| `capital.school` | School capital | `schools` | `potentially_affected` |
+| `capital.hospital` | Hospital capital | `hospitals` | `potentially_affected` |
 
-For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "primary"}`.
+For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "modelled"}`.
 
 > [!NOTE]
-> These values are PDC **exposure** estimates: the people and the assets in the hazard area. They are
-> not observed impacts. The `capital.total` value is in USD, but the item has no `unit`. How Monty
-> represents exposure is open in [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169)
-> and [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
+> These values are PDC **exposure** estimates from a model: the people and the assets in the hazard
+> area. They are not observed impacts, and for a warning they describe an area where the hazard can
+> still occur. Until Monty has a class for exposure and a forecast qualifier
+> ([#169](https://github.com/IFRCGo/monty-stac-extension/issues/169),
+> [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)), the items say
+> this with two existing values: `estimate_type` is `modelled`, and the type of the people and
+> asset counts is `potentially_affected`. GDACS uses the same two values for its exposure figures.
+> Do not add these values to observed impacts. The `capital.total` value is the replacement value
+> of the assets in the area, in USD; its type stays `cost`, and the item has no `unit`.
 
 ## Limitations and exclusions
 

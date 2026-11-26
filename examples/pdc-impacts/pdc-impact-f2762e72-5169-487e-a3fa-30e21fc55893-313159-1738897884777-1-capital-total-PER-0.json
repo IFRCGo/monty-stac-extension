@@ -52,7 +52,7 @@
       "category": "global_currency",
       "type": "cost",
       "value": 21096514700,
-      "estimate_type": "primary"
+      "estimate_type": "modelled"
     },
     "processing:version": "1.0.0",
     "processing:software": {

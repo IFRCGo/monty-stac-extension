@@ -44,15 +44,15 @@
       "Gravitational Mass Movement (Landslide)",
       "Ground Failure",
       "Peru",
-      "Total Affected",
+      "Potentially Affected",
       "People (All Demographics)"
     ],
     "monty:corr_id": "20250207-PER-720514-GH0300-1-GCDB",
     "monty:impact_detail": {
       "category": "people",
-      "type": "affected_total",
+      "type": "potentially_affected",
       "value": 1320000,
-      "estimate_type": "primary"
+      "estimate_type": "modelled"
     },
     "processing:version": "1.0.0",
     "processing:software": {
