@@ -7,8 +7,10 @@ This document describes the PDC transformer at
 (`pystac_monty/sources/pdc.py`). Each statement about the items was checked by a run of that
 transformer on the upstream fixtures in
 [`tests/data/pdc/`](https://github.com/IFRCGo/pystac-monty/tree/b831436a02deedbee6effaf5a3d1a1d76ddd3000/tests/data/pdc)
-(hazard `313159`, a landslide in Peru), and on variants of them: no exposure data, two snapshots,
-two countries and an unknown hazard type.
+(hazard `313159`, a landslide warning in Peru), and on variants of them: no exposure data, two snapshots,
+two countries and an unknown hazard type. The examples and the sample data of this repository use
+hazard `352320`, an observed volcano in Mexico, because the transformer now makes no item for a
+warning (see [Observed hazards only](#observed-hazards-only-temporary-rule)).
 
 ## Collection: `pdc-events`
 
@@ -27,20 +29,76 @@ A STAC collection hold all the PDC events.
 The three PDC collections (`pdc-events`, `pdc-hazards`, `pdc-impacts`) are marked private
 ([#195](https://github.com/IFRCGo/monty-stac-extension/pull/195)), because of this license.
 
-Examples: the transformer output for the upstream fixture, with the `self`, `collection` and
+Examples: the transformer output for the sample data of this folder, with the `self`, `collection` and
 `related` links changed to point into this repository, and only two of the 19 impact items:
 
-- Event: [pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events/pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json)
-- Hazard: [pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards/pdc-hazard-f2762e72-5169-487e-a3fa-30e21fc55893-313159.json)
-- Impact, total population: [pdc-impact-…-population-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0.json)
-- Impact, capital: [pdc-impact-…-capital-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-capital-total-PER-0.json)
+- Event: [pdc-event-62006159-a6da-45d8-b739-8d0940876fa1-352320.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-events/pdc-event-62006159-a6da-45d8-b739-8d0940876fa1-352320.json)
+- Hazard: [pdc-hazard-62006159-a6da-45d8-b739-8d0940876fa1-352320.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-hazards/pdc-hazard-62006159-a6da-45d8-b739-8d0940876fa1-352320.json)
+- Impact, total population: [pdc-impact-…-population-total-MEX-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1-population-total-MEX-0.json)
+- Impact, capital: [pdc-impact-…-capital-total-MEX-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1-capital-total-MEX-0.json)
 
 The fixture is in this folder, as sample data: the hazard record
-[313159-hazard_data.json](313159-hazard_data.json) and the exposure snapshot
-[313159-exposure_detail.json](313159-exposure_detail.json). The bundle
-[313159-bundle.json](313159-bundle.json) names the two files for the batch exporter `pdc`.
+[352320-hazard_data.json](352320-hazard_data.json) and the exposure snapshot
+[352320-exposure_detail.json](352320-exposure_detail.json). The bundle
+[352320-bundle.json](352320-bundle.json) names the two files for the batch exporter `pdc`.
 `scripts/check_example_drift.py` runs the transformer on the bundle and compares the result with
 the four examples.
+
+## Observed hazards only (temporary rule)
+
+PDC publishes two kinds of hazard record with the same fields:
+
+- an **observed hazard**: the hazard occurred, or an instrument or a person detected or reported it
+  (an earthquake, a fire that a satellite detected, volcanic activity that was reported);
+- a **warning**: an agency or a model says that a hazard is expected or possible (a flood watch, a
+  fire weather statement, a landslide warning from a model, a tropical cyclone forecast).
+
+Monty has no field that says "this is a forecast", and no class for exposure
+([Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110),
+[Discussion #168](https://github.com/IFRCGo/monty-stac-extension/discussions/168)). Before this rule,
+the transformer wrote a warning as an observed event and hazard. So, as a temporary rule, **the
+transformer makes items only for an observed hazard**. A warning gives no item. The decision, the
+evidence and the evaluation are in [#232](https://github.com/IFRCGo/monty-stac-extension/issues/232).
+
+No PDC field tells the two kinds apart: `severity_ID` is a threat level (`WARNING` means "imminent or
+occurring"), and `category_ID` and `status` are the same for the two. The transformer reads the
+**first sentence of `description`**, which PDC writes from one template for each product:
+
+| First sentence (pattern) | Example | Status |
+| --- | --- | --- |
+| `has occurred` | "An earthquake with a magnitude of 5.5 … has occurred …, as reported by … USGS" | observed |
+| `has been detected` | "A Potential Large and/or Intense Wildfire has been detected for …" | observed |
+| `reports … activity` | "National Interagency Fire Center (NIFC) reports Wildfire activity for …" | observed |
+| `has been reported`, `have been reported` | "Volcanic activity has been reported for Popocatepetl in Mexico, by …" | observed |
+| issuer `National Bushfire Extents` | "Geoscience Australia National Bushfire Extents (NRT) has issued a Wildfire warning" (the mapped extent of an active fire) | observed |
+| `forecast has been issued` | "A tropical cyclone forecast has been issued by National Hurricane Center (NHC) …" | warning |
+| `has been indicated by` | "A Landslide Warning has been indicated by the Landslide Hazard Assessment Model (LHASA) …" | warning |
+| `has issued`, `have issued` | "NWS Miami FL has issued a FA Watch for …" | warning |
+| `was issued`, `were issued`, `has been issued`, `have been issued` | "A Mekong River Commission (MRC) Riverine Flood Warning was issued for …" | warning |
+| no pattern | | unknown |
+
+The patterns are tried in this order, so the observed patterns come first. One more check uses the
+dates: when `start_Date` is after `create_Date`, the status is `warning`. The reverse is not a sign
+of an observed hazard, because most warnings start on the day of their creation.
+
+Only the status `observed` gives items. A `warning` or an `unknown` record is skipped, and the
+transform summary counts it in `skipped_rows` (not in `failed_rows`). An `unknown` record also gives a
+warning in the log, so a new PDC template shows as a count that rises.
+
+> [!WARNING]
+> **Limits of this rule.**
+>
+> - It reads text templates. PDC can change them.
+> - The patterns come from 197 records of four hazard types (flood, wildfire, earthquake, tropical
+>   cyclone), one landslide and one volcano. On these records, no warning is kept as observed. One
+>   observed record and 10 records that are both observed and forecast are skipped: 7 flood warnings
+>   where flooding already occurs, 2 tropical cyclones (an observed position and a forecast) and 1
+>   fire weather statement.
+> - Most floods and all tropical cyclones of PDC give no item with this rule.
+> - Most observed wildfire records are satellite heat detections that PDC calls "potential". The
+>   heat can come from an industrial source or from agricultural burning.
+> - The population and capital figures of an observed hazard are still exposure from a model, not
+>   observed impacts (see [Impact Detail](#impact-detail)).
 
 ## Data flow
 
@@ -78,11 +136,11 @@ PDCDataSourceType(
 
 | Item | Number | Condition |
 | --- | --- | --- |
-| Event | 1 | Always, when `type_ID` is in the [Hazard Type Mapping](#hazard-type-mapping) |
+| Event | 1 | When the hazard is [observed](#observed-hazards-only-temporary-rule) and `type_ID` is in the [Hazard Type Mapping](#hazard-type-mapping) |
 | Hazard | 1 | Same as the event |
 | Impact | One per snapshot × [impact field](#impact-detail) × `totalByAdmin` row | Only for a valid snapshot, and only when the field has a value |
 
-For the upstream fixture (one snapshot, one `totalByAdmin` row), the transformer makes 21 items: the
+For the sample data (one snapshot, one `totalByAdmin` row), the transformer makes 21 items: the
 event, the hazard and 19 impact items. With a second snapshot that has three `totalByAdmin` rows,
 it makes 78 items: the event, the hazard, 19 impact items for the first snapshot and 57 for the
 second.
@@ -91,7 +149,7 @@ second.
 
 | STAC field | PDC field | Description |
 | --- | --- | --- |
-| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | `uuid`, `hazard_ID` | `pdc-event-{uuid}-{hazard_ID}`, e.g. `pdc-event-f2762e72-5169-487e-a3fa-30e21fc55893-313159`. The id does not change when a new snapshot comes |
+| [id](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#id) | `uuid`, `hazard_ID` | `pdc-event-{uuid}-{hazard_ID}`, e.g. `pdc-event-62006159-a6da-45d8-b739-8d0940876fa1-352320`. The id does not change when a new snapshot comes |
 | [geometry](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#geometry) | `latitude`, `longitude` | Point |
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | `longitude`, `latitude` | The bbox of the point |
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-events` | |
@@ -103,9 +161,9 @@ second.
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByCountry[].country` of all the snapshots | The ISO3 codes of all the snapshots, earliest snapshot first, in source order, with no duplicates. Without exposure data, the country of the hazard point from the geocoder, else `UNK` |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | `type_ID` | The three codes of the [Hazard Type Mapping](#hazard-type-mapping), e.g. `["GH0300", "LS", "nat-geo-mmd-lan"]` |
 | [monty:episode_number](https://github.com/IFRCGo/monty-stac-extension#montyepisode_number) | Fixed | Always `1`. PDC has no episode number |
-| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | `hazard_ID` | e.g. `313159` |
-| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention, with the first country code, e.g. `20250207-PER-720514-GH0300-1-GCDB` |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | The hazard keywords, then the `admin0` names of `totalByCountry` of all the snapshots, with no duplicates, e.g. `["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru"]`. Without exposure data, no country name |
+| [monty:src_event_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:src_event_id) | `hazard_ID` | e.g. `352320` |
+| [monty:corr_id](https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json#monty:corr_id) | Generated | Generated following the [event correlation](../../correlation_identifier.md) convention, with the first country code, e.g. `20250627-MEX-979608-GH0201-1-GCDB` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | The hazard keywords, then the `admin0` names of `totalByCountry` of all the snapshots, with no duplicates, e.g. `["Geological", "Lava Flows (Lava Domes)", "Volcanic", "Mexico"]`. Without exposure data, no country name |
 | `Maps` asset | `geojson_path` | The hazard area GeoJSON, with `type: geojson`. The ETL stores a copy of the `get_mags` response and gives its URL. The examples use the PDC `get_mags` URL |
 | `report` asset | `snc_url` | The PDC report page, with `type: html`. Only when `snc_url` has a value |
 | `related` links | Generated | To the hazard item and to each impact item |
@@ -219,8 +277,8 @@ The impact item is a copy of the event item, with these differences:
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-impacts` | |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `timestamp` of the snapshot | Converted to UTC. `start_datetime` and `end_datetime` stay the same as the event |
 | roles | Fixed | `["source", "impact"]` |
-| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event, then the title text of the [impact field](#impact-detail), then the place of the row in parentheses (`admin2`, `admin1`, `country`, when they have a value): `Landslide - Central Andes, Huaraz, Ancash, Peru - Total population (PER)` |
-| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The keywords of the event, then the label of the impact type and the label of the exposure category from the [taxonomy](../../taxonomy.md#impact): `["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru", "Total Affected", "People (All Demographics)"]` |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event, then the title text of the [impact field](#impact-detail), then the place of the row in parentheses (`admin2`, `admin1`, `country`, when they have a value): `Volcano - Popocatepetl, Mexico - Total population (MEX)` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The keywords of the event, then the label of the impact type and the label of the exposure category from the [taxonomy](../../taxonomy.md#impact): `["Geological", "Lava Flows (Lava Domes)", "Volcanic", "Mexico", "Total Affected", "People (All Demographics)"]` |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByAdmin[].country` | The country of the row. One code |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) | The field | See [Impact Detail](#impact-detail) |
 | `related` links | Generated | To the event item and to the hazard item |
@@ -232,14 +290,14 @@ impact item can name other countries than its `monty:country_codes`.
 The parts of the impact id:
 
 - `{timestamp_ms}`: the snapshot `timestamp` in milliseconds. PDC sends milliseconds or seconds
-  with decimals (`1738897884.7774327` in the fixture). A value below 10¹¹ is read as seconds.
+  with decimals (`1751032040.9863468` in the fixture). A value below 10¹¹ is read as seconds.
 - `{episode}`: always `1`.
 - `{group}-{field}`: the impact field, e.g. `population-total0_4`, `capital-total`.
 - `{admin}`: the `country` of the row, then `admin1` and `admin2` when they have a value, in
   lowercase ASCII (`San Martín` → `san-martin`), then `-0`. When a row has the same
   `country`/`admin1`/`admin2` as a row before it, `-0` becomes the row index (`-1`, `-2`, …).
 
-Example: `pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0`.
+Example: `pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1-population-total-MEX-0`.
 
 ### Impact Detail
 
@@ -268,7 +326,7 @@ Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate
 | `capital.school` | School capital | `schools` | `potentially_affected` |
 | `capital.hospital` | Hospital capital | `hospitals` | `potentially_affected` |
 
-For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "modelled"}`.
+For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 39725685500.0, "estimate_type": "modelled"}`.
 
 > [!NOTE]
 > These values are PDC **exposure** estimates from a model: the people and the assets in the hazard
@@ -291,6 +349,8 @@ For the fixture, `capital.total` gives `{"category": "global_currency", "type": 
   offered targeted exports of its historical database on request.
 - **Unchanged snapshots.** The ETL does not send a snapshot that has the same content as the one
   before it, so such a snapshot gives no impact item.
+- **Warnings.** A hazard that is not observed gives no item (see
+  [Observed hazards only](#observed-hazards-only-temporary-rule)).
 - **Unknown hazard types.** A `type_ID` that is not in the [Hazard Type Mapping](#hazard-type-mapping)
   gives no item. The eight types with no UNDRR-ISC 2025 code give no item too.
 - **Fields not mapped.** A `totalByAdmin` row has more fields than the 19 in [Impact Detail](#impact-detail).

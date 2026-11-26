@@ -1,0 +1,713 @@
+{
+    "totalByAdmin": [
+        {
+            "country": "MEX",
+            "capital": {
+                "total": {
+                    "valueFormatted": "39.7 Billion",
+                    "valueFormattedNoTrunc": "39,725,685,500",
+                    "valueRounded": 3.97E10,
+                    "value": 3.97256855E10
+                },
+                "school": {
+                    "valueFormatted": "46",
+                    "valueFormattedNoTrunc": "46",
+                    "valueRounded": 46,
+                    "value": 46
+                },
+                "hospital": {
+                    "valueFormatted": "26",
+                    "valueFormattedNoTrunc": "26",
+                    "valueRounded": 26,
+                    "value": 26
+                }
+            },
+            "foodNeeds": {
+                "valueFormatted": "1.23 Billion",
+                "valueFormattedNoTrunc": "1,234,800,000",
+                "valueRounded": 1.23E9,
+                "value": 1.2348E9
+            },
+            "wasteNeedsUnit": "100 liter",
+            "population": {
+                "total90_94": {
+                    "valueFormatted": "2,430",
+                    "valueFormattedNoTrunc": "2,430",
+                    "valueRounded": 2430,
+                    "value": 2430
+                },
+                "vulnerable15_64": {
+                    "valueFormatted": "394,548",
+                    "valueFormattedNoTrunc": "394,548",
+                    "valueRounded": 394548,
+                    "value": 394548
+                },
+                "total20_24": {
+                    "valueFormatted": "137,700",
+                    "valueFormattedNoTrunc": "137,700",
+                    "valueRounded": 137700,
+                    "value": 137700
+                },
+                "total45_49": {
+                    "valueFormatted": "98,334",
+                    "valueFormattedNoTrunc": "98,334",
+                    "valueRounded": 98334,
+                    "value": 98334
+                },
+                "total65_Plus": {
+                    "valueFormatted": "129,276",
+                    "valueFormattedNoTrunc": "129,276",
+                    "valueRounded": 129276,
+                    "value": 129276
+                },
+                "total60_64": {
+                    "valueFormatted": "62,370",
+                    "valueFormattedNoTrunc": "62,370",
+                    "valueRounded": 62370,
+                    "value": 62370
+                },
+                "vulnerable65_Plus": {
+                    "valueFormatted": "46,922",
+                    "valueFormattedNoTrunc": "46,922.4",
+                    "valueRounded": 46922,
+                    "value": 46922.4
+                },
+                "total85_89": {
+                    "valueFormatted": "7,128",
+                    "valueFormattedNoTrunc": "7,128",
+                    "valueRounded": 7128,
+                    "value": 7128
+                },
+                "total0_14": {
+                    "valueFormatted": "403,704",
+                    "valueFormattedNoTrunc": "403,704",
+                    "valueRounded": 403704,
+                    "value": 403704
+                },
+                "total15_19": {
+                    "valueFormatted": "139,320",
+                    "valueFormattedNoTrunc": "139,320",
+                    "valueRounded": 139320,
+                    "value": 139320
+                },
+                "total": {
+                    "valueFormatted": "1.62 Million",
+                    "valueFormattedNoTrunc": "1,620,000",
+                    "valueRounded": 1620000.0,
+                    "value": 1620000.0
+                },
+                "vulnerable": {
+                    "valueFormatted": "588,000",
+                    "valueFormattedNoTrunc": "588,000",
+                    "valueRounded": 588000,
+                    "value": 588000
+                },
+                "total30_34": {
+                    "valueFormatted": "127,818",
+                    "valueFormattedNoTrunc": "127,818",
+                    "valueRounded": 127818,
+                    "value": 127818
+                },
+                "total55_59": {
+                    "valueFormatted": "76,464",
+                    "valueFormattedNoTrunc": "76,464",
+                    "valueRounded": 76464,
+                    "value": 76464
+                },
+                "total70_74": {
+                    "valueFormatted": "34,182",
+                    "valueFormattedNoTrunc": "34,182",
+                    "valueRounded": 34182,
+                    "value": 34182
+                },
+                "total95_99": {
+                    "valueFormatted": "486",
+                    "valueFormattedNoTrunc": "486",
+                    "valueRounded": 486,
+                    "value": 486
+                },
+                "total25_29": {
+                    "valueFormatted": "132,354",
+                    "valueFormattedNoTrunc": "132,354",
+                    "valueRounded": 132354,
+                    "value": 132354
+                },
+                "total40_44": {
+                    "valueFormatted": "106,434",
+                    "valueFormattedNoTrunc": "106,434",
+                    "valueRounded": 106434,
+                    "value": 106434
+                },
+                "total65_69": {
+                    "valueFormatted": "47,304",
+                    "valueFormattedNoTrunc": "47,304",
+                    "valueRounded": 47304,
+                    "value": 47304
+                },
+                "households": {
+                    "valueFormatted": "433,000",
+                    "valueFormattedNoTrunc": "433,155.08",
+                    "valueRounded": 433000,
+                    "value": 433155.08021390374
+                },
+                "total80_84": {
+                    "valueFormatted": "14,418",
+                    "valueFormattedNoTrunc": "14,418",
+                    "valueRounded": 14418,
+                    "value": 14418
+                },
+                "total10_14": {
+                    "valueFormatted": "140,616",
+                    "valueFormattedNoTrunc": "140,616",
+                    "valueRounded": 140616,
+                    "value": 140616
+                },
+                "total100AndOver": {
+                    "valueFormatted": "0",
+                    "valueFormattedNoTrunc": "0",
+                    "valueRounded": 0,
+                    "value": 0
+                },
+                "total35_39": {
+                    "valueFormatted": "116,640",
+                    "valueFormattedNoTrunc": "116,640",
+                    "valueRounded": 116640,
+                    "value": 116640
+                },
+                "total0_4": {
+                    "valueFormatted": "128,790",
+                    "valueFormattedNoTrunc": "128,790",
+                    "valueRounded": 128790,
+                    "value": 128790
+                },
+                "vulnerable0_14": {
+                    "valueFormatted": "146,530",
+                    "valueFormattedNoTrunc": "146,529.6",
+                    "valueRounded": 146530,
+                    "value": 146529.6
+                },
+                "total15_64": {
+                    "valueFormatted": "1,087,020",
+                    "valueFormattedNoTrunc": "1,087,020",
+                    "valueRounded": 1087020,
+                    "value": 1087020.0
+                },
+                "total50_54": {
+                    "valueFormatted": "89,586",
+                    "valueFormattedNoTrunc": "89,586",
+                    "valueRounded": 89586,
+                    "value": 89586
+                },
+                "total75_79": {
+                    "valueFormatted": "23,328",
+                    "valueFormattedNoTrunc": "23,328",
+                    "valueRounded": 23328,
+                    "value": 23328
+                },
+                "total5_9": {
+                    "valueFormatted": "134,298",
+                    "valueFormattedNoTrunc": "134,298",
+                    "valueRounded": 134298,
+                    "value": 134298
+                }
+            },
+            "waterNeeds": {
+                "valueFormatted": "1.76 Million",
+                "valueFormattedNoTrunc": "1,764,000",
+                "valueRounded": 1760000.0,
+                "value": 1764000.0
+            },
+            "shelterNeeds": {
+                "valueFormatted": "2.02 Million",
+                "valueFormattedNoTrunc": "2,028,600",
+                "valueRounded": 2020000.0,
+                "value": 2028600.0
+            },
+            "admin1": null,
+            "admin2": null,
+            "waterNeedsUnit": "liter",
+            "shelterNeedsUnit": "sq meters",
+            "admin0": "Mexico",
+            "wasteNeeds": {
+                "valueFormatted": "58,800",
+                "valueFormattedNoTrunc": "58,800",
+                "valueRounded": 58800,
+                "value": 58800
+            },
+            "foodNeedsUnit": "CAL"
+        }
+    ],
+    "capital": {
+        "total": {
+            "valueFormatted": "39.7 Billion",
+            "valueFormattedNoTrunc": "39,725,685,500",
+            "valueRounded": 3.97E10,
+            "value": 3.97256855E10
+        },
+        "school": {
+            "valueFormatted": "46",
+            "valueFormattedNoTrunc": "46",
+            "valueRounded": 46,
+            "value": 46
+        },
+        "hospital": {
+            "valueFormatted": "26",
+            "valueFormattedNoTrunc": "26",
+            "valueRounded": 26,
+            "value": 26
+        }
+    },
+    "foodNeeds": {
+        "valueFormatted": "1.23 Billion",
+        "valueFormattedNoTrunc": "1,234,800,000",
+        "valueRounded": 1.23E9,
+        "value": 1.2348E9
+    },
+    "wasteNeedsUnit": "100 liter",
+    "hazardUuid": "62006159-a6da-45d8-b739-8d0940876fa1",
+    "hazardType": "VOLCANO",
+    "version": "1",
+    "population": {
+        "total90_94": {
+            "valueFormatted": "2,430",
+            "valueFormattedNoTrunc": "2,430",
+            "valueRounded": 2430,
+            "value": 2430
+        },
+        "vulnerable15_64": {
+            "valueFormatted": "394,548",
+            "valueFormattedNoTrunc": "394,548",
+            "valueRounded": 394548,
+            "value": 394548
+        },
+        "total20_24": {
+            "valueFormatted": "137,700",
+            "valueFormattedNoTrunc": "137,700",
+            "valueRounded": 137700,
+            "value": 137700
+        },
+        "total45_49": {
+            "valueFormatted": "98,334",
+            "valueFormattedNoTrunc": "98,334",
+            "valueRounded": 98334,
+            "value": 98334
+        },
+        "total65_Plus": {
+            "valueFormatted": "129,276",
+            "valueFormattedNoTrunc": "129,276",
+            "valueRounded": 129276,
+            "value": 129276
+        },
+        "total60_64": {
+            "valueFormatted": "62,370",
+            "valueFormattedNoTrunc": "62,370",
+            "valueRounded": 62370,
+            "value": 62370
+        },
+        "vulnerable65_Plus": {
+            "valueFormatted": "46,922",
+            "valueFormattedNoTrunc": "46,922.4",
+            "valueRounded": 46922,
+            "value": 46922.4
+        },
+        "total85_89": {
+            "valueFormatted": "7,128",
+            "valueFormattedNoTrunc": "7,128",
+            "valueRounded": 7128,
+            "value": 7128
+        },
+        "total0_14": {
+            "valueFormatted": "403,704",
+            "valueFormattedNoTrunc": "403,704",
+            "valueRounded": 403704,
+            "value": 403704
+        },
+        "total15_19": {
+            "valueFormatted": "139,320",
+            "valueFormattedNoTrunc": "139,320",
+            "valueRounded": 139320,
+            "value": 139320
+        },
+        "total": {
+            "valueFormatted": "1.62 Million",
+            "valueFormattedNoTrunc": "1,620,000",
+            "valueRounded": 1620000.0,
+            "value": 1620000.0
+        },
+        "vulnerable": {
+            "valueFormatted": "588,000",
+            "valueFormattedNoTrunc": "588,000",
+            "valueRounded": 588000,
+            "value": 588000
+        },
+        "total30_34": {
+            "valueFormatted": "127,818",
+            "valueFormattedNoTrunc": "127,818",
+            "valueRounded": 127818,
+            "value": 127818
+        },
+        "total55_59": {
+            "valueFormatted": "76,464",
+            "valueFormattedNoTrunc": "76,464",
+            "valueRounded": 76464,
+            "value": 76464
+        },
+        "total70_74": {
+            "valueFormatted": "34,182",
+            "valueFormattedNoTrunc": "34,182",
+            "valueRounded": 34182,
+            "value": 34182
+        },
+        "total95_99": {
+            "valueFormatted": "486",
+            "valueFormattedNoTrunc": "486",
+            "valueRounded": 486,
+            "value": 486
+        },
+        "total25_29": {
+            "valueFormatted": "132,354",
+            "valueFormattedNoTrunc": "132,354",
+            "valueRounded": 132354,
+            "value": 132354
+        },
+        "total40_44": {
+            "valueFormatted": "106,434",
+            "valueFormattedNoTrunc": "106,434",
+            "valueRounded": 106434,
+            "value": 106434
+        },
+        "total65_69": {
+            "valueFormatted": "47,304",
+            "valueFormattedNoTrunc": "47,304",
+            "valueRounded": 47304,
+            "value": 47304
+        },
+        "households": {
+            "valueFormatted": "433,000",
+            "valueFormattedNoTrunc": "433,155.08",
+            "valueRounded": 433000,
+            "value": 433155.08021390374
+        },
+        "total80_84": {
+            "valueFormatted": "14,418",
+            "valueFormattedNoTrunc": "14,418",
+            "valueRounded": 14418,
+            "value": 14418
+        },
+        "total10_14": {
+            "valueFormatted": "140,616",
+            "valueFormattedNoTrunc": "140,616",
+            "valueRounded": 140616,
+            "value": 140616
+        },
+        "total100AndOver": {
+            "valueFormatted": "0",
+            "valueFormattedNoTrunc": "0",
+            "valueRounded": 0,
+            "value": 0
+        },
+        "total35_39": {
+            "valueFormatted": "116,640",
+            "valueFormattedNoTrunc": "116,640",
+            "valueRounded": 116640,
+            "value": 116640
+        },
+        "total0_4": {
+            "valueFormatted": "128,790",
+            "valueFormattedNoTrunc": "128,790",
+            "valueRounded": 128790,
+            "value": 128790
+        },
+        "vulnerable0_14": {
+            "valueFormatted": "146,530",
+            "valueFormattedNoTrunc": "146,529.6",
+            "valueRounded": 146530,
+            "value": 146529.6
+        },
+        "total15_64": {
+            "valueFormatted": "1,087,020",
+            "valueFormattedNoTrunc": "1,087,020",
+            "valueRounded": 1087020,
+            "value": 1087020.0
+        },
+        "total50_54": {
+            "valueFormatted": "89,586",
+            "valueFormattedNoTrunc": "89,586",
+            "valueRounded": 89586,
+            "value": 89586
+        },
+        "total75_79": {
+            "valueFormatted": "23,328",
+            "valueFormattedNoTrunc": "23,328",
+            "valueRounded": 23328,
+            "value": 23328
+        },
+        "total5_9": {
+            "valueFormatted": "134,298",
+            "valueFormattedNoTrunc": "134,298",
+            "valueRounded": 134298,
+            "value": 134298
+        }
+    },
+    "totalByCountry": [
+        {
+            "country": "MEX",
+            "capital": {
+                "total": {
+                    "valueFormatted": "39.7 Billion",
+                    "valueFormattedNoTrunc": "39,725,685,500",
+                    "valueRounded": 3.97E10,
+                    "value": 3.97256855E10
+                },
+                "school": {
+                    "valueFormatted": "46",
+                    "valueFormattedNoTrunc": "46",
+                    "valueRounded": 46,
+                    "value": 46
+                },
+                "hospital": {
+                    "valueFormatted": "26",
+                    "valueFormattedNoTrunc": "26",
+                    "valueRounded": 26,
+                    "value": 26
+                }
+            },
+            "foodNeeds": {
+                "valueFormatted": "1.23 Billion",
+                "valueFormattedNoTrunc": "1,234,800,000",
+                "valueRounded": 1.23E9,
+                "value": 1.2348E9
+            },
+            "wasteNeedsUnit": "100 liter",
+            "population": {
+                "total90_94": {
+                    "valueFormatted": "2,430",
+                    "valueFormattedNoTrunc": "2,430",
+                    "valueRounded": 2430,
+                    "value": 2430
+                },
+                "vulnerable15_64": {
+                    "valueFormatted": "394,548",
+                    "valueFormattedNoTrunc": "394,548",
+                    "valueRounded": 394548,
+                    "value": 394548
+                },
+                "total20_24": {
+                    "valueFormatted": "137,700",
+                    "valueFormattedNoTrunc": "137,700",
+                    "valueRounded": 137700,
+                    "value": 137700
+                },
+                "total45_49": {
+                    "valueFormatted": "98,334",
+                    "valueFormattedNoTrunc": "98,334",
+                    "valueRounded": 98334,
+                    "value": 98334
+                },
+                "total65_Plus": {
+                    "valueFormatted": "129,276",
+                    "valueFormattedNoTrunc": "129,276",
+                    "valueRounded": 129276,
+                    "value": 129276
+                },
+                "total60_64": {
+                    "valueFormatted": "62,370",
+                    "valueFormattedNoTrunc": "62,370",
+                    "valueRounded": 62370,
+                    "value": 62370
+                },
+                "vulnerable65_Plus": {
+                    "valueFormatted": "46,922",
+                    "valueFormattedNoTrunc": "46,922.4",
+                    "valueRounded": 46922,
+                    "value": 46922.4
+                },
+                "total85_89": {
+                    "valueFormatted": "7,128",
+                    "valueFormattedNoTrunc": "7,128",
+                    "valueRounded": 7128,
+                    "value": 7128
+                },
+                "total0_14": {
+                    "valueFormatted": "403,704",
+                    "valueFormattedNoTrunc": "403,704",
+                    "valueRounded": 403704,
+                    "value": 403704
+                },
+                "total15_19": {
+                    "valueFormatted": "139,320",
+                    "valueFormattedNoTrunc": "139,320",
+                    "valueRounded": 139320,
+                    "value": 139320
+                },
+                "total": {
+                    "valueFormatted": "1.62 Million",
+                    "valueFormattedNoTrunc": "1,620,000",
+                    "valueRounded": 1620000.0,
+                    "value": 1620000.0
+                },
+                "vulnerable": {
+                    "valueFormatted": "588,000",
+                    "valueFormattedNoTrunc": "588,000",
+                    "valueRounded": 588000,
+                    "value": 588000
+                },
+                "total30_34": {
+                    "valueFormatted": "127,818",
+                    "valueFormattedNoTrunc": "127,818",
+                    "valueRounded": 127818,
+                    "value": 127818
+                },
+                "total55_59": {
+                    "valueFormatted": "76,464",
+                    "valueFormattedNoTrunc": "76,464",
+                    "valueRounded": 76464,
+                    "value": 76464
+                },
+                "total70_74": {
+                    "valueFormatted": "34,182",
+                    "valueFormattedNoTrunc": "34,182",
+                    "valueRounded": 34182,
+                    "value": 34182
+                },
+                "total95_99": {
+                    "valueFormatted": "486",
+                    "valueFormattedNoTrunc": "486",
+                    "valueRounded": 486,
+                    "value": 486
+                },
+                "total25_29": {
+                    "valueFormatted": "132,354",
+                    "valueFormattedNoTrunc": "132,354",
+                    "valueRounded": 132354,
+                    "value": 132354
+                },
+                "total40_44": {
+                    "valueFormatted": "106,434",
+                    "valueFormattedNoTrunc": "106,434",
+                    "valueRounded": 106434,
+                    "value": 106434
+                },
+                "total65_69": {
+                    "valueFormatted": "47,304",
+                    "valueFormattedNoTrunc": "47,304",
+                    "valueRounded": 47304,
+                    "value": 47304
+                },
+                "households": {
+                    "valueFormatted": "433,000",
+                    "valueFormattedNoTrunc": "433,155.08",
+                    "valueRounded": 433000,
+                    "value": 433155.08021390374
+                },
+                "total80_84": {
+                    "valueFormatted": "14,418",
+                    "valueFormattedNoTrunc": "14,418",
+                    "valueRounded": 14418,
+                    "value": 14418
+                },
+                "total10_14": {
+                    "valueFormatted": "140,616",
+                    "valueFormattedNoTrunc": "140,616",
+                    "valueRounded": 140616,
+                    "value": 140616
+                },
+                "total100AndOver": {
+                    "valueFormatted": "0",
+                    "valueFormattedNoTrunc": "0",
+                    "valueRounded": 0,
+                    "value": 0
+                },
+                "total35_39": {
+                    "valueFormatted": "116,640",
+                    "valueFormattedNoTrunc": "116,640",
+                    "valueRounded": 116640,
+                    "value": 116640
+                },
+                "total0_4": {
+                    "valueFormatted": "128,790",
+                    "valueFormattedNoTrunc": "128,790",
+                    "valueRounded": 128790,
+                    "value": 128790
+                },
+                "vulnerable0_14": {
+                    "valueFormatted": "146,530",
+                    "valueFormattedNoTrunc": "146,529.6",
+                    "valueRounded": 146530,
+                    "value": 146529.6
+                },
+                "total15_64": {
+                    "valueFormatted": "1,087,020",
+                    "valueFormattedNoTrunc": "1,087,020",
+                    "valueRounded": 1087020,
+                    "value": 1087020.0
+                },
+                "total50_54": {
+                    "valueFormatted": "89,586",
+                    "valueFormattedNoTrunc": "89,586",
+                    "valueRounded": 89586,
+                    "value": 89586
+                },
+                "total75_79": {
+                    "valueFormatted": "23,328",
+                    "valueFormattedNoTrunc": "23,328",
+                    "valueRounded": 23328,
+                    "value": 23328
+                },
+                "total5_9": {
+                    "valueFormatted": "134,298",
+                    "valueFormattedNoTrunc": "134,298",
+                    "valueRounded": 134298,
+                    "value": 134298
+                }
+            },
+            "waterNeeds": {
+                "valueFormatted": "1.76 Million",
+                "valueFormattedNoTrunc": "1,764,000",
+                "valueRounded": 1760000.0,
+                "value": 1764000.0
+            },
+            "shelterNeeds": {
+                "valueFormatted": "2.02 Million",
+                "valueFormattedNoTrunc": "2,028,600",
+                "valueRounded": 2020000.0,
+                "value": 2028600.0
+            },
+            "admin1": null,
+            "admin2": null,
+            "waterNeedsUnit": "liter",
+            "shelterNeedsUnit": "sq meters",
+            "admin0": "Mexico",
+            "wasteNeeds": {
+                "valueFormatted": "58,800",
+                "valueFormattedNoTrunc": "58,800",
+                "valueRounded": 58800,
+                "value": 58800
+            },
+            "foodNeedsUnit": "CAL"
+        }
+    ],
+    "exposureDescription": "PDC Volcano Hazard Zone",
+    "waterNeeds": {
+        "valueFormatted": "1.76 Million",
+        "valueFormattedNoTrunc": "1,764,000",
+        "valueRounded": 1760000.0,
+        "value": 1764000.0
+    },
+    "shelterNeeds": {
+        "valueFormatted": "2.02 Million",
+        "valueFormattedNoTrunc": "2,028,600",
+        "valueRounded": 2020000.0,
+        "value": 2028600.0
+    },
+    "waterNeedsUnit": "liter",
+    "shelterNeedsUnit": "sq meters",
+    "wasteNeeds": {
+        "valueFormatted": "58,800",
+        "valueFormattedNoTrunc": "58,800",
+        "valueRounded": 58800,
+        "value": 58800
+    },
+    "foodNeedsUnit": "CAL",
+    "timestamp": "1751032040.9863468"
+}
