@@ -43,6 +43,12 @@
     "datetime": "1854-07-01T00:00:00Z",
     "title": "Cholera Epidemic in Carriacou",
     "description": "386 deaths - 223 are male",
+    "keywords": [
+      "Airborne Diseases (human and Animal)",
+      "Biological",
+      "Infectious Diseases",
+      "GRD"
+    ],
     "monty:src_event_id": "200",
     "monty:episode_number": 1,
     "monty:country_codes": [

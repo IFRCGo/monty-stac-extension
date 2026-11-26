@@ -141,6 +141,7 @@ no defensible default, not because mapping it was inconvenient.
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time)             | disaster_start_date    | Yes      | Start date of the disaster           |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)                  | name                   | Yes      | Event name                           |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#item-fields)            | summary                | No       | Event summary                        |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | Yes | The hazard keywords of `monty:hazard_codes` in alphabetical order, then the `name` of each country of the event in source order (not the ISO3 code), with no duplicates. The impact items of the event have the same list |
 | [start_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range) | disaster_start_date    | Yes      |                                      |
 | [end_datetime](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#date-and-time-range)   | disaster_start_date    | Yes      | Same as start (no end date provided) |
 
@@ -309,7 +310,11 @@ This mapping enables standardized hazard categorization while preserving IFRC's 
    listed countries when there is more than one; impact items fall back to
    the parent event's geometry whenever none of their own field report's
    countries resolves to a geometry (an empty list, or a list where every
-   entry fails geocoding).
+   entry fails geocoding). The geocoder has no geometry for Kosovo (`XKX` or
+   the name `Kosovo`), so the transformer uses the geometry of Serbia (`SRB`)
+   for it. The item's country codes keep the original value. This substitution
+   is the `GEOMETRY_COUNTRY_FALLBACK` table
+   ([IFRCGo/pystac-monty#258](https://github.com/IFRCGo/pystac-monty/pull/258)).
 5. Every field report on an event is processed independently — an event with
    *N* field reports and *M* impact types with a truthy value can produce up
    to *N* × *M* impact items, distinguished by the field report ID in each

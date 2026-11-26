@@ -36,6 +36,12 @@
       "nat-geo-ear-gro",
       "GH0101"
     ],
+    "keywords": [
+      "Earthquake",
+      "Geological",
+      "Seismic",
+      "COL"
+    ],
     "monty:corr_id": "20260810T123428Z-COL-GEO-SEIS-001-GCDB",
     "monty:hazard_detail": {
       "cluster": "GEO-SEIS",

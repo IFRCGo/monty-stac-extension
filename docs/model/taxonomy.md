@@ -827,6 +827,26 @@ This mapping uses the updated 2025 UNDRR-ISC codes. Key changes from 2020 includ
 > event disagree. All three codes in a `monty:hazard_codes` triplet must come
 > from the **same row**.
 
+> [!IMPORTANT]
+> **Keep the source meaning.** The same applies one level down, where one
+> GLIDE + EM-DAT pair maps to several UNDRR-ISC 2025 profiles. `TC` +
+> `nat-met-sto-tro` has four rows: `MH0309` (Tropical cyclone), `MH0306`
+> (Depression or cyclone), `MH0308` (Sub-tropical cyclone) and `MH0307` through
+> `nat-met-sto-ext`. A source whose category asserts a tropical system (typhoon,
+> hurricane, tropical cyclone) takes `MH0309`. A source whose category also
+> contains non-tropical systems (a generic "cyclone" or "storm" class, like IFRC
+> GO's `Cyclone`) takes `MH0306`, because `MH0309` would claim a precision the
+> source does not have. Two sources may therefore give the same storm two UNDRR
+> codes, and that is correct: the UNDRR code is the **precise profile** that the
+> source asserts, and the EM-DAT and GLIDE codes next to it are the **family
+> key**. Cross-source search and correlation match on the family key with
+> `a_overlaps` over the whole `monty:hazard_codes` array (see
+> [correlation algorithms](./stac-api/correlation_algorithms.md#algorithm-1-event-to-event-correlation)),
+> not on one UNDRR code. The static `monty:corr_id` embeds the UNDRR code, so it
+> stays per-source; it is not a cross-source join key
+> ([correlation identifier](./correlation_identifier.md)). Decided in
+> [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+
 | GLIDE Code | EM-DAT Classification Key | Name                                    | UNDRR-ISC 2025 Code |
 | ---------- | ------------------------- | --------------------------------------- | ------------------- |
 | CW         | nat-met-ext-col           | Cold wave                               | MH0502              |

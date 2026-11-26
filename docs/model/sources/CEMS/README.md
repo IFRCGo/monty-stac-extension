@@ -72,12 +72,16 @@ flowchart TD
 | Area of Interest (AOI) | Hazard | `cems-hazard-{code}-aoi{n}-{type}` | `cems-hazards` |
 | Product (REF/FEP/DEL/GRA) | Response | `cems-response-{code}-aoi{n}-{type}[-m{k}]` | `cems-response` |
 | Situational Report (`reportLink`) | Response (`eo-sr`) | `cems-response-{code}-sr` | `cems-response` |
-| Product `images[]` entry | Response (`eo-dat`) | `cems-response-{code}-aoi{n}-dat-{images[].uuid}` | `cems-response` |
+| Product `images[]` entry | Response (`eo-dat`) | `cems-response-{code}-aoi{n}-dat-{image}` (e.g. `cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho`) | `cems-response` |
 | GRA statistic (per thematic class) | Impact | `cems-impact-{code}-aoi{n}-gra-{thematic}[-m{k}]` | `cems-impacts` |
 
 - `{code}` is the activation code (`EMSR847`); `{n}` is the AOI `number`; `{type}` ∈
   `ref`/`fep`/`del`/`gra` (or the hazard type slug for `cems-hazards`); `-m{k}` is
   appended only for monitoring iterations (`monitoringNumber > 0`).
+- `{image}` comes from `images[].fileName`, not from `images[].uuid`. See
+  [Acquisition items](#acquisition-items) for the rule.
+- `{thematic}` is a lowercase slug of the thematic class (`Estimated population` →
+  `population`). Only `{code}` keeps its upper case.
 - **The AOI is the hazard-area entity** — the direct analog of a Charter Area — so it
   maps to a **Hazard** item (one per AOI, split per hazard code for multi-hazard
   activations, as Charter does). Geometry is the AOI `extent`, **refined to the DEL
@@ -124,12 +128,36 @@ Maps to a Monty Event item (`cems-events`); Monty extension only.
 | `reason` | `description` | Free-text situation summary |
 | `centroid` (WKT POINT) | `geometry` | Parse WKT → GeoJSON Point; `extent` (WKT POLYGON) → `bbox` |
 | `category` (+ `subCategory`) | `monty:hazard_codes` | Map via [Hazard codes](#hazard-codes) |
-| `countries[].name` | `monty:country_codes` | Map country name → ISO 3166-1 alpha-3 |
+| `countries[].name` | `monty:country_codes` | Map country name → ISO 3166-1 alpha-3. See [Country names](#country-names) |
 | derived | `monty:corr_id` | Standard Monty algorithm (date/ISO3/spatial block/hazard/episode) — **not** the EMSR code |
 | derived | `processing:version` | Semantic version of the transformer that generated the item, via the `processing:` extension |
 | derived | `processing:software` | Dependency/provenance chain (`{"pystac-monty": "<version>"}`), via the `processing:` extension |
 | `gdacsId`, `charterNumber` | `links[rel=related]` | See [Cross-source linkage](#cross-source-linkage) |
 | `reportLink`, source page | `links[rel=via]` | Activation page / StoryMap |
+
+### Country names
+
+The transformer finds the ISO 3166-1 alpha-3 code of each `countries[].name` in three steps:
+
+1. It replaces the CEMS names that the geocoder does not know with the name that the
+   geocoder uses
+   ([pystac-monty#215](https://github.com/IFRCGo/pystac-monty/pull/215)):
+
+   | CEMS name | Geocoder name |
+   |-----------|---------------|
+   | `Bosnia and Herzegovina` | `Bosnia & Herzegovina` |
+   | `Czechia` | `Czech Republic` |
+   | `Libya` | `Libyan Arab Jamahiriya` |
+   | `Micronesia` | `Micronesia (Federated States of)` |
+   | `Syria` | `Syrian Arab Republic` |
+   | `United Kingdom` | `U.K. of Great Britain and Northern Ireland` |
+   | `Viet Nam` | `Vietnam` |
+
+2. It looks for the name in a fixed alias list of long official names (for example
+   `Russian Federation` → `RUS`, `Republic of Korea` → `KOR`).
+3. If the alias list has no entry, it asks the geocoder for the country with that name.
+
+A name that no step resolves gives no code. The transformer does not stop.
 
 ## Area of Interest → Hazard
 
@@ -202,20 +230,67 @@ Each product maps to a Monty Response item via `monty:response_detail`.
 | `layers[]` (`vt`, thematic layers), `downloadPath` (ZIP) | `assets` | Web layers (GeoJSON `FeatureCollection` + `sld` style, one asset pair per thematic layer — despite the CEMS "VT" naming, these are plain GeoJSON, not a tiled service; no CEMS schema documents this, verified empirically against the live AWS bucket) + downloadable package. The base-image `cog` layer is also copied here (as `basemap`), so the item alone renders the raster under its own vector overlay — its canonical copy, with imagery identity/metadata, is the linked acquisition item's `data` asset (see below) |
 | activation page | `links[rel=derived_from]` | Upstream CEMS activation provenance |
 
-> **Acquisition items are `eo-dat` Response items (implemented, field coverage partial).** Each
-> `images[]` entry becomes its own Response item, id `cems-response-{code}-aoi{n}-dat-{uuid}`
-> (`images[].uuid`, not the parent product's own type slug — the acquisition's own
-> `monty:response_detail.type` is `eo-dat`, whatever product it's linked from), living in
-> `cems-response` alongside the REF/FEP/DEL/GRA items it is a sibling `related` Response to
-> (`roles: ["response"]`, both ways — see the Product → Response table above). When CEMS
-> publishes a web-optimized COG of the same acquisition under `layers[]` (matched to the
-> `images[]` entry by filename), it becomes this item's `data` asset. `images[]` only carries
-> `sensorType`/`sensorName`/`resolutionClass`/`acquisitionTime`/`fileName` — none of these back a
-> typed `sat:`/`eo:`/`sar:` field with real data today, so the shipped acquisition items declare
-> no such extension; `sensorName` maps to the STAC common-metadata `platform` field, and
-> `resolutionClass`/`fileName` are kept as descriptive text (`title`/`description`) pending a
-> schema decision on where they belong. See
-> [pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166).
+### Acquisition items
+
+Each `images[]` entry of a product becomes its own Response item in `cems-response`, with
+`monty:response_detail.type` = `eo-dat` (the Data Product code of the taxonomy). The
+REF/FEP/DEL/GRA item and the acquisition item are sibling Response items: each has a
+`related` link (`roles: ["response"]`) to the other.
+
+| CEMS field (image / product) | Monty field | Notes |
+|------------------------------|-------------|-------|
+| `fileName` | `id` | `cems-response-{code}-aoi{n}-dat-{image}`. See the id rule below |
+| — | `collection: "cems-response"` | Required |
+| `acquisitionTime` | `datetime` | Falls back to the delivery time of the product, then to the activation `eventTime`. If all three are absent, the image gets no item |
+| product `extent` (WKT) | `geometry` / `bbox` | The footprint of the first product that cites the image |
+| — | `monty:response_detail.type` | `eo-dat` for all images, for all product types |
+| `code` (activation) | `monty:response_detail.source_id` | e.g. `EMSR847` |
+| — | `monty:response_detail.producer` | `Copernicus EMS` |
+| — | `monty:response_detail.sendai_targets` | `["D", "G"]` |
+| `sensorName` | `platform` | Direct copy (`Legion`) |
+| `sensorName` → else `fileName` | `mission` | `sensorName` in lower case (`legion`). If `sensorName` is absent, the first token of the `{image}` key |
+| `sensorType`, `sensorName` | `title` | `CEMS {sensorType} acquisition — {sensorName}` |
+| `resolutionClass`, `fileName` | `description` | Descriptive text. No typed field holds them yet |
+| — | `roles` | `["source", "acquisition", "response"]` |
+| activation, AOI | `monty:corr_id`, `monty:country_codes`, `monty:hazard_codes` | Same values as the product that cites the image |
+| `layers[]` entry with `format: cog` | `assets.data` | The COG of the same acquisition, matched by file name (`{fileName stem}` or `{fileName stem}_cog`). The href is `{aws_bucket}/{layer name}`. No match gives no asset |
+| product that cites the image | `links[rel=related]` (`roles: ["response"]`) | One link for each product that cites the image |
+
+An image with no `sensorType`, `sensorName`, `resolutionClass` and `fileName` gets no item.
+
+**Id rule.** `{image}` is the key of one physical acquisition
+([pystac-monty#251](https://github.com/IFRCGo/pystac-monty/pull/251),
+[#253](https://github.com/IFRCGo/pystac-monty/pull/253)):
+
+1. Take the `fileName` without its extension:
+   `EMSR847_AOI01_GRA_PRODUCT_LEGION_20251107_1555_ORTHO`.
+2. Remove the product prefix `{code}_AOI{nn}_{TYPE}_` and the `PRODUCT_` or `MONIT{nn}_`
+   token when there is one: `LEGION_20251107_1555_ORTHO`. The prefix identifies the product
+   that cites the image, not the acquisition.
+3. Change the result to lower case: `legion_20251107_1555_ortho`.
+
+If `fileName` is absent, the key is `images[].uuid` in lower case. If `uuid` is also absent,
+the key is `{type}[-m{k}]-img{index}`, from the product that cites the image and the position
+of the image in `images[]`.
+
+> [!IMPORTANT]
+> `images[].uuid` does not identify an acquisition. CEMS uses the same `uuid` again in
+> products that have different source images, with a different sensor and a different date
+> ([pystac-monty#242](https://github.com/IFRCGo/pystac-monty/issues/242)). The ids that used
+> the `uuid` (`…-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f`) are replaced by the ids from
+> `fileName`.
+
+**One item for each acquisition in an AOI.** When two products of the same AOI cite the same
+image (EMSR659 AOI 1 is such a case), the transformer builds one acquisition item. Each
+product that cites it gets a `related` link to that item, and the item has a `related` link
+back to each product. The same image in two different AOIs gives two items, because the AOI
+number is part of the id.
+
+The acquisition items declare the `monty` and `processing` extensions only. `images[]` has no
+field that backs a typed `sat:` / `eo:` / `sar:` field with real data. See
+[pystac-monty#166](https://github.com/IFRCGo/pystac-monty/issues/166).
+
+### Other Response items and links
 
 **Situational Report** → one Response per activation, `type = eo-sr`, whose asset is the
 `reportLink` StoryMap URL. It has no product `extent` of its own, so `geometry`/`bbox`
@@ -225,6 +300,12 @@ none — `null` geometry is not emitted, since it is not recommended by the STAC
 A **DEL** Response additionally carries a `rel: related` (`roles: ["hazard"]`) link to the
 `cems-hazards` item whose geometry it supplied (reciprocal of the Hazard→DEL link above).
 Every Response links to its Event and Hazard(s) via `related`, sharing `monty:corr_id`.
+
+The transformer writes each href to another CEMS item (`related`, and `prev` between
+monitoring iterations) as `{eoapi_url}/collections/{collection}/items/{item_id}`, or
+`../collections/{collection}/items/{item_id}` when it has no STAC API URL. The files under
+`examples/` use repository-relative paths instead
+(`../cems-events/cems-event-EMSR847.json`).
 
 > **Do not** put damage/exposure statistics in `monty:response_detail` — those become
 > separate **Impact** items (below). **Do not** set `status` from anything but
@@ -335,9 +416,15 @@ link** so the graph is directly navigable (65/224 sampled activations carry a `g
 
 | CEMS field | Example | Target Monty id (derivation) | Link |
 |------------|---------|------------------------------|------|
-| `gdacsId` | `TC1001230` | GDACS `{eventtype}`+`{eventid}`; Monty id `{eventid}-{episodeid}` in `gdacs-events` → `1001230-41` (current episode via `geteventdata`) | `rel: related`, `roles: ["event"]` |
+| `gdacsId` | `TC1001230` | GDACS `{eventtype}`+`{eventid}`; Monty id `gdacs-event-{eventid}-{episodeid}` in `gdacs-events` → `gdacs-event-1001230-41` (current episode via `geteventdata`) | `rel: related`, `roles: ["event"]` |
 | `charterNumber` (+ `charterUrl`) | `996` | Charter Event `charter-event-{activation_id}` → `charter-event-996` (`charter-events`) | `rel: related`, `roles: ["event"]` (+ `["response"]` to Charter VAPs) |
-| `relatedevents` | EMSR codes | `cems-event-{code}` | `rel: related`, `roles: ["event"]` |
+| `relatedevents` | EMSR codes | `cems-event-{code}` | `rel: related`, `roles: ["event"]`. Only the entries that are a code string (`"EMSR661"`) get a link |
+
+`relatedevents` has two entry shapes. Most entries are an activation code string. Some
+activations (for example EMSR682 and EMSR715) also have `{"title", "url"}` objects that
+point to a related **EMSN** (Risk & Recovery) activation. That service is out of scope, and
+Monty has no item for it. The transformer accepts these objects and makes no link for them
+([pystac-monty#206](https://github.com/IFRCGo/pystac-monty/pull/206)).
 
 This is a **reusable pattern**: any cross-reference field that yields a deterministic
 source-item id becomes a typed `related` link, with `monty:corr_id` as the fallback join.
@@ -353,16 +440,16 @@ The edge is reciprocal — the Charter source doc already links VAPs to sibling 
   `{eventid}-{episodeid}`. (A bare `{eventid}-1` would be stale; only fall back to it if the
   lookup fails.)
 
-**Worked, fixture-verified example**: [`gdacs-events/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json)
-and [`gdacs-hazards/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json) are built from the
+**Worked, fixture-verified example**: [`gdacs-events/gdacs-event-1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1001230-41.json)
+and [`gdacs-hazards/gdacs-hazard-1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/gdacs-hazard-1001230-41.json) are built from the
 real GDACS `geteventdata`/`getgeometry` API responses for the same Tropical Cyclone Melissa activation
-(`iso3: JAM`, `MH0306`, 21–31 Oct 2025), completing the `related` link this CEMS example already declares
-(#61). Their `monty:corr_id` (`20251021-JAM-1159798-MH0306-41-GCDB`, computed with the real
+(`iso3: JAM`, `MH0309`, 21–31 Oct 2025), completing the `related` link this CEMS example already declares
+(#61). Their `monty:corr_id` (`20251021-JAM-1159798-MH0309-41-GCDB`, computed with the real
 `geo_blocks-0.2.parquet` lookup) **does not match** CEMS's (`20251026-JAM-983324-MH0306-1-GCDB`) — different
 date, different `block_id`, since GDACS's own centroid for this episode sits mid-Atlantic (`-60.5, 39.0`,
 the storm's track position at that point), while CEMS's AOI is Kingston. This is a live, real illustration
 of the caveat in #57: `corr_id` is per-source deterministic and not a cross-source join key. The two items
-still correlate correctly under the dynamic Event-to-Event algorithm — shared `MH0306`/`TC`/`nat-met-sto-tro`
+still correlate correctly under the dynamic Event-to-Event algorithm — shared `TC`/`nat-met-sto-tro`
 (`a_overlaps`), shared `JAM` (`a_contains`), and CEMS's `2025-10-26` falling inside GDACS's `2025-10-21`–`2025-10-31`
 window (`t_intersects`).
 
@@ -376,13 +463,13 @@ casings):
 
 | CEMS `category` | UNDRR-ISC 2025 | GLIDE | EM-DAT | Notes / `subCategory` refinement |
 |-----------------|----------------|-------|--------|----------------------------------|
-| Flood | MH0600 | FL | nat-hyd-flo-flo | `Riverine flood`→MH0604, flash→MH0603, coastal/surge→MH0601 |
+| Flood | MH0600 | FL | nat-hyd-flo-flo | `subCategory` changes all three codes: `Riverine flood`→**MH0604** / `FL` / `nat-hyd-flo-riv`, `Flash flood`→**MH0603** / `FF` / `nat-hyd-flo-fla`, `Coastal flood` or `Storm surge`→**MH0601** / `FL` / `nat-hyd-flo-coa` |
 | Wildfire | EN0205 | WF | nat-cli-wil-wil | Category default, always `nat-cli-wil-wil`. `subCategory: Forest fire` maps to the same general key — no distinct forest/land refinement is implemented |
 | Storm | — | — | — | No single UNDRR-ISC chapeau, and `subCategory` alone is not trusted — resolved by a tropical-signal order across `subCategory`, `gdacsId`, and `name`/`reason`; see [the storm rule](#the-storm-rule) below |
 | Earthquake | GH0101 | EQ | nat-geo-ear-gro | `Ground shaking`; tsunami subCat→**MH0705**/`TS` |
 | Mass Movement | GH0300 | LS | nat-geo-mmd-lan | Landslide (chapeau, matching GDACS/EM-DAT/GLIDE convention); `subCategory: Avalanche`→**MH0801**. Rockfall (GH0301) and subsidence (GH0309) are not currently distinguished by `subCategory` — both fall through to the GH0300 chapeau |
 | Volcanic Activity | GH0201 | VO | nat-geo-vol-vol | Eruption (chapeau), always `GH0201` — refining by `subCategory` to ashfall (GH0202) or lahar (GH0204) is not currently implemented |
-| Industrial Accident | — | — | tec-ind | Technological — no single chapeau; `subCategory: Chemical`→**TL0301**, `Explosion`→**TL0304**. Anything else — including `gas leak`, which is not a distinct key — falls through to the category default, **TL0301**, not TL0309 |
+| Industrial Accident | TL0301 | AC | tec-ind-che-che | Technological — no single chapeau, so the category default is the chemical row. `subCategory: Chemical` or `Oil spill`→**TL0301** / `AC` / `tec-ind-che-che`, `Explosion`→**TL0304** / `AC` / `tec-ind-exp-exp`. Anything else — including `gas leak`, which is not a distinct key — falls through to the category default, **TL0301**, not TL0309 |
 | Transport accident | — | — | — | Technological, no single chapeau; refined by mode from `subCategory` — `Air`→**TL0401**, `Water`→**TL0403**, `Rail`→**TL0404**, `Road`→**TL0405** (all `AC` / `tec-tra-*-*`) — overridden to **CH0203** / `AC` / `tec-ind-oil-oil` when `name`/`reason` names an oil or fuel spill regardless of the labelled mode. n=1 in the catalogue (EMSR716, labelled `Air` but "Cargo Ship Oil Spill in Aruba"), so the override is provisional |
 | Humanitarian Crisis | — | — | — | Complex/societal emergency — `humanitarian crisis` is in the manual-review set, so no code is produced at all, not even the bare `CE` this row used to show (a `humanitarian_crisis: ["CE"]` entry exists in the code but is unreachable — the manual-review check short-circuits before it's ever consulted). Societal cluster (`SO01xx`/`SO02xx`, e.g. SO0103 civil unrest) has codes but none fits as a chapeau (mostly Risk & Recovery, out of core RM scope) |
 | Environmental Degradation | — | — | — | Environmental cluster (`EN01xx`–`EN05xx`) has codes but none fits as a chapeau; in the manual-review set, no code produced |
@@ -412,9 +499,9 @@ label, checked in this order:
 
 MH0306 / `TC` / `nat-met-sto-tro` is kept for the tropical case rather than a
 more specific UNDRR code: it is the row this doc and the `examples/cems-*`
-items already use, and it keeps the EMSR847 ↔ GDACS `1001230-41` cross-link
-discoverable via `a_overlaps`. The repo-wide MH0306 vs MH0309 question stays
-with [#94](https://github.com/IFRCGo/monty-stac-extension/issues/94).
+items already use, and it keeps the EMSR847 ↔ GDACS `gdacs-event-1001230-41` cross-link
+discoverable via `a_overlaps` on `TC`/`nat-met-sto-tro`, although GDACS emits `MH0309`. This follows the
+[keep the source meaning](../../taxonomy.md) rule ([#94](https://github.com/IFRCGo/monty-stac-extension/issues/94)).
 
 Checked against all 23 `Storm` activations in the catalogue: the rule
 resolves **16 as tropical** (4 by `subCategory`, 11 by `gdacsId`, 1 by name),
@@ -450,6 +537,10 @@ disasters:
 | EMSR877 Public Event in Burgenland, Austria | excluded — planned public event |
 | EMSR741 Oil Spill in Manila Bay, Philippines | **CH0203** / `AC` / `tec-ind-oil-oil` |
 | EMSR791 Snowfall impact in Guria, Georgia | **MH0405** (UNDRR-only) |
+
+The transformer finds a planned event from the activation `name` only: the name contains
+`public event`, `festival` or `olympic` (not case-sensitive). The `reason` text is not used
+for this check.
 
 A planned event has no hazard to resolve, so these five are a **deliberate
 scope exclusion** — reported, not dropped silently, and not a transformation
@@ -495,17 +586,17 @@ Worked Monty items derived from **EMSR847** (Tropical Cyclone Melissa) AOI 1 (Ki
 demonstrating the full chain — note AOI 1's DEL is `statusCode=N` (not produced), so the
 Hazard geometry falls back to the AOI extent:
 
-- [`cems-event-EMSR847`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`1001230-41`) and Charter (`charter-event-996`) events
+- [`cems-event-EMSR847`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-events/cems-event-EMSR847.json) — Event, with cross-source `related` links to the GDACS (`gdacs-event-1001230-41`) and Charter (`charter-event-996`) events
 - [`cems-hazard-EMSR847-aoi01-storm`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-storm.json) — Hazard (tropical cyclone, `MH0306`)
 - [`cems-hazard-EMSR847-aoi01-landslide`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-hazards/cems-hazard-EMSR847-aoi01-landslide.json) — secondary Hazard (landslide, `GH0300`) surfaced from the GRA `Landslide` footprint class; geometry falls back to the AOI extent
-- [`cems-response-EMSR847-aoi01-gra`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (COG + download assets)
-- [`cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-dat-d8deb932-f3c6-42f7-8f31-1dfa61acd40f.json) — `eo-dat` Response (source imagery, sibling `related` Response to the `eo-gra` item above)
+- [`cems-response-EMSR847-aoi01-gra`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-gra.json) — `eo-gra` Response (`download` package, `basemap` COG, and the `observedEventP` GeoJSON layer with its SLD style)
+- [`cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-response/cems-response-EMSR847-aoi01-dat-legion_20251107_1555_ortho.json) — `eo-dat` Response (source imagery, sibling `related` Response to the `eo-gra` item above)
 - [`cems-impact-EMSR847-aoi01-gra-population`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/cems-impacts/cems-impact-EMSR847-aoi01-gra-population.json) — Impact (84 000 people, `derived_from` the GRA Response)
 
 The GDACS side of the cross-source link is also a real worked example, not a placeholder:
 
-- [`gdacs-events/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/1001230-41.json) — GDACS Event for the same storm (`TC1001230`, episode 41), built from the real `geteventdata` response
-- [`gdacs-hazards/1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/1001230-41.json) — GDACS Hazard, geometry unioned from the real `getgeometry` `Poly_Red` footprint features
+- [`gdacs-events/gdacs-event-1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-events/gdacs-event-1001230-41.json) — GDACS Event for the same storm (`TC1001230`, episode 41), built from the real `geteventdata` response
+- [`gdacs-hazards/gdacs-hazard-1001230-41`](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gdacs-hazards/gdacs-hazard-1001230-41.json) — GDACS Hazard, geometry unioned from the real `getgeometry` `Poly_Red` footprint features
 
 ## Reference files
 

@@ -35,6 +35,7 @@ Here is a table with the fields that are mapped from the GFD event to the STAC e
 | [bbox](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#bbox) | `coordinates` from system:footprint | Max and min latitude and longitude are calculated from the `coordinates` from system:footprint |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | dfo_main_cause |        |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Derived | The hazard keywords of `monty:hazard_codes` in alphabetical order, then the ISO3 codes of `monty:country_codes` in the same order, with no duplicates: `["Flooding", "Meteorological & Hydrological", "Water-related", "AUS"]`. The hazard and impact items of the event have the same list |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | system:time_start | |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | cc      | Split the `cc` field to get the list of iso3 |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | List of hazard codes converted following the mapping | Default value is FL as GFD is a flood related source (see [Hazard Type Mapping](#hazard-type-mapping)). |
@@ -125,3 +126,14 @@ The following fields are used to create several **Impact Detail** items.
 |value|value from *dfo_displaced* |Get the value using the key *dfo_displaced*|
 | unit | count |     |
 |estimate_type|MontyEstimateType.PRIMARY| |
+
+## Examples
+
+The examples are the output of the pystac-monty transformer for one record of the image collection: the flood of February 2000 in Australia (`DFO_1586_From_20000218_to_20000301`).
+
+- The source record is in the file [DFO_1586_From_20000218_to_20000301.json](DFO_1586_From_20000218_to_20000301.json).
+- The event item is [gfd-events/gfd-event-1586.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-events/gfd-event-1586.json).
+- The hazard item is [gfd-hazards/gfd-hazard-1586.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-hazards/gfd-hazard-1586.json).
+- The impact items are [gfd-impacts/gfd-impact-1586-dfo_dead.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_dead.json) and [gfd-impacts/gfd-impact-1586-dfo_displaced.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/gfd-impacts/gfd-impact-1586-dfo_displaced.json).
+
+`scripts/check_example_drift.py --source gfd` runs the transformer on the source record and compares the result with these examples.

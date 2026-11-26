@@ -1,0 +1,112 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "idmc-gidd-event-15607",
+  "geometry": {
+    "type": "MultiPoint",
+    "coordinates": [
+      [
+        36.688499,
+        36.395481
+      ]
+    ]
+  },
+  "bbox": [
+    36.688499,
+    36.395481,
+    36.688499,
+    36.395481
+  ],
+  "properties": {
+    "title": "Syria: Storm -  Northern Syria - 29/03/2023",
+    "start_datetime": "2023-03-29T00:00:00+00:00",
+    "end_datetime": "2023-03-30T00:00:00+00:00",
+    "location": [
+      "Jandaris, Afrin District, Aleppo, Syria"
+    ],
+    "location_accuracy": [
+      "County/City/town/Village/Woreda (ADM3)"
+    ],
+    "location_type": [
+      "Origin"
+    ],
+    "displacement_occured": "",
+    "sources": [
+      "CCCM Cluster"
+    ],
+    "publishers": [
+      "CCCM Cluster"
+    ],
+    "monty:src_event_id": "15607",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "SYR"
+    ],
+    "monty:hazard_codes": [
+      "MH0301",
+      "VW",
+      "nat-met-sto-sto"
+    ],
+    "keywords": [
+      "Convective-Related",
+      "Dust Storm or Sandstorm",
+      "Meteorological & Hydrological",
+      "Particle-related",
+      "Thunderstorm",
+      "Wind",
+      "Wind & Pressure-related",
+      "SYR"
+    ],
+    "monty:corr_id": "20230329-SYR-1136884-MH0301-1-GCDB",
+    "roles": [
+      "source",
+      "event"
+    ],
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2023-03-29T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/json",
+      "title": "GIDD Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../idmc-gidd-impacts/idmc-gidd-impact-15607-108364-internal-displacements.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-events/idmc-gidd-event-15607.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-events/idmc-gidd-events.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "source": {
+      "href": "https://helix-tools-api.idmcdb.org/external-api/gidd/disaggregations/disaggregation-geojson/",
+      "type": "application/geo+json",
+      "title": "GIDD GeoJson Source",
+      "roles": [
+        "source"
+      ]
+    }
+  },
+  "collection": "idmc-gidd-events"
+}

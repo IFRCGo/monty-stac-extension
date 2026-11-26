@@ -176,6 +176,19 @@ the doc update to land alongside it, ask for it explicitly with
 `--include-open-prs` locally, or the `include_open_prs` input when dispatching
 the workflow by hand. Scheduled runs never look at open PRs.
 
+**Before the merge: the contract check.** The daily checks find a contract
+change only after it is merged and maybe deployed. `check_etl_drift.py --pull N`
+applies the same rules to one open upstream PR. If the PR matches a rule in
+`contract_check.blocking_rules` of `.github/etl-watch.yml` (today `item-id`,
+`hazard-mapping` and `value-mapping`), the check fails until one of
+`contract_check.reviewers` approves the PR head commit. The other rules are
+listed but do not block. The check also reads `contract_check.shared_paths`
+(for example `sources/utils.py`), which hold mappings of several sources.
+
+```sh
+python scripts/check_etl_drift.py --pull 243    # exit 1: contract change, no reviewer approval
+```
+
 > [!IMPORTANT]
 > `check_example_drift.py` reports on whichever `pystac-monty` is importable, so
 > install it from **`main`** — a stale local checkout replays drift that upstream

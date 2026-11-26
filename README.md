@@ -22,7 +22,7 @@ For more information about the Montandon project, please check out [this 5-minut
 This repository is more than the field spec below. It is organized around three pieces that build on each other:
 
 1. **[Extension Spec](#fields)** (this document) — the normative STAC fields, roles and relation types that carry Monty data in a STAC Item or Collection.
-2. **[Model](https://ifrcgo.org/monty-stac-extension/model/)** (`docs/model/`) — the data model behind the spec: the [hazard/impact taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md) (the canonical UNDRR-ISC reference), the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md), and the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) algorithm.
+2. **[Model](https://ifrcgo.org/monty-stac-extension/model/)** (`docs/model/`) — the data model behind the spec: the [hazard/impact taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy/) (the canonical UNDRR-ISC reference), the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/), and the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/) algorithm.
 3. **[Sources](https://ifrcgo.org/monty-stac-extension/model/sources/)** (`docs/model/sources/`) — per-source analyses mapping real-world disaster data feeds onto the model, <!-- gen_sources_index.py: BEGIN readme-source-count -->13<!-- gen_sources_index.py: END readme-source-count --> of them documented so far (CEMS, Charter, EM-DAT, GDACS, USGS, and more), each with a field mapping, license and integration status.
 
 Start with whichever pillar matches what you're doing: implement against the spec, understand *why* a field means what it means, or add/update a data source.
@@ -30,7 +30,7 @@ Start with whichever pillar matches what you're doing: implement against the spe
 ## Quick Start
 
 - **Validate an example against the spec** — clone the repo, run `npm install` then `npm test`. This checks every file under [`examples/`](examples/) against [`json-schema/schema.json`](json-schema/schema.json) and lints the markdown; see [Running tests locally](CONTRIBUTING.md#running-tests-locally) in `CONTRIBUTING.md`.
-- **Find a field** — the [Fields](#fields) table below lists every `monty:*` property; each links to an [Additional Field Information](#additional-field-information) subsection with the full rules. For the values a field can take (hazard codes, impact types, response codes), see the [taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md) and [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md) in the model.
+- **Find a field** — the [Fields](#fields) table below lists every `monty:*` property; each links to an [Additional Field Information](#additional-field-information) subsection with the full rules. For the values a field can take (hazard codes, impact types, response codes), see the [taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy/) and [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/) in the model.
 - **See a worked example** — the [Event](#event), [Hazard](#hazard), [Impact](#impact), [Exposure](#exposure) and [Response](#response) sections below each link example STAC Items from a real source.
 
 ## Repository Map
@@ -71,7 +71,7 @@ The specification is organized as follows
   - [Impact](#impact): Describes the mandatory fields for the impact object.
   - [Exposure](#exposure): Describes the mandatory fields for the exposure object.
   - [Response](#response): Describes the mandatory fields for the response object.
-- [Queryables](https://ifrcgo.org/monty-stac-extension/model/stac-api/queryables.md): Describes the properties that can be used as queryables in a STAC API implementing the Filter Extension.
+- [Queryables](https://ifrcgo.org/monty-stac-extension/model/stac-api/queryables/): Describes the properties that can be used as queryables in a STAC API implementing the Filter Extension.
 
 The specifications of the fields and the objects are grouped by their data types.
 
@@ -93,15 +93,15 @@ The fields in the sections below can be used in these parts of STAC documents:
 | monty:src_event_id    | string                                          | The identifier of the event in the source system. Used to group all items (event episodes, hazards, impacts, exposures) belonging to the same source event, independently of the STAC item `id`.                                                                                                                               |
 | monty:episode_number  | integer                                         | The episode number of the event. It is a unique identifier assigned by the Monty system to the event                                                                                                                                                                                                                |
 | monty:country_codes   | \[string]                                       | **REQUIRED**. The country codes of the countries affected by the event, hazard, impact, exposure or response. The country code follows [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) standard format                                                                                                 |
-| monty:corr_id         | string                                          | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page |
-| monty:hazard_codes    | \[string]                                       | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)                                                                  |
+| monty:corr_id         | string                                          | **REQUIRED**. The unique identifier assigned by the Monty system to the reference event used to "pair" all the items of the same event. The correlation identifier follows a specific convention described in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/) page |
+| monty:hazard_codes    | \[string]                                       | **REQUIRED**. The hazard codes of the hazards affecting the event. For interoperability purpose, the array MUST contain at least one code from a [hazard classification system](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#hazards)                                                                  |
 | monty:hazard_detail   | [Hazard Detail object](#montyhazard_detail)     | The details of the hazard                                                                                                                                                                                                                                                                                           |
 | monty:impact_detail   | [Impact Detail object](#montyimpact_detail)     | The details of the impact                                                                                                                                                                                                                                                                                           |
 | monty:exposure_detail | [Exposure Detail object](#montyexposure_detail) | The details of the exposure |
 | monty:response_detail | [Response Detail object](#montyresponse_detail) | The details of the response                                                                                                                                                                                                                                                                                         |
 
 > [!TIP]
-> To track which revision of the [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) transformer produced a given item, declare the [`processing:` extension](https://github.com/stac-extensions/processing) and populate `processing:version` (the transformer's [Semantic Versioning](https://semver.org/) string) and `processing:software` (e.g. `{"pystac-monty": "1.0.0"}`), rather than adding a Monty-specific field — per the [extension layering principle](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md#1-governing-principles). These fields always mean *the `pystac-monty` transformer*, even on items that also carry `processing:level` / `processing:lineage` for the source data's own processing chain — see [governing principle 2](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md#1-governing-principles).
+> To track which revision of the [`pystac-monty`](https://github.com/IFRCGo/pystac-monty) transformer produced a given item, declare the [`processing:` extension](https://github.com/stac-extensions/processing) and populate `processing:version` (the transformer's [Semantic Versioning](https://semver.org/) string) and `processing:software` (e.g. `{"pystac-monty": "1.0.0"}`), rather than adding a Monty-specific field — per the [extension layering principle](https://ifrcgo.org/monty-stac-extension/model/response-best-practices/#1-governing-principles). These fields always mean *the `pystac-monty` transformer*, even on items that also carry `processing:level` / `processing:lineage` for the source data's own processing chain — see [governing principle 2](https://ifrcgo.org/monty-stac-extension/model/response-best-practices/#1-governing-principles).
 
 ### Roles
 
@@ -145,20 +145,39 @@ It is the unique identifier assigned by the Monty system to an episode of the ev
 It is a list of country codes of the countries concerned by the item.
 It must at least contain the countries intersected by the item's geometry.
 
+When an item concerns more than one country, these rules apply:
+
+1. **All the countries of the source.** The list contains every country that the source gives for the item.
+   An event item takes the countries of all the source records of the event, not only of the first record.
+2. **No duplicates.** Each code is in the list one time. `UNK` is used only when the source gives no country.
+3. **The first code is the primary country.** The transformer must select it in the same way on every run:
+   - if the source names a main country (for example GDACS `iso3`), that country is first;
+   - if not, the first country in the order of the source records is first.
+
+   The other codes follow in the order of the source. The order must never come from an unordered
+   collection, such as a Python `set`: its order can change from one run to the next.
+4. **A change of the primary country is a breaking change.** [`monty:corr_id`](#montycorr_id) uses the first
+   code. If the rule that selects the primary country of a source changes, all the correlation ids of that
+   source change.
+
+A source document can set a better rule for its primary country. That rule must give the same result for
+the same source data. Do not use a value that changes when the source adds data later, for example the
+country with the largest figure.
+
 ##### monty:hazard_codes
 
 It is a list of hazard codes of the hazards concerned by the item. There are multiple various classification systems for hazards so the field is open to any code.
 
-Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards)
-and then to include their other system counterparts following the [crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#cross-classification-mapping) to enforce interoperability.
+Nevertheless, the field is recommended to follow at least one of the [referenced classification systems](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#hazards)
+and then to include their other system counterparts following the [crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#cross-classification-mapping) to enforce interoperability.
 
-Tables with the possible values are available in the [hazard section of the taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#hazards) with:
+Tables with the possible values are available in the [hazard section of the taxonomy](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#hazards) with:
 
-- **[UNDRR-ISC 2025 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#2025-update)** (Reference Classification)
-- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#undrr-isc-2020-hazard-information-profiles) (Historical Reference)
-- [EM_DAT CRED Classification Key](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#em-dat-cred-classification-tree)
-- [GLIDE classification](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#glide-classification)
-- [A crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#cross-classification-mapping)
+- **[UNDRR-ISC 2025 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#2025-update)** (Reference Classification)
+- [UNDRR-ISC 2020 Hazard Information Profiles](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#2020-hazard-information-profiles-historical-reference) (Historical Reference)
+- [EM_DAT CRED Classification Key](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#em-dat-cred-classification-tree)
+- [GLIDE classification](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#glide-classification)
+- [A crosswalk classification systems mapping](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#cross-classification-mapping)
 
 > [!IMPORTANT]
 > The **2025 UNDRR-ISC Hazard Information Profiles** is the **reference classification system** for all hazard codes in the Monty extension. This updated classification includes 281 hazards organized into 8 hazard types and 39 clusters, with improved organization and new chapeau HIPs for general hazard categories.
@@ -173,7 +192,7 @@ With those codes, it is possible to derive a set of additional properties associ
 for which a human-readable keyword can be generated and stored in the `keywords` field.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/).
 >
 > **Valid examples**: `["MH0600"]`, `["FL", "MH0600"]`, `["FL", "nat-hyd-flo-flo", "MH0600"]`  
 > **Invalid examples**: `["FL"]` (missing UNDRR code), `["FL", "MH0600", "MH0601"]` (multiple UNDRR codes), `["FL", "TC", "MH0600"]` (multiple GLIDE codes)
@@ -185,7 +204,7 @@ for which a human-readable keyword can be generated and stored in the `keywords`
 It is the unique identifier assigned by the Monty system to every item in the system.
 This correlation identifier is critical to associate event, hazard, impact, exposure and response items together.
 Each item *MUST* have one.
-More information about the correlation identifier is available in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md) page.
+More information about the correlation identifier is available in the [event correlation](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/) page.
 
 ##### monty:hazard_detail
 
@@ -208,7 +227,7 @@ It has the [shared figure fields](#shared-figure-fields) and this field:
 
 | Field Name | Type   | Description |
 | ---------- | ------ | ----------- |
-| type       | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#impact-type) |
+| type       | string | **REQUIRED** The estimated value type of the impact. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#impact-type) |
 
 ##### monty:exposure_detail
 
@@ -228,7 +247,7 @@ It has the [shared figure fields](#shared-figure-fields) and these fields:
 
 | Field Name    | Type   | Description |
 | ------------- | ------ | ----------- |
-| category      | string | **REQUIRED** The category of people or assets that the figure counts. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy.md#exposure-category) |
+| category      | string | **REQUIRED** The category of people or assets that the figure counts. The possible values are defined in [this table](https://ifrcgo.org/monty-stac-extension/model/taxonomy/#exposure-category) |
 | value         | number | **REQUIRED** The value of the figure, as a number, without the units |
 | unit          | string | The units of the figure |
 | estimate_type | string | The type of the estimate. The possible values are `primary`, `secondary` and `modelled` |
@@ -240,17 +259,17 @@ An impact figure and an exposure figure MUST NOT be added together. See the [Exp
 
 It is an object that contains the details of the response action or product. Preferably used only in a Response item.
 
-The only strictly required field is `type` (the response type code). Other fields are optional and added when the source data supports them. Fields already covered by an STAC extension declared on the same item (e.g., Terradue [`disaster:`](https://github.com/Terradue/stac-extensions-disaster) for International Charter items) **MUST NOT** be duplicated in `monty:response_detail`. See the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md) document for the per-source extension-layering rules.
+The only strictly required field is `type` (the response type code). Other fields are optional and added when the source data supports them. Fields already covered by an STAC extension declared on the same item (e.g., Terradue [`disaster:`](https://github.com/Terradue/stac-extensions-disaster) for International Charter items) **MUST NOT** be duplicated in `monty:response_detail`. See the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices/) document for the per-source extension-layering rules.
 
 | Field Name        | Type      | Description                                                                                                                                                                                                                                                  |
 | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type              | string    | **REQUIRED** Response type code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md) (`{domain}-{type}`, e.g., `eo-del`, `eo-gra`, `hum-shelter`, `fin-dref`)                                                    |
+| type              | string    | **REQUIRED** Response type code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/) (`{domain}-{type}`, e.g., `eo-del`, `eo-gra`, `hum-shelter`, `fin-dref`)                                                    |
 | source_id         | string    | Source-system identifier for the response (e.g., CEMS activation code `EMSR744`, Charter VAP id `1144-1`, DREF operation id)                                                                                                                               |
 | status            | string    | Lifecycle status. One of `planned`, `in-production`, `published`, `finished`, `no-impact`, `withdrawn`. Use `disaster:activation_status` instead on items declaring the `disaster:` extension                                                                |
 | monitoring_number | integer   | Iteration number for monitoring updates (mirrors CEMS `monitoringNumber`). The presence of this field marks the item as a monitoring update. The prior iteration this update monitors SHOULD be expressed via a `rel="prev"` link to that Response STAC item |
 | producer          | string    | Organisation that produced the response (e.g., `JRC`, `UNOSAT`, `Airbus`, `IFRC`)                                                                                                                                                                            |
 | methodology       | string    | Type of analysis. One of `human_interpreted`, `semi_automated`, `automated`, `modelled`                                                                                                                                                                      |
-| sendai_targets    | \[string] | Subset of `["A","B","C","D","E","F","G"]` indicating the Sendai Framework targets this response contributes to. Defaults per response type are documented in the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md)     |
+| sendai_targets    | \[string] | Subset of `["A","B","C","D","E","F","G"]` indicating the Sendai Framework targets this response contributes to. Defaults per response type are documented in the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/)     |
 | sectors           | \[string] | For humanitarian (`hum-*`) items, the IASC clusters / IFRC EPoA sectors covered (e.g., `shelter`, `health`, `wash`)                                                                                                                                          |
 
 Statistical / damage figures contained in EO products are **not** part of `response_detail` — they belong to separate Monty Impact items linked via `monty:corr_id`.
@@ -303,7 +322,7 @@ The table below describes the rules for the core fields in the representation of
 The event class is the core of the Monty model. It represents a disaster event that has occured or is forecasted to occur.
 The global crisis data bank records multiple instances of events that are related to a single event:
 
-- One **unique reference** event that is used to "[pair](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md)" all the instances of the event
+- One **unique reference** event that is used to "[pair](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/)" all the instances of the event
 - Multiple instances of the event that are recorded for different sources. Each source event **must** have the following:
   - A link to the reference event with the [relationship](#relation-types) type `reference-event`
   - A link to the resource from which the event was sourced with
@@ -347,7 +366,7 @@ This linkage is called "concurrent hazard" and is linking the observed and poten
 The link may also have specific `occ-*` [attributes](#link-attributes) to describe the occurrence of the linked hazard.
 
 > [!IMPORTANT]
-> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier.md).
+> [Hazard items](#hazard) **MUST** have **exactly one UNDRR-ISC 2025 code** (format: 2 letters + 4 digits, e.g., GH0101, MH0600) in the `monty:hazard_codes` array. Optionally, the array may also include **at most one GLIDE code** (2 letters, e.g., FL, EQ) and **at most one EM-DAT code** (nat-xxx-xxx-xxx format) for maximum interoperability. The array is limited to a maximum of **3 codes total** (one per classification type) to maintain clarity while ensuring the hazard remains uniquely identifiable for the [correlation process](https://ifrcgo.org/monty-stac-extension/model/correlation_identifier/).
 >
 > **Valid examples**: `["MH0600"]`, `["FL", "MH0600"]`, `["FL", "nat-hyd-flo-flo", "MH0600"]`  
 > **Invalid examples**: `["FL"]` (missing UNDRR code), `["FL", "MH0600", "MH0601"]` (multiple UNDRR codes), `["FL", "TC", "MH0600"]` (multiple GLIDE codes)
@@ -390,9 +409,9 @@ The exposure class represents the people or assets that are inside the area of a
 
 This section describes in details the usage of the fields and links for the response object.
 More detail on the field definition is available in the [Montandon model analysis](https://ifrcgo.org/monty-stac-extension/model#response).
-The taxonomy of response type codes, the framework survey and the Sendai Framework crosswalk are documented in the [Response Taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md).
-The extension-layering rules per response type are documented in the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices.md).
-The rules for deciding whether a given piece of data belongs on a Response item, on a paired Impact item, or on neither — the data-pattern catalogue, decision tree, ETL splitting algorithm, and query patterns — are documented in the [Response ↔ Impact Boundary Rules](https://ifrcgo.org/monty-stac-extension/model/response-impact-boundary.md).
+The taxonomy of response type codes, the framework survey and the Sendai Framework crosswalk are documented in the [Response Taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/).
+The extension-layering rules per response type are documented in the [Response Best Practices](https://ifrcgo.org/monty-stac-extension/model/response-best-practices/).
+The rules for deciding whether a given piece of data belongs on a Response item, on a paired Impact item, or on neither — the data-pattern catalogue, decision tree, ETL splitting algorithm, and query patterns — are documented in the [Response ↔ Impact Boundary Rules](https://ifrcgo.org/monty-stac-extension/model/response-impact-boundary/).
 
 - Examples:
   - [Synthetic Response ↔ Impact pairing](examples/_response-impact-pairing/) (illustrative fixture exercising the multi-thematic split, pattern P4)
@@ -402,7 +421,7 @@ The Response class represents an **action taken or a product produced in respons
 In the Monty model, a Response is **ALWAYS** linked to one or multiple event(s) through `monty:corr_id`. A response item:
 
 - **MUST** include the `response` role in its `roles` field
-- **MUST** include the [`monty:response_detail`](#montyresponse_detail) object with at least the `type` code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy.md)
+- **MUST** include the [`monty:response_detail`](#montyresponse_detail) object with at least the `type` code from the [response taxonomy](https://ifrcgo.org/monty-stac-extension/model/response-taxonomy/)
 - **SHOULD** include `monty:hazard_codes` indicating which hazard(s) the response addresses
 - **SHOULD** link to the reference event with `reference-event`
 - **SHOULD** link to acquisition / source imagery items via STAC `derived_from` (those acquisition items typically carry `sar:` / `eo:` / `sat:` / `processing:` fields)
