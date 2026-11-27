@@ -302,7 +302,7 @@ Example: `pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1
 ### Impact Detail
 
 Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate_type` is always
-`modelled`. `unit` is not set.
+`modelled`. `unit` is `count` for the 18 people and asset counts. `capital.total` has no `unit`.
 
 | `{group}.{field}` | Title text | category | type |
 | --- | --- | --- | --- |
@@ -337,7 +337,8 @@ For the fixture, `capital.total` gives `{"category": "global_currency", "type": 
 > this with two existing values: `estimate_type` is `modelled`, and the type of the people and
 > asset counts is `potentially_affected`. GDACS uses the same two values for its exposure figures.
 > Do not add these values to observed impacts. The `capital.total` value is the replacement value
-> of the assets in the area, in USD; its type stays `cost`, and the item has no `unit`.
+> of the assets in the area, in USD; its type stays `cost`. The payload does not name the currency,
+> so the item has no `unit`.
 
 ## Limitations and exclusions
 
