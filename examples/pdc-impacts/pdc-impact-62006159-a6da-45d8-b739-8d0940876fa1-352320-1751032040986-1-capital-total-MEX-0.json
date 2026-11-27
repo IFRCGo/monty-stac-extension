@@ -1,0 +1,103 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1-capital-total-MEX-0",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -98.622,
+      19.023
+    ]
+  },
+  "bbox": [
+    -98.622,
+    19.023,
+    -98.622,
+    19.023
+  ],
+  "properties": {
+    "title": "Volcano - Popocatepetl, Mexico - Total capital (MEX)",
+    "description": "Volcanic activity has been reported for Popocatepetl in Mexico, by the Volcanic Ash Advisory Centre (VAAC) WASHINGTON on July 13, 2025, 12:28:00 GMT.\nThis volcanic activity is reported based on aerial, satellite and/or ground observations.\nBased on the limited data available, it is estimated that 1.62 Million people, 433,155 households, and $39.7 Billion (USD) of infrastructure\\* are within 10 km (6 miles) and more likely to be adversely impacted, and that there is no concentrated population between 10 km (6 miles) and 30 km (18 miles) of the volcano. Additional information will be provided as it becomes available by official sources.\nVolcano information sources for this report include: GOES-19. WEBCAM. NWP MODELS. VOLCAT.\n\\*The cost represents the total replacement value of the infrastructure.",
+    "start_datetime": "2025-06-27T15:32:00+00:00",
+    "end_datetime": "2025-07-18T14:40:55.468000+00:00",
+    "roles": [
+      "source",
+      "impact"
+    ],
+    "monty:src_event_id": "352320",
+    "monty:episode_number": 1,
+    "monty:country_codes": [
+      "MEX"
+    ],
+    "monty:hazard_codes": [
+      "GH0201",
+      "VO",
+      "nat-geo-vol-vol"
+    ],
+    "keywords": [
+      "Geological",
+      "Lava Flows (Lava Domes)",
+      "Volcanic",
+      "Mexico",
+      "Loss (Cost)",
+      "Global/Regional Currency (e.g. USD)"
+    ],
+    "monty:corr_id": "20250627-MEX-979608-GH0201-1-GCDB",
+    "monty:impact_detail": {
+      "category": "global_currency",
+      "type": "cost",
+      "value": 39725685500,
+      "estimate_type": "modelled"
+    },
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2025-06-27T13:47:20.986000Z"
+  },
+  "links": [
+    {
+      "rel": "related",
+      "href": "../pdc-events/pdc-event-62006159-a6da-45d8-b739-8d0940876fa1-352320.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../pdc-hazards/pdc-hazard-62006159-a6da-45d8-b739-8d0940876fa1-352320.json",
+      "type": "application/geo+json",
+      "roles": [
+        "hazard"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/pdc-impacts/pdc-impact-62006159-a6da-45d8-b739-8d0940876fa1-352320-1751032040986-1-capital-total-MEX-0.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/pdc-impacts/pdc-impacts.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "Maps": {
+      "href": "https://sentry.pdc.org/hp_srv/services/mags/1/json/get_mags?hazard_id=352320",
+      "type": "geojson",
+      "title": "Polygon"
+    },
+    "report": {
+      "href": "https://hazardbrief.pdc.org/PRODUCTION/ui/index.html?uuid=62006159-a6da-45d8-b739-8d0940876fa1",
+      "type": "html",
+      "title": "Report"
+    }
+  },
+  "collection": "pdc-impacts"
+}

@@ -1,0 +1,13 @@
+{
+  "source_url": "https://sentry.pdc.org/hp_srv/services/hazards/t/json/get_active_hazards",
+  "uuid": "62006159-a6da-45d8-b739-8d0940876fa1",
+  "hazard_data": {
+    "path": "352320-hazard_data.json"
+  },
+  "exposure_detail_data": [
+    {
+      "path": "352320-exposure_detail.json"
+    }
+  ],
+  "geojson_path": "https://sentry.pdc.org/hp_srv/services/mags/1/json/get_mags?hazard_id=352320"
+}
