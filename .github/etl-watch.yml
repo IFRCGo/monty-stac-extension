@@ -97,7 +97,7 @@ sources:
 
   desinventar:
     extra_paths: [pystac_monty/validators/desinventar.py]
-    reviewed: 9566ff863bd8958da6cd9cd37f05230b841f5800
+    reviewed: cfc8c0b7aadb2cc85edff3cda5a673f84119a4a1
 
   emdat:
     extra_paths: [pystac_monty/validators/em_dat.py]
