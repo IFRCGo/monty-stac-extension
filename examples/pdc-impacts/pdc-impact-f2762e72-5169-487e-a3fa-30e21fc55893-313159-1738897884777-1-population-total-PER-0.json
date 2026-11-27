@@ -51,6 +51,7 @@
       "category": "people",
       "type": "potentially_affected",
       "value": 1320000,
+      "unit": "count",
       "estimate_type": "modelled"
     },
     "processing:version": "1.0.0",
