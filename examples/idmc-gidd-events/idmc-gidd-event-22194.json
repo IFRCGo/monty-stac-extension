@@ -86,6 +86,14 @@
       ]
     },
     {
+      "rel": "related",
+      "href": "../idmc-gidd-impacts/idmc-gidd-impact-22194-136080-idps.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
       "rel": "self",
       "href": "https://ifrcgo.org/monty-stac-extension/examples/idmc-gidd-events/idmc-gidd-event-22194.json",
       "type": "application/geo+json"
