@@ -1,0 +1,137 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://ifrcgo.org/monty-stac-extension/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json"
+  ],
+  "id": "emdat-hazard-2024-0796-ESP",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -9,
+          36
+        ],
+        [
+          -9,
+          44
+        ],
+        [
+          3,
+          44
+        ],
+        [
+          3,
+          36
+        ],
+        [
+          -9,
+          36
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -9,
+    36,
+    3,
+    44
+  ],
+  "properties": {
+    "title": "Flood (General) in Spain of October 2024",
+    "description": "Flood (Flood (General)) in Alaquàs, Albal, Aldaya, Alfafar, Algemesí, Benerússer, Catarroja, Llocnou de la Corona, Massanassa, Paiporta, Picanya, Sedaví, Utiel and La Torre municipalties (Valencia);, Letur, lbacete provinces; Castilla-La Mancha communities, Andalusia, Murcia, and the Balearic Islands, Catalonia, Spain of October 2024",
+    "start_datetime": "2024-10-27T00:00:00Z",
+    "end_datetime": "2024-11-04T00:00:00Z",
+    "monty:src_event_id": "2024-0796-ESP",
+    "monty:episode_number": 1,
+    "monty:hazard_codes": [
+      "MH0600"
+    ],
+    "monty:country_codes": [
+      "ESP"
+    ],
+    "keywords": [
+      "Flooding",
+      "Meteorological & Hydrological",
+      "Water-related",
+      "Spain"
+    ],
+    "monty:corr_id": "20241027-ESP-1169086-MH0600-1-GCDB",
+    "roles": [
+      "source",
+      "hazard"
+    ],
+    "monty:hazard_detail": {
+      "severity_value": 56,
+      "severity_unit": "Km2",
+      "estimate_type": "primary"
+    },
+    "processing:version": "1.0.0",
+    "processing:software": {
+      "pystac-monty": "1.0.0"
+    },
+    "datetime": "2024-10-27T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "via",
+      "href": "https://public.emdat.be/data/2024-0796-ESP",
+      "type": "text/html",
+      "title": "EM-DAT Event Data"
+    },
+    {
+      "rel": "related",
+      "href": "../emdat-events/emdat-event-2024-0796-ESP.json",
+      "type": "application/geo+json",
+      "roles": [
+        "event"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../emdat-impacts/emdat-impact-2024-0796-ESP-total_deaths.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../emdat-impacts/emdat-impact-2024-0796-ESP-no_affected.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../emdat-impacts/emdat-impact-2024-0796-ESP-total_affected.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "related",
+      "href": "../emdat-impacts/emdat-impact-2024-0796-ESP-total_dam.json",
+      "type": "application/geo+json",
+      "roles": [
+        "impact"
+      ]
+    },
+    {
+      "rel": "self",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/emdat-hazards/emdat-hazard-2024-0796-ESP.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "collection",
+      "href": "https://ifrcgo.org/monty-stac-extension/examples/emdat-hazards/emdat-hazards.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {},
+  "collection": "emdat-hazards"
+}
