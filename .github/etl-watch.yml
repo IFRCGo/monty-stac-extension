@@ -162,7 +162,7 @@ sources:
 
   pdc:
     extra_paths: [pystac_monty/validators/pdc.py]
-    reviewed: b831436a02deedbee6effaf5a3d1a1d76ddd3000
+    reviewed: 513e044e89dfb81a3eda358abdd45ad4e654d56e
     regenerate:
       batch: pdc
       # One observed hazard (the volcano 352320) with one exposure snapshot. The
