@@ -47,6 +47,12 @@
       "href": "./idmc-gidd-impact-22194-107479-internal-displacements.json",
       "type": "application/json",
       "title": "Internal Displacements of People for Syria, Türkiye: Earthquake - 06/02/2023"
+    },
+    {
+      "rel": "item",
+      "href": "./idmc-gidd-impact-22194-136080-idps.json",
+      "type": "application/json",
+      "title": "IDPs of People for Syria, Türkiye: Earthquake - 06/02/2023"
     }
   ],
   "stac_extensions": [
@@ -87,7 +93,8 @@
       "source"
     ],
     "monty:country_codes": [
-      "SYR"
+      "SYR",
+      "TUR"
     ],
     "monty:hazard_codes": [
       "TC",
