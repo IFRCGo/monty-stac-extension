@@ -127,10 +127,8 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 | Earthquake          | `EARTHQUAKE`         | EQ    | nat-geo-ear-gro     | **GH0101**                     | GEO-SEIS     | Earthquake                       |
 | Extreme Temperature | `EXTREMETEMPERATURE` | HT    | nat-met-ext-hea     | **MH0501**                     | MH-TEMP      | Heatwave (also for cold, see the note) |
 | Flood               | `FLOOD`              | FL    | nat-hyd-flo-flo     | **MH0600**                     | MH-WATER     | Flooding (chapeau)               |
-| High Surf           | `HIGHSURF`           | OT    | nat-hyd-wav-wav     | **MH0702**                     | MH-MARINE    | Wave Action                      |
 | High Wind           | `HIGHWIND`           | VW    | nat-met-sto-sto     | **MH0301**                     | MH-WIND      | Wind (general)                   |
 | Landslide           | `LANDSLIDE`          | LS    | nat-geo-mmd-lan     | **GH0300**                     | GEO-GFAIL    | Gravitational Mass Movement      |
-| Marine              | `MARINE`             | OT    | nat-hyd-wav-wav     | **MH0700**                     | MH-MARINE    | Marine-related (chapeau)         |
 | Severe Weather      | `SEVEREWEATHER`      | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
 | Storm               | `STORM`              | ST    | nat-met-sto-sto     | **MH0103**                     | MH-CONV      | Thunderstorm                     |
 | Tornado             | `TORNADO`            | TO    | nat-met-sto-tor     | **MH0305**                     | MH-WIND      | Tornado                          |
@@ -140,27 +138,34 @@ PDC (Pacific Disaster Center) tracks a wide range of natural and geopolitical ha
 | Wildfire            | `WILDFIRE`           | WF    | nat-cli-wil-wil     | **EN0205**                     | ENV-FOREST   | Wildfires                        |
 | Winter Storm        | `WINTERSTORM`        | OT    | nat-met-sto-bli     | **MH0403**                     | MH-PRECIP    | Blizzard                         |
 
-**Geopolitical & Technological Hazards:**
+**Geopolitical Hazards:**
 
 | PDC Type          | `type_ID`           | GLIDE | EM-DAT          | **UNDRR-ISC 2025** (Reference) | Cluster      | Description                      |
 | ----------------- | ------------------- | ----- | --------------- | ------------------------------ | ------------ | -------------------------------- |
-| Accident          | `ACCIDENT`          | AC    | tec-mis-col-col | **TL0200**                     | TECH-STRFAIL | Structural Failure (chapeau)     |
-| Active Shooter    | `ACTIVESHOOTER`     | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Civil Unrest      | `CIVILUNREST`       | OT    | soc-soc-vio-vio | **SO0202**                     | SOC-CONF     | Civil Unrest                     |
-| Combat            | `COMBAT`            | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Cyber             | `CYBER`             | OT    | N/A             | **TL0601**                     | TECH-CYBER   | Cyber Incidents                  |
-| Man Made          | `MANMADE`           | OT    | tec-tec-tec-tec | **TL0000**                     | TECH         | Technological (general)          |
-| Occurrence        | `OCCURRENCE`        | OT    | N/A             | **OT0000**                     | OTHER        | Other/Unspecified                |
-| Political Conflict| `POLITICALCONFLICT` | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
-| Terrorism         | `TERRORISM`         | OT    | soc-soc-vio-vio | **SO0203**                     | SOC-CONF     | Terrorism                        |
-| Weapons           | `WEAPONS`           | OT    | soc-soc-vio-vio | **SO0201**                     | SOC-CONF     | Armed Conflict                   |
+| Active Shooter    | `ACTIVESHOOTER`     | OT    |                 | **SO0301**                     | SOC-BEH      | Violence                         |
+| Civil Unrest      | `CIVILUNREST`       | CE    |                 | **SO0103**                     | SOC-CONF     | Civil Unrest                     |
+| Political Conflict| `POLITICALCONFLICT` | CE    |                 | **SO0103**                     | SOC-CONF     | Civil Unrest (nearest code)      |
+| Terrorism         | `TERRORISM`         | OT    |                 | **SO0301**                     | SOC-BEH      | Violence                         |
 
 > [!NOTE]
-> All three classification codes (GLIDE, EM-DAT, UNDRR-ISC 2025) should be included in the `monty:hazard_codes` array for maximum interoperability. A type with no EM-DAT code (`CYBER`, `OCCURRENCE`) gets only two codes. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
+> The codes of a type come from one row of the [Cross-Classification Mapping](../../taxonomy.md#cross-classification-mapping). The four geopolitical types have no EM-DAT code in that table, so they get only two codes. More specific [hazard codes](../../taxonomy.md#complete-2025-hazard-list) can be added following the characteristics of the event.
 >
 > **Extreme Temperature:** the transformer always uses `MH0501` (Heatwave) and `HT`, also for a cold event. The correct codes for a cold event are `MH0502` and `CW`. PDC gives no field that tells heat from cold, so this is not fixed yet.
 >
 > **Unknown `type_ID`:** the transformer logs a warning, makes no item for the hazard, and counts the hazard as a failed row.
+>
+> **Types with no UNDRR-ISC 2025 code:** the transformer makes no item for the eight types below, logs a warning, and counts the hazard as a failed row. A hazard item must have one UNDRR-ISC 2025 code, and the 2025 profiles have no code at the granularity that PDC states for these types. A specific code would add precision that PDC does not give ([pystac-monty#296](https://github.com/IFRCGo/pystac-monty/issues/296)).
+>
+> | PDC Type   | `type_ID`    | Why no code fits                                                                      |
+> | ---------- | ------------ | ------------------------------------------------------------------------------------- |
+> | Accident   | `ACCIDENT`   | General accident. The Technological type has no general code.                         |
+> | Combat     | `COMBAT`     | The type does not say if the conflict is international (`SO0101`) or not (`SO0102`).  |
+> | Cyber      | `CYBER`      | The Cyberhazards cluster has seven specific codes and no general code.                |
+> | High Surf  | `HIGHSURF`   | The 2025 profiles have no code for wave action.                                       |
+> | Man Made   | `MANMADE`    | General man-made hazard. The Technological type has no general code.                  |
+> | Marine     | `MARINE`     | The Marine-related cluster has no general code.                                       |
+> | Occurrence | `OCCURRENCE` | The type has no hazard meaning.                                                       |
+> | Weapons    | `WEAPONS`    | The type does not say which weapon or which use.                                      |
 >
 > **Scope decision — `HIGHWIND` ([pystac-monty#196](https://github.com/IFRCGo/pystac-monty/issues/196)):** PDC issues `HighWind` from NWS High Wind Warnings/Advisories — sustained wind of 40 mph (35 kt) or more for 1 hour or more, or gusts of 58 mph (50 kt) or more, when no tropical cyclone or thunderstorm is present. This is a general wind event, not a Beaufort-scale term. So it maps to **MH0301 (Wind)**, not **MH0303 (Gale)**. This choice follows the existing GLIDE↔EM-DAT↔UNDRR crosswalk in [taxonomy.md](../../taxonomy.md#complete-2025-hazard-list) (`VW` → `nat-met-sto-sto` → `MH0301`).
 
@@ -274,7 +279,7 @@ For the fixture, `capital.total` gives `{"category": "global_currency", "type": 
 - **Unchanged snapshots.** The ETL does not send a snapshot that has the same content as the one
   before it, so such a snapshot gives no impact item.
 - **Unknown hazard types.** A `type_ID` that is not in the [Hazard Type Mapping](#hazard-type-mapping)
-  gives no item.
+  gives no item. The eight types with no UNDRR-ISC 2025 code give no item too.
 - **Fields not mapped.** A `totalByAdmin` row has more fields than the 19 in [Impact Detail](#impact-detail).
   These are not mapped: the other `population` groups (`total0_14`, `total15_64`, `total65_69` to
   `total95_99`, `total100AndOver`, `vulnerable`, `vulnerable0_14`, `vulnerable15_64`,
