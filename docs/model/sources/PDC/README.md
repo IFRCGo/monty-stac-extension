@@ -35,6 +35,13 @@ Examples: the transformer output for the upstream fixture, with the `self`, `col
 - Impact, total population: [pdc-impact-…-population-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-population-total-PER-0.json)
 - Impact, capital: [pdc-impact-…-capital-total-PER-0.json](https://github.com/IFRCGo/monty-stac-extension/tree/main/examples/pdc-impacts/pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1-capital-total-PER-0.json)
 
+The fixture is in this folder, as sample data: the hazard record
+[313159-hazard_data.json](313159-hazard_data.json) and the exposure snapshot
+[313159-exposure_detail.json](313159-exposure_detail.json). The bundle
+[313159-bundle.json](313159-bundle.json) names the two files for the batch exporter `pdc`.
+`scripts/check_example_drift.py` runs the transformer on the bundle and compares the result with
+the four examples.
+
 ## Data flow
 
 The ETL ([montandon-etl](https://github.com/IFRCGo/montandon-etl), `apps/etl/etl_tasks/pdc.py` and
@@ -92,7 +99,6 @@ second.
 | [start_datetime, end_datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `start_Date`, `end_Date` | Milliseconds since epoch, converted to UTC |
 | [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `hazard_Name` | |
 | [description](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | `description` | HTML converted to Markdown. `NA` when it is empty |
-| `category_id` | `category_ID` | Copied, e.g. `EVENT`. This property is not declared by the Monty schema |
 | roles | Fixed | `["source", "event"]` |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByCountry[].country` of all the snapshots | The ISO3 codes of all the snapshots, earliest snapshot first, in source order, with no duplicates. Without exposure data, the country of the hazard point from the geocoder, else `UNK` |
 | [monty:hazard_codes](https://github.com/IFRCGo/monty-stac-extension#montyhazard_codes) | `type_ID` | The three codes of the [Hazard Type Mapping](#hazard-type-mapping), e.g. `["GH0300", "LS", "nat-geo-mmd-lan"]` |
@@ -213,13 +219,15 @@ The impact item is a copy of the event item, with these differences:
 | [collection](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#collection) | `pdc-impacts` | |
 | [datetime](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#date-and-time) | `timestamp` of the snapshot | Converted to UTC. `start_datetime` and `end_datetime` stay the same as the event |
 | roles | Fixed | `["source", "impact"]` |
+| [title](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The title of the event, then the title text of the [impact field](#impact-detail), then the place of the row in parentheses (`admin2`, `admin1`, `country`, when they have a value): `Landslide - Central Andes, Huaraz, Ancash, Peru - Total population (PER)` |
+| [keywords](https://github.com/radiantearth/stac-spec/blob/master/commons/common-metadata.md#basics) | Generated | The keywords of the event, then the label of the impact type and the label of the exposure category from the [taxonomy](../../taxonomy.md#impact): `["Geological", "Gravitational Mass Movement (Landslide)", "Ground Failure", "Peru", "Total Affected", "People (All Demographics)"]` |
 | [monty:country_codes](https://github.com/IFRCGo/monty-stac-extension#montycountry_codes) | `totalByAdmin[].country` | The country of the row. One code |
 | [monty:impact_detail](https://github.com/IFRCGo/monty-stac-extension#montyimpact_detail) | The field | See [Impact Detail](#impact-detail) |
 | `related` links | Generated | To the event item and to the hazard item |
 
-The geometry (the hazard point), `monty:hazard_codes` (all three codes), `monty:corr_id`, keywords
-and assets are the same as the event. So the keywords of an impact item can name other countries
-than its `monty:country_codes`.
+The geometry (the hazard point), `monty:hazard_codes` (all three codes), `monty:corr_id` and the
+assets are the same as the event. The first keywords are those of the event, so the keywords of an
+impact item can name other countries than its `monty:country_codes`.
 
 The parts of the impact id:
 
@@ -236,37 +244,43 @@ Example: `pdc-impact-f2762e72-5169-487e-a3fa-30e21fc55893-313159-1738897884777-1
 ### Impact Detail
 
 Each impact field is read from `totalByAdmin[].{group}.{field}.value`. `estimate_type` is always
-`primary`. `unit` is not set.
+`modelled`. `unit` is `count` for the 18 people and asset counts. `capital.total` has no `unit`.
 
-| `{group}.{field}` | category | type |
-| --- | --- | --- |
-| `population.total0_4` | `children_0_4` | `affected_total` |
-| `population.total5_9` | `children_5_9` | `affected_total` |
-| `population.total10_14` | `children_10_14` | `affected_total` |
-| `population.total15_19` | `children_15_19` | `affected_total` |
-| `population.total20_24` | `adult_20_24` | `affected_total` |
-| `population.total25_29` | `adult_25_29` | `affected_total` |
-| `population.total30_34` | `adult_30_34` | `affected_total` |
-| `population.total35_39` | `adult_35_39` | `affected_total` |
-| `population.total40_44` | `adult_40_44` | `affected_total` |
-| `population.total45_49` | `adult_45_49` | `affected_total` |
-| `population.total50_54` | `adult_50_54` | `affected_total` |
-| `population.total55_59` | `adult_55_59` | `affected_total` |
-| `population.total60_64` | `adult_60_64` | `affected_total` |
-| `population.total65_Plus` | `elderly` | `affected_total` |
-| `population.total` | `people` | `affected_total` |
-| `population.households` | `households` | `affected_total` |
-| `capital.total` | `global_currency` | `cost` |
-| `capital.school` | `schools` | `affected_total` |
-| `capital.hospital` | `hospitals` | `affected_total` |
+| `{group}.{field}` | Title text | category | type |
+| --- | --- | --- | --- |
+| `population.total0_4` | Population aged 0 to 4 | `children_0_4` | `potentially_affected` |
+| `population.total5_9` | Population aged 5 to 9 | `children_5_9` | `potentially_affected` |
+| `population.total10_14` | Population aged 10 to 14 | `children_10_14` | `potentially_affected` |
+| `population.total15_19` | Population aged 15 to 19 | `children_15_19` | `potentially_affected` |
+| `population.total20_24` | Population aged 20 to 24 | `adult_20_24` | `potentially_affected` |
+| `population.total25_29` | Population aged 25 to 29 | `adult_25_29` | `potentially_affected` |
+| `population.total30_34` | Population aged 30 to 34 | `adult_30_34` | `potentially_affected` |
+| `population.total35_39` | Population aged 35 to 39 | `adult_35_39` | `potentially_affected` |
+| `population.total40_44` | Population aged 40 to 44 | `adult_40_44` | `potentially_affected` |
+| `population.total45_49` | Population aged 45 to 49 | `adult_45_49` | `potentially_affected` |
+| `population.total50_54` | Population aged 50 to 54 | `adult_50_54` | `potentially_affected` |
+| `population.total55_59` | Population aged 55 to 59 | `adult_55_59` | `potentially_affected` |
+| `population.total60_64` | Population aged 60 to 64 | `adult_60_64` | `potentially_affected` |
+| `population.total65_Plus` | Population aged 65 and over | `elderly` | `potentially_affected` |
+| `population.total` | Total population | `people` | `potentially_affected` |
+| `population.households` | Households | `households` | `potentially_affected` |
+| `capital.total` | Total capital | `global_currency` | `cost` |
+| `capital.school` | School capital | `schools` | `potentially_affected` |
+| `capital.hospital` | Hospital capital | `hospitals` | `potentially_affected` |
 
-For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "primary"}`.
+For the fixture, `capital.total` gives `{"category": "global_currency", "type": "cost", "value": 21096514700.0, "estimate_type": "modelled"}`.
 
 > [!NOTE]
-> These values are PDC **exposure** estimates: the people and the assets in the hazard area. They are
-> not observed impacts. The `capital.total` value is in USD, but the item has no `unit`. How Monty
-> represents exposure is open in [#169](https://github.com/IFRCGo/monty-stac-extension/issues/169)
-> and [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110).
+> These values are PDC **exposure** estimates from a model: the people and the assets in the hazard
+> area. They are not observed impacts, and for a warning they describe an area where the hazard can
+> still occur. Until Monty has a class for exposure and a forecast qualifier
+> ([#169](https://github.com/IFRCGo/monty-stac-extension/issues/169),
+> [Discussion #110](https://github.com/IFRCGo/monty-stac-extension/discussions/110)), the items say
+> this with two existing values: `estimate_type` is `modelled`, and the type of the people and
+> asset counts is `potentially_affected`. GDACS uses the same two values for its exposure figures.
+> Do not add these values to observed impacts. The `capital.total` value is the replacement value
+> of the assets in the area, in USD; its type stays `cost`. The payload does not name the currency,
+> so the item has no `unit`.
 
 ## Limitations and exclusions
 
